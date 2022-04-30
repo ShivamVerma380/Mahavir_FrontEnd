@@ -1,44 +1,22 @@
 import React  from "react";
-import { ToastContainer } from "react-toastify";
 import { Row,Col, Container } from "reactstrap";
 import '../App.css';
-
-
+import {BsPinMapFill,BsFillPersonFill,BsFillCartPlusFill,BsSearch} from "react-icons/bs";
 
 const Header = () => {
     return(
-       
-        // <div>
-        //     <ToastContainer/>
-        //     <Container>
-        //         <Row >
-        //             <Col>Shivam</Col>
-        //             <Col>Verma</Col>
-        //         </Row>
-        //     </Container>
-        // </div>
-           /* <Row >
-                    <Col md={4}><img style={{textAlign:"left"}} src = {require ('../assets/images.jpg')}/></Col>
-                    <Col md={8}><h1 style={{textAlign:"left",marginLeft:100 , fontFamily:"Tapestry"}}>MAHAVIR</h1></Col>
-                </Row> */
-            
-
-        // <div>
-        // <header>
-        // <img style={{marginLeft:30, marginTop:30}} src = {require ('../assets/images.jpg')} width={75} height={75} />
-        // <h3 style={{textAlign:"left",marginLeft:150 ,fontFamily:"Tapestry"}}>MAHAVIR</h3>
-        // </header>
-        // </div>
-        <Container>
-            <Row>
-            <Col md={4}><img style={{textAlign:"left"}} src = {require ('../assets/images.jpg')}/></Col>
-            <Col md={8}><h1 style={{textAlign:"left",marginLeft:100 , fontFamily:"Tapestry"}}>MAHAVIR</h1></Col>
-            </Row>
-            
-        </Container>
-
-      
-     
+        <div>
+            <Container>
+                <Row className="mt-4">
+                <Col ms="1" ><img className="logo_mahavir" src = {require ('../assets/images.jpg')}/></Col>
+                <Col  ms="2" style={{fontFamily:"Tapestry"}}>MAHAVIR</Col>
+                <Col  ms="2"> <BsPinMapFill /><b>Pune</b></Col>
+                <Col  md="4" class="inline"><input type="search" placeholder="Search"></input><i class="fa fa-search icon" style={{margin:"10px"}}></i></Col>
+                <Col  ms="1"> <BsFillPersonFill/></Col>
+                <Col  ms="1"> <BsFillCartPlusFill/></Col>
+                </Row>
+            </Container>
+        </div>
     );
     
 }

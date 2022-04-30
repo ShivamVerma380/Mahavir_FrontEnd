@@ -1,4 +1,4 @@
-
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Tapestry&display=swap');
 
 
@@ -41,16 +41,10 @@
   }
 }
 
-header {
-  position: relative;
-  text-align: center;
-  padding-top: 25px;
-}
-header img {
+.logo_mahavir{
   position: absolute;
   border-radius: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  margin-top: -10px;
+  height: 60px;
+  width: 60px; 
 }
