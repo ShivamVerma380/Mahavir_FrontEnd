@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
-import { Container, Row ,Col} from 'reactstrap';
+import CategoriesToDisplay from './components/CategoriesToDisplay';
 
 
 
@@ -9,7 +8,7 @@ function App() {
   return (
     <div className="App" >
       <Header/>
-      
+      <CategoriesToDisplay/>
     </div>
   );
 }

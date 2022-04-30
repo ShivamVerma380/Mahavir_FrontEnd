@@ -40,11 +40,16 @@
     transform: rotate(360deg);
   }
 }
-
+/*-------------------------------------- Header Css------------------------------------------------------------------- */
 .logo_mahavir{
-  position: absolute;
   border-radius: 100%;
   margin-top: -10px;
   height: 60px;
   width: 60px; 
+}
+
+/*-------------------------------------- CategoriesToDisplay Css------------------------------------------------------------------- */
+
+.category{
+  display: inline;
 }
