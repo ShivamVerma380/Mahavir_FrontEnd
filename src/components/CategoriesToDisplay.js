@@ -10,25 +10,9 @@ import {
     NavItem
 } from 'reactstrap';
 
-function CategoriesToDisplay () {
+function CategoriesToDisplay ({categoryDetail}) {
 
-    var categoryDetail = [{
-        "id":1,
-        "title": "Mobile",
-        "image": "https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
-    },{
-        "id":2,
-        "title": "Laptop",
-        "image": "https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
-    },{
-        "id":3,
-        "title":"Televisions",
-        "image":"https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
-    },{
-        "id":4,
-        "title":"Air Conditioners",
-        "image":"https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
-    }]
+    
     
     const [isOpen, setIsOpen] = React.useState(false);
     var cards = <div>
@@ -39,15 +23,14 @@ function CategoriesToDisplay () {
         <div style={{
             display: 'block', padding: 30
         }}>
-            <h5>ReactJS Reactstrap Navbar Component</h5>
             <Navbar color="light" light expand="md">
                 <NavbarToggler onClick={() => { setIsOpen(!isOpen) }} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
-                        if(categoryDetail){
+                        {
                             cards = categoryDetail.map(index=>{
                                 return(
-                                    <NavItem>
+                                    <NavItem style={{margin:20}}>
                                         <img src={index.image} alt={index.title} className="logo_mahavir" /> {index.title}
                                     </NavItem>       
                                 )
