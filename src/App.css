@@ -59,3 +59,9 @@
   height:30px;
   border-radius: 100%; 
 }
+
+.product{
+  width: 200px;
+  height: 150px;
+  margin: 50;
+}
