@@ -21,17 +21,17 @@ function CategoriesToDisplay ({categoryDetail}) {
   
     return (
         <div style={{
-            display: 'block', padding: 30
+            display: 'block'
         }}>
             <Navbar color="light" light expand="md">
                 <NavbarToggler onClick={() => { setIsOpen(!isOpen) }} />
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav className="mr-auto" navbar>
+                    <Nav style={{marginLeft:50,marginRight:50}} className="mr-auto" navbar>
                         {
                             cards = categoryDetail.map(index=>{
                                 return(
-                                    <NavItem style={{margin:20}}>
-                                        <img src={index.image} alt={index.title} className="logo_mahavir" /> {index.title}
+                                    <NavItem style={{margin:10, textAlign:"left"  }}>
+                                        <img src={index.image} alt={index.title} className="category-image"/> {index.title}
                                     </NavItem>       
                                 )
                             })
