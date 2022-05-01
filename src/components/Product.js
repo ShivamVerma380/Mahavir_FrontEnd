@@ -16,18 +16,18 @@ function Product({title,productList}){
                     cards = productList.map(index=>{
                         return(
             
-                            <Card className="product" style={{height:350 ,margin:10, padding:2}}>
-                               <CardImg
+                            <Card className="card" style={{height:350 ,margin:10, padding:2}}>
+                               <CardImg className="this.props.img"
                                    src={index.src}
                                  />
                                  <CardBody>
-                                   <CardTitle>
+                                   <CardTitle className="this.props.h5">
                                         <h5>{index.title}</h5>
                                     </CardTitle>
                                     <CardSubtitle>
                                         <h6>Rs {index.price}</h6>
                                     </CardSubtitle>
-                                    <CardText>
+                                    <CardText className="this.props.p">
                                         <p>{index.description}</p>
                                    </CardText>
                                     
