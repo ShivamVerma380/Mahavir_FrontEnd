@@ -65,3 +65,8 @@
   height: 150px;
   margin: 50;
 }
+
+
+::-webkit-scrollbar {
+  display: none;
+}

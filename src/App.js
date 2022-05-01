@@ -115,7 +115,7 @@ var products=[
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
       <Slideshow offerPosters={offerPosters}/>
       <Product title="Mahavir Special" productList={products}/>
-      <Product title="God" productList={products}/>
+      <Product title="Deals Of The Day" productList={products}/>
     </div>
   );
 }
