@@ -64,6 +64,48 @@ var products=[
   "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
   "price":19999,
   "description":"OxygenOS based on Android™ 12"
+}, {
+  "id":4,
+  "src":"https://static.photocdn.pt/images/articles/2017_1/iStock-467764294-1.webp",
+  "alt":"Offer Name:1",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+},{
+  "id":5,
+  "src":"https://static.photocdn.pt/images/articles/2017_1/iStock-467764294-1.webp",
+  "alt":"Offer Name:2",
+  "title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+  "price":65999,
+  "description":"OxygenOS based on Android™ 12"
+},{
+  "id":6,
+  "src":"https://static.photocdn.pt/images/articles/2017_1/iStock-467764294-1.webp",
+  "alt":"Offer Name:3",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+}, {
+  "id":7,
+  "src":"https://static.photocdn.pt/images/articles/2017_1/iStock-467764294-1.webp",
+  "alt":"Offer Name:1",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+},{
+"id":8,
+"src":"https://static.photocdn.pt/images/articles/2017_1/iStock-467764294-1.webp",
+"alt":"Offer Name:2",
+"title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+"price":65999,
+"description":"OxygenOS based on Android™ 12"
+},{
+"id":9,
+"src":"https://static.photocdn.pt/images/articles/2017_1/iStock-467764294-1.webp",
+"alt":"Offer Name:3",
+"title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+"price":19999,
+"description":"OxygenOS based on Android™ 12"
 }
 ]
 
@@ -73,6 +115,7 @@ var products=[
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
       <Slideshow offerPosters={offerPosters}/>
       <Product title="Mahavir Special" productList={products}/>
+      <Product title="God" productList={products}/>
     </div>
   );
 }
