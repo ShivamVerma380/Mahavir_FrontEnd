@@ -6,7 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import EmailVerification from './components/EmailVerification';
-
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import VerifyOTP from './components/VerifyOTP';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
@@ -16,6 +18,9 @@ root.render(
     <Routes>
       <Route path='/' element={<App/>}/>
       <Route path='/email-verification' element={<EmailVerification/>}/>
+      <Route path='/sign-up' element={<SignUp/>}/>
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/otp' element={<VerifyOTP/>}/>
     </Routes>
   </BrowserRouter>
 );

@@ -1,12 +1,11 @@
 import React from "react";
 import Header from "./Header";
 import { Button, Container, Form, FormGroup, Input, Label,Row,Col } from "reactstrap";
-// import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-function EmailVerification(){  
+function Login(){  
     const navigate = useNavigate(); 
-const verifyOTP=()=>{
-    navigate('/otp');
+const homepage=()=>{
+    navigate('/')
 }
     return(
         <div>
@@ -20,7 +19,6 @@ const verifyOTP=()=>{
                             >
                             Email
                             </Label>
-                            <br></br>
                             <Input
                             id="email"
                             name="email"
@@ -30,13 +28,38 @@ const verifyOTP=()=>{
                         </FormGroup>
                     </Col>
                 </Row>
-                
+                <Row >
+                    <Col md={4}></Col>
+                    <Col md={4}>
+                    <FormGroup >
+                        <Label
+                        for="password"
+                        >
+                        Password
+                        </Label>
+                        <br></br>
+                        <Input
+                        id="password"
+                        name="password"
+                        placeholder="Enter Password"
+                        type="password"
+                        />
+                    </FormGroup>
+                    </Col>
+                </Row>
             <Row>
                 <Col md={4}></Col>
                 <Col md={4}>
-                <Button onClick={verifyOTP}>
-                    Send OTP
+                <Button onClick={homepage}>
+                    Login
                 </Button >
+                </Col>
+            </Row>
+            <Row>
+            <Col md={4}></Col>
+                <Col md={4}>
+                    New User?
+                    <a href="/sign-up">SignUp</a>
                 </Col>
             </Row>
             
@@ -48,4 +71,4 @@ const verifyOTP=()=>{
 // signup page -> full name, address, pincode, phone no -> home page
 }
 
-export default EmailVerification;
+export default Login;
