@@ -26,7 +26,7 @@ const Header = () => {
         <div>
            <Navbar bg="light" expand="lg">
             <Container fluid>
-            <Navbar.Brand href="#" style={{fontFamily:"Tapestry"}}><img className="logo_mahavir" src = {require ('../assets/logo.jpg')}/>MAHAVIR</Navbar.Brand>
+            <Navbar.Brand href="/" style={{fontFamily:"Tapestry"}}><img className="logo_mahavir" src = {require ('../assets/logo.jpg')}/>MAHAVIR</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                 <Nav
@@ -45,10 +45,14 @@ const Header = () => {
                     />
                     <Nav.Link href="#action1"><i class="fa fa-search icon" ></i></Nav.Link> 
                 </Form>
-                <Nav.Link><i  class="fa fa-map-marker" style={{paddingLeft:"20px" , paddingRight:"20px"}}>Pune</i></Nav.Link>
-                    <Nav.Link><i class="fa fa-user" style={{paddingLeft:"20px" , paddingRight:"20px"}} onClick={EmailVerification}></i></Nav.Link>
-                    <Nav.Link ><i  class="fa fa-shopping-cart" style={{paddingLeft:"20px" , paddingRight:"20px"}} onClick={verifyOTP}></i></Nav.Link>
-                
+                <Nav.Link><i  class="fa fa-map-marker" style={{paddingLeft:"20px" , paddingRight:"10px"}}>Pune</i></Nav.Link>
+                    <Nav.Link><i class="fa fa-user" style={{paddingLeft:"10px" , paddingRight:"10px"}} onClick={EmailVerification}></i></Nav.Link>
+                    <Nav.Link ><i  class="fa fa-shopping-cart" style={{paddingLeft:"10px" , paddingRight:"20px"}} onClick={verifyOTP}></i></Nav.Link>
+                    <NavDropdown title="Our Location" id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
+                        <NavDropdown.Item href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
+                        <NavDropdown.Item href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
+                        <NavDropdown.Item href="https://goo.gl/maps/eLmvYz7aLYgTuiSa7" target="_blank">Kothrud</NavDropdown.Item>
+                    </NavDropdown>
                 </Nav>
                 </Navbar.Collapse>
             </Container>

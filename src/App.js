@@ -4,7 +4,6 @@ import CategoriesToDisplay from './components/CategoriesToDisplay';
 import Slideshow from './components/Slideshow';
 import Product from './components/Product';
 import { Router, Routes, Route } from 'react-router-dom';
-import EmailVerification from './components/EmailVerification';
 
 
 

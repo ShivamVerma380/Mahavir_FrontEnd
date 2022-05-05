@@ -5,10 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import EmailVerification from './components/EmailVerification';
-import SignUp from './components/SignUp';
-import Login from './components/Login';
-import VerifyOTP from './components/VerifyOTP';
+import EmailVerification from './components/Login-Signup/EmailVerification';
+import SignUp from './components/Login-Signup/SignUp';
+import Login from './components/Login-Signup/Login';
+import VerifyOTP from './components/Login-Signup/VerifyOTP';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Header from "./Header";
+import Header from "../Header";
 import { Button, Container, Form, FormGroup, Input, Label,Row,Col } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 function SignUp(){
