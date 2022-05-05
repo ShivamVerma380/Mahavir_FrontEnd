@@ -61,3 +61,25 @@ body {
   width: 80px;
   color: white;
 }
+.card{
+  height:350px; 
+  margin:10px; 
+  padding:2px;
+}
+@media (max-width: 786px) {
+  .change{
+    display: none;
+  }
+  .card{
+    height:150px; 
+    margin:10px;
+    padding:2px;
+  }
+}
+@media (max-width: 500px) {
+  .card{
+    height:250px; 
+    margin:10px; 
+    padding:2px;
+  }
+}

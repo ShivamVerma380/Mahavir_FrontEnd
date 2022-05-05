@@ -64,9 +64,7 @@
 
 ::-webkit-scrollbar {
   display: none;
-}
-
-
+} 
 /*-----------------------------------------------------For card hovering----------------------------------------------*/
 .card {
   background: #fff;
@@ -131,3 +129,4 @@ form{
   margin-right: auto;
   text-align: left;
 }
+/* Product */

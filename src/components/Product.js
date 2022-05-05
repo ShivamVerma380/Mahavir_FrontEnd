@@ -98,11 +98,19 @@ function Product({title,productList}){
         <h3 style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3>
       <>
       <Swiper
-        slidesPerView={6}
+        slidesPerView={1}
         spaceBetween={5}
         slidesPerGroup={3}
-        loop={true}
+        loop={false}
         loopFillGroupWithBlank={true}
+        breakpoints={{
+          700: {
+            slidesPerView: 6,
+          },
+          400: {
+            slidesPerView: 3,
+          },
+        }}
         pagination={{
           clickable: true,
         }}
@@ -114,17 +122,17 @@ function Product({title,productList}){
           cards = productList.map(index=>{
             return(
               <SwiperSlide>
-              <Card className="card" style={{height:350, margin:10, padding:2}}>
+              <Card className="card">
                 <CardImg className="this.props.img"
                   src={index.src}/>
                   <CardBody>
-                    <CardTitle className="this.props.h5">
+                    <CardTitle className="this.props.h5 change">
                       <h5><b>{index.title}</b></h5>
                     </CardTitle>
                     <CardSubtitle>
                     <h6>Rs {index.price}</h6>
                     </CardSubtitle>
-                    <CardText className="this.props.p">
+                    <CardText className="this.props.p change">
                      <p>{index.description}</p>
                   </CardText>
                   </CardBody>
