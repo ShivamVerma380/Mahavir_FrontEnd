@@ -7,12 +7,55 @@ import {useState,useEffect} from "react";
 import {axios} from "axios";
 
 function EmailVerification(){  
+    const [email,setEmail] = useState("");
+    const [otp,setOtp] = useState("");
+    // var o = "";
+    //var email = "";
+    // const handleChange=()=>{
+    //     setEmail(document.getElementById("email-input"));
+    //     console.log("In Handle change");
+    //     //email = document.getElementById("email-input");
+    // }
+
     const navigate = useNavigate(); 
-    const verifyOTP=()=>{
-        navigate('/otp');
+    const sendOTP=()=>{
+        //setEmail(document.getElementById("email-input"));
+        console.log(email)
+        if(email===""){
+            console.log("Email is empty")
+        }else{
+            axios({
+                    method: "get",
+                    url: "http://localhost:8080/verify-email/"+email,
+                  })
+                    .then(function (response) {
+                      //handle success
+                      console.log(response.data);
+                    //   o = response.data.otp;
+                      setOtp(response.data.otp);
+                      console.log(otp);
+                    })
+                    .catch(function (response) {
+                      //handle error
+                      console.log(response);
+
+                    });
+            
+            // navigate('/otp');
+        }
+        
     }
 
-    const[otp,SetOtp] = useState(null);
+    const inputEvent=(event)=>{
+        console.log(event.target.value);
+        setEmail(event.target.value);
+    }
+
+    const getOtp=()=>{
+        console.log(otp);
+    }
+
+
     const axios = require('axios');
     //const FormData = require('form-data');
     const FormData = require('form-data');
@@ -21,7 +64,7 @@ function EmailVerification(){
         const form_data = new FormData();
         form_data.append("email","shivamvermasv380@gmail.com");
 
-        let res = await axios.get('http://172.16.1.157:8080/welcome',form_data);
+        let res = await axios.get('http://localhost:8080/welcome',form_data);
         
         let data = res.data;
 
@@ -30,7 +73,7 @@ function EmailVerification(){
 
     }
 
-    makeGetRequest();
+    //makeGetRequest();
 
     return(
         <div>
@@ -38,9 +81,10 @@ function EmailVerification(){
                 <Row>
                     <Col md={4}></Col>
                     <Col md={4}>
+                        <Form>
                         <FormGroup>
-                            <Label
-                            for="email"
+                            <Label id="email-input" 
+                            for="email"  
                             >
                             Email
                             </Label>
@@ -50,17 +94,21 @@ function EmailVerification(){
                             name="email"
                             placeholder="Enter Email"
                             type="email"
+                            onChange={inputEvent}
                             />
                         </FormGroup>
+                        </Form>
                     </Col>
                 </Row>
                 
             <Row>
                 <Col md={4}></Col>
                 <Col md={4}>
-                <Button onClick={verifyOTP}>
+                <Button onClick={sendOTP}>
                     Send OTP
                 </Button >
+                <Button onClick={getOtp}>Get Otp</Button>
+
                 </Col>
             </Row>
             
