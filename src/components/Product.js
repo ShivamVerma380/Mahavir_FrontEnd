@@ -1,8 +1,9 @@
 import React from "react";
-import { Row,Col,Card,CardImg, CardBody, CardTitle,CardSubtitle, CardText } from "reactstrap";
+import { Row,Col,Card,CardImg, CardBody, CardTitle,CardSubtitle, CardText, Container } from "reactstrap";
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import Arrow from 'react-arrows';
 import Carousel from 'react-bootstrap/Carousel';
+import { Button } from "bootstrap";
 
 
 function Product({title,productList}){
@@ -10,14 +11,37 @@ function Product({title,productList}){
         <img className="logo_mahavir" src={require ('../assets/images.jpg')} alt="God" />
     </div>
 
+
+
+    
+    const leftScroll=()=>{
+      console.log("Left scroll");
+      const conent = document.querySelector('#content');
+      conent.scrollLeft += 300;
+    }
+
+
+    const rightScroll=()=>{
+      console.log("Right scroll");
+      const conent = document.querySelector('#content');
+      conent.scrollLeft -= 300;
+    }
     
     return(
         <div>
             <h3 style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3>
-            <ScrollMenu 
+            <Row>
+              <Col md={1}>
+              <button style={{marginTop:175}} onClick={leftScroll}>
+                Left
+              </button>
+              </Col>
+              <Col md={10}>
+              <Container>
+              <ScrollMenu 
                 LeftArrow={LeftArrow}
                 RightArrow={RightArrow}
-            >
+              >
                 {
                     cards = productList.map(index=>{
                         return(
@@ -42,8 +66,17 @@ function Product({title,productList}){
                             </Card>
                         )
                     })
-                }
-            </ScrollMenu>
+                 }
+                </ScrollMenu>
+                </Container>
+                </Col>
+              <Col md={1}>
+                <button style={{marginTop:175}} onClick={rightScroll}>
+                  Right
+                </button>
+              </Col>
+            </Row>
+            
         </div>
 
     );
