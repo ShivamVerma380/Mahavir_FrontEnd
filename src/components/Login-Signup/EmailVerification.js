@@ -21,7 +21,7 @@ function EmailVerification(){
         const form_data = new FormData();
         form_data.append("email","shivamvermasv380@gmail.com");
 
-        let res = await axios.get('http://localhost:8080/verify-email',form_data);
+        let res = await axios.get('http://172.16.1.157:8080/welcome',form_data);
         
         let data = res.data;
 

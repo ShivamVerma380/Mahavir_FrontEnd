@@ -6,12 +6,32 @@ import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar,FormControl,Button,Form,NavDropdown, Nav} from 'react-bootstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import FormData from "form-data"; 
+import axios from "axios";
+
 const Header = () => {
 
     const navigate = useNavigate();
 
     const EmailVerification = () => {
-        navigate("/email-verification");
+        //navigate("/email-verification");
+        console.log("In email verification");
+
+        var bodyFormData = new FormData();
+        bodyFormData.append("email","siddhant.21910811@viit.ac.in")
+        axios({
+            method: "get",
+            url: "http://localhost:8080/verify-email/siddhant.21910811@viit.ac.in"
+          })
+            .then(function (response) {
+              //handle success
+              console.log(response.data);
+            })
+            .catch(function (response) {
+              //handle error
+              console.log(response);
+            });
+          
     }
     const verifyOTP=()=>{
         navigate('/otp');
