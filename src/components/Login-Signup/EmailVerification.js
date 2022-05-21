@@ -5,6 +5,7 @@ import { Button, Container, Form, FormGroup, Input, Label,Row,Col } from "reacts
 import { useNavigate } from "react-router-dom";
 import {useState,useEffect} from "react";
 import {axios} from "axios";
+import VerifyOTP from "./VerifyOTP";
 
 function EmailVerification(){  
     const [email,setEmail] = useState("");
@@ -18,6 +19,7 @@ function EmailVerification(){
     // }
 
     const navigate = useNavigate(); 
+    const axios = require('axios');
     const sendOTP=()=>{
         //setEmail(document.getElementById("email-input"));
         console.log(email)
@@ -29,7 +31,7 @@ function EmailVerification(){
                     url: "http://localhost:8080/verify-email/"+email,
                   })
                     .then(function (response) {
-                      //handle success
+                      //handle success 
                       console.log(response.data);
                     //   o = response.data.otp;
                       setOtp(response.data.otp);
@@ -41,13 +43,14 @@ function EmailVerification(){
 
                     });
             
-            // navigate('/otp');
+           // navigate('/otp');
+           return  <VerifyOTP otp={otp}/>;
+            
         }
         
     }
 
     const inputEvent=(event)=>{
-        console.log(event.target.value);
         setEmail(event.target.value);
     }
 
@@ -56,24 +59,8 @@ function EmailVerification(){
     }
 
 
-    const axios = require('axios');
-    //const FormData = require('form-data');
-    const FormData = require('form-data');
-    async function makeGetRequest(){
-        //const form_data = FormData();
-        const form_data = new FormData();
-        form_data.append("email","shivamvermasv380@gmail.com");
-
-        let res = await axios.get('http://localhost:8080/welcome',form_data);
-        
-        let data = res.data;
-
-        console.log(data);
-
-
-    }
-
-    //makeGetRequest();
+    
+    
 
     return(
         <div>
@@ -107,8 +94,6 @@ function EmailVerification(){
                 <Button onClick={sendOTP}>
                     Send OTP
                 </Button >
-                <Button onClick={getOtp}>Get Otp</Button>
-
                 </Col>
             </Row>
             

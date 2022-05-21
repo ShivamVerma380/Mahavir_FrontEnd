@@ -4,10 +4,23 @@ import CategoriesToDisplay from './components/CategoriesToDisplay';
 import Slideshow from './components/Slideshow';
 import Product from './components/Product';
 import { Router, Routes, Route } from 'react-router-dom';
-
-
+import {useState, useEffect} from "react";
+import axios from "axios";
 
 function App() {
+
+  const [offerPosters,setOfferPosters] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/getoffers").then((response)=>{
+      setOfferPosters(response.data);
+      console.log("response",response.data);
+    });
+  },[]);
+
+  
+  
+
   var categoryDisplay = [{
     "id":1,
     "title": "Mobile",
@@ -26,23 +39,23 @@ function App() {
     "image":"https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
   }]
 
-  var offerPosters=[
-    {
-        "id":1,
-        "src":"https://static.photocdn.pt/images/articles/2017_1/iStock-467764294-1.webp",
-        "alt":"Offer Name:1"
-    },
-    {
-        "id":2,
-        "src":"https://cdn.dribbble.com/users/1803663/screenshots/11400179/media/25558ede8bcb553fd48d7ed339e136ee.png?compress=1&resize=400x300",
-        "alt":"Offer Name:2"
-    },
-    {
-        "id":3,
-        "src":"https://freerangestock.com/thumbnail/140669/baobab-tree-at-sunset--african-landscape--calm--relaxing--tr.jpg",
-        "alt":"Offer Name:3"
-    }
-]
+//   var offerPosters=[
+//     {
+//         "id":1,
+//         "src":"https://static.photocdn.pt/images/articles/2017_1/iStock-467764294-1.webp",
+//         "alt":"Offer Name:1"
+//     },
+//     {
+//         "id":2,
+//         "src":"https://cdn.dribbble.com/users/1803663/screenshots/11400179/media/25558ede8bcb553fd48d7ed339e136ee.png?compress=1&resize=400x300",
+//         "alt":"Offer Name:2"
+//     },
+//     {
+//         "id":3,
+//         "src":"https://freerangestock.com/thumbnail/140669/baobab-tree-at-sunset--african-landscape--calm--relaxing--tr.jpg",
+//         "alt":"Offer Name:3"
+//     }
+// ]
 var products=[
   {
       "id":1,

@@ -12,15 +12,22 @@ function Slideshow({offerPosters}){
         <Carousel>
         {
             offerPoster= offerPosters.map(index=>{
+                //let Base64string = Buffer.from(index.image.data,"base64").toString();
+                
+                console.log("image",index.image.data);
+                // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
                 return(
                     <Carousel.Item interval={1000}>
-                    <img className="d-block w-100"
-                    src={index.src}
+                    <img id = "classname" 
+                    className="d-block w-100"
+                    src={"data:image/png;base64," + index.image.data}
                     alt={index.alt}
                     height={300}
-                    />
+                    />                    
                     </Carousel.Item>
+                  
                 )
+
             })
         }
   

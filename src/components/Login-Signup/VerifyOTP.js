@@ -2,16 +2,29 @@ import React from "react";
 import Header from "../Header";
 import { Button, Container, Form, FormGroup, Input, Label,Row,Col } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import {useState,useEffect} from "react";
+const VerifyOTP=({otp})=>{   
+const navigate = useNavigate();
+console.log(otp);
 
-const VerifyOTP=()=>{   
-    const navigate = useNavigate();
+const [inputOtp,SetinputOtp] = useState("");
+const inputEvent=(event)=>{
+    SetinputOtp(event.target.value);
+}
+
 const login=()=>{
-    navigate('/login');
+    
+    if(inputOtp===String({otp})){
+        console.log("Logged In");
+    }else{
+        console.log("inputOTP:"+inputOtp);
+        console.log("otp:"+String({otp}));
+    }
+
 }
     return(
         <div>
             <Header/>
-            
                 <Row>
                     <Col md={4}></Col>
                     <Col md={4}>
@@ -26,6 +39,7 @@ const login=()=>{
                             name="otp"
                             placeholder="Enter OTP"
                             type="otp"
+                            onChange={inputEvent}
                             />
                         </FormGroup>
                         </Form>
