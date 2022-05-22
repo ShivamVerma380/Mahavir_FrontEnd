@@ -43,8 +43,8 @@ function EmailVerification(){
 
                     });
             
-           // navigate('/otp');
-           return  <VerifyOTP otp={otp}/>;
+           navigate('/otp');
+           //return  <VerifyOTP otp={otp}/>;
             
         }
         
