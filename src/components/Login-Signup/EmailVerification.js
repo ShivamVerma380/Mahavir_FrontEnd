@@ -36,6 +36,11 @@ function EmailVerification(){
                     //   o = response.data.otp;
                       setOtp(response.data.otp);
                       console.log(otp);
+                      return( 
+                        
+                            <VerifyOTP/>
+                        
+                      );
                     })
                     .catch(function (response) {
                       //handle error
@@ -43,7 +48,6 @@ function EmailVerification(){
 
                     });
             
-           navigate('/otp');
            //return  <VerifyOTP otp={otp}/>;
             
         }
@@ -91,7 +95,7 @@ function EmailVerification(){
             <Row>
                 <Col md={4}></Col>
                 <Col md={4}>
-                <Button onClick={sendOTP}>
+                <Button onClick={<sendOTP/>}>
                     Send OTP
                 </Button >
                 </Col>
