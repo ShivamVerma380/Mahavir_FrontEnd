@@ -1,191 +1,177 @@
-import React from "react";
-import { Component,useState } from "react";
-import axios from "axios";
+import { Component,useState ,useEffect} from "react";
+
 import { Button, Container, Form, FormGroup, Input, Label,Row,Col } from "reactstrap";
 import Header from "../Header";
-// Message Component   
-function Message(props)   
-{   
-    if (props.isOTPSent)   
-        return <h1>Please enter your otp!!!</h1>;   
-    else  
-        return <h1>Please enter your email!!!</h1>;   
-}   
-// Login Component   
-function SendOTP(props)   
-{   
 
-    // var o = "";
-    //var email = "";
-    // const handleChange=()=>{
-    //     setEmail(document.getElementById("email-input"));
-    //     console.log("In Handle change");
-    //     //email = document.getElementById("email-input");
-    // }
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-   
-    
-    const inputEvent=(event)=>{
-        //setEmail(event.target.value);
+var email = "";
+var inputOTP = "";
+var otp = "";
 
-        this.setState({email:event.target.value});
+const axios = require('axios');
+// Message Component
+function Message(props)
+{
+    const inputEmailEvent=(event)=>{
+        email = event.target.value;
+        console.log(email);
     }
 
-    return(   
-        //    <button onClick = {props.clickInfo}> Login </button>
-        <div>
+    const inputOtpEvent=(event)=>{
+        inputOTP = event.target.value;
+        console.log(inputOTP);
+    }
+
+	if (props.isOTPSent){
+		return(
+            <div>
+                <Header/>
                 <Row>
                     <Col md={4}></Col>
                     <Col md={4}>
+                        <h1>Enter OTP</h1>
                         <Form>
-                        <FormGroup>
-                            <Label id="email-input" 
-                            for="email"  
-                            >
-                            Email
-                            </Label>
-                            <br></br>
-                            <Input
-                            id="email"
-                            name="email"
-                            placeholder="Enter Email"
-                            type="email"
-                            onChange={inputEvent}
-                            />
-                        </FormGroup>
+                            <FormGroup>
+                                <Label for="otp">
+                                    Enter OTP
+                                </Label>
+                                <Input id="otp" name="otp" placeholder="Enter OTP" type="otp" onChange={inputOtpEvent}/>
+                            </FormGroup>
                         </Form>
                     </Col>
                 </Row>
-                
-            <Row>
-                <Col md={4}></Col>
-                <Col md={4}>
-                <Button onClick={props.clickInfo}>
-                    Get OTP
-                </Button >
-                </Col>
-            </Row>
+            </div>
             
-        </div>   
-       );   
-}    
-// Logout Component   
-function VerifyOTP(props)   
-{   
-    const inputOTPEvent=(event)=>{
-        this.setState({inputOTP:event.target.value});
-    }
 
-    return(   
-        <div>
-            <Row>
-                <Col md={4}></Col>
-                <Col md={4}>
-                <Form>
-                    <FormGroup>
-                        <Label for="otp">
-                        Enter OTP
-                        </Label>
-                        
-                        <Input
-                        id="otp"
-                        name="otp"
-                        placeholder="Enter OTP"
-                        type="otp"
-                        onChange={inputOTPEvent}
-                        />
-                    </FormGroup>
-                    </Form>
-                </Col>
-            </Row>
-            <Row>
+        );
+    }
+	else{
+        return(
+            <div>
+                <Header/> 
+                <Row>
+                    <Col md={4}></Col>
+                    <Col md={4}>
+                        <h1>Enter your Email</h1>
+                        <Form>
+                            <FormGroup>
+                                <Label id="email-input" for="email">Email</Label>
+                                <br></br>
+                                <Input id="email" name="email" placeholder="Enter email" type="email" onChange={inputEmailEvent}/>
+                            </FormGroup>
+                        </Form>
+                    </Col>
+                </Row>
+
+            </div>
+        );
+    }
+}
+
+// Login Component
+function SendOTP(props)
+{
+return(
+    <Row>
+    <Col md={4}></Col>
+    <Col md={4}>
+        <button onClick = {props.clickFunc}>
+            Send OTP
+        </button>
+    </Col>
+    
+</Row>
+	);
+}
+
+// Logout Component
+function SubmitOTP(props)
+{
+	return(
+        <Row>
             <Col md={4}></Col>
-                <Col md={4}>
-                <Button onClick={props.clickInfo}>
-                    Submit OTP
-                </Button>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={4}></Col>
-                <Col md={4}>
-                    <a href="/otp">Resend OTP</a>
-                </Col>
-            </Row>
-        
+            <Col md={4}>
+                <button onClick = {props.clickFunc}>
+			        Verify OTP
+		        </button>
+            </Col>
             
+        </Row>
+		
+	);
+}
+
+// Parent Homepage Component
+class EmailAuth extends React.Component{  
+	constructor(props)
+	{
+		super(props);
+
+		this.state = {isOTPSent : false};
+
+		this.ifSendOtpClicked = this.ifSendOtpClicked.bind(this);
+		this.ifSubmitOtpClicked = this.ifSubmitOtpClicked.bind(this);
+	}
+
+	ifSendOtpClicked()
+	{
+        console.log("Inside Send OTP");
         
-        </div>   
-       );   
-}   
-
-
-class EmailAuth extends Component{
-
-    constructor(props){
-        super(props);
-        this.OTPHandler = this.OTPHandler.bind(this);  
-        this.OTPVerificationHandler = this.OTPVerificationHandler.bind(this);   
-        this.state = {isOTPSent : false , otp : null,email:null, inputOTP:null};
-    }
-    OTPHandler()   
-    {   
-        //write code for axios
-        const axios = require("axios");
-
-        console.log(this.state.email);
-        if(this.state.email===""){
-            console.log("Email is empty");
+        if(email===""){
+            console.log("Email is empty")
         }else{
+            console.log("Email",email);
             axios({
-                method: "get",
-                url: "http://localhost:8080/verify-email/"+this.state.email,
-              })
-                .then(function (response) {
-                  //handle success 
-                  console.log(response.data);
-                //   o = response.data.otp;
-                  //(response.data.otp);
-                  this.setState({isOTPSent : true});
-                  this.setState({otp:response.data.otp});
-                })
-                .catch(function (response) {
-                  //handle error
-                  console.log(response);
-
-                });
-        
-            //return  <VerifyOTP otp={otp}/>;
+                method:"get",
+                url:"http://localhost:8080/verify-email/"+email
+            }).then(function (response){
+                console.log(response.data);
+                otp = response.data.otp;
+                console.log("otp:",otp);
+            }).catch(function(response){
+                console.log(response);
+                return;
+            })
+            this.setState({isOTPSent : true});
         }
+		
+	}
 
-           
-    }   
-    OTPVerificationHandler()   
-    {   
-        var otp = this.state.otp;
-        var inputOTP = this.state.inputOTP;
-        if(inputOTP===otp){
-            console.log("Logged In");
+	ifSubmitOtpClicked()
+	{
+        if(inputOTP===""){
+            console.log("Please enter valid otp");
+        }else if(inputOTP===otp){
+            console.log("Login Successfull");
+            this.setState({isOTPSent : false});
         }else{
-            console.log("Input OTP:",inputOTP);
-            console.log("OTP:",otp);
+            console.log("Please enter correct OTP");   
         }
-    }   
-    render() {
-        return(   
-            <div>   
-        <h1> Conditional Rendering Example </h1>  
-                <Message isOTPSent = {this.state.isOTPSent}/>               
-                {   
-                    (this.state.isOTPSent)?(   
-                    <VerifyOTP clickInfo = {this.OTPVerificationHandler} />   
-                    ) : (   
-                    <SendOTP clickInfo = {this.OTPHandler} />   
-                    )   
-                }   
-            </div>         
-            );   
-    }
+		
+	}
+
+	render(){
+
+		return(
+
+			<div>
+
+				<Message isOTPSent = {this.state.isOTPSent}/>
+				
+				{
+					(this.state.isOTPSent)?(
+					<SubmitOTP clickFunc = {this.ifSubmitOtpClicked} />
+					) : (
+					<SendOTP clickFunc = {this.ifSendOtpClicked} />
+					)
+				}
+
+			</div>
+				
+			);
+	}
 }
 
 export default EmailAuth;
