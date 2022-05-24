@@ -5,10 +5,19 @@ import Header from "../Header";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate } from "react-router-dom";
 
 var email = "";
 var inputOTP = "";
 var otp = "";
+
+var firstName = "";
+var lastName = "";
+var phoneNo = "";
+var password = "";
+var confirmPassword = "";
+
+
 
 const axios = require('axios');
 // Message Component
@@ -23,8 +32,7 @@ function Message(props)
         inputOTP = event.target.value;
         console.log(inputOTP);
     }
-
-	if (props.isOTPSent){
+    if (props.isOTPSent){
 		return(
             <div>
                 <Header/>
@@ -103,16 +111,89 @@ function SubmitOTP(props)
 	);
 }
 
+function Register(props){
+
+    
+
+    const inputFirstNameEvent=(event)=>{
+        console.log("In input first name event");
+        firstName = event.target.value;
+        console.log("First Name:",firstName);
+    }
+
+    const inputLastNameEvent=(event)=>{
+        console.log("In input last name event");
+        lastName = event.target.value;
+        console.log("Last Name:",lastName);
+    }
+    const inputPhoneNumberEvent=(event)=>{
+        console.log("In input phone Number event");
+        phoneNo = event.target.value;
+        console.log("Phone Number:",phoneNo);
+    }
+    const inputPasswordEvent=(event)=>{
+        console.log("In input password event");
+        password = event.target.value;
+        console.log("Password:",password);
+    }
+    const inputConfirmPasswordEvent=(event)=>{
+        console.log("In input confirm password event");
+        confirmPassword = event.target.value;
+        console.log("Confirm Password:",confirmPassword);
+    }
+    
+    return(
+            <div>
+            <Header/>
+            <Row>
+                <Col md={4}>
+                </Col>
+                <Col md={4}>
+                    <h4>Please Complete Registration</h4>
+                    <br></br>
+                    <Form>
+                        <FormGroup>
+                            <Label id="label-first-name" for="label-first-name">Enter your First Name</Label>
+                            <br></br>
+                            <Input id="first-name" name="first-name" placeholder="Omkar" type="name" onChange={inputFirstNameEvent}/>
+                            <br></br>
+                            <Label id="label-last-name" for="label-last-name">Enter your Last Name</Label>
+                            <br></br>
+                            <Input id="last-name" name="last-name" placeholder="Khare" type="name" onChange={inputLastNameEvent}/>
+                            <br></br>
+                            <Label id="label-phoneNo" for="label-phoneNo">Enter your Phone Number</Label>
+                            <br></br>
+                            <Input id="phoneNo" name="phoneNo" placeholder="92833824932" type="number" onChange={inputPhoneNumberEvent}/>
+                            <br></br>
+                            <Label id="label-password" for="label-password">Enter your Password</Label>
+                            <br></br>
+                            <Input id="password" name="password" placeholder="********" type="password" onChange={inputPasswordEvent}/>
+                            <br></br>
+                            <Label id="label-confirm-password" for="label-confirm-password">Confirm Password</Label>
+                            <br></br>
+                            <Input id="confirm-password" name="confirm-password" placeholder="******" type="password" onChange={inputConfirmPasswordEvent}/>
+                        </FormGroup>
+                    </Form>
+                    <br></br>
+                    <button onClick={props.clickFunc}>Register</button> 
+                </Col>       
+            </Row>
+            </div>
+    );
+    
+}
+
 // Parent Homepage Component
 class EmailAuth extends React.Component{  
 	constructor(props)
 	{
 		super(props);
 
-		this.state = {isOTPSent : false};
+		this.state = {isOTPSent : false, isEmailVerified:false};
 
 		this.ifSendOtpClicked = this.ifSendOtpClicked.bind(this);
 		this.ifSubmitOtpClicked = this.ifSubmitOtpClicked.bind(this);
+        this.ifRegisterBtnClicked = this.ifRegisterBtnClicked.bind(this);
 	}
 
 	ifSendOtpClicked()
@@ -146,18 +227,66 @@ class EmailAuth extends React.Component{
         }else if(inputOTP===otp){
             console.log("Login Successfull");
             this.setState({isOTPSent : false});
+            this.setState({isEmailVerified:true});
         }else{
             console.log("Please enter correct OTP");   
         }
 		
 	}
 
+    ifRegisterBtnClicked(){
+
+        
+
+        console.log("Inside register btn");
+        if(password!==confirmPassword){
+            console.log("Passwords do not match!!");
+            return;
+        }
+        if(firstName==="" || lastName==="" || phoneNo==="" || password==="" || confirmPassword===""){
+            console.log("Please enter all fields");
+            return;
+        }
+        if(password.length<6 || confirmPassword.length<6){
+            console.log("Password length must be atleast 6 characters");
+            return;
+        }
+        //Can add special characters validation in password
+        console.log("Email:",email);
+        console.log("First Name",firstName);
+        console.log("LastName:",lastName);
+        console.log("Phone Number:",phoneNo);
+        console.log("Password:",password);
+
+        var form_data_body={
+            first_name:firstName,
+            last_name: lastName,
+            PhoneNo: phoneNo,
+            Email: email,
+            Password: password
+        }
+
+        axios({
+            method:"post",
+            url:"http://localhost:8080/add-user",
+            data: form_data_body 
+        }).then(function(response){
+            console.log(response);
+            
+        }).catch(function(error){
+            console.log(error);
+        })
+    }
 	render(){
 
+        if(this.state.isEmailVerified){
+            return(
+                <Register clickFunc={this.ifRegisterBtnClicked}/>
+            );
+        }
+
 		return(
-
 			<div>
-
 				<Message isOTPSent = {this.state.isOTPSent}/>
 				
 				{
@@ -166,10 +295,8 @@ class EmailAuth extends React.Component{
 					) : (
 					<SendOTP clickFunc = {this.ifSendOtpClicked} />
 					)
-				}
-
-			</div>
-				
+                }
+			</div>				
 			);
 	}
 }
