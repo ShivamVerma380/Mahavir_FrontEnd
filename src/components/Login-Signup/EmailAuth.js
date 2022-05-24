@@ -1,11 +1,13 @@
 import { Component,useState ,useEffect} from "react";
 
-import { Button, Container, Form, FormGroup, Input, Label,Row,Col } from "reactstrap";
+import { Button, Container, Form, FormGroup, Input, Label,Row,Col, Toast, ToastHeader, ToastBody } from "reactstrap";
 import Header from "../Header";
 
 import React from 'react';
+import { ToastContainer, toast,position } from 'react-toastify';
 import ReactDOM from 'react-dom';
 import { useNavigate } from "react-router-dom";
+
 
 var email = "";
 var inputOTP = "";
@@ -81,6 +83,7 @@ function Message(props)
 // Login Component
 function SendOTP(props)
 {
+    
 return(
     <Row>
     <Col md={4}></Col>
@@ -97,6 +100,7 @@ return(
 // Logout Component
 function SubmitOTP(props)
 {
+
 	return(
         <Row>
             <Col md={4}></Col>
@@ -198,6 +202,11 @@ class EmailAuth extends React.Component{
 
 	ifSendOtpClicked()
 	{
+        
+        const notify=()=>{
+            toast.error("Email is empty",{position:"top-right"})
+        }
+
         console.log("Inside Send OTP");
         
         if(email===""){
@@ -279,6 +288,7 @@ class EmailAuth extends React.Component{
 	render(){
 
         if(this.state.isEmailVerified){
+            //toast.success("Email Verified Successfully")
             return(
                 <Register clickFunc={this.ifRegisterBtnClicked}/>
             );
