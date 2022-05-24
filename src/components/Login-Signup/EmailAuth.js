@@ -265,12 +265,11 @@ class EmailAuth extends React.Component{
             Email: email,
             Password: password
         }
-
-        axios({
-            method:"post",
-            url:"http://localhost:8080/add-user",
-            data: form_data_body 
-        }).then(function(response){
+        axios.post("http://localhost:8080/add-user", form_data_body, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }).then(function(response){
             console.log(response);
             
         }).catch(function(error){
