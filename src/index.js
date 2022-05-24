@@ -9,6 +9,7 @@ import EmailVerification from './components/Login-Signup/EmailVerification';
 import SignUp from './components/Login-Signup/SignUp';
 import Login from './components/Login-Signup/Login';
 import VerifyOTP from './components/Login-Signup/VerifyOTP';
+import EmailAuth from './components/Login-Signup/EmailAuth';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
@@ -21,6 +22,7 @@ root.render(
       <Route path='/sign-up' element={<SignUp/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/otp' element={<VerifyOTP/>}/>
+      <Route path='/email-auth' element = {<EmailAuth/>}/>
     </Routes>
   </BrowserRouter>
 );
