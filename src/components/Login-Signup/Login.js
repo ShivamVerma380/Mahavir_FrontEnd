@@ -10,6 +10,9 @@ const axios = require('axios');
 
 var email = "";
 var password = "";
+var isUserLoggedIn = false;
+localStorage.setItem("isUserLoggedIn",isUserLoggedIn);
+
 function Login(){  
     const navigate = useNavigate();
     let token = localStorage.getItem("jwtToken");
@@ -24,16 +27,20 @@ function Login(){
         console.log("Password",password);
     }
 
+    
+
     const homepage=()=>{
     let token = localStorage.getItem("jwtToken");
 
     console.log("token",token);
     if(email===""){
         console.log("Email is empty");
+        alert("enter email")
         return;
     }
     if(password===""){
         console.log("Password is empty");
+        alert("enter password")
         return;
     }
 
@@ -59,6 +66,9 @@ function Login(){
     }).catch(function(error){
         console.log(error);
     })
+    isUserLoggedIn=true;
+    alert("login successful")
+
     
     }
 
@@ -119,7 +129,7 @@ function Login(){
             <br></br>
             <Col md={4}></Col>
                 <Col md={4}>
-                    <a href="/email-auth">New User? Signup</a>
+                    <a href="/email-auth">New User?   Signup</a>
                 
                 </Col>
             </Row>

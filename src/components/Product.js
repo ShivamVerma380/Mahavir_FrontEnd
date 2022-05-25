@@ -14,15 +14,20 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "./styles.css";
+import { useNavigate } from "react-router-dom";
 
 // import required modules
 import { Pagination, Navigation } from "swiper";
 
 function Product({title,productList}){
+    const navigate = useNavigate();
     var cards=<div>
         <img className="logo_mahavir" src={require ('../assets/images.jpg')} alt="God" />
     </div>
 
+    const callProductDetails=()=>{
+      navigate("/productDetails")
+    }
 
     return(
       <div>
@@ -52,8 +57,8 @@ function Product({title,productList}){
         {
           cards = productList.map(index=>{
             return(
-              <SwiperSlide>
-              <Card className="card">
+              <SwiperSlide >
+              <Card className="card" onClick={callProductDetails}>
                 <CardImg className="this.props.img"
                   src={index.src}/>
                   <CardBody>

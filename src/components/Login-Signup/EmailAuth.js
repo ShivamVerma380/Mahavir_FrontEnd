@@ -222,6 +222,7 @@ class EmailAuth extends React.Component{
         
         if(email===""){
             console.log("Email is empty")
+            alert("Please Enter Email")
         }else{
             console.log("Email",email);
             axios({
@@ -244,12 +245,14 @@ class EmailAuth extends React.Component{
 	{
         if(inputOTP===""){
             console.log("Please enter valid otp");
+            alert("Please enter OTP");
         }else if(inputOTP===otp){
             console.log("Login Successfull");
             this.setState({isOTPSent : false});
             this.setState({isEmailVerified:true});
         }else{
-            console.log("Please enter correct OTP");   
+            console.log("Please enter correct OTP");
+            alert("False OTP, please enter correct OTP")   
         }
 		
 	}
@@ -261,14 +264,17 @@ class EmailAuth extends React.Component{
         console.log("Inside register btn");
         if(password!==confirmPassword){
             console.log("Passwords do not match!!");
+            alert("incorrect password")
             return;
         }
         if(firstName==="" || lastName==="" || phoneNo==="" || password==="" || confirmPassword===""){
             console.log("Please enter all fields");
+            alert("fill in all details")
             return;
         }
         if(password.length<6 || confirmPassword.length<6){
             console.log("Password length must be atleast 6 characters");
+            alert("password must be atleast 6 characters long")
             return;
         }
         //Can add special characters validation in password
@@ -311,7 +317,12 @@ class EmailAuth extends React.Component{
         isUserRegistered = true;
         this.setState({isRegistered:true});
         console.log(this.state.isRegistered);
-        toast.success("User Registered Successfully")
+        
+        {
+            return(
+                toast.success("User Registered Successfully")
+            );
+        }
         
     }
 	render(){

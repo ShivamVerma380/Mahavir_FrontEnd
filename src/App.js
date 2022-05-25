@@ -10,6 +10,7 @@ import axios from "axios";
 function App() {
 
   const [offerPosters,setOfferPosters] = useState([]);
+  localStorage.setItem("product",JSON.stringify(products));
 
   useEffect(() => {
     axios.get("http://localhost:8080/getoffers").then((response)=>{
@@ -122,6 +123,7 @@ var products=[
 "description":"OxygenOS based on Android™ 12"
 }
 ]
+
 
   return (
     <div className="App" >
