@@ -58,8 +58,11 @@ function Login(){
         console.log(error);
     })
     
-}
+    }
 
+    
+
+   
     return(
         <div>
             <Header/>
@@ -114,7 +117,7 @@ function Login(){
             <br></br>
             <Col md={4}></Col>
                 <Col md={4}>
-                    <a href="/email-auth" >New User? Signup</a>
+                    <a href="/email-auth">New User? Signup</a>
                 
                 </Col>
             </Row>

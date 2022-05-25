@@ -6,7 +6,7 @@ import Header from "../Header";
 import React from 'react';
 import { ToastContainer, toast,position } from 'react-toastify';
 import ReactDOM from 'react-dom';
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 
 var email = "";
@@ -18,6 +18,8 @@ var lastName = "";
 var phoneNo = "";
 var password = "";
 var confirmPassword = "";
+
+var isUserRegistered = false;
 
 
 
@@ -116,7 +118,13 @@ function SubmitOTP(props)
 }
 
 function Register(props){
+    const navigate = useNavigate();
+    if(isUserRegistered){
+        console.log("In is registered");
+        <ToastContainer/>
+        navigate("/");
 
+    }else{
     
 
     const inputFirstNameEvent=(event)=>{
@@ -184,6 +192,7 @@ function Register(props){
             </Row>
             </div>
     );
+    }
     
 }
 
@@ -193,12 +202,14 @@ class EmailAuth extends React.Component{
 	{
 		super(props);
 
-		this.state = {isOTPSent : false, isEmailVerified:false};
+		this.state = {isOTPSent : false, isEmailVerified:false, isRegistered:false};
 
 		this.ifSendOtpClicked = this.ifSendOtpClicked.bind(this);
 		this.ifSubmitOtpClicked = this.ifSubmitOtpClicked.bind(this);
         this.ifRegisterBtnClicked = this.ifRegisterBtnClicked.bind(this);
-	}
+        
+    }
+    
 
 	ifSendOtpClicked()
 	{
@@ -244,7 +255,7 @@ class EmailAuth extends React.Component{
 	}
 
     ifRegisterBtnClicked(){
-
+        
         
 
         console.log("Inside register btn");
@@ -284,23 +295,35 @@ class EmailAuth extends React.Component{
                 console.log("token",response.data.token);
                 localStorage.setItem("jwtToken",response.data.token);
                 console.log("token",localStorage.getItem("jwtToken"));
+                //navigate("/")
+                
                 //redux();
             }else{
                 console.log(response.data.message);
-            }
+                return;
+            }   
             
         }).catch(function(error){
             console.log(error);
+            return;
         })
+        isUserRegistered = true;
+        this.setState({isRegistered:true});
+        console.log(this.state.isRegistered);
+        toast.success("User Registered Successfully")
+        
     }
 	render(){
-
+        
         if(this.state.isEmailVerified){
             //toast.success("Email Verified Successfully")
             return(
                 <Register clickFunc={this.ifRegisterBtnClicked}/>
             );
         }
+
+        
+        
 
 		return(
 			<div>
