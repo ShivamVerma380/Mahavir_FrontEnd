@@ -2,11 +2,64 @@ import React from "react";
 import Header from "../Header";
 import { Button, Container, Form, FormGroup, Input, Label,Row,Col } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+
+
+
+const axios = require('axios');
+
+
+var email = "";
+var password = "";
 function Login(){  
-    const navigate = useNavigate(); 
-const homepage=()=>{
-    navigate('/')
+    const navigate = useNavigate();
+    let token = localStorage.getItem("jwtToken");
+    console.log("token",token); 
+ 
+    const inputEmailEvent=(event)=>{
+        email = event.target.value;
+        console.log("email",email);
+    }
+    const inputPasswordEvent=(event)=>{
+        password = event.target.value;
+        console.log("Password",password);
+    }
+
+    const homepage=()=>{
+    let token = localStorage.getItem("jwtToken");
+
+    console.log("token",token);
+    if(email===""){
+        console.log("Email is empty");
+        return;
+    }
+    if(password===""){
+        console.log("Password is empty");
+        return;
+    }
+
+    var form_data_body={
+        Email: email,
+        Password: password
+    }
+
+    axios.post("http://localhost:8080/login-user",form_data_body,{
+        headers:{
+            "Content-Type": "multipart/form-data",
+            "Authorization":"Bearer "+localStorage.getItem('jwtToken'),
+        },
+    }).then(function(response){
+        console.log(response);
+        if(response.status==200){
+            console.log(response.data.message);
+            navigate("/");
+        }
+        console.log(response.data.message);
+    }).catch(function(error){
+        console.log(error);
+    })
+    
 }
+
     return(
         <div>
             <Header/>
@@ -24,6 +77,7 @@ const homepage=()=>{
                             name="email"
                             placeholder="Enter Email"
                             type="email"
+                            onChange={inputEmailEvent}
                             />
                         </FormGroup>
                     </Col>
@@ -43,6 +97,7 @@ const homepage=()=>{
                         name="password"
                         placeholder="Enter Password"
                         type="password"
+                        onChange={inputPasswordEvent}
                         />
                     </FormGroup>
                     </Col>
@@ -56,10 +111,11 @@ const homepage=()=>{
                 </Col>
             </Row>
             <Row>
+            <br></br>
             <Col md={4}></Col>
                 <Col md={4}>
-                    New User?
-                    <a href="/sign-up">SignUp</a>
+                    <a href="/email-auth" >New User? Signup</a>
+                
                 </Col>
             </Row>
             

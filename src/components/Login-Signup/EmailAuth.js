@@ -88,9 +88,9 @@ return(
     <Row>
     <Col md={4}></Col>
     <Col md={4}>
-        <button onClick = {props.clickFunc}>
+        <Button onClick = {props.clickFunc}>
             Send OTP
-        </button>
+        </Button>
     </Col>
     
 </Row>
@@ -105,9 +105,9 @@ function SubmitOTP(props)
         <Row>
             <Col md={4}></Col>
             <Col md={4}>
-                <button onClick = {props.clickFunc}>
+                <Button onClick = {props.clickFunc}>
 			        Verify OTP
-		        </button>
+		        </Button>
             </Col>
             
         </Row>
@@ -179,7 +179,7 @@ function Register(props){
                         </FormGroup>
                     </Form>
                     <br></br>
-                    <button onClick={props.clickFunc}>Register</button> 
+                    <Button onClick={props.clickFunc}>Register</Button> 
                 </Col>       
             </Row>
             </div>
@@ -280,6 +280,14 @@ class EmailAuth extends React.Component{
             },
           }).then(function(response){
             console.log(response);
+            if(response.status==200){
+                console.log("token",response.data.token);
+                localStorage.setItem("jwtToken",response.data.token);
+                console.log("token",localStorage.getItem("jwtToken"));
+                //redux();
+            }else{
+                console.log(response.data.message);
+            }
             
         }).catch(function(error){
             console.log(error);

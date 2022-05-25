@@ -9,6 +9,7 @@ import SignUp from './components/Login-Signup/SignUp';
 import Login from './components/Login-Signup/Login';
 import EmailAuth from './components/Login-Signup/EmailAuth';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   // <React.StrictMode>
   //   <App />

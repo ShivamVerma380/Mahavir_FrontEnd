@@ -9,6 +9,7 @@ import {Navbar,FormControl,Button,Form,NavDropdown, Nav} from 'react-bootstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import FormData from "form-data"; 
 import axios from "axios";
+import Login from "./Login-Signup/Login";
 
 const Header = () => {
 
@@ -44,8 +45,8 @@ const Header = () => {
         navigate("/sign-up");
     }
 
-    const callEmailAuth=()=>{
-        navigate("/email-auth");
+    const callLogin=()=>{
+        navigate("/login")
     }
     return(
         <div>
@@ -71,7 +72,7 @@ const Header = () => {
                     <Nav.Link href="#action1"><i class="fa fa-search icon" ></i></Nav.Link> 
                 </Form>
                 <Nav.Link><i  class="fa fa-map-marker" style={{paddingLeft:"20px" , paddingRight:"10px"}}>Pune</i></Nav.Link>
-                    <Nav.Link><i class="fa fa-user" style={{paddingLeft:"10px" , paddingRight:"10px"}} onClick={callEmailAuth}></i></Nav.Link>
+                    <Nav.Link><i class="fa fa-user" style={{paddingLeft:"10px" , paddingRight:"10px"}} onClick={callLogin}></i></Nav.Link>
                     <Nav.Link ><i  class="fa fa-shopping-cart" style={{paddingLeft:"10px" , paddingRight:"20px"}}></i></Nav.Link>
                     <NavDropdown title="Our Location" id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
                         <NavDropdown.Item href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
