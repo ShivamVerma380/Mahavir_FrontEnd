@@ -41,11 +41,13 @@ function Login(){
         Email: email,
         Password: password
     }
+    var authorization = "Bearer "+localStorage.getItem("jwtToken");
+    console.log(authorization);
 
     axios.post("http://localhost:8080/login-user",form_data_body,{
         headers:{
             "Content-Type": "multipart/form-data",
-            "Authorization":"Bearer "+localStorage.getItem('jwtToken'),
+            "Authorization": authorization
         },
     }).then(function(response){
         console.log(response);

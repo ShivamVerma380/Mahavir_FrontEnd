@@ -294,6 +294,7 @@ class EmailAuth extends React.Component{
             if(response.status==200){
                 console.log("token",response.data.token);
                 localStorage.setItem("jwtToken",response.data.token);
+                localStorage.setItem("Name",firstName+lastName);
                 console.log("token",localStorage.getItem("jwtToken"));
                 //navigate("/")
                 
