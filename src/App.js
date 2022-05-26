@@ -2,7 +2,7 @@ import './App.css';
 import Header from './components/Header';
 import CategoriesToDisplay from './components/CategoriesToDisplay';
 import Slideshow from './components/Slideshow';
-import Product from './components/Product';
+import Product from './components/Items/Product';
 import { Router, Routes, Route } from 'react-router-dom';
 import {useState, useEffect} from "react";
 import axios from "axios";

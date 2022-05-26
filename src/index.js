@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './components/Login-Signup/Login';
 import EmailAuth from './components/Login-Signup/EmailAuth';
-import ProductDetails from './components/ProductDetails'
+import ProductDetails from './components/Items/ProductDetails';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(

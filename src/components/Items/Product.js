@@ -13,7 +13,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import "./styles.css";
+import "../styles.css"
 import { useNavigate } from "react-router-dom";
 
 // import required modules
@@ -22,7 +22,7 @@ import { Pagination, Navigation } from "swiper";
 function Product({title,productList}){
     const navigate = useNavigate();
     var cards=<div>
-        <img className="logo_mahavir" src={require ('../assets/images.jpg')} alt="God" />
+        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
     </div>
 
     const callProductDetails=()=>{

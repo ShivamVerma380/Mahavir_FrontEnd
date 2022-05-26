@@ -56,7 +56,7 @@ const Header = () => {
     }
 
     const callLogin=()=>{
-        // setIsUserLoggedIn(true);
+        setIsUserLoggedIn(true);
         navigate("/login")
     }
 
@@ -65,6 +65,8 @@ const Header = () => {
         alert(localStorage.getItem("isLoggedIn"));
         localStorage.setItem("isLoggedIn",false);
         alert(localStorage.getItem("isLoggedIn"));
+        
+
         
     }
     return(
@@ -94,16 +96,7 @@ const Header = () => {
                 {(isUserLoggedIn)?null:(<Nav.Link><i class="fa fa-user" style={{paddingLeft:"10px" , paddingRight:"10px"}} onClick={callLogin}></i></Nav.Link>)}   
                 {isUserLoggedIn ?(<NavDropdown title={"Hi, "+(name)} id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
                         <NavDropdown.Item target="_blank" onClick={handleLogout}>Logout</NavDropdown.Item> 
-                    </NavDropdown>):null}    
-
-                 
-                    
-                        
-                    
-                        
-                    
-                    
-                    
+                    </NavDropdown>):null}                       
                     <Nav.Link ><i  class="fa fa-shopping-cart" style={{paddingLeft:"10px" , paddingRight:"20px"}}></i></Nav.Link>
                     <NavDropdown title="Our Location" id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
                         <NavDropdown.Item href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
