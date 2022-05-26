@@ -16,7 +16,15 @@ const Header = () => {
     let name = localStorage.getItem("Name")
    // let isUserLoggedIn = localStorage.getItem("isUserLoggedIn")
     const navigate = useNavigate();
-    const [isUserLoggedIn,setIsUserLoggedIn] = React.useState(true);
+    var loginStatus = localStorage.getItem("isLoggedIn");
+    const [isUserLoggedIn,setIsUserLoggedIn] = React.useState(localStorage.getItem("isLoggedIn"));
+    if(loginStatus=="true"){
+        console.log("In login status")
+        setIsUserLoggedIn(true);
+    }
+      
+    
+    //const [isLogoutClicked,setIsLogoutClicked] = React.useState(true);
     const EmailVerification = () => {
         navigate("/email-verification");
         console.log("In email verification");
@@ -48,15 +56,16 @@ const Header = () => {
     }
 
     const callLogin=()=>{
-        //navigate("/login")
-        setIsUserLoggedIn(false);
+        // setIsUserLoggedIn(true);
+        navigate("/login")
     }
 
     const handleLogout=()=>{
+        setIsUserLoggedIn(false);
         alert(localStorage.getItem("isLoggedIn"));
         localStorage.setItem("isLoggedIn",false);
         alert(localStorage.getItem("isLoggedIn"));
-        setIsUserLoggedIn(true);
+        
     }
     return(
         <div>
@@ -82,10 +91,12 @@ const Header = () => {
                     <Nav.Link href="#action1"><i class="fa fa-search icon" ></i></Nav.Link> 
                 </Form>
                 <Nav.Link><i  class="fa fa-map-marker" style={{paddingLeft:"20px" , paddingRight:"10px"}}>Pune</i></Nav.Link>
-                {isUserLoggedIn?<Nav.Link><i class="fa fa-user" style={{paddingLeft:"10px" , paddingRight:"10px"}} onClick={callLogin}></i></Nav.Link>:null}   
-                {isUserLoggedIn?null:(<NavDropdown title={"Hi, "+(name)} id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
+                {(isUserLoggedIn)?null:(<Nav.Link><i class="fa fa-user" style={{paddingLeft:"10px" , paddingRight:"10px"}} onClick={callLogin}></i></Nav.Link>)}   
+                {isUserLoggedIn ?(<NavDropdown title={"Hi, "+(name)} id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
                         <NavDropdown.Item target="_blank" onClick={handleLogout}>Logout</NavDropdown.Item> 
-                    </NavDropdown>)}     
+                    </NavDropdown>):null}    
+
+                 
                     
                         
                     
