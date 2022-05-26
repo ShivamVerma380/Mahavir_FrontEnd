@@ -16,4 +16,5 @@ const MenuItems = ({ items }) => {
       )}
      </li>
     );
+      }
 

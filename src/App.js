@@ -20,10 +20,21 @@ function App() {
     });
   },[]);
 
+  //var authorization = "Bearer "+localStorage.getItem("jwtToken");
+  var authorization ="Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJhZGRoYUBnbWFpbC5jb20iLCJleHAiOjE2NTM2NjExNzgsImlhdCI6MTY1MzU3NDc3OH0.xxLMUeZBo925HR3ss1AoyMeGxn4eFmCjnHpx1a14CPY";
+  console.log(authorization);
   
-  
+  const [categoryDisplay,setCategoryDisplay] = useState([]);
+  localStorage.setItem("product",JSON.stringify(products));
 
-  var categoryDisplay = [{
+  useEffect(() => {
+    axios.get("http://localhost:8080/getcategories").then((response)=>{
+      setCategoryDisplay(response.data);
+      console.log("response",response.data);
+    });
+  },[]);
+
+  /*var categoryDisplay = [{
     "id":1,
     "title": "Mobile",
     "image": "https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
@@ -39,7 +50,7 @@ function App() {
     "id":4,
     "title":"Air Conditioners",
     "image":"https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
-  }]
+  }]*/
 
 //   var offerPosters=[
 //     {

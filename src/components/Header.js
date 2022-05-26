@@ -11,6 +11,7 @@ import FormData from "form-data";
 import axios from "axios";
 import Login from "./Login-Signup/Login";
 
+
 const Header = () => {
 
     let name = localStorage.getItem("Name")
@@ -59,6 +60,10 @@ const Header = () => {
         setIsUserLoggedIn(true);
         navigate("/login")
     }
+    const Cart=()=>{
+        setIsUserLoggedIn(true);
+        navigate("/cart")
+    }
 
     const handleLogout=()=>{
         setIsUserLoggedIn(false);
@@ -69,6 +74,7 @@ const Header = () => {
 
         
     }
+    
     return(
         <div>
            <Navbar bg="light" expand="lg">
@@ -97,7 +103,7 @@ const Header = () => {
                 {isUserLoggedIn ?(<NavDropdown title={"Hi, "+(name)} id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
                         <NavDropdown.Item target="_blank" onClick={handleLogout}>Logout</NavDropdown.Item> 
                     </NavDropdown>):null}                       
-                    <Nav.Link ><i  class="fa fa-shopping-cart" style={{paddingLeft:"10px" , paddingRight:"20px"}}></i></Nav.Link>
+                    <Nav.Link ><i  class="fa fa-shopping-cart"  onClick={Cart} style={{paddingLeft:"10px" , paddingRight:"20px"}}></i></Nav.Link>
                     <NavDropdown title="Our Location" id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
                         <NavDropdown.Item href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
                         <NavDropdown.Item href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
