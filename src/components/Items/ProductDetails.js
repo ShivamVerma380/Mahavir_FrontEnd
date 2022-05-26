@@ -1,14 +1,17 @@
-import { Button, Col, Container, Row } from "reactstrap";
+import { Button, Col, Container, Input, Row } from "reactstrap";
 
 import Zoom from "react-img-zoom";
 import "./ProductDetails.css"
+import {AiOutlineMinus} from "react-icons/fa"
 const ProductDetails = () => {
         // let name = localStorage.getItem("Name")
         // var storedProduct = JSON.parse(localStorage.getItem("product"))
         // var id = storedProduct[0].id
 
+    var quantity  = 0;
+    var flag = false;
 
-        var products=
+    var products=
             {
                 "id":1,
                 "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
@@ -17,14 +20,39 @@ const ProductDetails = () => {
                 "price":19999,
                 "description":"OxygenOS based on Android™ 12"
             }
+    const inputQuantityEvent=(event)=>{
+        flag = true;
+        quantity = event.target.value;
+        console.log(quantity);
+    }
+    
+    const handleAddToCart=()=>{
+      if(flag==false){
+        alert("Add To Cart:1");
+      }else if(quantity<=0){
+        alert("Please enter a positive number");
+      }else{
+        alert("Quantity:"+quantity);
+      }
+    }
 
     
+
+    const handleBuyNow=()=>{
+      if(flag==false){
+        alert("Add To Cart:1");
+      }else if(quantity<=0){
+        alert("Please enter a positive number");
+      }else{
+        alert("Quantity:"+quantity);
+      }
+    }
     return(
         <div >
             <Row >
-              <Col md={1}className="container"></Col>
+              <Col md={1}></Col>
               
-              <Col md={5}className="container">
+              <Col md={5}>
                 <br></br>
                 <br></br>
                 <Zoom
@@ -35,7 +63,7 @@ const ProductDetails = () => {
                 />
                 
               </Col>
-              <Col className="container" md={5}>
+              <Col  md={5}>
                 <br></br>
                 <br></br>
                 
@@ -46,10 +74,17 @@ const ProductDetails = () => {
                 <br></br>
                 <h6>{products.description}</h6>
                 <br></br>
-
-                <Button>Add To Cart</Button>
-
-                <Button style={{marginLeft:30}}>Buy Now</Button>
+                <Input id="Quantity"
+                      name="Quantity"
+                      placeholder="Enter Quantity"
+                      type="number"
+                      min={0}
+                      onChange={inputQuantityEvent}
+                      style={{width:300}}>
+                </Input>
+                <br></br>
+                <Button onClick={handleAddToCart}>Add To Cart</Button>
+                <Button style={{marginLeft:30}} onClick={handleBuyNow}>Buy Now</Button>
 
                 </Col>
               
