@@ -6,6 +6,7 @@ import Product from './components/Items/Product';
 import { Router, Routes, Route } from 'react-router-dom';
 import {useState, useEffect} from "react";
 import axios from "axios";
+import AdminHeader from './components/Admin/AdminHeader';
 
 function App() {
 
@@ -127,7 +128,7 @@ var products=[
 
   return (
     <div className="App" >
-      
+      <AdminHeader/>
       <Header/>
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
       <Slideshow offerPosters={offerPosters}/>

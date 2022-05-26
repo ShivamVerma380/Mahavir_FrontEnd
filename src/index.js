@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './components/Login-Signup/Login';
 import EmailAuth from './components/Login-Signup/EmailAuth';
 import ProductDetails from './components/Items/ProductDetails';
+import Admin from './components/Admin/Admin';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -20,6 +21,7 @@ root.render(
       <Route path='/login' element={<Login/>}/>
       <Route path='/email-auth' element = {<EmailAuth/>}/>
       <Route path='/productDetails' element = {<ProductDetails/>}/>
+      <Route path='/admin' element = {<Admin/>}/>
     </Routes>
   </BrowserRouter>
 );
