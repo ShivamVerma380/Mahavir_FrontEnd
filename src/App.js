@@ -11,6 +11,10 @@ import AdminHeader from './components/Admin/AdminHeader';
 function App() {
 
   const [offerPosters,setOfferPosters] = useState([]);
+  const [categoryDisplay,setcategoryDisplay] = useState([]);
+  var Auth = "Bearer "+localStorage.getItem("jwtToken");
+  // var Auth= "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuYyIsImV4cCI6MTY1MzY2NDkwOSwiaWF0IjoxNjUzNTc4NTA5fQ.p5sCDqAIwKBC4cxYR2Mkt1o5USCOgKz6lFMJvgZ_IIQ";
+
   localStorage.setItem("product",JSON.stringify(products));
 
   useEffect(() => {
@@ -18,21 +22,18 @@ function App() {
       setOfferPosters(response.data);
       console.log("response",response.data);
     });
+    axios.get("http://localhost:8080/get-categories",{header:{"Content-Type": "multipart/form-data","Authorization": Auth}}).then(function(response){
+        console.log(response);
+        if(response.status==200){
+            setcategoryDisplay(response.data);
+            console.log(response.data);
+        }
+        console.log(response.data);
+    }).catch(function(error){
+        console.log(error);
+    })
   },[]);
 
-  //var authorization = "Bearer "+localStorage.getItem("jwtToken");
-  var authorization ="Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJhZGRoYUBnbWFpbC5jb20iLCJleHAiOjE2NTM2NjExNzgsImlhdCI6MTY1MzU3NDc3OH0.xxLMUeZBo925HR3ss1AoyMeGxn4eFmCjnHpx1a14CPY";
-  console.log(authorization);
-  
-  const [categoryDisplay,setCategoryDisplay] = useState([]);
-  localStorage.setItem("product",JSON.stringify(products));
-
-  useEffect(() => {
-    axios.get("http://localhost:8080/getcategories").then((response)=>{
-      setCategoryDisplay(response.data);
-      console.log("response",response.data);
-    });
-  },[]);
 
   /*var categoryDisplay = [{
     "id":1,
@@ -51,6 +52,25 @@ function App() {
     "title":"Air Conditioners",
     "image":"https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
   }]*/
+  
+
+  // var categoryDisplay = [{
+  //   "id":1,
+  //   "title": "Mobile",
+  //   "image": "https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
+  // },{
+  //   "id":2,
+  //   "title": "Laptop",
+  //   "image": "https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
+  // },{
+  //   "id":3,
+  //   "title":"Televisions",
+  //   "image":"https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
+  // },{
+  //   "id":4,
+  //   "title":"Air Conditioners",
+  //   "image":"https://i.ibb.co/kh08LcK/vedic-maths-card-image.jpg"
+  // }]
 
 //   var offerPosters=[
 //     {

@@ -31,7 +31,7 @@ function CategoriesToDisplay ({categoryDetail}) {
                             cards = categoryDetail.map(index=>{
                                 return(
                                     <NavItem style={{margin:10}}>
-                                        <Button variant="text"><img src={index.image} alt={index.title} className="category-image"/> <span> </span>{index.title}</Button>
+                                        <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button>
                                     </NavItem>      
                                 )
                             })
