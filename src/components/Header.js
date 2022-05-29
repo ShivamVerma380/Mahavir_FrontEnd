@@ -1,5 +1,5 @@
 import React  from "react";
-import { Row,Col, Container } from "reactstrap";
+import { Row,Col, Container, NavLink } from "reactstrap";
 import '../App.css';
 // import {BsPinMapFill,BsFillPersonFill,BsFillCartPlusFill,BsSearch} from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -19,10 +19,10 @@ const Header = () => {
     const navigate = useNavigate();
     var loginStatus = localStorage.getItem("isLoggedIn");
     const [isUserLoggedIn,setIsUserLoggedIn] = React.useState(localStorage.getItem("isLoggedIn"));
-    if(loginStatus=="true"){
-        console.log("In login status")
-        setIsUserLoggedIn(true);
-    }
+    // if(loginStatus=="true"){
+    //     console.log("In login status")
+    //     setIsUserLoggedIn(true);
+    // }
       
     
     //const [isLogoutClicked,setIsLogoutClicked] = React.useState(true);
@@ -65,6 +65,10 @@ const Header = () => {
         navigate("/cart")
     }
 
+    const callAdmin=()=>{
+        navigate("/admin")
+    }
+
     const handleLogout=()=>{
         setIsUserLoggedIn(false);
         alert(localStorage.getItem("isLoggedIn"));
@@ -98,6 +102,7 @@ const Header = () => {
                     />
                     <Nav.Link href="#action1"><i class="fa fa-search icon" ></i></Nav.Link> 
                 </Form>
+                <NavLink><i class="fa fa-user" style={{paddingLeft:"10px" , paddingRight:"10px"}} onClick={callAdmin}>Admin</i></NavLink>
                 <Nav.Link><i  class="fa fa-map-marker" style={{paddingLeft:"20px" , paddingRight:"10px"}}>Pune</i></Nav.Link>
                 {(isUserLoggedIn)?null:(<Nav.Link><i class="fa fa-user" style={{paddingLeft:"10px" , paddingRight:"10px"}} onClick={callLogin}></i></Nav.Link>)}   
                 {isUserLoggedIn ?(<NavDropdown title={"Hi, "+(name)} id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
