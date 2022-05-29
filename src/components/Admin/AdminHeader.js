@@ -92,9 +92,9 @@ const AdminHeader = () => {
                 </Nav>
                 <Nav>
                 
-                     
+                        
                
-                <Nav.Link><i  class="fa fa-map-marker" style={{paddingLeft:"20px" , paddingRight:"10px"}} onClick={callAdmin}>Pune</i></Nav.Link>
+                <Nav.Link><i  className ="fa fa-map-marker" style={{paddingLeft:"20px" , paddingRight:"10px"}}>Pune</i></Nav.Link>
                 {(isUserLoggedIn)?null:(<Nav.Link><i class="fa fa-user" style={{paddingLeft:"10px" , paddingRight:"10px"}} onClick={callLogin}></i></Nav.Link>)}   
                 {isUserLoggedIn ?(<NavDropdown title={"Hi, "+(name)} id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
                         <NavDropdown.Item target="_blank" onClick={handleLogout}>Logout</NavDropdown.Item> 

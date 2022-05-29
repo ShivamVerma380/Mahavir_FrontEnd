@@ -128,7 +128,7 @@ var products=[
 
   return (
     <div className="App" >
-      <AdminHeader/>
+      
       <Header/>
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
       <Slideshow offerPosters={offerPosters}/>
