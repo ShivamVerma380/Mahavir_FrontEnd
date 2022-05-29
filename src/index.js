@@ -9,6 +9,7 @@ import Login from './components/Login-Signup/Login';
 import EmailAuth from './components/Login-Signup/EmailAuth';
 import ProductDetails from './components/Items/ProductDetails';
 import Admin from './components/Admin/Admin';
+import Cart from "./components/Shopping-Cart/Cart";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -22,6 +23,7 @@ root.render(
       <Route path='/email-auth' element = {<EmailAuth/>}/>
       <Route path='/productDetails' element = {<ProductDetails/>}/>
       <Route path='/admin' element = {<Admin/>}/>
+      <Route path='/cart' element = {<Cart/>}/>
     </Routes>
   </BrowserRouter>
 );
