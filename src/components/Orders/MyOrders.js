@@ -3,9 +3,11 @@ import React, { useEffect, useState }  from "react";
 import OrderItem from "./OrderItem";
 
 const MyOrders=()=>{
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZGl0aXJuaWthbTIxQGdtYWlsLmNvbSIsImV4cCI6MTY1NDAxNDkzNywiaWF0IjoxNjUzOTI4NTM3fQ._DBvi2b9nGOb0hOt-Th-Ii0zXZ1lwVgPfdZeRMud7dw"
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tanciLCJleHAiOjE2NTQwMTIxNzMsImlhdCI6MTY1MzkyNTc3M30.k6ebcaaSIArMSLaoFKcOIGTCtmn5Ku0r08dGBxzZGTk"
+    //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZCIsImV4cCI6MTY1NDAxOTA1NywiaWF0IjoxNjUzOTMyNjU3fQ.Ma7RU2CHo-RfQ_uSBHn4zxKzlyz5X0I9ZClMXIaY0oc";
     const [orderDetails,setOrderDetails] = useState();
     const [isOrderDetailsSet,setIsOrderDetailsSet] = useState(false);
+    var MyOrders = false;
     useEffect(()=>{
         axios({
             method:"get",
@@ -16,10 +18,15 @@ const MyOrders=()=>{
         }).then(function(response){
             console.log(response);
             if(response.status==200){
+                MyOrders=true
                 console.log(response.data);
                 setOrderDetails(response.data);
                 setIsOrderDetailsSet(true);
-            }else{
+            }else if(response.status==404){
+               MyOrders = false;
+            }   
+            else{
+                // setMyOrders("No Products buyed yet");
                 console.log(response.data.message);
             }
         }).catch(function(error){
@@ -28,17 +35,47 @@ const MyOrders=()=>{
     },[]);
 
     return(
+        // <div>
+            
+        //     {(MyOrders)?(<h1>No Products Buyed</h1>):(<h1>Products Buyed</h1>)}
+            
+        //     {
+        //         (isOrderDetailsSet)?(
+
+                    
+                        
+        //             orderDetails.map(index=>{
+        //             console.log("Model Number:",index.modelNumber)
+        //             return(    
+        //                 <OrderItem item={index}/>
+        //             );
+        //         })
+        //         ):(
+        //             null
+        //         )
+        //     }
+        // </div>
         <div>
-            <h1>MyOrders</h1>
+            {
+            (isOrderDetailsSet)?(
+            (MyOrders)?(<h1>No Products Buyed</h1>):(<h1>Products Buyed</h1>)
+            ):(
+                    <h1>No Products buyed</h1>
+            )}
             {
                 (isOrderDetailsSet)?(
-                orderDetails.map(index=>{
+
+                    
+                        
+                    orderDetails.map(index=>{
                     console.log("Model Number:",index.modelNumber)
-                    return(
-                    <OrderItem item={index}/>
+                    return(    
+                        <OrderItem item={index}/>
                     );
                 })
-                ):(null)
+                ):(
+                    null
+                )
             }
         </div>
     );
