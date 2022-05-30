@@ -1,11 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from "../Header";
 import { Card, CardHeader, CardText, CardBody,Row,
   CardTitle, CardFooter, Button, Col,Container ,Table} from 'reactstrap';
   import {FormControl,Form} from 'react-bootstrap';
   import { QuantityPicker } from 'react-qty-picker';
+import axios from 'axios';
+import CartItem from './CartItem';
 
 function Cart() {
+
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tIiwiZXhwIjoxNjU0MDA1OTkwLCJpYXQiOjE2NTM5MTk1OTB9.zbu5U0nrqPNSilthy3IrmwqYi0n4FoEyKIi6S_yn0sc"
+    
+    const [cartDetails,setCartDetails] = useState();
+    useEffect(()=>{
+        axios({
+            method:"get",
+            url: "http://localhost:8080/get-cart-details",
+            headers:{
+                "Authorization": "Bearer "+token
+            }
+        }).then(function(response){
+            console.log("Response",response);
+            if(response.status==200){
+                console.log("Data",response.data);
+                setCartDetails(response.data);
+                console.log("Cart Details",cartDetails)
+                
+            }else{
+                console.log(response.data.message);
+            }
+        }).catch(function(error){
+            console.log(error);
+        })
+        
+    },[cartDetails]);
+    
     
     return (
         
@@ -18,7 +47,8 @@ function Cart() {
   
             <Col sm={8}>
 
-            <Table>
+          
+           <Table>
             <thead>
                 <tr>
                 <th> Order Summary (1 Item)</th>
@@ -34,45 +64,22 @@ function Cart() {
                 </tr>
             </thead>
 
-            </Table>
-            <Table>
-            <tbody>
-                <tr>
-                <td><img  style={{height:"150px", width:"300px"}} src = {require ('../../assets/logo.jpg')}/>
-                </td>
-                
-                <td><QuantityPicker smooth/></td>
-                <td><table>
-                    <tr>
-                        <td>FREE DELIVERY</td>
-                        </tr>
-                        <tr>
-                        <td>Delivery in 1-3 Days</td>
-                        </tr>
-                        <tr>
-                        <td>( T&C apply)</td>
-                        </tr>
-                    </table>
-                </td>
-                </tr>
-                <tr>
-                <td><table>
-                    <tr>
-                        <td>LG 1 Ton 5 Star Split Inverter Air Conditioner</td>
-                        </tr>
-                        <tr>
-                        <td>(PSQ13ENZE)</td>
-                        </tr>
-                        <tr>
-                        <td>₹ 37,480 ₹ 61,990 40% off</td>
-                        </tr>
-                    </table>
-                </td>
-                <td></td>
-                <td><Button style={{height:"100%", width:"200px"}} variant="info">Proceed to Buy</Button></td>
-                </tr>
-                </tbody>
-            </Table>
+        </Table>
+        {/* <CartItem/> */}
+            
+
+            {/* <CartItem/> */}
+            {
+                console.log("cartDetails",cartDetails)
+            }
+            {
+                cartDetails.map(index=>{
+                    console.log("Model Number:",index.modelNumber)
+                    return(
+                    <CartItem item={index}/>
+                    );
+                })
+            }
             
 
                 </Col>

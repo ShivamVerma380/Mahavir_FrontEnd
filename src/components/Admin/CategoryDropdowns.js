@@ -15,12 +15,14 @@ const CategoryDropdowns = () => {
   
   /** Different arrays for different dropdowns */
   const algorithm = [
-    "Searching Algorithm",
-    "Sorting Algorithm",
-    "Graph Algorithm",
+    "Brand",
+    "Type",
+    "Add New",
   ];
   const language = ["C++", "Java", "Python", "C#"];
   const dataStructure = ["Arrays", "LinkedList", "Stack", "Queue"];
+
+  
   
   /** Type variable to store different array for different dropdown */
   let type = null;
@@ -29,14 +31,15 @@ const CategoryDropdowns = () => {
   let options = null;
   
   /** Setting Type variable according to dropdown */
-  if (selected === "Algorithm") {
+  if (selected === "TV") {
     type = algorithm;
   } else if (selected === "Language") {
     type = language;
   } else if (selected === "Data Structure") {
     type = dataStructure;
-  }
-  
+  }else if(selected ==="Add New"){
+    //react conditional rendering
+  }  
   /** If "Type" is null or undefined then options will be null,
    * otherwise it will create a options iterable based on our array
    */
@@ -58,9 +61,10 @@ const CategoryDropdowns = () => {
            */}
           <select onChange={changeSelectOptionHandler}>
             <option>Choose...</option>
-            <option>Algorithm</option>
+            <option>TV</option>
             <option>Language</option>
             <option>Data Structure</option>
+            <option>Add New</option>
           </select>
         </div>
         <div>

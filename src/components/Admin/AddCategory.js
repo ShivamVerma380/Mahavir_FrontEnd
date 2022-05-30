@@ -19,8 +19,8 @@ class AddCategory extends react.Component {
     constructor() {
         super()
         const algorithm = [
-            "Searching Algorithm",
-            "Sorting Algorithm",
+            "Brand",
+            "Type",
             "Graph Algorithm",
           ];
         const language = ["C++", "Java", "Python", "C#"];
