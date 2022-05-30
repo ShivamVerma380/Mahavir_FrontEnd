@@ -4,25 +4,25 @@ import { Card, CardHeader, CardText, CardBody,Row,
     import {FormControl,Form} from 'react-bootstrap';
     import { QuantityPicker } from 'react-qty-picker';
 
-const OrderItem=()=>{
+const OrderItem=({item})=>{
     return(
         <Table>
         <tbody>
             <tr>
-            <td style={{textAlign:"center"}}><img  style={{height:"150px", width:"300px"}} src = {require ('../../assets/logo.jpg')}/>
+            <td style={{textAlign:"center"}}><img  style={{height:"150px", width:"300px"}} src = {"data:image/png;base64,"+item.productImage.data}/>
             </td>
             <tr> 
-            <td>TV</td>
+            <td>{item.orderId}</td>
             </tr>
             <tr>
-            <td>83746326</td>
+            <td>{item.modelNumber}</td>
             </tr>
             <tr>
-            <td>72653</td>
+            <td>Rs. {item.productPrice}</td>
             </tr>
             <td><table>
                 <tr>
-                    <td>Delivery Date=09-02-22</td>
+                    <td>Delivery Date={item.buyDate}</td>
                     </tr>
                 </table>
             </td>
