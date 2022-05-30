@@ -12,6 +12,8 @@ function Cart() {
     var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tIiwiZXhwIjoxNjU0MDA1OTkwLCJpYXQiOjE2NTM5MTk1OTB9.zbu5U0nrqPNSilthy3IrmwqYi0n4FoEyKIi6S_yn0sc"
     
     const [cartDetails,setCartDetails] = useState();
+    // var isCartDetailsSet = false;
+    const [isCartDetailsSet,setisCartDetailsSet] = React.useState(false);
     useEffect(()=>{
         axios({
             method:"get",
@@ -25,6 +27,7 @@ function Cart() {
                 console.log("Data",response.data);
                 setCartDetails(response.data);
                 console.log("Cart Details",cartDetails)
+                setisCartDetailsSet(true);
                 
             }else{
                 console.log(response.data.message);
@@ -33,7 +36,7 @@ function Cart() {
             console.log(error);
         })
         
-    },[cartDetails]);
+    },[]);
     
     
     return (
@@ -73,12 +76,14 @@ function Cart() {
                 console.log("cartDetails",cartDetails)
             }
             {
+                (isCartDetailsSet)?(
                 cartDetails.map(index=>{
                     console.log("Model Number:",index.modelNumber)
                     return(
                     <CartItem item={index}/>
                     );
                 })
+                ):(null)
             }
             
 
