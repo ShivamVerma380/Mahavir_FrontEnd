@@ -2,27 +2,40 @@ import * as React from "react";
 import axios from "axios";
 
 
-/** Type variable to store different array for different dropdown */
-var type = null;
-/** This will be used to create set of options that user will see */
-var options = null;
+/** subCategoriesArray variable to store different array for different dropdown */
+var subCategoriesArray = null;
+/** This will be used to create set of subCategories that user will see */
+var subCategories = null;
+
+var subSubCategoriesArray = null;
+
+var subSubCategories = null;
   
 const CategoryDropdowns = ({Category}) => {
-  /** "selected" here is state variable which will hold the
-   * value of currently selected dropdown.
+  /** "selectedCategory" here is state variable which will hold the
+   * value of currently selectedCategory dropdown.
    */
-  const [selected, setSelected] = React.useState("");
+  const [selectedCategory, setselectedCategory] = React.useState("");
+
+  const [selectedSubCategory,setSelectedSubCategory] = React.useState("");
   
-  const [isCategorySelected,setIsCategorySelected] = React.useState(false);
+  const [isCategoryselected,setIsCategoryselected] = React.useState(false);
+
+  const [isSubCategoryselected,setIsSubCategorySelected] = React.useState(false);
   
   /** Function that will set different values to state variable
-   * based on which dropdown is selected
+   * based on which dropdown is selectedCategory
    */
-  const changeSelectOptionHandler = (event) => {
-    setIsCategorySelected(false);
-    setSelected(event.target.value);
+  const changeCategoryOptionHandler = (event) => {
+    setIsCategoryselected(false);
+    setselectedCategory(event.target.value);
     // fetchSubCategories();
   };
+
+  const changeSubCategoryOptionHandler = (event) =>{
+    setIsSubCategorySelected(false);
+    setSelectedSubCategory(event.target.value);
+  }
   
   const fetchSubCategories=()=>{
     console.log("In Fetch SubCategories")
@@ -30,20 +43,43 @@ const CategoryDropdowns = ({Category}) => {
 
     axios({
       method:"get",
-      url:"http://localhost:8080/get-sub-categories/"+selected,
+      url:"http://localhost:8080/get-sub-categories/"+selectedCategory,
       headers:{
         "Authorization":"Bearer "+token,
       }
     }).then(function (response){
       console.log(response.data);
-      type = response.data;
-      setIsCategorySelected(true)
+      subCategoriesArray = response.data;
+      setIsCategoryselected(true)
       
-      console.log("type:",type);
+      console.log("subCategoriesArray:",subCategoriesArray);
     }).catch(function(error){
       console.log("Error:",error);
     })
   }
+
+  const fetchSubSubCategories=()=>{
+    console.log("In Fetch SubSubCategories")
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZHNpIiwiZXhwIjoxNjU0MDY3ODQyLCJpYXQiOjE2NTM5ODE0NDJ9.hMVo1iliC9lUdp4I2CDzQqtwQqbDh1M1mTAhCc5tHKM"
+
+    axios({
+      method:"get",
+      url:"http://localhost:8080/get-sub-categories/"+selectedCategory+"/"+selectedSubCategory,
+      headers:{
+        "Authorization":"Bearer "+token,
+      }
+    }).then(function (response){
+      console.log(response.data);
+      subSubCategoriesArray = response.data;
+      setIsSubCategorySelected(true)
+      
+      console.log("subSubCategoriesArray:",subSubCategoriesArray);
+    }).catch(function(error){
+      console.log("Error:",error);
+    })
+  }
+
+
 
 
   
@@ -52,11 +88,16 @@ const CategoryDropdowns = ({Category}) => {
   
   
   fetchSubCategories();
-  /** If "Type" is null or undefined then options will be null,
-   * otherwise it will create a options iterable based on our array
+  /** If "subCategoriesArray" is null or undefined then subCategories will be null,
+   * otherwise it will create a subCategories iterable based on our array
    */
-  if (isCategorySelected) {
-    options = type.map((el) => <option>{el}</option>);
+  if (isCategoryselected) {
+    subCategories = subCategoriesArray.map((el) => <option>{el}</option>);
+    
+  }
+  fetchSubSubCategories();
+  if (isSubCategoryselected) {
+    subSubCategories = subSubCategoriesArray.map((el) => <option>{el}</option>);
   }
   return (
     
@@ -71,9 +112,9 @@ const CategoryDropdowns = ({Category}) => {
         <div>
           {/** Bind changeSelectOptionHandler to onChange method of select.
            * This method will trigger every time different
-           * option is selected.
+           * option is selectedCategory.
            */}
-          <select onChange={changeSelectOptionHandler}>
+          <select onChange={changeCategoryOptionHandler}>
             <option>Choose...</option>
             {
               // console.log({Category})
@@ -91,15 +132,29 @@ const CategoryDropdowns = ({Category}) => {
             // <option>Add New</option> */}
           </select>
         </div>
+        
         <div>
-          <select>
+          <br></br>
+          <select onChange={changeSubCategoryOptionHandler}>
             {
-              /** This is where we have used our options variable */
-              options
-              
+              /** This is where we have used our subCategories variable */
+              subCategories
             }
             {
-              console.log("Options",options)
+              console.log("subCategories",subCategories)
+            }
+          </select>
+        </div>
+
+        <div>
+          <br></br>
+          <select>
+            {
+              /** This is where we have used our subSubCategories variable */
+              subSubCategories
+            }
+            {
+              console.log("subSubCategories",subSubCategories)
             }
           </select>
         </div>
