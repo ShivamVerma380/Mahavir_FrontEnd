@@ -47,21 +47,25 @@ function CategoriesToDisplay ({categoryDetail}) {
                                         {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
                                         <img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>
                                         <NavDropdown title={index.category}> 
-                                        {
+                                        {/* If else code for checking if subCategories are not null */}
+                                        
+                                        
+                                        {/* {
+                                        
                                          subCategories= index.subCategories
                                          
                                         }
                                         {
                                             subSubCategories = subCategories.subSubCategories
                                         }
-                                        
-                                        {
+                                         */}
+                                        {/* {
                                         subCategories.map(subCat=>{
                                             return(
                                                 <NavDropdown.Header >ABC</NavDropdown.Header>
                                             )
                                         })  
-                                        }
+                                        } */}
                                         <NavDropdown.Item>XYZ</NavDropdown.Item>                                         
                                         </NavDropdown>
                                     </NavItem>      

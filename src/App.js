@@ -22,7 +22,7 @@ function App() {
       setOfferPosters(response.data);
       console.log("response",response.data);
     });
-    axios.get("http://localhost:8080/get-categories",{header:{"Content-Type": "multipart/form-data","Authorization": Auth}}).then(function(response){
+    axios.get("http://localhost:8080/get-categories").then(function(response){
         console.log(response);
         if(response.status==200){
             setcategoryDisplay(response.data);

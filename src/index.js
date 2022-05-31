@@ -11,6 +11,7 @@ import ProductDetails from './components/Items/ProductDetails';
 import Admin from './components/Admin/Admin';
 import Cart from "./components/Shopping-Cart/Cart";
 import MyOrders from './components/Orders/MyOrders';
+import AddCategory from './components/Admin/AddCategory';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
