@@ -3,6 +3,7 @@ import { Button, Col, Container, Input, Row } from "reactstrap";
 import Zoom from "react-img-zoom";
 import "./ProductDetails.css"
 import {AiOutlineMinus} from "react-icons/fa"
+import ProductRating from "./ProductRating";
 const ProductDetails = () => {
         // let name = localStorage.getItem("Name")
         // var storedProduct = JSON.parse(localStorage.getItem("product"))
@@ -88,6 +89,14 @@ const ProductDetails = () => {
 
                 </Col>
               
+            </Row>
+            <br></br>
+            <Row>
+              <Col>
+                <h3 style={{textAlign:"center"}}>Ratings And Reviews</h3>
+              </Col>
+              <br></br>
+              <ProductRating rating="3.5"/>
             </Row>
         </div>
         
