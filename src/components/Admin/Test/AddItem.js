@@ -7,6 +7,8 @@ var SelectedCategory="";
 
 var selectedSubCategory="";
 var isSelectedSubCategory=false;
+
+var updatedSubCategoriesArray=[]
 function CategoryComponent(props){
     
     return(
@@ -40,7 +42,7 @@ class AddItem extends React.Component{
             isCategoriesFetched:false,
             Category:[],
             isSubCategoriesFetched:false,
-            SubCategory:["Brand","Type"],
+            SubCategory:[],
             
         }
 
@@ -71,7 +73,7 @@ class AddItem extends React.Component{
     }
 
     handleFetchSubCategories(){
-        var updatedSubCategoriesArray=[]
+        
         if(SelectedCategory===""){
             alert("Please select a Category first")
         }else{
@@ -84,16 +86,21 @@ class AddItem extends React.Component{
                 "Authorization":"Bearer "+token,
             }
             }).then(function (response){
-            console.log(response.data);
-            updatedSubCategoriesArray = response.data;       
-            console.log("subCategoriesArray:",updatedSubCategoriesArray);
-            
+            console.log(response);
+            if(response.status==200){
+                var responseArray = response.data;
+                responseArray.map(index=>{
+                    updatedSubCategoriesArray.push(index);       
+                })
+                console.log("updatedSubCategories",updatedSubCategoriesArray);
+                isSelectedSubCategory=true;
+            }   
             }).catch(function(error){
                 console.log("Error:",error);
             })
             //alert(SelectedCategory);
             this.setState({SubCategory:updatedSubCategoriesArray,isSubCategoriesFetched:true})
-            isSelectedSubCategory=true;
+            
             console.log("SuBCategoriesFetched",this.state.SubCategory)   
         }
         
@@ -148,15 +155,13 @@ class AddItem extends React.Component{
             <Button>Add New</Button>
             <br></br>
             <br></br>
-            {/* <SubCategories/> */}
+           
             {
-                (this.state.isSubCategoriesFetched)?(
+                (isSelectedSubCategory)?(
                     
                     
-                    this.state.SubCategory.map(index=>{
-                        {
-                            console.log("index",index)
-                        }
+                    updatedSubCategoriesArray.map(index=>{
+                        
                         return(
                             
                             <FormCheck
@@ -167,7 +172,7 @@ class AddItem extends React.Component{
                                 onChange={this.CategorySelectedEvent}
                             />
                         );
-                    })):(null)
+                    })):(console.log("In null"))
             }
             </div>
             

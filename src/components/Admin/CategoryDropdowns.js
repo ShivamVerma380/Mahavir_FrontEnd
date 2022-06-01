@@ -22,13 +22,22 @@ const CategoryDropdowns = ({Category}) => {
   const [isCategoryselected,setIsCategoryselected] = React.useState(false);
 
   const [isSubCategoryselected,setIsSubCategorySelected] = React.useState(false);
+
+
+  const [isSelectedCategoryEqualChoose, setIsSelectedCategoryEqualChoose] = React.useState(false);
   
   /** Function that will set different values to state variable
    * based on which dropdown is selectedCategory
    */
   const changeCategoryOptionHandler = (event) => {
     setIsCategoryselected(false);
+    
+    
     setselectedCategory(event.target.value);
+    if(event.target.value==="Choose..."){
+      setIsSelectedCategoryEqualChoose(true);
+      subCategoriesArray=[];
+    }
     
     // fetchSubCategories();
     
@@ -49,6 +58,7 @@ const CategoryDropdowns = ({Category}) => {
   if(selectedCategory==="Choose..."){
     subCategoriesArray=[]
     subSubCategoriesArray=[]
+    setIsSelectedCategoryEqualChoose(true);
     console.log("SubCategoriesArray In Choose",subCategoriesArray);
     console.log("SubSub CategoriesArray In Choose",subSubCategoriesArray);
 
@@ -128,7 +138,7 @@ const CategoryDropdowns = ({Category}) => {
   
   
   return (
-
+  
     
     <div
       
@@ -137,6 +147,33 @@ const CategoryDropdowns = ({Category}) => {
         margin: "16px",
       }}
     >
+     { (isSelectedCategoryEqualChoose)?(
+        <form>  
+        <div>
+          {/** Bind changeSelectOptionHandler to onChange method of select.
+           * This method will trigger every time different
+           * option is selectedCategory.
+           */}
+          <select onChange={changeCategoryOptionHandler}>
+            <option>Choose...</option>
+            {
+              // console.log({Category})
+            }
+            {
+              Category.map(index=>{
+                return(
+                  <option>{index}</option>
+                );
+              })
+            }
+            {/* // <option>TV</option>
+            // <option>Language</option>
+            // <option>Data Structure</option>
+            // <option>Add New</option> */}
+          </select>
+        </div>
+        </form>
+      ):(
       <form>
         <div>
           {/** Bind changeSelectOptionHandler to onChange method of select.
@@ -190,6 +227,7 @@ const CategoryDropdowns = ({Category}) => {
           </select>
         </div>
       </form>
+      )}
     </div>
   );
 };

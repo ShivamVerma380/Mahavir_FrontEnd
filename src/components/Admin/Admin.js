@@ -40,8 +40,8 @@ export default function Admin () {
             <AdminHeader/>
             <Navbar/>
             <h1 style={{marginTop:"20px",textAlign:"center"}}>Mahavir Electronics</h1>
-            <AddCategory/> 
-            {/* <AddItem/> */}
+            {/* <AddCategory/>  */}
+            <AddItem/>
                 <br></br>
                 
                 
