@@ -2,96 +2,291 @@ import { Button, Col, Container, Input, Row } from "reactstrap";
 
 import Zoom from "react-img-zoom";
 import "./ProductDetails.css"
-import {AiOutlineMinus} from "react-icons/fa"
+import { AiOutlineMinus } from "react-icons/fa"
+import { useNavigate } from "react-router-dom";
+import ReactImageMagnify from 'react-image-magnify';
+import watchImg1200 from '../../assets/watch.jpg'
+import watchImg300 from '../../assets/watch300.jpg'
+import React from "react";
+import { ImageList, Slider } from "@mui/material";
+import Swiper from "swiper";
+
+
 const ProductDetails = () => {
-        // let name = localStorage.getItem("Name")
-        // var storedProduct = JSON.parse(localStorage.getItem("product"))
-        // var id = storedProduct[0].id
+  // let name = localStorage.getItem("Name")
+  // var storedProduct = JSON.parse(localStorage.getItem("product"))
+  // var id = storedProduct[0].id
 
-    var quantity  = 0;
-    var flag = false;
+  var quantity = 0;
+  var flag = false;
 
-    var products=
-            {
-                "id":1,
-                "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
-                "alt":"Offer Name:1",
-                "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
-                "price":19999,
-                "description":"OxygenOS based on Android™ 12"
-            }
-    const inputQuantityEvent=(event)=>{
-        flag = true;
-        quantity = event.target.value;
-        console.log(quantity);
+
+
+
+  var products =
+  {
+    "id": 1,
+    // "src": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
+    // "imgone": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
+    "imgone": "https://d2xamzlzrdbdbn.cloudfront.net/products/4e7b28c3-4db3-4097-ab92-65d0166a651821170544.jpg",
+    "imgtwo": "https://d2xamzlzrdbdbn.cloudfront.net/products/5f3944c6-f695-4c02-ab76-7b486cc95ef321170544.jpg",
+    "imgthree": "https://d2xamzlzrdbdbn.cloudfront.net/products/84cae684-56d7-4136-b506-494f2e497a9421170544.jpg",
+    "imgfour": "https://d2xamzlzrdbdbn.cloudfront.net/products/2ebe097c-f7d7-4f60-9d0d-541ea6a083b321170544.jpg",
+    "imgfive": "https://d2xamzlzrdbdbn.cloudfront.net/products/77adc54b-83a8-44fd-9ed4-61eb87c86aad21170544.jpg",
+    "alt": "Offer Name:1",
+    "title": "Apple iPhone 13 Pro Max (128 GB Storage, Graphite)",
+    "price": 120000,
+    "description": "iOS 15 Operating System"
+  }
+  var imglink = products.imgone;
+  // var imglinkfinal= products.imgone;
+  const [imglinkfinal, setimage] = React.useState(products.imgone);
+  const inputQuantityEvent = (event) => {
+    flag = true;
+    quantity = event.target.value;
+    console.log(quantity);
+  }
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    navigate("/cart")
+    if (flag == false) {
+      alert("Add To Cart:1");
+    } else if (quantity <= 0) {
+      alert("Please enter a positive number");
+    } else {
+      alert("Quantity:" + quantity);
     }
-    
-    const handleAddToCart=()=>{
-      if(flag==false){
-        alert("Add To Cart:1");
-      }else if(quantity<=0){
-        alert("Please enter a positive number");
-      }else{
-        alert("Quantity:"+quantity);
-      }
-    }
+  }
 
-    
 
-    const handleBuyNow=()=>{
-      if(flag==false){
-        alert("Add To Cart:1");
-      }else if(quantity<=0){
-        alert("Please enter a positive number");
-      }else{
-        alert("Quantity:"+quantity);
-      }
+
+  const handleBuyNow = () => {
+
+    if (flag == false) {
+      alert("Add To Cart:1");
+    } else if (quantity <= 0) {
+      alert("Please enter a positive number");
+    } else {
+      alert("Quantity:" + quantity);
     }
-    return(
-        <div >
-            <Row >
-              <Col md={1}></Col>
+    navigate("/AddressForm")
+  }
+
+  // const ImgHandler=(src)=> {
+  //   alert('Image Clicked')
+  // }
+
+  function ImgHandler(e) {
+    // alert(`Image Clicked, ${e}`);
+    imglink = { e };
+    // imglinkfinal = imglink.e;
+    setimage(imglink.e);
+    console.log("Img Final:", imglinkfinal);
+    console.log("Image: ", imglink)
+  }
+
+
+
+  return (
+    <div>
+      <Row >
+        <Col md={2} style={{ paddingLeft: "200px", paddingTop: "45px" }}>
+
+
+          <img src={products.imgone} onClick={() => ImgHandler(products.imgone)} style={{ width: "90px", height: "100px" }} />
+          <img src={products.imgtwo} onClick={() => ImgHandler(products.imgtwo)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+          <img src={products.imgthree} onClick={() => ImgHandler(products.imgthree)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+          <img src={products.imgfour} onClick={() => ImgHandler(products.imgfour)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+          <img src={products.imgfive} onClick={() => ImgHandler(products.imgfive)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+
+
+
+        </Col>
+
+        <Col md={4}>
+          <br></br>
+          <br></br>
+          {/* <Zoom
+            img={products.src}
+            height={500}
+            width={500}
+            zoomScale={2}
+
+          /> */}
+
+          <div style={{ width: '400px', height: '513px' }}>
+            {/* width:'400px',height:'513px'      */}
+            <ReactImageMagnify {...{
+              smallImage: {
+                alt: 'Wristwatch by Ted Baker London',
+                isFluidWidth: true,
+                src: imglinkfinal,
+
+
+
+              },
+              largeImage: {
+                src: imglinkfinal,
+                width: 800,
+                height: 800
+
+                // width: 1200, height: 1800
+              }
+            }} />
+
+          </div>
+
+        </Col>
+        <Col md={6}>
+          <br></br>
+          <br></br>
+
+          <p className="text" >{products.title}</p>
+
+          <br></br>
+          <h6 >Price:{products.price}</h6>
+          <br></br>
+          <h6>{products.description}</h6>
+          <br></br>
+          <Input id="Quantity"
+            name="Quantity"
+            placeholder="Enter Quantity"
+            type="number"
+            min={0}
+            onChange={inputQuantityEvent}
+            style={{ width: 300 }}>
+          </Input>
+          <br></br>
+          <Button onClick={handleAddToCart}>Add To Cart</Button>
+          <Button style={{ marginLeft: 30 }} onClick={handleBuyNow}>Buy Now</Button>
+
+          <br></br>
+
+          <h1 className="text" style={{ marginTop: "50px" }}>Product Description</h1>
+          <br></br>
+
+          <Row>
+            <Col md={2}>
+
+              <img src="https://rukminim1.flixcart.com/image/200/200/cms-rpd-images/c1e168ff0ba0498d875fc8723c95f093_16d48598a68_image.jpeg?q=90" style={{ width: "100px" }}></img>
+
+            </Col>
+            <Col md={6}>
+              <h4>Product</h4>
               
-              <Col md={5}>
-                <br></br>
-                <br></br>
-                <Zoom
-                  img ={products.src}
-                  height={500}
-                  width={500}
-                  zoomScale={2}
-                />
-                
+              <p>Featuring a 15.49-cm (6.1) all-screen Liquid Retina LCD and a glass and aluminum design, the iPhone 11 is as beautiful as it gets. Also, the IP68 rating ensures that is water-resistant up to 2 meters for 30 minutes.</p>
+            </Col>
+          </Row>
+          <br></br>
+          <Row>
+            <Col md={6}>
+              
+              <h4>Take Your Photos Further. And Wider.</h4>
+              <p>The iPhone 11 features dual 12 MP Ultra Wide (13mm) and Wide (26mm) cameras with 4K video recording up to 60 fps. The Ultra Wide camera provides 120° field of view, letting you capture four times more scene, and the Wide camera provides 100% Focus Pixels for up to three times faster autofocus in low light.</p>
+            </Col>
+            <Col md={2}>
+              <img src="https://rukminim1.flixcart.com/image/200/200/cms-rpd-images/9490ec20393b496fa9f270d715bba3f9_16d4859a41c_image.jpeg?q=90"></img>
+            </Col>
+          </Row>
+          <br></br>
+          <h4 className="text" style={{marginTop:"10px"}}>Specifications</h4>
+          <br></br>
+          <Row>
+            
+            <h6>General</h6>
+          
+            <Row style={{marginTop:"10px"}}>
+            
+              <Col md={2}>
+                <p>In The Box</p>
               </Col>
-              <Col  md={5}>
-                <br></br>
-                <br></br>
-                
-                <p className="text" >{products.title}</p>
-                
-                <br></br>
-                <h6 >Price:{products.price}</h6>
-                <br></br>
-                <h6>{products.description}</h6>
-                <br></br>
-                <Input id="Quantity"
-                      name="Quantity"
-                      placeholder="Enter Quantity"
-                      type="number"
-                      min={0}
-                      onChange={inputQuantityEvent}
-                      style={{width:300}}>
-                </Input>
-                <br></br>
-                <Button onClick={handleAddToCart}>Add To Cart</Button>
-                <Button style={{marginLeft:30}} onClick={handleBuyNow}>Buy Now</Button>
-
-                </Col>
-              
+              <Col md={6}>
+                <p>Handset, EarPods with Lightning Connector, Lightning to USB Cable, USB Power Adapter, Documentation</p>
+              </Col>
             </Row>
-        </div>
-        
-    );
+            
+            <Row>
+              <Col md={2}>
+                <p>Model Number</p>
+              </Col>
+              <Col md={6}>
+                <p>MWLT2HN/A</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={2}>
+                <p>Color</p>
+              </Col>
+              <Col md={6}>
+                <p>Graphite</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={2}>
+                <p>SIM Type</p>
+              </Col>
+              <Col md={6}>
+                <p>Dual Sim</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={2}>
+                <p>Model Name</p>
+              </Col>
+              <Col md={6}>
+                <p>iPhone 13 Pro Max</p>
+              </Col>
+            </Row>
+          </Row>
+
+
+
+
+          {/* <div class="row">
+            <div class="columnone">
+            <img src="https://rukminim1.flixcart.com/image/200/200/cms-rpd-images/c1e168ff0ba0498d875fc8723c95f093_16d48598a68_image.jpeg?q=90" style={{width:"100px"}}></img>
+            </div>
+            <div class="columntwo">
+            <p>Beautiful Design</p>
+            <br></br>
+            <p>Featuring a 15.49-cm (6.1) all-screen Liquid Retina LCD and a glass and aluminum design, the iPhone 11 is as beautiful as it gets. Also, the IP68 rating ensures that is water-resistant up to 2 meters for 30 minutes.</p>
+            </div>
+            
+
+          </div> */}
+
+
+        </Col>
+
+      </Row>
+      <br></br>
+      {/* <Row>
+        <Col>
+          <h3 style={{ textAlign: "center" }}>Ratings And Reviews</h3>
+        </Col>
+      
+      </Row> */}
+
+      {/* <ProductRating rating="3.5" /> */}
+
+      {/* <Row>
+        <ReactImageMagnify {...{
+          smallImage: {
+            alt: 'Wristwatch by Ted Baker London',
+            isFluidWidth: true,
+            src: watchImg300
+          },
+          largeImage: {
+            src: watchImg1200,
+            width: 1200,
+            height: 1800
+          }
+        }} />
+      </Row> */}
+    </div>
+
+  );
 }
 
 export default ProductDetails;

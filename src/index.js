@@ -10,6 +10,14 @@ import EmailAuth from './components/Login-Signup/EmailAuth';
 import ProductDetails from './components/Items/ProductDetails';
 import Admin from './components/Admin/Admin';
 import Cart from "./components/Shopping-Cart/Cart";
+import CategoryDropdowns from './components/Admin/CategoryDropdowns';
+import PendingDelivery from './components/Admin/Sidebar/PendingDelivery'
+import UserComplaint from './components/Admin/Sidebar/UserComplaint'
+import AddressForm from './components/AddressForm';
+import OrderSummary from './components/OrderSummary';
+import PaymentOption from './components/PaymentOption';
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -24,6 +32,15 @@ root.render(
       <Route path='/productDetails' element = {<ProductDetails/>}/>
       <Route path='/admin' element = {<Admin/>}/>
       <Route path='/cart' element = {<Cart/>}/>
+      <Route path='/categorydrop' element = {<CategoryDropdowns/>}/>
+      <Route path='/pendingdelivery' element = {<PendingDelivery/>}/>
+      <Route path='/usercomplaint' element = {<UserComplaint/>}/>
+      <Route path='/AddressForm' element = {<AddressForm/>}/>
+      <Route path='/OrderSummary' element = {<OrderSummary/>}/>
+      <Route path='/PaymentOption' element = {<PaymentOption/>}/>
+      
+
+
     </Routes>
   </BrowserRouter>
 );

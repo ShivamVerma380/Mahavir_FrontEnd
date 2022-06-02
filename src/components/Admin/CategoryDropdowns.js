@@ -10,6 +10,7 @@ const CategoryDropdowns = () => {
    * based on which dropdown is selected
    */
   const changeSelectOptionHandler = (event) => {
+    
     setSelected(event.target.value);
   };
   
@@ -29,12 +30,9 @@ const CategoryDropdowns = () => {
   let options = null;
   
   /** Setting Type variable according to dropdown */
-  if (selected === "Algorithm") {
+  if (selected === "Add New") {
     type = algorithm;
-  } else if (selected === "Language") {
-    type = language;
-  } else if (selected === "Data Structure") {
-    type = dataStructure;
+    alert("Add New")
   }
   
   /** If "Type" is null or undefined then options will be null,
@@ -58,9 +56,10 @@ const CategoryDropdowns = () => {
            */}
           <select onChange={changeSelectOptionHandler}>
             <option>Choose...</option>
-            <option>Algorithm</option>
-            <option>Language</option>
-            <option>Data Structure</option>
+            <option>Add New</option>
+            
+            {/* <option>Language</option>
+            <option>Data Structure</option> */}
           </select>
         </div>
         <div>

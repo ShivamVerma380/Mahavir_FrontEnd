@@ -9,3 +9,24 @@
     background-color:antiquewhite;
 
 }
+
+.columnone {
+    float: left;
+    width: 5%;
+    padding: 5px;
+  }
+
+.columntwo {
+    float: right;
+    width: 100%;
+    padding: 5px;
+}  
+  
+  /* Clear floats after image containers */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+

@@ -7,6 +7,9 @@ import { Router, Routes, Route } from 'react-router-dom';
 import {useState, useEffect} from "react";
 import axios from "axios";
 import AdminHeader from './components/Admin/AdminHeader';
+import ShowSearchResults from './components/ShowSearchResults';
+import Test from './components/Test';
+
 
 function App() {
 
@@ -95,6 +98,8 @@ var products=[
       "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
       "alt":"Offer Name:1",
       "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+      "tags": "OnePlus Mobile Lite 5G 6GB RAM 128 Blue Nord",
+      "category": "Mobiles",
       "price":19999,
       "description":"OxygenOS based on Android™ 12"
   },{
@@ -102,6 +107,8 @@ var products=[
     "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
     "alt":"Offer Name:2",
     "title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+    "tags": "OnePlus Mobile Lite 5G 6GB RAM 128 Blue Nord",
+    "category": "Mobiles",
     "price":65999,
     "description":"OxygenOS based on Android™ 12"
 },{
@@ -109,6 +116,8 @@ var products=[
   "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
   "alt":"Offer Name:3",
   "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "tags": "OnePlus Mobile Lite 5G 6GB RAM 128 Blue Nord",
+  "category": "Mobiles",
   "price":19999,
   "description":"OxygenOS based on Android™ 12"
 }, {
@@ -116,6 +125,8 @@ var products=[
   "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
   "alt":"Offer Name:1",
   "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "tags": "OnePlus Mobile Lite 5G 6GB RAM 128 Blue Nord",
+  "category": "Mobiles",
   "price":19999,
   "description":"OxygenOS based on Android™ 12"
 },{
@@ -123,6 +134,8 @@ var products=[
   "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
   "alt":"Offer Name:2",
   "title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+  "tags": "OnePlus Mobile Lite 5G 6GB RAM 128 Blue Nord",
+  "category": "Mobiles",
   "price":65999,
   "description":"OxygenOS based on Android™ 12"
 },{
@@ -130,6 +143,8 @@ var products=[
   "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
   "alt":"Offer Name:3",
   "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "tags": "OnePlus Mobile Lite 5G 6GB RAM 128 Blue Nord",
+  "category": "Mobiles",
   "price":19999,
   "description":"OxygenOS based on Android™ 12"
 }, {
@@ -137,6 +152,8 @@ var products=[
   "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
   "alt":"Offer Name:1",
   "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "tags": "OnePlus Mobile Lite 5G 6GB RAM 128 Blue Nord",
+  "category": "Mobiles",
   "price":19999,
   "description":"OxygenOS based on Android™ 12"
 },{
@@ -144,6 +161,8 @@ var products=[
 "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
 "alt":"Offer Name:2",
 "title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+"tags": "OnePlus Mobile Lite 5G 6GB RAM 128 Blue Nord",
+"category": "Mobiles",
 "price":65999,
 "description":"OxygenOS based on Android™ 12"
 },{
@@ -151,6 +170,8 @@ var products=[
 "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
 "alt":"Offer Name:3",
 "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+"tags": "OnePlus Mobile Lite 5G 6GB RAM 128 Blue Nord",
+"category": "Mobiles",
 "price":19999,
 "description":"OxygenOS based on Android™ 12"
 }
@@ -162,9 +183,13 @@ var products=[
       
       <Header/>
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
+      
       <Slideshow offerPosters={offerPosters}/>
       <Product title="Mahavir Special" productList={products}/>
       <Product title="Deals Of The Day" productList={products}/>
+      <ShowSearchResults productList={products}/>
+      <Test/>
+       
       
     </div>
   );
