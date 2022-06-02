@@ -12,6 +12,9 @@ import { ImageList, Slider } from "@mui/material";
 import Swiper from "swiper";
 
 
+
+import ProductRating from "./ProductRating";
+import UserReviewRating from "./UserReviewRating";
 const ProductDetails = () => {
   // let name = localStorage.getItem("Name")
   // var storedProduct = JSON.parse(localStorage.getItem("product"))
@@ -287,6 +290,24 @@ const ProductDetails = () => {
     </div>
 
   );
+            // <br></br>
+            // <Row>
+            //   <Col>
+            //     <h3 style={{textAlign:"center"}}>Ratings And Reviews</h3>
+            //   </Col>
+            //   <br></br>
+            //   <ProductRating rating="3.5"/>
+            //   <UserReviewRating/>
+            //   <UserReviewRating/>
+            //   <UserReviewRating/>
+            //   <UserReviewRating/>
+            //   <UserReviewRating/>
+            //   <UserReviewRating/>
+            //   <UserReviewRating/>
+            // </Row>
+        // </div>
+        
+    
 }
 
 export default ProductDetails;

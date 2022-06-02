@@ -12,6 +12,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import { Button } from "bootstrap";
 import AddCategory from "./AddCategory";
+import AddItem from "./Test/AddItem";
 
 const filter = createFilterOptions();
 
@@ -39,8 +40,8 @@ export default function Admin () {
             <AdminHeader/>
             <Navbar/>
             <h1 style={{marginTop:"20px",textAlign:"center"}}>Mahavir Electronics</h1>
-            <AddCategory/> 
-                
+            {/* <AddCategory/>  */}
+            <AddItem/>
                 <br></br>
                 
                 

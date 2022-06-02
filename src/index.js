@@ -18,6 +18,8 @@ import OrderSummary from './components/OrderSummary';
 import PaymentOption from './components/PaymentOption';
 
 
+import MyOrders from './components/Orders/MyOrders';
+import AddCategory from './components/Admin/AddCategory';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -41,6 +43,7 @@ root.render(
       
 
 
+      <Route path='/my-orders' element={<MyOrders/>}/>
     </Routes>
   </BrowserRouter>
 );

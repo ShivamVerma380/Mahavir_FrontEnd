@@ -69,6 +69,10 @@ const Header = () => {
         navigate("/admin")
     }
 
+    const handleMyOrders=()=>{
+        navigate("/my-orders")
+    }
+
     const handleLogout=()=>{
         setIsUserLoggedIn(false);
         alert(localStorage.getItem("isLoggedIn"));
@@ -106,6 +110,7 @@ const Header = () => {
                 <Nav.Link><i  class="fa fa-map-marker" style={{paddingLeft:"20px" , paddingRight:"10px"}}>Pune</i></Nav.Link>
                 {(isUserLoggedIn)?null:(<Nav.Link><i class="fa fa-user" style={{paddingLeft:"10px" , paddingRight:"10px"}} onClick={callLogin}></i></Nav.Link>)}   
                 {isUserLoggedIn ?(<NavDropdown title={"Hi, "+(name)} id="collasible-nav-dropdown" style={{marginRight:"25px"}}>
+                        <NavDropdown.Item  onClick={handleMyOrders}>My Orders</NavDropdown.Item>
                         <NavDropdown.Item target="_blank" onClick={handleLogout}>Logout</NavDropdown.Item> 
                     </NavDropdown>):null}                       
                     <Nav.Link ><i  class="fa fa-shopping-cart"  onClick={Cart} style={{paddingLeft:"10px" , paddingRight:"20px"}}></i></Nav.Link>

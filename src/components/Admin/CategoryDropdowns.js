@@ -1,76 +1,233 @@
-import * as React from "react";
+import React from "react";
+import axios from "axios";
+
+
+/** subCategoriesArray variable to store different array for different dropdown */
+var subCategoriesArray = null;
+/** This will be used to create set of subCategories that user will see */
+var subCategories = null;
+
+var subSubCategoriesArray = null;
+
+var subSubCategories = null;
   
-const CategoryDropdowns = () => {
-  /** "selected" here is state variable which will hold the
-   * value of currently selected dropdown.
+const CategoryDropdowns = ({Category}) => {
+  /** "selectedCategory" here is state variable which will hold the
+   * value of currently selectedCategory dropdown.
    */
-  const [selected, setSelected] = React.useState("");
+  const [selectedCategory, setselectedCategory] = React.useState("");
+
+  const [selectedSubCategory,setSelectedSubCategory] = React.useState("");
+  
+  const [isCategoryselected,setIsCategoryselected] = React.useState(false);
+
+  const [isSubCategoryselected,setIsSubCategorySelected] = React.useState(false);
+
+
+  const [isSelectedCategoryEqualChoose, setIsSelectedCategoryEqualChoose] = React.useState(false);
   
   /** Function that will set different values to state variable
-   * based on which dropdown is selected
+   * based on which dropdown is selectedCategory
    */
-  const changeSelectOptionHandler = (event) => {
+  const changeCategoryOptionHandler = (event) => {
+    setIsCategoryselected(false);
     
-    setSelected(event.target.value);
+    
+    setselectedCategory(event.target.value);
+    if(event.target.value==="Choose..."){
+      setIsSelectedCategoryEqualChoose(true);
+      subCategoriesArray=[];
+    }
+    
+    // fetchSubCategories();
+    
   };
+
+
   
-  /** Different arrays for different dropdowns */
-  const algorithm = [
-    "Searching Algorithm",
-    "Sorting Algorithm",
-    "Graph Algorithm",
-  ];
-  const language = ["C++", "Java", "Python", "C#"];
-  const dataStructure = ["Arrays", "LinkedList", "Stack", "Queue"];
-  
-  /** Type variable to store different array for different dropdown */
-  let type = null;
-  
-  /** This will be used to create set of options that user will see */
-  let options = null;
-  
-  /** Setting Type variable according to dropdown */
-  if (selected === "Add New") {
-    type = algorithm;
-    alert("Add New")
+
+  const changeSubCategoryOptionHandler = (event) =>{
+
+    setIsSubCategorySelected(false);
+    setSelectedSubCategory(event.target.value);
+
+    
+    
   }
+
+  if(selectedCategory==="Choose..."){
+    subCategoriesArray=[]
+    subSubCategoriesArray=[]
+    setIsSelectedCategoryEqualChoose(true);
+    console.log("SubCategoriesArray In Choose",subCategoriesArray);
+    console.log("SubSub CategoriesArray In Choose",subSubCategoriesArray);
+
+    
+
+  }
+
+  if(selectedSubCategory==="Choose..."){
+    subSubCategoriesArray=[]
+      }
   
-  /** If "Type" is null or undefined then options will be null,
-   * otherwise it will create a options iterable based on our array
+  const fetchSubCategories=()=>{
+    console.log("In Fetch SubCategories")
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZHNpcyIsImV4cCI6MTY1NDE1NDY1NywiaWF0IjoxNjU0MDY4MjU3fQ._sfkKaoXbe5L8wNGyt8lG0jeBcXJ2su7UMaORmze4H8"
+
+    axios({
+      method:"get",
+      url:"http://localhost:8080/get-sub-categories/"+selectedCategory,
+      headers:{
+        "Authorization":"Bearer "+token,
+      }
+    }).then(function (response){
+      console.log(response.data);
+      subCategoriesArray = response.data;
+      subSubCategoriesArray=[];
+      setIsCategoryselected(true)
+      
+      console.log("subCategoriesArray:",subCategoriesArray);
+    }).catch(function(error){
+      console.log("Error:",error);
+    })
+  }
+
+  const fetchSubSubCategories=()=>{
+    console.log("In Fetch SubSubCategories")
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZHNpcyIsImV4cCI6MTY1NDE1NDY1NywiaWF0IjoxNjU0MDY4MjU3fQ._sfkKaoXbe5L8wNGyt8lG0jeBcXJ2su7UMaORmze4H8"
+
+    axios({
+      method:"get",
+      url:"http://localhost:8080/get-sub-sub-categories/"+selectedCategory+"/"+selectedSubCategory,
+      headers:{
+        "Authorization":"Bearer "+token,
+      }
+    }).then(function (response){
+      console.log(response.data);
+      subSubCategoriesArray = response.data;
+      setIsSubCategorySelected(true)
+      
+      console.log("subSubCategoriesArray:",subSubCategoriesArray);
+    }).catch(function(error){
+      console.log("Error:",error);
+    })
+  }
+
+
+
+
+  
+  
+  
+  
+  
+  fetchSubCategories();
+  /** If "subCategoriesArray" is null or undefined then subCategories will be null,
+   * otherwise it will create a subCategories iterable based on our array
    */
-  if (type) {
-    options = type.map((el) => <option key={el}>{el}</option>);
+  if (isCategoryselected) {
+    subCategories = subCategoriesArray.map((el) => <option>{el}</option>);
+      
   }
+  fetchSubSubCategories();
+  
+  if (isSubCategoryselected) {
+    subSubCategories = subSubCategoriesArray.map((el) => <option>{el}</option>);
+  }
+  
+  
+  
   return (
+  
+    
     <div
+      
       style={{
         padding: "16px",
         margin: "16px",
       }}
     >
+     { (isSelectedCategoryEqualChoose)?(
+        <form>  
+        <div>
+          {/** Bind changeSelectOptionHandler to onChange method of select.
+           * This method will trigger every time different
+           * option is selectedCategory.
+           */}
+          <select onChange={changeCategoryOptionHandler}>
+            <option>Choose...</option>
+            {
+              // console.log({Category})
+            }
+            {
+              Category.map(index=>{
+                return(
+                  <option>{index}</option>
+                );
+              })
+            }
+            {/* // <option>TV</option>
+            // <option>Language</option>
+            // <option>Data Structure</option>
+            // <option>Add New</option> */}
+          </select>
+        </div>
+        </form>
+      ):(
       <form>
         <div>
           {/** Bind changeSelectOptionHandler to onChange method of select.
            * This method will trigger every time different
-           * option is selected.
+           * option is selectedCategory.
            */}
-          <select onChange={changeSelectOptionHandler}>
+          <select onChange={changeCategoryOptionHandler}>
             <option>Choose...</option>
-            <option>Add New</option>
-            
-            {/* <option>Language</option>
-            <option>Data Structure</option> */}
+            {
+              // console.log({Category})
+            }
+            {
+              Category.map(index=>{
+                return(
+                  <option>{index}</option>
+                );
+              })
+            }
+            {/* // <option>TV</option>
+            // <option>Language</option>
+            // <option>Data Structure</option>
+            // <option>Add New</option> */}
           </select>
         </div>
+        
         <div>
-          <select>
+          <br></br>
+          <select onChange={changeSubCategoryOptionHandler}>
+          <option>Choose...</option>
             {
-              /** This is where we have used our options variable */
-              options
+              /** This is where we have used our subCategories variable */
+              subCategories
+            }
+            {
+              console.log("subCategories",subCategories)
+            }
+          </select>
+        </div>
+
+        <div>
+          <br></br>
+          <select>
+            <option>Choose...</option>
+            {
+              /** This is where we have used our subSubCategories variable */
+              subSubCategories
+            }
+            {
+              console.log("subSubCategories",subSubCategories)
             }
           </select>
         </div>
       </form>
+      )}
     </div>
   );
 };
