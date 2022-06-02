@@ -287,24 +287,25 @@ const ProductDetails = () => {
           }
         }} />
       </Row> */}
+      <Row>
+              <Col>
+                <h3 style={{textAlign:"center"}}>Ratings And Reviews</h3>
+              </Col>
+              <br></br>
+              <ProductRating rating="3.5"/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+      </Row>
     </div>
 
   );
             // <br></br>
-            // <Row>
-            //   <Col>
-            //     <h3 style={{textAlign:"center"}}>Ratings And Reviews</h3>
-            //   </Col>
-            //   <br></br>
-            //   <ProductRating rating="3.5"/>
-            //   <UserReviewRating/>
-            //   <UserReviewRating/>
-            //   <UserReviewRating/>
-            //   <UserReviewRating/>
-            //   <UserReviewRating/>
-            //   <UserReviewRating/>
-            //   <UserReviewRating/>
-            // </Row>
+            
         // </div>
         
     
