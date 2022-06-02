@@ -31,7 +31,7 @@ function Product({title,productList}){
     // }
 
     function callProductDetails(index){
-      alert(index);
+      //alert(index);
       console.log("Index",index);
       localStorage.setItem("productSelected",index.modelNumber);
       console.log("Product Selected",localStorage.getItem("productSelected"))

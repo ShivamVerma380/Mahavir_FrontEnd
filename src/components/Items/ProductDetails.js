@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ReactImageMagnify from 'react-image-magnify';
 import watchImg1200 from '../../assets/watch.jpg'
 import watchImg300 from '../../assets/watch300.jpg'
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ImageList, Slider } from "@mui/material";
 
 import * as AiIcons from 'react-icons/ai';
@@ -20,6 +20,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "../styles.css"
+
+import axios from "axios";
 
 
 // import required modules
@@ -38,7 +40,28 @@ const ProductDetails = () => {
   var quantity = 0;
   var flag = false;
 
+  const [product,setProduct] = useState([]);
+  const [isProductFetched,setIsProductFetched]= useState(false);
 
+  useEffect(()=>{
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZHNpc3MiLCJleHAiOjE2NTQyNTIzMTIsImlhdCI6MTY1NDE2NTkxMn0.Jml6S8bTMq7X1cfmvSKP7qW_Kv6yRkl1F-t-TopSyKI"
+    axios({
+      method:"get",
+      url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected"),
+      headers:{
+        "Authorization":"Bearer "+token,
+      }
+    }).then(function(response){
+      console.log(response);
+      if(response.status==200){
+        setProduct(response.data);
+        setIsProductFetched(true);
+        console.log("Product Detail",product);
+      }
+    }).catch(function(error){
+      console.log("error",error);
+    })
+  },[]);
 
 
   var products =
@@ -166,47 +189,30 @@ const ProductDetails = () => {
     navigate("/AddressForm")
   }
 
-  // const ImgHandler=(src)=> {
-  //   alert('Image Clicked')
-  // }
 
   function ImgHandler(e) {
-    // alert(`Image Clicked, ${e}`);
     imglink = { e };
-    // imglinkfinal = imglink.e;
     setimage(imglink.e);
     console.log("Img Final:", imglinkfinal);
     console.log("Image: ", imglink)
   }
 
-
-
   return (
+    
     <div>
       <Row >
         <Col md={2} style={{ paddingLeft: "100px", paddingTop: "45px" }}>
-
-
           <img src={products.imgone} onClick={() => ImgHandler(products.imgone)} style={{ width: "90px", height: "100px" }} />
           <img src={products.imgtwo} onClick={() => ImgHandler(products.imgtwo)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img src={products.imgthree} onClick={() => ImgHandler(products.imgthree)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img src={products.imgfour} onClick={() => ImgHandler(products.imgfour)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img src={products.imgfive} onClick={() => ImgHandler(products.imgfive)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
 
-
-
         </Col>
 
         <Col md={4}>
           <br></br>
           <br></br>
-          {/* <Zoom
-            img={products.src}
-            height={500}
-            width={500}
-            zoomScale={2}
-
-          /> */}
 
           <div style={{ width: '400px', height: '513px' }}>
             {/* width:'400px',height:'513px'      */}
@@ -215,9 +221,6 @@ const ProductDetails = () => {
                 alt: 'Wristwatch by Ted Baker London',
                 isFluidWidth: true,
                 src: imglinkfinal,
-
-
-
               },
               largeImage: {
                 src: imglinkfinal,
@@ -351,15 +354,6 @@ const ProductDetails = () => {
               <p>1⭐</p>
             </Col>
 
-            {/* <Col md={1} style={{paddingRight:"30px"}}>
-              <p style={{marginBottom:"7px"}}><AiIcons.AiFillStar /></p>
-              <p style={{marginBottom:"13px"}}><AiIcons.AiFillStar /></p>
-              <p style={{marginBottom:"13px"}}><AiIcons.AiFillStar /></p>
-              <p style={{marginBottom:"10px"}}><AiIcons.AiFillStar /></p>
-              <p><AiIcons.AiFillStar /></p>
-            </Col> */}
-
-
 
             <Col md={3}>
 
@@ -386,38 +380,14 @@ const ProductDetails = () => {
               <p style={{ marginBottom: "10px" }}>22,000</p>
               <p>22,000</p>
             </Col>
-
           </Row>
           <Row>
-
             <br></br>
-
             <UserReviewRating />
             <UserReviewRating />
             <UserReviewRating />
             <UserReviewRating />
-
           </Row>
-
-
-
-
-
-
-          {/* <div class="row">
-            <div class="columnone">
-            <img src="https://rukminim1.flixcart.com/image/200/200/cms-rpd-images/c1e168ff0ba0498d875fc8723c95f093_16d48598a68_image.jpeg?q=90" style={{width:"100px"}}></img>
-            </div>
-            <div class="columntwo">
-            <p>Beautiful Design</p>
-            <br></br>
-            <p>Featuring a 15.49-cm (6.1) all-screen Liquid Retina LCD and a glass and aluminum design, the iPhone 11 is as beautiful as it gets. Also, the IP68 rating ensures that is water-resistant up to 2 meters for 30 minutes.</p>
-            </div>
-            
-
-          </div> */}
-
-
         </Col>
 
       </Row>
