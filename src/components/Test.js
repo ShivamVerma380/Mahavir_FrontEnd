@@ -1,66 +1,27 @@
 import React, {useState} from "react";
 import "./ShowSearchResults.css";
 import react from "react"
-import { Button } from "reactstrap"
+import { Button, Container } from "reactstrap"
 //import CategoryDropdowns from "./CategoryDropdowns";
 import CategoryDropdowns from "./Admin/CategoryDropdowns";
+import { height } from "@mui/system";
 
-const Test = () => {
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      title: "Check Textured Coat",
-      category: "Coat",
-      price: "175.4",
-      tags: "coat check textured camel brown long sleeves buttoned cuffs",
-    },
-    {
-      id: 2,
-      title: "Contrast Check Coat",
-      category: "Coat",
-      price: "155.4",
-      tags: "coat camel black grey marl lapel collar hip flap pockets",
-    },
-    {
-      id: 3,
-      title: "White Coat",
-      category: "Coat",
-      price: "125.4",
-      tags: "coat camel white short sleeves double-breasted button",
-    },
-    {
-      id: 4,
-      title: "Basic Hoodie",
-      category: "Hoodies / SweatShirts",
-      price: "55.4",
-      tags: "hoodie solid plain purple long baggy hood",
-    },
-    {
-      id: 5,
-      title: "Basic Hoodie",
-      category: "Hoodies / SweatShirts",
-      price: "55.4",
-      tags: "hoodie solid plain black long baggy hood",
-    },
-    {
-      id: 6,
-      title: "Basic short Hoodie",
-      category: "Hoodies / SweatShirts",
-      price: "55.4",
-      tags: "hoodie solid plain gray grey short hood",
-    },
-  ]);
+const Test = ({productList}) => {
+ 
 
   const [isSearchEmpty,setIsSearchEmpty] = useState(true); 
 
 
   const [search, setSearch] = useState("");
 
-  const filteredProducts = products.filter((product) => {
+  const filteredProducts = productList.filter((product) => {
     if (
-      product.tags.toLowerCase().includes(search) ||
-      product.title.toLowerCase().includes(search) ||
-      product.category.toLowerCase().includes(search)
+      product.modelNumber.toLowerCase().includes(search) ||
+      product.category.toLowerCase().includes(search) ||
+      product.subCategory.toLowerCase().includes(search) ||
+      product.subSubCategory.toLowerCase().includes(search)||
+      product.productName.toLowerCase().includes(search)||
+      product.productDescription.toLowerCase().includes(search)
     ) {
       return product;
     }
@@ -114,9 +75,10 @@ const Test = () => {
             <div className="display">
             {filteredProducts.map((product) => (
               <div className="product">
+                <img src= {"data:image/png;base64," + product.productImage1.data} style={{width:140 ,height:140}}></img>
                 <h6>{product.category}</h6>
-                <h3>{product.title}</h3>
-                <h5>{product.price}</h5>
+                <h4>{product.productName}</h4>
+                <h5>{product.productPrice}</h5>
               </div>
             ))}
           </div>

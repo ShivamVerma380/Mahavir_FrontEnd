@@ -459,30 +459,6 @@ const ProductDetails = () => {
 
       </Row>
       <br></br>
-      {/* <Row>
-        <Col>
-          <h3 style={{ textAlign: "center" }}>Ratings And Reviews</h3>
-        </Col>
-      
-      </Row> */}
-
-      {/* <ProductRating rating="3.5" /> */}
-
-      {/* <Row>
-        <ReactImageMagnify {...{
-          smallImage: {
-            alt: 'Wristwatch by Ted Baker London',
-            isFluidWidth: true,
-            src: watchImg300
-          },
-          largeImage: {
-            src: watchImg1200,
-            width: 1200,
-            height: 1800
-          }
-        }} />
-      </Row> */}
-
     </div>
     ):(null)
     

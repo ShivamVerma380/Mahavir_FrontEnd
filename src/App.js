@@ -65,9 +65,9 @@ function App() {
     }
 
     if(!isProductsFetched){
-      axios.get("http://localhost:8080/get-products").then(function(response){
-      console.log("Products",response.data);
+      axios.get("http://localhost:8080/get-products").then(function(response){     
       if(response.status==200){
+        console.log("Products",response.data);
         setProducts(response.data);
         setIsProductsFetched(true);
         console.log("Products set",Products)
@@ -106,7 +106,7 @@ function App() {
       <Slideshow offerPosters={offerPosters}/>
       <Product title="Mahavir Special" productList={Products}/>
       <Product title="Deals Of The Day" productList={Products}/>
-      <Test/>
+      <Test productList={Products} />
        
       
     </div>
