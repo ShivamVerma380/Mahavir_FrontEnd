@@ -30,6 +30,13 @@
   }
 
 
-.div{
+/* .div{
     background-color: antiquewhite;
+} */
+
+.star {
+  background-color: green;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 20px;
 }

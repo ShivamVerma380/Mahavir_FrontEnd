@@ -2,14 +2,15 @@ import React from "react";
 import { AiFillStar } from "react-icons/ai";
 import { Row,Col, Container } from "reactstrap";
 
+
 const UserReviewRating=()=>{
 
     return(
-        <div className="div">
+        <div>
             <Row>
-                <Col md={1} style={{textAlign:"right"}} >
-                        <AiFillStar/>
-                        3.5
+                <Col className="star" md={1} style={{textAlign:"right"}} >
+                        
+                        3.5<AiFillStar/>
                 </Col>
                 <Col>
                     <p>Shivam Verma</p>

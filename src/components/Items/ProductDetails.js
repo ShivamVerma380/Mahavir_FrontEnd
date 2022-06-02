@@ -10,6 +10,8 @@ import watchImg300 from '../../assets/watch300.jpg'
 import React from "react";
 import { ImageList, Slider } from "@mui/material";
 import Swiper from "swiper";
+import * as AiIcons from 'react-icons/ai';
+import { CProgress, CProgressBar } from '@coreui/react'
 
 
 
@@ -177,14 +179,14 @@ const ProductDetails = () => {
             </Col>
             <Col md={6}>
               <h4>Product</h4>
-              
+
               <p>Featuring a 15.49-cm (6.1) all-screen Liquid Retina LCD and a glass and aluminum design, the iPhone 11 is as beautiful as it gets. Also, the IP68 rating ensures that is water-resistant up to 2 meters for 30 minutes.</p>
             </Col>
           </Row>
           <br></br>
           <Row>
             <Col md={6}>
-              
+
               <h4>Take Your Photos Further. And Wider.</h4>
               <p>The iPhone 11 features dual 12 MP Ultra Wide (13mm) and Wide (26mm) cameras with 4K video recording up to 60 fps. The Ultra Wide camera provides 120° field of view, letting you capture four times more scene, and the Wide camera provides 100% Focus Pixels for up to three times faster autofocus in low light.</p>
             </Col>
@@ -193,14 +195,14 @@ const ProductDetails = () => {
             </Col>
           </Row>
           <br></br>
-          <h4 className="text" style={{marginTop:"10px"}}>Specifications</h4>
+          <h4 className="text" style={{ marginTop: "10px" }}>Specifications</h4>
           <br></br>
           <Row>
-            
+
             <h6>General</h6>
-          
-            <Row style={{marginTop:"10px"}}>
-            
+
+            <Row style={{ marginTop: "10px" }}>
+
               <Col md={2}>
                 <p>In The Box</p>
               </Col>
@@ -208,7 +210,7 @@ const ProductDetails = () => {
                 <p>Handset, EarPods with Lightning Connector, Lightning to USB Cable, USB Power Adapter, Documentation</p>
               </Col>
             </Row>
-            
+
             <Row>
               <Col md={2}>
                 <p>Model Number</p>
@@ -242,6 +244,74 @@ const ProductDetails = () => {
               </Col>
             </Row>
           </Row>
+          <br></br>
+          <h4 className="text">Ratings and Reviews</h4>
+          <br></br>
+          <Row>
+            <Col md={1} style={{ paddingLeft: "30px" }}>
+              <h3>4.6</h3>
+            </Col>
+            <Col md={1} style={{ paddingLeft: "0px" }}>
+              <AiIcons.AiFillStar />
+            </Col>
+
+            <Col md={1} style={{paddingLeft:"5px"}}>
+              <p style={{marginBottom:"7px"}}>5⭐</p>
+              <p style={{marginBottom:"13px"}}>4⭐</p>
+              <p style={{marginBottom:"13px"}}>3⭐</p>
+              <p style={{marginBottom:"10px"}}>2⭐</p>
+              <p>1⭐</p>
+            </Col>
+
+            {/* <Col md={1} style={{paddingRight:"30px"}}>
+              <p style={{marginBottom:"7px"}}><AiIcons.AiFillStar /></p>
+              <p style={{marginBottom:"13px"}}><AiIcons.AiFillStar /></p>
+              <p style={{marginBottom:"13px"}}><AiIcons.AiFillStar /></p>
+              <p style={{marginBottom:"10px"}}><AiIcons.AiFillStar /></p>
+              <p><AiIcons.AiFillStar /></p>
+            </Col> */}
+
+
+            
+            <Col md={3}>
+              
+              <CProgress className="mb-3">
+                <CProgressBar color="success" value={90} />
+              </CProgress>
+              <CProgress className="mb-3">
+              <CProgressBar color="success" value={70} />
+              </CProgress>
+              <CProgress className="mb-3">
+              <CProgressBar color="warning" value={30} />
+              </CProgress>
+              <CProgress className="mb-3">
+              <CProgressBar color="danger" value={10} />
+              </CProgress>
+              <CProgress className="mb-3">
+              <CProgressBar color="danger" value={5} />
+              </CProgress>
+            </Col>
+            <Col md={1}>
+              <p style={{marginBottom:"7px"}}>60,000</p>
+              <p style={{marginBottom:"13px"}}>22,000</p>
+              <p style={{marginBottom:"13px"}}>22,000</p>
+              <p style={{marginBottom:"10px"}}>22,000</p>
+              <p>22,000</p>
+            </Col>
+
+          </Row>
+          <Row>
+      
+        <br></br>
+        
+        <UserReviewRating />
+        <UserReviewRating />
+        <UserReviewRating />
+        <UserReviewRating />
+        
+      </Row>
+
+
 
 
 
@@ -287,28 +357,15 @@ const ProductDetails = () => {
           }
         }} />
       </Row> */}
-      <Row>
-              <Col>
-                <h3 style={{textAlign:"center"}}>Ratings And Reviews</h3>
-              </Col>
-              <br></br>
-              <ProductRating rating="3.5"/>
-              <UserReviewRating/>
-              <UserReviewRating/>
-              <UserReviewRating/>
-              <UserReviewRating/>
-              <UserReviewRating/>
-              <UserReviewRating/>
-              <UserReviewRating/>
-      </Row>
+      
     </div>
 
   );
-            // <br></br>
-            
-        // </div>
-        
-    
+  // <br></br>
+
+  // </div>
+
+
 }
 
 export default ProductDetails;
