@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ReactImageMagnify from 'react-image-magnify';
 import watchImg1200 from '../../assets/watch.jpg'
 import watchImg300 from '../../assets/watch300.jpg'
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ImageList, Slider } from "@mui/material";
 import Swiper from "swiper";
 import * as AiIcons from 'react-icons/ai';
@@ -17,32 +17,61 @@ import { CProgress, CProgressBar } from '@coreui/react'
 
 import ProductRating from "./ProductRating";
 import UserReviewRating from "./UserReviewRating";
+import axios from "axios";
 const ProductDetails = () => {
   // let name = localStorage.getItem("Name")
   // var storedProduct = JSON.parse(localStorage.getItem("product"))
   // var id = storedProduct[0].id
+  
+
+ 
 
   var quantity = 0;
   var flag = false;
 
+  const [products,setProducts] =  useState([]);
+  const [isProductFetched,setIsProductFetched]= useState([]);
+
+  useEffect(()=>{
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZHNpc3MiLCJleHAiOjE2NTQyNTIzMTIsImlhdCI6MTY1NDE2NTkxMn0.Jml6S8bTMq7X1cfmvSKP7qW_Kv6yRkl1F-t-TopSyKI"
+    
+    axios({
+      method:"get",
+      url:"http://localhost:8080/get-offers",
+      headers:{
+        "Authorization":"Bearer "+token,
+      }
+    }).then(function(response){
+      console.log(response);
+      if(response.status==200){
+        setOfferPosters(response.data);
+        setIsOfferPostersFetched(true);
+        console.log("OfferPosters",offerPosters);
+      }
+    }).catch(function(error){
+      console.log("error",error);
+    })
+
+
+  },[]);
 
 
 
-  var products =
-  {
-    "id": 1,
-    // "src": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
-    // "imgone": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
-    "imgone": "https://d2xamzlzrdbdbn.cloudfront.net/products/4e7b28c3-4db3-4097-ab92-65d0166a651821170544.jpg",
-    "imgtwo": "https://d2xamzlzrdbdbn.cloudfront.net/products/5f3944c6-f695-4c02-ab76-7b486cc95ef321170544.jpg",
-    "imgthree": "https://d2xamzlzrdbdbn.cloudfront.net/products/84cae684-56d7-4136-b506-494f2e497a9421170544.jpg",
-    "imgfour": "https://d2xamzlzrdbdbn.cloudfront.net/products/2ebe097c-f7d7-4f60-9d0d-541ea6a083b321170544.jpg",
-    "imgfive": "https://d2xamzlzrdbdbn.cloudfront.net/products/77adc54b-83a8-44fd-9ed4-61eb87c86aad21170544.jpg",
-    "alt": "Offer Name:1",
-    "title": "Apple iPhone 13 Pro Max (128 GB Storage, Graphite)",
-    "price": 120000,
-    "description": "iOS 15 Operating System"
-  }
+  // var products =
+  // {
+  //   "id": 1,
+  //   // "src": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
+  //   // "imgone": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
+  //   "imgone": "https://d2xamzlzrdbdbn.cloudfront.net/products/4e7b28c3-4db3-4097-ab92-65d0166a651821170544.jpg",
+  //   "imgtwo": "https://d2xamzlzrdbdbn.cloudfront.net/products/5f3944c6-f695-4c02-ab76-7b486cc95ef321170544.jpg",
+  //   "imgthree": "https://d2xamzlzrdbdbn.cloudfront.net/products/84cae684-56d7-4136-b506-494f2e497a9421170544.jpg",
+  //   "imgfour": "https://d2xamzlzrdbdbn.cloudfront.net/products/2ebe097c-f7d7-4f60-9d0d-541ea6a083b321170544.jpg",
+  //   "imgfive": "https://d2xamzlzrdbdbn.cloudfront.net/products/77adc54b-83a8-44fd-9ed4-61eb87c86aad21170544.jpg",
+  //   "alt": "Offer Name:1",
+  //   "title": "Apple iPhone 13 Pro Max (128 GB Storage, Graphite)",
+  //   "price": 120000,
+  //   "description": "iOS 15 Operating System"
+  // }
   var imglink = products.imgone;
   // var imglinkfinal= products.imgone;
   const [imglinkfinal, setimage] = React.useState(products.imgone);
@@ -96,17 +125,12 @@ const ProductDetails = () => {
   return (
     <div>
       <Row >
-        <Col md={2} style={{ paddingLeft: "200px", paddingTop: "45px" }}>
-
-
+        <Col md={2} style={{ paddingLeft: "100px", paddingTop: "45px" }}>
           <img src={products.imgone} onClick={() => ImgHandler(products.imgone)} style={{ width: "90px", height: "100px" }} />
           <img src={products.imgtwo} onClick={() => ImgHandler(products.imgtwo)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img src={products.imgthree} onClick={() => ImgHandler(products.imgthree)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img src={products.imgfour} onClick={() => ImgHandler(products.imgfour)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img src={products.imgfive} onClick={() => ImgHandler(products.imgfive)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
-
-
-
         </Col>
 
         <Col md={4}>

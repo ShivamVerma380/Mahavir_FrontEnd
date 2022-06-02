@@ -25,7 +25,16 @@ function Product({title,productList}){
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
     </div>
 
-    const callProductDetails=()=>{
+    // const callProductDetails=()=>{
+    //   navigate("/productDetails")
+    //   //console.log("Product selected ",index);
+    // }
+
+    function callProductDetails(index){
+      alert(index);
+      console.log("Index",index);
+      localStorage.setItem("productSelected",index.modelNumber);
+      console.log("Product Selected",localStorage.getItem("productSelected"))
       navigate("/productDetails")
     }
 
@@ -58,7 +67,7 @@ function Product({title,productList}){
           cards = productList.map(index=>{
             return(
               <SwiperSlide >
-              <Card className="card" onClick={callProductDetails}>
+              <Card  className="card" onClick={()=>callProductDetails(index)}>
                 <CardImg className="this.props.img"
                   
                   src={"data:image/png;base64," + index.productImage1.data}/>
