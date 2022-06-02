@@ -76,8 +76,8 @@ const Test = ({productList}) => {
             {filteredProducts.map((product) => (
               <div className="product">
                 <img src= {"data:image/png;base64," + product.productImage1.data} style={{width:140 ,height:140}}></img>
-                <h6>{product.category}</h6>
-                <h4>{product.productName}</h4>
+                <h4>{product.category}</h4>
+                <h6>{product.productName}</h6>
                 <h5>{product.productPrice}</h5>
               </div>
             ))}
