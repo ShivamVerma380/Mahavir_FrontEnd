@@ -7,7 +7,7 @@ function Slideshow({offerPosters}){
 
     var offerPoster = <div>
         <img className="logo_mahavir" src={require ('../assets/images.jpg')} alt="Mandala" />
-    </div>
+      </div>
     return(
         <Carousel>
         {

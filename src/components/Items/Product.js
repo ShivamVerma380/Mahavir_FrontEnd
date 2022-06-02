@@ -60,16 +60,17 @@ function Product({title,productList}){
               <SwiperSlide >
               <Card className="card" onClick={callProductDetails}>
                 <CardImg className="this.props.img"
-                  src={index.src}/>
+                  
+                  src={"data:image/png;base64," + index.productImage1.data}/>
                   <CardBody>
                     <CardTitle className="this.props.h5 change">
-                      <h5><b>{index.title}</b></h5>
+                      <h5><b>{index.productName}</b></h5>
                     </CardTitle>
                     <CardSubtitle>
-                    <h6>Rs {index.price}</h6>
+                    <h6>Rs {index.productPrice}</h6>
                     </CardSubtitle>
                     <CardText className="this.props.p change">
-                     <p>{index.description}</p>
+                     <p>{index.productDescription}</p>
                   </CardText>
                   </CardBody>
               </Card>
