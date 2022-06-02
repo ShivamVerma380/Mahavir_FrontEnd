@@ -9,9 +9,22 @@ import watchImg1200 from '../../assets/watch.jpg'
 import watchImg300 from '../../assets/watch300.jpg'
 import React from "react";
 import { ImageList, Slider } from "@mui/material";
-import Swiper from "swiper";
+
 import * as AiIcons from 'react-icons/ai';
 import { CProgress, CProgressBar } from '@coreui/react'
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import "../styles.css"
+
+
+// import required modules
+import { Pagination, Navigation } from "swiper";
+import { Card,CardImg, CardBody, CardTitle,CardSubtitle, CardText } from "reactstrap";
 
 
 
@@ -43,6 +56,77 @@ const ProductDetails = () => {
     "price": 120000,
     "description": "iOS 15 Operating System"
   }
+
+  var productList = [
+    {
+      "id":1,
+      "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+      "alt":"Offer Name:1",
+      "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+      "price":19999,
+      "description":"OxygenOS based on Android™ 12"
+  },{
+    "id":2,
+    "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+    "alt":"Offer Name:2",
+    "title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+    "price":65999,
+    "description":"OxygenOS based on Android™ 12"
+},{
+  "id":3,
+  "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+  "alt":"Offer Name:3",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+}, {
+  "id":4,
+  "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+  "alt":"Offer Name:1",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+},{
+  "id":5,
+  "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+  "alt":"Offer Name:2",
+  "title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+  "price":65999,
+  "description":"OxygenOS based on Android™ 12"
+},
+{
+  "id":6,
+  "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+  "alt":"Offer Name:3",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+}, {
+  "id":7,
+  "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+  "alt":"Offer Name:1",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+},{
+"id":8,
+"src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+"alt":"Offer Name:2",
+"title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+"price":65999,
+"description":"OxygenOS based on Android™ 12"
+},{
+"id":9,
+"src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+"alt":"Offer Name:3",
+"title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+"price":19999,
+"description":"OxygenOS based on Android™ 12"
+}
+
+  ]
+
+  
   var imglink = products.imgone;
   // var imglinkfinal= products.imgone;
   const [imglinkfinal, setimage] = React.useState(products.imgone);
@@ -63,6 +147,10 @@ const ProductDetails = () => {
       alert("Quantity:" + quantity);
     }
   }
+
+  var cards=<div>
+        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
+    </div>
 
 
 
@@ -174,7 +262,7 @@ const ProductDetails = () => {
           <Row>
             <Col md={2}>
 
-              <img src="https://rukminim1.flixcart.com/image/200/200/cms-rpd-images/c1e168ff0ba0498d875fc8723c95f093_16d48598a68_image.jpeg?q=90" style={{ width: "100px" }}></img>
+              <img src="https://rukminim1.flixcart.com/image/200/200/cms-rpd-images/c1e168ff0ba0498d875fc8723c95f093_16d48598a68_image.jpeg?q=90" style={{ width: "130px" }}></img>
 
             </Col>
             <Col md={6}>
@@ -255,11 +343,11 @@ const ProductDetails = () => {
               <AiIcons.AiFillStar />
             </Col>
 
-            <Col md={1} style={{paddingLeft:"5px"}}>
-              <p style={{marginBottom:"7px"}}>5⭐</p>
-              <p style={{marginBottom:"13px"}}>4⭐</p>
-              <p style={{marginBottom:"13px"}}>3⭐</p>
-              <p style={{marginBottom:"10px"}}>2⭐</p>
+            <Col md={1} style={{ paddingLeft: "5px" }}>
+              <p style={{ marginBottom: "7px" }}>5⭐</p>
+              <p style={{ marginBottom: "13px" }}>4⭐</p>
+              <p style={{ marginBottom: "13px" }}>3⭐</p>
+              <p style={{ marginBottom: "10px" }}>2⭐</p>
               <p>1⭐</p>
             </Col>
 
@@ -272,44 +360,44 @@ const ProductDetails = () => {
             </Col> */}
 
 
-            
+
             <Col md={3}>
-              
+
               <CProgress className="mb-3">
                 <CProgressBar color="success" value={90} />
               </CProgress>
               <CProgress className="mb-3">
-              <CProgressBar color="success" value={70} />
+                <CProgressBar color="success" value={70} />
               </CProgress>
               <CProgress className="mb-3">
-              <CProgressBar color="warning" value={30} />
+                <CProgressBar color="warning" value={30} />
               </CProgress>
               <CProgress className="mb-3">
-              <CProgressBar color="danger" value={10} />
+                <CProgressBar color="danger" value={10} />
               </CProgress>
               <CProgress className="mb-3">
-              <CProgressBar color="danger" value={5} />
+                <CProgressBar color="danger" value={5} />
               </CProgress>
             </Col>
             <Col md={1}>
-              <p style={{marginBottom:"7px"}}>60,000</p>
-              <p style={{marginBottom:"13px"}}>22,000</p>
-              <p style={{marginBottom:"13px"}}>22,000</p>
-              <p style={{marginBottom:"10px"}}>22,000</p>
+              <p style={{ marginBottom: "7px" }}>60,000</p>
+              <p style={{ marginBottom: "13px" }}>22,000</p>
+              <p style={{ marginBottom: "13px" }}>22,000</p>
+              <p style={{ marginBottom: "10px" }}>22,000</p>
               <p>22,000</p>
             </Col>
 
           </Row>
           <Row>
-      
-        <br></br>
-        
-        <UserReviewRating />
-        <UserReviewRating />
-        <UserReviewRating />
-        <UserReviewRating />
-        
-      </Row>
+
+            <br></br>
+
+            <UserReviewRating />
+            <UserReviewRating />
+            <UserReviewRating />
+            <UserReviewRating />
+
+          </Row>
 
 
 
@@ -331,6 +419,59 @@ const ProductDetails = () => {
 
 
         </Col>
+
+      </Row>
+      <br></br>
+      <br></br>
+      <br></br>
+        <h4 className="text" style={{marginLeft:"20px"}}>Similar Products</h4>
+      <Row>
+        
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={5}
+          slidesPerGroup={3}
+          loop={false}
+          loopFillGroupWithBlank={true}
+          breakpoints={{
+            700: {
+              slidesPerView: 6,
+            },
+            400: {
+              slidesPerView: 3,
+            },
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+        >
+          {
+            cards = productList.map(index => {
+              return (
+                <SwiperSlide >
+              <Card className="card">
+                <CardImg className="this.props.img"
+                  src={index.src}/>
+                  <CardBody>
+                    <CardTitle className="this.props.h5 change">
+                      <h5><b>{index.title}</b></h5>
+                    </CardTitle>
+                    <CardSubtitle>
+                    <h6>Rs {index.price}</h6>
+                    </CardSubtitle>
+                    <CardText className="this.props.p change">
+                     <p>{index.description}</p>
+                  </CardText>
+                  </CardBody>
+              </Card>
+              </SwiperSlide>
+              )
+            })
+          }
+        </Swiper>
 
       </Row>
       <br></br>
@@ -357,7 +498,7 @@ const ProductDetails = () => {
           }
         }} />
       </Row> */}
-      
+
     </div>
 
   );
