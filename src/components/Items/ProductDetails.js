@@ -40,27 +40,39 @@ const ProductDetails = () => {
   var quantity = 0;
   var flag = false;
 
-  const [product,setProduct] = useState([]);
+  //var product = [];
+  var productImg1;
   const [isProductFetched,setIsProductFetched]= useState(false);
+  const [product,setProduct] = useState([]);
+  var imglink;
 
   useEffect(()=>{
     var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZHNpc3MiLCJleHAiOjE2NTQyNTIzMTIsImlhdCI6MTY1NDE2NTkxMn0.Jml6S8bTMq7X1cfmvSKP7qW_Kv6yRkl1F-t-TopSyKI"
-    axios({
-      method:"get",
-      url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected"),
-      headers:{
-        "Authorization":"Bearer "+token,
-      }
-    }).then(function(response){
-      console.log(response);
-      if(response.status==200){
-        setProduct(response.data);
-        setIsProductFetched(true);
-        console.log("Product Detail",product);
-      }
-    }).catch(function(error){
-      console.log("error",error);
-    })
+    if(localStorage.getItem("productSelected")!=null){
+      axios({
+        method:"get",
+        url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected"),
+        headers:{
+          "Authorization":"Bearer "+token,
+        }
+      }).then(function(response){
+        console.log(response);
+        if(response.status==200){
+          console.log("response data",response.data);
+          //product= response.data;
+          setProduct(response.data);
+          setIsProductFetched(true);
+          imglink = product.productImage1;
+          console.log("Product Detail",product);
+          productImg1 = product.productImage1.data;
+          console.log("Product Image 1:",productImg1);
+          
+        }
+      }).catch(function(error){
+        console.log("error",error);
+      })
+    }
+    
   },[]);
 
 
@@ -150,8 +162,9 @@ const ProductDetails = () => {
   ]
 
   
-  var imglink = products.imgone;
+  
   // var imglinkfinal= products.imgone;
+  var imgfinal = ""
   const [imglinkfinal, setimage] = React.useState(products.imgone);
   const inputQuantityEvent = (event) => {
     flag = true;
@@ -192,21 +205,22 @@ const ProductDetails = () => {
 
   function ImgHandler(e) {
     imglink = { e };
+    
     setimage(imglink.e);
     console.log("Img Final:", imglinkfinal);
     console.log("Image: ", imglink)
   }
 
   return (
-    
-    <div>
+    (isProductFetched)?(
+      <div>
       <Row >
         <Col md={2} style={{ paddingLeft: "100px", paddingTop: "45px" }}>
-          <img src={products.imgone} onClick={() => ImgHandler(products.imgone)} style={{ width: "90px", height: "100px" }} />
-          <img src={products.imgtwo} onClick={() => ImgHandler(products.imgtwo)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
-          <img src={products.imgthree} onClick={() => ImgHandler(products.imgthree)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
-          <img src={products.imgfour} onClick={() => ImgHandler(products.imgfour)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
-          <img src={products.imgfive} onClick={() => ImgHandler(products.imgfive)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+          <img src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  style={{ width: "90px", height: "100px" }} />
+          <img src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+          <img src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+          <img src={'data:image/jpg;base64,' + product.productImage4.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage4.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+          <img src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
 
         </Col>
 
@@ -220,7 +234,7 @@ const ProductDetails = () => {
               smallImage: {
                 alt: 'Wristwatch by Ted Baker London',
                 isFluidWidth: true,
-                src: imglinkfinal,
+                src:  imglinkfinal,
               },
               largeImage: {
                 src: imglinkfinal,
@@ -238,12 +252,12 @@ const ProductDetails = () => {
           <br></br>
           <br></br>
 
-          <p className="text" >{products.title}</p>
+          <p className="text" >{product.productName}</p>
 
           <br></br>
-          <h6 >Price:{products.price}</h6>
+          <h6 >Price:{product.productPrice}</h6>
           <br></br>
-          <h6>{products.description}</h6>
+          <h6>{product.productDescription}</h6>
           <br></br>
           <Input id="Quantity"
             name="Quantity"
@@ -265,13 +279,13 @@ const ProductDetails = () => {
           <Row>
             <Col md={2}>
 
-              <img src="https://rukminim1.flixcart.com/image/200/200/cms-rpd-images/c1e168ff0ba0498d875fc8723c95f093_16d48598a68_image.jpeg?q=90" style={{ width: "130px" }}></img>
+              <img src={'data:image/jpg;base64,'+product.productImage1.data }style={{ width: "130px" }}></img>
 
             </Col>
             <Col md={6}>
-              <h4>Product</h4>
+              <h4 style={{marginLeft:20}}>{product.modelNumber}</h4>
 
-              <p>Featuring a 15.49-cm (6.1) all-screen Liquid Retina LCD and a glass and aluminum design, the iPhone 11 is as beautiful as it gets. Also, the IP68 rating ensures that is water-resistant up to 2 meters for 30 minutes.</p>
+              <p style={{marginLeft:20}}>{product.productDescription}</p>
             </Col>
           </Row>
           <br></br>
@@ -282,7 +296,7 @@ const ProductDetails = () => {
               <p>The iPhone 11 features dual 12 MP Ultra Wide (13mm) and Wide (26mm) cameras with 4K video recording up to 60 fps. The Ultra Wide camera provides 120° field of view, letting you capture four times more scene, and the Wide camera provides 100% Focus Pixels for up to three times faster autofocus in low light.</p>
             </Col>
             <Col md={2}>
-              <img src="https://rukminim1.flixcart.com/image/200/200/cms-rpd-images/9490ec20393b496fa9f270d715bba3f9_16d4859a41c_image.jpeg?q=90"></img>
+              <img src={'data:image/jpg;base64,'+product.productImage1.data } style={{ width: "130px" }}></img>
             </Col>
           </Row>
           <br></br>
@@ -470,6 +484,9 @@ const ProductDetails = () => {
       </Row> */}
 
     </div>
+    ):(null)
+    
+    
 
   );
   // <br></br>
