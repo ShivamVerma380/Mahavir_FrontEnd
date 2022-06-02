@@ -44,6 +44,9 @@ const ProductDetails = () => {
   var productImg1;
   const [isProductFetched,setIsProductFetched]= useState(false);
   const [product,setProduct] = useState([]);
+
+  const [imglinkfinal, setimage] = React.useState();
+  const [isImgLinkfinalSet,setIsImgLinkFinal] = React.useState();
   var imglink;
 
   useEffect(()=>{
@@ -64,8 +67,13 @@ const ProductDetails = () => {
           setIsProductFetched(true);
           imglink = product.productImage1;
           console.log("Product Detail",product);
-          productImg1 = product.productImage1.data;
-          console.log("Product Image 1:",productImg1);
+          //productImg1 = 'data:image/jpg;base64,'+ product.productImage1.data;
+          //console.log("Product Image 1:",productImg1);
+          ImgHandler('data:image/jpg;base64,' +product.productImage1.data);
+          //setimage('data:image/jpg;base64,'+product.productImage1.data);
+          setIsImgLinkFinal(true);
+
+          
           
         }
       }).catch(function(error){
@@ -74,6 +82,8 @@ const ProductDetails = () => {
     }
     
   },[]);
+
+  
 
 
   var products =
@@ -157,15 +167,12 @@ const ProductDetails = () => {
 "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
 "price":19999,
 "description":"OxygenOS based on Android™ 12"
-}
-
-  ]
+}]
 
   
   
-  // var imglinkfinal= products.imgone;
-  var imgfinal = ""
-  const [imglinkfinal, setimage] = React.useState(products.imgone);
+  
+  
   const inputQuantityEvent = (event) => {
     flag = true;
     quantity = event.target.value;
@@ -174,14 +181,49 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
-    navigate("/cart")
-    if (flag == false) {
-      alert("Add To Cart:1");
-    } else if (quantity <= 0) {
-      alert("Please enter a positive number");
-    } else {
-      alert("Quantity:" + quantity);
+    
+
+    var form_data_body={
+      modelNumber: product.modelNumber,
     }
+    axios.post("http://localhost:8080/add-to-cart", form_data_body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxvbWthckBoc2tkLmNvbXNrc2RubmQiLCJleHAiOjE2NTQyNzMwODYsImlhdCI6MTY1NDE4NjY4Nn0.m52eDmGM3OSeDzU8pYZPLGstCrNKOqqbUnRWmA-AXQI"
+      },
+    }).then(function(response){
+      console.log(response);
+      if(response.status==200){
+          console.log("response",response);
+          console.log("Item added to cart successfully");
+
+          // localStorage.setItem("isLoggedIn",true);
+          //navigate("/")
+          
+          //redux();
+      }else if(response.status==406){
+        alert("Item already present in cart");
+      }else{
+          console.log(response.data.message);
+          return;
+      }   
+      navigate("/cart")
+      if (flag == false) {
+        alert("Add To Cart:1");
+      } else if (quantity <= 0) {
+        alert("Please enter a positive number");
+      } else {
+        alert("Quantity:" + quantity);
+      }
+  }).catch(function(error){
+      console.log(error);
+      return;
+  })
+
+
+
+
+    
   }
 
   var cards=<div>
@@ -212,7 +254,8 @@ const ProductDetails = () => {
   }
 
   return (
-    (isProductFetched)?(
+      
+    (isProductFetched )?(
       <div>
       <Row >
         <Col md={2} style={{ paddingLeft: "100px", paddingTop: "45px" }}>
@@ -230,6 +273,7 @@ const ProductDetails = () => {
 
           <div style={{ width: '400px', height: '513px' }}>
             {/* width:'400px',height:'513px'      */}
+            
             <ReactImageMagnify {...{
               smallImage: {
                 alt: 'Wristwatch by Ted Baker London',

@@ -94,7 +94,7 @@ var phoneNo = "";
     return (
         <div>
             <Header/> 
-            <AddItem/>
+            
         <div class="form-container">
       <form class="register-form">
         {/* Uncomment the next line to show the success message */}
