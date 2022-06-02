@@ -4,6 +4,7 @@ import Zoom from "react-img-zoom";
 import "./ProductDetails.css"
 import {AiOutlineMinus} from "react-icons/fa"
 import ProductRating from "./ProductRating";
+import UserReviewRating from "./UserReviewRating";
 const ProductDetails = () => {
         // let name = localStorage.getItem("Name")
         // var storedProduct = JSON.parse(localStorage.getItem("product"))
@@ -97,6 +98,13 @@ const ProductDetails = () => {
               </Col>
               <br></br>
               <ProductRating rating="3.5"/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+              <UserReviewRating/>
+              <UserReviewRating/>
             </Row>
         </div>
         

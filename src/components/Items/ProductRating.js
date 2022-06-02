@@ -10,13 +10,9 @@ const ProductRating=({rating})=>{
         <Row>
         <Col md={2}>
         <Stack spacing={1}>
-            <Rating name="half-rating-read" defaultValue={rating} precision={0.5} size="large" readOnly />
+            <Rating name="half-rating-read"  defaultValue={rating} precision={0.5} size="large" readOnly />
         </Stack>
-        </Col>
-        <Col>
-            <Progress value={25}>
-                5 Stars 
-            </Progress>
+        <br></br>
         </Col>
         </Row>
 
