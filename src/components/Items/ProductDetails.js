@@ -7,71 +7,126 @@ import { useNavigate } from "react-router-dom";
 import ReactImageMagnify from 'react-image-magnify';
 import watchImg1200 from '../../assets/watch.jpg'
 import watchImg300 from '../../assets/watch300.jpg'
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ImageList, Slider } from "@mui/material";
-import Swiper from "swiper";
+
 import * as AiIcons from 'react-icons/ai';
 import { CProgress, CProgressBar } from '@coreui/react'
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import "../styles.css"
+
+
+// import required modules
+import { Pagination, Navigation } from "swiper";
+import { Card,CardImg, CardBody, CardTitle,CardSubtitle, CardText } from "reactstrap";
 
 
 
 import ProductRating from "./ProductRating";
 import UserReviewRating from "./UserReviewRating";
-import axios from "axios";
 const ProductDetails = () => {
   // let name = localStorage.getItem("Name")
   // var storedProduct = JSON.parse(localStorage.getItem("product"))
   // var id = storedProduct[0].id
-  
-
- 
 
   var quantity = 0;
   var flag = false;
 
-  const [products,setProducts] =  useState([]);
-  const [isProductFetched,setIsProductFetched]= useState([]);
-
-  useEffect(()=>{
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZHNpc3MiLCJleHAiOjE2NTQyNTIzMTIsImlhdCI6MTY1NDE2NTkxMn0.Jml6S8bTMq7X1cfmvSKP7qW_Kv6yRkl1F-t-TopSyKI"
-    
-    axios({
-      method:"get",
-      url:"http://localhost:8080/get-offers",
-      headers:{
-        "Authorization":"Bearer "+token,
-      }
-    }).then(function(response){
-      console.log(response);
-      if(response.status==200){
-        setOfferPosters(response.data);
-        setIsOfferPostersFetched(true);
-        console.log("OfferPosters",offerPosters);
-      }
-    }).catch(function(error){
-      console.log("error",error);
-    })
-
-
-  },[]);
 
 
 
-  // var products =
-  // {
-  //   "id": 1,
-  //   // "src": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
-  //   // "imgone": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
-  //   "imgone": "https://d2xamzlzrdbdbn.cloudfront.net/products/4e7b28c3-4db3-4097-ab92-65d0166a651821170544.jpg",
-  //   "imgtwo": "https://d2xamzlzrdbdbn.cloudfront.net/products/5f3944c6-f695-4c02-ab76-7b486cc95ef321170544.jpg",
-  //   "imgthree": "https://d2xamzlzrdbdbn.cloudfront.net/products/84cae684-56d7-4136-b506-494f2e497a9421170544.jpg",
-  //   "imgfour": "https://d2xamzlzrdbdbn.cloudfront.net/products/2ebe097c-f7d7-4f60-9d0d-541ea6a083b321170544.jpg",
-  //   "imgfive": "https://d2xamzlzrdbdbn.cloudfront.net/products/77adc54b-83a8-44fd-9ed4-61eb87c86aad21170544.jpg",
-  //   "alt": "Offer Name:1",
-  //   "title": "Apple iPhone 13 Pro Max (128 GB Storage, Graphite)",
-  //   "price": 120000,
-  //   "description": "iOS 15 Operating System"
-  // }
+  var products =
+  {
+    "id": 1,
+    // "src": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
+    // "imgone": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
+    "imgone": "https://d2xamzlzrdbdbn.cloudfront.net/products/4e7b28c3-4db3-4097-ab92-65d0166a651821170544.jpg",
+    "imgtwo": "https://d2xamzlzrdbdbn.cloudfront.net/products/5f3944c6-f695-4c02-ab76-7b486cc95ef321170544.jpg",
+    "imgthree": "https://d2xamzlzrdbdbn.cloudfront.net/products/84cae684-56d7-4136-b506-494f2e497a9421170544.jpg",
+    "imgfour": "https://d2xamzlzrdbdbn.cloudfront.net/products/2ebe097c-f7d7-4f60-9d0d-541ea6a083b321170544.jpg",
+    "imgfive": "https://d2xamzlzrdbdbn.cloudfront.net/products/77adc54b-83a8-44fd-9ed4-61eb87c86aad21170544.jpg",
+    "alt": "Offer Name:1",
+    "title": "Apple iPhone 13 Pro Max (128 GB Storage, Graphite)",
+    "price": 120000,
+    "description": "iOS 15 Operating System"
+  }
+
+  var productList = [
+    {
+      "id":1,
+      "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+      "alt":"Offer Name:1",
+      "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+      "price":19999,
+      "description":"OxygenOS based on Android™ 12"
+  },{
+    "id":2,
+    "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+    "alt":"Offer Name:2",
+    "title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+    "price":65999,
+    "description":"OxygenOS based on Android™ 12"
+},{
+  "id":3,
+  "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+  "alt":"Offer Name:3",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+}, {
+  "id":4,
+  "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+  "alt":"Offer Name:1",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+},{
+  "id":5,
+  "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+  "alt":"Offer Name:2",
+  "title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+  "price":65999,
+  "description":"OxygenOS based on Android™ 12"
+},
+{
+  "id":6,
+  "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+  "alt":"Offer Name:3",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+}, {
+  "id":7,
+  "src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+  "alt":"Offer Name:1",
+  "title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+  "price":19999,
+  "description":"OxygenOS based on Android™ 12"
+},{
+"id":8,
+"src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+"alt":"Offer Name:2",
+"title":"OnePlus 10 Pro 5G (8 GB RAM, 128 GB ROM, Volcanic Black",
+"price":65999,
+"description":"OxygenOS based on Android™ 12"
+},{
+"id":9,
+"src":"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg",
+"alt":"Offer Name:3",
+"title":"OnePlus Nord CE 2 Lite 5G (6 GB RAM, 128 GB ROM, Blue Tide)",
+"price":19999,
+"description":"OxygenOS based on Android™ 12"
+}
+
+  ]
+
+  
   var imglink = products.imgone;
   // var imglinkfinal= products.imgone;
   const [imglinkfinal, setimage] = React.useState(products.imgone);
@@ -92,6 +147,10 @@ const ProductDetails = () => {
       alert("Quantity:" + quantity);
     }
   }
+
+  var cards=<div>
+        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
+    </div>
 
 
 
@@ -126,11 +185,16 @@ const ProductDetails = () => {
     <div>
       <Row >
         <Col md={2} style={{ paddingLeft: "100px", paddingTop: "45px" }}>
+
+
           <img src={products.imgone} onClick={() => ImgHandler(products.imgone)} style={{ width: "90px", height: "100px" }} />
           <img src={products.imgtwo} onClick={() => ImgHandler(products.imgtwo)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img src={products.imgthree} onClick={() => ImgHandler(products.imgthree)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img src={products.imgfour} onClick={() => ImgHandler(products.imgfour)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img src={products.imgfive} onClick={() => ImgHandler(products.imgfive)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+
+
+
         </Col>
 
         <Col md={4}>
@@ -198,7 +262,7 @@ const ProductDetails = () => {
           <Row>
             <Col md={2}>
 
-              <img src="https://rukminim1.flixcart.com/image/200/200/cms-rpd-images/c1e168ff0ba0498d875fc8723c95f093_16d48598a68_image.jpeg?q=90" style={{ width: "100px" }}></img>
+              <img src="https://rukminim1.flixcart.com/image/200/200/cms-rpd-images/c1e168ff0ba0498d875fc8723c95f093_16d48598a68_image.jpeg?q=90" style={{ width: "130px" }}></img>
 
             </Col>
             <Col md={6}>
@@ -279,11 +343,11 @@ const ProductDetails = () => {
               <AiIcons.AiFillStar />
             </Col>
 
-            <Col md={1} style={{paddingLeft:"5px"}}>
-              <p style={{marginBottom:"7px"}}>5⭐</p>
-              <p style={{marginBottom:"13px"}}>4⭐</p>
-              <p style={{marginBottom:"13px"}}>3⭐</p>
-              <p style={{marginBottom:"10px"}}>2⭐</p>
+            <Col md={1} style={{ paddingLeft: "5px" }}>
+              <p style={{ marginBottom: "7px" }}>5⭐</p>
+              <p style={{ marginBottom: "13px" }}>4⭐</p>
+              <p style={{ marginBottom: "13px" }}>3⭐</p>
+              <p style={{ marginBottom: "10px" }}>2⭐</p>
               <p>1⭐</p>
             </Col>
 
@@ -296,44 +360,44 @@ const ProductDetails = () => {
             </Col> */}
 
 
-            
+
             <Col md={3}>
-              
+
               <CProgress className="mb-3">
                 <CProgressBar color="success" value={90} />
               </CProgress>
               <CProgress className="mb-3">
-              <CProgressBar color="success" value={70} />
+                <CProgressBar color="success" value={70} />
               </CProgress>
               <CProgress className="mb-3">
-              <CProgressBar color="warning" value={30} />
+                <CProgressBar color="warning" value={30} />
               </CProgress>
               <CProgress className="mb-3">
-              <CProgressBar color="danger" value={10} />
+                <CProgressBar color="danger" value={10} />
               </CProgress>
               <CProgress className="mb-3">
-              <CProgressBar color="danger" value={5} />
+                <CProgressBar color="danger" value={5} />
               </CProgress>
             </Col>
             <Col md={1}>
-              <p style={{marginBottom:"7px"}}>60,000</p>
-              <p style={{marginBottom:"13px"}}>22,000</p>
-              <p style={{marginBottom:"13px"}}>22,000</p>
-              <p style={{marginBottom:"10px"}}>22,000</p>
+              <p style={{ marginBottom: "7px" }}>60,000</p>
+              <p style={{ marginBottom: "13px" }}>22,000</p>
+              <p style={{ marginBottom: "13px" }}>22,000</p>
+              <p style={{ marginBottom: "10px" }}>22,000</p>
               <p>22,000</p>
             </Col>
 
           </Row>
           <Row>
-      
-        <br></br>
-        
-        <UserReviewRating />
-        <UserReviewRating />
-        <UserReviewRating />
-        <UserReviewRating />
-        
-      </Row>
+
+            <br></br>
+
+            <UserReviewRating />
+            <UserReviewRating />
+            <UserReviewRating />
+            <UserReviewRating />
+
+          </Row>
 
 
 
@@ -355,6 +419,59 @@ const ProductDetails = () => {
 
 
         </Col>
+
+      </Row>
+      <br></br>
+      <br></br>
+      <br></br>
+        <h4 className="text" style={{marginLeft:"20px"}}>Similar Products</h4>
+      <Row>
+        
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={5}
+          slidesPerGroup={3}
+          loop={false}
+          loopFillGroupWithBlank={true}
+          breakpoints={{
+            700: {
+              slidesPerView: 6,
+            },
+            400: {
+              slidesPerView: 3,
+            },
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+        >
+          {
+            cards = productList.map(index => {
+              return (
+                <SwiperSlide >
+              <Card className="card">
+                <CardImg className="this.props.img"
+                  src={index.src}/>
+                  <CardBody>
+                    <CardTitle className="this.props.h5 change">
+                      <h5><b>{index.title}</b></h5>
+                    </CardTitle>
+                    <CardSubtitle>
+                    <h6>Rs {index.price}</h6>
+                    </CardSubtitle>
+                    <CardText className="this.props.p change">
+                     <p>{index.description}</p>
+                  </CardText>
+                  </CardBody>
+              </Card>
+              </SwiperSlide>
+              )
+            })
+          }
+        </Swiper>
 
       </Row>
       <br></br>
@@ -381,7 +498,7 @@ const ProductDetails = () => {
           }
         }} />
       </Row> */}
-      
+
     </div>
 
   );
