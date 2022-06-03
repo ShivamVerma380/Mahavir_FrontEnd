@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header';
-import CategoriesToDisplay from './components/CategoriesToDisplay';
+import CategoriesToDisplay from './components/DisplayCategories/CategoriesToDisplay';
 import Slideshow from './components/Slideshow';
 import Product from './components/Items/Product';
 import { Router, Routes, Route } from 'react-router-dom';

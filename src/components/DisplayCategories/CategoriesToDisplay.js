@@ -11,21 +11,31 @@ import {
 } from 'reactstrap';
 
 import { NavDropdown } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function CategoriesToDisplay ({categoryDetail}) {
 
-    
-    
+    var modelNumbers=[];
+
+    var navigate = useNavigate();
+
     const [isOpen, setIsOpen] = React.useState(false);
     var cards = <div>
-        <img className="logo_mahavir" src={require ('../assets/images.jpg')} alt="Mandala" />
+        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="Mandala" />
     </div>
   
-    var subCategories = <div>
-        <img className="logo_mahavir" src={require ('../assets/images.jpg')} alt="Mandala" />
-    </div>
-
-    var subSubCategories;
+    function handleSubSubCategoriesClick(category,subCategory,subSubCategory,modelNumber){
+        alert(modelNumber);
+        localStorage.setItem("Category",category);
+        localStorage.setItem("SubCategory",subCategory);
+        localStorage.setItem("SubSubCategory",subSubCategory);
+        localStorage.setItem("Model Number",modelNumber);
+        console.log(localStorage.getItem("Category"));
+        console.log(localStorage.getItem("SubCategory"));
+        console.log(localStorage.getItem("SubSubCategory"));
+        console.log(localStorage.getItem("Model Number"));
+        navigate("/"+category+"/"+subCategory+"/"+subSubCategory);
+    }
 
     return (
         <div style={{
@@ -54,7 +64,7 @@ function CategoriesToDisplay ({categoryDetail}) {
                                                         {
                                                             subCat.subSubCategories.map(subSubCategories=>{
                                                                 return(
-                                                                    <NavDropdown.Item>{subSubCategories.subSubCategoryName}</NavDropdown.Item>
+                                                                    <NavDropdown.Item onClick={()=>handleSubSubCategoriesClick(index.category,subCat.subCategoryName,subSubCategories.subSubCategoryName,subSubCategories.modelNumber)}>{subSubCategories.subSubCategoryName}</NavDropdown.Item>
                                                                 );
                                                             })
                                                         }

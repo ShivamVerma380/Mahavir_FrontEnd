@@ -20,7 +20,11 @@ import PaymentOption from './components/PaymentOption';
 
 import MyOrders from './components/Orders/MyOrders';
 import AddCategory from './components/Admin/AddCategory';
+import SelCatProducts from './components/DisplayCategories/SelCatProducts';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+var Category = localStorage.getItem("Category");
+var SubCategory = localStorage.getItem("SubCategory");
+var SubSubCategory = localStorage.getItem("SubSubCategory");
 
 root.render(
   // <React.StrictMode>
@@ -40,6 +44,7 @@ root.render(
       <Route path='/AddressForm' element = {<AddressForm/>}/>
       <Route path='/OrderSummary' element = {<OrderSummary/>}/>
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
+      <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
       
 
 
