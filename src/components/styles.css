@@ -47,25 +47,51 @@ body {
 }
 
 .swiper-button-next{
-  background-color: rgba(128, 128, 128, 0.493);
-  border-radius: 100%;
-  height: 80px;
-  width: 80px;
-  color: white;
+  background-color: rgb(255 198 198 / 49%);
+    border-radius: 10%;
+    height: 40px;
+    width: 40px;
+    color: #ff3434;
 }
 
 .swiper-button-prev{
-  background-color: rgba(128, 128, 128, 0.493);
-  border-radius: 100%;
-  height: 80px;
-  width: 80px;
+  background-color: rgb(255 198 198 / 49%);
+    border-radius: 10%;
+    height: 40px;
+    width: 40px;
+    color: #ff3434;
+}
+
+
+.card{
+  height:400px; 
+  
+  margin:10px; 
+  padding:20px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px #e1e5ee;
+  border-radius: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 200ms ease-in;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  align-items: left;
+  font-size: 12px;
+  
+  
+}
+.btn-flat {
+  background-color: rgb(255, 88, 88);
   color: white;
 }
-.card{
-  height:350px; 
-  margin:10px; 
-  padding:2px;
+
+.btn-l {
+  padding: 0.5rem 3rem;
+  font-size: 1rem;
 }
+
 @media (max-width: 786px) {
   .change{
     display: none;
