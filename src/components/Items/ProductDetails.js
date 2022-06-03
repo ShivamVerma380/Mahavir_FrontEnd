@@ -50,7 +50,7 @@ const ProductDetails = () => {
   var imglink;
 
   useEffect(()=>{
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZHNpc3MiLCJleHAiOjE2NTQyNTIzMTIsImlhdCI6MTY1NDE2NTkxMn0.Jml6S8bTMq7X1cfmvSKP7qW_Kv6yRkl1F-t-TopSyKI"
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmIiwiZXhwIjoxNjU0MzM3MTI3LCJpYXQiOjE2NTQyNTA3Mjd9.EnhdbxYVO0jz23e26nrU_lumtzbYJJGRtn26NjU_uko"
     if(localStorage.getItem("productSelected")!=null){
       axios({
         method:"get",
@@ -167,7 +167,7 @@ const ProductDetails = () => {
     axios.post("http://localhost:8080/add-to-cart", form_data_body, {
       headers: {
         "Content-Type": "multipart/form-data",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxvbWthckBoc2tkLmNvbXNrc2RubmQiLCJleHAiOjE2NTQyNzMwODYsImlhdCI6MTY1NDE4NjY4Nn0.m52eDmGM3OSeDzU8pYZPLGstCrNKOqqbUnRWmA-AXQI"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmUiLCJleHAiOjE2NTQzMzY5ODUsImlhdCI6MTY1NDI1MDU4NX0.D9mBqXow48LegJBjCZfrRk7jWnmU8P715w-eM-GI_kE"
       },
     }).then(function(response){
       console.log(response);
@@ -236,7 +236,7 @@ const ProductDetails = () => {
     (isProductFetched )?(
       <div>
       <Row >
-        <Col md={2} style={{ paddingLeft: "100px", paddingTop: "45px" }}>
+        <Col md={2} style={{ paddingLeft: "140px", paddingTop: "45px" }}>
           <img src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  style={{ width: "90px", height: "100px" }} />
           <img src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />

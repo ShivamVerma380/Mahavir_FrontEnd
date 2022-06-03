@@ -1,5 +1,6 @@
 import React from "react";
-import { Row,Col,Card,CardImg, CardBody, CardTitle,CardSubtitle, CardText, Container } from "reactstrap";
+import { Row,Card,Col,CardImg, CardBody, CardTitle,CardSubtitle, CardText, Container } from "reactstrap";
+
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import Arrow from 'react-arrows';
 import Carousel from 'react-bootstrap/Carousel';
@@ -67,7 +68,23 @@ function Product({title,productList}){
           cards = productList.map(index=>{
             return(
               <SwiperSlide >
-                  <Card 
+              <Card  className="card" onClick={()=>callProductDetails(index)}>
+                <CardImg className="this.props.img"
+                  
+                  src={"data:image/png;base64," + index.productImage1.data}/>
+                  <CardBody>
+                    <CardTitle className="this.props.h5 change">
+                      <h5><b>{index.productName}</b></h5>
+                    </CardTitle>
+                    <CardSubtitle>
+                    <h6>Rs {index.productPrice}</h6>
+                    </CardSubtitle>
+                    <CardText className="this.props.p change">
+                     <p>{index.productDescription}</p>
+                  </CardText>
+                  </CardBody>
+              </Card>
+              {/* <Card 
                   style={{ width: '18rem' }}
                   className="mb-2"
                   onClick={()=>callProductDetails(index)}
@@ -80,7 +97,8 @@ function Product({title,productList}){
                     </Card.Text>
                     <Button variant="flat" size="l" >Buy</Button>
                   </Card.Body>
-                </Card>
+                </Card> */}
+               
               </SwiperSlide>
             )
           })

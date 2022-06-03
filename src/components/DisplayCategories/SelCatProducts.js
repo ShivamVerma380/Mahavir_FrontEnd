@@ -12,7 +12,7 @@ const SelCatProducts=()=>{
         if(!isProductsFetched){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
         console.log("Model Number",modelNumbers);
-        var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxvbWthckBoc2tkLmNvbXNrc2RubmRzIiwiZXhwIjoxNjU0MzE2OTI5LCJpYXQiOjE2NTQyMzA1Mjl9.m_RZqv1u16gkWmUSBErszBqJSzsDloBbiVwWZs6NpKY"
+        var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmUiLCJleHAiOjE2NTQzMzY5ODUsImlhdCI6MTY1NDI1MDU4NX0.D9mBqXow48LegJBjCZfrRk7jWnmU8P715w-eM-GI_kE"
         modelNumbers.map(modelNum=>{
             console.log("Model Num",modelNum);
 
