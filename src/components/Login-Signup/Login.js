@@ -3,6 +3,8 @@ import Header from "../Header";
 import { Button, Container, Form, FormGroup, Input, Label,Row,Col } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
+import "./SignIn.css"
+
 
 
 const axios = require('axios');
@@ -77,7 +79,11 @@ function Login(){
    
     return(
         <div>
-            <Header/>
+        <Header />
+        <br></br>
+        <br></br>
+        <div className="form-parent">
+            
                 <Row>
                     <Col md={4}></Col>
                     <Col md={4}>
@@ -134,6 +140,7 @@ function Login(){
                 </Col>
             </Row>
             
+        </div>
         </div>
     );
 
