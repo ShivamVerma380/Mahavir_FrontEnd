@@ -67,22 +67,20 @@ function Product({title,productList}){
           cards = productList.map(index=>{
             return(
               <SwiperSlide >
-              <Card  className="card" onClick={()=>callProductDetails(index)}>
-                <CardImg className="this.props.img"
-                  
-                  src={"data:image/png;base64," + index.productImage1.data}/>
-                  <CardBody>
-                    <CardTitle className="this.props.h5 change">
-                      <h5><b>{index.productName}</b></h5>
-                    </CardTitle>
-                    <CardSubtitle>
-                    <h6>Rs {index.productPrice}</h6>
-                    </CardSubtitle>
-                    <CardText className="this.props.p change">
-                     <p>{index.productDescription}</p>
-                  </CardText>
-                  </CardBody>
-              </Card>
+                  <Card 
+                  style={{ width: '18rem' }}
+                  className="mb-2"
+                  onClick={()=>callProductDetails(index)}
+                  >
+                  <Card.Img variant="top" src={index.src} />
+                  <Card.Body>
+                    <Card.Title as="h6">{index.title}</Card.Title>
+                    <Card.Text>
+                    {index.description}
+                    </Card.Text>
+                    <Button variant="flat" size="l" >Buy</Button>
+                  </Card.Body>
+                </Card>
               </SwiperSlide>
             )
           })
