@@ -104,8 +104,8 @@ function App() {
       } */}
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
       <Slideshow offerPosters={offerPosters}/>
-      <Product title="Mahavir Special" productList={Products}/>
-      <Product title="Deals Of The Day" productList={Products}/>
+      <Product title="Mahavir Special" className="title" productList={Products}/>
+      <Product title="Deals Of The Day" className="title" productList={Products}/>
       <Test productList={Products} />
        
       

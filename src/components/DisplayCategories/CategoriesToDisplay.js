@@ -12,6 +12,7 @@ import {
 
 import { NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "../styles.css"
 
 function CategoriesToDisplay ({categoryDetail}) {
 

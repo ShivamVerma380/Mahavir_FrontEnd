@@ -82,6 +82,17 @@ body {
   border-radius: 20px;
   
   
+
+  
+  
+}
+.card:hover {
+  outline: solid 5px lightblue;
+  transition: outline 0.6s linear;
+  margin: 10px;
+  outline-width: 5px;
+  
+
 }
 .btn-flat {
   background-color: rgb(255, 88, 88);
@@ -109,4 +120,20 @@ body {
     margin:10px; 
     padding:2px;
   }
+}
+
+.category-image {
+  /* background-size: cover;
+  border-radius: 50%; */
+  height: 50px;
+  width: auto;
+  
+  
+}
+
+.productdetailimg:hover {
+  border: solid 5px rgba(0, 110, 255, 0.767);
+  /* transition: outline 0.6s linear;
+  margin: 0.5em; */
+  outline-width: 8px;
 }

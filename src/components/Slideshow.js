@@ -22,7 +22,7 @@ function Slideshow({offerPosters}){
                     className="d-block w-100"
                     src={"data:image/png;base64," + index.image.data}
                     alt={index.alt}
-                    height={300}
+                    height={500}
                     />                    
                     </Carousel.Item>
                   
