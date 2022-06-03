@@ -72,9 +72,6 @@ const ProductDetails = () => {
           ImgHandler('data:image/jpg;base64,' +product.productImage1.data);
           //setimage('data:image/jpg;base64,'+product.productImage1.data);
           setIsImgLinkFinal(true);
-
-          
-          
         }
       }).catch(function(error){
         console.log("error",error);
@@ -82,25 +79,6 @@ const ProductDetails = () => {
     }
     
   },[]);
-
-  
-
-
-  var products =
-  {
-    "id": 1,
-    // "src": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
-    // "imgone": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-11-pro-midnight-green-2019?wid=1360&hei=2000&fmt=jpeg&qlt=95&.v=1611101526000",
-    "imgone": "https://d2xamzlzrdbdbn.cloudfront.net/products/4e7b28c3-4db3-4097-ab92-65d0166a651821170544.jpg",
-    "imgtwo": "https://d2xamzlzrdbdbn.cloudfront.net/products/5f3944c6-f695-4c02-ab76-7b486cc95ef321170544.jpg",
-    "imgthree": "https://d2xamzlzrdbdbn.cloudfront.net/products/84cae684-56d7-4136-b506-494f2e497a9421170544.jpg",
-    "imgfour": "https://d2xamzlzrdbdbn.cloudfront.net/products/2ebe097c-f7d7-4f60-9d0d-541ea6a083b321170544.jpg",
-    "imgfive": "https://d2xamzlzrdbdbn.cloudfront.net/products/77adc54b-83a8-44fd-9ed4-61eb87c86aad21170544.jpg",
-    "alt": "Offer Name:1",
-    "title": "Apple iPhone 13 Pro Max (128 GB Storage, Graphite)",
-    "price": 120000,
-    "description": "iOS 15 Operating System"
-  }
 
   var productList = [
     {

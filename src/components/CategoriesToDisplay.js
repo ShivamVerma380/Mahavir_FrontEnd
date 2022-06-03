@@ -47,26 +47,23 @@ function CategoriesToDisplay ({categoryDetail}) {
                                         {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
                                         <img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>
                                         <NavDropdown title={index.category}> 
-                                        {/* If else code for checking if subCategories are not null */}
-                                        
-                                        
-                                        {/* {
-                                        
-                                         subCategories= index.subCategories
-                                         
-                                        }
                                         {
-                                            subSubCategories = subCategories.subSubCategories
+                                              index.subCategories.map(subCat=>{
+                                                return(
+                                                    <NavDropdown title={subCat.subCategoryName}>
+                                                        {
+                                                            subCat.subSubCategories.map(subSubCategories=>{
+                                                                return(
+                                                                    <NavDropdown.Item>{subSubCategories.subSubCategoryName}</NavDropdown.Item>
+                                                                );
+                                                            })
+                                                        }
+                                                    </NavDropdown>
+                                                );
+                                                 
+                                            })
                                         }
-                                         */}
-                                        {/* {
-                                        subCategories.map(subCat=>{
-                                            return(
-                                                <NavDropdown.Header >ABC</NavDropdown.Header>
-                                            )
-                                        })  
-                                        } */}
-                                        <NavDropdown.Item>XYZ</NavDropdown.Item>                                         
+                                                                                
                                         </NavDropdown>
                                     </NavItem>      
                                 )
