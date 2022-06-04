@@ -9,7 +9,7 @@ import CartItem from './CartItem';
 
 function Cart() {
 
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmUiLCJleHAiOjE2NTQzMzY5ODUsImlhdCI6MTY1NDI1MDU4NX0.D9mBqXow48LegJBjCZfrRk7jWnmU8P715w-eM-GI_kE"
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkcyIsImV4cCI6MTY1NDQ0MzIwNSwiaWF0IjoxNjU0MzU2ODA1fQ.-6GCm7hIQrDj3U08zwPGe5rqEpDyVYAQrH69PHlcC14"
     
     const [cartDetails,setCartDetails] = useState();
     // var isCartDetailsSet = false;

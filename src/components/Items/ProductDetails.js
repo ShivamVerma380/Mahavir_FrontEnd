@@ -50,7 +50,7 @@ const ProductDetails = () => {
   var imglink;
 
   useEffect(()=>{
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmIiwiZXhwIjoxNjU0MzM3MTI3LCJpYXQiOjE2NTQyNTA3Mjd9.EnhdbxYVO0jz23e26nrU_lumtzbYJJGRtn26NjU_uko"
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkcyIsImV4cCI6MTY1NDQ0MzIwNSwiaWF0IjoxNjU0MzU2ODA1fQ.-6GCm7hIQrDj3U08zwPGe5rqEpDyVYAQrH69PHlcC14"
     if(localStorage.getItem("productSelected")!=null){
       axios({
         method:"get",
@@ -167,7 +167,7 @@ const ProductDetails = () => {
     axios.post("http://localhost:8080/add-to-cart", form_data_body, {
       headers: {
         "Content-Type": "multipart/form-data",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmUiLCJleHAiOjE2NTQzMzY5ODUsImlhdCI6MTY1NDI1MDU4NX0.D9mBqXow48LegJBjCZfrRk7jWnmU8P715w-eM-GI_kE"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkcyIsImV4cCI6MTY1NDQ0MzIwNSwiaWF0IjoxNjU0MzU2ODA1fQ.-6GCm7hIQrDj3U08zwPGe5rqEpDyVYAQrH69PHlcC14"
       },
     }).then(function(response){
       console.log(response);

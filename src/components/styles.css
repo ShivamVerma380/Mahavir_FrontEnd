@@ -64,7 +64,7 @@ body {
 
 
 .card{
-  height: fit-content;
+    height: auto;
     margin: 10px;
     padding: px;
     overflow: hidden;
@@ -77,8 +77,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     align-items: left;
     font-size: 12px;
-    border-radius: 2px;
-    width: fit-content;
+    border-radius: 4px;
+    width: auto;
   
   
 
