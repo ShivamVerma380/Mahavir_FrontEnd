@@ -8,7 +8,7 @@ import {
     Nav,
     NavbarBrand,
     NavItem
-} from 'reactstrap';
+} from 'react-bootstrap';
 
 import { NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -42,10 +42,10 @@ function CategoriesToDisplay ({categoryDetail}) {
         <div style={{
             display: 'block'
         }}>
-            <Navbar color="light" light expand="md">
-                <NavbarToggler onClick={() => { setIsOpen(!isOpen) }} />
-                <Collapse isOpen={isOpen} navbar>
-                    <Nav style={{marginLeft:50,marginRight:50}} className="mr-auto" navbar>
+            <Navbar bg="dark" variant="dark" expand="md">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav  style={{marginLeft:50,marginRight:50}} className="me-auto">
                         {
                             
                             console.log("CategoryDetail",categoryDetail)
@@ -54,21 +54,24 @@ function CategoriesToDisplay ({categoryDetail}) {
                             
                             cards = categoryDetail.map(index=>{
                                 return(
-                                    <NavItem style={{margin:10}}>
+                                    <Nav.Link style={{margin:10}}>
                                         {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
-                                        <img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>
-                                        <NavDropdown title={index.category}> 
+                                        {/*<img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>*/}
+                                        <NavDropdown style={{color:"black"}} title={index.category}> 
                                         {
                                               index.subCategories.map(subCat=>{
                                                 return(
-                                                    <NavDropdown title={subCat.subCategoryName}>
+                                                    <NavDropdown id="drop" style={{ color: "#00000" }} title={subCat.subCategoryName}>
                                                         {
                                                             subCat.subSubCategories.map(subSubCategories=>{
                                                                 return(
-                                                                    <NavDropdown.Item onClick={()=>handleSubSubCategoriesClick(index.category,subCat.subCategoryName,subSubCategories.subSubCategoryName,subSubCategories.modelNumber)}>{subSubCategories.subSubCategoryName}</NavDropdown.Item>
+                                                                    
+                                                                    <NavDropdown.Item  onClick={()=>handleSubSubCategoriesClick(index.category,subCat.subCategoryName,subSubCategories.subSubCategoryName,subSubCategories.modelNumber)}>{subSubCategories.subSubCategoryName}</NavDropdown.Item>
+                                                                    
                                                                 );
                                                             })
                                                         }
+                                                       
                                                     </NavDropdown>
                                                 );
                                                  
@@ -76,12 +79,15 @@ function CategoriesToDisplay ({categoryDetail}) {
                                         }
                                                                                 
                                         </NavDropdown>
-                                    </NavItem>      
+                                      
+                                        
+                                    </Nav.Link>    
+                                  
                                 )
                             })
                         }
                     </Nav>
-                </Collapse>
+                    </Navbar.Collapse>
             </Navbar>
         </div >
     );

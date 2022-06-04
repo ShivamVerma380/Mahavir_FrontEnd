@@ -42,7 +42,7 @@ function Product({title,productList}){
     return(
       <div>
         <h3 style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3>
-      <>
+      <span section-separator section-separator-dk-blue></span>
       <Swiper
         slidesPerView={1}
         spaceBetween={5}
@@ -104,7 +104,7 @@ function Product({title,productList}){
           })
         }
       </Swiper>
-    </>
+    
     </div>
     );
 }
