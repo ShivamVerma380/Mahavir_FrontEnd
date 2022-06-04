@@ -1,10 +1,10 @@
 import React from "react";
-import { Row,Card,Col,CardImg, CardBody, CardTitle,CardSubtitle, CardText, Container } from "reactstrap";
-
+//import { Row,Card,Col,CardImg, CardBody, CardTitle,CardSubtitle, CardText, Container } from "reactstrap";
+import {Card,Button} from "react-bootstrap";
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import Arrow from 'react-arrows';
 import Carousel from 'react-bootstrap/Carousel';
-import { Button } from "bootstrap";
+//import { Button } from "bootstrap";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -68,36 +68,36 @@ function Product({title,productList}){
           cards = productList.map(index=>{
             return(
               <SwiperSlide >
-              <Card  className="card" onClick={()=>callProductDetails(index)}>
-                <CardImg className="this.props.img"
+              <Card  style={{ width: '25rem' }}
+                  className="mb-2"
+                  onClick={()=>callProductDetails(index)} >
+                    <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data}/>
+               
+                    <Card.Body >
+                    <Card.Title as="h6">{index.productName}</Card.Title>
+                    <Card.Text >
+                    {index.productDescription}
+                    <br></br>Rs {index.productPrice}
+                    </Card.Text>
+                    <Button variant="flat" size="l" >Buy</Button>
+                  </Card.Body>
+
                   
-                  src={"data:image/png;base64," + index.productImage1.data}/>
-                  <CardBody>
-                    <CardTitle className="this.props.h5 change">
-                      <h5><b>{index.productName}</b></h5>
-                    </CardTitle>
-                    <CardSubtitle>
-                    <h6>Rs {index.productPrice}</h6>
-                    </CardSubtitle>
-                    <CardText className="this.props.p change">
-                     <p>{index.productDescription}</p>
-                  </CardText>
-                  </CardBody>
               </Card>
-              {/* <Card 
+              {/*} <Card 
                   style={{ width: '18rem' }}
                   className="mb-2"
                   onClick={()=>callProductDetails(index)}
                   >
-                  <Card.Img variant="top" src={index.src} />
+                  <Card.Img variant="top" src={"data:image/png;base64," + index.productImage1.data}/>
                   <Card.Body>
-                    <Card.Title as="h6">{index.title}</Card.Title>
+                    <Card.Title as="h6">{index.productName}</Card.Title>
                     <Card.Text>
-                    {index.description}
+                    {index.productDescription}
                     </Card.Text>
                     <Button variant="flat" size="l" >Buy</Button>
                   </Card.Body>
-                </Card> */}
+            </Card> */}
                
               </SwiperSlide>
             )

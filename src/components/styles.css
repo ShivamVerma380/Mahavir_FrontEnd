@@ -64,22 +64,21 @@ body {
 
 
 .card{
-  height:400px; 
-  
-  margin:10px; 
-  padding:20px;
-  overflow: hidden;
-  box-shadow: 0 2px 20px #e1e5ee;
-  border-radius: 0.2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: transform 200ms ease-in;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  align-items: left;
-  font-size: 12px;
-  border-radius: 20px;
+  height: fit-content;
+    margin: 10px;
+    padding: px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px #e1e5ee;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 200ms ease-in;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    align-items: left;
+    font-size: 12px;
+    border-radius: 2px;
+    width: fit-content;
   
   
 
@@ -87,10 +86,10 @@ body {
   
 }
 .card:hover {
-  outline: solid 5px lightblue;
-  transition: outline 0.6s linear;
+  outline: solid 1px rgb(255, 88, 88);
+  transition: outline 0.2s linear;
   margin: 10px;
-  outline-width: 5px;
+  outline-width: 1px;
   
 
 }
