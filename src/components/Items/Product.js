@@ -67,7 +67,7 @@ function Product({title,productList}){
         {
           cards = productList.map(index=>{
             return(
-              <SwiperSlide >
+              <SwiperSlide>
               <Card  style={{ width: '25rem' }}
                   className="mb-2"
                   onClick={()=>callProductDetails(index)} >
