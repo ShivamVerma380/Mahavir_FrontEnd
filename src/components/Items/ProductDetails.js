@@ -45,7 +45,7 @@ const ProductDetails = () => {
   const [isProductFetched,setIsProductFetched]= useState(false);
   const [product,setProduct] = useState([]);
 
-  const [imglinkfinal, setimage] = React.useState();
+  const [imglinkfinal, setimage] = React.useState("https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-01.jpg");
   const [isImgLinkfinalSet,setIsImgLinkFinal] = React.useState();
   var imglink;
 
