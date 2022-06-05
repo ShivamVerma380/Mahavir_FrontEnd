@@ -8,7 +8,7 @@ const CartItem=({item})=>{
         <Table>
             <tbody>
                 <tr>
-                <td><img  style={{height:"150px", width:"300px"}} src = {"data:image/png;base64,"+item.productImage1.data}/>
+                <td><img  style={{height:"250px", width:"300px"}} src = {"data:image/png;base64,"+item.productImage1.data}/>
                 </td>
                 
                 <td><QuantityPicker smooth/></td>

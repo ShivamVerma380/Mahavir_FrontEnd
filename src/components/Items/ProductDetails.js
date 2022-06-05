@@ -28,11 +28,22 @@ import axios from "axios";
 import { Pagination, Navigation } from "swiper";
 import { Card,CardImg, CardBody, CardTitle,CardSubtitle, CardText } from "reactstrap";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+ 
+import { Toast,ToastBody,ToastHeader } from "reactstrap";
+ 
 
 
 import ProductRating from "./ProductRating";
 import UserReviewRating from "./UserReviewRating";
-const ProductDetails = () => {
+
+
+// toast-configuration method,
+ // it is compulsory method.
+//  toast.configure()
+
+function ProductDetails(){
   // let name = localStorage.getItem("Name")
   // var storedProduct = JSON.parse(localStorage.getItem("product"))
   // var id = storedProduct[0].id
@@ -45,12 +56,13 @@ const ProductDetails = () => {
   const [isProductFetched,setIsProductFetched]= useState(false);
   const [product,setProduct] = useState([]);
 
-  const [imglinkfinal, setimage] = React.useState("https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-01.jpg");
+  const [imglinkfinal, setimage] = React.useState();
   const [isImgLinkfinalSet,setIsImgLinkFinal] = React.useState();
   var imglink;
 
   useEffect(()=>{
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
+    //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
+    var token = localStorage.getItem("jwtToken");
     if(localStorage.getItem("productSelected")!=null){
       axios({
         method:"get",
@@ -75,6 +87,7 @@ const ProductDetails = () => {
         }
       }).catch(function(error){
         console.log("error",error);
+        toast("Item already present in cart")
       })
     }
     
@@ -148,7 +161,18 @@ const ProductDetails = () => {
 }]
 
   
-  
+  const notify=()=>{
+    return(
+      <Toast>
+      <ToastHeader>
+        Reactstrap
+      </ToastHeader>
+      <ToastBody>
+        This is a toast on a primary background — check it out!
+      </ToastBody>
+    </Toast>
+    );
+  }
   
   
   const inputQuantityEvent = (event) => {
@@ -159,7 +183,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
-    
+    //toast.configure();  
 
     var form_data_body={
       modelNumber: product.modelNumber,
@@ -167,34 +191,41 @@ const ProductDetails = () => {
     axios.post("http://localhost:8080/add-to-cart", form_data_body, {
       headers: {
         "Content-Type": "multipart/form-data",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
+        "Authorization": "Bearer "+localStorage.getItem("jwtToken")
       },
     }).then(function(response){
       console.log(response);
       if(response.status==200){
           console.log("response",response);
           console.log("Item added to cart successfully");
+          //alert("Item added to cart ")
+
+          if (flag == false) {
+            alert("Add To Cart:1");
+          } else if (quantity <= 0) {
+            alert("Please enter a positive number");
+          } else {
+            alert("Quantity:" + quantity);
+          }
+
+          navigate("/cart")
 
           // localStorage.setItem("isLoggedIn",true);
           //navigate("/")
           
           //redux();
-      }else if(response.status==406){
-        alert("Item already present in cart");
       }else{
+          console.log("In else");
+          alert("Item already present in cart")
           console.log(response.data.message);
           return;
-      }   
-      navigate("/cart")
-      if (flag == false) {
-        alert("Add To Cart:1");
-      } else if (quantity <= 0) {
-        alert("Please enter a positive number");
-      } else {
-        alert("Quantity:" + quantity);
-      }
+      }  
+
+      
+      
   }).catch(function(error){
       console.log(error);
+      alert("Item already present in cart")
       return;
   })
 
@@ -290,6 +321,7 @@ const ProductDetails = () => {
             style={{ width: 300 }}>
           </Input>
           <br></br>
+          {/* <Button onClick={handleAddToCart}>Add To Cart</Button> */}
           <Button onClick={handleAddToCart}>Add To Cart</Button>
           <Button style={{ marginLeft: 30 }} onClick={handleBuyNow}>Buy Now</Button>
 

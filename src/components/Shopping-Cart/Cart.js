@@ -9,8 +9,8 @@ import CartItem from './CartItem';
 
 function Cart() {
 
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkcyIsImV4cCI6MTY1NDQ0MzIwNSwiaWF0IjoxNjU0MzU2ODA1fQ.-6GCm7hIQrDj3U08zwPGe5rqEpDyVYAQrH69PHlcC14"
-    
+    // var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
+    var token = localStorage.getItem("jwtToken");
     const [cartDetails,setCartDetails] = useState();
     // var isCartDetailsSet = false;
     const [isCartDetailsSet,setisCartDetailsSet] = React.useState(false);
@@ -110,20 +110,14 @@ function Cart() {
                 <td> Total Amount</td>
                 <td>₹ 37,480</td>
                 </tr>
-                
-                
+                    
             </tbody>
             </Table>
             </Col>
             </Row>
            </div>
   
-  
-
     </div>    
-
-
-
     );
   }
   export default Cart;

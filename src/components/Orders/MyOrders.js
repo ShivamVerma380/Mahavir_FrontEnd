@@ -3,8 +3,9 @@ import React, { useEffect, useState }  from "react";
 import OrderItem from "./OrderItem";
 
 const MyOrders=()=>{
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkcyIsImV4cCI6MTY1NDQ0MzIwNSwiaWF0IjoxNjU0MzU2ODA1fQ.-6GCm7hIQrDj3U08zwPGe5rqEpDyVYAQrH69PHlcC14"
+    //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkcyIsImV4cCI6MTY1NDQ0MzIwNSwiaWF0IjoxNjU0MzU2ODA1fQ.-6GCm7hIQrDj3U08zwPGe5rqEpDyVYAQrH69PHlcC14"
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZCIsImV4cCI6MTY1NDAxOTA1NywiaWF0IjoxNjUzOTMyNjU3fQ.Ma7RU2CHo-RfQ_uSBHn4zxKzlyz5X0I9ZClMXIaY0oc";
+    var token = localStorage.getItem("jwtToken");
     const [orderDetails,setOrderDetails] = useState();
     const [isOrderDetailsSet,setIsOrderDetailsSet] = useState(false);
     var MyOrders = false;
