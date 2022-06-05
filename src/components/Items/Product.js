@@ -1,6 +1,6 @@
 import React from "react";
 //import { Row,Card,Col,CardImg, CardBody, CardTitle,CardSubtitle, CardText, Container } from "reactstrap";
-import {Card,Button} from "react-bootstrap";
+import {Card,Button, Form} from "react-bootstrap";
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import Arrow from 'react-arrows';
 import Carousel from 'react-bootstrap/Carousel';
@@ -39,6 +39,17 @@ function Product({title,productList}){
       navigate("/productDetails")
     }
 
+
+    function fetchOfferAvailableBtn(offerPrice){
+      if(offerPrice==="0"){
+        return <Button variant="flat" size="m" style={{visibility:"hidden"}}>Offer Available</Button>
+      }
+      return <Button variant="flat" size="m">Offer Available</Button>
+    }
+
+    function handleAddToCompare(){
+      alert("Added To Compare");
+    }
     return(
       <div>
         <h3 style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3>
@@ -70,34 +81,29 @@ function Product({title,productList}){
               <SwiperSlide>
               <Card  style={{ width: '25rem' }}
                   className="mb-2"
-                  onClick={()=>callProductDetails(index)} >
-                    <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data}/>
+                   >
+                    <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
                
                     <Card.Body >
-                    <Card.Title as="h6">{index.productName}</Card.Title>
-                    <Card.Text>
+                    <Card.Title as="h6"  onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
+                    <Card.Text onClick={()=>callProductDetails(index)} >
                     {index.productDescription}
                     <br></br>Rs {index.productPrice}
                     </Card.Text>
-                    <Button variant="flat" size="l" >Buy</Button>
+                    <Form>
+                      <Form.Check type="checkbox" id = "default-checkbox" label = "Add To Compare" onClick={handleAddToCompare}/>
+                    </Form>
+                      
+                      {
+                        fetchOfferAvailableBtn(index.offerPrice)
+                      }                    
+                    
                   </Card.Body>
 
                   
               </Card>
-              {/*} <Card 
-                  style={{ width: '18rem' }}
-                  className="mb-2"
-                  onClick={()=>callProductDetails(index)}
-                  >
-                  <Card.Img variant="top" src={"data:image/png;base64," + index.productImage1.data}/>
-                  <Card.Body>
-                    <Card.Title as="h6">{index.productName}</Card.Title>
-                    <Card.Text>
-                    {index.productDescription}
-                    </Card.Text>
-                    <Button variant="flat" size="l" >Buy</Button>
-                  </Card.Body>
-            </Card> */}
+
+
                
               </SwiperSlide>
             )
