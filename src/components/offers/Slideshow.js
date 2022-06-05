@@ -1,13 +1,24 @@
 import React  from "react";
 
 import Carousel from 'react-bootstrap/Carousel';
+import { useNavigate } from "react-router-dom";
 
 function Slideshow({offerPosters}){
     
+  const navigate = useNavigate();
 
     var offerPoster = <div>
-        <img className="logo_mahavir" src={require ('../assets/images.jpg')} alt="Mandala" />
+        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="Mandala" />
       </div>
+
+    
+    const handleOfferPosterOnClick=()=>{
+      // alert("Offer Poster clicked");
+      
+      navigate("/offer-poster");
+
+    }
+
     return(
         <Carousel>
         {
@@ -17,7 +28,7 @@ function Slideshow({offerPosters}){
                 console.log("image",index.image.data);
                 // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
                 return(
-                    <Carousel.Item interval={1000}>
+                    <Carousel.Item interval={1000} onClick={handleOfferPosterOnClick}>
                     <img id = "classname" 
                     className="d-block w-100"
                     src={"data:image/png;base64," + index.image.data}
