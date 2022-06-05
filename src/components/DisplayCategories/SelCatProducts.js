@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import {Card,Button} from "react-bootstrap";
 
 const SelCatProducts=()=>{
 
@@ -45,14 +46,11 @@ const SelCatProducts=()=>{
         setIsTimeOut(true);
     },500)
 
+    var cards=<div>
+        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
+    </div>
+
     return(
-        // (isProductsFetched)?(
-        //     <div>
-        //         <p>Hello World</p>
-        //     </div>
-        // ):(
-        //     <h1>Products Not Fetched</h1>
-        // )
         
             (isProductsFetched)?(
                 
@@ -62,11 +60,27 @@ const SelCatProducts=()=>{
                     }
                     {
                         (isTimeout)?
-                        (products.map((index)=>{
-                            return(
-                                <h1>{index.productName}</h1>
-                            )
-                        })):(null)
+                            cards = products.map(index=>{
+                                return(
+                                  <Card  style={{ width: '25rem' }}
+                                      className="mb-2"
+                                       >
+                                        <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data}/>
+                                   
+                                        <Card.Body >
+                                        <Card.Title as="h6">{index.productName}</Card.Title>
+                                        <Card.Text >
+                                        {index.productDescription}
+                                        <br></br>Rs {index.productPrice}
+                                        </Card.Text>
+                                        <Button variant="flat" size="l" >Buy</Button>
+                                      </Card.Body>
+                    
+                                      
+                                  </Card>
+                                   
+                                )
+                              }):(null)
                     }
                 </div>
             ):(
