@@ -64,7 +64,11 @@ body {
 
 
 .card{
+<<<<<<< HEAD
     height: 480px;
+=======
+    height: 500px;
+>>>>>>> 12dc8879ffee93a615c79bbe35f32cc86086209a
     margin: 10px;
     padding: px;
     overflow: hidden;

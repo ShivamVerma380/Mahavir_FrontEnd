@@ -1,18 +1,19 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import {Card,Button} from "react-bootstrap";
 
 const SelCatProducts=()=>{
 
     const [products,setProduct]= useState([]);
     const [isProductsFetched,setIsProductsFetched] = useState(false);
-    
+    const [isTimeout,setIsTimeOut] = useState(false);
     var productsArray=[];
     useEffect(()=>{
         if(!isProductsFetched){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
         console.log("Model Number",modelNumbers);
-        var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmUiLCJleHAiOjE2NTQzMzY5ODUsImlhdCI6MTY1NDI1MDU4NX0.D9mBqXow48LegJBjCZfrRk7jWnmU8P715w-eM-GI_kE"
+        var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGJiIiwiZXhwIjoxNjU0NDkxNDM5LCJpYXQiOjE2NTQ0MDUwMzl9.3flBid8HVAumobtPRhR65GSvnTpTMNCZ0GEeMAa3FAY"
         modelNumbers.map(modelNum=>{
             console.log("Model Num",modelNum);
 
@@ -27,6 +28,7 @@ const SelCatProducts=()=>{
                 if(response.status==200){
                     //console.log("response data",response.data);
                     productsArray.push(response.data);
+                    products.push(response.data);
                 }
             }).catch(function(error){
                 console.log("error",error);
@@ -39,24 +41,46 @@ const SelCatProducts=()=>{
         
     },[]);
 
+    setTimeout(() => {
+        console.log('Hello, World!')
+        setIsTimeOut(true);
+    },500)
+
+    var cards=<div>
+        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
+    </div>
+
     return(
-        // (isProductsFetched)?(
-        //     <div>
-        //         <p>Hello World</p>
-        //     </div>
-        // ):(
-        //     <h1>Products Not Fetched</h1>
-        // )
         
             (isProductsFetched)?(
+                
                 <div>
                     {
-                        products.map((index)=>{
-                            return(
-                                <h1>{index.productName}</h1>
-                            )
-                        })
-                        
+                        setTimeout
+                    }
+                    {
+                        (isTimeout)?
+                            cards = products.map(index=>{
+                                return(
+                                  <Card  style={{ width: '25rem' }}
+                                      className="mb-2"
+                                       >
+                                        <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data}/>
+                                   
+                                        <Card.Body >
+                                        <Card.Title as="h6">{index.productName}</Card.Title>
+                                        <Card.Text >
+                                        {index.productDescription}
+                                        <br></br>Rs {index.productPrice}
+                                        </Card.Text>
+                                        <Button variant="flat" size="l" >Buy</Button>
+                                      </Card.Body>
+                    
+                                      
+                                  </Card>
+                                   
+                                )
+                              }):(null)
                     }
                 </div>
             ):(
