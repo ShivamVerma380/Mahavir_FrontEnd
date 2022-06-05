@@ -46,6 +46,10 @@ function Product({title,productList}){
       }
       return <Button variant="flat" size="m">Offer Available</Button>
     }
+
+    function handleAddToCompare(){
+      alert("Added To Compare");
+    }
     return(
       <div>
         <h3 style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3>
@@ -74,27 +78,22 @@ function Product({title,productList}){
         {
           cards = productList.map(index=>{
             return(
-              <SwiperSlide >
+              <SwiperSlide>
               <Card  style={{ width: '25rem' }}
                   className="mb-2"
-                  onClick={()=>callProductDetails(index)} >
-                    <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data}/>
+                   >
+                    <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
                
                     <Card.Body >
-                    <Card.Title as="h6">{index.productName}</Card.Title>
-                    <Card.Text >
+                    <Card.Title as="h6"  onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
+                    <Card.Text onClick={()=>callProductDetails(index)} >
                     {index.productDescription}
                     <br></br>Rs {index.productPrice}
                     </Card.Text>
                     <Form>
-                      <Form.Check type="checkbox" id = "default-checkbox" label = "Add To Compare"/>
+                      <Form.Check type="checkbox" id = "default-checkbox" label = "Add To Compare" onClick={handleAddToCompare}/>
                     </Form>
                       
-                      {/* if(!index.offerPrice.equals("0")){
-                        return(
-                          <Button variant="flat" size="l" >Offer Available</Button>
-                        );
-                      } */}
                       {
                         fetchOfferAvailableBtn(index.offerPrice)
                       }                    
@@ -103,20 +102,8 @@ function Product({title,productList}){
 
                   
               </Card>
-              {/*} <Card 
-                  style={{ width: '18rem' }}
-                  className="mb-2"
-                  onClick={()=>callProductDetails(index)}
-                  >
-                  <Card.Img variant="top" src={"data:image/png;base64," + index.productImage1.data}/>
-                  <Card.Body>
-                    <Card.Title as="h6">{index.productName}</Card.Title>
-                    <Card.Text>
-                    {index.productDescription}
-                    </Card.Text>
-                    <Button variant="flat" size="l" >Buy</Button>
-                  </Card.Body>
-            </Card> */}
+
+
                
               </SwiperSlide>
             )
