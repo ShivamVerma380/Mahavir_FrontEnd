@@ -75,7 +75,7 @@ function Product({title,productList}){
                
                     <Card.Body >
                     <Card.Title as="h6">{index.productName}</Card.Title>
-                    <Card.Text >
+                    <Card.Text>
                     {index.productDescription}
                     <br></br>Rs {index.productPrice}
                     </Card.Text>

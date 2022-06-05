@@ -28,7 +28,7 @@
     border-radius: 20px;
     text-align: center;
     margin-left: 20%;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;

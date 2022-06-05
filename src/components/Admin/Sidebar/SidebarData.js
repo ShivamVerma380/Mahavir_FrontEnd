@@ -25,6 +25,14 @@ export const SidebarData = [
     icon: <RiIcons.RiFileList2Fill />,
     cName: 'nav-text'
   },
+
+  {
+    title: 'Add New',
+    path:'',
+    icon: <MdIcons.MdOutlineProductionQuantityLimits/>,
+    cName: 'nav-text'
+  },
+  
   {
     title: 'Logout',
     path: '/',

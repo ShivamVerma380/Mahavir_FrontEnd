@@ -252,11 +252,14 @@ const ProductDetails = () => {
           <div style={{ width: '400px', height: '513px' }}>
             {/* width:'400px',height:'513px'      */}
             
+            
             <ReactImageMagnify {...{
               smallImage: {
                 alt: 'Wristwatch by Ted Baker London',
                 isFluidWidth: true,
                 src:  imglinkfinal,
+                
+                
               },
               largeImage: {
                 src: imglinkfinal,
@@ -290,8 +293,8 @@ const ProductDetails = () => {
             style={{ width: 300 }}>
           </Input>
           <br></br>
-          <Button onClick={handleAddToCart}>Add To Cart</Button>
-          <Button style={{ marginLeft: 30 }} onClick={handleBuyNow}>Buy Now</Button>
+          <Button style={{background:"white", color:"black",border:"2px solid green"}} onClick={handleAddToCart}>Add To Cart</Button>
+          <Button style={{ marginLeft: 30, backgroundColor:"green" }} onClick={handleBuyNow}>Buy Now</Button>
 
           <br></br>
 

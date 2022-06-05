@@ -56,6 +56,7 @@ const SelCatProducts=()=>{
                                 <h1>{index.productName}</h1>
                             )
                         })
+                        
                     }
                 </div>
             ):(
