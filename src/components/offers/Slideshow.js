@@ -1,6 +1,7 @@
 import React  from "react";
 
 import Carousel from 'react-bootstrap/Carousel';
+import NavbarOffcanvas from "react-bootstrap/esm/NavbarOffcanvas";
 import { useNavigate } from "react-router-dom";
 
 function Slideshow({offerPosters}){
@@ -12,11 +13,14 @@ function Slideshow({offerPosters}){
       </div>
 
     
-    const handleOfferPosterOnClick=()=>{
+    
+    const handleOfferPosterOnClick=(modelNumbers)=>{
       // alert("Offer Poster clicked");
-      
-      navigate("/offer-poster");
 
+      console.log(modelNumbers);
+      localStorage.setItem("offerPostersModelNumber",modelNumbers)
+      console.log(localStorage.getItem("offerPostersModelNumber"))
+      navigate("/offers")
     }
 
     return(
@@ -28,7 +32,7 @@ function Slideshow({offerPosters}){
                 console.log("image",index.image.data);
                 // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
                 return(
-                    <Carousel.Item interval={1000} onClick={handleOfferPosterOnClick}>
+                    <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index.modelNumbers)}>
                     <img id = "classname" 
                     className="d-block w-100"
                     src={"data:image/png;base64," + index.image.data}

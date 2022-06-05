@@ -47,7 +47,7 @@ root.render(
       <Route path='/OrderSummary' element = {<OrderSummary/>}/>
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
-      <Route path='/offer-poster' element={<OfferItems/>}/>
+      <Route path='/offers' element={<OfferItems/>}/>
       
 
 
