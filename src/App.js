@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
     
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkcyIsImV4cCI6MTY1NDQ0MzIwNSwiaWF0IjoxNjU0MzU2ODA1fQ.-6GCm7hIQrDj3U08zwPGe5rqEpDyVYAQrH69PHlcC14"
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyIiwiZXhwIjoxNjU0NTM4Njc0LCJpYXQiOjE2NTQ0NTIyNzR9.ZMMGyu937_9ENQm6bNAFS_zL86VrdSMv0faWBRrfs4w"
     if(!isOfferPostersFetched){
       axios({
         method:"get",

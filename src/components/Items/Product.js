@@ -19,8 +19,12 @@ import { useNavigate } from "react-router-dom";
 
 // import required modules
 import { Pagination, Navigation } from "swiper";
+import { useEffect, useState } from "react";
+
 
 function Product({title,productList}){
+    const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
+    const [change, setChange] = useState(0);
     const navigate = useNavigate();
     var cards=<div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
@@ -47,8 +51,21 @@ function Product({title,productList}){
       return <Button variant="flat" size="m">Offer Available</Button>
     }
 
-    function handleAddToCompare(){
-      alert("Added To Compare");
+    const handleAddToCompare = event => {
+      if (event.target.checked) {
+
+        console.log('✅ Checkbox is checked');
+        setChange(change+1)
+        
+      } else {
+        console.log('⛔️ Checkbox is NOT checked');
+        setChange(change-1)
+      }
+      setisAddCompareClicked(current => !current);
+      // alert("Added To Compare");
+    }
+    function CheckHandler(){
+      setChange(change+1)
     }
     return(
       <div>
@@ -91,7 +108,7 @@ function Product({title,productList}){
                     <br></br>Rs {index.productPrice}
                     </Card.Text>
                     <Form>
-                      <Form.Check type="checkbox" id = "default-checkbox" label = "Add To Compare" onClick={handleAddToCompare}/>
+                      <Form.Check type="checkbox" id = "default-checkbox" label = "Add To Compare" onChange={handleAddToCompare}/>
                     </Form>
                       
                       {
@@ -110,8 +127,18 @@ function Product({title,productList}){
           })
         }
       </Swiper>
+      {
+      (change>0)?(
+        <Button>Compare</Button>
+      ):(
+        <Button style={{visibility:"hidden"}}>Compare</Button>
+      )
+      }
+      
+      
     
     </div>
+    
     );
 }
 

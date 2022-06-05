@@ -191,11 +191,7 @@ function ProductDetails(){
     axios.post("http://localhost:8080/add-to-cart", form_data_body, {
       headers: {
         "Content-Type": "multipart/form-data",
-<<<<<<< HEAD
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczUiLCJleHAiOjE2NTQ0OTM1MzIsImlhdCI6MTY1NDQwNzEzMn0.JGhrTWsQydPivuLV8tUuk6Ak3G94PceelttxEmKLc0s"
-=======
         "Authorization": "Bearer "+localStorage.getItem("jwtToken")
->>>>>>> refs/remotes/origin/master
       },
     }).then(function(response){
       console.log(response);
@@ -328,14 +324,9 @@ function ProductDetails(){
             style={{ width: 300 }}>
           </Input>
           <br></br>
-<<<<<<< HEAD
-          <Button style={{background:"white", color:"black",border:"2px solid green"}} onClick={handleAddToCart}>Add To Cart</Button>
-          <Button style={{ marginLeft: 30, backgroundColor:"green" }} onClick={handleBuyNow}>Buy Now</Button>
-=======
           {/* <Button onClick={handleAddToCart}>Add To Cart</Button> */}
           <Button onClick={handleAddToCart}>Add To Cart</Button>
           <Button style={{ marginLeft: 30 }} onClick={handleBuyNow}>Buy Now</Button>
->>>>>>> refs/remotes/origin/master
 
           <br></br>
 
