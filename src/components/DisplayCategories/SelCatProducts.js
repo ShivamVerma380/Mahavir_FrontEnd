@@ -26,7 +26,7 @@ const SelCatProducts=()=>{
     console.log(localStorage.getItem("Category"));
 
     //var token = localStorage.getItem("token");
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2QiLCJleHAiOjE2NTQ1ODYxNTgsImlhdCI6MTY1NDQ4NjE1OH0.BlxfpMI8rlFhna4lcqm_iZ6wyZlrX079KstVV8wv380";
+    //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2QiLCJleHAiOjE2NTQ1ODYxNTgsImlhdCI6MTY1NDQ4NjE1OH0.BlxfpMI8rlFhna4lcqm_iZ6wyZlrX079KstVV8wv380";
     var offerPoster = <div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="Mandala" />
       </div>
@@ -71,9 +71,7 @@ const SelCatProducts=()=>{
             axios({
             method:"get",
             url:"http://localhost:8080/get-products/"+modelNum,
-            headers:{
-            "Authorization":"Bearer "+token,
-            }
+                
             }).then(function(response){
                 console.log(response);
                 if(response.status==200){

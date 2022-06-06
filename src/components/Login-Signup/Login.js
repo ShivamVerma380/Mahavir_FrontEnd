@@ -50,7 +50,7 @@ function Login(){
         Email: email,
         Password: password
     }
-    var authorization = "Bearer "+localStorage.getItem("jwtToken");
+    var authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2RzIiwiZXhwIjoxNjU0NjE4ODgwLCJpYXQiOjE2NTQ1MTg4ODB9.kDTGQbDIDVTXqtEkm_35VqXzpWwJ8wUxOw8Cd8Wrgi0";
     console.log(authorization);
 
     axios.post("http://localhost:8080/login-user",form_data_body,{
