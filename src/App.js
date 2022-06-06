@@ -9,6 +9,7 @@ import axios from "axios";
 import AdminHeader from './components/Admin/AdminHeader';
 import ShowSearchResults from './components/ShowSearchResults';
 import Test from './components/Test';
+import { Button } from 'react-bootstrap';
 
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
 
   const [Products,setProducts] = useState([]);
   const [isProductsFetched,setIsProductsFetched] = useState(false);
+
+  localStorage.setItem("comparecount",0)
 
 
   var Auth = "Bearer "+localStorage.getItem("jwtToken");
@@ -108,7 +111,7 @@ function App() {
       <Product title="Deals Of The Day" className="title" productList={Products}/>
       <Test productList={Products} />
        
-      
+      {/* <Button id="comparebtn">Compare{localStorage.getItem("comparecount")}</Button> */}
     </div>
   );
 }

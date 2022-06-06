@@ -22,6 +22,7 @@ import MyOrders from './components/Orders/MyOrders';
 import AddCategory from './components/Admin/AddCategory';
 import SelCatProducts from './components/DisplayCategories/SelCatProducts';
 import OfferItems from './components/offers/OfferItems';
+import CompareProducts from './components/Items/CompareProducts';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -48,6 +49,8 @@ root.render(
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
       <Route path='/offers' element={<OfferItems/>}/>
+      <Route path='/compareproducts' element={<CompareProducts/>}/>
+
       
 
 

@@ -5,6 +5,7 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import Arrow from 'react-arrows';
 import Carousel from 'react-bootstrap/Carousel';
 //import { Button } from "bootstrap";
+import './CompareProducts.css'
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,6 +21,8 @@ import { useNavigate } from "react-router-dom";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 import { useEffect, useState } from "react";
+
+var checkcount = 0;
 
 
 function Product({title,productList}){
@@ -43,6 +46,10 @@ function Product({title,productList}){
       navigate("/productDetails")
     }
 
+    const CompareHandler=()=> {
+      navigate("/compareproducts")
+    }
+
 
     function fetchOfferAvailableBtn(offerPrice){
       if(offerPrice==="0"){
@@ -57,16 +64,31 @@ function Product({title,productList}){
         console.log('✅ Checkbox is checked');
         setChange(change+1)
         
+        
+        
       } else {
         console.log('⛔️ Checkbox is NOT checked');
         setChange(change-1)
       }
       setisAddCompareClicked(current => !current);
       // alert("Added To Compare");
+      
     }
-    function CheckHandler(){
-      setChange(change+1)
-    }
+    
+    localStorage.setItem("comparecount",change)
+    console.log("Get",localStorage.getItem("comparecount"))
+
+    
+    // function CheckHandler(){
+    //   setChange(change+1)
+    // }
+    // const twoCalls= e => {
+    //   handleAddToCompare
+    //   CheckHandler
+      
+    // }
+
+
     return(
       <div>
         <h3 style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3>
@@ -127,13 +149,21 @@ function Product({title,productList}){
           })
         }
       </Swiper>
+
+      
       {
       (change>0)?(
-        <Button>Compare</Button>
+       
+          <Button id="comparebtn" onClick={CompareHandler}>Compare{change}</Button>
+        
+        
       ):(
-        <Button style={{visibility:"hidden"}}>Compare</Button>
+        <Button id="comparebtn" style={{visibility:"hidden"}}>Compare{change}</Button>
+        
+        
       )
-      }
+    }
+      
       
       
     
