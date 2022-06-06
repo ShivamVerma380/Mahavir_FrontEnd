@@ -8,6 +8,9 @@ import { Row,Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../../App.css"
 
+import Carousel from 'react-bootstrap/Carousel';
+import NavbarOffcanvas from "react-bootstrap/esm/NavbarOffcanvas";
+
 const SelCatProducts=()=>{
 
     const navigate = useNavigate();
@@ -16,12 +19,54 @@ const SelCatProducts=()=>{
     const [isProductsFetched,setIsProductsFetched] = useState(false);
     const [isTimeout,setIsTimeOut] = useState(false);
     var productsArray=[];
+
+    const [offerPosters,setOfferPosters] = useState([]);
+    const [isOfferPostersFetched,setIsOfferPostersFetched] = useState(false);
+
+    console.log(localStorage.getItem("Category"));
+
+    //var token = localStorage.getItem("token");
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2QiLCJleHAiOjE2NTQ1ODYxNTgsImlhdCI6MTY1NDQ4NjE1OH0.BlxfpMI8rlFhna4lcqm_iZ6wyZlrX079KstVV8wv380";
+    var offerPoster = <div>
+        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="Mandala" />
+      </div>
+
+    
+    
+    const handleOfferPosterOnClick=(modelNumbers)=>{
+      // alert("Offer Poster clicked");
+
+      console.log(modelNumbers);
+      localStorage.setItem("offerPostersModelNumber",modelNumbers)
+      console.log(localStorage.getItem("offerPostersModelNumber"))
+      navigate("/offers")
+    }
+
+    
     useEffect(()=>{
+        if(!isOfferPostersFetched){
+            axios({
+              method:"get",
+              url:"http://localhost:8080/get-offers/"+localStorage.getItem("Category"),
+              headers:{
+                "Authorization":"Bearer "+token,
+              }
+            }).then(function(response){
+              console.log(response);
+              if(response.status==200){
+                setOfferPosters(response.data);
+                setIsOfferPostersFetched(true);
+                console.log("OfferPosters",offerPosters);
+              }
+            }).catch(function(error){
+              console.log("error",error);
+            })
+          }
+
         if(!isProductsFetched){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
         console.log("Model Number",modelNumbers);
-        //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGJiIiwiZXhwIjoxNjU0NDkxNDM5LCJpYXQiOjE2NTQ0MDUwMzl9.3flBid8HVAumobtPRhR65GSvnTpTMNCZ0GEeMAa3FAY"
-        var token = localStorage.getItem("jwtToken");
+        
         modelNumbers.map(modelNum=>{
             console.log("Model Num",modelNum);
 
@@ -72,6 +117,34 @@ const SelCatProducts=()=>{
             (isProductsFetched)?(
                 
                 <div>
+                    <Carousel>
+                    {
+                        (isOfferPostersFetched)?(
+                            offerPoster= offerPosters.map(index=>{
+                                //let Base64string = Buffer.from(index.image.data,"base64").toString();
+                                
+                                console.log("image",index.image.data);
+                                // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
+                                return(
+                                    <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index.modelNumbers)}>
+                                    <img id = "classname" 
+                                    className="d-block w-100"
+                                    src={"data:image/png;base64," + index.image.data}
+                                    alt={index.alt}
+                                    height={500}
+                                    />                    
+                                    </Carousel.Item>
+                                  
+                                )
+                
+                            })
+                        ):(
+                            
+                            null
+                            
+                        )
+                    }
+                    </Carousel>
                     {
                         setTimeout
                     }
