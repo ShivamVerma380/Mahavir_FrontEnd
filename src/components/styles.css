@@ -164,25 +164,9 @@ body {
   outline-width: 8px;
 }
 
-/***** dropdown */
 
-.dropdown-menu.show {
-  display: block;
-  height: fit-content;
-  width: 500px;
-  height: 300px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-variant-caps: all-petite-caps;
-  
-}
 
-.dropdown-toggle.nav-link{
-  color: #000;
-}
 
-#drop{
-  color: #000;
-}
 
 .section-separator {
   width: 100%;
@@ -227,5 +211,18 @@ navbar {
   display: block;
 }
 
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
 
-.dropdown:hover .dropdown-content {display: block;}
+
+
+.list-group-item{
+  border: 0px ;
+  font-feature-settings: "pcap", "c2pc";
+    font-variant-caps: all-petite-caps;
+}
+
+.list-group-item:hover{
+  background-color:whitesmoke;
+}

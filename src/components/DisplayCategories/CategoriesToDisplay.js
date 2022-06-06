@@ -1,12 +1,14 @@
-import React  from "react";
+import React from "react";
 import Button from '@mui/material/Button';
 
-import {Nav,Navbar,FormControl,Container,NavLink,Form,NavDropdown,Offcanvas} from 'react-bootstrap';
+import {Nav,Navbar,FormControl,Container,NavLink,Form,NavDropdown,Offcanvas,ListGroup} from 'react-bootstrap';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import "../styles.css"
 
 function CategoriesToDisplay ({categoryDetail}) {
+
+   
 
     var modelNumbers=[];
 
@@ -61,22 +63,27 @@ function CategoriesToDisplay ({categoryDetail}) {
                                     <Nav.Link style={{margin:10}}>
                                         {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
                                         {/*<img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>*/}
-                                        <NavDropdown style={{color:"black"}} title={index.category}> 
+                                        <NavDropdown style={{color:"black"}} title={index.category} renderMenuOnMount={true}> 
                                         {
                                               index.subCategories.map(subCat=>{
                                                 return(
-                                                    <NavDropdown id="drop" style={{ color: "#00000" }} title={subCat.subCategoryName}>
+                                                    <div style={{ display: 'block', width: 500, padding: 10}}>
+                                                    <h6>{subCat.subCategoryName}</h6>
+                                                    <ListGroup>
+                                                   {/*  <NavDropdown id="drop" style={{ color: "#00000" }} title={subCat.subCategoryName}>*/}
                                                         {
                                                             subCat.subSubCategories.map(subSubCategories=>{
                                                                 return(
-                                                                    
-                                                                    <NavDropdown.Item  onClick={()=>handleSubSubCategoriesClick(index.category,subCat.subCategoryName,subSubCategories.subSubCategoryName,subSubCategories.modelNumber)}>{subSubCategories.subSubCategoryName}</NavDropdown.Item>
+
+                                                                    <ListGroup.Item onClick={()=>handleSubSubCategoriesClick(index.category,subCat.subCategoryName,subSubCategories.subSubCategoryName,subSubCategories.modelNumber)}>{subSubCategories.subSubCategoryName}</ListGroup.Item>
                                                                     
                                                                 );
                                                             })
                                                         }
-                                                       
-                                                    </NavDropdown>
+                                                    </ListGroup>
+                                                    </div>
+                                                    
+                                                    
                                                 );
                                                  
                                             })
