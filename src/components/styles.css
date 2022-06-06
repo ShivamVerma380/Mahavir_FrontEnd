@@ -169,8 +169,9 @@ body {
 .dropdown-menu.show {
   display: block;
   height: fit-content;
-  width: 500px;
-  height: 300px;
+  /* width: 500px;
+  height: 300px; */
+  width: fit-content;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-variant-caps: all-petite-caps;
   
@@ -192,6 +193,22 @@ body {
   text-indent: -9999px;
 }
 
+#comparebtn {
+  position:fixed;
+  background-color: rgb(255, 88, 88);
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size:25px;
+  z-index: 9999;
+  margin: 10px;               
+  bottom:0;                        
+  right:0; 
+  
+  
+}
 navbar {
   
   height: 60px;
