@@ -47,10 +47,8 @@ const SelCatProducts=()=>{
         if(!isOfferPostersFetched){
             axios({
               method:"get",
-              url:"http://localhost:8080/get-offers/"+localStorage.getItem("Category"),
-              headers:{
-                "Authorization":"Bearer "+token,
-              }
+              url:"http://localhost:8080/get-offers-by-category/"+localStorage.getItem("Category"),
+              
             }).then(function(response){
               console.log(response);
               if(response.status==200){
