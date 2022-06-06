@@ -21,7 +21,7 @@ function OfferItems(){
         if(!isProductsFetched){
             var modelNumbers = localStorage.getItem("offerPostersModelNumber").split(',');
         console.log("Model Number",modelNumbers);
-        var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zIiwiZXhwIjoxNjU0NTYyMzgzLCJpYXQiOjE2NTQ0NjIzODN9.T_vHyIc5WTO2NPWi-L6YXhVqD21JNw4SCLCcT2G5kPcRWKFHfje2I5UqOXjZ8G6zjdTkOJ3wgllc0Lfx-LDhYA"
+        var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2RzIiwiZXhwIjoxNjU0NjE4ODgwLCJpYXQiOjE2NTQ1MTg4ODB9.kDTGQbDIDVTXqtEkm_35VqXzpWwJ8wUxOw8Cd8Wrgi0"
         //var token = localStorage.getItem("jwtToken");
         modelNumbers.map(modelNum=>{
             console.log("Model Num",modelNum);

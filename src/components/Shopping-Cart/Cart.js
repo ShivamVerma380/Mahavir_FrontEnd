@@ -9,8 +9,8 @@ import CartItem from './CartItem';
 
 function Cart() {
 
-    // var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
-    var token = localStorage.getItem("jwtToken");
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2RzIiwiZXhwIjoxNjU0NjE4ODgwLCJpYXQiOjE2NTQ1MTg4ODB9.kDTGQbDIDVTXqtEkm_35VqXzpWwJ8wUxOw8Cd8Wrgi0"
+    //var token = localStorage.getItem("jwtToken");
     const [cartDetails,setCartDetails] = useState();
     // var isCartDetailsSet = false;
     const [isCartDetailsSet,setisCartDetailsSet] = React.useState(false);

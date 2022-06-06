@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
     
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyIiwiZXhwIjoxNjU0NTM4Njc0LCJpYXQiOjE2NTQ0NTIyNzR9.ZMMGyu937_9ENQm6bNAFS_zL86VrdSMv0faWBRrfs4w"
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2RzIiwiZXhwIjoxNjU0NjE4ODgwLCJpYXQiOjE2NTQ1MTg4ODB9.kDTGQbDIDVTXqtEkm_35VqXzpWwJ8wUxOw8Cd8Wrgi0"
     if(!isOfferPostersFetched){
       axios({
         method:"get",
@@ -85,23 +85,6 @@ function App() {
       
       <Header/>
 
-      {/* {
-        (isCategoryDisplayFetched)?(
-          <CategoriesToDisplay categoryDetail={categoryDisplay}/>
-        ):(console.log("Categories not fetched"))
-
-        (isOfferPostersFetched)?(
-          <Slideshow offerPosters={offerPosters}/>
-        ):(console.log("Offers not fetched"))
-
-        (isProductsFetched)?(
-          <Product title="Mahavir Special" productList={Products}/>
-        ):(console.log("Not products fetched"))
-
-        (isProductsFetched)?(
-          <Product title="Deals Of The Day" productList={Products}/>
-        ):(console.log("Products not fetched"))
-      } */}
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
       <Slideshow offerPosters={offerPosters}/>
       <Product title="Mahavir Special" className="title" productList={Products}/>
