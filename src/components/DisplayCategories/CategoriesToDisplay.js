@@ -1,16 +1,8 @@
 import React  from "react";
 import Button from '@mui/material/Button';
-import {
-    Navbar,
-    NavbarToggler,
-    Collapse,
-    NavLink,
-    Nav,
-    NavbarBrand,
-    NavItem
-} from 'react-bootstrap';
 
-import { NavDropdown } from "react-bootstrap";
+import {Nav,Navbar,FormControl,Container,NavLink,Form,NavDropdown,Offcanvas} from 'react-bootstrap';
+
 import { useNavigate } from "react-router-dom";
 import "../styles.css"
 
@@ -39,14 +31,26 @@ function CategoriesToDisplay ({categoryDetail}) {
     }
 
     return (
-        <div style={{
-            display: 'block'
-        }}>
-            <Navbar bg="dark" variant="dark" expand="md">
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav  style={{marginLeft:50,marginRight:50}} className="me-auto">
-                        {
+        <div >
+            
+  {['sm'].map((expand) => (
+    <Navbar key={expand} bg="dark" expand={expand}   variant="dark">
+      <Container fluid>
+        
+        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+        <Navbar.Offcanvas
+          id={`offcanvasNavbar-expand-${expand}`}
+          aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+          placement="start"
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+              CATEGORIES
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Nav className="justify-content-start flex-grow-1 pe-3">
+            {
                             
                             console.log("CategoryDetail",categoryDetail)
                         }
@@ -86,10 +90,14 @@ function CategoriesToDisplay ({categoryDetail}) {
                                 )
                             })
                         }
-                    </Nav>
-                    </Navbar.Collapse>
-            </Navbar>
-        </div >
+            </Nav>
+            
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+      </Container>
+    </Navbar>
+  ))}
+   </div >
     );
 }
 

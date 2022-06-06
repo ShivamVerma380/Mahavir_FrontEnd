@@ -1,10 +1,10 @@
 import React  from "react";
-import { Row,Col, Container, NavLink } from "reactstrap";
+import { Row,Col  } from "reactstrap";
 import '../App.css';
 // import {BsPinMapFill,BsFillPersonFill,BsFillCartPlusFill,BsSearch} from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar,FormControl,Button,Form,NavDropdown, Nav} from 'react-bootstrap';
+import {Navbar,FormControl,Container,NavLink,Button,Form,NavDropdown, Nav,Offcanvas} from 'react-bootstrap';
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import FormData from "form-data"; 
@@ -85,7 +85,57 @@ const Header = () => {
     
     return(
         <div>
-           <Navbar bg="light" expand="lg">
+
+            
+  {['md'].map((expand) => (
+    <Navbar key={expand} bg="light" expand={expand} >
+      <Container fluid>
+        <Navbar.Brand href="/" style={{fontFamily:"Tapestry"}}><img className="logo_mahavir" src = {require ('../assets/logo.jpg')}/>MAHAVIR</Navbar.Brand>
+        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+        <Navbar.Offcanvas
+          id={`offcanvasNavbar-expand-${expand}`}
+          aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+          placement="end"
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+              MAHAVIR
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Nav className="justify-content-end flex-grow-1 pe-3">
+            <Form className="d-flex">
+                    <FormControl
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                    />
+                    <Nav.Link href="#action1"><i class="fa fa-search icon" ></i></Nav.Link> 
+                </Form>
+                <NavLink><i class="fa fa-user"  onClick={callAdmin}>Admin</i></NavLink>
+                <Nav.Link><i  class="fa fa-map-marker" >Pune</i></Nav.Link>
+                {(isUserLoggedIn)?null:(<Nav.Link><i class="fa fa-user"  onClick={callLogin}></i></Nav.Link>)}   
+                {isUserLoggedIn ?(<NavDropdown title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                        <NavDropdown.Item  onClick={handleMyOrders}>My Orders</NavDropdown.Item>
+                        <NavDropdown.Item target="_blank" onClick={handleLogout}>Logout</NavDropdown.Item> 
+                    </NavDropdown>):null}                       
+                    <Nav.Link ><i  class="fa fa-shopping-cart"  onClick={Cart} ></i></Nav.Link>
+                <NavDropdown title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
+                    <NavDropdown.Item href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
+                    <NavDropdown.Item href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
+                    <NavDropdown.Item href="https://goo.gl/maps/eLmvYz7aLYgTuiSa7" target="_blank">Kothrud</NavDropdown.Item>
+                </NavDropdown>
+                
+            </Nav>
+            
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+      </Container>
+    </Navbar>
+  ))}
+
+         {/* <Navbar bg="light" expand="lg">
             <Container fluid>
             <Navbar.Brand href="/" style={{fontFamily:"Tapestry"}}><img className="logo_mahavir" src = {require ('../assets/logo.jpg')}/>MAHAVIR</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
@@ -122,7 +172,7 @@ const Header = () => {
                 </Nav>
                 </Navbar.Collapse>
             </Container>
-            </Navbar>
+  </Navbar>*/}
         </div>
     );
     
