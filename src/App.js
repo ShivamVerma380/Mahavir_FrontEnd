@@ -82,6 +82,17 @@ function App() {
     }    
   },[]);
 
+  function fetchSlideshow(){
+    if(offerPosters.length===0){
+      return( 
+        null
+      );
+    }else{
+      return( 
+        <Slideshow offerPosters={offerPosters}/>
+      );
+    }
+  }
 
   return (
     <div className="App" >
@@ -89,7 +100,11 @@ function App() {
       <Header/>
 
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
-      <Slideshow offerPosters={offerPosters}/>
+      {
+        fetchSlideshow()
+      
+      }
+      
       <Product title="Mahavir Special" className="title" productList={Products}/>
       <Product title="Deals Of The Day" className="title" productList={Products}/>
       <Test productList={Products} />
