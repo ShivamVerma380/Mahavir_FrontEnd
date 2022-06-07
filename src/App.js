@@ -10,6 +10,7 @@ import AdminHeader from './components/Admin/AdminHeader';
 import ShowSearchResults from './components/ShowSearchResults';
 import Test from './components/Test';
 import { Button } from 'react-bootstrap';
+import AddItem from './components/Test/AddItem';
 
 
 function App() {
@@ -98,6 +99,8 @@ function App() {
     <div className="App" >
       
       <Header/>
+
+      {/* <AddItem/> */}
 
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
       {
