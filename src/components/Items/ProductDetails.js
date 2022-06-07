@@ -66,10 +66,7 @@ function ProductDetails(){
     if(localStorage.getItem("productSelected")!=null){
       axios({
         method:"get",
-        url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected"),
-        headers:{
-          "Authorization":"Bearer "+token,
-        }
+        url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")
       }).then(function(response){
         console.log(response);
         if(response.status==200){
