@@ -130,7 +130,7 @@ function Product({title,productList}){
                     <br></br><b>Rs {index.productPrice}</b>
                     </Card.Text>
                     <Form>
-                      <Form.Check type="checkbox" id = "default-checkbox" label = "Add To Compare" onChange={handleAddToCompare}/>
+                      <Form.Check type="checkbox"  label = "Add To Compare" onChange={handleAddToCompare}/>
                     </Form>
                       <br></br>
                       {

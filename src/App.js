@@ -26,6 +26,8 @@ function App() {
 
   localStorage.setItem("comparecount",0)
 
+  console.log("CompareModes",localStorage.getItem("CompareModels"));
+
 
   var Auth = "Bearer "+localStorage.getItem("jwtToken");
   // var Auth= "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuYyIsImV4cCI6MTY1MzY2NDkwOSwiaWF0IjoxNjUzNTc4NTA5fQ.p5sCDqAIwKBC4cxYR2Mkt1o5USCOgKz6lFMJvgZ_IIQ";
