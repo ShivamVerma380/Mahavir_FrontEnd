@@ -40,20 +40,17 @@ function Message(props)
     if (props.isOTPSent){
 		return(
             <div>
-                <Header/>
-                
-                        <Form className="OTPform">
-                        <Form.Group className="mb-3" >
-                            <Form.Label htmlFor="otp">Enter OTP</Form.Label>
-                            <Form.Control id="otp" name="otp" placeholder="Enter OTP" type="otp" onChange={inputOtpEvent} />
-                            
-                        </Form.Group>
-                        <Button type="submit" variant="flat" size="1" onClick = {props.clickFunc}>
-                            Verify OTP
-                        </Button>
+
+                        <h1>Enter OTP</h1>
+                        <Form>
+                            <FormGroup>
+                                <Label for="otp">
+                                    Enter OTP
+                                </Label>
+                                <Input id="otp" name="otp" placeholder="Enter OTP" type="otp" onChange={inputOtpEvent}/>
+                            </FormGroup>
                         </Form>
                     
-                
             </div>
             
 
@@ -62,22 +59,14 @@ function Message(props)
 	else{
         return(
             <div>
-                <Header/> 
-             
-                        <Form className="OTPform">
-                        <Form.Group className="mb-3" >
-                            <Form.Label id="email-input" htmlFor="email">Enter Email</Form.Label>
-                            <Form.Control id="email" name="email" placeholder="Enter email" type="email" onChange={inputEmailEvent} />
-                            
-                        </Form.Group>
-                        <Button type="submit" variant="flat" size="1" onClick = {props.clickFunc}>
-            Send OTP
-        </Button>
-                        </Form>
-                        
-                    
-                
-
+                <h1>Enter your Email</h1>
+                <Form>
+                    <FormGroup>
+                        <Label id="email-input" for="email" className="enter-email">Email</Label>
+                        <br></br>
+                        <Input id="email" name="email" placeholder="Enter email" type="email" onChange={inputEmailEvent}/>
+                    </FormGroup>
+                </Form>
             </div>
         );
     }
@@ -89,15 +78,11 @@ function SendOTP(props)
     
 return(
     
-    <Form className="OTPform">
-                        <Form.Group className="mb-3" >
-                        <Button type="submit" variant="flat" size="1" onClick = {props.clickFunc}>
+        <Button onClick = {props.clickFunc}>
             Send OTP
         </Button>
-        </Form.Group>
-        </Form>
-    
  
+
 	);
 }
 
@@ -160,7 +145,6 @@ function Register(props){
     
     return(
             <div>
-            <Header/>
             <Row>
                 <Col md={4}>
                 </Col>
