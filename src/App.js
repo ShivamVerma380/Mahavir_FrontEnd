@@ -10,6 +10,7 @@ import AdminHeader from './components/Admin/AdminHeader';
 import ShowSearchResults from './components/ShowSearchResults';
 import Test from './components/Test';
 import { Button } from 'react-bootstrap';
+import AddItem from './components/Test/AddItem';
 
 
 function App() {
@@ -99,6 +100,8 @@ function App() {
       
       <Header/>
 
+      {/* <AddItem/> */}
+
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
       {
         fetchSlideshow()
@@ -108,6 +111,7 @@ function App() {
       <Product title="Mahavir Special" className="title" productList={Products}/>
       <Product title="Deals Of The Day" className="title" productList={Products}/>
       <Test productList={Products} />
+      
        
       {/* <Button id="comparebtn">Compare{localStorage.getItem("comparecount")}</Button> */}
     </div>

@@ -51,8 +51,8 @@ function Product({title,productList}){
     }
 
 
-    function fetchOfferAvailableBtn(offerPrice){
-      if(offerPrice==="0"){
+    function fetchOfferAvailableBtn(offerPrice,productPrice){
+      if(offerPrice===productPrice){
         return <Button variant="flat" size="m" style={{visibility:"hidden"}}>Offer Available</Button>
       }
       return <Button variant="flat" size="m">Offer Available</Button>
@@ -134,7 +134,7 @@ function Product({title,productList}){
                     </Form>
                       <br></br>
                       {
-                        fetchOfferAvailableBtn(index.offerPrice)
+                        fetchOfferAvailableBtn(index.offerPrice,index.productPrice)
                       }                    
                     
                   </Card.Body>
