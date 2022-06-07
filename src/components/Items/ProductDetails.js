@@ -407,7 +407,7 @@ function ProductDetails(){
           <h4 className="text">Ratings and Reviews</h4>
           <br></br>
           <Row>
-            <Col md={1} style={{ paddingLeft: "30px" }}>
+            <Col md={1} style={{ display:"flex", justifyContent:"right"}}>
               <h3>4.6</h3>
             </Col>
             <Col md={1} style={{ paddingLeft: "0px" }}>

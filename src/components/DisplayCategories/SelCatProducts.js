@@ -2,7 +2,7 @@ import { margin } from "@mui/system";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import {Card,Button, Container, CardGroup} from "react-bootstrap";
+import {Card,Button, Container, CardGroup,Form} from "react-bootstrap";
 
 import { Row,Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -159,6 +159,9 @@ const SelCatProducts=()=>{
                                         {index.productDescription}
                                         <br></br>Rs {index.productPrice}
                                         </Card.Text>
+                                        <Form>
+                                            <Form.Check type="checkbox" id = "default-checkbox" label = "Add To Compare"/>
+                                        </Form>
                                         <Button variant="flat" size="1">Buy</Button>
                                       </Card.Body>
                                   </Card>
