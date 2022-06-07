@@ -17,14 +17,15 @@ var password = "";
 var otp = "123456";
 var inputOtpByUser ="";
 var isUserLoggedIn = false;
+var name = ""
 localStorage.setItem("isUserLoggedIn",isUserLoggedIn);
 
 function Login(){  
     const navigate = useNavigate();
     
     const [isOTPSent,setIsOTPSent] = useState(true);
-    const [isOTPVerified,setIsOTPVerified] = useState(false);
-    const [isUserRegistered,setIsUserRegistered] = useState(false);
+    const [isOTPNotVerified,setIsOTPNotVerified] = useState(true);
+    //const [isUserRegistered,setIsUserRegistered] = useState(false);
     let token = localStorage.getItem("jwtToken");
     console.log("token",token); 
  
@@ -40,6 +41,10 @@ function Login(){
     const inputPasswordEvent=(event)=>{
         password = event.target.value;
         // console.log("Password",password);
+    }
+
+    const inputNameEvent=(event)=>{
+        name = event.target.value;
     }
 
     
@@ -117,20 +122,24 @@ function Login(){
             console.log("Email is empty")
             alert("Please Enter Email")
         }else{
-            console.log("Email",email);
-            axios({
-                method:"get",
-                url:"http://localhost:8080/verify-email/"+email
-            }).then(function (response){
-                console.log(response.data);
-                otp = response.data.otp;
-                console.log("otp:",otp);
-            }).catch(function(response){
-                console.log(response);
-                return;
-            })
+            // console.log("Email",email);
+            // axios({
+            //     method:"get",
+            //     url:"http://localhost:8080/verify-email/"+email
+            // }).then(function (response){
+            //     console.log(response.data);
+            //     otp = response.data.otp;
+            //     console.log("otp:",otp);
+            // }).catch(function(response){
+            //     console.log(response);
+            //     return;
+            // })
+            
+            
             setIsOTPSent(false);
-            setIsOTPVerified(true);
+            //setIsOTPVerified(true);
+            console.log("isOTPSent",isOTPSent);
+            console.log("isOTPVerified",isOTPNotVerified);
         }
 
     }
@@ -138,15 +147,23 @@ function Login(){
     //    alert(otp);
        if(otp === inputOtpByUser){
            alert('Correct input otp');
-           setIsOTPVerified(false);
+           setIsOTPNotVerified(false);
         //    setIsOTPSent(false);
-        setIsUserRegistered(true);
+        //setIsUserRegistered(true);
         //    setIsEmailVerified(false);
        }
        else{
            alert('incorrect')
        }
 
+   }
+
+   const registerUser=()=>{
+       if(name===""){
+           alert("Enter correct name")
+       }else{
+           alert("User Registered successfully")
+       }
    }
    
 return(
@@ -214,36 +231,54 @@ return(
                                 </FormGroup>
         
                         </div>
-                        <button className="send-email" onClick={sendOTP}>Send OTP on Email</button>
+                        <button className="send-email" onClick={()=>sendOTP()}>Send OTP on Email</button>
                         <br></br><br></br>
                         <h6>
                         <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
                         </h6>
                         </div>
                     ):(
-                        null
-                    )
-                    }
-                    {
-                (isOTPVerified)?(
-                    <div className="form" id="sign-up-form">
-                    <h1 className="title">Verify your OTP</h1>
-                    <div className="fields">
-                        <h1>Enter your Email</h1>
-                            <FormGroup>
-                                <Label for="otp" id="Enter-otp-input">Enter OTP</Label>
-                                <br></br>
-                                <Input  id="otp" name="otp" placeholder="Enter OTP" type="number" onChange={inputOTPEvent}/>
-                            </FormGroup>
+                        (isOTPNotVerified)?(
+                        <div className="form" id="sign-up-form">
+                        <h1 className="title">Verify your OTP</h1>
+                        <div className="fields">
+                            <h1>Enter your OTP</h1>
+                                <FormGroup>
+                                    <Label for="otp-input" id="Enter-otp-input">Enter OTP</Label>
+                                    <br></br>
+                                    <Input  id="otp" name="otp" placeholder="Enter OTP" type="number" onChange={inputOTPEvent}/>
+                                </FormGroup>
 
-                    </div>
-                    <button className="send-email" onClick={verifyOTP}>Verify OTP</button>
-                    <br></br><br></br>
-                    </div>
-                ):(
-                    null
-                )
+                        </div>
+                        <button className="send-otp" onClick={()=>verifyOTP()}>Verify OTP</button>
+                        <br></br><br></br>
+                        <h6>
+                        <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
+                        </h6>
+                        </div>
+                        ):(
+                            <div className="form" id="sign-up-form">
+                            <h1 className="title">User Registration</h1>
+                            <div className="fields">
+                                <h1>Enter your Name</h1>
+                                    <FormGroup>
+                                        <Label id="name-input" for="name">Name</Label>
+                                        <br></br>
+                                        <Input id="name" name="name" placeholder="Enter name" type="name" onChange={inputNameEvent}/>
+                                    </FormGroup>
+            
+                            </div>
+                            <button className="send-email" onClick={()=>registerUser()}>Register User</button>
+                            <br></br><br></br>
+                            <h6>
+                            <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
+                            </h6>
+                            </div>
+
+                        )
+                    )
                 }
+                
             
             
                 </div>
