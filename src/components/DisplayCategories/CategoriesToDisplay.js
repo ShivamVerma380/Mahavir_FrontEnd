@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import {Nav,Navbar,FormControl,Container,NavLink,Form,NavDropdown,Offcanvas,ListGroup} from 'react-bootstrap';
 
 import { useNavigate} from "react-router-dom";
-import "../styles.css"
+import "./CategoriesToDisplay.css"
 
 function CategoriesToDisplay ({categoryDetail}) {
 
@@ -33,9 +33,10 @@ function CategoriesToDisplay ({categoryDetail}) {
     }
 
     return (
-        <div >
+        <div className="Category" >
             
   {['sm'].map((expand) => (
+    
     <Navbar key={expand} bg="dark" expand={expand}   variant="dark">
       <Container fluid>
         
@@ -60,14 +61,15 @@ function CategoriesToDisplay ({categoryDetail}) {
                             
                             cards = categoryDetail.map(index=>{
                                 return(
+                                  
                                     <Nav.Link style={{margin:10}}>
                                         {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
                                         {/*<img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>*/}
-                                        <NavDropdown style={{color:"black"}} title={index.category} renderMenuOnMount={true}> 
+                                        <NavDropdown id="drop "style={{color:"black"}} title={index.category} renderMenuOnMount={true}> 
                                         {
                                               index.subCategories.map(subCat=>{
                                                 return(
-                                                    <div style={{ display: 'block', width: 500, padding: 10}}>
+                                                    <div style={{ display: 'block', padding: 10}}>
                                                     <h6>{subCat.subCategoryName}</h6>
                                                     <ListGroup>
                                                    {/*  <NavDropdown id="drop" style={{ color: "#00000" }} title={subCat.subCategoryName}>*/}
@@ -93,7 +95,7 @@ function CategoriesToDisplay ({categoryDetail}) {
                                       
                                         
                                     </Nav.Link>    
-                                  
+                                    
                                 )
                             })
                         }
@@ -103,6 +105,7 @@ function CategoriesToDisplay ({categoryDetail}) {
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
+    
   ))}
    </div >
     );

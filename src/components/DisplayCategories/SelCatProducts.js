@@ -3,7 +3,8 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import {Card,Button, Container, CardGroup} from "react-bootstrap";
-
+import Header from "../Header";
+import CategoriesToDisplay from "./CategoriesToDisplay";
 import { Row,Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../../App.css"
@@ -113,6 +114,8 @@ const SelCatProducts=()=>{
             (isProductsFetched)?(
                 
                 <div>
+                    <Header/>
+                    
                     <Carousel>
                     {
                         (isOfferPostersFetched)?(
@@ -144,29 +147,35 @@ const SelCatProducts=()=>{
                     {
                         setTimeout
                     }
-                    <div className="grid-container">
+                    <center>
+                    <div className="container">
+                    
+                                    <Row> 
                     {
                         (isTimeout)?
                             cards = products.map(index=>{
                                 return(
                                     
-                                    <Card  style={{ width: '25rem'}} onClick={()=>callProductDetails(index)}
+                                    <Card  style={{ width: '15rem'}} onClick={()=>callProductDetails(index)}
                                       className="mb-2">
-                                        <Card.Img  variant="top" style={{width:200,height:200,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data}/>
+                                        <Card.Img  variant="top" style={{width:200,height:150,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data}/>
                                         <Card.Body>
                                         <Card.Title as="h6">{index.productName}</Card.Title>
                                         <Card.Text>
                                         {index.productDescription}
-                                        <br></br>Rs {index.productPrice}
+                                        <br></br><br></br><strong>Rs {index.productPrice}</strong>
                                         </Card.Text>
-                                        <Button variant="flat" size="1">Buy</Button>
+                                        <Button width="20px" variant="flat" size="1">Buy</Button><span>  </span>
+                                        <Button width="20px" variant="flat" size="1">Add to Cart</Button>
                                       </Card.Body>
                                   </Card>
                                   
                                 )
                               }):(null)
                     }
+                    </Row>  
                     </div>
+                    </center>
                 </div>
             ):(
                 <h1>Product Not Fetched</h1>

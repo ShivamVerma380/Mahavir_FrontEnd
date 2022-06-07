@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Header";
-import { Button, Container, Form, FormGroup, Input, Label,Row,Col } from "reactstrap";
+import { Button, Container, Form, FormGroup, Row,Col } from "react-bootstrap";
+import {Input,Label} from 'reactstrap';
 import { useNavigate } from "react-router-dom";
 
 import "./SignIn.css"
@@ -78,69 +79,27 @@ function Login(){
 
    
     return(
-        <div>
+        <div className="Login">
         <Header />
-        <br></br>
-        <br></br>
-        <div className="form-parent">
+         <Form className="Loginform">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" placeholder="Enter email" onChange={inputEmailEvent} />
             
-                <Row>
-                    <Col md={4}></Col>
-                    <Col md={4}>
-                        <FormGroup>
-                            <Label
-                            for="email"
-                            >
-                            Email
-                            </Label>
-                            <Input
-                            id="email"
-                            name="email"
-                            placeholder="Enter Email"
-                            type="email"
-                            onChange={inputEmailEvent}
-                            />
-                        </FormGroup>
-                    </Col>
-                </Row>
-                <Row >
-                    <Col md={4}></Col>
-                    <Col md={4}>
-                    <FormGroup >
-                        <Label
-                        for="password"
-                        >
-                        Password
-                        </Label>
-                        <br></br>
-                        <Input
-                        id="password"
-                        name="password"
-                        placeholder="Enter Password"
-                        type="password"
-                        onChange={inputPasswordEvent}
-                        />
-                    </FormGroup>
-                    </Col>
-                </Row>
-            <Row>
-                <Col md={4}></Col>
-                <Col md={4}>
-                <Button onClick={homepage}>
-                    Login
-                </Button >
-                </Col>
-            </Row>
-            <Row>
-            <br></br>
-            <Col md={4}></Col>
-                <Col md={4}>
-                    <a href="/email-auth">New User?   Signup</a>
-                
-                </Col>
-            </Row>
-            
-        </div>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control onChange={inputPasswordEvent} type="password" placeholder="Password" />
+        </Form.Group>
+        
+        <Button onClick={homepage} variant="flat" size="1" type="submit">
+            Login
+        </Button> <br></br>
+        <a href="/email-auth">New User?   Signup</a>
+        </Form>
+       
+        
         </div>
     );
 

@@ -1,13 +1,14 @@
 import { Component,useState ,useEffect} from "react";
+import { Button, Container, Form, FormGroup, Row,Col } from "react-bootstrap";
+import {Input,Label} from 'reactstrap';
 
-import { Button, Container, Form, FormGroup, Input, Label,Row,Col, Toast, ToastHeader, ToastBody } from "reactstrap";
 import Header from "../Header";
 
 import React from 'react';
 import { ToastContainer, toast,position } from 'react-toastify';
 import ReactDOM from 'react-dom';
 import {  useNavigate } from "react-router-dom";
-
+import "./SignIn.css"
 
 var email = "";
 var inputOTP = "";
@@ -40,20 +41,19 @@ function Message(props)
 		return(
             <div>
                 <Header/>
-                <Row>
-                    <Col md={4}></Col>
-                    <Col md={4}>
-                        <h1>Enter OTP</h1>
-                        <Form>
-                            <FormGroup>
-                                <Label for="otp">
-                                    Enter OTP
-                                </Label>
-                                <Input id="otp" name="otp" placeholder="Enter OTP" type="otp" onChange={inputOtpEvent}/>
-                            </FormGroup>
+                
+                        <Form className="OTPform">
+                        <Form.Group className="mb-3" >
+                            <Form.Label htmlFor="otp">Enter OTP</Form.Label>
+                            <Form.Control id="otp" name="otp" placeholder="Enter OTP" type="otp" onChange={inputOtpEvent} />
+                            
+                        </Form.Group>
+                        <Button type="submit" variant="flat" size="1" onClick = {props.clickFunc}>
+                            Verify OTP
+                        </Button>
                         </Form>
-                    </Col>
-                </Row>
+                    
+                
             </div>
             
 
@@ -63,19 +63,20 @@ function Message(props)
         return(
             <div>
                 <Header/> 
-                <Row>
-                    <Col md={4}></Col>
-                    <Col md={4}>
-                        <h1>Enter your Email</h1>
-                        <Form>
-                            <FormGroup>
-                                <Label id="email-input" for="email">Email</Label>
-                                <br></br>
-                                <Input id="email" name="email" placeholder="Enter email" type="email" onChange={inputEmailEvent}/>
-                            </FormGroup>
+             
+                        <Form className="OTPform">
+                        <Form.Group className="mb-3" >
+                            <Form.Label id="email-input" htmlFor="email">Enter Email</Form.Label>
+                            <Form.Control id="email" name="email" placeholder="Enter email" type="email" onChange={inputEmailEvent} />
+                            
+                        </Form.Group>
+                        <Button type="submit" variant="flat" size="1" onClick = {props.clickFunc}>
+            Send OTP
+        </Button>
                         </Form>
-                    </Col>
-                </Row>
+                        
+                    
+                
 
             </div>
         );
@@ -87,15 +88,16 @@ function SendOTP(props)
 {
     
 return(
-    <Row>
-    <Col md={4}></Col>
-    <Col md={4}>
-        <Button onClick = {props.clickFunc}>
+    
+    <Form className="OTPform">
+                        <Form.Group className="mb-3" >
+                        <Button type="submit" variant="flat" size="1" onClick = {props.clickFunc}>
             Send OTP
         </Button>
-    </Col>
+        </Form.Group>
+        </Form>
     
-</Row>
+ 
 	);
 }
 
@@ -104,15 +106,17 @@ function SubmitOTP(props)
 {
 
 	return(
-        <Row>
-            <Col md={4}></Col>
-            <Col md={4}>
-                <Button onClick = {props.clickFunc}>
-			        Verify OTP
-		        </Button>
-            </Col>
+        <Form className="OTPform">
+        <Form.Group className="mb-3" >
+        <Button type="submit" variant="flat" size="1" onClick = {props.clickFunc}>
+                            Verify OTP
+                        </Button>
+                </Form.Group>
+        </Form>
+    
             
-        </Row>
+            
+       
 		
 	);
 }

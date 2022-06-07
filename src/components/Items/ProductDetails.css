@@ -1,12 +1,12 @@
 .text{
     font-size: large;
-    
-    font-family: cursive;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;;
     /* font-family: "Gotham",serif */
 }
 
 .container{
-    background-color:antiquewhite;
+    background-color:white;
 
 }
 

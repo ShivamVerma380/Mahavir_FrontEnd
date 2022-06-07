@@ -116,12 +116,13 @@ const Header = () => {
                 <NavLink><i class="fa fa-user"  onClick={callAdmin}>Admin</i></NavLink>
                 <Nav.Link><i  class="fa fa-map-marker" >Pune</i></Nav.Link>
                 {(isUserLoggedIn)?null:(<Nav.Link><i class="fa fa-user"  onClick={callLogin}></i></Nav.Link>)}   
-                {isUserLoggedIn ?(<NavDropdown title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                {isUserLoggedIn ?(<NavDropdown renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                <NavDropdown.Item target="_blank" onClick={handleLogout}>Logout</NavDropdown.Item> 
                         <NavDropdown.Item  onClick={handleMyOrders}>My Orders</NavDropdown.Item>
-                        <NavDropdown.Item target="_blank" onClick={handleLogout}>Logout</NavDropdown.Item> 
+                        
                     </NavDropdown>):null}                       
                     <Nav.Link ><i  class="fa fa-shopping-cart"  onClick={Cart} ></i></Nav.Link>
-                <NavDropdown title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
+                <NavDropdown renderMenuOnMount={false} title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
                     <NavDropdown.Item href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
                     <NavDropdown.Item href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
                     <NavDropdown.Item href="https://goo.gl/maps/eLmvYz7aLYgTuiSa7" target="_blank">Kothrud</NavDropdown.Item>

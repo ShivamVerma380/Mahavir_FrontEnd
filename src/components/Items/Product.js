@@ -127,7 +127,7 @@ function Product({title,productList}){
                     <Card.Title as="h6"  onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
                     <Card.Text onClick={()=>callProductDetails(index)} >
                     {index.productDescription}
-                    <br></br>Rs {index.productPrice}
+                    <br></br><b>Rs {index.productPrice}</b>
                     </Card.Text>
                     <Form>
                       <Form.Check type="checkbox" id = "default-checkbox" label = "Add To Compare" onChange={handleAddToCompare}/>

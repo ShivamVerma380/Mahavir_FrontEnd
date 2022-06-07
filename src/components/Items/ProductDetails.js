@@ -1,5 +1,6 @@
-import { Button, Col, Container, Input, Row } from "reactstrap";
-
+import {  Input } from "reactstrap";
+import { ProgressBar ,Button,Col, Container,Row} from "react-bootstrap";
+import Header from "../Header";
 import Zoom from "react-img-zoom";
 import "./ProductDetails.css"
 import { AiOutlineMinus } from "react-icons/fa"
@@ -262,9 +263,14 @@ function ProductDetails(){
   return (
       
     (isProductFetched )?(
-      <div>
+      <>
+      <Header/>
+      <div className="container">
       <Row >
-        <Col md={2} style={{ paddingLeft: "140px", paddingTop: "45px" }}>
+        <Col md={6}>
+        <div >
+      <Row >
+        <Col md={2} >
           <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  style={{ width: "90px", height: "100px" }} />
           <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
@@ -299,7 +305,10 @@ function ProductDetails(){
             }} />
 
           </div>
-
+          </Col>
+        </Row >
+        </div>
+     
         </Col>
         <Col md={6}>
           <br></br>
@@ -322,8 +331,8 @@ function ProductDetails(){
           </Input>
           <br></br>
           {/* <Button onClick={handleAddToCart}>Add To Cart</Button> */}
-          <Button onClick={handleAddToCart}>Add To Cart</Button>
-          <Button style={{ marginLeft: 30 }} onClick={handleBuyNow}>Buy Now</Button>
+          <Button variant="flat" size="1" onClick={handleAddToCart}>Add To Cart</Button>
+          <Button variant="flat" size="1" style={{ marginLeft: 30 }} onClick={handleBuyNow}>Buy Now</Button>
 
           <br></br>
 
@@ -415,37 +424,33 @@ function ProductDetails(){
             </Col>
 
             <Col md={1} style={{ paddingLeft: "5px" }}>
-              <p style={{ marginBottom: "7px" }}>5⭐</p>
-              <p style={{ marginBottom: "13px" }}>4⭐</p>
-              <p style={{ marginBottom: "13px" }}>3⭐</p>
-              <p style={{ marginBottom: "10px" }}>2⭐</p>
+              <p >5⭐</p>
+              <p >4⭐</p>
+              <p >3⭐</p>
+              <p >2⭐</p>
               <p>1⭐</p>
             </Col>
 
 
             <Col md={3}>
 
-              <CProgress className="mb-3">
-                <CProgressBar color="success" value={90} />
-              </CProgress>
-              <CProgress className="mb-3">
-                <CProgressBar color="success" value={70} />
-              </CProgress>
-              <CProgress className="mb-3">
-                <CProgressBar color="warning" value={30} />
-              </CProgress>
-              <CProgress className="mb-3">
-                <CProgressBar color="danger" value={10} />
-              </CProgress>
-              <CProgress className="mb-3">
-                <CProgressBar color="danger" value={5} />
-              </CProgress>
+            <div>
+            <ProgressBar style={{marginBottom:"2px"}}animated  striped variant="success" now={40} />
+            <br></br>
+            <ProgressBar style={{marginBottom:"2px"}}animated  striped variant="success" now={40} />
+            <br></br>
+            <ProgressBar style={{marginBottom:"2px"}} animated striped variant="info" now={20} />
+            <br></br>
+            <ProgressBar style={{marginBottom:"2px"}} animated striped variant="warning" now={60} />
+            <br></br>
+            <ProgressBar style={{marginBottom:"2px"}} animated striped variant="danger" now={80} />
+          </div>
             </Col>
             <Col md={1}>
-              <p style={{ marginBottom: "7px" }}>60,000</p>
-              <p style={{ marginBottom: "13px" }}>22,000</p>
-              <p style={{ marginBottom: "13px" }}>22,000</p>
-              <p style={{ marginBottom: "10px" }}>22,000</p>
+              <p >60,000</p>
+              <p >22,000</p>
+              <p >22,000</p>
+              <p >22,000</p>
               <p>22,000</p>
             </Col>
           </Row>
@@ -513,7 +518,9 @@ function ProductDetails(){
 
       </Row>
       <br></br>
+
     </div>
+    </>
     ):(null)
     
     
