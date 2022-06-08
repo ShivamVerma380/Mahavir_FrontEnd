@@ -54,6 +54,14 @@ root.render(
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
       <Route path='/offers' element={<OfferItems/>}/>
       <Route path='/compareproducts' element={<CompareProducts/>}/>
+<<<<<<< HEAD
+      {/* <Route path="/SearchBar" element={<SearchBar/>}/> */}
+
+      
+
+
+=======
+>>>>>>> cd6877298467750b415f81a52a146f8de5254f0f
       <Route path='/my-orders' element={<MyOrders/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>
       <Route path='onlyreviews' element = {<OnlyReviews/>}/>

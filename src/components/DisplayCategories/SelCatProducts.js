@@ -2,6 +2,8 @@ import { margin } from "@mui/system";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import Header from "../Header";
+import CategoriesToDisplay from "./CategoriesToDisplay";
 import {Card,Button, Container, CardGroup,Form} from "react-bootstrap";
 
 import { Row,Col } from "react-bootstrap";
