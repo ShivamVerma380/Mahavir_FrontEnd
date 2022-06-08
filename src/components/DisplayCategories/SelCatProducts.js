@@ -2,7 +2,6 @@ import { margin } from "@mui/system";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Header from "../Header";
 import CategoriesToDisplay from "./CategoriesToDisplay";
 import {Card,Button, Container, CardGroup,Form} from "react-bootstrap";
 
@@ -17,6 +16,7 @@ import { useCookies } from "react-cookie";
 
 
 var modelNumsToCompare = new Set();
+var flag = false;
 
 const SelCatProducts=()=>{
 
@@ -34,6 +34,7 @@ const SelCatProducts=()=>{
 
     const [cookies,SetCookie] = useCookies(['modelNumsToCompare'])
     const [isFormLoaded,SetIsFormLoaded] = useState(false)
+    const [isButtonNeeded,SetIsButtonNeeded] = useState(false);
 
     console.log("Cookies",cookies.CompareModels)
     console.log("Cookies size",cookies.CompareModelsLength)
@@ -45,6 +46,11 @@ const SelCatProducts=()=>{
         var str="";
     }else{
         var str= cookies.CompareModels+",";
+        var arr = str.split(",");
+        arr.map(index=>{
+            modelNumsToCompare.add(index);
+        })
+        
     }
     
    
@@ -74,16 +80,23 @@ const SelCatProducts=()=>{
         //navigate("/compareproducts")
     }
   
+    function compareProducts(){
+        if(cookies.CompareModels===undefined || cookies.CompareModels===""){
+            alert("Please select products to compare");
+        }
+        else{
+            navigate("/compareproducts");
+        }
+    }
 
     function getCompareBtn(){
-        var modelNumsToCompare = cookies.CompareModels;
-        var size = cookies.CompareModelsLength;
-        if(modelNumsToCompare!=undefined){
+       
+       
           return(
-            <Button id="comparebtn">Compare</Button>
+            <Button id="comparebtn" onClick={compareProducts}>Compare</Button>
           )
-        }
-      }
+        
+    }
     
     useEffect(()=>{
         if(!isOfferPostersFetched){
@@ -158,20 +171,21 @@ const SelCatProducts=()=>{
 
             //console.log('✅ Checkbox is checked');
             setChange(change+1)
-            
+            //document.getElementById(event.value).checked = "false"
             console.log("Value",event.target.value);
             modelNumsToCompare.add(event.target.value);
             alert(event.target.value)
             console.log("ModelNumbers",modelNumsToCompare)
           } else {
             console.log('⛔️ Checkbox is NOT checked');
+            //document.getElementById(event.value).checked = "true"
             setChange(change-1)
             modelNumsToCompare.delete(event.target.value);
 
             console.log("ModelNumbers",modelNumsToCompare)
           }
 
-        
+        str="";
         modelNumsToCompare.forEach(element=>{
             //console.log(element);
             str +=  element + ",";
@@ -180,6 +194,7 @@ const SelCatProducts=()=>{
         console.log(str);
         //localStorage.setItem("CompareModels",str);
         SetCookie('CompareModels',str,{path:'/'});
+        //getCompareBtn();
         console.log('Compare Models',cookies.CompareModels)
         SetCookie('CompareModelsLength',cookies.CompareModelsLength,{path:'/'});
         setisAddCompareClicked(current => !current);
@@ -205,7 +220,7 @@ const SelCatProducts=()=>{
             if(modelNums.includes(modelNumber)){
                 return(
                     <Form>    
-                        <Form.Check id={modelNumber} type="checkbox" label = "Add To Compare" value={modelNumber} onChange={handleAddToCompare} checked="true"/>
+                        <Form.Check id={modelNumber} type="checkbox" label = "Add To Compare" value={modelNumber} onChange={handleAddToCompare} defaultChecked="true"/>
                     </Form>
                 );
             }
@@ -296,10 +311,7 @@ const SelCatProducts=()=>{
                               }):(null)
                     }
                     {
-                        
-                             
-                        getCompareBtn()
-                              
+                        getCompareBtn()      
                     }
                    
                     </Row>  
@@ -308,21 +320,7 @@ const SelCatProducts=()=>{
                 </div>
             ):(
                 <h1>Product Not Fetched</h1>
-            )
-            
-                // (change>0)?(
-                 
-                //     <Button id="comparebtn" onClick={CompareHandler}>Compare{change}</Button>
-                  
-                  
-                // ):(
-                //   <Button id="comparebtn" style={{visibility:"hidden"}}>Compare{change}</Button>
-                  
-                  
-                // )
-        
-            
-        
+            )   
     );
 
 }
