@@ -14,6 +14,8 @@ import Header from "../Header";
 import NavbarOffcanvas from "react-bootstrap/esm/NavbarOffcanvas";
 import { useCookies } from "react-cookie";
 
+import CompareProducts from "../Items/CompareProducts";
+
 
 var modelNumsToCompare = new Set();
 var flag = false;
@@ -27,25 +29,33 @@ const SelCatProducts=()=>{
     const [isTimeout,setIsTimeOut] = useState(false);
     var productsArray=[];
 
+    var productsToCompare=[];
+
     const [offerPosters,setOfferPosters] = useState([]);
     const [isOfferPostersFetched,setIsOfferPostersFetched] = useState(false);
 
     console.log(localStorage.getItem("Category"));
 
-    const [cookies,SetCookie] = useCookies(['modelNumsToCompare'])
+    // const [cookies,SetCookie] = useCookies(['modelNumsToCompare'])
     const [isFormLoaded,SetIsFormLoaded] = useState(false)
     const [isButtonNeeded,SetIsButtonNeeded] = useState(false);
 
-    console.log("Cookies",cookies.CompareModels)
-    console.log("Cookies size",cookies.CompareModelsLength)
+    // console.log("Cookies",cookies.CompareModels)
+    // console.log("Cookies size",cookies.CompareModelsLength)
 
+    console.log("Models To Compare",localStorage.getItem("CompareModels"))
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
-    const [change, setChange] = useState(cookies.CompareModelsLength);
+    const [change, setChange] = useState(0);
 
-    if(cookies.CompareModels===undefined){
+    const [isCompareBtnClicked,SetIsCompareBtnClicked] = useState(false);
+
+    const [isAddToCompareProductsFetched,SetIsAddToCompareProductsFetched] =  useState(false);
+    const [addToCompareProducts,SetAddToCompareProducts] = useState([]);
+
+    if(localStorage.getItem("CompareModels")===null){
         var str="";
     }else{
-        var str= cookies.CompareModels+",";
+        var str= localStorage.getItem("CompareModels")+",";
         var arr = str.split(",");
         arr.map(index=>{
             modelNumsToCompare.add(index);
@@ -53,6 +63,34 @@ const SelCatProducts=()=>{
         
     }
     
+
+    const FetchProductsByModelNumber=()=>{
+        // var modelNumbers = localStorage.getItem("CompareModels").split(',');
+        // console.log("Model Number",modelNumbers);
+        
+        // modelNumbers.map(modelNum=>{
+        //     console.log("Model Num",modelNum);
+
+        //     axios({
+        //     method:"get",
+        //     url:"http://localhost:8080/get-products/"+modelNum,
+                
+        //     }).then(function(response){
+        //         console.log(response);
+        //         if(response.status==200){
+        //             //console.log("response data",response.data);
+        //             productsToCompare.push(response.data);
+        //             addToCompareProducts.push(productsToCompare);    
+        //         }
+        //     }).catch(function(error){
+        //         console.log("error",error);
+        //     })
+        // })
+        // SetIsAddToCompareProductsFetched(true);
+        
+
+        
+    }
    
     
 
@@ -73,19 +111,12 @@ const SelCatProducts=()=>{
       navigate("/offers")
     }
 
-    const CompareHandler=()=> {
-        
-        
-
-        //navigate("/compareproducts")
-    }
-  
     function compareProducts(){
-        if(cookies.CompareModels===undefined || cookies.CompareModels===""){
+        if(localStorage.getItem("CompareModels")===null || localStorage.getItem("CompareModels")===""){
             alert("Please select products to compare");
         }
         else{
-            navigate("/compareproducts");
+            navigate("/compareproducts")
         }
     }
 
@@ -193,10 +224,10 @@ const SelCatProducts=()=>{
         str = str.slice(0,str.length-1);
         console.log(str);
         //localStorage.setItem("CompareModels",str);
-        SetCookie('CompareModels',str,{path:'/'});
+        // SetCookie('CompareModels',str,{path:'/'});
         //getCompareBtn();
-        console.log('Compare Models',cookies.CompareModels)
-        SetCookie('CompareModelsLength',cookies.CompareModelsLength,{path:'/'});
+        localStorage.setItem("CompareModels",str);
+        console.log('Compare Models',localStorage.getItem("CompareModels"))
         setisAddCompareClicked(current => !current);
     }
 
@@ -206,7 +237,7 @@ const SelCatProducts=()=>{
     // }
 
     const callFormCheck=(modelNumber)=>{
-        if(cookies.CompareModels===undefined || cookies.CompareModels===""){
+        if(localStorage.getItem("CompareModels")===null || localStorage.getItem("CompareModels")===""){
             //SetCookie("CompareModels","",{path:"/"});
             return(
                 <Form>    
@@ -214,7 +245,7 @@ const SelCatProducts=()=>{
                 </Form>
             );
         }else{
-            var modelNums = cookies.CompareModels.split(',');
+            var modelNums = localStorage.getItem("CompareModels").split(',');
             console.log("Model Nums",modelNums)
         
             if(modelNums.includes(modelNumber)){
@@ -238,89 +269,84 @@ const SelCatProducts=()=>{
 
     var modelNums;
     return(
-
-
             
-            (isProductsFetched)?(
                 
-                <div>
-                    <Header/>
                     
-                    <Carousel>
-                    {
-                        (isOfferPostersFetched)?(
-                            offerPoster= offerPosters.map(index=>{
-                                //let Base64string = Buffer.from(index.image.data,"base64").toString();
-                                
-                                //console.log("image",index.image.data);
-                                // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
-                                return(
-                                    <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index.modelNumber)}>
-                                    <img id = "classname" 
-                                    className="d-block w-100"
-                                    src={"data:image/png;base64," + index.image.data}
-                                    alt={index.alt}
-                                    height={500}
-                                    />                    
-                                    </Carousel.Item>
-                                  
-                                )
-                
-                            })
-                        ):(
-                            
-                            null
-                            
-                        )
-                    }
-                    </Carousel>
-                    {
-                        setTimeout
-                    }
-                    <center>
-                    <div className="container">
-                    
-                                    <Row> 
-                    {
-                        (isTimeout)?
-                            cards = products.map(index=>{
-                                return(
+                    <div>
+                        <Header/>
+                        
+                        <Carousel>
+                        {
+                            (isOfferPostersFetched)?(
+                                offerPoster= offerPosters.map(index=>{
+                                    //let Base64string = Buffer.from(index.image.data,"base64").toString();
                                     
-                                    <Card  style={{ width: '15rem'}} 
-                                      className="mb-2">
-                                        <Card.Img  variant="top" style={{width:200,height:150,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
-                                        <Card.Body>
-                                        <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
-                                        <Card.Text onClick={()=>callProductDetails(index)}>
-                                        {index.productDescription}
-                                        <br></br><br></br><strong>Rs {index.productPrice}</strong>
-                                        </Card.Text>
-                                        {
-                                            callFormCheck(index.modelNumber)
-                                        }
+                                    //console.log("image",index.image.data);
+                                    // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
+                                    return(
+                                        <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index.modelNumber)}>
+                                        <img id = "classname" 
+                                        className="d-block w-100"
+                                        src={"data:image/png;base64," + index.image.data}
+                                        alt={index.alt}
+                                        height={500}
+                                        />                    
+                                        </Carousel.Item>
+                                    
+                                    )
+                    
+                                })
+                            ):(
+                                
+                                null
+                                
+                            )
+                        }
+                        </Carousel>
+                        {
+                            setTimeout
+                        }
+                        <center>
+                        <div className="container">
+                        
+                                        <Row> 
+                        {
+                            (isTimeout)?
+                                cards = products.map(index=>{
+                                    return(
                                         
-                                        
-                                        
-                                        <br></br>
-                                        <Button variant="flat" size="1">Buy</Button>
-                                        </Card.Body>
-                                  </Card>
-                                  
-                                  
-                                )
-                              }):(null)
-                    }
-                    {
-                        getCompareBtn()      
-                    }
-                   
-                    </Row>  
+                                        <Card  style={{ width: '15rem'}} 
+                                        className="mb-2">
+                                            <Card.Img  variant="top" style={{width:200,height:150,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
+                                            <Card.Body>
+                                            <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
+                                            <Card.Text onClick={()=>callProductDetails(index)}>
+                                            {index.productDescription}
+                                            <br></br><br></br><strong>Rs {index.productPrice}</strong>
+                                            </Card.Text>
+                                            {
+                                                callFormCheck(index.modelNumber)
+                                            }
+                                            
+                                            
+                                            
+                                            <br></br>
+                                            <Button variant="flat" size="1">Buy</Button>
+                                            </Card.Body>
+                                    </Card>
+                                    
+                                    
+                                    )
+                                }):(null)
+                        }
+                        {
+                            getCompareBtn()      
+                        }
+                    
+                        </Row>  
+                        </div>
+                        </center>
                     </div>
-                    </center>
-                </div>
-            ):(
-                <h1>Product Not Fetched</h1>
-            )   
     );
 
 }

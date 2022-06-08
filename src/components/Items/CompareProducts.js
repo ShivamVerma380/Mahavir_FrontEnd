@@ -1,31 +1,121 @@
 import { Checkbox } from "material-ui";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, NavDropdown, Form, Button } from "react-bootstrap";
 import Header from "../Header";
 import "./CompareProducts.css"
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 
-    const CompareProducts = () => {
-        const navigate = useNavigate();
-        const buyHandler = () => {
-            navigate("/AddressForm")
+
+const CompareProducts = () => {
+    const navigate = useNavigate();
+    const [products,setProducts] = useState([]);
+    const [isProductsFetched,SetIsProductFetched] = useState(false);
+    
+    useEffect(()=>{
+        if(!isProductsFetched){
+            var productsArray = [];
+            var modelNumbers = localStorage.getItem("CompareModels").split(',');
+            console.log("Model Numbers",modelNumbers);
+            
+            axios.all([
+                axios.get("http://localhost:8080/get-products/IPH287131"),
+                axios.get("http://localhost:8080/get-products/IPH287373")
+            ]).then(axios.spread(function(resp1,resp2){
+                products.push(resp1.data);
+                products.push(resp2.data);
+                SetIsProductFetched(true)
+            }))
+            
+            
+        }
+    })
+
+
+    // async function getData(){
+    //     var productsArray = [];
+    //     var modelNumbers = localStorage.getItem("CompareModels").split(',');
+    //     console.log("Model Numbers",modelNumbers);
+    
+    //     modelNumbers.map(index=>{
+    //         if(index!=""){
+    //             try {
+    //                 axios.get("http://localhost:8080/get-products/"+index)
+    //                 .then(promise=>{
+    //                     productsArray.push(promise.data);
+    //                 }).catch(e=>{
+    //                     console.log(e);
+    //                 })
+    //             } catch (error) {
+    //                 console.log(error);
+    //             }
+                
+    //         }
+    //     })
+    //     return  productsArray;
+    // }
+
+    // useEffect(()=>{
+    //     if(!isProductsFetched){
+    //         (async()=>{
+    //             const data = await getData();
+    //             setProducts(data);
+    //             SetIsProductFetched(true);
+    //         })();
+    //     }
+    // },[]);
+
+    // useEffect(()=>{
+    //     if(!isProductsFetched){
+    //         var modelNumbers = localStorage.getItem("CompareModels").split(',');
+    //         console.log(modelNumbers);
+    //         modelNumbers.map(index=>{
+    //             if(index!=""){
+    //                 axios({
+    //                     method:"get",
+    //                     url:"http://localhost:8080/get-products/"+index
+    //                 }).then(function(response){
+    //                     if(response.status==200){
+    //                         console.log(response.data);
+                            
+    //                         products.push(response.data);
+    //                     }
+    //                 }).catch(function(error){
+    //                     console.log(error);
+    //                 })
+    //             }
+    //         })
+    //         SetIsProductFetched(true);
+    //         // console.log("products",products);
+    //     }
+    // })
+
+    const buyHandler = () => {
+        navigate("/AddressForm")
     }
     const CompareImgHandler = () => {
         navigate("/productDetails")
     }
 
-    return (
+    
+
+    return (    
+        
+        (isProductsFetched)?(
+        
+        
         <div>
             <Header />
-            
+
             <Row style={{ marginTop: "30px" }}>
                 <Col md={1}>
                 </Col>
                 <Col md={2}>
-                    <h4>Redmi Note 11T 5G (8 GB RAM, 128 GB ROM, Stardust White) vs others</h4>
+                    {/* <h4>Redmi Note 11T 5G (8 GB RAM, 128 GB ROM, Stardust White) vs others</h4> */}
+                    <h4>{products[0].productName} vs others</h4>
                 </Col>
                 <Col md={2}>
                     <img style={{ width: "10rem", alignContent: "center" }} onClick={CompareImgHandler} src="https://d2xamzlzrdbdbn.cloudfront.net/products/7d54e926-1b54-4e1c-8a5e-3041b01bbd9a22211119.jpg"></img>
@@ -62,7 +152,7 @@ import { useNavigate } from "react-router-dom";
                 </Col>
                 <Col md={1}></Col>
             </Row>
-        
+
 
 
             <Row>
@@ -91,8 +181,8 @@ import { useNavigate } from "react-router-dom";
                 <Col md={1}></Col>
 
             </Row>
-            
-           
+
+
             <Row>
                 <Col md={1}></Col>
                 <Col md={10}>
@@ -283,11 +373,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>SIM Size</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -306,11 +396,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>SIM Type</h6>
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -329,11 +419,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Network Type</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -352,11 +442,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Battery Capacity</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -376,11 +466,11 @@ import { useNavigate } from "react-router-dom";
                 </Col>
 
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -407,11 +497,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>OS</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -430,11 +520,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Processor</h6>
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -453,11 +543,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>RAM</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -476,11 +566,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Graphics</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -500,11 +590,11 @@ import { useNavigate } from "react-router-dom";
                     <br></br>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -532,11 +622,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Primary Camera</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -555,11 +645,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Front Camera</h6>
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -578,11 +668,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Flash</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -601,11 +691,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Zoom</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -625,11 +715,11 @@ import { useNavigate } from "react-router-dom";
                     <br></br>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -657,11 +747,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Resolution</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -680,11 +770,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Features</h6>
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -703,11 +793,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>RAM</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -726,11 +816,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Graphics</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -750,11 +840,11 @@ import { useNavigate } from "react-router-dom";
                     <br></br>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -782,11 +872,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Internal Memory</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -805,11 +895,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Expandable Memory</h6>
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -828,11 +918,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>RAM</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -851,11 +941,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Graphics</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -875,11 +965,11 @@ import { useNavigate } from "react-router-dom";
                     <br></br>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -907,11 +997,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>USB</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -930,11 +1020,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>WiFi</h6>
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
-                
+
 
                 </Col>
                 <Col md={2}>
@@ -953,11 +1043,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Bluetooth</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -976,11 +1066,11 @@ import { useNavigate } from "react-router-dom";
                     <h6>Graphics</h6>
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
-                    
+
 
                 </Col>
                 <Col md={2}>
@@ -1000,37 +1090,11 @@ import { useNavigate } from "react-router-dom";
                     <br></br>
                 </Col>
                 <Col md={2}>
-                    
 
-                </Col>
-                <Col md={2}>
-                    
 
                 </Col>
                 <Col md={2}>
 
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-
-            
-            {/* <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    
-                    
-                </Col>
-                <Col md={2}>
-                    <img src="https://rukminim1.flixcart.com/image/182/182/kwv0djk0/mobile/g/h/4/note-11t-21091116ai-mzb0a8qin-redmi-original-imag9g37hzxggjgg.jpeg?q=90"></img>
-
-                </Col>
-                <Col md={2}>
-                
 
                 </Col>
                 <Col md={2}>
@@ -1042,106 +1106,11 @@ import { useNavigate } from "react-router-dom";
                 <Col md={1}>
                 </Col>
             </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    
-                </Col>
-                <Col md={2}>
-                    <p>REDMI Note 11T 5G (Stardust White, 128 GB)  (6 GB RAM)</p>
-
-                </Col>
-                <Col md={2}>
-                
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    
-                </Col>
-                <Col md={2}>
-                    
-
-                </Col>
-                <Col md={2}>
-                    
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    
-                </Col>
-                <Col md={2}>
-                    
-
-                </Col>
-                <Col md={2}>
-                    
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    
-                    
-                </Col>
-                <Col md={2}>
-                    
-
-                </Col>
-                <Col md={2}>
-                    
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row> */}
-
-
-
-            
-
 
         </div>
+        ):(
+            <h1>Products Not Fetched yet</h1>
+        )
     )
 }
 export default CompareProducts;

@@ -32,11 +32,12 @@ var SubCategory = localStorage.getItem("SubCategory");
 var SubSubCategory = localStorage.getItem("SubSubCategory");
 
 
+
 root.render(
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
-  <CookiesProvider>
+  
   <BrowserRouter>
     <Routes>
       <Route path='/' element={<App/>}/>
@@ -57,10 +58,9 @@ root.render(
       {/* <Route path="/SearchBar" element={<SearchBar/>}/> */}
       <Route path='/my-orders' element={<MyOrders/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>
-      <Route path='onlyreviews' element = {<OnlyReviews/>}/>
+      <Route path='/onlyreviews' element = {<OnlyReviews/>}/>
     </Routes>
   </BrowserRouter>
-  </CookiesProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
