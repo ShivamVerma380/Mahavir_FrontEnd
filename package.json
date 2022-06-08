@@ -13,12 +13,14 @@
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
     "@trendmicro/react-sidenav": "^0.5.0",
+    "@uiw/react-alert": "^4.21.10",
     "arrows": "^0.0.3",
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
     "cors": "^2.8.5",
     "form-data": "^4.0.0",
     "material-ui": "^0.20.2",
+    "node-modules": "^1.0.1",
     "react": "^18.1.0",
     "react-arrows": "^1.2.0",
     "react-bootstrap": "^2.4.0",
@@ -33,7 +35,8 @@
     "react-search-box": "^2.2.1",
     "react-toastify": "^9.0.3",
     "reactstrap": "^9.0.3",
-    "swiper": "^8.1.6"
+    "swiper": "^8.1.6",
+    "uiw": "^4.21.10"
   },
   "scripts": {
     "start": "react-scripts start",

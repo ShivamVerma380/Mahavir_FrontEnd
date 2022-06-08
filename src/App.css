@@ -125,12 +125,7 @@
   height: fit-content;
  width: fit-content;
 } */
-form{
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-}
+
 /* Product */
 
 .Cart{

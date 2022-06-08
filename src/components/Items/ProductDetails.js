@@ -14,6 +14,7 @@ import { ImageList, Slider } from "@mui/material";
 import * as AiIcons from 'react-icons/ai';
 import { CProgress, CProgressBar } from '@coreui/react'
 import { Swiper, SwiperSlide } from "swiper/react";
+import { QuantityPicker } from 'react-qty-picker';  
 
 // Import Swiper styles
 import "swiper/css";
@@ -279,7 +280,7 @@ function ProductDetails(){
 
         </Col>
 
-        <Col md={4}>
+        <Col className="imageproduct" md={4} style={{marginTop: "100px", justifyContent: "center"}}>
           <br></br>
           <br></br>
 
@@ -317,22 +318,23 @@ function ProductDetails(){
           <p className="text" >{product.productName}</p>
 
           <br></br>
-          <h6 >Price:{product.productPrice}</h6>
+          <h4>Price: <b>{product.productPrice}</b></h4>
           <br></br>
           <h6>{product.productDescription}</h6>
           <br></br>
-          <Input id="Quantity"
+          <QuantityPicker style={{ background: "red" }} min={0} smooth onChange={inputQuantityEvent} />
+          {/* <Input id="Quantity"
             name="Quantity"
             placeholder="Enter Quantity"
             type="number"
             min={0}
             onChange={inputQuantityEvent}
             style={{ width: 300 }}>
-          </Input>
+          </Input> */}
           <br></br>
           {/* <Button onClick={handleAddToCart}>Add To Cart</Button> */}
-          <Button variant="flat" size="1" onClick={handleAddToCart}>Add To Cart</Button>
-          <Button variant="flat" size="1" style={{ marginLeft: 30 }} onClick={handleBuyNow}>Buy Now</Button>
+          <Button  variant="flat" size="1" onClick={handleAddToCart}>Add To Cart</Button>
+          <Button variant="flat" size="1" style={{marginLeft:30}} onClick={handleBuyNow}>Buy Now</Button>
 
           <br></br>
 
@@ -420,7 +422,7 @@ function ProductDetails(){
               <h3>4.6</h3>
             </Col>
             <Col md={1} style={{ paddingLeft: "0px" }}>
-              <AiIcons.AiFillStar />
+              <AiIcons.AiFillStar size={20}/>
             </Col>
 
             <Col md={1} style={{ paddingLeft: "5px" }}>

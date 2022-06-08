@@ -39,4 +39,10 @@ export const SidebarData = [
     icon: <RiIcons.RiLogoutBoxRFill />,
     cName: 'nav-text'
   },
+  {
+    title: 'Upload Excel',
+    path:'/upload',
+    icon: <AiIcons.AiOutlineUpload/>,
+    cName: 'nav-text'
+  },
 ];
