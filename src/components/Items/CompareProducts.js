@@ -9,6 +9,7 @@ import axios from "axios";
 import { propTypes } from "react-bootstrap/esm/Image";
 import { SliderValueLabelUnstyled } from "@mui/base";
 import RowComponent from "./RowComponent";
+import CompareHeader from "./CompareHeader";
 
 
 
@@ -62,9 +63,7 @@ const CompareProducts = () => {
     const buyHandler = () => {
         navigate("/AddressForm")
     }
-    const CompareImgHandler = () => {
-        navigate("/productDetails")
-    }
+    
 
     const [productTitles,SetProductTitles]=useState([]);
     const [productSubTitles,SetProductSubTitles] = useState(new Map());
@@ -140,71 +139,13 @@ const CompareProducts = () => {
                     {/* <h4>Redmi Note 11T 5G (8 GB RAM, 128 GB ROM, Stardust White) vs others</h4> */}
                     <h4>{products[0].productName} vs others</h4>
                 </Col>
-                <Col md={2}>
-                    <img style={{ width: "10rem", alignContent: "center" }} onClick={CompareImgHandler} src={'data:image/jpg;base64,' + products[0].productImage1.data}></img>
-
-                </Col>
-                <Col md={2}>
-                    <img style={{ width: "10rem" }} onClick={CompareImgHandler} src={'data:image/jpg;base64,' + products[1].productImage1.data}></img>
-                </Col>
-                <Col md={2}>
-                    <img style={{ background: "green" }} onClick={CompareImgHandler}></img>
-                </Col>
-                <Col md={2}>
-                    <img onClick={CompareImgHandler}></img>
-                </Col>
-                <Col md={1}>
-                </Col>
+                <CompareHeader isModelNumPresent="true" name={products[0].productName} image={products[0].productImage1.data} price = {products[0].productPrice} />
+                <CompareHeader isModelNumPresent="true" name={products[1].productName} image={products[1].productImage1.data} price = {products[1].productPrice}/>
+                <CompareHeader isModelNumPresent="false" name="" image="" price = ""/>
+                <CompareHeader isModelNumPresent="false" name="" image="" price = ""/> 
+            
             </Row>
-            <Row>
-                <Col md={1}></Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>{products[0].productName}</h6>
-                </Col>
-                <Col md={2}>
-                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>{products[1].productName}</h6>
-                </Col>
-                <Col md={2}>
-                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>Add a product</h6>
-                </Col>
-                <Col md={2}>
-                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>Add a product</h6>
-                </Col>
-                <Col md={1}></Col>
-            </Row>
-
-
-
-            <Row>
-                <Col md={1}></Col>
-                <Col md={2}>
-                    <Form>
-                        <Form.Check type="checkbox" id="default-checkbox" label="Show Only Differences" />
-                    </Form>
-                </Col>
-                <Col md={2}>
-                    <h6 style={{}}>{products[0].productPrice}</h6>
-                </Col>
-                <Col md={2}>
-                    <h6>{products[1].productPrice}</h6>
-                </Col>
-                <Col md={2}>
-                    <NavDropdown title="Choose Brand"></NavDropdown>
-
-                    <NavDropdown title="Choose Product"></NavDropdown>
-                </Col>
-                <Col md={2}>
-                    <NavDropdown title="Choose Brand"></NavDropdown>
-
-                    <NavDropdown title="Choose Product"></NavDropdown>
-                </Col>
-                <Col md={1}></Col>
-
-            </Row>
-
+            
 
             <Row>
                 <Col md={1}></Col>
