@@ -29,6 +29,11 @@
     display: table;
   }
 
+  .imageproduct {
+    z-index: 9999;
+  }
+
+
 
 /* .div{
     background-color: antiquewhite;

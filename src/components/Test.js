@@ -18,8 +18,6 @@ const Test = ({productList}) => {
     if (
       product.modelNumber.toLowerCase().includes(search) ||
       product.category.toLowerCase().includes(search) ||
-      product.subCategory.toLowerCase().includes(search) ||
-      product.subSubCategory.toLowerCase().includes(search)||
       product.productName.toLowerCase().includes(search)||
       product.productDescription.toLowerCase().includes(search)
     ) {

@@ -24,6 +24,7 @@ import SelCatProducts from './components/DisplayCategories/SelCatProducts';
 import OfferItems from './components/offers/OfferItems';
 import CompareProducts from './components/Items/CompareProducts';
 import UploadExcel from './components/Admin/Sidebar/UploadExcel';
+import OnlyReviews from './components/Items/OnlyReviews';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -53,6 +54,7 @@ root.render(
       <Route path='/compareproducts' element={<CompareProducts/>}/>
       <Route path='/my-orders' element={<MyOrders/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>
+      <Route path='onlyreviews' element = {<OnlyReviews/>}/>
     </Routes>
   </BrowserRouter>
 );
