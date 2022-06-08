@@ -102,7 +102,7 @@
 
 }
 
-.btn{
+.login-button{
     color: #fff;
     background: #0d0d0d;
     border:none;
@@ -118,7 +118,7 @@
     transition: 0.5s;
 }
 
-.btn:hover,input:focus{
+.login-button:hover,input:focus{
     background: #000;
     color: #fff;
 }

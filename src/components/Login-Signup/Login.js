@@ -210,7 +210,7 @@ return(
                         </FormGroup>
                     </div>
                     <div className="submit-container">
-                        <Button className="btn" onClick={homepage}>
+                        <Button className="login-button" onClick={homepage}>
                             Login
                         </Button><br></br><br></br>
                         <h6>

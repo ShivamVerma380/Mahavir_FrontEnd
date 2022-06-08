@@ -331,8 +331,8 @@ function ProductDetails(){
           </Input>
           <br></br>
           {/* <Button onClick={handleAddToCart}>Add To Cart</Button> */}
-          <Button variant="flat" size="1" onClick={handleAddToCart}>Add To Cart</Button>
-          <Button variant="flat" size="1" style={{ marginLeft: 30 }} onClick={handleBuyNow}>Buy Now</Button>
+          <Button  variant="flat" size="1" onClick={handleAddToCart}>Add To Cart</Button>
+          <Button variant="flat" size="1" style={{marginLeft:30}} onClick={handleBuyNow}>Buy Now</Button>
 
           <br></br>
 
