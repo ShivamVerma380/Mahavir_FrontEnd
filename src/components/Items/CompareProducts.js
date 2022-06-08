@@ -6,6 +6,7 @@ import "./CompareProducts.css"
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 
 
@@ -20,15 +21,36 @@ const CompareProducts = () => {
             var productsArray = [];
             var modelNumbers = localStorage.getItem("CompareModels").split(',');
             console.log("Model Numbers",modelNumbers);
+
+            var urls = [];
+            modelNumbers.map(index=>{
+                if(index!=""){
+                    urls.push(axios.get("http://localhost:8080/get-products/"+index));
+                }
+            })
             
-            axios.all([
-                axios.get("http://localhost:8080/get-products/IPH287131"),
-                axios.get("http://localhost:8080/get-products/IPH287373")
-            ]).then(axios.spread(function(resp1,resp2){
-                products.push(resp1.data);
-                products.push(resp2.data);
-                SetIsProductFetched(true)
-            }))
+            axios.all(urls).then(
+                axios.spread((res1,res2,res3,res4)=>{
+                    console.log("res1",res1);
+                    console.log("res2",res2);
+                    console.log("res3",res3);
+                    console.log("res4",res4);
+                    if(res1!=undefined){
+                        products.push(res1.data);
+                    }
+                    if(res2!=undefined){
+                        products.push(res2.data);
+                    }
+                    if(res3!=undefined){
+                        products.push(res3.data);
+                    }
+                    if(res4!=undefined){
+                        products.push(res4.data);
+                    }
+                    console.log("Products",products);                    
+                    SetIsProductFetched(true);
+                })
+            )
             
             
         }
