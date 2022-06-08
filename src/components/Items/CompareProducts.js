@@ -4,10 +4,19 @@ import { Row, Col, NavDropdown, Form, Button } from "react-bootstrap";
 import Header from "../Header";
 import "./CompareProducts.css"
 import { AiFillStar } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 
 
-const CompareProducts = () => {
+    const CompareProducts = () => {
+        const navigate = useNavigate();
+        const buyHandler = () => {
+            navigate("/AddressForm")
+    }
+    const CompareImgHandler = () => {
+        navigate("/productDetails")
+    }
+
     return (
         <div>
             <Header />
@@ -19,17 +28,17 @@ const CompareProducts = () => {
                     <h4>Redmi Note 11T 5G (8 GB RAM, 128 GB ROM, Stardust White) vs others</h4>
                 </Col>
                 <Col md={2}>
-                    <img style={{ width: "10rem", alignContent: "center" }} src="https://d2xamzlzrdbdbn.cloudfront.net/products/7d54e926-1b54-4e1c-8a5e-3041b01bbd9a22211119.jpg"></img>
+                    <img style={{ width: "10rem", alignContent: "center" }} onClick={CompareImgHandler} src="https://d2xamzlzrdbdbn.cloudfront.net/products/7d54e926-1b54-4e1c-8a5e-3041b01bbd9a22211119.jpg"></img>
 
                 </Col>
                 <Col md={2}>
-                    <img style={{ width: "10rem" }} src="https://d2xamzlzrdbdbn.cloudfront.net/products/13a5ea0f-9755-4451-a1c9-3d3ac19a9ae922240846.jpg"></img>
+                    <img style={{ width: "10rem" }} onClick={CompareImgHandler} src="https://d2xamzlzrdbdbn.cloudfront.net/products/13a5ea0f-9755-4451-a1c9-3d3ac19a9ae922240846.jpg"></img>
                 </Col>
                 <Col md={2}>
-                    <img style={{ background: "green" }}></img>
+                    <img style={{ background: "green" }} onClick={CompareImgHandler}></img>
                 </Col>
                 <Col md={2}>
-                    <img></img>
+                    <img onClick={CompareImgHandler}></img>
                 </Col>
                 <Col md={1}>
                 </Col>
@@ -40,16 +49,16 @@ const CompareProducts = () => {
 
                 </Col>
                 <Col md={2}>
-                    <h6 style={{ marginTop: "20px" }}>Redmi Note 11T 5G (8 GB RAM, 128 GB ROM, Stardust White)</h6>
+                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>Redmi Note 11T 5G (8 GB RAM, 128 GB ROM, Stardust White)</h6>
                 </Col>
                 <Col md={2}>
-                    <h6 style={{ marginTop: "20px" }}>Realme 9i (6 GB RAM, 128 GB ROM, Prism Blue)</h6>
+                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>Realme 9i (6 GB RAM, 128 GB ROM, Prism Blue)</h6>
                 </Col>
                 <Col md={2}>
-                    <h6 style={{ marginTop: "20px" }}>Add a product</h6>
+                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>Add a product</h6>
                 </Col>
                 <Col md={2}>
-                    <h6 style={{ marginTop: "20px" }}>Add a product</h6>
+                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>Add a product</h6>
                 </Col>
                 <Col md={1}></Col>
             </Row>
@@ -121,12 +130,12 @@ const CompareProducts = () => {
                 <Col md={2}>
                     <p className="ratingstar">3.5<AiFillStar /></p>
                     <p>2,039 Ratings & 169 Reviews</p>
-                    <a href="url">All 169 Reviews</a>
+                    <a href="onlyreviews">All 169 Reviews</a>
                 </Col>
                 <Col md={2}>
                     <p className="ratingstar">4.5<AiFillStar /></p>
                     <p>1,675 Ratings & 140 Reviews</p>
-                    <a href="url">All 140 Reviews</a>
+                    <a href="onlyreviews">All 140 Reviews</a>
                 </Col>
                 <Col md={2}>
                     <img style={{ background: "green" }}></img>
@@ -181,11 +190,11 @@ const CompareProducts = () => {
 
                 </Col>
                 <Col md={2}>
-                    <Button>BUY NOW</Button>
+                    <Button onClick={buyHandler}>BUY NOW</Button>
 
                 </Col>
                 <Col md={2}>
-                    <Button>BUY NOW</Button>
+                    <Button onClick={buyHandler}>BUY NOW</Button>
 
                 </Col>
                 <Col md={2}>

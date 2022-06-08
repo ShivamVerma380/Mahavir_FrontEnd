@@ -30,6 +30,10 @@ function App() {
   const[cookies,SetCookie] = useCookies(["modelNumsToCompare"])
 
   console.log("Cookies",cookies.CompareModels)
+  console.log("Cookies size",cookies.CompareModelsLength)
+
+  //SetCookie("CompareModels","IPH287373");
+
 
   // console.log("CompareModes",localStorage.getItem("CompareModels"));
 
@@ -102,6 +106,16 @@ function App() {
     }
   }
 
+  function getCompareBtn(){
+    var modelNumsToCompare = cookies.CompareModels;
+    var size = cookies.CompareModelsLength;
+    if(modelNumsToCompare!=undefined){
+      return(
+        <Button id="comparebtn">Compare{size}</Button>
+      )
+    }
+  }
+
   return (
     <div className="App" >
       
@@ -121,7 +135,12 @@ function App() {
       
        
       {/* <Button id="comparebtn">Compare{localStorage.getItem("comparecount")}</Button> */}
+      {
+        getCompareBtn()
+     }
     </div>
+    
+     
   );
 }
 

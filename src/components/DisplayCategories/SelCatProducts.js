@@ -30,14 +30,23 @@ const SelCatProducts=()=>{
 
     console.log(localStorage.getItem("Category"));
 
+    const [cookies,SetCookie] = useCookies(['modelNumsToCompare'])
+    const [isFormLoaded,SetIsFormLoaded] = useState(false)
+
+    console.log("Cookies",cookies.CompareModels)
+    console.log("Cookies size",cookies.CompareModelsLength)
 
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
-    const [change, setChange] = useState(0);
+    const [change, setChange] = useState(cookies.CompareModelsLength);
 
-    const [cookies,SetCookie] = useCookies(['modelNumsToCompare'])
+    if(cookies.CompareModels===undefined){
+        var str="";
+    }else{
+        var str= cookies.CompareModels+",";
+    }
     
    
-
+    
 
     //var token = localStorage.getItem("token");
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2QiLCJleHAiOjE2NTQ1ODYxNTgsImlhdCI6MTY1NDQ4NjE1OH0.BlxfpMI8rlFhna4lcqm_iZ6wyZlrX079KstVV8wv380";
@@ -64,6 +73,15 @@ const SelCatProducts=()=>{
     }
   
 
+    function getCompareBtn(){
+        var modelNumsToCompare = cookies.CompareModels;
+        var size = cookies.CompareModelsLength;
+        if(modelNumsToCompare!=undefined){
+          return(
+            <Button id="comparebtn">Compare</Button>
+          )
+        }
+      }
     
     useEffect(()=>{
         if(!isOfferPostersFetched){
@@ -114,8 +132,10 @@ const SelCatProducts=()=>{
 
     setTimeout(() => {
         console.log('Hello, World!')
+        //setCheckboxes()
+        //
         setIsTimeOut(true);
-    },500)
+    },1000)
 
     function callProductDetails(index){
         //alert(index);
@@ -131,6 +151,7 @@ const SelCatProducts=()=>{
     </div>
 
     const handleAddToCompare=event=>{
+        
         if (event.target.checked) {
 
             //console.log('✅ Checkbox is checked');
@@ -148,7 +169,7 @@ const SelCatProducts=()=>{
             console.log("ModelNumbers",modelNumsToCompare)
           }
 
-        var str="";
+        
         modelNumsToCompare.forEach(element=>{
             //console.log(element);
             str +=  element + ",";
@@ -157,9 +178,48 @@ const SelCatProducts=()=>{
         console.log(str);
         //localStorage.setItem("CompareModels",str);
         SetCookie('CompareModels',str,{path:'/'});
+        console.log('Compare Models',cookies.CompareModels)
+        SetCookie('CompareModelsLength',cookies.CompareModelsLength,{path:'/'});
         setisAddCompareClicked(current => !current);
     }
 
+    // const setCheckboxes=()=>{
+          
+
+    // }
+
+    const callFormCheck=(modelNumber)=>{
+        if(cookies.CompareModels===undefined || cookies.CompareModels===""){
+            //SetCookie("CompareModels","",{path:"/"});
+            return(
+                <Form>    
+                    <Form.Check id={modelNumber} type="checkbox" label = "Add To Compare" value={modelNumber} onChange={handleAddToCompare}/>
+                </Form>
+            );
+        }else{
+            var modelNums = cookies.CompareModels.split(',');
+            console.log("Model Nums",modelNums)
+        
+            if(modelNums.includes(modelNumber)){
+                return(
+                    <Form>    
+                        <Form.Check id={modelNumber} type="checkbox" label = "Add To Compare" value={modelNumber} onChange={handleAddToCompare} checked="true"/>
+                    </Form>
+                );
+            }
+            return(
+                <Form>    
+                    <Form.Check id={modelNumber} type="checkbox" label = "Add To Compare" value={modelNumber} onChange={handleAddToCompare}/>
+                </Form>
+            )
+
+        }
+        
+        
+        
+    }
+
+    var modelNums;
     return(
 
 
@@ -218,32 +278,28 @@ const SelCatProducts=()=>{
                                         {index.productDescription}
                                         <br></br><br></br><strong>Rs {index.productPrice}</strong>
                                         </Card.Text>
+                                        {
+                                            callFormCheck(index.modelNumber)
+                                        }
                                         
-                                        <Form>
-                                            <Form.Check type="checkbox" label = "Add To Compare" value={index.modelNumber} onChange={handleAddToCompare}/>
-                                        </Form>
+                                        
+                                        
                                         <br></br>
                                         <Button variant="flat" size="1">Buy</Button>
-                                      </Card.Body>
+                                        </Card.Body>
                                   </Card>
+                                  
                                   
                                 )
                               }):(null)
                     }
                     {
                         
-                            (change>0)?(
                              
-                                <Button id="comparebtn" onClick={CompareHandler}>Compare{change}</Button>
+                        getCompareBtn()
                               
-                              
-                            ):(
-                              <Button id="comparebtn" style={{visibility:"hidden"}}>Compare{change}</Button>
-                              
-                              
-                            )
-                          
                     }
+                   
                     </Row>  
                     </div>
                     </center>
