@@ -49,49 +49,6 @@ function ProductDetails(){
   // let name = localStorage.getItem("Name")
   // var storedProduct = JSON.parse(localStorage.getItem("product"))
   // var id = storedProduct[0].id
-
-  var quantity = 0;
-  var flag = false;
-
-  //var product = [];
-  var productImg1;
-  const [isProductFetched,setIsProductFetched]= useState(false);
-  const [product,setProduct] = useState([]);
-
-  const [imglinkfinal, setimage] = React.useState();
-  const [isImgLinkfinalSet,setIsImgLinkFinal] = React.useState();
-  var imglink;
-
-  useEffect(()=>{
-    //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
-    var token = localStorage.getItem("jwtToken");
-    if(localStorage.getItem("productSelected")!=null){
-      axios({
-        method:"get",
-        url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")
-      }).then(function(response){
-        console.log(response);
-        if(response.status==200){
-          console.log("response data",response.data);
-          //product= response.data;
-          setProduct(response.data);
-          setIsProductFetched(true);
-          imglink = product.productImage1;
-          console.log("Product Detail",product);
-          //productImg1 = 'data:image/jpg;base64,'+ product.productImage1.data;
-          //console.log("Product Image 1:",productImg1);
-          ImgHandler('data:image/jpg;base64,' +product.productImage1.data);
-          //setimage('data:image/jpg;base64,'+product.productImage1.data);
-          setIsImgLinkFinal(true);
-        }
-      }).catch(function(error){
-        console.log("error",error);
-        toast("Item already present in cart")
-      })
-    }
-    
-  },[]);
-
   var productList = [
     {
       "id":1,
@@ -159,6 +116,50 @@ function ProductDetails(){
 "description":"OxygenOS based on Android™ 12"
 }]
 
+  var quantity = 0;
+  var flag = false;
+
+  //var product = [];
+  var productImg1;
+  const [isProductFetched,setIsProductFetched]= useState(false);
+  const [product,setProduct] = useState([]);
+
+  const [imglinkfinal, setimage] = React.useState();
+  const [isImgLinkfinalSet,setIsImgLinkFinal] = React.useState();
+  var imglink;
+
+  useEffect(()=>{
+    //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
+    var token = localStorage.getItem("jwtToken");
+    if(localStorage.getItem("productSelected")!=null){
+      axios({
+        method:"get",
+        url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")
+      }).then(function(response){
+        console.log(response);
+        if(response.status==200){
+          console.log("response data",response.data);
+          //product= response.data;
+          setProduct(response.data);
+          setIsProductFetched(true);
+          imglink = product.productImage1;
+          console.log("Product Detail",product);
+          setimage(imglink);
+          //productImg1 = 'data:image/jpg;base64,'+ product.productImage1.data;
+          //console.log("Product Image 1:",productImg1);
+          ImgHandler('data:image/jpg;base64,' +product.productImage1.data);
+          //setimage('data:image/jpg;base64,'+product.productImage1.data);
+          setIsImgLinkFinal(true);
+        }
+      }).catch(function(error){
+        console.log("error",error);
+        toast("Item already present in cart")
+      })
+    }
+    
+  },[]);
+
+ 
   
   const notify=()=>{
     return(
@@ -269,46 +270,46 @@ function ProductDetails(){
       <div className="container">
       <Row >
         <Col md={6}>
-        <div >
-      <Row >
-        <Col md={2} >
-          <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  style={{ width: "90px", height: "100px" }} />
-          <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
-          <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
-          <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage4.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage4.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
-          <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+          <div >
+          <Row style={{position:"fixed"}}>
+            <Col md={2} >
+              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  style={{ width: "90px", height: "100px" }} />
+              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage4.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage4.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
+              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
 
-        </Col>
+            </Col>
 
-        <Col className="imageproduct" md={4} style={{marginTop: "100px", justifyContent: "center"}}>
-          <br></br>
-          <br></br>
+            <Col className="imageproduct" md={4} style={{marginTop: "100px", justifyContent: "center"}}>
+              <br></br>
+              <br></br>
 
-          <div style={{ width: '400px', height: '513px' }}>
-            {/* width:'400px',height:'513px'      */}
-            
-            
-            <ReactImageMagnify {...{
-              smallImage: {
-                alt: 'Wristwatch by Ted Baker London',
-                isFluidWidth: true,
-                src:  imglinkfinal,
+              <div style={{ width: '400px', height: '513px' }}>
+                {/* width:'400px',height:'513px'      */}
                 
                 
-              },
-              largeImage: {
-                src: imglinkfinal,
-                width: 800,
-                height: 800
+                <ReactImageMagnify {...{
+                  smallImage: {
+                    alt: 'Wristwatch by Ted Baker London',
+                    isFluidWidth: true,
+                    src:  imglinkfinal,
+                    
+                    
+                  },
+                  largeImage: {
+                    src: imglinkfinal,
+                    width: 800,
+                    height: 800
 
-                // width: 1200, height: 1800
-              }
-            }} />
+                    // width: 1200, height: 1800
+                  }
+                }} />
 
+              </div>
+              </Col>
+          </Row >
           </div>
-          </Col>
-        </Row >
-        </div>
      
         </Col>
         <Col md={6}>
@@ -463,10 +464,9 @@ function ProductDetails(){
             <UserReviewRating />
             <UserReviewRating />
           </Row>
-        </Col>
-
-      </Row>
-      <br></br>
+          <br></br>
+          <Row>
+          <br></br>
       <br></br>
       <br></br>
         <h4 className="text" style={{marginLeft:"20px"}}>Similar Products</h4>
@@ -480,10 +480,10 @@ function ProductDetails(){
           loopFillGroupWithBlank={true}
           breakpoints={{
             700: {
-              slidesPerView: 6,
+              slidesPerView: 3,
             },
             400: {
-              slidesPerView: 3,
+              slidesPerView: 1,
             },
           }}
           pagination={{
@@ -521,6 +521,11 @@ function ProductDetails(){
       </Row>
       <br></br>
 
+          </Row>
+        </Col>
+
+      </Row>
+      
     </div>
     </>
     ):(null)

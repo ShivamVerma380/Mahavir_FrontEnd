@@ -73,38 +73,9 @@ function Message(props)
 }
 
 // Login Component
-function SendOTP(props)
-{
-    
-return(
-    
-        <Button onClick = {props.clickFunc}>
-            Send OTP
-        </Button>
- 
-
-	);
-}
 
 // Logout Component
-function SubmitOTP(props)
-{
 
-	return(
-        <Form className="OTPform">
-        <Form.Group className="mb-3" >
-        <Button type="submit" variant="flat" size="1" onClick = {props.clickFunc}>
-                            Verify OTP
-                        </Button>
-                </Form.Group>
-        </Form>
-    
-            
-            
-       
-		
-	);
-}
 
 function Register(props){
     const navigate = useNavigate();
@@ -149,33 +120,41 @@ function Register(props){
                 <Col md={4}>
                 </Col>
                 <Col md={4}>
-                    <h4>Please Complete Registration</h4>
+                    {/* <h4>Please Complete Registration</h4> */}
                     <br></br>
-                    <Form>
+                    <div className="register-form" >
+                    <h1 className="title">Register Here</h1>
+                    <hr></hr>
+                        {/* <p style={{color:"white"}}>Enter your Email</p> */}
+                        <div className="fields">
+                    
                         <FormGroup>
-                            <Label id="label-first-name" for="label-first-name">Enter your First Name</Label>
+                            <Label id="label-first-name" for="label-first-name" >Enter your First Name</Label>
                             <br></br>
-                            <Input id="first-name" name="first-name" placeholder="Omkar" type="name" onChange={inputFirstNameEvent}/>
+                            <Input id="first-name" name="first-name" placeholder="Omkar" type="name"className="input" onChange={inputFirstNameEvent}/>
                             <br></br>
                             <Label id="label-last-name" for="label-last-name">Enter your Last Name</Label>
                             <br></br>
-                            <Input id="last-name" name="last-name" placeholder="Khare" type="name" onChange={inputLastNameEvent}/>
+                            <Input id="last-name" name="last-name" placeholder="Khare" type="name"className="input" onChange={inputLastNameEvent}/>
                             <br></br>
                             <Label id="label-phoneNo" for="label-phoneNo">Enter your Phone Number</Label>
                             <br></br>
-                            <Input id="phoneNo" name="phoneNo" placeholder="92833824932" type="number" onChange={inputPhoneNumberEvent}/>
+                            <Input id="phoneNo" name="phoneNo" placeholder="92833824932" type="number"className="input" onChange={inputPhoneNumberEvent}/>
                             <br></br>
                             <Label id="label-password" for="label-password">Enter your Password</Label>
                             <br></br>
-                            <Input id="password" name="password" placeholder="********" type="password" onChange={inputPasswordEvent}/>
+                            <Input id="password" name="password" placeholder="********" type="password" className="input"onChange={inputPasswordEvent}/>
                             <br></br>
                             <Label id="label-confirm-password" for="label-confirm-password">Confirm Password</Label>
                             <br></br>
-                            <Input id="confirm-password" name="confirm-password" placeholder="******" type="password" onChange={inputConfirmPasswordEvent}/>
+                            <Input id="confirm-password" name="confirm-password" placeholder="******" type="password"className="input" onChange={inputConfirmPasswordEvent}/>
                         </FormGroup>
-                    </Form>
+                    </div>
                     <br></br>
-                    <Button onClick={props.clickFunc}>Register</Button> 
+                    <div className="submit-container">
+                    <Button className="login-button" onClick={props.clickFunc}>Register</Button> 
+                    </div>
+                    </div>
                 </Col>       
             </Row>
             </div>
@@ -190,7 +169,7 @@ class EmailAuth extends React.Component{
 	{
 		super(props);
 
-		this.state = {isOTPSent : false, isEmailVerified:false, isRegistered:false};
+		this.state = {isOTPSent : true, isEmailVerified:true, isRegistered:false};
 
 		this.ifSendOtpClicked = this.ifSendOtpClicked.bind(this);
 		this.ifSubmitOtpClicked = this.ifSubmitOtpClicked.bind(this);
@@ -325,21 +304,6 @@ class EmailAuth extends React.Component{
         }
 
         
-        
-
-		return(
-			<div>
-				<Message isOTPSent = {this.state.isOTPSent}/>
-				
-				{
-					(this.state.isOTPSent)?(
-					<SubmitOTP clickFunc = {this.ifSubmitOtpClicked} />
-					) : (
-					<SendOTP clickFunc = {this.ifSendOtpClicked} />
-					)
-                }
-			</div>				
-			);
 	}
 }
 

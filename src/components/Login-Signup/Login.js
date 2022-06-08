@@ -18,6 +18,12 @@ var otp = "123456";
 var inputOtpByUser ="";
 var isUserLoggedIn = false;
 var name = ""
+var firstName = "";
+var lastName = "";
+var phoneNo = "";
+var password2 = "";
+var confirmPassword = "";
+
 localStorage.setItem("isUserLoggedIn",isUserLoggedIn);
 
 function Login(){  
@@ -25,7 +31,7 @@ function Login(){
     
     const [isOTPSent,setIsOTPSent] = useState(true);
     const [isOTPNotVerified,setIsOTPNotVerified] = useState(true);
-    //const [isUserRegistered,setIsUserRegistered] = useState(false);
+    const [isUserRegistered,setIsUserRegistered] = useState(false);
     let token = localStorage.getItem("jwtToken");
     console.log("token",token); 
  
@@ -47,7 +53,32 @@ function Login(){
         name = event.target.value;
     }
 
-    
+    const inputFirstNameEvent=(event)=>{
+        console.log("In input first name event");
+        firstName = event.target.value;
+        console.log("First Name:",firstName);
+    }
+
+    const inputLastNameEvent=(event)=>{
+        console.log("In input last name event");
+        lastName = event.target.value;
+        console.log("Last Name:",lastName);
+    }
+    const inputPhoneNumberEvent=(event)=>{
+        console.log("In input phone Number event");
+        phoneNo = event.target.value;
+        console.log("Phone Number:",phoneNo);
+    }
+    const inputPassword2Event=(event)=>{
+        console.log("In input password event");
+        password = event.target.value;
+        console.log("Password:",password);
+    }
+    const inputConfirmPasswordEvent=(event)=>{
+        console.log("In input confirm password event");
+        confirmPassword = event.target.value;
+        console.log("Confirm Password:",confirmPassword);
+    }
 
 
     const homepage=()=>{
@@ -96,8 +127,8 @@ function Login(){
     
     const switchForm = (form) => {
         const formContainer = document.querySelector(".form-body");
-    const loginForm = document.querySelector("#sign-in-form");
-    const registerForm = document.querySelector("#sign-up-form");
+        const loginForm = document.querySelector("#sign-in-form");
+        const registerForm = document.querySelector("#sign-up-form");
         console.log(form);
         if(form === 'register'){
             if(window.innerWidth > 800){
@@ -164,7 +195,11 @@ function Login(){
        }else{
            alert("User Registered successfully")
        }
+       
+       navigate("/email-auth");
+       <EmailAuth/>
    }
+   
    
 return(
     <div>
@@ -221,23 +256,26 @@ return(
             {
                 (isOTPSent)?(
                         <div className="form" id="sign-up-form">
-                        <h1 className="title">Sign up</h1>
+                        <h1 className="title">Sign up</h1>.
+                        {/* <p style={{color:"white"}}>Enter your Email</p> */}
                         <div className="fields">
-                            <h1>Enter your Email</h1>
                                 <FormGroup>
-                                    <Label id="email-input" for="email">Email</Label>
+                                    <Label id="email-input" for="email"></Label>
                                     <br></br>
-                                    <Input id="email" name="email" placeholder="Enter email" type="email" onChange={inputEmailEvent}/>
+                                    <Input id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent}/>
                                 </FormGroup>
         
                         </div>
-                        <button className="send-email" onClick={()=>sendOTP()}>Send OTP on Email</button>
-                        <br></br><br></br>
-                        <h6>
-                        <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
-                        </h6>
+                        <div className="submit-container">
+                            <Button className="login-button" onClick={()=>sendOTP()}>Send OTP on Email</Button>
+                            <br></br><br></br>
+                            <h6>
+                            <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
+                            </h6>
+                        </div>
                         </div>
                     ):(
+                        
                         (isOTPNotVerified)?(
                         <div className="form" id="sign-up-form">
                         <h1 className="title">Verify your OTP</h1>
@@ -246,33 +284,38 @@ return(
                                 <FormGroup>
                                     <Label for="otp-input" id="Enter-otp-input">Enter OTP</Label>
                                     <br></br>
-                                    <Input  id="otp" name="otp" placeholder="Enter OTP" type="number" onChange={inputOTPEvent}/>
+                                    <Input  id="otp" name="otp" placeholder="Enter OTP" type="number" className="input" onChange={inputOTPEvent}/>
                                 </FormGroup>
 
                         </div>
-                        <button className="send-otp" onClick={()=>verifyOTP()}>Verify OTP</button>
-                        <br></br><br></br>
-                        <h6>
-                        <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
-                        </h6>
+                            <div className="submit-container">
+                                <Button className="login-button" onClick={()=>verifyOTP()}>Verify OTP</Button>
+                            <br></br><br></br>
+                            
+                            <h6>
+                            <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
+                            </h6>
+                            </div>
                         </div>
                         ):(
                             <div className="form" id="sign-up-form">
                             <h1 className="title">User Registration</h1>
                             <div className="fields">
-                                <h1>Enter your Name</h1>
+                                <p style={{color:"white",textAlign:"left",marginLeft:"50px",fontSize:"15px"}}>Enter your Name</p>
                                     <FormGroup>
                                         <Label id="name-input" for="name">Name</Label>
                                         <br></br>
-                                        <Input id="name" name="name" placeholder="Enter name" type="name" onChange={inputNameEvent}/>
+                                        <Input id="name" name="name" placeholder="Enter name" type="name" className ="input" onChange={inputNameEvent}/>
                                     </FormGroup>
             
                             </div>
-                            <button className="send-email" onClick={()=>registerUser()}>Register User</button>
-                            <br></br><br></br>
-                            <h6>
-                            <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
-                            </h6>
+                                <div className="submit-container">
+                                <Button className="login-button" onClick={()=>registerUser()}>Register User</Button>
+                                <br></br><br></br>
+                                <h6>
+                                <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
+                                </h6>
+                                </div>
                             </div>
 
                         )
