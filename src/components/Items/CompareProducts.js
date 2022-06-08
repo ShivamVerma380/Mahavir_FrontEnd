@@ -1,12 +1,14 @@
 import { Checkbox } from "material-ui";
 import React, { useEffect, useState } from "react";
-import { Row, Col, NavDropdown, Form, Button } from "react-bootstrap";
+import { Row, Col, NavDropdown, Form, Button, Container } from "react-bootstrap";
 import Header from "../Header";
 import "./CompareProducts.css"
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { propTypes } from "react-bootstrap/esm/Image";
+import { SliderValueLabelUnstyled } from "@mui/base";
+import RowComponent from "./RowComponent";
 
 
 
@@ -57,64 +59,6 @@ const CompareProducts = () => {
     })
 
 
-    // async function getData(){
-    //     var productsArray = [];
-    //     var modelNumbers = localStorage.getItem("CompareModels").split(',');
-    //     console.log("Model Numbers",modelNumbers);
-    
-    //     modelNumbers.map(index=>{
-    //         if(index!=""){
-    //             try {
-    //                 axios.get("http://localhost:8080/get-products/"+index)
-    //                 .then(promise=>{
-    //                     productsArray.push(promise.data);
-    //                 }).catch(e=>{
-    //                     console.log(e);
-    //                 })
-    //             } catch (error) {
-    //                 console.log(error);
-    //             }
-                
-    //         }
-    //     })
-    //     return  productsArray;
-    // }
-
-    // useEffect(()=>{
-    //     if(!isProductsFetched){
-    //         (async()=>{
-    //             const data = await getData();
-    //             setProducts(data);
-    //             SetIsProductFetched(true);
-    //         })();
-    //     }
-    // },[]);
-
-    // useEffect(()=>{
-    //     if(!isProductsFetched){
-    //         var modelNumbers = localStorage.getItem("CompareModels").split(',');
-    //         console.log(modelNumbers);
-    //         modelNumbers.map(index=>{
-    //             if(index!=""){
-    //                 axios({
-    //                     method:"get",
-    //                     url:"http://localhost:8080/get-products/"+index
-    //                 }).then(function(response){
-    //                     if(response.status==200){
-    //                         console.log(response.data);
-                            
-    //                         products.push(response.data);
-    //                     }
-    //                 }).catch(function(error){
-    //                     console.log(error);
-    //                 })
-    //             }
-    //         })
-    //         SetIsProductFetched(true);
-    //         // console.log("products",products);
-    //     }
-    // })
-
     const buyHandler = () => {
         navigate("/AddressForm")
     }
@@ -122,7 +66,64 @@ const CompareProducts = () => {
         navigate("/productDetails")
     }
 
+    const [productTitles,SetProductTitles]=useState([]);
+    const [productSubTitles,SetProductSubTitles] = useState(new Map());
+
+    const [isProductTitlesFetched,SetIsProductTitlesFetched] = useState(false)
     
+
+    const [subItems,SetSubItems] = useState(new Map());
+
+    const [indexes,SetIndexes] = useState([]);
+    
+    var productInformation;
+    const getProductInformation=()=>{
+        if(!isProductTitlesFetched){
+            productInformation = products[0].productInformation;
+            console.log("productInfo",productInformation);
+            var i=0;
+            for(var key in products[0].productInformation){
+                console.log("key",key)
+                productTitles.push(key);
+                
+                for(var k in products[0].productInformation[key]){
+                    SetSubItems(new Map(subItems.set(k,products[0].productInformation[key][k])))
+                    i++;
+                }
+                indexes.push(i);
+            }
+            console.log("ProductSubTitles",subItems);
+            // console.log("NewArr",newArr);
+            
+            SetIsProductTitlesFetched(true);
+
+            console.log("ProductTitles",productTitles);
+        }
+    }
+
+    const [keys,SetKey] = useState([]);
+    const [value,SetValue] = useState([]);
+    const [isKeysFetched,SetIsKeysFetched] = useState(false);
+    
+    const getSubItems=()=>{
+        if(!isKeysFetched){
+
+            // for(var k  of Object.keys(subItems)){
+            //     console.log("key",k);
+            //     keys.push(k);
+            //     value.push(subItems[k]);
+            // }
+            
+            [...subItems.keys()].map(index=>{
+                keys.push(index);
+                value.push(subItems.get(index))
+                
+            })
+            console.log("Keys",keys);
+            console.log("Value",value);
+            SetIsKeysFetched(true);
+        }
+    }
 
     return (    
         
@@ -140,11 +141,11 @@ const CompareProducts = () => {
                     <h4>{products[0].productName} vs others</h4>
                 </Col>
                 <Col md={2}>
-                    <img style={{ width: "10rem", alignContent: "center" }} onClick={CompareImgHandler} src="https://d2xamzlzrdbdbn.cloudfront.net/products/7d54e926-1b54-4e1c-8a5e-3041b01bbd9a22211119.jpg"></img>
+                    <img style={{ width: "10rem", alignContent: "center" }} onClick={CompareImgHandler} src={'data:image/jpg;base64,' + products[0].productImage1.data}></img>
 
                 </Col>
                 <Col md={2}>
-                    <img style={{ width: "10rem" }} onClick={CompareImgHandler} src="https://d2xamzlzrdbdbn.cloudfront.net/products/13a5ea0f-9755-4451-a1c9-3d3ac19a9ae922240846.jpg"></img>
+                    <img style={{ width: "10rem" }} onClick={CompareImgHandler} src={'data:image/jpg;base64,' + products[1].productImage1.data}></img>
                 </Col>
                 <Col md={2}>
                     <img style={{ background: "green" }} onClick={CompareImgHandler}></img>
@@ -161,10 +162,10 @@ const CompareProducts = () => {
 
                 </Col>
                 <Col md={2}>
-                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>Redmi Note 11T 5G (8 GB RAM, 128 GB ROM, Stardust White)</h6>
+                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>{products[0].productName}</h6>
                 </Col>
                 <Col md={2}>
-                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>Realme 9i (6 GB RAM, 128 GB ROM, Prism Blue)</h6>
+                    <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>{products[1].productName}</h6>
                 </Col>
                 <Col md={2}>
                     <h6 style={{ marginTop: "20px" }} onClick={CompareImgHandler}>Add a product</h6>
@@ -185,10 +186,10 @@ const CompareProducts = () => {
                     </Form>
                 </Col>
                 <Col md={2}>
-                    <h6 style={{}}>₹17,990</h6>
+                    <h6 style={{}}>{products[0].productPrice}</h6>
                 </Col>
                 <Col md={2}>
-                    <h6>₹15,999</h6>
+                    <h6>{products[1].productPrice}</h6>
                 </Col>
                 <Col md={2}>
                     <NavDropdown title="Choose Brand"></NavDropdown>
@@ -265,26 +266,27 @@ const CompareProducts = () => {
                     <h6>Highlights</h6>
                 </Col>
                 <Col md={2}>
-                    <p>6 GB RAM | 128 GB ROM</p>
+                    {/* <p>6 GB RAM | 128 GB ROM</p>
                     <p>16.76 cm (6.6 inch) Display</p>
                     <p>50MP + 2MP + 2MP | 16MP Front Camera</p>
                     <p>5000 mAh Lithium ion Battery</p>
                     <p>Qualcomm Snapdragon 680 (SM6225)</p>
                     <p>Processor</p>
                     <p>Warranty: 1 Year Manufacturer Warranty for Phone and 6 Months Warranty for in the Box Accessories</p>
-                    <p>Returns: 7 Days Replacement Policy</p>
-
+                    <p>Returns: 7 Days Replacement Policy</p> */}
+                    <p>{products[0].productDescription}</p>   
+                    {/* Highlights should be seperated by . and split here */}
                 </Col>
                 <Col md={2}>
-                    <p>6 GB RAM | 128 GB ROM | Expandable Upto 1 TB</p>
+                    {/* <p>6 GB RAM | 128 GB ROM | Expandable Upto 1 TB</p>
                     <p>16.76 cm (6.6 inch) Full HD+ Display</p>
                     <p>50MP Rear Camera</p>
                     <p>5000 mAh Battery</p>
                     <p>Octa Core Processor</p>
                     <p>Warranty: 12 months</p>
-                    <p>Returns: 7 Days Replacement Policy</p>
-
-
+                    <p>Returns: 7 Days Replacement Policy</p> */}
+                    <p>{products[1].productDescription}</p>
+                    {/* Highlights should be seperated by . and split here */}
                 </Col>
                 <Col md={2}>
 
@@ -383,751 +385,79 @@ const CompareProducts = () => {
             <Row>
                 <Col md={1}>
                 </Col>
-                <Col md={2}>
-                    <h5>GENERAL FEATURES</h5>
-                </Col>
-
             </Row>
             <Row>
                 <Col md={1}>
                 </Col>
-                <Col md={2}>
-                    <h6>SIM Size</h6>
-                </Col>
-                <Col md={2}>
+                {
+                    getProductInformation()
+                }
+                
+                    
+                    <Col md={2}>
+                        {/* {
+                            productTitles.map(index=>{
+                                return(
+                                    <h5>{index}</h5>  
+                                );                              
+                            })
 
+                        } */}
+                    </Col>
+                    <Col md={2}>
 
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
+                        {
+                            getSubItems()
+                        }
+                        
+                        {/* {
+                            
+                            keys.map((v,index)=>{
+                                return(
+                                    <h6>{v}:{value[index]}</h6>
+                                )
+                                
+                                // if(indexes<2){
+                                //     return(
+                                //         <h6>{v}:{value[index]}</h6>
+                                //     )
+                                // }
+                                // else if(indexes<4){
+                                //     return(
+                                //         <div>
+                                //             <br></br>
+                                //             <h6 style={{color:"blue"}}>{v}:{value[index]}</h6>
+                                            
+                                //         </div>
+                                //     )
+                                // }
+                                // else{
+                                //     return(
+                                //         <div>
+                                //             <br></br>
+                                //             <h6 style={{color:"red"}}>{v}:{value[index]}</h6>
+                                //         </div>
+                                //     )
+                                // }
+                            })
+                        }
+                         */}
+                        
+                        
+                    </Col>
+                
             </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>SIM Type</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Network Type</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Battery Capacity</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Sensors</h6>
-                    <br></br>
-                </Col>
-
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h5>PLATFORM & PERFORMANCE</h5>
-                </Col>
-
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>OS</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Processor</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>RAM</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Graphics</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Sensors</h6>
-                    <br></br>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h5>CAMERA</h5>
-                </Col>
-
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Primary Camera</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Front Camera</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Flash</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Zoom</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Video Recording</h6>
-                    <br></br>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h5>DISPLAY</h5>
-                </Col>
-
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Resolution</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Features</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>RAM</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Graphics</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Sensors</h6>
-                    <br></br>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h5>STORAGE</h5>
-                </Col>
-
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Internal Memory</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Expandable Memory</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>RAM</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Graphics</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Sensors</h6>
-                    <br></br>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h5>CONNECTIVITY FEATURES</h5>
-                </Col>
-
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>USB</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>WiFi</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Bluetooth</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Graphics</h6>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}>
-                </Col>
-                <Col md={2}>
-                    <h6>Sensors</h6>
-                    <br></br>
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={2}>
-
-                </Col>
-                <Col md={1}>
-                </Col>
-            </Row>
+            {
+            (isKeysFetched)?(
+                <div>
+                <RowComponent title={productTitles[0]} keys={keys} value={value} />
+                <Container>
+                    <hr></hr>
+                </Container>
+                <RowComponent title={productTitles[1]} keys={keys} value={value} />
+                </div>
+            ):(null)
+            }
 
         </div>
         ):(
