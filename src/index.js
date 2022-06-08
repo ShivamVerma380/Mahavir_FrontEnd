@@ -24,6 +24,7 @@ import SelCatProducts from './components/DisplayCategories/SelCatProducts';
 import OfferItems from './components/offers/OfferItems';
 import CompareProducts from './components/Items/CompareProducts';
 import UploadExcel from './components/Admin/Sidebar/UploadExcel';
+import { CookiesProvider } from 'react-cookie';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -34,6 +35,7 @@ root.render(
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
+  <CookiesProvider>
   <BrowserRouter>
     <Routes>
       <Route path='/' element={<App/>}/>
@@ -55,6 +57,7 @@ root.render(
       <Route path='/upload' element = {<UploadExcel/>}/>
     </Routes>
   </BrowserRouter>
+  </CookiesProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

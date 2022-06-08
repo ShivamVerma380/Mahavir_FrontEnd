@@ -11,6 +11,7 @@ import "../styles.css"
 import Carousel from 'react-bootstrap/Carousel';
 import Header from "../Header";
 import NavbarOffcanvas from "react-bootstrap/esm/NavbarOffcanvas";
+import { useCookies } from "react-cookie";
 
 
 var modelNumsToCompare = new Set();
@@ -32,6 +33,8 @@ const SelCatProducts=()=>{
 
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
+
+    const [cookies,SetCookie] = useCookies(['modelNumsToCompare'])
     
    
 
@@ -152,7 +155,8 @@ const SelCatProducts=()=>{
         })
         str = str.slice(0,str.length-1);
         console.log(str);
-        localStorage.setItem("CompareModels",str);
+        //localStorage.setItem("CompareModels",str);
+        SetCookie('CompareModels',str,{path:'/'});
         setisAddCompareClicked(current => !current);
     }
 

@@ -11,6 +11,7 @@ import ShowSearchResults from './components/ShowSearchResults';
 import Test from './components/Test';
 import { Button } from 'react-bootstrap';
 import AddItem from './components/Test/AddItem';
+import { Cookies, useCookies } from 'react-cookie';
 
 
 function App() {
@@ -26,7 +27,11 @@ function App() {
 
   localStorage.setItem("comparecount",0)
 
-  console.log("CompareModes",localStorage.getItem("CompareModels"));
+  const[cookies,SetCookie] = useCookies(["modelNumsToCompare"])
+
+  console.log("Cookies",cookies.CompareModels)
+
+  // console.log("CompareModes",localStorage.getItem("CompareModels"));
 
 
   var Auth = "Bearer "+localStorage.getItem("jwtToken");
