@@ -355,7 +355,7 @@ function ProductDetails(){
           <Row>
             <Col md={6}>
 
-              <h4>Take Your Photos Further. And Wider.</h4>
+              <h4>Take Your Photos </h4>
               <p>The iPhone 11 features dual 12 MP Ultra Wide (13mm) and Wide (26mm) cameras with 4K video recording up to 60 fps. The Ultra Wide camera provides 120° field of view, letting you capture four times more scene, and the Wide camera provides 100% Focus Pixels for up to three times faster autofocus in low light.</p>
             </Col>
             <Col md={2}>

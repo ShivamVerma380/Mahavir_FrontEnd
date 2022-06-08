@@ -126,8 +126,9 @@ function Product({title,productList}){
                     <Card.Body >
                     <Card.Title as="h6"  onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
                     <Card.Text onClick={()=>callProductDetails(index)} >
-                    {index.productDescription}
-                    <br></br><b>Rs {index.productPrice}</b>
+                    {/* {index.productDescription}
+                    <br></br> */}
+                    <b>Rs {index.productPrice}</b>
                     </Card.Text>
                     <Form>
                       <Form.Check type="checkbox" id = "default-checkbox" label = "Add To Compare" onChange={handleAddToCompare}/>
@@ -154,11 +155,11 @@ function Product({title,productList}){
       {
       (change>0)?(
        
-          <Button id="comparebtn" onClick={CompareHandler}>Compare{change}</Button>
+          <Button id="comparebtn" onClick={CompareHandler}>Compare<span> </span>:<span> </span>{change}</Button>
         
         
       ):(
-        <Button id="comparebtn" style={{visibility:"hidden"}}>Compare{change}</Button>
+        <Button id="comparebtn" style={{visibility:"hidden"}}>Compare<span> </span>:<span> </span>{change}</Button>
         
         
       )

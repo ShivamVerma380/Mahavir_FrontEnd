@@ -50,6 +50,7 @@ root.render(
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
       <Route path='/offers' element={<OfferItems/>}/>
       <Route path='/compareproducts' element={<CompareProducts/>}/>
+      {/* <Route path="/SearchBar" element={<SearchBar/>}/> */}
 
       
 

@@ -5,7 +5,7 @@ import '../App.css';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar,FormControl,Container,NavLink,Button,Form,NavDropdown, Nav,Offcanvas} from 'react-bootstrap';
-
+import SearchBar from "./SearchBar"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import FormData from "form-data"; 
 import axios from "axios";
@@ -103,8 +103,10 @@ const Header = () => {
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
+          
             <Nav className="justify-content-end flex-grow-1 pe-3">
-            <Form className="d-flex">
+            <SearchBar/>
+            {/* <Form className="d-flex">
                     <FormControl
                     type="search"
                     placeholder="Search"
@@ -112,7 +114,7 @@ const Header = () => {
                     aria-label="Search"
                     />
                     <Nav.Link href="#action1"><i class="fa fa-search icon" ></i></Nav.Link> 
-                </Form>
+                </Form> */}
                 <NavLink><i class="fa fa-user"  onClick={callAdmin}>Admin</i></NavLink>
                 <Nav.Link><i  class="fa fa-map-marker" >Pune</i></Nav.Link>
                 {(isUserLoggedIn)?null:(<Nav.Link><i class="fa fa-user"  onClick={callLogin}></i></Nav.Link>)}   
