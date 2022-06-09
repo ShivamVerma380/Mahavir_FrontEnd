@@ -13,7 +13,7 @@ const OrderSummary = () => {
     return (
         <div>
             <h1 style={{textAlign:"center",marginTop:"40px"}}>Order Summary</h1>
-        <Table style={{marginLeft:"400px",marginTop:"100px"}}>
+     {/* <Table style={{marginLeft:"400px",marginTop:"100px"}}>
                 <tbody>
                     <tr>
                     <td style={{textAlign:"center"}}><img  style={{height:"200px", width:"200px"}} src = {"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg"}/>
@@ -43,9 +43,17 @@ const OrderSummary = () => {
                     <td></td>
                     </tr>
                 </tbody>
-        </Table>
+        </Table> */}
+        <Row>
+            <Col md={5}></Col>
+            <Col md={2}><img style={{height:"200px", width:"200px", marginTop:50}} src = {"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg"}></img></Col>
+            <Col md={2} style={{fontWeight:"bold", fontSize:20, marginTop:50}}>Iphone11</Col>
+            <Row>
+            <p style={{paddingTop:"5px"}}>Rs.20000</p>
+            </Row>
+        </Row>
         <center>
-        <Button onClick={PaymentHandler}>Proceed</Button>
+        <Button onClick={PaymentHandler} style={{marginTop:50}}>Proceed</Button>
         </center>
         
         </div>

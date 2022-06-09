@@ -154,11 +154,11 @@ function Product({title,productList}){
       {
       (change>0)?(
        
-          <Button id="comparebtn" onClick={CompareHandler}>Compare{change}</Button>
+          <Button id="comparebtn" onClick={CompareHandler}>Compare<span> </span>:<span> </span>{change}</Button>
         
         
       ):(
-        <Button id="comparebtn" style={{visibility:"hidden"}}>Compare{change}</Button>
+        <Button id="comparebtn" style={{visibility:"hidden"}}>Compare<span> </span>:<span> </span>{change}</Button>
         
         
       )

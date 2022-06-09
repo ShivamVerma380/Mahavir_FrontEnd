@@ -35,7 +35,11 @@
   border: 0;
   font-family: "Roboto", sans-serif;
 }
-
+.form-field:focus{
+  
+  border: 1;
+  border-color: rgb(255, 88, 88);
+}
 span {
   font-family: "Roboto", sans-serif;
   font-size: 10px;
@@ -53,7 +57,7 @@ input {
 }
 
 button {
-  background: #8d8d8c;
+  background: rgb(255, 88, 88);
   color: white;
   cursor: pointer;
 }

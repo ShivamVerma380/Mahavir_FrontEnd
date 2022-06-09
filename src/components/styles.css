@@ -179,8 +179,9 @@ body {
   padding-right: 30px;
   padding-top: 5px;
   padding-bottom: 5px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size:25px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* font-family: 'Courier New', Courier, monospace; */
+  font-size:17px;
   z-index: 9999;
   margin: 10px;               
   bottom:0;                        
