@@ -269,9 +269,9 @@ function ProductDetails(){
       <div className="container">
       <Row >
         <Col md={6}>
-        <div >
+        
       <Row >
-        <Col md={2} >
+        <Col md={2} style={{marginRight:"px", paddingTop: "100px"}}>
           <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  style={{ width: "90px", height: "100px" }} />
           <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
           <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
@@ -280,7 +280,7 @@ function ProductDetails(){
 
         </Col>
 
-        <Col className="imageproduct" md={4} style={{marginTop: "100px", justifyContent: "center"}}>
+        <Col className="imageproduct" md={4} style={{marginTop: "100px" ,justifyContent: "center"}}>
           <br></br>
           <br></br>
 
@@ -308,7 +308,7 @@ function ProductDetails(){
           </div>
           </Col>
         </Row >
-        </div>
+        
      
         </Col>
         <Col md={6}>
@@ -469,8 +469,13 @@ function ProductDetails(){
       <br></br>
       <br></br>
       <br></br>
-        <h4 className="text" style={{marginLeft:"20px"}}>Similar Products</h4>
-      <Row>
+        
+      
+      <br></br>
+
+    </div>
+    <h4 className="textsimilar" style={{marginLeft:"20px"}}>Similar Products</h4>
+    <Row>
         
         <Swiper
           slidesPerView={1}
@@ -519,9 +524,6 @@ function ProductDetails(){
         </Swiper>
 
       </Row>
-      <br></br>
-
-    </div>
     </>
     ):(null)
     

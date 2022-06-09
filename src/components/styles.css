@@ -157,12 +157,7 @@ body {
   
 }
 
-.productdetailimg:hover {
-  border: solid 5px rgba(0, 110, 255, 0.767);
-  /* transition: outline 0.6s linear;
-  margin: 0.5em; */
-  outline-width: 8px;
-}
+
 
 
 
