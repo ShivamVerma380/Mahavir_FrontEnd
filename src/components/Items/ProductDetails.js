@@ -41,6 +41,7 @@ import ProductRating from "./ProductRating";
 import UserReviewRating from "./UserReviewRating";
 import ComparisonProductInformation from "../ProductsComparison/ComparisonProductInformation";
 import ProductSpecification from "./ProductSpecification";
+import ProductVariant from "./ProductVariant";
 
 
 // toast-configuration method,
@@ -131,8 +132,11 @@ function ProductDetails(){
   var imglink;
 
   const [keys,SetKeys]=useState([]);
+  const [isKeysFetched,SetIsKeysFetched]= useState(false);
+
+  const [variantKeys,SetVariantKeys] = useState([]);
+  const [isVariantKeysFetched,SetIsVariantKeysFetched] = useState(false);
   
-  const [isKeysFetched,SetIsKeysFetched]= useState(false)
 
   //const[productInformation,SetProductInformation] = useState();
   const[isProductInformationSet,SetIsProductInformationSet] = useState(false);
@@ -140,7 +144,7 @@ function ProductDetails(){
   useEffect(()=>{
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
     var token = localStorage.getItem("jwtToken");
-    if(localStorage.getItem("productSelected")!=null && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched){
+    if(localStorage.getItem("productSelected")!=null && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched){
       axios({
         method:"get",
         url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")
@@ -162,6 +166,10 @@ function ProductDetails(){
           for(var k in response.data.productInformation){
             keys.push(k);
           }
+
+          for(var k in response.data.variants){
+            variantKeys.push(k);
+          }
           
           console.log("keys",keys);
           //productInformation= response.data.productInformation;
@@ -171,6 +179,7 @@ function ProductDetails(){
           setIsImgLinkFinal(true);
           SetIsProductInformationSet(true);
           SetIsKeysFetched(true);
+          SetIsVariantKeysFetched(true);
         }
       }).catch(function(error){
         console.log("error",error);
@@ -291,6 +300,23 @@ function ProductDetails(){
     console.log("Image: ", imglink)
   }
 
+  function handleBtnClick(variantName){
+    // console.log("Variant Btn Clicked",variantName.index);
+    axios({
+        method:"get",
+        url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")+"/"+variantName.index
+    }).then(function(response){
+        if(response.status==200){
+            console.log("response data",response.data);
+            setProduct(response.data);
+            setimage('data:image/jpg;base64,'+response.data.productImage1.data);
+        }
+    }).catch(function(error){
+        console.log("error",error);
+    })
+    
+}
+
   return (
       
     (isProductFetched )?(
@@ -345,11 +371,12 @@ function ProductDetails(){
           <br></br>
           <br></br>
 
-          <p className="text" >{product.productName}</p>
+          <h2 className="text" >{product.productName}</h2>
 
           <br></br>
-          <h4>Price: <b>{product.productPrice}</b></h4>
+          <h4>Price: <b>₹{product.productPrice}</b></h4>
           <br></br>
+          <h5><b><i>Product Highlights</i></b></h5>
           {
             product.productHighlights.split(';').map(index=>{
               return(
@@ -375,7 +402,43 @@ function ProductDetails(){
           <Button variant="flat" size="1" style={{marginLeft:30}} onClick={handleBuyNow}>Buy Now</Button>
 
           <br></br>
-
+          <br></br>
+          <h3><b>Variants</b></h3>
+          {/* {
+            (isVariantKeysFetched)?(
+              variantKeys.map(variant=>{
+                return(
+                  <ProductVariant variantName={variant} product={product}/>
+                );
+              })
+            ):(
+              null
+            )
+          } */}
+          {
+            (isVariantKeysFetched)?(
+              variantKeys.map(variantName=>{
+                return(
+                  <Row style={{marginTop:15}}>
+                    <Col md={2}>
+                      <h5>{variantName}</h5>
+                    </Col>
+                    {
+                      product.variants[variantName].map(index=>{
+                        return(
+                          <Col md={3}>
+                          <Button id={index}  variant="flat" style={{marginLeft:10}} onClick={()=>handleBtnClick({index})}>{index}</Button>
+                          </Col>
+                        );
+                      })
+                    }
+                  </Row>
+                )  
+              })
+            ):(
+              null
+            )
+          }
           <h1 className="text" style={{ marginTop: "50px" }}>Product Description</h1>
           <br></br>
 
