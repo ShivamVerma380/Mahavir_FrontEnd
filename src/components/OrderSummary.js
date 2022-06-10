@@ -45,13 +45,17 @@ const OrderSummary = () => {
                 </tbody>
         </Table> */}
         <Row>
-            <Col md={5}></Col>
+            <Col md={4}></Col>
             <Col md={2}><img style={{height:"200px", width:"200px", marginTop:50}} src = {"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg"}></img></Col>
-            <Col md={2} style={{fontWeight:"bold", fontSize:20, marginTop:50}}>Iphone11</Col>
-            <Row>
-            <p style={{paddingTop:"5px"}}>Rs.20000</p>
-            </Row>
+            <Col md={2} style={{marginTop:50}}>
+                <h4>Iphone11 Pro Max 64GB</h4>
+                <h3 style={{marginTop:20}}>Rs.20,000</h3>
+                <h6 style={{marginTop:30}}>Deliver by Friday 10/06/2022</h6>
+
+            </Col>
+            
         </Row>
+        
         <center>
         <Button onClick={PaymentHandler} style={{marginTop:50}}>Proceed</Button>
         </center>

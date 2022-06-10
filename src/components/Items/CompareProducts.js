@@ -407,7 +407,7 @@ const CompareProducts = () => {
                 <Col md={1}>
                 </Col>
                 {
-                    getProductInformationOne()
+                    getProductInformation()
                     
                 }
                 
