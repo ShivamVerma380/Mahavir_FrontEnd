@@ -1,15 +1,16 @@
 import React, { useState, useRef } from "react";
-import InitialHistory from "./history";
+// import searchResults,{GetSearchResults} from "./history";
 import "./searchbar.css";
 
-function SearchBar(){
+function SearchBar({productList}){
+  console.log(productList)
   const [inFocus, setInFocus] = useState(false);
   // const [history, setHistory] = useState(initialHistory);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredSuggestions, setfilteredSuggestions] = useState(() =>
-    InitialHistory.slice(0, 8)
+  productList.slice(0, 8)
   );
-
+  
   const inputRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -23,17 +24,44 @@ function SearchBar(){
         setActiveIndex(activeIndex - 1);
         setSearchQuery(filteredSuggestions[activeIndex - 1].text);
       }
-    } else if (e.key === "Escape") {
+    }else if(e.key === "Enter"){
+      if (activeIndex - 1 >= 0) {
+        setActiveIndex(activeIndex - 1);
+      }
+      setSearchQuery(filteredSuggestions[activeIndex].text);
+    
+  }
+
+    else if (e.key === "Escape") {
       setActiveIndex(-1);
       setInFocus(false);
       inputRef.current.blur();
     }
   };
 
+  // const filterSuggestions=(query) =>{
+
+  //  productList.filter((product) => {
+  //   if (
+  //     product.modelNumber.toLowerCase().includes(query) ||
+  //     product.category.toLowerCase().includes(query) ||
+  //     product.productName.toLowerCase().includes(query)||
+  //     product.productHighlights.toLowerCase().includes(query)
+  //   ) {
+  //     return product;
+  //   }
+  // }
+  //  )
+  // };
   const filterSuggestions = (query) => {
-    return InitialHistory
+    // var toFilter = InitialHistory.text+InitialHistory.description+InitialHistory.highlights+InitialHistory.price+InitialHistory.modelno;
+    return productList
       .slice(0, 8)
-      .filter(({ text }) => text.toLowerCase().startsWith(query.toLowerCase()));
+      .filter((product) => product.modelNumber.toLowerCase().includes(query) ||
+          product.category.toLowerCase().includes(query) ||
+          product.productName.toLowerCase().includes(query)||
+          product.productHighlights.toLowerCase().includes(query)
+        );
   };
 
   const handleOnChange = (e) => {
@@ -43,20 +71,20 @@ function SearchBar(){
     setActiveIndex(-1);
     setSearchQuery(e.target.value);
   };
-
+  const getHighlightedText=(text, highlight) => {
+    // Split text on highlight term, include term itself into parts, ignore case
+    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+    return <div>{parts.map(part => part.toLowerCase() === highlight.toLowerCase() ? <b>{part}</b> : part)}</div>;
+}
   const formatSuggestion = (suggestion) => {
     if (
-      suggestion.toLowerCase().startsWith(searchQuery.toLowerCase()) &&
+      suggestion.toLowerCase().includes(searchQuery.toLowerCase()) &&
       searchQuery.length > 0
     ) {
       return (
         <>
-          <span className="light">
-            {suggestion.substring(0, searchQuery.length)}
-          </span>
-          <span className="bold">
-            {suggestion.substring(searchQuery.length)}
-          </span>
+          {getHighlightedText(suggestion, searchQuery)}
+        
         </>
       );
     } else {
@@ -119,7 +147,7 @@ function SearchBar(){
 
       {inFocus && (
         <ul className="search_dropdown">
-          {filteredSuggestions.map(({ text, icon }, index) => (
+          {filteredSuggestions.map(( product , index) => (
             <li
               className={
                 activeIndex === index
@@ -130,12 +158,12 @@ function SearchBar(){
               onMouseOver={() => setActiveIndex(index)}
               onMouseOut={() => setActiveIndex(-1)}
             >
-              <a className="item-link" href={`/search?q=${text}`}>
+              <a className="item-link" href={`/search?q=${product.productName}`}>
                 <div className="search-suggestion-icon">
-                  <img src={icon} alt="" />
+                  <img src={product.productImage1} alt="" />
                 </div>
                 <div className="search-suggestion-text">
-                  {formatSuggestion(text)}
+                  {formatSuggestion(product.productName)}
                 </div>
               </a>
             </li>
