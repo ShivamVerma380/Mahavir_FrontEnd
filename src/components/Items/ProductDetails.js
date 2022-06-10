@@ -125,13 +125,13 @@ function ProductDetails(){
   const [product,setProduct] = useState([]);
 
   const [imglinkfinal, setimage] = React.useState();
-  const [isImgLinkfinalSet,setIsImgLinkFinal] = React.useState();
+  const [isImgLinkfinalSet,setIsImgLinkFinal] = React.useState(false);
   var imglink;
 
   useEffect(()=>{
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
     var token = localStorage.getItem("jwtToken");
-    if(localStorage.getItem("productSelected")!=null){
+    if(localStorage.getItem("productSelected")!=null && !isImgLinkfinalSet){
       axios({
         method:"get",
         url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")
@@ -144,10 +144,11 @@ function ProductDetails(){
           setIsProductFetched(true);
           imglink = product.productImage1;
           console.log("Product Detail",product);
-          setimage(imglink);
+          //setimage(imglink);
           //productImg1 = 'data:image/jpg;base64,'+ product.productImage1.data;
           //console.log("Product Image 1:",productImg1);
-          ImgHandler('data:image/jpg;base64,' +product.productImage1.data);
+          setimage('data:image/jpg;base64,'+response.data.productImage1.data);
+          // ImgHandler('data:image/jpg;base64,' +product.productImage1.data);
           //setimage('data:image/jpg;base64,'+product.productImage1.data);
           setIsImgLinkFinal(true);
         }
@@ -258,6 +259,7 @@ function ProductDetails(){
     imglink = { e };
     
     setimage(imglink.e);
+    console.log("imglink.e",imglink.e);
     console.log("Img Final:", imglinkfinal);
     console.log("Image: ", imglink)
   }
@@ -266,7 +268,7 @@ function ProductDetails(){
       
     (isProductFetched )?(
       <>
-      <Header/>
+     {/* <Header/> */}
       <div className="container">
       <Row >
         <Col md={6}>
@@ -321,7 +323,15 @@ function ProductDetails(){
           <br></br>
           <h4>Price: <b>{product.productPrice}</b></h4>
           <br></br>
-          <h6>{product.productDescription}</h6>
+          {
+            product.productHighlights.split(';').map(index=>{
+              return(
+                <p>•{index}</p>
+              );
+              
+            })
+          }
+          {/* <h6>{product.productHighlights}</h6> */}
           <br></br>
           <QuantityPicker className="quantitypicker" style={{ background: "red" }} min={0} smooth onChange={inputQuantityEvent} />
           {/* <Input id="Quantity"
