@@ -22,7 +22,6 @@ import MyOrders from './components/Orders/MyOrders';
 import AddCategory from './components/Admin/AddCategory';
 import SelCatProducts from './components/DisplayCategories/SelCatProducts';
 import OfferItems from './components/offers/OfferItems';
-import CompareProducts from './components/Items/CompareProducts';
 import UploadExcel from './components/Admin/Sidebar/UploadExcel';
 
 import OnlyReviews from './components/Items/OnlyReviews';
@@ -56,7 +55,6 @@ root.render(
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
       <Route path='/offers' element={<OfferItems/>}/>
       <Route path='/compareproducts' element={<AddToCompareProducts/>}/>
-      <Route path='/compProTest' element={<CompareProducts/>}/>
       {/* <Route path="/SearchBar" element={<SearchBar/>}/> */}
       <Route path='/my-orders' element={<MyOrders/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>

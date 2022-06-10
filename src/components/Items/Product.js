@@ -5,7 +5,6 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import Arrow from 'react-arrows';
 import Carousel from 'react-bootstrap/Carousel';
 //import { Button } from "bootstrap";
-import './CompareProducts.css'
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";

@@ -50,7 +50,7 @@ function AddToCompareProducts(){
 
     return(
         <div>
-        <Header/>
+        {/* <Header/> */}
             {
                 (isProductFetched)?(
                     <div>
