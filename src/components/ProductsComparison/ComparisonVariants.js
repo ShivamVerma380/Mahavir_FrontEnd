@@ -37,12 +37,13 @@ function ComparisonVariants({product}){
                                         str=""
                                     }
                                     return(
-                                        <Container>
+                                        <Row>
                                         <p style={{marginTop:10}}><b>{key}({index.variants[key].length})</b></p>
                                         {   
 
                                             index.variants[key].map(value=>{
-                                                str+=value+","
+                                                str+=" "+value+","
+                                                
                                             }) 
                                         }
                                         {
@@ -51,7 +52,7 @@ function ComparisonVariants({product}){
                                         
                                         
                                         
-                                        </Container>
+                                        </Row>
                                     );
                                     <p>{str}</p>
                                     

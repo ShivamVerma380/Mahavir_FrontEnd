@@ -5,11 +5,24 @@ import { Button, Container, Row ,Col} from "react-bootstrap";
 import ComparisonHeader from "./ComparisonHeader";
 import ComparisonHighlights from "./ComparisonHighlights";
 import ComparisonVariants from "./ComparisonVariants";
+import ComparisonProductInformation from "./ComparisonProductInformation";
 
 function AddToCompareProducts(){
 
     const [product,SetProduct] = useState([]);
     const [isProductFetched,SetIsProductFetched] = useState(false);
+
+
+    var keys=[];
+    var value=[];
+
+
+    function getProductInformationKeys(productInformation){
+        
+        for(var k in productInformation){
+            keys.push(k);
+        }
+    }
 
     useEffect(()=>{
         if(!isProductFetched){
@@ -65,8 +78,22 @@ function AddToCompareProducts(){
                     <ComparisonVariants product={product}/>
                     <Container>
                         <hr></hr>
+                        <h3>Product Information</h3>
+                        <hr></hr>
                     </Container>
-
+                    
+                    
+                    {
+                        getProductInformationKeys(product[0].productInformation)
+                    }
+                    {
+                        keys.map(k=>{
+                            return(
+                                <ComparisonProductInformation title={k} product={product}/>
+                            );
+                        })
+                    }
+                    
                     </div>
                 ):(null)
             
