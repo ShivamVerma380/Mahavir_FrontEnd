@@ -130,6 +130,7 @@ const SelCatProducts=()=>{
     }
     
     useEffect(()=>{
+    if(!isProductsFetched && !isOfferPostersFetched){
         if(!isOfferPostersFetched){
             axios({
               method:"get",
@@ -150,38 +151,25 @@ const SelCatProducts=()=>{
         if(!isProductsFetched){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
         console.log("Model Number",modelNumbers);
-        
+        var urls=[];
         modelNumbers.map(modelNum=>{
-            console.log("Model Num",modelNum);
+            urls.push(axios.get("http://localhost:8080/get-products/"+modelNum));
+        })
 
-            axios({
-            method:"get",
-            url:"http://localhost:8080/get-products/"+modelNum,
-                
-            }).then(function(response){
-                console.log(response);
-                if(response.status==200){
-                    //console.log("response data",response.data);
-                    productsArray.push(response.data);
-                    products.push(response.data);
-                }
-            }).catch(function(error){
-                console.log("error",error);
+        axios.all(urls).then(
+            axios.spread((...res)=>{
+                res.map(index=>{
+                    products.push(index.data);
+                })
+                setIsProductsFetched(true);
             })
-            console.log("Products array",productsArray);
-            setProduct(productsArray);
-            setIsProductsFetched(true);
-            })
+        )
         }
-        
-    },[]);
+    }
 
-    setTimeout(() => {
-        console.log('Hello, World!')
-        //setCheckboxes()
-        //
-        setIsTimeOut(true);
-    },1000)
+    })
+
+
 
     function callProductDetails(index){
         //alert(index);
@@ -277,6 +265,7 @@ const SelCatProducts=()=>{
                         
                         <Carousel>
                         {
+                            
                             (isOfferPostersFetched)?(
                                 offerPoster= offerPosters.map(index=>{
                                     //let Base64string = Buffer.from(index.image.data,"base64").toString();
@@ -303,15 +292,13 @@ const SelCatProducts=()=>{
                             )
                         }
                         </Carousel>
-                        {
-                            setTimeout
-                        }
+                       
                         <center>
                         <div className="container">
                         
                                         <Row> 
                         {
-                            (isTimeout)?
+                            (isProductsFetched)?
                                 cards = products.map(index=>{
                                     return(
                                         
