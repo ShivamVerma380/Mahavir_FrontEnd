@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row,Col ,NavItem ,NavDropdown} from "react-bootstrap";
+import { Row,Col ,NavItem ,NavDropdown,Form} from "react-bootstrap";
 
 
 function ComparisonHeader({product}){
@@ -18,7 +18,9 @@ function ComparisonHeader({product}){
     
    
         
-    
+    const handleFormCheck=event=>{
+        alert(event.target.value)
+    }
 
     console.log("length",length);
     return(
@@ -27,6 +29,10 @@ function ComparisonHeader({product}){
             </Col>
             <Col md={2}>
                 <h5>{product[0].productName} vs others</h5>
+                <br></br>
+                <Form>
+                    <Form.Check type="checkbox"   label = "Show Only Differences" onChange={handleFormCheck}/>
+                </Form>
             </Col>
             {
                 product.map(index=>{

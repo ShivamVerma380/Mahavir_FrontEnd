@@ -41,7 +41,6 @@ import ProductRating from "./ProductRating";
 import UserReviewRating from "./UserReviewRating";
 import ComparisonProductInformation from "../ProductsComparison/ComparisonProductInformation";
 import ProductSpecification from "./ProductSpecification";
-import ProductVariant from "./ProductVariant";
 
 
 // toast-configuration method,
