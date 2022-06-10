@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../Header";
-import { Container, Row } from "react-bootstrap";
+import { Button, Container, Row ,Col} from "react-bootstrap";
 import ComparisonHeader from "./ComparisonHeader";
 import ComparisonHighlights from "./ComparisonHighlights";
+import ComparisonVariants from "./ComparisonVariants";
 
 function AddToCompareProducts(){
 
@@ -23,6 +24,7 @@ function AddToCompareProducts(){
             axios.all(urls).then(
                 axios.spread((...res)=>{
                     res.map((response)=>{
+                        console.log("response",response);
                         product.push(response.data);
                     })
                     SetIsProductFetched(true);
@@ -45,7 +47,26 @@ function AddToCompareProducts(){
                     <hr></hr>
                     </Container>
                     <ComparisonHighlights product={product}/>
-                    
+                    <br></br>
+                    <Row>
+                    <Col md={1}></Col>
+                    <Col md={2}></Col>
+                    {
+                        
+                        product.map(index=>{
+                            return(
+                                <Col md={2}>
+                                    <Button id={index.modelNumber} className="btn-flat">Buy Now</Button>
+                                </Col>
+                            );
+                        })
+                    }
+                    </Row>
+                    <ComparisonVariants product={product}/>
+                    <Container>
+                        <hr></hr>
+                    </Container>
+
                     </div>
                 ):(null)
             
