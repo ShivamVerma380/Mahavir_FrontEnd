@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../Header";
+import { Container, Row } from "react-bootstrap";
 import ComparisonHeader from "./ComparisonHeader";
+import ComparisonHighlights from "./ComparisonHighlights";
 
 function AddToCompareProducts(){
 
@@ -36,9 +38,15 @@ function AddToCompareProducts(){
         <Header/>
             {
                 (isProductFetched)?(
+                    <div>
                     
                     <ComparisonHeader product={product}/>
+                    <Container>
+                    <hr></hr>
+                    </Container>
+                    <ComparisonHighlights product={product}/>
                     
+                    </div>
                 ):(null)
             
             }
