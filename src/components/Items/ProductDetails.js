@@ -40,6 +40,7 @@ import { Toast,ToastBody,ToastHeader } from "reactstrap";
 import ProductRating from "./ProductRating";
 import UserReviewRating from "./UserReviewRating";
 import ComparisonProductInformation from "../ProductsComparison/ComparisonProductInformation";
+import ProductSpecification from "./ProductSpecification";
 
 
 // toast-configuration method,
@@ -129,6 +130,9 @@ function ProductDetails(){
   const [isImgLinkfinalSet,setIsImgLinkFinal] = React.useState(false);
   var imglink;
 
+  const [keys,SetKeys]=useState([]);
+  
+  const [isKeysFetched,SetIsKeysFetched]= useState(false)
 
   //const[productInformation,SetProductInformation] = useState();
   const[isProductInformationSet,SetIsProductInformationSet] = useState(false);
@@ -136,7 +140,7 @@ function ProductDetails(){
   useEffect(()=>{
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
     var token = localStorage.getItem("jwtToken");
-    if(localStorage.getItem("productSelected")!=null && !isImgLinkfinalSet && !isProductInformationSet){
+    if(localStorage.getItem("productSelected")!=null && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched){
       axios({
         method:"get",
         url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")
@@ -154,11 +158,19 @@ function ProductDetails(){
           //console.log("Product Image 1:",productImg1);
           setimage('data:image/jpg;base64,'+response.data.productImage1.data);
           console.log(response.data.productInformation);
-          productInformation= response.data.productInformation;
+          productInformation = response.data.productInformation;
+          for(var k in response.data.productInformation){
+            keys.push(k);
+          }
+          
+          console.log("keys",keys);
+          //productInformation= response.data.productInformation;
+          //getProductInformationKeys(productInformation)
           // ImgHandler('data:image/jpg;base64,' +product.productImage1.data);
           //setimage('data:image/jpg;base64,'+product.productImage1.data);
           setIsImgLinkFinal(true);
           SetIsProductInformationSet(true);
+          SetIsKeysFetched(true);
         }
       }).catch(function(error){
         console.log("error",error);
@@ -167,13 +179,11 @@ function ProductDetails(){
     }
   },[]);
 
-  var keys=[];
+  
 
   function getProductInformationKeys(productInformation){
-    if(isProductInformationSet){
-      for(var k in productInformation){
-        keys.push(k);
-      }
+    if(isProductInformationSet && !isKeysFetched){
+      
     }
     
 }
@@ -396,32 +406,21 @@ function ProductDetails(){
           <h4 className="text" style={{ marginTop: "10px" }}>Specifications</h4>
           <br></br>
           <Row>
+         
           {
-            (isProductInformationSet)?(
-              
-                getProductInformationKeys(productInformation)
+            (isKeysFetched)?(
+              keys.map(k=>{
+                return(
+                  <ProductSpecification title={k} product={product}/> 
+                );
+              })
+            
             ):(
               null
             )
 
           }
-          {
-            (isProductInformationSet)?(
-              
-                keys.map(k=>{
-                  return(
-                    <ComparisonProductInformation title={k} product={product}/>
-                  );
-                })
-              
-            ):(
-              null
-            )
-          }
-           
           
-
-
             {/* <h6>General</h6>
 
             <Row style={{ marginTop: "10px" }}>
