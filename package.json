@@ -33,6 +33,7 @@
     "react-image-magnify": "^2.7.4",
     "react-img-zoom": "^0.1.0",
     "react-qty-picker": "^1.0.6",
+    "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "react-search-box": "^2.2.1",

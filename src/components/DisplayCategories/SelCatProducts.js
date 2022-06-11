@@ -196,7 +196,7 @@ const SelCatProducts=()=>{
             alert(event.target.value)
             console.log("ModelNumbers",modelNumsToCompare)
           } else {
-            console.log('⛔️ Checkbox is NOT checked');
+            console.log('⛔ Checkbox is NOT checked');
             //document.getElementById(event.value).checked = "true"
             setChange(change-1)
             modelNumsToCompare.delete(event.target.value);
@@ -261,7 +261,7 @@ const SelCatProducts=()=>{
                 
                     
                     <div>
-                        <Header/>
+                        {/* <Header/> */}
                         
                         <Carousel>
                         {

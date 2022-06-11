@@ -19,7 +19,7 @@ const Test = ({productList}) => {
       product.modelNumber.toLowerCase().includes(search) ||
       product.category.toLowerCase().includes(search) ||
       product.productName.toLowerCase().includes(search)||
-      product.productDescription.toLowerCase().includes(search)
+      product.productHighlights.toLowerCase().includes(search)
     ) {
       return product;
     }
