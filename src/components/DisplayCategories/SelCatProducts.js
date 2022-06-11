@@ -263,7 +263,7 @@ const SelCatProducts=()=>{
                         
                         {/* Error  */}
                         {/* <Header/> */}
-
+                        <Header  productList={products}/>
                         
                         <Carousel>
                         {
