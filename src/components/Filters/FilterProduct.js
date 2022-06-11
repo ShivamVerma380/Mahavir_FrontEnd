@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col,Row,Button ,Form,Card} from "react-bootstrap";
+import { Col,Row,Button ,Form,Card, Container} from "react-bootstrap";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 
@@ -135,8 +135,20 @@ function FilterProduct(){
     }
         
 
+    //FilterProduct....
+    const [FilterCriterias,SetFilterCriterias] = useState([]);
+    const [isFilterCrieteriasFetched,SetIsFilterCriteriasFetched]= useState(false);
+
+    
+
+    // useEffect(()=>{
+    //     if(!isFilterCrieteriasFetched){
+            
+    //     }
+    // })    
+
     useEffect(()=>{
-        if(!isProductsFetched){
+        if(!isProductsFetched && !isFilterCrieteriasFetched){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
             console.log("Model Number",modelNumbers);
             var urls=[];
@@ -153,15 +165,64 @@ function FilterProduct(){
                     setIsProductsFetched(true);
                 })
             )
-        }
+
+            var Category = localStorage.getItem("Category");
+            axios.get("http://localhost:8080/get-sub-categories-detail/"+Category)
+                .then(function(response){
+                    if(response.status==200){
+                        console.log("response",response.data);
+                        // for(var key in response.data){
+                        //     FilterCriterias.push(key.subCategoryName);
+                        // }
+                        SetFilterCriterias(response.data);
+                        // response.data.map(index=>{
+                        //     FilterCriterias.push(index.subCategoryName);
+                        // })
+                        SetIsFilterCriteriasFetched(true);
+                    }
+                }).catch(function(error){
+                    console.log(error);
+
+                })
+        
+
+            
+            }
+        
     })
 
+
+
     return(
-        <div>
+        <Row>
         <Col md={2}>
             <h5>FilterProduct</h5>
+            <br></br>
+            {
+            (isFilterCrieteriasFetched && isProductsFetched)?(
+
+                FilterCriterias.map(index=>{
+                    
+                    return(
+                        <div>
+                        <h4>{index.subCategoryName}</h4>
+                        {
+                            index.subSubCategories.map(subSubCategories=>{
+                                return(
+                                    <h5>{subSubCategories.subSubCategoryName}</h5>
+                                );
+                            })
+                        }
+                        </div>
+                    )
+                })
+            ):(
+                null
+            )
+            }
         </Col>
-        <Row style={{marginLeft:300}}>
+        <Col md={10}>
+        <Row>
             {
                 (isProductsFetched)?
                 cards = products.map(index=>{
@@ -194,11 +255,12 @@ function FilterProduct(){
                 }):(null)
             }
             </Row>
+            </Col>
         
         {
             getCompareBtn()      
         }
-        </div>
+        </Row>
     );
 }
 
