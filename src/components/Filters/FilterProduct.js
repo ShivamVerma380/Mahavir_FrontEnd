@@ -14,7 +14,7 @@ function FilterProduct(){
     var category = localStorage.getItem("Category");
     console.log("Category",category);
 
-    const[products,setProducts] = useState(new Set());
+    const[products,setProducts] = useState([]);
     const[isProductsFetched,setIsProductsFetched] = useState(false);
 
     const[keySet,setKeyState] = useState(new Set());
@@ -165,7 +165,7 @@ function FilterProduct(){
             axios.all(urls).then(
                 axios.spread((...res)=>{
                     res.map(index=>{
-                        products.add(index.data);
+                        products.push(index.data);
                         
                       //  products.push(index.data);
                     })
@@ -221,7 +221,7 @@ function FilterProduct(){
                         console.log("God Inside if");
                         //add product index here in set
                         
-                        [...products].map(p=>{
+                        products.map(p=>{
                             if(p.modelNumber===index.modelNumber){
                                 console.log("P",p.modelNumber);
                                 console.log('index',index.modelNumber);
@@ -236,38 +236,25 @@ function FilterProduct(){
             })
 
         }else{
-            alert(event.target.value+"off");
-            
+            var arr = products;
             ProductsByCategories.map(pro=>{
-                  //var flag=false;
-                pro.map(index=>{    
+                pro.map(index=>{  
                 console.log("Index",index);
                 var subCategoryMap = index.subCategoryMap;
                 for(var key in subCategoryMap){
                     console.log("key",key);
                     if(subCategoryMap[key]===event.target.value){
-                        console.log("God Inside if");
-                        //add product index here in set
-                        var mySet = new Set(products);
-                        [...products].map(p=>{
-                            if(p.modelNumber===index.modelNumber){
-                                console.log("P",p.modelNumber);
-                                console.log('index',index.modelNumber);
-                                
-                                mySet.delete(p);
-                                
-                                // flag=true;
-                            }
-                        })
-                        setProducts(mySet)
-                        // if(flag)
-                        //     setProducts(arr=>({...arr,[index]:false}));
+                        console.log("Inside if");
+                        // setProducts(products.filter(p=>p.modelNumber!==index.modelNumber));
+                        arr = arr.filter(p=>p.modelNumber!==index.modelNumber);
                     }
-                }})
+                }
             })
+            setProducts(arr);
 
-        }
+        })
     }
+}
 
 
 
