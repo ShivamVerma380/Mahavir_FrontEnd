@@ -76,7 +76,11 @@ const RateReviewProducts = () => {
         <Container style={{ marginTop: 50 }}>
 
             <h1>Rate this Product</h1>
+            <Col md={1}></Col>
+            <Col md={8}>
             <hr></hr>
+            </Col>
+            
             <Row>
                 <Col md={1}>
                     <img src="https://d2xamzlzrdbdbn.cloudfront.net/products/2eb1eeb0-470e-48a0-9bcf-7d6f610a449521170554.jpg" style={{ width: 100, height: 100 }}></img>
@@ -102,7 +106,10 @@ const RateReviewProducts = () => {
                     />
                 </Col>
 
-                <hr></hr>
+                
+            <Col md={8}>
+            <hr></hr>
+            </Col>
             </Row>
 
             <Row>
@@ -119,7 +126,7 @@ const RateReviewProducts = () => {
                 <Input placeholder="Description of product here....." type="textarea" style={{ width: 600, height: 100 }} onChange={ReviewHandler}></Input>
             </Row>
 
-            <Button style={{ marginTop: 20 }} onClick={HandleSubmit}>SUBMIT</Button>
+            <Button style={{ marginTop: 20, backgroundColor:"rgb(255, 88, 88)" }} onClick={HandleSubmit}>SUBMIT</Button>
 
 
         </Container>
