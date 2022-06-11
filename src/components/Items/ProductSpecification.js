@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Table} from 'react-bootstrap';
 
 function ProductSpecification({title,product}){
     console.log("productInfo",product.productInformation);
@@ -24,8 +25,22 @@ function ProductSpecification({title,product}){
                     key.map((k)=>{
                        
                             return(
+                                <>
+                                <table >
+                                  
+                                        <tr>
+                                            <td style={{width:'150px'}}>
+                                            {k}
+                                            </td>
+                                            <td>
+                                            {product.productInformation[title][k]}
+                                            </td>
+                                        </tr>
+                                        
+                                </table>
                                 
-                                <p>{k}:{product.productInformation[title][k]}</p>
+                                {/* <p><b>{k}<span> </span></b>:<span> </span>{product.productInformation[title][k]}</p> */}
+                                </>
                             );
                     })
                 ):(

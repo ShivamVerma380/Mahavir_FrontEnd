@@ -10,7 +10,6 @@ import watchImg1200 from '../../assets/watch.jpg'
 import watchImg300 from '../../assets/watch300.jpg'
 import React, { useEffect, useState } from "react";
 import { ImageList, Slider } from "@mui/material";
-
 import * as AiIcons from 'react-icons/ai';
 import { CProgress, CProgressBar } from '@coreui/react'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -321,7 +320,7 @@ function ProductDetails(){
     (isProductFetched )?(
       <>
      {/* <Header/> */}
-      <div className="container">
+      <div className="container" style={{backgroudColor:'white'}}>
       <Row >
         <Col md={6}>
           <div >
@@ -361,12 +360,15 @@ function ProductDetails(){
                 }} />
 
               </div>
-              </Col>
+            </Col>
           </Row >
           </div>
      
         </Col>
-        <Col md={6}>
+        <Col md={6} style={{
+    height: '600px',
+    overflowY: 'scroll'}}>
+        
           <br></br>
           <br></br>
 
@@ -379,7 +381,7 @@ function ProductDetails(){
           {
             product.productHighlights.split(';').map(index=>{
               return(
-                <p>•{index}</p>
+                <p>•<span> </span>{index}</p>
               );
               
             })
@@ -438,19 +440,20 @@ function ProductDetails(){
               null
             )
           }
-          <h1 className="text" style={{ marginTop: "50px" }}>Product Description</h1>
-          <br></br>
+          <h3 className="text" style={{ marginTop: "50px" }}>Product Description</h3>
+          <hr></hr>
 
-          <Row>
+          <Row >
             <Col md={2}>
 
               <img src={'data:image/jpg;base64,'+product.productImage1.data }style={{ width: "130px" }}></img>
 
             </Col>
             <Col md={6}>
-              <h4 style={{marginLeft:20}}>{product.modelNumber}</h4>
 
-              <p style={{marginLeft:20}}>{product.productDescription}</p>
+              <h5 style={{marginLeft:'50px'}} >{product.modelNumber}</h5>
+
+              <p style={{marginLeft:'50px'}}>{product.productDescription}</p>
             </Col>
           </Row>
           <br></br>
@@ -465,8 +468,8 @@ function ProductDetails(){
             </Col>
           </Row>
           <br></br>
-          <h4 className="text" style={{ marginTop: "10px" }}>Specifications</h4>
-          <br></br>
+          <h3 className="text" style={{ marginTop: "10px" }}>Specifications</h3>
+          <hr></hr>
           <Row>
          
           {
@@ -530,12 +533,12 @@ function ProductDetails(){
           </Row>
           <br></br>
           <h4 className="text">Ratings and Reviews</h4>
-          <br></br>
+          <hr></hr>
           <Row>
-            <Col md={1} style={{ display:"flex", justifyContent:"right"}}>
+            <Col md={1} style={{ display:"flex"}}>
               <h3>4.6</h3>
             </Col>
-            <Col md={1} style={{ paddingLeft: "0px" }}>
+            <Col md={1} style={{ paddingLeft: "10px" , paddingTop:'5px'}}>
               <AiIcons.AiFillStar size={20}/>
             </Col>
 
@@ -578,7 +581,11 @@ function ProductDetails(){
             <UserReviewRating />
           </Row>
           <br></br>
-          <Row>
+          
+
+        </Col>
+      </Row>
+      <Row>
           <br></br>
       <br></br>
       <br></br>
@@ -619,7 +626,7 @@ function ProductDetails(){
                 <CardImg className="this.props.img"
                   src={index.src}/>
                   <CardBody>
-                    <CardTitle className="this.props.h5 change">
+                    <CardTitle className="this.props.h6 change">
                       <h5><b>{index.title}</b></h5>
                     </CardTitle>
                     <CardSubtitle>
@@ -640,9 +647,6 @@ function ProductDetails(){
       <br></br>
 
           </Row>
-        </Col>
-
-      </Row>
       
     </div>
     </>
