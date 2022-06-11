@@ -296,15 +296,19 @@ const SelCatProducts=()=>{
                         </Carousel>
                        
                         <center>
-                        <div className="container">
+                        <div >
                         
-                                        <Row> 
+                        <Row> 
+                            <Col sm={2} style={{backgroundColor: 'antiquewhite'}}>
+                                Filters
+                            </Col>
+                            <Col sm={10}>
                         {
                             (isProductsFetched)?
                                 cards = products.map(index=>{
                                     return(
                                         
-                                        <Card  style={{ width: '15rem'}} 
+                                        <Card  style={{ width: '12rem',display: 'inline-table'}} 
                                         className="mb-2">
                                             <Card.Img  variant="top" style={{width:200,height:150,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
                                             <Card.Body>
@@ -331,7 +335,7 @@ const SelCatProducts=()=>{
                         {
                             getCompareBtn()      
                         }
-                    
+                            </Col>
                         </Row>  
                         </div>
                         </center>
