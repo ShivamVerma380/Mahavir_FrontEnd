@@ -140,7 +140,7 @@ function FilterProduct(){
     const [isFilterCrieteriasFetched,SetIsFilterCriteriasFetched]= useState(false);
 
     
-
+    console.log("SubSubCategory",localStorage.getItem("SubSubCategory"))
     // useEffect(()=>{
     //     if(!isFilterCrieteriasFetched){
             
@@ -209,7 +209,9 @@ function FilterProduct(){
                         {
                             index.subSubCategories.map(subSubCategories=>{
                                 return(
-                                    <h5>{subSubCategories.subSubCategoryName}</h5>
+                                    <Form>
+                                        <Form.Check type="checkbox"   label = {subSubCategories.subSubCategoryName} defaultChecked={(subSubCategories.subSubCategoryName===localStorage.getItem("SubSubCategory"))?(true):(false)}/>
+                                    </Form>
                                 );
                             })
                         }
