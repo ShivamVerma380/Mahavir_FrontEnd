@@ -8,13 +8,16 @@ var modelNumsToCompare = new Set();
 var flag = false;
 
 
+
 function FilterProduct(){
 
     var category = localStorage.getItem("Category");
     console.log("Category",category);
 
-    const[products,setProducts] = useState([]);
+    const[products,setProducts] = useState(new Set());
     const[isProductsFetched,setIsProductsFetched] = useState(false);
+
+    const[keySet,setKeyState] = useState(new Set());
 
     const[filteredProducts,setFilteredProducts] = useState([]);
 
@@ -139,6 +142,9 @@ function FilterProduct(){
     const [FilterCriterias,SetFilterCriterias] = useState([]);
     const [isFilterCrieteriasFetched,SetIsFilterCriteriasFetched]= useState(false);
 
+    const [ProductsByCategories,SetProductsByCategories] = useState([]);
+    const [isProductsByCategoriesSet,SetIsProductsByCategoriesSet] = useState(false);
+
     
     console.log("SubSubCategory",localStorage.getItem("SubSubCategory"))
     // useEffect(()=>{
@@ -148,7 +154,7 @@ function FilterProduct(){
     // })    
 
     useEffect(()=>{
-        if(!isProductsFetched && !isFilterCrieteriasFetched){
+        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
             console.log("Model Number",modelNumbers);
             var urls=[];
@@ -159,8 +165,9 @@ function FilterProduct(){
             axios.all(urls).then(
                 axios.spread((...res)=>{
                     res.map(index=>{
-                        products.push(index.data);
-                        products.push(index.data);
+                        products.add(index.data);
+                        
+                      //  products.push(index.data);
                     })
                     setIsProductsFetched(true);
                 })
@@ -185,11 +192,78 @@ function FilterProduct(){
 
                 })
         
-
+            axios.get("http://localhost:8080/get-products-by-category/"+Category)
+                .then(function(response){
+                    if(response.status==200){
+                        console.log("GetProductsByCategory",response.data);
+                        ProductsByCategories.push(response.data);
+                        SetIsProductsByCategoriesSet(true);
+                    }
+                }).catch(function(error){
+                    console.log("error",error);
+                })
             
             }
         
     })
+
+    const handleFormCheck = event=>{
+        if(event.target.checked){
+            //alert(event.target.value+"on");
+            
+            ProductsByCategories[0].map(index=>{
+                var flag = true;
+                console.log("Index",index);
+                var subCategoryMap = index.subCategoryMap;
+                for(var key in subCategoryMap){
+                    console.log("key",key);
+                    if(subCategoryMap[key]===event.target.value){
+                        console.log("God Inside if");
+                        //add product index here in set
+                        
+                        [...products].map(p=>{
+                            if(p.modelNumber===index.modelNumber){
+                                console.log("P",p.modelNumber);
+                                console.log('index',index.modelNumber);
+                                flag=false;
+                            }
+                        })
+                        if(flag)
+                            setProducts(arr=>[...arr,index]);
+                    }
+                }
+                // index.map(product=>{
+                //     var subCategoryMap = product.subCategoryMap;
+                //     console.log("product",product.subCategoryMap);
+
+                    // for(var key in subCategoryMap){
+                    //     // if(subCategoryMap[key]===event.target.value){
+                    //         // console.log("if")
+                    //         // console.log("Products",products);
+                    //         // console.log("index",index);
+                    //         //var mySet = new Set(products);
+                            
+                    //         [...products].map(p=>{
+                    //             console.log("")
+                    //             if(p.modelNumber===product.modelNumber)
+                    //                 return;
+                    //         })  
+                            
+                    //         setProducts(arr=>[...arr,product]);
+                            
+                        
+                    // }
+                // })
+                
+            })
+
+        }else{
+            alert(event.target.value+"off");
+            
+
+
+        }
+    }
 
 
 
@@ -210,7 +284,7 @@ function FilterProduct(){
                             index.subSubCategories.map(subSubCategories=>{
                                 return(
                                     <Form>
-                                        <Form.Check type="checkbox"   label = {subSubCategories.subSubCategoryName} defaultChecked={(subSubCategories.subSubCategoryName===localStorage.getItem("SubSubCategory"))?(true):(false)}/>
+                                        <Form.Check type="checkbox"  value={subSubCategories.subSubCategoryName}  label = {subSubCategories.subSubCategoryName} defaultChecked={(subSubCategories.subSubCategoryName===localStorage.getItem("SubSubCategory"))?(true):(false)} onChange={handleFormCheck}/>
                                     </Form>
                                 );
                             })
@@ -227,7 +301,7 @@ function FilterProduct(){
         <Row>
             {
                 (isProductsFetched)?
-                cards = products.map(index=>{
+                [...products].map(index=>{
                     return(
                         
                         <Card  style={{ width: '15rem'}} 
@@ -254,8 +328,38 @@ function FilterProduct(){
                     
                     
                     )
-                }):(null)
+                }):(
+                    [...products].map(index=>{
+                        return(
+                            
+                            <Card  style={{ width: '15rem'}} 
+                            className="mb-2">
+                                <Card.Img  variant="top" style={{width:200,height:150,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
+                                <Card.Body>
+                                <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
+                                <Card.Text onClick={()=>callProductDetails(index)}>
+                                {index.productDescription}
+                                <br></br><br></br><strong>Rs {index.productPrice}</strong>
+                            </Card.Text>
+                                {
+                                    callFormCheck(index.modelNumber)
+                                }
+                                
+                                
+                                
+                                <br></br>
+                                <Button variant="flat" size="1">Buy</Button>
+                                </Card.Body>
+                                
+                        </Card>
+                        
+                        
+                        
+                        )
+                    })
+                )
             }
+            
             </Row>
             </Col>
         
