@@ -37,8 +37,8 @@ const SelCatProducts=()=>{
     console.log(localStorage.getItem("Category"));
 
     // const [cookies,SetCookie] = useCookies(['modelNumsToCompare'])
-    const [isFormLoaded,SetIsFormLoaded] = useState(false)
-    const [isButtonNeeded,SetIsButtonNeeded] = useState(false);
+    // const [isFormLoaded,SetIsFormLoaded] = useState(false)
+    // const [isButtonNeeded,SetIsButtonNeeded] = useState(false);
 
     // console.log("Cookies",cookies.CompareModels)
     // console.log("Cookies size",cookies.CompareModelsLength)
@@ -104,45 +104,45 @@ const SelCatProducts=()=>{
 
 
 
-    useEffect(()=>{
-    if(!isProductsFetched && !isOfferPostersFetched){
-        if(!isOfferPostersFetched){
-            axios({
-              method:"get",
-              url:"http://localhost:8080/get-offers-by-category/"+localStorage.getItem("Category"),
+    // useEffect(()=>{
+    // if(!isProductsFetched && !isOfferPostersFetched){
+    //     if(!isOfferPostersFetched){
+    //         axios({
+    //           method:"get",
+    //           url:"http://localhost:8080/get-offers-by-category/"+localStorage.getItem("Category"),
               
-            }).then(function(response){
-              console.log(response);
-              if(response.status==200){
-                setOfferPosters(response.data);
-                setIsOfferPostersFetched(true);
-                console.log("OfferPosters",offerPosters);
-              }
-            }).catch(function(error){
-              console.log("error",error);
-            })
-          }
+    //         }).then(function(response){
+    //           console.log(response);
+    //           if(response.status==200){
+    //             setOfferPosters(response.data);
+    //             setIsOfferPostersFetched(true);
+    //             console.log("OfferPosters",offerPosters);
+    //           }
+    //         }).catch(function(error){
+    //           console.log("error",error);
+    //         })
+    //       }
 
-        if(!isProductsFetched){
-            var modelNumbers = localStorage.getItem("Model Number").split(',');
-        console.log("Model Number",modelNumbers);
-        var urls=[];
-        modelNumbers.map(modelNum=>{
-            urls.push(axios.get("http://localhost:8080/get-products/"+modelNum));
-        })
+    //     if(!isProductsFetched){
+    //         var modelNumbers = localStorage.getItem("Model Number").split(',');
+    //     console.log("Model Number",modelNumbers);
+    //     var urls=[];
+    //     modelNumbers.map(modelNum=>{
+    //         urls.push(axios.get("http://localhost:8080/get-products/"+modelNum));
+    //     })
 
-        axios.all(urls).then(
-            axios.spread((...res)=>{
-                res.map(index=>{
-                    products.push(index.data);
-                })
-                setIsProductsFetched(true);
-            })
-        )
-        }
-    }
+    //     axios.all(urls).then(
+    //         axios.spread((...res)=>{
+    //             res.map(index=>{
+    //                 products.push(index.data);
+    //             })
+    //             setIsProductsFetched(true);
+    //         })
+    //     )
+    //     }
+    // }
 
-    })
+    // })
 
 
 
@@ -269,7 +269,8 @@ const SelCatProducts=()=>{
                             )
                         }
                         </Carousel>
-                        <Row>
+                        <FilterProduct/>
+                        {/* <Row>
                         <Col md={2}>
                             <FilterProduct/>
                         </Col>
@@ -314,7 +315,7 @@ const SelCatProducts=()=>{
                         </div>
                         </center>
                         </Col>
-                    </Row>
+                    </Row> */}
                     </div>
     );
 
