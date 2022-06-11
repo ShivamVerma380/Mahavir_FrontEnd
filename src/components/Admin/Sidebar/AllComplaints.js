@@ -5,7 +5,7 @@ import { Card, CardHeader, CardText, CardBody,Row,
 var isClicked = false;   
 
 
-const UserComplaint = () => {
+const AllComplaints = () => {
 
     const ComplaintHandler=()=> {
         isClicked = true;
@@ -95,4 +95,4 @@ const UserComplaint = () => {
     )
 
 }
-export default UserComplaint;
+export default AllComplaints;

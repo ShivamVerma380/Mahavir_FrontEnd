@@ -12,7 +12,7 @@ import Admin from './components/Admin/Admin';
 import Cart from "./components/Shopping-Cart/Cart";
 import CategoryDropdowns from './components/Admin/CategoryDropdowns';
 import PendingDelivery from './components/Admin/Sidebar/PendingDelivery'
-import UserComplaint from './components/Admin/Sidebar/UserComplaint'
+import UserComplaint from './components/Items/UserComplaint'
 import AddressForm from './components/AddressForm';
 import OrderSummary from './components/OrderSummary';
 import PaymentOption from './components/PaymentOption';
@@ -25,6 +25,8 @@ import OfferItems from './components/offers/OfferItems';
 import UploadExcel from './components/Admin/Sidebar/UploadExcel';
 
 import OnlyReviews from './components/Items/OnlyReviews';
+import RateReviewProducts from './components/Items/RateReviewProducts';
+import AllComplaints from './components/Admin/Sidebar/AllComplaints';
 import AddToCompareProducts from './components/ProductsComparison/AddToCompareProducts';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
@@ -48,7 +50,7 @@ root.render(
       <Route path='/cart' element = {<Cart/>}/>
       <Route path='/categorydrop' element = {<CategoryDropdowns/>}/>
       <Route path='/pendingdelivery' element = {<PendingDelivery/>}/>
-      <Route path='/usercomplaint' element = {<UserComplaint/>}/>
+      <Route path='/allcomplaints' element = {<AllComplaints/>}/>
       <Route path='/AddressForm' element = {<AddressForm/>}/>
       <Route path='/OrderSummary' element = {<OrderSummary/>}/>
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
@@ -59,6 +61,9 @@ root.render(
       <Route path='/my-orders' element={<MyOrders/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>
       <Route path='/onlyreviews' element = {<OnlyReviews/>}/>
+      <Route path='/ratereview' element = {<RateReviewProducts/>}/>
+      <Route path='/complainuser' element = {<UserComplaint/>}/>
+
     </Routes>
   </BrowserRouter>
 );
