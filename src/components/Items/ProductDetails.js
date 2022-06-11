@@ -39,6 +39,8 @@ import { Toast,ToastBody,ToastHeader } from "reactstrap";
 
 import ProductRating from "./ProductRating";
 import UserReviewRating from "./UserReviewRating";
+import ComparisonProductInformation from "../ProductsComparison/ComparisonProductInformation";
+import ProductSpecification from "./ProductSpecification";
 
 
 // toast-configuration method,
@@ -125,13 +127,23 @@ function ProductDetails(){
   const [product,setProduct] = useState([]);
 
   const [imglinkfinal, setimage] = React.useState();
-  const [isImgLinkfinalSet,setIsImgLinkFinal] = React.useState();
+  const [isImgLinkfinalSet,setIsImgLinkFinal] = React.useState(false);
   var imglink;
 
+  const [keys,SetKeys]=useState([]);
+  const [isKeysFetched,SetIsKeysFetched]= useState(false);
+
+  const [variantKeys,SetVariantKeys] = useState([]);
+  const [isVariantKeysFetched,SetIsVariantKeysFetched] = useState(false);
+  
+
+  //const[productInformation,SetProductInformation] = useState();
+  const[isProductInformationSet,SetIsProductInformationSet] = useState(false);
+  var productInformation;
   useEffect(()=>{
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
     var token = localStorage.getItem("jwtToken");
-    if(localStorage.getItem("productSelected")!=null){
+    if(localStorage.getItem("productSelected")!=null && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched){
       axios({
         method:"get",
         url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")
@@ -144,21 +156,45 @@ function ProductDetails(){
           setIsProductFetched(true);
           imglink = product.productImage1;
           console.log("Product Detail",product);
-          setimage(imglink);
+          //setimage(imglink);
           //productImg1 = 'data:image/jpg;base64,'+ product.productImage1.data;
           //console.log("Product Image 1:",productImg1);
-          ImgHandler('data:image/jpg;base64,' +product.productImage1.data);
+          setimage('data:image/jpg;base64,'+response.data.productImage1.data);
+          console.log(response.data.productInformation);
+          productInformation = response.data.productInformation;
+          for(var k in response.data.productInformation){
+            keys.push(k);
+          }
+
+          for(var k in response.data.variants){
+            variantKeys.push(k);
+          }
+          
+          console.log("keys",keys);
+          //productInformation= response.data.productInformation;
+          //getProductInformationKeys(productInformation)
+          // ImgHandler('data:image/jpg;base64,' +product.productImage1.data);
           //setimage('data:image/jpg;base64,'+product.productImage1.data);
           setIsImgLinkFinal(true);
+          SetIsProductInformationSet(true);
+          SetIsKeysFetched(true);
+          SetIsVariantKeysFetched(true);
         }
       }).catch(function(error){
         console.log("error",error);
         toast("Item already present in cart")
       })
     }
-    
   },[]);
 
+  
+
+  function getProductInformationKeys(productInformation){
+    if(isProductInformationSet && !isKeysFetched){
+      
+    }
+    
+}
  
   
   const notify=()=>{
@@ -258,15 +294,33 @@ function ProductDetails(){
     imglink = { e };
     
     setimage(imglink.e);
+    console.log("imglink.e",imglink.e);
     console.log("Img Final:", imglinkfinal);
     console.log("Image: ", imglink)
   }
+
+  function handleBtnClick(variantName){
+    // console.log("Variant Btn Clicked",variantName.index);
+    axios({
+        method:"get",
+        url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")+"/"+variantName.index
+    }).then(function(response){
+        if(response.status==200){
+            console.log("response data",response.data);
+            setProduct(response.data);
+            setimage('data:image/jpg;base64,'+response.data.productImage1.data);
+        }
+    }).catch(function(error){
+        console.log("error",error);
+    })
+    
+}
 
   return (
       
     (isProductFetched )?(
       <>
-      <Header/>
+     {/* <Header/> */}
       <div className="container">
       <Row >
         <Col md={6}>
@@ -316,12 +370,21 @@ function ProductDetails(){
           <br></br>
           <br></br>
 
-          <p className="text" >{product.productName}</p>
+          <h2 className="text" >{product.productName}</h2>
 
           <br></br>
-          <h4>Price: <b>{product.productPrice}</b></h4>
+          <h4>Price: <b>₹{product.productPrice}</b></h4>
           <br></br>
-          <h6>{product.productDescription}</h6>
+          <h5><b><i>Product Highlights</i></b></h5>
+          {
+            product.productHighlights.split(';').map(index=>{
+              return(
+                <p>•{index}</p>
+              );
+              
+            })
+          }
+          {/* <h6>{product.productHighlights}</h6> */}
           <br></br>
           <QuantityPicker className="quantitypicker" style={{ background: "red" }} min={0} smooth onChange={inputQuantityEvent} />
           {/* <Input id="Quantity"
@@ -338,7 +401,43 @@ function ProductDetails(){
           <Button variant="flat" size="1" style={{marginLeft:30}} onClick={handleBuyNow}>Buy Now</Button>
 
           <br></br>
-
+          <br></br>
+          <h3><b>Variants</b></h3>
+          {/* {
+            (isVariantKeysFetched)?(
+              variantKeys.map(variant=>{
+                return(
+                  <ProductVariant variantName={variant} product={product}/>
+                );
+              })
+            ):(
+              null
+            )
+          } */}
+          {
+            (isVariantKeysFetched)?(
+              variantKeys.map(variantName=>{
+                return(
+                  <Row style={{marginTop:15}}>
+                    <Col md={2}>
+                      <h5>{variantName}</h5>
+                    </Col>
+                    {
+                      product.variants[variantName].map(index=>{
+                        return(
+                          <Col md={3}>
+                          <Button id={index}  variant="flat" style={{marginLeft:10}} onClick={()=>handleBtnClick({index})}>{index}</Button>
+                          </Col>
+                        );
+                      })
+                    }
+                  </Row>
+                )  
+              })
+            ):(
+              null
+            )
+          }
           <h1 className="text" style={{ marginTop: "50px" }}>Product Description</h1>
           <br></br>
 
@@ -369,8 +468,22 @@ function ProductDetails(){
           <h4 className="text" style={{ marginTop: "10px" }}>Specifications</h4>
           <br></br>
           <Row>
+         
+          {
+            (isKeysFetched)?(
+              keys.map(k=>{
+                return(
+                  <ProductSpecification title={k} product={product}/> 
+                );
+              })
+            
+            ):(
+              null
+            )
 
-            <h6>General</h6>
+          }
+          
+            {/* <h6>General</h6>
 
             <Row style={{ marginTop: "10px" }}>
 
@@ -413,7 +526,7 @@ function ProductDetails(){
               <Col md={6}>
                 <p>iPhone 13 Pro Max</p>
               </Col>
-            </Row>
+            </Row> */}
           </Row>
           <br></br>
           <h4 className="text">Ratings and Reviews</h4>

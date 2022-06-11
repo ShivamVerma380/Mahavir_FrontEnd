@@ -119,7 +119,7 @@ function App() {
   return (
     <div className="App" >
       
-      <Header/>
+      <Header  productList={Products}/>
 
       {/* <AddItem/> */}
 
@@ -131,7 +131,7 @@ function App() {
       
       <Product title="Mahavir Special" className="title" productList={Products}/>
       <Product title="Deals Of The Day" className="title" productList={Products}/>
-      <Test productList={Products} />
+      {/* <Test productList={Products} /> */}
       
        
       {/* <Button id="comparebtn">Compare{localStorage.getItem("comparecount")}</Button> */}

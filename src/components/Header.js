@@ -12,7 +12,7 @@ import axios from "axios";
 import Login from "./Login-Signup/Login";
 
 
-const Header = () => {
+const Header = ({productList}) => {
 
     let name = localStorage.getItem("Name")
    // let isUserLoggedIn = localStorage.getItem("isUserLoggedIn")
@@ -105,7 +105,7 @@ const Header = () => {
           <Offcanvas.Body>
           
             <Nav className="justify-content-end flex-grow-1 pe-3">
-            <SearchBar/>
+            <SearchBar  productList={productList}/>
             {/* <Form className="d-flex">
                     <FormControl
                     type="search"

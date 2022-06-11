@@ -14,7 +14,6 @@ import Header from "../Header";
 import NavbarOffcanvas from "react-bootstrap/esm/NavbarOffcanvas";
 
 
-import CompareProducts from "../Items/CompareProducts";
 
 
 var modelNumsToCompare = new Set();

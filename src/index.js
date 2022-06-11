@@ -22,12 +22,12 @@ import MyOrders from './components/Orders/MyOrders';
 import AddCategory from './components/Admin/AddCategory';
 import SelCatProducts from './components/DisplayCategories/SelCatProducts';
 import OfferItems from './components/offers/OfferItems';
-import CompareProducts from './components/Items/CompareProducts';
 import UploadExcel from './components/Admin/Sidebar/UploadExcel';
 
 import OnlyReviews from './components/Items/OnlyReviews';
 import RateReviewProducts from './components/Items/RateReviewProducts';
 import AllComplaints from './components/Admin/Sidebar/AllComplaints';
+import AddToCompareProducts from './components/ProductsComparison/AddToCompareProducts';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -56,7 +56,7 @@ root.render(
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
       <Route path='/offers' element={<OfferItems/>}/>
-      <Route path='/compareproducts' element={<CompareProducts/>}/>
+      <Route path='/compareproducts' element={<AddToCompareProducts/>}/>
       {/* <Route path="/SearchBar" element={<SearchBar/>}/> */}
       <Route path='/my-orders' element={<MyOrders/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>

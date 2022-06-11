@@ -205,7 +205,7 @@ const CompareProducts = () => {
         
         
         <div>
-            <Header />
+            
             
 
             <Row style={{ marginTop: "30px" }}>
