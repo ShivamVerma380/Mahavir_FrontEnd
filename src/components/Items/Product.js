@@ -131,6 +131,7 @@ function Product({title,productList}){
                     <Form>
                       <Form.Check type="checkbox"  label = "Add To Compare" onChange={handleAddToCompare}/>
                     </Form>
+                    
                       <br></br>
                       {
                         fetchOfferAvailableBtn(index.offerPrice,index.productPrice)

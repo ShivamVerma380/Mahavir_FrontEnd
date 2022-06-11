@@ -93,7 +93,7 @@ var phoneNo = "";
     
     return (
         <div>
-            <Header/> 
+            {/* <Header/>  */}
             
         <div class="form-container">
       <form class="register-form">

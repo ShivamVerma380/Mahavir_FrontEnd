@@ -21,7 +21,7 @@ export const SidebarData = [
   },
   {
     title: 'User Complaints',
-    path: '/usercomplaint',
+    path: '/allcomplaints',
     icon: <RiIcons.RiFileList2Fill />,
     cName: 'nav-text'
   },
