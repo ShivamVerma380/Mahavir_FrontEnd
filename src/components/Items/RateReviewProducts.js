@@ -35,10 +35,7 @@ const RateReviewProducts = () => {
             "modelNumber": "IPH12123",
             "Review":""+userreview,
             "Rating":""+userrating,
-            "Date":""+reviewdate
-
-
-             
+            "Date":""+reviewdate     
         }
         console.log("FormData",form_data_body)
         axios.post("http://localhost:8080/add-review/IPH12123", form_data_body, {
