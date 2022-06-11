@@ -232,35 +232,39 @@ function FilterProduct(){
                             setProducts(arr=>[...arr,index]);
                     }
                 }
-                // index.map(product=>{
-                //     var subCategoryMap = product.subCategoryMap;
-                //     console.log("product",product.subCategoryMap);
-
-                    // for(var key in subCategoryMap){
-                    //     // if(subCategoryMap[key]===event.target.value){
-                    //         // console.log("if")
-                    //         // console.log("Products",products);
-                    //         // console.log("index",index);
-                    //         //var mySet = new Set(products);
-                            
-                    //         [...products].map(p=>{
-                    //             console.log("")
-                    //             if(p.modelNumber===product.modelNumber)
-                    //                 return;
-                    //         })  
-                            
-                    //         setProducts(arr=>[...arr,product]);
-                            
-                        
-                    // }
-                // })
                 
             })
 
         }else{
             alert(event.target.value+"off");
             
-
+            ProductsByCategories.map(pro=>{
+                  //var flag=false;
+                pro.map(index=>{    
+                console.log("Index",index);
+                var subCategoryMap = index.subCategoryMap;
+                for(var key in subCategoryMap){
+                    console.log("key",key);
+                    if(subCategoryMap[key]===event.target.value){
+                        console.log("God Inside if");
+                        //add product index here in set
+                        var mySet = new Set(products);
+                        [...products].map(p=>{
+                            if(p.modelNumber===index.modelNumber){
+                                console.log("P",p.modelNumber);
+                                console.log('index',index.modelNumber);
+                                
+                                mySet.delete(p);
+                                
+                                // flag=true;
+                            }
+                        })
+                        setProducts(mySet)
+                        // if(flag)
+                        //     setProducts(arr=>({...arr,[index]:false}));
+                    }
+                }})
+            })
 
         }
     }
