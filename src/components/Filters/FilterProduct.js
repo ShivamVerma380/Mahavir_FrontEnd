@@ -17,7 +17,12 @@ function FilterProduct(){
     const[products,setProducts] = useState([]);
     const[isProductsFetched,setIsProductsFetched] = useState(false);
 
-    const[keySet,setKeyState] = useState(new Set());
+
+
+    const[keySet,setKeyState] = useState(new Set()); //To Store subSubCategories name
+    const[isKeySetUpdated,setKeyStateUpdated] = useState(false);
+    //keySet.add(localStorage.getItem("SubSubCategoryName"));
+        console.log("keySet",keySet);
 
     const[filteredProducts,setFilteredProducts] = useState([]);
 
@@ -154,7 +159,7 @@ function FilterProduct(){
     // })    
 
     useEffect(()=>{
-        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet){
+        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet && !isKeySetUpdated){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
             console.log("Model Number",modelNumbers);
             var urls=[];
@@ -178,13 +183,9 @@ function FilterProduct(){
                 .then(function(response){
                     if(response.status==200){
                         console.log("response",response.data);
-                        // for(var key in response.data){
-                        //     FilterCriterias.push(key.subCategoryName);
-                        // }
+
                         SetFilterCriterias(response.data);
-                        // response.data.map(index=>{
-                        //     FilterCriterias.push(index.subCategoryName);
-                        // })
+                        
                         SetIsFilterCriteriasFetched(true);
                     }
                 }).catch(function(error){
@@ -197,6 +198,9 @@ function FilterProduct(){
                     if(response.status==200){
                         console.log("GetProductsByCategory",response.data);
                         ProductsByCategories.push(response.data);
+                        // keySet.add(localStorage.getItem("SubSubCategoryName"));
+                        setKeyState(prev=> new Set(prev.add(localStorage.getItem("SubSubCategory"))));
+                        setKeyStateUpdated(true);
                         SetIsProductsByCategoriesSet(true);
                     }
                 }).catch(function(error){
@@ -204,7 +208,7 @@ function FilterProduct(){
                 })
             
             }
-        
+                    
     })
 
     const handleFormCheck = event=>{
@@ -234,25 +238,96 @@ function FilterProduct(){
                 }
                 
             })
+            setKeyState(prev=>new Set([...prev,event.target.value]))
+            console.log("KeySet",keySet);
 
         }else{
-            var arr = products;
+            var mySet = new Set(keySet);
+            // mySet = new Set(prev=>new Set([...prev].filter(x=>x!==event.target.value)));
+            mySet.delete(event.target.value);
+            //setKeyState(prev=>new Set([...prev].filter(x=>x!==event.target.value)));
+            console.log("mySet",mySet);
+            
+            //var arr = products;
+            var arr=[];
             ProductsByCategories.map(pro=>{
                 pro.map(index=>{  
                 console.log("Index",index);
                 var subCategoryMap = index.subCategoryMap;
                 for(var key in subCategoryMap){
                     console.log("key",key);
-                    if(subCategoryMap[key]===event.target.value){
-                        console.log("Inside if");
-                        // setProducts(products.filter(p=>p.modelNumber!==index.modelNumber));
-                        arr = arr.filter(p=>p.modelNumber!==index.modelNumber);
-                    }
+                    // if(subCategoryMap[key]===event.target.value){
+                    //     console.log("Inside if");
+                    //     // setProducts(products.filter(p=>p.modelNumber!==index.modelNumber));
+                    //     arr = arr.filter(p=>p.modelNumber!==index.modelNumber);
+                    // }
+                    var flag = true;
+                    [...mySet].map(k=>{
+                        if(subCategoryMap[key]===k){
+                            // arr.push(index);
+                            arr.map(a=>{
+                                if(a.modelNumber===index.modelNumber){
+                                    flag=false;
+                                }
+                            })
+                            if(flag){
+                                arr.push(index);
+                            }
+                        }
+                    })
                 }
             })
+            })
             setProducts(arr);
+            setKeyState(mySet);
+            // var arr;
+            // [...mySet].map(key=>{
+            //     arr=[];
+            //     console.log("Set variable",key);
+            //     ProductsByCategories[0].map(pro=>{
+            //         var flag = true;
+            //         pro.map(index=>{
+            //             console.log("Index",index);
+            //             var subCategoryMap = index.subCategoryMap;
+            //             for(var k in subCategoryMap){
+            //                 console.log("key",k);
+            //                 if(subCategoryMap[k]===key){
+            //                     arr.map(element=>{
+            //                         if(element.modelNumber===index.modelNumber){
 
-        })
+            //                             flag=false;
+            //                         }
+            //                     })
+            //                     if(flag)
+            //                         // setProducts(a=>[...a,index])
+            //                         arr.push(index);
+            //                 }
+            //             }
+            //         })  
+            //     })
+            // })
+            // setProducts(arr);
+            // setKeyState(mySet);
+
+
+
+            // setProducts(arr);
+
+            // ProductsByCategories.map(pro=>{
+            //     pro.map(index=>{
+            //         console.log("Index",index);
+            //         var subCategoryMap = index.subCategoryMap;
+            //         [...keySet].map(key=>{
+            //             for(var k in subCategoryMap){
+            //                 console.log("key",key);
+            //                 console.log("k",k);
+            //             }
+            //         })
+                    
+
+            //     })
+            // })
+
     }
 }
 

@@ -276,7 +276,6 @@ const SelCatProducts=()=>{
                         </Col>
                         <Col>
                         <center>
-<<<<<<< HEAD
                         <div >
                         
                         <Row> 
@@ -284,10 +283,6 @@ const SelCatProducts=()=>{
                                 Filters
                             </Col>
                             <Col sm={10}>
-=======
-                        <div className="container">  
-                        <Row> 
->>>>>>> ea58643aed359df39484355176f3d9e5a04a278c
                         {
                             (isProductsFetched)?
                                 cards = products.map(index=>{
