@@ -179,6 +179,7 @@ function FilterProduct(){
                     res.map(index=>{
                         
                         products.push(index.data);
+                        filteredProducts.push(index.data);
                         var price = index.data.productPrice;
                         console.log("price",price)
                         if(min>parseInt(index.data.productPrice)){
@@ -255,6 +256,7 @@ function FilterProduct(){
                         })
                         if(flag){
                             setProducts(arr=>[...arr,index]);
+                            setFilteredProducts(arr=>[...arr,index]);
                             // setFilteredProducts(arr=>[...arr,])
                         }
                             
@@ -297,6 +299,7 @@ function FilterProduct(){
             })
             })
             setProducts(arr);
+            setFilteredProducts(arr);
             setKeyState(mySet);
 
     }
@@ -341,16 +344,20 @@ function FilterProduct(){
                                 );
                             })
                         }
+                        <br></br>
                         </div>
                     )
                 })
-
+                
 
             ):(
                 null
 
             )
             }
+            
+            <br></br>
+            <h4>Price Selector</h4>
             <br></br>
             {
                 (isRangeSet)?(
@@ -373,7 +380,7 @@ function FilterProduct(){
         <Row>
             {
                 (isProductsFetched)?
-                [...products].map(index=>{
+                [...filteredProducts].map(index=>{
                     return(
                         
                         <Card  style={{ width: '15rem'}} 
