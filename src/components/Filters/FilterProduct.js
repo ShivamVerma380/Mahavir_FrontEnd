@@ -180,23 +180,23 @@ function FilterProduct(){
                         
                         products.push(index.data);
                         filteredProducts.push(index.data);
-                        var price = index.data.productPrice;
-                        console.log("price",price)
-                        if(min>parseInt(index.data.productPrice)){
-                            min= parseInt(index.data.productPrice);
-                            console.log("min",min)
+                        // var price = index.data.productPrice;
+                        // console.log("price",price)
+                        // if(min>parseInt(index.data.productPrice)){
+                        //     min= parseInt(index.data.productPrice);
+                        //     console.log("min",min)
                             
-                        }
-                        if(max<parseInt(index.data.productPrice)){
-                            max= parseInt(index.data.productPrice);
-                            console.log("max",max);
-                        }
+                        // }
+                        // if(max<parseInt(index.data.productPrice)){
+                        //     max= parseInt(index.data.productPrice);
+                        //     console.log("max",max);
+                        // }
                       //  products.push(index.data);
                     })
-                    SetMinPrice(min);
-                    SetMaxPrice(max);
+                    // SetMinPrice(min);
+                    // SetMaxPrice(max);
                     setIsProductsFetched(true);
-                    SetIsRangeSet(true);
+                    // SetIsRangeSet(true);
                 })
             )
 
@@ -220,8 +220,17 @@ function FilterProduct(){
                     if(response.status==200){
                         console.log("GetProductsByCategory",response.data);
                         ProductsByCategories.push(response.data);
+                        ProductsByCategories[0].map(index=>{
+                            console.log(index);
+                            var price = parseInt(index.productPrice);
+                            if(min>price) min = price;
+                            if(max<price) max=price;
+                        })
                         // keySet.add(localStorage.getItem("SubSubCategoryName"));
                         setKeyState(prev=> new Set(prev.add(localStorage.getItem("SubSubCategory"))));
+                        SetMinPrice(min);
+                        SetMaxPrice(max);
+                        SetIsRangeSet(true);
                         setKeyStateUpdated(true);
                         SetIsProductsByCategoriesSet(true);
                     }
@@ -275,6 +284,7 @@ function FilterProduct(){
             console.log("mySet",mySet);
 
             var arr=[];
+           
             ProductsByCategories.map(pro=>{
                 pro.map(index=>{  
                 console.log("Index",index);
@@ -292,6 +302,7 @@ function FilterProduct(){
                             })
                             if(flag){
                                 arr.push(index);
+                                
                             }
                         }
                     })
