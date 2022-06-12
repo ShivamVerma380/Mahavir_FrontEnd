@@ -30,10 +30,6 @@ function FilterProduct(){
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
 
-    const [isCompareBtnClicked,SetIsCompareBtnClicked] = useState(false);
-
-    const [isAddToCompareProductsFetched,SetIsAddToCompareProductsFetched] =  useState(false);
-    const [addToCompareProducts,SetAddToCompareProducts] = useState([]);
 
     var cards=<div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
@@ -151,6 +147,9 @@ function FilterProduct(){
     const [ProductsByCategories,SetProductsByCategories] = useState([]);
     const [isProductsByCategoriesSet,SetIsProductsByCategoriesSet] = useState(false);
 
+    const [FilterProductInformation,setFilteredProductInformation] = useState([]);
+    const [isFilterProductInformationSet,setIsFilteredProductInformationSet] = useState(false);
+
     
     console.log("SubSubCategory",localStorage.getItem("SubSubCategory"))
     // useEffect(()=>{
@@ -166,7 +165,7 @@ function FilterProduct(){
     const [isRangeSet,SetIsRangeSet] = useState(false);
 
     useEffect(()=>{
-        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet && !isKeySetUpdated && !isRangeSet){
+        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet && !isKeySetUpdated && !isRangeSet && !isFilterProductInformationSet){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
             console.log("Model Number",modelNumbers);
             var urls=[];
@@ -201,6 +200,19 @@ function FilterProduct(){
             )
 
             var Category = localStorage.getItem("Category");
+
+            axios.get("http://localhost:8080/get-categories/"+Category)
+                .then(function(response){
+                    console.log("Get Category response",response.data);
+                    if(response.status==200){
+                        console.log("response.data.productInformationItemList",response.data.productInformationItemList);
+                        setFilteredProductInformation(response.data.productInformationItemList);
+                        setIsFilteredProductInformationSet(true);
+                    }
+                }).catch(function(error){
+                    console.log("Get Category error",error);
+                })
+
             axios.get("http://localhost:8080/get-sub-categories-detail/"+Category)
                 .then(function(response){
                     if(response.status==200){
@@ -335,7 +347,7 @@ function FilterProduct(){
 
     return(
         <Row>
-        <Col md={2}>
+        <Col md={2} >
             <h5>FilterProduct</h5>
             <br></br>
             {
@@ -381,6 +393,33 @@ function FilterProduct(){
                             onChange={({min,max})=> {handlePriceRange({min,max})}}
                         />
                     
+                ):(
+                    null
+                )
+            }
+            <br></br>
+            <br></br>
+            {
+                (isFilterProductInformationSet)?(
+                    
+                    FilterProductInformation.map(item=>{
+                        return(
+                            <div>
+                            <h5>{item.itemName}</h5>
+
+                            {   
+                                item.subitemNames.map(subItems=>{
+                                    return(
+                                        <Form>
+                                            <Form.Check type="checkbox"  value={subItems}  label = {subItems} />
+                                        </Form>
+                                    );
+                                })
+                            }
+                            <br></br>
+                            </div>
+                        ) 
+                    })
                 ):(
                     null
                 )
