@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col,Row,Button ,Form,Card, Container} from "react-bootstrap";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 
 
 var modelNumsToCompare = new Set();
@@ -156,10 +157,16 @@ function FilterProduct(){
     //     if(!isFilterCrieteriasFetched){
             
     //     }
-    // })    
+    // })   
+    
+    
+    var min= Number.MAX_VALUE ,max = Number.MIN_VALUE;
+    const [minPrice,SetMinPrice] = useState();
+    const [maxPrice,SetMaxPrice] = useState();
+    const [isRangeSet,SetIsRangeSet] = useState(false);
 
     useEffect(()=>{
-        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet && !isKeySetUpdated){
+        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet && !isKeySetUpdated && !isRangeSet){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
             console.log("Model Number",modelNumbers);
             var urls=[];
@@ -170,11 +177,25 @@ function FilterProduct(){
             axios.all(urls).then(
                 axios.spread((...res)=>{
                     res.map(index=>{
-                        products.push(index.data);
                         
+                        products.push(index.data);
+                        var price = index.data.productPrice;
+                        console.log("price",price)
+                        if(min>parseInt(index.data.productPrice)){
+                            min= parseInt(index.data.productPrice);
+                            console.log("min",min)
+                            
+                        }
+                        if(max<parseInt(index.data.productPrice)){
+                            max= parseInt(index.data.productPrice);
+                            console.log("max",max);
+                        }
                       //  products.push(index.data);
                     })
+                    SetMinPrice(min);
+                    SetMaxPrice(max);
                     setIsProductsFetched(true);
+                    SetIsRangeSet(true);
                 })
             )
 
@@ -232,8 +253,11 @@ function FilterProduct(){
                                 flag=false;
                             }
                         })
-                        if(flag)
+                        if(flag){
                             setProducts(arr=>[...arr,index]);
+                            // setFilteredProducts(arr=>[...arr,])
+                        }
+                            
                     }
                 }
                 
@@ -247,8 +271,7 @@ function FilterProduct(){
             mySet.delete(event.target.value);
             //setKeyState(prev=>new Set([...prev].filter(x=>x!==event.target.value)));
             console.log("mySet",mySet);
-            
-            //var arr = products;
+
             var arr=[];
             ProductsByCategories.map(pro=>{
                 pro.map(index=>{  
@@ -256,11 +279,6 @@ function FilterProduct(){
                 var subCategoryMap = index.subCategoryMap;
                 for(var key in subCategoryMap){
                     console.log("key",key);
-                    // if(subCategoryMap[key]===event.target.value){
-                    //     console.log("Inside if");
-                    //     // setProducts(products.filter(p=>p.modelNumber!==index.modelNumber));
-                    //     arr = arr.filter(p=>p.modelNumber!==index.modelNumber);
-                    // }
                     var flag = true;
                     [...mySet].map(k=>{
                         if(subCategoryMap[key]===k){
@@ -280,57 +298,25 @@ function FilterProduct(){
             })
             setProducts(arr);
             setKeyState(mySet);
-            // var arr;
-            // [...mySet].map(key=>{
-            //     arr=[];
-            //     console.log("Set variable",key);
-            //     ProductsByCategories[0].map(pro=>{
-            //         var flag = true;
-            //         pro.map(index=>{
-            //             console.log("Index",index);
-            //             var subCategoryMap = index.subCategoryMap;
-            //             for(var k in subCategoryMap){
-            //                 console.log("key",k);
-            //                 if(subCategoryMap[k]===key){
-            //                     arr.map(element=>{
-            //                         if(element.modelNumber===index.modelNumber){
-
-            //                             flag=false;
-            //                         }
-            //                     })
-            //                     if(flag)
-            //                         // setProducts(a=>[...a,index])
-            //                         arr.push(index);
-            //                 }
-            //             }
-            //         })  
-            //     })
-            // })
-            // setProducts(arr);
-            // setKeyState(mySet);
-
-
-
-            // setProducts(arr);
-
-            // ProductsByCategories.map(pro=>{
-            //     pro.map(index=>{
-            //         console.log("Index",index);
-            //         var subCategoryMap = index.subCategoryMap;
-            //         [...keySet].map(key=>{
-            //             for(var k in subCategoryMap){
-            //                 console.log("key",key);
-            //                 console.log("k",k);
-            //             }
-            //         })
-                    
-
-            //     })
-            // })
 
     }
 }
 
+    function handlePriceRange({min,max}){
+        // console.log("Min",{min});
+        // console.log("Max",{max});
+        //alert("Hello")
+        // console.log("Min"+{min.min}+",Max"+{max.max});
+        console.log("Min  "+{min}.min+",Max  "+{max}.max);
+        var arr =[];
+        products.map(index=>{
+            var price = parseInt(index.productPrice);
+            if(price>={min}.min && price<={max}.max){
+                arr.push(index);
+            }
+        })
+        setFilteredProducts(arr);
+    }
 
 
     return(
@@ -358,10 +344,30 @@ function FilterProduct(){
                         </div>
                     )
                 })
+
+
             ):(
                 null
+
             )
             }
+            <br></br>
+            {
+                (isRangeSet)?(
+                    
+                        <MultiRangeSlider
+                            
+                            min={minPrice}
+                            max={maxPrice}
+                            // onChange={({ min, max }) =>  console.log(`min = ${min}, max = ${max}`)}
+                            onChange={({min,max})=> {handlePriceRange({min,max})}}
+                        />
+                    
+                ):(
+                    null
+                )
+            }
+            
         </Col>
         <Col md={10}>
         <Row>
@@ -395,7 +401,7 @@ function FilterProduct(){
                     
                     )
                 }):(
-                    [...products].map(index=>{
+                    [...filteredProducts].map(index=>{
                         return(
                             
                             <Card  style={{ width: '15rem'}} 
