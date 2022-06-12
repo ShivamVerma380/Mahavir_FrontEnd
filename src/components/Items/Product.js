@@ -125,7 +125,7 @@ function Product({title,productList}){
                     <Card.Body >
                     <Card.Title as="h6"  onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
                     <Card.Text onClick={()=>callProductDetails(index)} >
-                    {index.productDescription}
+                    {index.productHighlights}
                     <br></br><b style={{fontWeight:"bolder",color:"rgb(255, 88, 88)", fontSize:20}}>Rs {index.productPrice}</b>
                     </Card.Text>
                     <Form>
