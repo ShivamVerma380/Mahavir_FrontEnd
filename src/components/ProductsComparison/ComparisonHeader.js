@@ -1,10 +1,11 @@
+import { ComboBox } from "@progress/kendo-react-dropdowns";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Row,Col ,NavItem ,NavDropdown,Form} from "react-bootstrap";
 
 
 function ComparisonHeader({product}){
-    var length = product.length; 
+    const[length,SetLength] = useState(product.length); 
     var arr=[];
     if(length===1){
         arr.push("God");
@@ -27,6 +28,10 @@ function ComparisonHeader({product}){
     const [isBrandSelected,SetIsBrandSelected] = useState(false);
     
     const [model,SetModel] = useState("Choose Model....")
+
+    const [productArr,SetProductArr] = useState(product);
+    const [isProductArrUpdated,SetIsProductArrUpdated] = useState(true);
+    
     
 
     useEffect(()=>{
@@ -62,7 +67,22 @@ function ComparisonHeader({product}){
         console.log("BrandSelected",brandName);
     }
 
-    function handleModelClick(modelName){
+    function handleModelClick(modelName,modelNumber){
+
+        console.log("model number",modelNumber);
+        axios.get("http://localhost:8080/get-products/"+modelNumber)
+            .then(function(response){
+                if(response.status==200){
+                    // product.push(response.data);
+                    
+                    SetProductArr([...productArr,response.data])
+                    SetModel(modelName);
+                    SetLength(length+1);
+                }
+            }).catch(function(error){
+                console.log(error);
+            })
+        
         SetModel(modelName);
     }
 
@@ -79,7 +99,8 @@ function ComparisonHeader({product}){
                 </Form>
             </Col>
             {
-                product.map(index=>{
+                (isProductArrUpdated)?(
+                productArr.map(index=>{
                     return(
                         <Col md={2}>
                             <img style={{ width: "10rem", alignContent: "center" }}  src={'data:image/jpg;base64,' + index.productImage1.data}></img>
@@ -89,6 +110,9 @@ function ComparisonHeader({product}){
                         </Col>
                     );
                 })
+                ):(
+                    null
+                )
 
             }
            
@@ -126,7 +150,7 @@ function ComparisonHeader({product}){
                                         {   
                                             Models.map(model=>{
                                                 return(
-                                                    <NavItem onClick={()=>handleModelClick(model.modelName)}>{model.modelName}</NavItem>
+                                                    <NavItem onClick={()=>handleModelClick(model.modelName,model.modelNumber)}>{model.modelName}</NavItem>
                                                 )
                                             })
                                         }
