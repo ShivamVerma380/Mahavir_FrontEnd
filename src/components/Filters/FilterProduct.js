@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col,Row,Button ,Form,Card, Container} from "react-bootstrap";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 
 
 var modelNumsToCompare = new Set();
@@ -17,7 +18,12 @@ function FilterProduct(){
     const[products,setProducts] = useState([]);
     const[isProductsFetched,setIsProductsFetched] = useState(false);
 
-    const[keySet,setKeyState] = useState(new Set());
+
+
+    const[keySet,setKeyState] = useState(new Set()); //To Store subSubCategories name
+    const[isKeySetUpdated,setKeyStateUpdated] = useState(false);
+    //keySet.add(localStorage.getItem("SubSubCategoryName"));
+        console.log("keySet",keySet);
 
     const[filteredProducts,setFilteredProducts] = useState([]);
 
@@ -151,10 +157,16 @@ function FilterProduct(){
     //     if(!isFilterCrieteriasFetched){
             
     //     }
-    // })    
+    // })   
+    
+    
+    var min= Number.MAX_VALUE ,max = Number.MIN_VALUE;
+    const [minPrice,SetMinPrice] = useState();
+    const [maxPrice,SetMaxPrice] = useState();
+    const [isRangeSet,SetIsRangeSet] = useState(false);
 
     useEffect(()=>{
-        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet){
+        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet && !isKeySetUpdated && !isRangeSet){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
             console.log("Model Number",modelNumbers);
             var urls=[];
@@ -165,11 +177,26 @@ function FilterProduct(){
             axios.all(urls).then(
                 axios.spread((...res)=>{
                     res.map(index=>{
-                        products.push(index.data);
                         
+                        products.push(index.data);
+                        filteredProducts.push(index.data);
+                        // var price = index.data.productPrice;
+                        // console.log("price",price)
+                        // if(min>parseInt(index.data.productPrice)){
+                        //     min= parseInt(index.data.productPrice);
+                        //     console.log("min",min)
+                            
+                        // }
+                        // if(max<parseInt(index.data.productPrice)){
+                        //     max= parseInt(index.data.productPrice);
+                        //     console.log("max",max);
+                        // }
                       //  products.push(index.data);
                     })
+                    // SetMinPrice(min);
+                    // SetMaxPrice(max);
                     setIsProductsFetched(true);
+                    // SetIsRangeSet(true);
                 })
             )
 
@@ -178,13 +205,9 @@ function FilterProduct(){
                 .then(function(response){
                     if(response.status==200){
                         console.log("response",response.data);
-                        // for(var key in response.data){
-                        //     FilterCriterias.push(key.subCategoryName);
-                        // }
+
                         SetFilterCriterias(response.data);
-                        // response.data.map(index=>{
-                        //     FilterCriterias.push(index.subCategoryName);
-                        // })
+                        
                         SetIsFilterCriteriasFetched(true);
                     }
                 }).catch(function(error){
@@ -197,6 +220,18 @@ function FilterProduct(){
                     if(response.status==200){
                         console.log("GetProductsByCategory",response.data);
                         ProductsByCategories.push(response.data);
+                        ProductsByCategories[0].map(index=>{
+                            console.log(index);
+                            var price = parseInt(index.productPrice);
+                            if(min>price) min = price;
+                            if(max<price) max=price;
+                        })
+                        // keySet.add(localStorage.getItem("SubSubCategoryName"));
+                        setKeyState(prev=> new Set(prev.add(localStorage.getItem("SubSubCategory"))));
+                        SetMinPrice(min);
+                        SetMaxPrice(max);
+                        SetIsRangeSet(true);
+                        setKeyStateUpdated(true);
                         SetIsProductsByCategoriesSet(true);
                     }
                 }).catch(function(error){
@@ -204,7 +239,7 @@ function FilterProduct(){
                 })
             
             }
-        
+                    
     })
 
     const handleFormCheck = event=>{
@@ -228,34 +263,74 @@ function FilterProduct(){
                                 flag=false;
                             }
                         })
-                        if(flag)
+                        if(flag){
                             setProducts(arr=>[...arr,index]);
+                            setFilteredProducts(arr=>[...arr,index]);
+                            // setFilteredProducts(arr=>[...arr,])
+                        }
+                            
                     }
                 }
                 
             })
+            setKeyState(prev=>new Set([...prev,event.target.value]))
+            console.log("KeySet",keySet);
 
         }else{
-            var arr = products;
+            var mySet = new Set(keySet);
+            // mySet = new Set(prev=>new Set([...prev].filter(x=>x!==event.target.value)));
+            mySet.delete(event.target.value);
+            //setKeyState(prev=>new Set([...prev].filter(x=>x!==event.target.value)));
+            console.log("mySet",mySet);
+
+            var arr=[];
+           
             ProductsByCategories.map(pro=>{
                 pro.map(index=>{  
                 console.log("Index",index);
                 var subCategoryMap = index.subCategoryMap;
                 for(var key in subCategoryMap){
                     console.log("key",key);
-                    if(subCategoryMap[key]===event.target.value){
-                        console.log("Inside if");
-                        // setProducts(products.filter(p=>p.modelNumber!==index.modelNumber));
-                        arr = arr.filter(p=>p.modelNumber!==index.modelNumber);
-                    }
+                    var flag = true;
+                    [...mySet].map(k=>{
+                        if(subCategoryMap[key]===k){
+                            // arr.push(index);
+                            arr.map(a=>{
+                                if(a.modelNumber===index.modelNumber){
+                                    flag=false;
+                                }
+                            })
+                            if(flag){
+                                arr.push(index);
+                                
+                            }
+                        }
+                    })
                 }
             })
+            })
             setProducts(arr);
+            setFilteredProducts(arr);
+            setKeyState(mySet);
 
-        })
     }
 }
 
+    function handlePriceRange({min,max}){
+        // console.log("Min",{min});
+        // console.log("Max",{max});
+        //alert("Hello")
+        // console.log("Min"+{min.min}+",Max"+{max.max});
+        console.log("Min  "+{min}.min+",Max  "+{max}.max);
+        var arr =[];
+        products.map(index=>{
+            var price = parseInt(index.productPrice);
+            if(price>={min}.min && price<={max}.max){
+                arr.push(index);
+            }
+        })
+        setFilteredProducts(arr);
+    }
 
 
     return(
@@ -280,19 +355,43 @@ function FilterProduct(){
                                 );
                             })
                         }
+                        <br></br>
                         </div>
                     )
                 })
+                
+
             ):(
                 null
+
             )
             }
+            
+            <br></br>
+            <h4>Price Selector</h4>
+            <br></br>
+            {
+                (isRangeSet)?(
+                    
+                        <MultiRangeSlider
+                            
+                            min={minPrice}
+                            max={maxPrice}
+                            // onChange={({ min, max }) =>  console.log(`min = ${min}, max = ${max}`)}
+                            onChange={({min,max})=> {handlePriceRange({min,max})}}
+                        />
+                    
+                ):(
+                    null
+                )
+            }
+            
         </Col>
         <Col md={10}>
         <Row>
             {
                 (isProductsFetched)?
-                [...products].map(index=>{
+                [...filteredProducts].map(index=>{
                     return(
                         
                         <Card  style={{ width: '15rem'}} 
@@ -320,7 +419,7 @@ function FilterProduct(){
                     
                     )
                 }):(
-                    [...products].map(index=>{
+                    [...filteredProducts].map(index=>{
                         return(
                             
                             <Card  style={{ width: '15rem'}} 
