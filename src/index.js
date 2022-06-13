@@ -28,6 +28,7 @@ import OnlyReviews from './components/Items/OnlyReviews';
 import RateReviewProducts from './components/Items/RateReviewProducts';
 import AllComplaints from './components/Admin/Sidebar/AllComplaints';
 import AddToCompareProducts from './components/ProductsComparison/AddToCompareProducts';
+import GenerateBill from './components/GenerateBill';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -62,7 +63,8 @@ root.render(
       <Route path='/upload' element = {<UploadExcel/>}/>
       <Route path='/onlyreviews' element = {<OnlyReviews/>}/>
       <Route path='/ratereview' element = {<RateReviewProducts/>}/>
-      <Route path='/complainuser' element = {<UserComplaint/>}/>
+      <Route path='/usercomplaint' element = {<UserComplaint/>}/>
+      <Route path='/generatebill' element = {<GenerateBill/>}/>
 
     </Routes>
   </BrowserRouter>

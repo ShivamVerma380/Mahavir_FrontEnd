@@ -49,7 +49,7 @@ function ComparisonVariants({product}){
                                         {
                                             str= str.substr(0,str.length-1)
                                         }    
-                                        
+                                                                
                                         
                                         
                                         </Row>
