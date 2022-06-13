@@ -30,10 +30,7 @@ function FilterProduct(){
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
 
-    const [isCompareBtnClicked,SetIsCompareBtnClicked] = useState(false);
 
-    const [isAddToCompareProductsFetched,SetIsAddToCompareProductsFetched] =  useState(false);
-    const [addToCompareProducts,SetAddToCompareProducts] = useState([]);
 
     var cards=<div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
@@ -152,12 +149,12 @@ function FilterProduct(){
     const [isProductsByCategoriesSet,SetIsProductsByCategoriesSet] = useState(false);
 
     
-    console.log("SubSubCategory",localStorage.getItem("SubSubCategory"))
-    // useEffect(()=>{
-    //     if(!isFilterCrieteriasFetched){
-            
-    //     }
-    // })   
+    console.log("SubSubCategory",localStorage.getItem("SubSubCategory")) 
+
+
+    const [productInformationFilters,SetProductInformationFilters] = useState();
+    const [productInformationKeys,SetProductInformationKeys] = useState([]);
+    const [isProductInformationFiltersFetched,SetIsProductInformationFiltersFetched] = useState(false);
     
     
     var min= Number.MAX_VALUE ,max = Number.MIN_VALUE;
@@ -165,8 +162,10 @@ function FilterProduct(){
     const [maxPrice,SetMaxPrice] = useState();
     const [isRangeSet,SetIsRangeSet] = useState(false);
 
+
+
     useEffect(()=>{
-        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet && !isKeySetUpdated && !isRangeSet){
+        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet && !isKeySetUpdated && !isRangeSet && !isProductInformationFiltersFetched){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
             console.log("Model Number",modelNumbers);
             var urls=[];
@@ -180,23 +179,12 @@ function FilterProduct(){
                         
                         products.push(index.data);
                         filteredProducts.push(index.data);
-                        // var price = index.data.productPrice;
-                        // console.log("price",price)
-                        // if(min>parseInt(index.data.productPrice)){
-                        //     min= parseInt(index.data.productPrice);
-                        //     console.log("min",min)
-                            
-                        // }
-                        // if(max<parseInt(index.data.productPrice)){
-                        //     max= parseInt(index.data.productPrice);
-                        //     console.log("max",max);
-                        // }
-                      //  products.push(index.data);
+
+
                     })
-                    // SetMinPrice(min);
-                    // SetMaxPrice(max);
+
                     setIsProductsFetched(true);
-                    // SetIsRangeSet(true);
+
                 })
             )
 
@@ -215,6 +203,20 @@ function FilterProduct(){
 
                 })
         
+
+                axios.get("http://localhost:8080/get-categories/"+Category)
+                .then(function(response){
+                    if(response.status==200){
+                        console.log("productFilters",response.data.productFilters);
+                        SetProductInformationFilters(response.data.productFilters);
+                        for(var key in response.data.productFilters){
+                            productInformationKeys.push(key);
+                        } 
+                    }
+                }).catch(function(error){
+                    console.log(error);
+                })
+
             axios.get("http://localhost:8080/get-products-by-category/"+Category)
                 .then(function(response){
                     if(response.status==200){
@@ -233,6 +235,7 @@ function FilterProduct(){
                         SetIsRangeSet(true);
                         setKeyStateUpdated(true);
                         SetIsProductsByCategoriesSet(true);
+                        SetIsProductInformationFiltersFetched(true);
                     }
                 }).catch(function(error){
                     console.log("error",error);
@@ -381,6 +384,31 @@ function FilterProduct(){
                             onChange={({min,max})=> {handlePriceRange({min,max})}}
                         />
                     
+                ):(
+                    null
+                )
+            }
+            <br></br>
+            <br></br>
+            {
+                (isProductInformationFiltersFetched)?(
+                    productInformationKeys.map(key=>{
+                        return(
+                            <div>
+                                <h5>{key}</h5>
+                                {
+                                    productInformationFilters[key].map(values=>{
+                                        return(
+                                            <Form>
+                                                <Form.Check type="checkbox"  value={values}  label = {values}/>
+                                            </Form>
+
+                                        );
+                                    })
+                                }
+                            </div>
+                        );
+                    })
                 ):(
                     null
                 )
