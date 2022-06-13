@@ -6,8 +6,10 @@ import ComparisonHeader from "./ComparisonHeader";
 import ComparisonHighlights from "./ComparisonHighlights";
 import ComparisonVariants from "./ComparisonVariants";
 import ComparisonProductInformation from "./ComparisonProductInformation";
-
+import { useNavigate } from "react-router-dom";
 function AddToCompareProducts(){
+
+    const navigate = useNavigate();
 
     const [product,SetProduct] = useState([]);
     const [isProductFetched,SetIsProductFetched] = useState(false);
@@ -136,6 +138,23 @@ function AddToCompareProducts(){
         SetModel(modelName);
     }
 
+    const removeProduct=(event)=>{
+        var arr=[];
+        console.log("Model number",event.target.name);
+        // product.map(p=>{
+        //     if(p.modelNumber===event.target.name){
+        //         console.log("Inside model num if");
+        //     }
+        // })
+
+        if(product.length==1){
+            
+            navigate("/");
+        }
+        SetProduct(product.filter(item=>item.modelNumber!==event.target.name))
+        SetLength(length-1);
+    }
+
     return(
         <div>
         {/* <Header/> */}
@@ -157,6 +176,8 @@ function AddToCompareProducts(){
                         product.map(index=>{
                             return(
                                 <Col md={2}>
+                                    <Button name={index.modelNumber} onClick={removeProduct}>X</Button>
+                                    
                                     <img style={{ width: "10rem", alignContent: "center" }}  src={'data:image/jpg;base64,' + index.productImage1.data}></img>
                                     <br></br>
                                     <h6 style={{ marginTop: "20px" }}>{index.productName}</h6>
@@ -165,6 +186,8 @@ function AddToCompareProducts(){
                             );
                         })
                     }
+
+                    
            
             
             {
@@ -180,7 +203,7 @@ function AddToCompareProducts(){
                             (isBrandsFetched)?(
                                 <div>
                                 
-                                <NavDropdown title = {brand} id="brand">
+                                <NavDropdown title = {brand} id="brand" >
                                     {
                                     Brands.map(index=>{
                                         return(
