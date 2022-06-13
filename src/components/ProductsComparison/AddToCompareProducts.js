@@ -64,7 +64,6 @@ function AddToCompareProducts(){
                         console.log("Add To Compare SubCat",response.data);
                         SetBrands(response.data);
                         SetIsBrandsFetched(true);
-                        
                     }
                     
                 }).catch(function(error){
@@ -106,6 +105,17 @@ function AddToCompareProducts(){
         })
         console.log("BrandSelected",brandName);
     }
+
+    // function getModel({modelNumber,modelName}){
+    //     // product.map(pro=>{
+    //     //     // if(pro.modelNumber==modelNumber){
+    //     //     //     return null;
+    //     //     // }
+    //     // })
+    //     return(
+    //         <NavItem onClick={()=>handleModelClick(modelName,modelNumber)}>{modelName}</NavItem>
+    //     );
+    // }
 
     function handleModelClick(modelName,modelNumber){
 
@@ -193,7 +203,7 @@ function AddToCompareProducts(){
                                         Models.map(model=>{
                                             return(
                                                 <NavItem onClick={()=>handleModelClick(model.modelName,model.modelNumber)}>{model.modelName}</NavItem>
-                                            )
+                                            );
                                         })
                                         }
                                     </NavDropdown>
