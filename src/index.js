@@ -62,7 +62,7 @@ root.render(
       <Route path='/upload' element = {<UploadExcel/>}/>
       <Route path='/onlyreviews' element = {<OnlyReviews/>}/>
       <Route path='/ratereview' element = {<RateReviewProducts/>}/>
-      <Route path='/complainuser' element = {<UserComplaint/>}/>
+      <Route path='/usercomplaint' element = {<UserComplaint/>}/>
 
     </Routes>
   </BrowserRouter>

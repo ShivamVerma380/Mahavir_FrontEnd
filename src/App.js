@@ -3,7 +3,7 @@ import Header from './components/Header';
 import CategoriesToDisplay from './components/DisplayCategories/CategoriesToDisplay';
 import Slideshow from './components/offers/Slideshow';
 import Product from './components/Items/Product';
-import { Router, Routes, Route } from 'react-router-dom';
+import { Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import {useState, useEffect} from "react";
 import axios from "axios";
 import AdminHeader from './components/Admin/AdminHeader';
@@ -12,6 +12,7 @@ import Test from './components/Test';
 import { Button } from 'react-bootstrap';
 import AddItem from './components/Test/AddItem';
 import Footer from './components/Footer'
+
 
 
 
@@ -44,6 +45,8 @@ function App() {
 
   //localStorage.setItem("product",JSON.stringify(products));
 
+  
+  
   useEffect(() => {
     
     var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
@@ -107,6 +110,8 @@ function App() {
     }
   }
 
+  
+
   function getCompareBtn(){
     var modelNumsToCompare = localStorage.getItem("CompareModels");
     //var size = cookies.CompareModelsLength;
@@ -119,8 +124,10 @@ function App() {
 
   return (
     <div className="App" >
+
       
       <Header  productList={Products}/>
+
 
       {/* <AddItem/> */}
 

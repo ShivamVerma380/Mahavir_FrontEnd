@@ -605,7 +605,7 @@ function ProductDetails(){
           loopFillGroupWithBlank={true}
           breakpoints={{
             700: {
-              slidesPerView: 3,
+              slidesPerView: 5,
             },
             400: {
               slidesPerView: 1,

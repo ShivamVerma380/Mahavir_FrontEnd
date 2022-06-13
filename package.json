@@ -25,6 +25,8 @@
     "material-ui": "^0.20.2",
     "node-modules": "^1.0.1",
     "react": "^18.1.0",
+    "react-360-product-viewer": "^0.1.0",
+    "react-360-view": "^0.1.3",
     "react-arrows": "^1.2.0",
     "react-bootstrap": "^2.4.0",
     "react-cookie": "^4.1.1",
