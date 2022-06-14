@@ -146,6 +146,7 @@ function App() {
       {
         getCompareBtn()
      }
+    
      <Footer/>
     </div>
     

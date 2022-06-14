@@ -29,6 +29,7 @@ import RateReviewProducts from './components/Items/RateReviewProducts';
 import AllComplaints from './components/Admin/Sidebar/AllComplaints';
 import AddToCompareProducts from './components/ProductsComparison/AddToCompareProducts';
 import GenerateBill from './components/GenerateBill';
+import WishList from './components/WishList';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -65,6 +66,11 @@ root.render(
       <Route path='/ratereview' element = {<RateReviewProducts/>}/>
       <Route path='/usercomplaint' element = {<UserComplaint/>}/>
       <Route path='/generatebill' element = {<GenerateBill/>}/>
+      <Route path='/wishlist' element = {<WishList/>}/>
+
+      
+      
+      
 
     </Routes>
   </BrowserRouter>

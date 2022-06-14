@@ -13,6 +13,7 @@ function SearchBar({productList}){
   
   const inputRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [search, setSearch] = useState("");
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown" && activeIndex + 1 < filteredSuggestions.length) {
