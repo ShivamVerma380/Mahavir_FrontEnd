@@ -1,47 +1,113 @@
 import React, { useState } from "react";
 import { Row,Col } from "react-bootstrap";
+import { Container } from "reactstrap";
+import { Flag } from "semantic-ui-react";
 
-function ComparisonHighlights({product}){
-    // const[highlight1,SetHighlight1] = useState([]);
-    // const[highlight2,SetHighlight2] = useState([]);
-    // const[highlight3,SetHighlight3] = useState([]);
-    // const[highlight4,SetHighlight4] = useState([]);
+function ComparisonHighlights({product,showOnlyDiff}){
 
-    var highlight1=[];
-    var highlight2=[];
-    var highlight3=[];
-    var highlight4=[];
+    var arr = product[0].productHighlights.split(';');
+    const [ans,SetAns] = useState(new Set());
+    const [isAnsFetched,SetIsAnsFetched] = useState(false);
 
-
-    // var length = product.length;
-    // if(length===1){
-    //     highlight1= product[0].productHighlights.split(';');
-
-    // }else if(length===2){
-    //     highlight2= product[1].productHighlights.split(';');
-    // }else if(length===3){
-    //     highlight3= product[2].productHighlights.split(';');
-    // }else if(length===4){
-    //     highlight4= product[3].productHighlights.split(';');
-    // }
+    function getFilteredHighlights(){
+            product.map((index,pos)=>{
+                var flag = false;
+                
+                
+                    index.productHighlights.split(';').map((h,pos)=>{
+                        console.log("h:",h,"....arr:",arr[pos]);
+                        if(h!==arr[pos]){
+                            ans.add(pos);
+                        }
+                    })
+                    
+                
+            })
+            console.log("ans",ans);
+    }
 
     return(
         <Row>
             <Col md={1}>
             </Col> 
-            <Col md={2}>
-                <h5>Product Highlights</h5>
-            </Col>
             {
-                product.map(index=>{
-                    return(
+                (!showOnlyDiff)?(
+                    
+                    <Col md={2}>
+                        <h5>Product Highlights</h5>
+                    </Col>
+                ):(null)
+            }
+            {
+
+                (!showOnlyDiff)?(
+                    
+                        product.map(index=>{
+                            return(
+                                <Col md={2}>
+                                    {
+                                        index.productHighlights.split(';').map(str=><p>•{str}</p>)
+                                    }
+                                </Col>
+                            );
+                        })
+                    
+                ):(null)
+                    
+            }
+
+            {
+            (showOnlyDiff)?(   
+                    
+                getFilteredHighlights()
+
+                    
+            ):(
+                null
+            )
+            }
+
+            {
+                (showOnlyDiff)?(
+                    
+                    <Col md={2}>
+                        <h5>Product hightlights</h5>
+                    </Col>
+                    
+                ):(
+                    null
+                )
+            }
+            {
+                (showOnlyDiff)?(
+                    product.map(p=>{
+                        return(
                         <Col md={2}>
                             {
-                                index.productHighlights.split(';').map(str=><p>•{str}</p>)
+                                p.productHighlights.split(';').map((highlight,pos)=>{
+                                    
+                                    return(
+                                        <Container>
+                                        {
+                                            (ans.has(pos))?(
+                                                
+                                                <p>{highlight}</p>
+                                            
+                                            ):(
+                                                null
+                                            )
+                                        }
+                                        </Container>
+                                    )
+                                    
+                                })
                             }
                         </Col>
-                    );
-                })
+                        );
+                    })
+                ):(
+                    null
+                )
             }
 
         </Row>

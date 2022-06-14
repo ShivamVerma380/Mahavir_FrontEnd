@@ -14,6 +14,8 @@ function AddToCompareProducts(){
     const [product,SetProduct] = useState([]);
     const [isProductFetched,SetIsProductFetched] = useState(false);
 
+    const [filteredProduct,SetFilteredProduct] = useState([]);
+
     const[length,SetLength] = useState(); 
 
     const [Brands,SetBrands] = useState([]);
@@ -31,6 +33,8 @@ function AddToCompareProducts(){
     var keys=[];
     var value=[];
 
+
+    const[showOnlyDiff,SetShowOnlyDiff] = useState(false);
 
     function getProductInformationKeys(productInformation){
         
@@ -54,6 +58,7 @@ function AddToCompareProducts(){
                     res.map((response)=>{
                         console.log("response",response);
                         product.push(response.data);
+                        filteredProduct.push(response.data);
                     })
                     SetLength(product.length);
                     SetIsProductFetched(true);
@@ -90,10 +95,34 @@ function AddToCompareProducts(){
         arr.push("God");
     }
 
+    const [modelNumberFiltered,SetModelNumberFiltered] = useState([]);
     
 
     const handleFormCheck=event=>{
-        alert(event.target.value)
+        // console.log(event.target.value)
+        console.log("Show Only Diff",showOnlyDiff);
+        if(showOnlyDiff==false){
+            alert("On")
+            var arr = product;
+            var modelNumber=[];
+            modelNumber.push(arr[0].modelNumber);
+            var modelNumberFlag = false;
+            arr.map((index,pos)=>{
+                if(pos!=0){
+                    modelNumber.push(index.modelNumber);
+                }
+                if(index.modelNumber!==arr[0].modelNumber){
+                    modelNumberFlag= true;
+                }
+            })
+            if(modelNumberFlag){
+                SetModelNumberFiltered(modelNumber);
+            }
+
+        }else{
+            alert("Off")
+        }
+        SetShowOnlyDiff(!showOnlyDiff);
     }
 
     function handleBrandClick(brandName){
@@ -108,16 +137,7 @@ function AddToCompareProducts(){
         console.log("BrandSelected",brandName);
     }
 
-    // function getModel({modelNumber,modelName}){
-    //     // product.map(pro=>{
-    //     //     // if(pro.modelNumber==modelNumber){
-    //     //     //     return null;
-    //     //     // }
-    //     // })
-    //     return(
-    //         <NavItem onClick={()=>handleModelClick(modelName,modelNumber)}>{modelName}</NavItem>
-    //     );
-    // }
+
 
     function handleModelClick(modelName,modelNumber){
 
@@ -169,10 +189,27 @@ function AddToCompareProducts(){
                         <h5>{product[0].productName} vs others</h5>
                         <br></br>
                         <Form>
-                            <Form.Check type="checkbox"   label = "Show Only Differences" onChange={handleFormCheck}/>
+                            <Form.Check type="switch" id="Show Only Differences"   label = "Show Only Differences"  value={showOnlyDiff} onClick={handleFormCheck}/>
                         </Form>
                     </Col>
                     {
+                        
+                            product.map(index=>{
+                                return(
+                                    <Col md={2}>
+                                        <Button name={index.modelNumber} onClick={removeProduct}>X</Button>
+                                    
+                                        <img style={{ width: "10rem", alignContent: "center" }}  src={'data:image/jpg;base64,' + index.productImage1.data}></img>
+                                        <br></br>
+                                        <h6 style={{ marginTop: "20px" }}>{index.productName}</h6>
+                                        <h6 style={{}}>₹{index.productPrice}</h6>
+                                    </Col>
+                                )
+                            })
+                       
+                    }
+
+                    {/* {
                         product.map(index=>{
                             return(
                                 <Col md={2}>
@@ -185,7 +222,7 @@ function AddToCompareProducts(){
                                 </Col>
                             );
                         })
-                    }
+                    } */}
 
                     
            
@@ -243,7 +280,7 @@ function AddToCompareProducts(){
                     <Container>
                     <hr></hr>
                     </Container>
-                    <ComparisonHighlights product={product}/>
+                    <ComparisonHighlights product={product} showOnlyDiff={showOnlyDiff}/>
                     <br></br>
                     <Row>
                     <Col md={1}></Col>
@@ -259,7 +296,7 @@ function AddToCompareProducts(){
                         })
                     }
                     </Row>
-                    <ComparisonVariants product={product}/>
+                    <ComparisonVariants product={product} showOnlyDiff={showOnlyDiff}/>
                     <Container>
                         <hr></hr>
                         <h3>Product Information</h3>
