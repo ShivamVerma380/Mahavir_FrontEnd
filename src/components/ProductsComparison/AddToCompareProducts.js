@@ -12,6 +12,7 @@ function AddToCompareProducts(){
     const navigate = useNavigate();
 
     const [product,SetProduct] = useState([]);
+    const [modelNums,SetModelNums] = useState([]);
     const [isProductFetched,SetIsProductFetched] = useState(false);
 
     const[length,SetLength] = useState(); 
@@ -54,28 +55,70 @@ function AddToCompareProducts(){
                     res.map((response)=>{
                         console.log("response",response);
                         product.push(response.data);
+                        modelNums.push(response.data.modelNumber);
                     })
                     SetLength(product.length);
                     SetIsProductFetched(true);
                     
                 })
             )
-            axios.get("http://localhost:8080/get-add-to-compare-subcat/"+localStorage.getItem("Category")+"/Brand")
-                .then(function(response){
-                    if(response.status==200){
-                        console.log("Add To Compare SubCat",response.data);
-                        SetBrands(response.data);
-                        SetIsBrandsFetched(true);
-                    }
-                    
-                }).catch(function(error){
-                    console.log("error");
-                })
-                
-        }
+            
         
+        }
+
+        if(isProductFetched){
+
+            axios.get("http://localhost:8080/get-add-to-compare-subcat/"+localStorage.getItem("Category")+"/Brand")
+            .then(function(response){
+                var arr=[];
+                if(response.status==200){
+                    console.log("Add To Compare SubCat",response.data);
+                    arr = response.data;
+                    console.log("Before filter",arr);
+                    arr.map((index,p)=>{
+                        index.modelResponses.map((model,pos)=>{
+                            // modelNums.map(mNo=>{
+                            //     if(model.modelNumber===mNo){
+                            //         // SetProduct(product.filter(item=>item.modelNumber!==event.target.name))
+                            //         arr.filter()
+                            //     }
+    
+                            // })
+                            
+                            modelNums.map(mNo=>{
+                                if(mNo===model.modelNumber){
+                                    console.log("In if......")
+                                    console.log("modelNum",index.modelResponses[pos].modelNumber)
+                                    console.log("ModelNum",mNo)
+                                    index.modelResponses.filter(item=>item.modelNumber!==mNo);
+                                    console.log("index.modelResponses",index.modelResponses);
+                                }
+                            })
+                            arr[p]=index.modelResponses;
+                            
+                        })
+                        console.log("index",index);
+                        arr[p]=index;
+                    })
+                    console.log("After filter",arr);
+                    SetBrands(arr);
+    
+                    SetIsBrandsFetched(true);
+                }
+                
+            }).catch(function(error){
+                console.log(error);
+            })
+        }
 
     })
+
+    
+    
+        
+
+
+
 
     
     var arr=[];
@@ -221,7 +264,7 @@ function AddToCompareProducts(){
 
                                 (isBrandSelected)?(
                                     <div>
-                                    <NavDropdown title={model} id = "Models">
+                                    <NavDropdown title={model} id = "Models" >
                                         {   
                                         Models.map(model=>{
                                             return(
