@@ -300,3 +300,7 @@ body {
 .wishlisticon:hover {
   color: rgb(255, 88, 88);
 }
+
+.hometitle {
+  text-transform: uppercase;
+}
