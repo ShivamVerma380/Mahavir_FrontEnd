@@ -665,8 +665,19 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
 
           <br></br>
           <br></br>
-          <h5>Enter Pincode</h5>
-          <h3><b>Variants</b></h3>
+          <Row style={{marginTop:20}}>
+            <Col md={3}>
+            <h5 >Enter Pincode</h5>
+            </Col>
+            <Col md={4}>
+              <Input type="number" style={{height:25}}></Input>
+            </Col>
+            <Col md={3}>
+              Check Pincode
+            </Col>
+          </Row>
+          
+          <h3 style={{marginTop:30}}><b>Variants</b></h3>
           {/* {
             (isVariantKeysFetched)?(
               variantKeys.map(variant=>{
