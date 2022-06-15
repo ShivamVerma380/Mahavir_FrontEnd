@@ -55,7 +55,7 @@ function Product({title,productList}){
       if(offerPrice===productPrice){
         return <Button variant="flat" size="m" style={{visibility:"hidden"}}>Offer Available</Button>
       }
-      return <Button variant="flat" size="m">Offer Available</Button>
+      return <Button variant="flat" size="m">Offer, Free Gift Available</Button>
     }
 
     const handleAddToCompare = event => {
@@ -80,7 +80,7 @@ function Product({title,productList}){
 
     
     function WishlistHandler(index) {
-      alert("Item added successfully to wishlist");
+      // alert("Item added successfully to wishlist");
       console.log(index.modelNumber)
       if (localStorage.getItem("wishlistproduct")==null) {
         localStorage.setItem("wishlistproduct",index.modelNumber)
@@ -115,7 +115,7 @@ function Product({title,productList}){
 
     return(
       <div>
-        <h3 style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3>
+        <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3>
       <span section-separator section-separator-dk-blue></span>
       <Swiper
         slidesPerView={1}
