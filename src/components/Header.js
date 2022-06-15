@@ -10,6 +10,7 @@ import SearchBar from "./SearchBar"
 import FormData from "form-data"; 
 import axios from "axios";
 import Login from "./Login-Signup/Login";
+import Search from "./SearchBar/Search";
 
 
 const Header = ({productList}) => {
@@ -110,7 +111,8 @@ const Header = ({productList}) => {
           <Offcanvas.Body>
           
             <Nav className="justify-content-end flex-grow-1 pe-3">
-            <SearchBar  productList={productList}/>
+            <Search/>
+            {/* <SearchBar  productList={productList}/> */}
             {/* <Form className="d-flex">
                     <FormControl
                     type="search"
