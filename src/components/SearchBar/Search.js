@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-
+import { useNavigate } from "react-router-dom";
 function Search(){
     const[products,SetProducts] = useState([]);
     const[isProductsFetched,setIsProductsFetched] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(!isProductsFetched){
@@ -19,44 +21,25 @@ function Search(){
                 })
         }
     })
-
-    // const items = [
-    //     {
-    //       id: 0,
-    //       name: 'Cobol'
-    //     },
-    //     {
-    //       id: 1,
-    //       name: 'JavaScript'
-    //     },
-    //     {
-    //       id: 2,
-    //       name: 'Basic'
-    //     },
-    //     {
-    //       id: 3,
-    //       name: 'PHP'
-    //     },
-    //     {
-    //       id: 4,
-    //       name: 'Java'
-    //     }
-    //   ]
     
       const handleOnSearch = (string, results) => {
-        // onSearch will have as the first callback parameter
-        // the string searched and for the second the results.
+
         console.log(string, results)
       }
     
       const handleOnHover = (result) => {
         // the item hovered
-        console.log(result)
+        console.log(result.name)
+
       }
     
       const handleOnSelect = (item) => {
         // the item selected
-        console.log(item)
+        console.log(item.name)
+        localStorage.setItem("productSelected",item.id);
+        navigate("/productDetails")
+        
+        
       }
     
       const handleOnFocus = () => {
