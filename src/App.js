@@ -11,7 +11,7 @@ import ShowSearchResults from './components/ShowSearchResults';
 import Test from './components/Test';
 import { Button } from 'react-bootstrap';
 import AddItem from './components/Test/AddItem';
-import Footer from './components/Footer'
+import Footer from './components/Footer/Footer'
 
 
 
