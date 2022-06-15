@@ -12,8 +12,9 @@ function AddToCompareProducts(){
     const navigate = useNavigate();
 
     const [product,SetProduct] = useState([]);
-    const [modelNums,SetModelNums] = useState([]);
     const [isProductFetched,SetIsProductFetched] = useState(false);
+
+    const [filteredProduct,SetFilteredProduct] = useState([]);
 
     const[length,SetLength] = useState(); 
 
@@ -32,6 +33,8 @@ function AddToCompareProducts(){
     var keys=[];
     var value=[];
 
+
+    const[showOnlyDiff,SetShowOnlyDiff] = useState(false);
 
     function getProductInformationKeys(productInformation){
         
@@ -55,70 +58,29 @@ function AddToCompareProducts(){
                     res.map((response)=>{
                         console.log("response",response);
                         product.push(response.data);
-                        modelNums.push(response.data.modelNumber);
+                        filteredProduct.push(response.data);
                     })
                     SetLength(product.length);
                     SetIsProductFetched(true);
                     
                 })
             )
-            
-        
-        }
-
-        if(isProductFetched){
-
             axios.get("http://localhost:8080/get-add-to-compare-subcat/"+localStorage.getItem("Category")+"/Brand")
-            .then(function(response){
-                var arr=[];
-                if(response.status==200){
-                    console.log("Add To Compare SubCat",response.data);
-                    arr = response.data;
-                    console.log("Before filter",arr);
-                    arr.map((index,p)=>{
-                        index.modelResponses.map((model,pos)=>{
-                            // modelNums.map(mNo=>{
-                            //     if(model.modelNumber===mNo){
-                            //         // SetProduct(product.filter(item=>item.modelNumber!==event.target.name))
-                            //         arr.filter()
-                            //     }
-    
-                            // })
-                            
-                            modelNums.map(mNo=>{
-                                if(mNo===model.modelNumber){
-                                    console.log("In if......")
-                                    console.log("modelNum",index.modelResponses[pos].modelNumber)
-                                    console.log("ModelNum",mNo)
-                                    index.modelResponses.filter(item=>item.modelNumber!==mNo);
-                                    console.log("index.modelResponses",index.modelResponses);
-                                }
-                            })
-                            arr[p]=index.modelResponses;
-                            
-                        })
-                        console.log("index",index);
-                        arr[p]=index;
-                    })
-                    console.log("After filter",arr);
-                    SetBrands(arr);
-    
-                    SetIsBrandsFetched(true);
-                }
+                .then(function(response){
+                    if(response.status==200){
+                        console.log("Add To Compare SubCat",response.data);
+                        SetBrands(response.data);
+                        SetIsBrandsFetched(true);
+                    }
+                    
+                }).catch(function(error){
+                    console.log("error");
+                })
                 
-            }).catch(function(error){
-                console.log(error);
-            })
         }
+        
 
     })
-
-    
-    
-        
-
-
-
 
     
     var arr=[];
@@ -133,10 +95,34 @@ function AddToCompareProducts(){
         arr.push("God");
     }
 
+    const [modelNumberFiltered,SetModelNumberFiltered] = useState([]);
     
 
     const handleFormCheck=event=>{
-        alert(event.target.value)
+        // console.log(event.target.value)
+        console.log("Show Only Diff",showOnlyDiff);
+        if(showOnlyDiff==false){
+            alert("On")
+            var arr = product;
+            var modelNumber=[];
+            modelNumber.push(arr[0].modelNumber);
+            var modelNumberFlag = false;
+            arr.map((index,pos)=>{
+                if(pos!=0){
+                    modelNumber.push(index.modelNumber);
+                }
+                if(index.modelNumber!==arr[0].modelNumber){
+                    modelNumberFlag= true;
+                }
+            })
+            if(modelNumberFlag){
+                SetModelNumberFiltered(modelNumber);
+            }
+
+        }else{
+            alert("Off")
+        }
+        SetShowOnlyDiff(!showOnlyDiff);
     }
 
     function handleBrandClick(brandName){
@@ -151,16 +137,7 @@ function AddToCompareProducts(){
         console.log("BrandSelected",brandName);
     }
 
-    // function getModel({modelNumber,modelName}){
-    //     // product.map(pro=>{
-    //     //     // if(pro.modelNumber==modelNumber){
-    //     //     //     return null;
-    //     //     // }
-    //     // })
-    //     return(
-    //         <NavItem onClick={()=>handleModelClick(modelName,modelNumber)}>{modelName}</NavItem>
-    //     );
-    // }
+
 
     function handleModelClick(modelName,modelNumber){
 
@@ -212,10 +189,27 @@ function AddToCompareProducts(){
                         <h5>{product[0].productName} vs others</h5>
                         <br></br>
                         <Form>
-                            <Form.Check type="checkbox"   label = "Show Only Differences" onChange={handleFormCheck}/>
+                            <Form.Check type="switch" id="Show Only Differences"   label = "Show Only Differences"  value={showOnlyDiff} onClick={handleFormCheck}/>
                         </Form>
                     </Col>
                     {
+                        
+                            product.map(index=>{
+                                return(
+                                    <Col md={2}>
+                                        <Button name={index.modelNumber} onClick={removeProduct}>X</Button>
+                                    
+                                        <img style={{ width: "10rem", alignContent: "center" }}  src={'data:image/jpg;base64,' + index.productImage1.data}></img>
+                                        <br></br>
+                                        <h6 style={{ marginTop: "20px" }}>{index.productName}</h6>
+                                        <h6 style={{}}>₹{index.productPrice}</h6>
+                                    </Col>
+                                )
+                            })
+                       
+                    }
+
+                    {/* {
                         product.map(index=>{
                             return(
                                 <Col md={2}>
@@ -228,7 +222,7 @@ function AddToCompareProducts(){
                                 </Col>
                             );
                         })
-                    }
+                    } */}
 
                     
            
@@ -264,7 +258,7 @@ function AddToCompareProducts(){
 
                                 (isBrandSelected)?(
                                     <div>
-                                    <NavDropdown title={model} id = "Models" >
+                                    <NavDropdown title={model} id = "Models">
                                         {   
                                         Models.map(model=>{
                                             return(
@@ -286,7 +280,7 @@ function AddToCompareProducts(){
                     <Container>
                     <hr></hr>
                     </Container>
-                    <ComparisonHighlights product={product}/>
+                    <ComparisonHighlights product={product} showOnlyDiff={showOnlyDiff}/>
                     <br></br>
                     <Row>
                     <Col md={1}></Col>
@@ -302,7 +296,7 @@ function AddToCompareProducts(){
                         })
                     }
                     </Row>
-                    <ComparisonVariants product={product}/>
+                    <ComparisonVariants product={product} showOnlyDiff={showOnlyDiff}/>
                     <Container>
                         <hr></hr>
                         <h3>Product Information</h3>
