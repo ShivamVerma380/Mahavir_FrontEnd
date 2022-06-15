@@ -568,7 +568,7 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
 
             </Col>
 
-            <Col className="imageproduct" md={4} style={{marginTop: "100px", justifyContent: "center"}}>
+            <Col className="imageproduct" md={4} style={{marginTop: "100px", justifyContent: "center", marginLeft:35}}>
               <br></br>
               <br></br>
 
@@ -673,7 +673,7 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
               <Input type="number" style={{height:25}}></Input>
             </Col>
             <Col md={3}>
-              Check Pincode
+              <button style={{borderRadius:"5px", padding:3}}>Check Pincode</button>
             </Col>
           </Row>
           
@@ -700,7 +700,7 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
                     {
                       product.variants[variantName].map(index=>{
                         return(
-                          <Col md={3}>
+                          <Col md={1} style={{marginRight:30}}>
                           <Button id={index}  variant="flat" style={{marginLeft:10}} onClick={()=>handleBtnClick({index})}>{index}</Button>
                           </Col>
                         );
