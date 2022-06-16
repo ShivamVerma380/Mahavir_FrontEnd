@@ -2,7 +2,7 @@ import React , {useState} from 'react';
 import { Accordion } from 'react-bootstrap';
 import Select from 'react-select';
 import AdminHeader from "./AdminHeader";
-import Navbar from "./Sidebar/Navbar";
+import AdminNavbar from "./Sidebar/AdminNavbar";
 import {FormControl,Button,Form,NavDropdown, Nav, FormCheck,Container,Row,Col} from 'react-bootstrap';
 const Categories = [
     { label: "TV", value: 1 },
@@ -26,15 +26,14 @@ const [show,setShow]=useState(false);
     return(
         <div>
             <AdminHeader/>
-            <Navbar/>
+            <AdminNavbar/>
                     
         <Container>
 
                 <Accordion>
                     <Row>
-                        <Col md={2}>
-                        </Col>
-                        <Col md={10}>
+                        
+                        <Col md={12}>
                             <br></br>
                         <Accordion.Item eventKey="0">
                         <Accordion.Header>Add New Category</Accordion.Header>
