@@ -176,8 +176,8 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-
-
-
-
+.col-md-4 {
+  margin-top: 10px;
+  flex: 0 0 auto;
+  width: 33.33333333%;
+}

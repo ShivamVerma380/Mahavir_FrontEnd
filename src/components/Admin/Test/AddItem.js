@@ -1,20 +1,44 @@
-import React from "react";
-import {Navbar,FormControl,Button,Form,NavDropdown, Nav, FormCheck} from 'react-bootstrap';
-import { Col, Row } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import {Navbar,FormControl,Button,Form,NavDropdown, Nav, FormCheck,Container,Row,Col} from 'react-bootstrap';
+
 import axios from "axios";
-
+import Select from 'react-select';
 var SelectedCategory="";
-
 var selectedSubCategory="";
 var isSelectedSubCategory=false;
 
+const Categories = [
+    { label: "TV", value: 1 },
+    { label: "Mobile", value: 2 },
+    
+  ];
+  const SubCategories = [
+    { label: "Type", value: 1 },
+    { label: "Brand", value: 2 },
+    
+  ];
+  const SubSubCategories = [
+    { label: "Apple", value: 1 },
+    { label: "Samsung", value: 2 },
+    
+  ];
 var updatedSubCategoriesArray=[]
+
+
+
+
+
 function CategoryComponent(props){
     
+const [show,setShow]=useState(false);
     return(
+
         <div>
+
+        
+<Container>
             <Row>
-                <Col md={2}>
+                <Col md={6}>
                 <Form className="d-flex">
                     <FormControl
                     type="search"
@@ -26,7 +50,49 @@ function CategoryComponent(props){
                 </Form>
                 </Col>
             </Row>
+
+            
+            <Row>
+                <Col md={4}>
+                    <div>
+                    <br></br>
+                    <Select options={ Categories } />
+                    <br></br>
+                    <Select options={ SubCategories } />
+                    <br></br>
+                    <Select options={ SubSubCategories } />
+                    <br></br>
+                    </div>
+                </Col>
+                <Col md={2}>
+                <br></br>
+                <Button onClick={() => setShow(true) } variant="flat" size="m">Add Item</Button>
+                </Col>
+                <Col md={6}>
+                    {
+                        show? <Form>
+                            <br></br>
+                            <Form.Group  >
+                          <Form.Control type="text" placeholder="Model No" />
+                          
+                        </Form.Group>
+                        <br></br>
+                        <Form.Group  >
+                          <Form.Control type="text" placeholder="Product Name" />
+                          
+                        </Form.Group>
+                        <br></br>
+                         
+                        <Button  variant="flat" size="m">Submit</Button>
+                      </Form>
+                     : null
+                    }
+                </Col>
+            </Row>
+        </Container>
         </div>
+
+        
     )
 }
 
@@ -35,9 +101,11 @@ function CategoryComponent(props){
 
 class AddItem extends React.Component{
     
+    
+    
     constructor(props){
         super(props);
-
+        
         this.state={
             isCategoriesFetched:false,
             Category:[],
@@ -120,6 +188,8 @@ class AddItem extends React.Component{
     
 
     render() {
+        
+        
         if(!this.state.isCategoriesFetched){
             this.fetchCategories();
         }
@@ -174,6 +244,9 @@ class AddItem extends React.Component{
                         );
                     })):(console.log("In null"))
             }
+
+                    
+        
             </div>
             
                 
