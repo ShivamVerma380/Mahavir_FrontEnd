@@ -20,8 +20,7 @@ const AboutCompany = () => {
             
             <p style={{fontSize:20}}>Mahavir Electronics And Furniture in Pune is one of the leading businesses in the Electronic Goods 
             Showrooms. Also known for Electronic Goods Showrooms, Car Accessory Dealers, Cable Dealers, Flour Mill Dealers, TV Dealers-LG, 
-            Wire Dealers, Car Audio System Dealers, Domestic Flour Mill Dealers and much more. Find Address, Contact Number, Reviews & 
-            Ratings, Photos, Maps of Mahavir Electronics And Furniture, Pune.</p>
+            Wire Dealers, Car Audio System Dealers, Domestic Flour Mill Dealers and much more.</p>
             <br></br>
 
             <h3>Location and Overview</h3>

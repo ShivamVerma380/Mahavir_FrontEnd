@@ -1,5 +1,5 @@
 import {  Input } from "reactstrap";
-import { ProgressBar ,Form,Button,Col, Container,Row} from "react-bootstrap";
+import { ProgressBar ,Form,Button,Col, Container,Row, Card} from "react-bootstrap";
 import Header from "../Header";
 import Zoom from "react-img-zoom";
 import "./ProductDetails.css"
@@ -28,7 +28,7 @@ import axios from "axios";
 
 // import required modules
 import { Pagination, Navigation } from "swiper";
-import { Card,CardImg, CardBody, CardTitle,CardSubtitle, CardText } from "reactstrap";
+import { CardImg, CardBody, CardTitle,CardSubtitle, CardText } from "reactstrap";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -620,6 +620,90 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
             }
             
           </Row>
+          <br></br>
+
+          <h5><b><i>Available Offers</i></b></h5>
+          <Row>
+          <Swiper
+                slidesPerView={1}
+                spaceBetween={5}
+                slidesPerGroup={3}
+                loop={false}
+                loopFillGroupWithBlank={true}
+                breakpoints={{
+                    700: {
+                        slidesPerView: 3,
+                    },
+                    400: {
+                        slidesPerView: 3,
+                    },
+                }}
+                pagination={{
+                    clickable: true,
+                }}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper"
+            > 
+
+            <SwiperSlide>
+              <Card style={{ width: '25rem' }} className="mb-2">
+                <Card.Body>
+                  <Card.Title>
+                    "IDBI BANK"
+                  </Card.Title>
+                  <Card.Text>
+                  Flat Cashback upto Rs. 2,500 on ICICI Credit card 
+                  EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </SwiperSlide>
+
+            <SwiperSlide>
+              <Card style={{ width: '25rem' }} className="mb-2">
+                <Card.Body>
+                  <Card.Title>
+                    "ICICI BANK"
+                  </Card.Title>
+                  <Card.Text>
+                  Flat Cashback upto Rs. 2,500 on ICICI Credit card 
+                  EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </SwiperSlide>
+
+            <SwiperSlide>
+              <Card style={{ width: '25rem' }} className="mb-2">
+                <Card.Body>
+                  <Card.Title>
+                    "AXIS BANK"
+                  </Card.Title>
+                  <Card.Text>
+                  Flat Cashback upto Rs. 2,500 on ICICI Credit card 
+                  EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </SwiperSlide>
+
+            <SwiperSlide>
+              <Card style={{ width: '25rem' }} className="mb-2">
+                <Card.Body>
+                  <Card.Title>
+                    "SBI"
+                  </Card.Title>
+                  <Card.Text>
+                  Flat Cashback upto Rs. 2,500 on ICICI Credit card 
+                  EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </SwiperSlide>
+
+            </Swiper>
+          </Row>
           
           <br></br>
           <Row>
@@ -665,17 +749,7 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
 
           <br></br>
           <br></br>
-          <Row style={{marginTop:20}}>
-            <Col md={3}>
-            <h5 >Enter Pincode</h5>
-            </Col>
-            <Col md={4}>
-              <Input type="number" style={{height:25}}></Input>
-            </Col>
-            <Col md={3}>
-              <button style={{borderRadius:"5px", padding:3}}>Check Pincode</button>
-            </Col>
-          </Row>
+          
           
           <h3 style={{marginTop:30}}><b>Variants</b></h3>
           {/* {
@@ -713,6 +787,20 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
               null
             )
           }
+          <br></br>
+
+          <Row style={{marginTop:20}}>
+            <Col md={3}>
+            <h5 >Enter Pincode</h5>
+            </Col>
+            <Col md={4}>
+              <Input type="number" style={{height:25}}></Input>
+            </Col>
+            <Col md={3}>
+              <button style={{borderRadius:"5px", padding:3}}>Check Pincode</button>
+            </Col>
+          </Row>
+
           <h3 className="text" style={{ marginTop: "50px" }}>Product Description</h3>
           <hr></hr>
 
