@@ -10,11 +10,27 @@ import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import { Button } from "bootstrap";
+import { Button } from "react-bootstrap";
 import AddCategory from "./AddCategory";
-import AddItem from "./Test/AddItem";
+// import AddItem from "./Test/AddItem";
+import Select from 'react-select';
 
 const filter = createFilterOptions();
+const Categories = [
+    { label: "TV", value: 1 },
+    { label: "Mobile", value: 2 },
+    
+  ];
+  const SubCategories = [
+    { label: "Type", value: 1 },
+    { label: "Brand", value: 2 },
+    
+  ];
+  const SubSubCategories = [
+    { label: "Apple", value: 1 },
+    { label: "Samsung", value: 2 },
+    
+  ];
 
 export default function Admin () {
 
@@ -41,11 +57,45 @@ export default function Admin () {
             <Navbar/>
             <h1 style={{marginTop:"20px",textAlign:"center"}}>Mahavir Electronics</h1>
             {/* <AddCategory/>  */}
-            <AddItem/>
+            {/* <AddItem/> */}
                 <br></br>
                 
+            {/* <div className="container">
+                <div className="row">
+                <div className="col-md-4">
+                <Select options={ Categories } />
+                </div>
+                <div className="col-md-4"><Button>Add Item</Button>
+                </div>
+                <div className="col-md-4">
+                </div>
+                </div>
+                <div className="row">
                 
+                <div className="col-md-4">
+                    <Select options={ SubCategories } />
+                </div>
+                <div className="col-md-4"></div>
+                <div className="col-md-4"></div>
+                </div>
+                <div className="row">
                 
+                <div className="col-md-4">
+                    <Select options={ SubSubCategories } />
+                </div>
+                <div className="col-md-4"></div>
+                <div className="col-md-4"></div>
+                </div>
+
+                <div className="row">
+                <div className="col-md-4"></div>
+                <div className="col-md-4">
+                    
+                    </div>
+                    <div className="col-md-4"></div>
+                    </div>
+            </div>
+                 */}
 
                 {/* <DropdownButton
                     style={{marginLeft:"500px"}}

@@ -13,7 +13,7 @@ var flag = false;
 function FilterProduct(){
 
     var category = localStorage.getItem("Category");
-    console.log("Category",category);
+    // console.log("Category",category);
 
     const[products,setProducts] = useState([]);
     const[isProductsFetched,setIsProductsFetched] = useState(false);
@@ -23,7 +23,7 @@ function FilterProduct(){
     const[keySet,setKeyState] = useState(new Set()); //To Store subSubCategories name
     const[isKeySetUpdated,setKeyStateUpdated] = useState(false);
     //keySet.add(localStorage.getItem("SubSubCategoryName"));
-        console.log("keySet",keySet);
+        // console.log("keySet",keySet);
 
     const[filteredProducts,setFilteredProducts] = useState([]);
 
@@ -74,17 +74,17 @@ function FilterProduct(){
             //console.log('✅ Checkbox is checked');
             setChange(change+1)
             //document.getElementById(event.value).checked = "false"
-            console.log("Value",event.target.value);
+            // console.log("Value",event.target.value);
             modelNumsToCompare.add(event.target.value);
             alert(event.target.value)
-            console.log("ModelNumbers",modelNumsToCompare)
+            // console.log("ModelNumbers",modelNumsToCompare)
           } else {
-            console.log('⛔ Checkbox is NOT checked');
+            // console.log('⛔ Checkbox is NOT checked');
             //document.getElementById(event.value).checked = "true"
             setChange(change-1)
             modelNumsToCompare.delete(event.target.value);
 
-            console.log("ModelNumbers",modelNumsToCompare)
+            // console.log("ModelNumbers",modelNumsToCompare)
           }
 
         str="";
@@ -93,21 +93,21 @@ function FilterProduct(){
             str +=  element + ",";
         })
         str = str.slice(0,str.length-1);
-        console.log(str);
+        // console.log(str);
         //localStorage.setItem("CompareModels",str);
         // SetCookie('CompareModels',str,{path:'/'});
         //getCompareBtn();
         localStorage.setItem("CompareModels",str);
-        console.log('Compare Models',localStorage.getItem("CompareModels"))
+        // console.log('Compare Models',localStorage.getItem("CompareModels"))
         setisAddCompareClicked(current => !current);
     }
 
 
     function callProductDetails(index){
         //alert(index);
-        console.log("Index",index);
+        // console.log("Index",index);
         localStorage.setItem("productSelected",index.modelNumber);
-        console.log("Product Selected",localStorage.getItem("productSelected"))
+        // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
       }
 
@@ -122,7 +122,7 @@ function FilterProduct(){
             );
         }else{
             var modelNums = localStorage.getItem("CompareModels").split(',');
-            console.log("Model Nums",modelNums)
+            // console.log("Model Nums",modelNums)
         
             if(modelNums.includes(modelNumber)){
                 return(
@@ -144,12 +144,11 @@ function FilterProduct(){
     //FilterProduct....
     const [FilterCriterias,SetFilterCriterias] = useState([]);
     const [isFilterCrieteriasFetched,SetIsFilterCriteriasFetched]= useState(false);
-
+    const [isProductSorted, setIsProductSorted] = useState(false);
     const [ProductsByCategories,SetProductsByCategories] = useState([]);
     const [isProductsByCategoriesSet,SetIsProductsByCategoriesSet] = useState(false);
-
-    
-    console.log("SubSubCategory",localStorage.getItem("SubSubCategory")) 
+    const [SortedProducts, setSortedProducts] = useState([]);
+    // console.log("SubSubCategory",localStorage.getItem("SubSubCategory")) 
 
 
     const [productInformationFilters,SetProductInformationFilters] = useState();
@@ -167,7 +166,7 @@ function FilterProduct(){
     useEffect(()=>{
         if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet && !isKeySetUpdated && !isRangeSet && !isProductInformationFiltersFetched){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
-            console.log("Model Number",modelNumbers);
+            // console.log("Model Number",modelNumbers);
             var urls=[];
             modelNumbers.map(modelNum=>{
                 urls.push(axios.get("http://localhost:8080/get-products/"+modelNum));
@@ -192,14 +191,14 @@ function FilterProduct(){
             axios.get("http://localhost:8080/get-sub-categories-detail/"+Category)
                 .then(function(response){
                     if(response.status==200){
-                        console.log("response",response.data);
+                        // console.log("response",response.data);
 
                         SetFilterCriterias(response.data);
                         
                         SetIsFilterCriteriasFetched(true);
                     }
                 }).catch(function(error){
-                    console.log(error);
+                    // console.log(error);
 
                 })
         
@@ -207,23 +206,23 @@ function FilterProduct(){
                 axios.get("http://localhost:8080/get-categories/"+Category)
                 .then(function(response){
                     if(response.status==200){
-                        console.log("productFilters",response.data.productFilters);
+                        // console.log("productFilters",response.data.productFilters);
                         SetProductInformationFilters(response.data.productFilters);
                         for(var key in response.data.productFilters){
                             productInformationKeys.push(key);
                         } 
                     }
                 }).catch(function(error){
-                    console.log(error);
+                    // console.log(error);
                 })
 
             axios.get("http://localhost:8080/get-products-by-category/"+Category)
                 .then(function(response){
                     if(response.status==200){
-                        console.log("GetProductsByCategory",response.data);
+                        // console.log("GetProductsByCategory",response.data);
                         ProductsByCategories.push(response.data);
                         ProductsByCategories[0].map(index=>{
-                            console.log(index);
+                            // console.log(index);
                             var price = parseInt(index.productPrice);
                             if(min>price) min = price;
                             if(max<price) max=price;
@@ -251,18 +250,18 @@ function FilterProduct(){
             
             ProductsByCategories[0].map(index=>{
                 var flag = true;
-                console.log("Index",index);
+                // console.log("Index",index);
                 var subCategoryMap = index.subCategoryMap;
                 for(var key in subCategoryMap){
-                    console.log("key",key);
+                    // console.log("key",key);
                     if(subCategoryMap[key]===event.target.value){
-                        console.log("God Inside if");
+                        // console.log("God Inside if");
                         //add product index here in set
                         
                         products.map(p=>{
                             if(p.modelNumber===index.modelNumber){
-                                console.log("P",p.modelNumber);
-                                console.log('index',index.modelNumber);
+                                // console.log("P",p.modelNumber);
+                                // console.log('index',index.modelNumber);
                                 flag=false;
                             }
                         })
@@ -277,23 +276,23 @@ function FilterProduct(){
                 
             })
             setKeyState(prev=>new Set([...prev,event.target.value]))
-            console.log("KeySet",keySet);
+            // console.log("KeySet",keySet);
 
         }else{
             var mySet = new Set(keySet);
             // mySet = new Set(prev=>new Set([...prev].filter(x=>x!==event.target.value)));
             mySet.delete(event.target.value);
             //setKeyState(prev=>new Set([...prev].filter(x=>x!==event.target.value)));
-            console.log("mySet",mySet);
+            // console.log("mySet",mySet);
 
             var arr=[];
            
             ProductsByCategories.map(pro=>{
                 pro.map(index=>{  
-                console.log("Index",index);
+                // console.log("Index",index);
                 var subCategoryMap = index.subCategoryMap;
                 for(var key in subCategoryMap){
-                    console.log("key",key);
+                    // console.log("key",key);
                     var flag = true;
                     [...mySet].map(k=>{
                         if(subCategoryMap[key]===k){
@@ -317,14 +316,15 @@ function FilterProduct(){
             setKeyState(mySet);
 
     }
-}
+    }
 
     function handlePriceRange({min,max}){
         // console.log("Min",{min});
         // console.log("Max",{max});
         //alert("Hello")
         // console.log("Min"+{min.min}+",Max"+{max.max});
-        console.log("Min  "+{min}.min+",Max  "+{max}.max);
+        // console.log("Min  "+{min}.min+",Max  "+{max}.max);
+        
         var arr =[];
         products.map(index=>{
             var price = parseInt(index.productPrice);
@@ -332,9 +332,51 @@ function FilterProduct(){
                 arr.push(index);
             }
         })
+        // console.log("price",arr);
         setFilteredProducts(arr);
+         
+        
     }
-
+    function sortByPrice(event){
+        var arr =[];
+        
+        if(event.target.value=="Price: Low to High"){
+            console.log("before sort", filteredProducts);
+            arr = filteredProducts.sort((a,b)=>{
+               
+                return parseInt(a.productPrice)-parseInt(b.productPrice);
+            })
+            // setFilteredProducts([]);
+            console.log("Low to high",arr);
+            setSortedProducts(arr);
+            setIsProductSorted(true);
+        }else if(event.target.value=="Price: High to Low"){
+            console.log("before sort", filteredProducts);
+            arr = filteredProducts.sort((a,b)=>{
+                
+                return parseInt(b.productPrice)-parseInt(a.productPrice);
+            })
+            // setFilteredProducts([]);
+            console.log("High to low",arr);
+            setSortedProducts(arr);
+            setIsProductSorted(true);
+        }
+        
+            // arr.sort(function(a,b){
+            //     return a.offerPrice-b.offerPrice;
+            // });
+            // console.log("Sort By ",arr);
+        //     setFilteredProducts(arr);
+        // }
+        // if(event.target.value=="Price: High to Low"){
+        //     var arr=filteredProducts.slice(0);
+        //     arr.sort(function(a,b){
+        //         return b.offerPrice-a.offerPrice;
+        //     });
+        //     console.log("Sort By",arr);
+        //     setFilteredProducts(arr);
+        // }
+    }
 
     return(
         <Row>
@@ -365,8 +407,8 @@ function FilterProduct(){
                 
 
             ):(
+                
                 null
-
             )
             }
             
@@ -416,9 +458,18 @@ function FilterProduct(){
             
         </Col>
         <Col md={10}>
+            <Row>
+                <Col>
+                <select onChange={sortByPrice}>
+                        <option>SORT BY</option>
+                        <option>Price: High to Low</option>
+                        <option>Price: Low to High</option>
+                    </select>
+                </Col>
+            </Row>
         <Row>
             {
-                (isProductsFetched)?
+                (isProductsFetched && !isProductSorted)?
                 [...filteredProducts].map(index=>{
                     return(
                         
@@ -447,7 +498,7 @@ function FilterProduct(){
                     
                     )
                 }):(
-                    [...filteredProducts].map(index=>{
+                    [...SortedProducts].map(index=>{
                         return(
                             
                             <Card  style={{ width: '15rem'}} 

@@ -85,6 +85,21 @@ const ContactUs = () => {
 
                 </Col>
             </Row>
+
+            <center>
+                <img style={{ marginTop: 40 }}   src="https://d2xamzlzrdbdbn.cloudfront.net/imagesrewamp/Faqs/Corporate-queries.png"></img>
+                <h3>ADDRESS</h3>
+                <Card>
+                    <Card.Title>
+                        MAIN OFFICE <br></br>
+                        Bibvewadi
+                    </Card.Title>
+                    <Card.Text>
+                    Opp. Post Office, nr. Sahyadri Hospital, Vasant Baug, Ramyanagari Housing Society, Bibwewadi, Pune, Maharashtra 411037
+                    </Card.Text>
+                </Card>
+
+            </center>
             
         </div>
 

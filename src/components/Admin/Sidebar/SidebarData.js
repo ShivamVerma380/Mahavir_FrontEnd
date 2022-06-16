@@ -28,7 +28,7 @@ export const SidebarData = [
 
   {
     title: 'Add New',
-    path:'',
+    path:'/AddNew',
     icon: <MdIcons.MdOutlineProductionQuantityLimits/>,
     cName: 'nav-text'
   },
