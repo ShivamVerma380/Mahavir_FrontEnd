@@ -10,6 +10,7 @@ import SearchBar from "./SearchBar"
 import FormData from "form-data"; 
 import axios from "axios";
 import Login from "./Login-Signup/Login";
+import Search from "./SearchBar/Search";
 
 
 const Header = ({productList}) => {
@@ -82,6 +83,11 @@ const Header = ({productList}) => {
 
         
     }
+
+    const handleWishlist=()=>{
+        alert("Wishlist clicked")
+        navigate("/wishlist")
+    }
     
     return(
         <div>
@@ -105,7 +111,8 @@ const Header = ({productList}) => {
           <Offcanvas.Body>
           
             <Nav className="justify-content-end flex-grow-1 pe-3">
-            <SearchBar  productList={productList}/>
+            <Search/>
+            {/* <SearchBar  productList={productList}/> */}
             {/* <Form className="d-flex">
                     <FormControl
                     type="search"
@@ -117,12 +124,13 @@ const Header = ({productList}) => {
                 </Form> */}
                 <NavLink><i class="fa fa-user"  onClick={callAdmin}>Admin</i></NavLink>
                 <Nav.Link><i  class="fa fa-map-marker" >Pune</i></Nav.Link>
-                {(isUserLoggedIn)?null:(<Nav.Link><i class="fa fa-user"  onClick={callLogin}></i></Nav.Link>)}   
-                {isUserLoggedIn ?(<NavDropdown renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                {(isUserLoggedIn)?(<Nav.Link><i class="fa fa-user"  onClick={callLogin}></i></Nav.Link>) :(null)}   
+                {(isUserLoggedIn) ? (null):(<NavDropdown renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                <NavDropdown.Item onClick={handleWishlist}>WishList</NavDropdown.Item>  
+                <NavDropdown.Item  onClick={handleMyOrders}>My Orders</NavDropdown.Item>
                 <NavDropdown.Item target="_blank" onClick={handleLogout}>Logout</NavDropdown.Item> 
-                        <NavDropdown.Item  onClick={handleMyOrders}>My Orders</NavDropdown.Item>
                         
-                    </NavDropdown>):null}                       
+                    </NavDropdown>)}                       
                     <Nav.Link ><i  class="fa fa-shopping-cart"  onClick={Cart} ></i></Nav.Link>
                 <NavDropdown renderMenuOnMount={false} title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
                     <NavDropdown.Item href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>

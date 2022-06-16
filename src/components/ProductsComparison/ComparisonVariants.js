@@ -1,7 +1,7 @@
 import React from "react";
 import { Row,Col,Container } from "react-bootstrap";
 
-function ComparisonVariants({product}){
+function ComparisonVariants({product,showOnlyDiff}){
 
     var keyCol=[];
     var str;
@@ -16,6 +16,7 @@ function ComparisonVariants({product}){
     
 
     return(
+        (!showOnlyDiff)?(
         <Row style={{marginTop:20}}>
             <Col md={1}></Col>
             <Col md={2}>
@@ -68,6 +69,9 @@ function ComparisonVariants({product}){
                 })
             }
         </Row>
+        ):(
+            null
+        )
     );
 }
 

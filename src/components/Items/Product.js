@@ -5,6 +5,7 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import Arrow from 'react-arrows';
 import Carousel from 'react-bootstrap/Carousel';
 //import { Button } from "bootstrap";
+import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -54,7 +55,7 @@ function Product({title,productList}){
       if(offerPrice===productPrice){
         return <Button variant="flat" size="m" style={{visibility:"hidden"}}>Offer Available</Button>
       }
-      return <Button variant="flat" size="m">Offer Available</Button>
+      return <Button variant="flat" size="m">Offer, Free Gift Available</Button>
     }
 
     const handleAddToCompare = event => {
@@ -78,6 +79,30 @@ function Product({title,productList}){
     console.log("Get",localStorage.getItem("comparecount"))
 
     
+    function WishlistHandler(index) {
+      // alert("Item added successfully to wishlist");
+      console.log(index.modelNumber)
+      if (localStorage.getItem("wishlistproduct")==null) {
+        localStorage.setItem("wishlistproduct",index.modelNumber)
+      }else {
+        var arr = localStorage.getItem("wishlistproduct").split(',')
+        var flag = true;
+        arr.map(i=>{
+         
+          console.log("i: ",i)
+          if( i=== index.modelNumber) {
+            console.log("in if")
+            flag = false;
+          } 
+        }) 
+        if(flag)
+          localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        
+        
+      }
+      
+    }
+
     // function CheckHandler(){
     //   setChange(change+1)
     // }
@@ -90,7 +115,7 @@ function Product({title,productList}){
 
     return(
       <div>
-        <h3 style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3>
+        <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3>
       <span section-separator section-separator-dk-blue></span>
       <Swiper
         slidesPerView={1}
@@ -117,9 +142,11 @@ function Product({title,productList}){
           cards = productList.map(index=>{
             return(
               <SwiperSlide>
+               
               <Card  style={{ width: '25rem' }}
                   className="mb-2"
                    >
+                    <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
                     <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
                
                     <Card.Body >

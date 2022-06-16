@@ -568,7 +568,7 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
 
             </Col>
 
-            <Col className="imageproduct" md={4} style={{marginTop: "100px", justifyContent: "center"}}>
+            <Col className="imageproduct" md={4} style={{marginTop: "100px", justifyContent: "center", marginLeft:35}}>
               <br></br>
               <br></br>
 
@@ -609,8 +609,21 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
           <h2 className="text" >{product.productName}</h2>
 
           <br></br>
-          <h4>Price: <b>₹{product.productPrice}</b></h4>
+          <Row>
+            
+            {
+              (product.offerPrice==product.productPrice) ? (<Col md={4}>
+                <h4>Price: <b>₹{product.productPrice}</b></h4>
+                </Col>):(<Col md={8}>
+            <h6>MSP: <b style={{marginRight:"20px",color:"rgb(255,98,98)"}}>₹{product.offerPrice}</b> MRP: <b style={{textDecorationLine:"line-through", textDecorationStyle:"solid"}}>₹{product.productPrice}</b></h6> 
+            </Col>)
+            }
+            
+          </Row>
+          
           <br></br>
+          <Row>
+          <Col md={5}>  
           <h5><b><i>Product Highlights</i></b></h5>
           {
             product.productHighlights.split(';').map(index=>{
@@ -619,8 +632,22 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
               );
               
             })
-          }
+          }       
           {/* <h6>{product.productHighlights}</h6> */}
+          </Col>
+          <Col md={6}>
+            <h5 style={{textAlign:"center",color:"rgb(255,98,98)"}}><b><i>Free Gift Worth ₹12,400</i></b></h5>
+            <Row style={{marginTop:20}}>
+            <Col md={5}>
+            <img src="https://d2xamzlzrdbdbn.cloudfront.net/products/e342521a-d065-4663-9698-310768847a4a.jpg" style={{width:100, height:100}}></img>
+            </Col>
+            <Col md={6}>
+              <h5>Apple AirPods With Charging Case</h5>
+            </Col>
+            </Row>
+            
+          </Col>
+          </Row>
           <br></br>
           <QuantityPicker className="quantitypicker" style={{ background: "red" }} min={0} smooth onChange={inputQuantityEvent} />
           {/* <Input id="Quantity"
@@ -638,7 +665,19 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
 
           <br></br>
           <br></br>
-          <h3><b>Variants</b></h3>
+          <Row style={{marginTop:20}}>
+            <Col md={3}>
+            <h5 >Enter Pincode</h5>
+            </Col>
+            <Col md={4}>
+              <Input type="number" style={{height:25}}></Input>
+            </Col>
+            <Col md={3}>
+              <button style={{borderRadius:"5px", padding:3}}>Check Pincode</button>
+            </Col>
+          </Row>
+          
+          <h3 style={{marginTop:30}}><b>Variants</b></h3>
           {/* {
             (isVariantKeysFetched)?(
               variantKeys.map(variant=>{
@@ -661,7 +700,7 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
                     {
                       product.variants[variantName].map(index=>{
                         return(
-                          <Col md={3}>
+                          <Col md={1} style={{marginRight:30}}>
                           <Button id={index}  variant="flat" style={{marginLeft:10}} onClick={()=>handleBtnClick({index})}>{index}</Button>
                           </Col>
                         );
