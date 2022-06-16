@@ -33,6 +33,7 @@ import WishList from './components/WishList';
 import DeveloperPage from './components/DeveloperPage';
 import AboutCompany from './components/Footer/AboutCompany';
 import FAQ from './components/Footer/FAQ';
+import ContactUs from './components/Footer/ContactUs';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -73,6 +74,8 @@ root.render(
       <Route path='/developerpage' element = {<DeveloperPage/>}/>
       <Route path='/aboutcompany' element = {<AboutCompany/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
+      <Route path='/contactus' element = {<ContactUs/>}/>
+
 
       
       
