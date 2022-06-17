@@ -13,15 +13,20 @@ var productName = "";
 var productHighlights="";
 var price="";
 var offerPrice="";
-
+var imageListArr=[];
+var file,file1,file2,file3,file4;
 
 function Image(props) {
   const [images, setImages] = React.useState([]);
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
+    console.log("imageList",imageList.data_url);
+    // console.log("imageList",imageList.target.files[0]);
+    console.log("addUpdateIndex",addUpdateIndex);
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
+    imageListArr = imageList;
   };
   return (
     <ImageUploading
@@ -94,6 +99,21 @@ function CategoryComponent(props) {
   }
 
 
+  const handleImg=(e)=>{
+    file = e.target.files[0];
+  }
+  const handleImg1=(e)=>{
+    file1 = e.target.files[0];
+  }
+  const handleImg2=(e)=>{
+    file2 = e.target.files[0];
+  }
+  const handleImg3=(e)=>{
+    file3 = e.target.files[0];
+  }
+  const handleImg4=(e)=>{
+    file4 = e.target.files[0];
+  }
   return (
 
     <div>
@@ -126,7 +146,12 @@ function CategoryComponent(props) {
                     <Accordion.Item eventKey="0">
                       <Accordion.Header>Upload Images</Accordion.Header>
                       <Accordion.Body>
-                        <Image />
+                        {/* <Image /> */}
+                        <input type="file" name="img1" onChange={(e)=>handleImg(e)}/>
+                        <input type = "file" name="img2" onChange={(e)=>handleImg1(e)}/>
+                        <input type = "file" name="img3" onChange={(e)=>handleImg2(e)}/>
+                        <input type = "file" name="img4" onChange={(e)=>handleImg3(e)}/>
+                        <input type = "file" name="img5" onChange={(e)=>handleImg4(e)}/>
                       </Accordion.Body>
                     </Accordion.Item>
                   </Accordion>
@@ -191,7 +216,71 @@ function AddItem() {
   }
 
   function handleSaveButton() {
+    console.log("Model No",modelNo);
+    console.log("Product Name",productName);
+    console.log("Product Highlights",productHighlights);
+    console.log("Price",price);
+    console.log("OfferPrice",offerPrice);
+    console.log("Selected Category",SelectedCategory); 
+    console.log("images",imageListArr)
 
+    const image0 = {
+      uri: "https://d2xamzlzrdbdbn.cloudfront.net/products/65013798-5c87-4029-8fd9-1572599896b0.jpg",
+      type: 'image/jpeg',
+      name: 'Img1.jpg'
+    }
+
+    // const image1 = {
+    //   uri: imageListArr[1].data_url,
+    //   type: 'image/jpeg',
+    //   name: 'Img2.jpg'
+    // }
+
+    // const image2 = {
+    //   uri: imageListArr[2].data_url,
+    //   type: 'image/jpeg',
+    //   name: 'Img3.jpg'
+    // }
+
+    // const image3 = {
+    //   uri: imageListArr[3].data_url,
+    //   type: 'image/jpeg',
+    //   name: 'Img4.jpg'
+    // }
+
+    // const image4 = {
+    //   uri: imageListArr[4].data_url,
+    //   type: 'image/jpeg',
+    //   name: 'Img4.jpg'
+    // }
+
+    // console.log("image1",image0);
+
+    var form_data_body={
+      "modelNumber":modelNo,
+      "productName":productName,
+      "productHighlights":productHighlights,
+      "productPrice":price,
+      "offerPrice":offerPrice,
+      "category":SelectedCategory,
+      "productImage1":  file,
+      "productImage2": file1,
+      "productImage3": file2,
+      "productImage4": file3,
+      "productImage5": file4
+    }
+
+    axios.post("http://localhost:8080/add-product",form_data_body,{
+      headers:{
+        "Authorization":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsImV4cCI6MTY1NTU4MDY4MywiaWF0IjoxNjU1NDgwNjgzfQ.e_PWiAQ8yZV2FU6ChW1krAInQ4eLIWiKWrWnZuBlVY287vcIrqVVKC4gM1XxSMGCP9x-sgAvZNq0ArWfRPnXgw",
+        "Content-Type":"multipart/form-data"
+      },
+      mode:"no-cors"
+    }).then(function(response){
+      console.log(response.data);
+    }).catch(function(error){
+      console.log(error)
+    })
   }
 
 
