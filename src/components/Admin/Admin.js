@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header";
 import AdminHeader from "./AdminHeader";
-import Navbar from "./Sidebar/Navbar";
+import AdminNavbar from "./Sidebar/AdminNavbar";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete,
 { createFilterOptions } from '@material-ui/lab/Autocomplete';
@@ -12,8 +12,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import { Button } from "react-bootstrap";
 import AddCategory from "./AddCategory";
-// import AddItem from "./Test/AddItem";
 import Select from 'react-select';
+import AddItem from "./Test/AddItem";
 
 const filter = createFilterOptions();
 const Categories = [
@@ -54,10 +54,10 @@ export default function Admin () {
     return (
         <div>
             <AdminHeader/>
-            <Navbar/>
+            <AdminNavbar/>
             <h1 style={{marginTop:"20px",textAlign:"center"}}>Mahavir Electronics</h1>
             {/* <AddCategory/>  */}
-            {/* <AddItem/> */}
+            <AddItem/>
                 <br></br>
                 
             {/* <div className="container">

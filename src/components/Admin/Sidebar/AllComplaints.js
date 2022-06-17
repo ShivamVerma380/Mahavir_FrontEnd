@@ -1,9 +1,10 @@
 import React  from "react";
 import { Card, CardHeader, CardText, CardBody,Row,
-    CardTitle, CardFooter, Button, Col,Container ,Table} from 'react-bootstrap';
+    CardTitle, CardFooter, Button, Col,Container ,Table,Accordion} from 'react-bootstrap';
 
     import AdminHeader from "../../Admin/AdminHeader";
-    import Navbar from "./Navbar";
+    import AdminNavbar from "./AdminNavbar";
+ 
 var isClicked = false;   
 
 
@@ -21,12 +22,15 @@ const AllComplaints = () => {
 
 
         <AdminHeader/>
-            <Navbar/>
+        <AdminNavbar/>
         <Container>
-            
+        
             <h1 style={{textAlign:"center",marginTop:"20px"}}>User Complaints</h1><hr></hr>
-            
-            <Row>
+            <Accordion>
+            <Accordion.Item eventKey="0">
+                <Accordion.Header>Complaint by<span> </span>Shivam Verma</Accordion.Header>
+                <Accordion.Body>
+                <Row>
                 <Col colspan={10}>
                 <Table hover size="sm"  >
                             
@@ -57,7 +61,13 @@ const AllComplaints = () => {
                         <Button style={{width: '140px', marginBottom:'10px'}}variant="danger">Resolve Issue</Button>
 
                 </Col>
-            </Row>
+                </Row>
+              
+            
+            </Accordion.Body>
+            </Accordion.Item>
+            
+            </Accordion>
             </Container>
 
             {/* <h1 style={{textAlign:"center"}}>User Complaints</h1>
