@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header";
 import AdminHeader from "./AdminHeader";
-import Navbar from "./Sidebar/Navbar";
+import AdminNavbar from "./Sidebar/AdminNavbar";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete,
 { createFilterOptions } from '@material-ui/lab/Autocomplete';
@@ -54,7 +54,7 @@ export default function Admin () {
     return (
         <div>
             <AdminHeader/>
-            <Navbar/>
+            <AdminNavbar/>
             <h1 style={{marginTop:"20px",textAlign:"center"}}>Mahavir Electronics</h1>
             {/* <AddCategory/>  */}
             {/* <AddItem/> */}

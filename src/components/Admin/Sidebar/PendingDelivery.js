@@ -2,13 +2,13 @@ import React  from "react";
 import { Row,Button, Col,Container ,Table,Accordion} from 'react-bootstrap';
 
 import AdminHeader from "../../Admin/AdminHeader";
-import Navbar from "./Navbar";
+import AdminNavbar from "./AdminNavbar";
 const PendingDelivery = () => {
     return (
         // <h1>Pending Deliveries</h1>
         <>
         <AdminHeader/>
-            <Navbar/>
+        <AdminNavbar/>
         <Container>
             
             <h1 style={{textAlign:"center",marginTop:"20px"}}>Pending Deliveries</h1><hr></hr>
