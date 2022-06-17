@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import React , {useState} from 'react';
-import { Accordion } from 'react-bootstrap';
-import Select from 'react-select';
-import AdminHeader from "./AdminHeader";
-import AdminNavbar from "./Sidebar/AdminNavbar";
-import {FormControl,Button,Form,NavDropdown, Nav, FormCheck,Container,Row,Col} from 'react-bootstrap';
-const Categories = [
-    { label: "TV", value: 1 },
-    { label: "Mobile", value: 2 },
-=======
 // import React , {useState} from 'react';
 // import { Accordion } from 'react-bootstrap';
 // import * as Select from 'react-select'
@@ -18,7 +7,6 @@ const Categories = [
 // const Categories = [
 //     { label: "TV", value: 1 },
 //     { label: "Mobile", value: 2 },
->>>>>>> c34f0a8506671dfd7f923cb0e219f28a57f4021c
     
 //   ];
 //   const SubCategories = [
@@ -34,70 +22,14 @@ const Categories = [
 // const AddNew = () =>
 // {
     
-<<<<<<< HEAD
-const [show,setShow]=useState(false);
-    return(
-        <div>
-            <AdminHeader/>
-            <AdminNavbar/>
-=======
 // const [show,setShow]=useState(false);
 //     return(
 //         <div>
 //             <AdminHeader/>
 //             <Navbar/>
->>>>>>> c34f0a8506671dfd7f923cb0e219f28a57f4021c
                     
 //         <Container>
 
-<<<<<<< HEAD
-                <Accordion>
-                    <Row>
-                        
-                        <Col md={12}>
-                            <br></br>
-                        <Accordion.Item eventKey="0">
-                        <Accordion.Header>Add New Category</Accordion.Header>
-                        <Accordion.Body>
-                        <Form>
-                            <br></br>
-                            <Form.Group>
-                            <Form.Control type="text" placeholder="Category Name" /></Form.Group>
-                            <br></br><Button  variant="flat" size="m">Submit</Button>
-                        </Form>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item eventKey="1">
-                        <Accordion.Header>Add New Sub Category</Accordion.Header>
-                        <Accordion.Body>
-                        <Form>
-                            <br></br>
-                            <Select options={ SubCategories } />
-                            <br></br>
-                            <Form.Group>
-                            <Form.Control type="text" placeholder="Enter Category Name" /></Form.Group>
-                            <br></br><Button  variant="flat" size="m">Submit</Button>
-                        </Form>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item eventKey="2">
-                        <Accordion.Header>Add New Sub Sub Category</Accordion.Header>
-                        <Accordion.Body>
-                        <Form>
-                            <br></br>
-                            <Select options={ Categories } />
-                            <br></br>
-                            <Select options={ SubCategories } />
-                            <br></br>
-                            <Form.Group>
-                            <Form.Control type="text" placeholder="Enter Sub Sub Category Name" /></Form.Group>
-                            <br></br><Button  variant="flat" size="m">Submit</Button>
-                        </Form>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                        </Col>
-                    </Row>
-=======
 //                 <Accordion>
 //                     <Row>
 //                         <Col md={2}>
@@ -145,7 +77,6 @@ const [show,setShow]=useState(false);
 //                     </Accordion.Item>
 //                         </Col>
 //                     </Row>
->>>>>>> c34f0a8506671dfd7f923cb0e219f28a57f4021c
                     
 //                 </Accordion>
                     

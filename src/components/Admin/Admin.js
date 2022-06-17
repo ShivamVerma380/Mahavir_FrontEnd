@@ -12,8 +12,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import { Button } from "react-bootstrap";
 import AddCategory from "./AddCategory";
-// import AddItem from "./Test/AddItem";
-// import Select from 'react-select';
+import Select from 'react-select';
+import AddItem from "./Test/AddItem";
 
 const filter = createFilterOptions();
 const Categories = [
@@ -57,7 +57,7 @@ export default function Admin () {
             <AdminNavbar/>
             <h1 style={{marginTop:"20px",textAlign:"center"}}>Mahavir Electronics</h1>
             {/* <AddCategory/>  */}
-            {/* <AddItem/> */}
+            <AddItem/>
                 <br></br>
                 
             {/* <div className="container">
