@@ -35,6 +35,7 @@ import AboutCompany from './components/Footer/AboutCompany';
 import FAQ from './components/Footer/FAQ';
 import ContactUs from './components/Footer/ContactUs';
 import AddNew from './components/Admin/AddNew';
+import StoreLocator from './components/Footer/StoreLocator';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -77,7 +78,9 @@ root.render(
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/contactus' element = {<ContactUs/>}/>
 
-      <Route path='/AddNew' element={<AddNew/>}/>
+      {/* <Route path='/AddNew' element={<AddNew/>}/> */}
+      <Route path='/storelocator' element={<StoreLocator/>}/>
+
 
       
       
