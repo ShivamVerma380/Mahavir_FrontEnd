@@ -13,7 +13,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { Button } from "react-bootstrap";
 import AddCategory from "./AddCategory";
 // import AddItem from "./Test/AddItem";
-import Select from 'react-select';
+// import Select from 'react-select';
 
 const filter = createFilterOptions();
 const Categories = [
