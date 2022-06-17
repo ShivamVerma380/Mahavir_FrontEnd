@@ -14,7 +14,7 @@ function Footer(){
                             <ul>
                                 <li><a href="/aboutcompany">About Us</a></li>
                                 <li><a href="/contactus">Contact Us</a></li>
-                                <li><a href="#">Store Locator</a></li>
+                                <li><a href="/storelocator">Store Locator</a></li>
                                 <li><a href="#">Hear it from the Owners</a></li>
                             </ul>
                         </div>
