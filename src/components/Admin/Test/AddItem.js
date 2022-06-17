@@ -6,6 +6,7 @@ import axios from "axios";
 import Select from 'react-select';
 import ReactDOM from "react-dom";
 import ImageUploading from "react-images-uploading";
+import { useNavigate } from "react-router-dom";
 
 var SelectedCategory = "";
 var modelNo = "";
@@ -189,6 +190,7 @@ function CategoryComponent(props) {
 
 function AddItem() {
 
+  const navigate = useNavigate();
   const [isCategoriesFetched, SetIsCategoriesFetched] = useState(false);
   const [Categories, SetCategories] = useState([]);
 
@@ -278,9 +280,13 @@ function AddItem() {
       mode:"no-cors"
     }).then(function(response){
       console.log(response.data);
+      localStorage.setItem("CategorySelected",SelectedCategory);
+      localStorage.setItem("ModelNos",modelNo);
+      navigate("/addSubCategories")
     }).catch(function(error){
       console.log(error)
     })
+    
   }
 
 
