@@ -36,10 +36,13 @@ import FAQ from './components/Footer/FAQ';
 import ContactUs from './components/Footer/ContactUs';
 import StoreLocator from './components/Footer/StoreLocator';
 import AddSubCategories from './components/Admin/Test/AddSubCategories';
+import AddProductInformation from './components/Admin/Test/AddProductInformation';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
 var SubSubCategory = localStorage.getItem("SubSubCategory");
+
+var ModelNos = localStorage.getItem("ModelNos");
 
 
 
@@ -80,7 +83,8 @@ root.render(
 
       {/* <Route path='/AddNew' element={<AddNew/>}/> */}
       <Route path='/storelocator' element={<StoreLocator/>}/>
-      <Route path='/addSubCategories' element = {<AddSubCategories/>}/>
+      <Route path='/addSubCategories/:ModelNos' element = {<AddSubCategories/>}/>
+      <Route path='/addProductInformation/:ModelNos' element={<AddProductInformation/>}/>
     </Routes>
   </BrowserRouter>
 );
