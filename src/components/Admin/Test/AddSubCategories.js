@@ -15,7 +15,7 @@ const AddSubCategories=()=>{
     const navigate = useNavigate();
     
     const[SubCategories,SetSubCategories] = useState([]);
-    var map;
+    var map = new Map();
 
     useEffect(()=>{
         if(!isCategoriesFetched){
@@ -58,23 +58,52 @@ const AddSubCategories=()=>{
     }
 
     function handleSubmitClick(){
-        // var form_data_body={};
-        var arr=[];
-        for(const[key,value] of map){
-            console.log(key,value);
-            arr.push({key:value});
-            // form_data_body.append(key,value);
-        }
+        // var form_data_body={
+            
+        // };
+        // var arr=[];
+        // for(const[key,value] of map){
+        //     console.log(key,value);
+        //     form_data_body.append({key:value})
+        //     // form_data_body.append(key,value);
+        // }
+        // console.log("form_data_body",form_data_body);
+
         // /add-product-sub-categories/{modelNumber}
         // modelNumber
-        axios.post("http://localhost:8080/add-product-sub-categories/"+localStorage.getItem("ModelNos"),arr,{
+
+        // const params = new FormData();
+        // for(const[key,value] of map){
+        //     params.append(key,value)
+        // }
+            // "Brand":"MI",
+            // "Type":"TouchScreen"
+        
+        // for(const[key,value] of map){
+        //     params.append(key,value)
+        // }
+        var params={};
+        for(var key in map){
+            console.log("key:",key)
+            // params={"$key":"$value"}
+            // params+={key:map[key]}
+        }
+        
+        console.log("params",params);
+        
+
+
+    
+
+        // console.log("params",params);
+        axios.post("http://localhost:8080/add-product-sub-categories/"+localStorage.getItem("ModelNos"),{
             headers:{
                 "Authorization":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsImV4cCI6MTY1NTU4MDY4MywiaWF0IjoxNjU1NDgwNjgzfQ.e_PWiAQ8yZV2FU6ChW1krAInQ4eLIWiKWrWnZuBlVY287vcIrqVVKC4gM1XxSMGCP9x-sgAvZNq0ArWfRPnXgw",
                 "Content-Type":"application/json",
                 "Accept":"application/json"
             },
             mode:"no-cors",
-            
+            data:params
             
         }).then(function(response){
             console.log("response",response.data);
