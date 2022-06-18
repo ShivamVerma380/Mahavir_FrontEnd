@@ -13,6 +13,7 @@ import { Button } from 'react-bootstrap';
 import Footer from './components/Footer/Footer'
 import FeatureBrands from './components/Items/FeatureBrands';
 import MiniPosters from './components/offers/MiniPosters';
+import DeveloperPage from './components/DeveloperPage';
 
 
 
@@ -153,6 +154,7 @@ function App() {
 
     
      <Footer/>
+     <DeveloperPage/>
     </div>
     
      
