@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button ,Container} from "react-bootstrap";
 import * as AiIcons from 'react-icons/ai';
 import { Navigate, useNavigate } from "react-router-dom";
+import Header from "./Header";
+
 
 const WishList = () => {
   // var arr = localStorage.getItem("wishlistproduct").split(',')
@@ -11,6 +13,14 @@ const WishList = () => {
   const [product, setProduct] = useState([]);
   const [isProductFetched, setIsProductFetched] = useState(false);
   const [array,setarray] = useState([]);  
+  const navigate = useNavigate();
+  function callProductDetails(index){
+    //alert(index);
+    console.log("Index",index);
+    localStorage.setItem("productSelected",index.modelNumber);
+    console.log("Product Selected",localStorage.getItem("productSelected"))
+    navigate("/productDetails")
+  }
 
   const RemoveFromWishList=(event)=>{
     
@@ -128,57 +138,101 @@ const RemoveFromWishListviaIcon=(event)=>{
     }});
 
   return (
-    <div>
-      <Row style={{marginTop:20}}>
-        <Col md={2}></Col>
-        <Col md={3}>
-          <h1 style={{color:"rgb(255,98,98"}}><i>My WishList</i></h1>
-        </Col>
-      
-      </Row>
-      
+    <>
+    <Header/>
+    
+    <Container style={{width:'65%'}}>
+    <h1 style={{color:"rgb(255,98,98",margin:'2%',padding:'2%'}}><i>My WishList</i></h1>
       {
         (isProductFetched) ? (
 
           
               array.map(index => {
                 return (
-                  <Row >
-                    <Col md={2}></Col>
-                    <Col md={9}>
+      <Row style={{margin:'2%',padding:'2%',border:"1px solid black",borderRadius:'5px',boxShadow:' 0 2px 10px #bdbdbd'}}>
+        <Col sm={3}>
+          <img src={'data:image/jpg;base64,' + index.productImage1.data} style={{ width: '100%', height: '100%' }}></img>
+        </Col>
+        <Col style={{marginTop:'2%'}} sm={6} >
+          <h3 style={{cursor: 'pointer'}} onClick={()=>callProductDetails(index)}>{index.productName}</h3>
+          <br></br>
+          <h5>MSP: <b style={{marginRight:"20px",color:"rgb(255,98,98)"}}>₹{index.offerPrice}</b> MRP: <b style={{textDecorationLine:"line-through", textDecorationStyle:"solid"}}>₹{index.productPrice}</b></h5> 
+           
+        </Col>
+        <Col style={{padding:'3%'}} sm={3} >
+          <Row>
+          <Button variant="flat" size="1" name={index.modelNumber} onClick={RemoveFromWishList} style={{marginBottom:'10px', width: 150,height:50}}>Remove</Button>
+          </Row>
+          <Row>
+          <Button  variant="flat" size="1" style={{width: 150,height:50}}>Add To Cart</Button>
+          </Row>
+        
+        </Col>
+      </Row>
+             );
+                       })
+         
+                 ) : (null)
+         
+               }
+    </Container>
+    </>
+    // <div>
+    //   <Row style={{marginTop:20}}>
+    //     <Col md={2}></Col>
+    //     <Col md={3}>
+    //       <h1 style={{color:"rgb(255,98,98"}}><i>My WishList</i></h1>
+    //     </Col>
+      
+    //   </Row>
+      
+    //   {
+    //     (isProductFetched) ? (
+
+          
+    //           array.map(index => {
+    //             return (
+    //               <Row >
+    //                 <Col md={2}></Col>
+    //                 <Col md={9}>
                   
-                  <Row style={{marginTop:30, border:"1px solid black"}}>
+    //               <Row style={{marginTop:30, border:"1px solid black"}}>
                     
-                    <Col md={3}>
-                      <img src={'data:image/jpg;base64,' + index.productImage1.data} style={{ width: 200, height: 200 }}></img>
-                    </Col>
+    //                 <Col md={3}>
+    //                   <img src={'data:image/jpg;base64,' + index.productImage1.data} style={{ width: 200, height: 200 }}></img>
+    //                 </Col>
                     
-                    <Col md={6}>
-                      <Row>
-                        <Col md={7}>
-                          <h4>{index.productName}</h4>
-                        </Col>
-                        <Col md={3}>
-                          <Button name={index.modelNumber} style={{marginLeft:80,backgroundColor:"rgb(255,98,98"}} onClick={RemoveFromWishList}>X</Button>
-                          {/* <AiIcons.AiTwotoneDelete onClick={RemoveFromWishListviaIcon}/> */}
-                        </Col>
-                      </Row>
+    //                 <Col md={6}>
+    //                   <Row>
+    //                     <Col md={7}>
+    //                       <h4>{index.productName}</h4>
+    //                     </Col>
+    //                     <Col md={3}>
+    //                       <Button name={index.modelNumber} style={{marginLeft:80,backgroundColor:"rgb(255,98,98"}} onClick={RemoveFromWishList}>X</Button>
+    //                       {/* <AiIcons.AiTwotoneDelete onClick={RemoveFromWishListviaIcon}/> */}
+    //                     </Col>
+    //                   </Row>
                       
                       
-                      <br></br>
-                      <Row>
-                        <h4>₹{index.productPrice}</h4>
-                      </Row>
-                    </Col>
-                  </Row>
+    //                   <br></br>
+    //                   <Row>
+    //                     <h4>₹{index.productPrice}</h4>
+    //                   </Row>
+    //                   <Row>
+    //                   <Button  variant="flat" size="1" >Add To Cart</Button>
+         
+    //                   </Row>
+
+    //                 </Col>
+    //               </Row>
                   
-                  </Col>
-                  </Row>
+    //               </Col>
+    //               </Row>
                   
                   
-                  // <h1>Hello{index}</h1>
-                );
-              })
+    //               // <h1>Hello{index}</h1>
+    //             );
+    //           })
 
             
 
@@ -187,11 +241,11 @@ const RemoveFromWishListviaIcon=(event)=>{
 
 
 
-        ) : (null)
+    //     ) : (null)
 
-      }
+    //   }
 
-    </div>
+    // </div>
   )
 }
 export default WishList;

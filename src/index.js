@@ -80,6 +80,7 @@ root.render(
       <Route path='/aboutcompany' element = {<AboutCompany/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/contactus' element = {<ContactUs/>}/>
+      
 
       {/* <Route path='/AddNew' element={<AddNew/>}/> */}
       <Route path='/storelocator' element={<StoreLocator/>}/>

@@ -100,7 +100,7 @@ function Login(){
         Email: email,
         Password: password
     }
-    var authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2RzIiwiZXhwIjoxNjU0NjE4ODgwLCJpYXQiOjE2NTQ1MTg4ODB9.kDTGQbDIDVTXqtEkm_35VqXzpWwJ8wUxOw8Cd8Wrgi0";
+    var authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJhZGRoYW11bGF5QGdtYWlsLmNvbSIsImV4cCI6MTY1NTcyMjM2OSwiaWF0IjoxNjU1NjIyMzY5fQ.Ba-3LykZ5ysEfSc-22WQzwvM5WrSzqJoJ72JHb7XXok"  ;
     console.log(authorization);
 
     axios.post("http://localhost:8080/login-user",form_data_body,{
@@ -153,18 +153,18 @@ function Login(){
             console.log("Email is empty")
             alert("Please Enter Email")
         }else{
-            // console.log("Email",email);
-            // axios({
-            //     method:"get",
-            //     url:"http://localhost:8080/verify-email/"+email
-            // }).then(function (response){
-            //     console.log(response.data);
-            //     otp = response.data.otp;
-            //     console.log("otp:",otp);
-            // }).catch(function(response){
-            //     console.log(response);
-            //     return;
-            // })
+            console.log("Email",email);
+            axios({
+                method:"get",
+                url:"http://localhost:8080/verify-email/"+email
+            }).then(function (response){
+                console.log(response.data);
+                otp = response.data.otp;
+                console.log("otp:",otp);
+            }).catch(function(response){
+                console.log(response);
+                return;
+            })
             
             
             setIsOTPSent(false);
@@ -179,6 +179,7 @@ function Login(){
        if(otp === inputOtpByUser){
            alert('Correct input otp');
            setIsOTPNotVerified(false);
+           navigate('/email-auth');
         //    setIsOTPSent(false);
         //setIsUserRegistered(true);
         //    setIsEmailVerified(false);
@@ -186,6 +187,8 @@ function Login(){
        else{
            alert('incorrect')
        }
+
+
 
    }
 
