@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "./SignIn.css"
 import EmailAuth from "./EmailAuth";
 import { useState } from "react";
+import { IoMdLogOut } from "react-icons/io";
 
 
 const axios = require('axios');
@@ -21,7 +22,6 @@ var name = ""
 var firstName = "";
 var lastName = "";
 var phoneNo = "";
-var password2 = "";
 var confirmPassword = "";
 
 localStorage.setItem("isUserLoggedIn",isUserLoggedIn);
@@ -44,10 +44,10 @@ function Login(){
         inputOtpByUser = event.target.value;
         // console.log("email",email);
     }
-    const inputPasswordEvent=(event)=>{
-        password = event.target.value;
-        // console.log("Password",password);
-    }
+    // const inputPasswordEvent=(event)=>{
+    //     password = event.target.value;
+    //     // console.log("Password",password);
+    // }
 
     const inputNameEvent=(event)=>{
         name = event.target.value;
@@ -69,7 +69,7 @@ function Login(){
         phoneNo = event.target.value;
         console.log("Phone Number:",phoneNo);
     }
-    const inputPassword2Event=(event)=>{
+    const inputPasswordEvent=(event)=>{
         console.log("In input password event");
         password = event.target.value;
         console.log("Password:",password);
@@ -100,7 +100,11 @@ function Login(){
         Email: email,
         Password: password
     }
+<<<<<<< HEAD
     var authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJhZGRoYW11bGF5QGdtYWlsLmNvbSIsImV4cCI6MTY1NTcyMjM2OSwiaWF0IjoxNjU1NjIyMzY5fQ.Ba-3LykZ5ysEfSc-22WQzwvM5WrSzqJoJ72JHb7XXok"  ;
+=======
+    var authorization = "Bearer "+localStorage.getItem("jwtToken");
+>>>>>>> 940bb8bb2aa0bd42c2fea71c22e2342eced78fe7
     console.log(authorization);
 
     axios.post("http://localhost:8080/login-user",form_data_body,{
@@ -111,6 +115,7 @@ function Login(){
     }).then(function(response){
         console.log(response);
         if(response.status==200){
+            localStorage.setItem("isLoggedIn","true");
             console.log(response.data.message);
             navigate("/");
         }
@@ -119,7 +124,7 @@ function Login(){
         console.log(error);
     })
     isUserLoggedIn=true;
-    alert("login successful")
+    // alert("login successful")
 
     
     }
@@ -193,21 +198,53 @@ function Login(){
    }
 
    const registerUser=()=>{
-       if(name===""){
-           alert("Enter correct name")
-       }else{
-           alert("User Registered successfully")
-       }
-       
-       navigate("/email-auth");
-       <EmailAuth/>
+        if(firstName===""){
+           alert("Please enter first name")
+        }else if(lastName===""){
+           alert("Please enter last name")
+        }else if(phoneNo.length!=10){
+        alert("Please enter correct mobile number")
+        }
+        else if(password.length<6){
+            alert("Password must be of minimum 6 characters")
+        }
+        else if(confirmPassword.length<6){
+            alert("Confirm Password must be of minimum 6 characters")
+        }
+        else if(password!==confirmPassword){
+            alert("Passwords do not match")
+        }
+        else{
+            var form_data_body={
+                "Email": email,
+                "Password": password,
+                "first_name": firstName,
+                "last_name": lastName,
+                "PhoneNo": phoneNo
+            }
+            axios.post("http://localhost:8080/add-user",form_data_body,{
+                headers:{
+                    "Content-Type":"multipart/form-data"
+                }
+            }).then(function(response){
+                if(response.status==200){
+                    console.log("User Registered successfully");
+                    localStorage.setItem("isLoggedIn",true);
+                    localStorage.setItem("Name",firstName+" "+lastName);
+                    localStorage.setItem("jwtToken",response.data.token);
+                    navigate("/");
+                }
+            }).catch(function(error){
+                console.log("Error",error);
+            })
+        }
    }
    
    
 return(
     <div>
         
-        {/* <Header /> */}
+        <Header />
         <br></br>
         <br></br>
         
@@ -259,7 +296,7 @@ return(
             {
                 (isOTPSent)?(
                         <div className="form" id="sign-up-form">
-                        <h1 className="title">Sign up</h1>.
+                        <h1 className="title">Sign up</h1>
                         {/* <p style={{color:"white"}}>Enter your Email</p> */}
                         <div className="fields">
                                 <FormGroup>
@@ -287,7 +324,7 @@ return(
                                 <FormGroup>
                                     <Label for="otp-input" id="Enter-otp-input">Enter OTP</Label>
                                     <br></br>
-                                    <Input  id="otp" name="otp" placeholder="Enter OTP" type="number" className="input" onChange={inputOTPEvent}/>
+                                    <Input  id="otp" name="otp" placeholder="Enter OTP"  className="input" onChange={inputOTPEvent}/>
                                 </FormGroup>
 
                         </div>
@@ -304,11 +341,12 @@ return(
                             <div className="form" id="sign-up-form">
                             <h1 className="title">User Registration</h1>
                             <div className="fields">
-                                <p style={{color:"white",textAlign:"left",marginLeft:"50px",fontSize:"15px"}}>Enter your Name</p>
                                     <FormGroup>
-                                        <Label id="name-input" for="name">Name</Label>
-                                        <br></br>
-                                        <Input id="name" name="name" placeholder="Enter name" type="name" className ="input" onChange={inputNameEvent}/>
+                                        <Input id="firstName" name="firstName" placeholder="First name" defaultValue="" type="name" className ="input" onChange={inputFirstNameEvent}/>
+                                        <Input id="lastName" name="lastName" placeholder="Last name" defaultValue="" type="name" className ="input" onChange={inputLastNameEvent}/>
+                                        <Input id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" defaultValue="" type="name" className ="input" onChange={inputPhoneNumberEvent}/>
+                                        <Input id="password" name="password" placeholder="Password" defaultValue="" type="password" className ="input" onChange={inputPasswordEvent}/>
+                                        <Input id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" defaultValue="" type="password" className ="input" onChange={inputConfirmPasswordEvent}/>
                                     </FormGroup>
             
                             </div>
