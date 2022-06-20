@@ -96,7 +96,7 @@ const Header = ({productList}) => {
   {['md'].map((expand) => (
     <Navbar key={expand} bg="light" expand={expand} >
       <Container fluid>
-        <Navbar.Brand href="/" style={{fontFamily:"Tapestry"}}><img className="logo_mahavir" src = {require ('../assets/logo.jpg')}/>MAHAVIR</Navbar.Brand>
+        <Navbar.Brand href="/" style={{fontFamily:"Tapestry"}}><img className="logo_mahavir" src = {require ('../assets/mahavirlogo.jpg')}/>MAHAVIR</Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${expand}`}
@@ -123,7 +123,7 @@ const Header = ({productList}) => {
                     <Nav.Link href="#action1"><i class="fa fa-search icon" ></i></Nav.Link> 
                 </Form> */}
                 <NavLink><i class="fa fa-user"  onClick={callAdmin}>Admin</i></NavLink>
-                <Nav.Link><i  class="fa fa-map-marker" >Pune</i></Nav.Link>
+                {/* <Nav.Link><i  class="fa fa-map-marker" >Pune</i></Nav.Link> */}
                 {(isUserLoggedIn)?(<Nav.Link><i class="fa fa-user"  onClick={callLogin}></i></Nav.Link>) :(null)}   
                 {(isUserLoggedIn) ? (null):(<NavDropdown renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
                 <NavDropdown.Item onClick={handleWishlist}>WishList</NavDropdown.Item>  
