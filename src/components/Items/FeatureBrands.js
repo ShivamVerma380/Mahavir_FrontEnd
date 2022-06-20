@@ -28,6 +28,9 @@ const FeatureBrands = () => {
                 navigation={true}
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
+                
+                
+
             >
                 <SwiperSlide>
                     <Card style={{ width: '25rem' }} className="mb-2">
