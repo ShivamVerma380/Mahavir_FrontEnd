@@ -106,8 +106,8 @@ function Login(){
     axios.post("http://localhost:8080/login-user",form_data_body,{
         headers:{
             "Content-Type": "multipart/form-data",
-            "Authorization": authorization
         },
+        mode:"no-cors"
     }).then(function(response){
         console.log(response);
         if(response.status==200){
