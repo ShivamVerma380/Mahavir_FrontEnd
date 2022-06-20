@@ -150,10 +150,10 @@ function Product({title,productList}){
               <Card  style={{ width: '25rem' }}
                   className="mb-2"
                    >
-                    {(localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
+                    {/* {(localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
                       <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>:
                       <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
-                      }
+                      } */}
                     {/* <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/> */}
                     <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
                

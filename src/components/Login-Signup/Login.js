@@ -106,12 +106,14 @@ function Login(){
     axios.post("http://localhost:8080/login-user",form_data_body,{
         headers:{
             "Content-Type": "multipart/form-data",
-            "Authorization": authorization
         },
+        mode:"no-cors"
     }).then(function(response){
         console.log(response);
         if(response.status==200){
             localStorage.setItem("isLoggedIn","true");
+            localStorage.setItem("Name",response.data.message);
+            localStorage.setItem("jwtToken",response.data.token);
             console.log(response.data.message);
             navigate("/");
         }
