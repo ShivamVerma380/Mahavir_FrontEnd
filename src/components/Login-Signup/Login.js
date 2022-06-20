@@ -112,6 +112,8 @@ function Login(){
         console.log(response);
         if(response.status==200){
             localStorage.setItem("isLoggedIn","true");
+            localStorage.setItem("Name",response.data.message);
+            localStorage.setItem("jwtToken",response.data.token);
             console.log(response.data.message);
             navigate("/");
         }

@@ -15,16 +15,12 @@ import { CProgress, CProgressBar } from '@coreui/react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { QuantityPicker } from 'react-qty-picker';  
 import { AiFillStar } from "react-icons/ai";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import "../styles.css"
-
 import axios from "axios";
-
 
 // import required modules
 import { Pagination, Navigation } from "swiper";
@@ -332,9 +328,7 @@ function ProductDetails(){
   
 
   function getProductInformationKeys(productInformation){
-    if(isProductInformationSet && !isKeysFetched){
-      
-    }
+    if(isProductInformationSet && !isKeysFetched){}
     
 }
 function callProductDetails(index){
@@ -368,56 +362,53 @@ function callProductDetails(index){
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
-    //toast.configure();  
 
-    var form_data_body={
-      modelNumber: product.modelNumber,
+    var items = localStorage.getItem("CartItems");
+    if(items==null || items==undefined){
+      localStorage.setItem("CartItems",product.modelNumber);
+    }else{
+      items+=product.modelNumber+",";
+      localStorage.setItem("CartItems",items);
     }
-    axios.post("http://localhost:8080/add-to-cart", form_data_body, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2RzIiwiZXhwIjoxNjU0NjE4ODgwLCJpYXQiOjE2NTQ1MTg4ODB9.kDTGQbDIDVTXqtEkm_35VqXzpWwJ8wUxOw8Cd8Wrgi0"
-      },
-    }).then(function(response){
-      console.log(response);
-      if(response.status==200){
-          console.log("response",response);
-          console.log("Item added to cart successfully");
-          //alert("Item added to cart ")
 
-          if (flag == false) {
-            alert("Add To Cart:1");
-          } else if (quantity <= 0) {
-            alert("Please enter a positive number");
-          } else {
-            alert("Quantity:" + quantity);
-          }
+    var isLoggedIn = localStorage.getItem("isLoggedIn");
+    console.log("loggedIn",isLoggedIn);
 
-          navigate("/cart")
-
-          // localStorage.setItem("isLoggedIn",true);
-          //navigate("/")
-          
-          //redux();
-      }else{
-          console.log("In else");
-          alert("Item already present in cart")
-          console.log(response.data.message);
-          return;
-      }  
-
+    if(isLoggedIn==="true"){
       
-      
-  }).catch(function(error){
-      console.log(error);
-      alert("Item already present in cart")
-      return;
-  })
+      var form_data_body={
+        modelNumber: product.modelNumber,
+      }
 
-
-
+      axios.post("http://localhost:8080/add-to-cart", form_data_body, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Authorization": "Bearer "+localStorage.getItem("jwtToken")
+        },
+      }).then(function(response){
+        console.log(response);
+        if(response.status==200){
+            console.log("response",response);
+            console.log("Item added to cart successfully");
+            navigate("/cart");
+        }else{
+            console.log("In else");
+            alert("Item already present in cart")
+            console.log(response.data.message);
+            return;
+        } 
+        }).catch(function(error){
+            console.log(error);
+            alert("Item already present in cart")
+            return;
+        })
+  
+    }else{
+      navigate("/cart");
+    }
 
     
+   
   }
 
   var cards=<div>

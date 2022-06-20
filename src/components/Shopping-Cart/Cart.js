@@ -12,29 +12,53 @@ function Cart() {
     var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2RzIiwiZXhwIjoxNjU0NjE4ODgwLCJpYXQiOjE2NTQ1MTg4ODB9.kDTGQbDIDVTXqtEkm_35VqXzpWwJ8wUxOw8Cd8Wrgi0"
     //var token = localStorage.getItem("jwtToken");
     const [cartDetails,setCartDetails] = useState();
-    // var isCartDetailsSet = false;
+    // var isCartDetailsSet = false;x
     const [isCartDetailsSet,setisCartDetailsSet] = React.useState(false);
     useEffect(()=>{
-        axios({
-            method:"get",
-            url: "http://localhost:8080/get-cart-details",
-            headers:{
-                "Authorization": "Bearer "+token
-            }
-        }).then(function(response){
-            console.log("Response",response);
-            if(response.status==200){
-                console.log("Data",response.data);
-                setCartDetails(response.data);
-                console.log("Cart Details",cartDetails)
-                setisCartDetailsSet(true);
-                
+        if(!isCartDetailsSet){
+            var isLoggedIn = localStorage.getItem("isLoggedIn");
+            if(isLoggedIn==="true"){
+                axios({
+                    method:"get",
+                    url: "http://localhost:8080/get-cart-details",
+                    headers:{
+                        "Authorization": "Bearer "+localStorage.getItem("jwtToken")
+                    }
+                }).then(function(response){
+                    console.log("Response",response);
+                    if(response.status==200){
+                        console.log("Data",response.data);
+                        setCartDetails(response.data);
+                        console.log("Cart Details",cartDetails)
+                        setisCartDetailsSet(true);
+                        
+                    }else{
+                        console.log(response.data.message);
+                    }
+                }).catch(function(error){
+                    console.log(error);
+                })
             }else{
-                console.log(response.data.message);
+                var modelNumbers = localStorage.getItem("CartItems").split(',');
+                var urls=[];
+                var urls=[];
+                modelNumbers.map(modelNum=>{
+                    urls.push(axios.get("http://localhost:8080/get-products/"+modelNum));
+                })
+
+                axios.all(urls).then(
+                    axios.spread((...res)=>{
+                        res.map(index=>{
+                            cartDetails.push(index.data);
+                        })
+
+                        setisCartDetailsSet(true);
+
+                    })
+                )
+
             }
-        }).catch(function(error){
-            console.log(error);
-        })
+        }
         
     },[]);
     
@@ -49,26 +73,27 @@ function Cart() {
            <Row>
   
             <Col sm={8}>
-
-          
-           <Table>
-            <thead>
-                <tr>
-                <th> Order Summary (1 Item)</th>
-                <th><Form className="d-flex">
-                            <FormControl
-                            type="search"
-                            placeholder="Pincode Search"
-                        
-                            aria-label="Search"
-                            />
-                            
-                        </Form></th>
-                </tr>
-            </thead>
-
-        </Table>
-        {/* <CartItem/> */}
+            {
+                (isCartDetailsSet)?(
+                    <Table>
+                    <thead>
+                        <tr>
+                        <th> Order Summary ({cartDetails.length} items)</th>
+                        <th><Form className="d-flex">
+                                    <FormControl
+                                    type="search"
+                                    placeholder="Pincode Search"
+                                
+                                    aria-label="Search"
+                                    />        
+                                </Form></th>
+                        </tr>
+                    </thead>
+                    </Table>
+                ):(
+                    null
+                )
+            }
             
 
             {/* <CartItem/> */}
