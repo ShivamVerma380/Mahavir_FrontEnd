@@ -282,12 +282,14 @@ function AddItem() {
       console.log(response.data);
       localStorage.setItem("CategorySelected",SelectedCategory);
       localStorage.setItem("ModelNos",modelNo);
-      navigate("/addSubCategories")
+      navigate("/addSubCategories/"+modelNo)
     }).catch(function(error){
       console.log(error)
     })
     
   }
+
+  // navigate("/" + category + "/" + subCategory 
 
 
 

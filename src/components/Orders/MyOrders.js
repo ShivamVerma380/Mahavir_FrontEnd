@@ -9,13 +9,20 @@ const MyOrders=()=>{
     const [orderDetails,setOrderDetails] = useState();
     const [isOrderDetailsSet,setIsOrderDetailsSet] = useState(false);
     var MyOrders = false;
+    
     useEffect(()=>{
         axios({
             method:"get",
             url: "http://localhost:8080/get-bought-products",
             headers:{
-                "Authorization":"Bearer "+token
-            }
+                "Authorization":"Bearer "+"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXMiLCJleHAiOjE2NTU4NDY3NjQsImlhdCI6MTY1NTc0Njc2NH0.5hsW5_JFyOpmuCCKByf7oITmB8aS1WKNpE4z9ezDCR0",
+                "Accept":"*/*",
+                
+            },
+            mode:"no-cors"
+
+           
+            
         }).then(function(response){
             console.log(response);
             if(response.status==200){
@@ -24,6 +31,7 @@ const MyOrders=()=>{
                 setOrderDetails(response.data);
                 setIsOrderDetailsSet(true);
             }else if(response.status==404){
+                console.log("fail: ",MyOrders)
                MyOrders = false;
             }   
             else{

@@ -28,7 +28,15 @@ function FilterProduct(){
     const[filteredProducts,setFilteredProducts] = useState([]);
 
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
-    const [change, setChange] = useState(0);
+    var count = localStorage.getItem("change");
+    if (count==null || count==undefined) {
+        count = 0;
+    }
+    else {
+        count = parseInt(localStorage.getItem("change"));
+    }
+    const [change, setChange] = useState(count);
+
 
 
 
@@ -58,21 +66,36 @@ function FilterProduct(){
         }
     }
 
+    
     function getCompareBtn(){
        
        
         return(
-          <Button id="comparebtn" onClick={compareProducts}>Compare</Button>
+                (change!=0) ? (
+                    <Button id="comparebtn" onClick={compareProducts}>Compare</Button>
+                ) : (null)
+                
+            
+          
         )
       
     }
 
-    const handleAddToCompare=event=>{
+    const handleAddToCompare=(event)=>{
         
         if (event.target.checked) {
 
             //console.log('✅ Checkbox is checked');
             setChange(change+1)
+            console.log("change: ",change)
+            var c = localStorage.getItem("change")
+            if (c==null || c==undefined) {
+                localStorage.setItem("change","1");
+            }
+            else {
+                 
+                localStorage.setItem("change",parseInt(c)+1);
+            }
             //document.getElementById(event.value).checked = "false"
             // console.log("Value",event.target.value);
             modelNumsToCompare.add(event.target.value);
@@ -81,6 +104,7 @@ function FilterProduct(){
           } else {
             // console.log('⛔ Checkbox is NOT checked');
             //document.getElementById(event.value).checked = "true"
+            
             setChange(change-1)
             modelNumsToCompare.delete(event.target.value);
 
@@ -532,9 +556,17 @@ function FilterProduct(){
             </Row>
             </Col>
         
-        {
+        {/* {
             getCompareBtn()      
+        } */}
+        {
+            (change!=0) ? (
+                <Button id="comparebtn" onClick={compareProducts}>Compare</Button>
+                
+            ) : (null)
         }
+        
+        
         </Row>
     );
 }

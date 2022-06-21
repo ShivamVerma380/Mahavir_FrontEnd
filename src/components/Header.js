@@ -19,7 +19,11 @@ const Header = ({productList}) => {
    // let isUserLoggedIn = localStorage.getItem("isUserLoggedIn")
     const navigate = useNavigate();
     var loginStatus = localStorage.getItem("isLoggedIn");
-    const [isUserLoggedIn,setIsUserLoggedIn] = React.useState(localStorage.getItem("isLoggedIn"));
+    var flag= false;
+    if(localStorage.getItem("isLoggedIn")==="true"){
+        flag = true;
+    }
+    const[isUserLoggedIn,setIsUserLoggedIn] = React.useState(flag);
     // if(loginStatus=="true"){
     //     console.log("In login status")
     //     setIsUserLoggedIn(true);
@@ -31,20 +35,7 @@ const Header = ({productList}) => {
         navigate("/email-verification");
         console.log("In email verification");
 
-        // var bodyFormData = new FormData();
-        // bodyFormData.append("email","siddhant.21910811@viit.ac.in")
-        // axios({
-        //     method: "get",
-        //     url: "http://localhost:8080/verify-email/siddhant.21910811@viit.ac.in"
-        //   })
-        //     .then(function (response) {
-        //       //handle success
-        //       console.log(response.data);
-        //     })
-        //     .catch(function (response) {
-        //       //handle error
-        //       console.log(response);
-        //     });
+        
           
     }
     const verifyOTP=()=>{
@@ -58,7 +49,7 @@ const Header = ({productList}) => {
     }
 
     const callLogin=()=>{
-        setIsUserLoggedIn(true);
+        // setIsUserLoggedIn(true);
         navigate("/login")
     }
     const Cart=()=>{
@@ -76,10 +67,10 @@ const Header = ({productList}) => {
 
     const handleLogout=()=>{
         setIsUserLoggedIn(false);
-        alert(localStorage.getItem("isLoggedIn"));
+        // alert(localStorage.getItem("isLoggedIn"));
         localStorage.setItem("isLoggedIn",false);
-        alert(localStorage.getItem("isLoggedIn"));
-        
+        // alert(localStorage.getItem("isLoggedIn"));
+        setIsUserLoggedIn(false);
 
         
     }
@@ -124,13 +115,21 @@ const Header = ({productList}) => {
                 </Form> */}
                 <NavLink><i class="fa fa-user"  onClick={callAdmin}>Admin</i></NavLink>
                 {/* <Nav.Link><i  class="fa fa-map-marker" >Pune</i></Nav.Link> */}
-                {(isUserLoggedIn)?(<Nav.Link><i class="fa fa-user"  onClick={callLogin}></i></Nav.Link>) :(null)}   
-                {(isUserLoggedIn) ? (null):(<NavDropdown renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
-                <NavDropdown.Item onClick={handleWishlist}>WishList</NavDropdown.Item>  
-                <NavDropdown.Item  onClick={handleMyOrders}>My Orders</NavDropdown.Item>
-                <NavDropdown.Item target="_blank" onClick={handleLogout}>Logout</NavDropdown.Item> 
+                {/* {(isUserLoggedIn)?() :(null)}   
+                {(isUserLoggedIn) ? (null):( 
                         
-                    </NavDropdown>)}                       
+                   )}                        */}
+                {
+                    (isUserLoggedIn)?(
+                        <NavDropdown renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                        <NavDropdown.Item onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  
+                        <NavDropdown.Item  onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
+                        <NavDropdown.Item target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
+                        </NavDropdown>
+                    ):(
+                        <Nav.Link  onClick={callLogin}>Hi, Sign In</Nav.Link>
+                    )
+                }
                     <Nav.Link ><i  class="fa fa-shopping-cart"  onClick={Cart} ></i></Nav.Link>
                 <NavDropdown renderMenuOnMount={false} title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
                     <NavDropdown.Item href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>

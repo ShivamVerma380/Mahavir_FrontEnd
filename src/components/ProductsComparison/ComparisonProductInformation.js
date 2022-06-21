@@ -18,7 +18,15 @@ function ComparisonProductInformation({title,product}){
     }
     return(
         <Row>
+        <Row>
             <Col md={1}></Col>
+            <Col md={10}>
+                <hr></hr>
+            </Col>
+        </Row>
+        <Row>
+            <Col md={1}></Col>
+            
             <Col md={2}>
                 <h5>{title}</h5>
             </Col>
@@ -40,7 +48,8 @@ function ComparisonProductInformation({title,product}){
                     );
                 })   
             }
-            <hr></hr>
+           
+        </Row>
         </Row>
     );
 }
