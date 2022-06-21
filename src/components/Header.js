@@ -71,7 +71,7 @@ const Header = ({productList}) => {
         localStorage.setItem("isLoggedIn",false);
         // alert(localStorage.getItem("isLoggedIn"));
         setIsUserLoggedIn(false);
-
+        
         
     }
 

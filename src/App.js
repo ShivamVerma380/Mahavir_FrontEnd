@@ -48,6 +48,7 @@ function App() {
   //SetCookie("CompareModels","IPH287373");
 
 
+
   // console.log("CompareModes",localStorage.getItem("CompareModels"));
 
 
@@ -61,14 +62,13 @@ function App() {
   useEffect(() => {
 
     
-    
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxIiwiZXhwIjoxNjU1ODkyNjA3LCJpYXQiOjE2NTU3OTI2MDd9.Z5haBu6yF7p66iA5CNSnuweio-5WfsNlAfsGpBAmyhw"
-    if(!isOfferPostersFetched){
+    // var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
+    if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched){
       axios({
         method:"get",
         url:"http://localhost:8080/get-offers",
         headers:{
-          "Authorization":"Bearer "+token,
+          "Authorization":"Bearer "+localStorage.getItem("jwtToken"),
         }
       }).then(function(response){
         console.log(response);
@@ -97,10 +97,6 @@ function App() {
       }).catch(function(error){
         console.log("error",error);
       })
-      
-    }
-    
-    if(!isCategoryDisplayFetched){
       axios.get("http://localhost:8080/get-categories").then(function(response){
         console.log(response);
         if(response.status==200){
@@ -112,9 +108,7 @@ function App() {
       }).catch(function(error){
           console.log(error);
       })
-    }
 
-    if(!isProductsFetched){
       axios.get("http://localhost:8080/get-products").then(function(response){     
       if(response.status==200){
         console.log("Products",response.data);
@@ -126,7 +120,9 @@ function App() {
       }).catch(function(error){
         console.log(error);
       })
-    }    
+    }
+    
+        
   },[]);
 
   function fetchSlideshow(){
@@ -216,10 +212,14 @@ function App() {
   return (
 
     <div className="App" >
-
-      
-      <Header  productList={Products}/>
-
+      {
+        (isProductsFetched)?(
+            <Header  productList={Products}/>
+        ):(
+          null
+        )
+      }
+    
 
       {/* <AddItem/> */}
 

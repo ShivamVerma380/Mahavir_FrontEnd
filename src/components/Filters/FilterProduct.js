@@ -185,10 +185,10 @@ function FilterProduct(){
     const [maxPrice,SetMaxPrice] = useState();
     const [isRangeSet,SetIsRangeSet] = useState(false);
 
-
-
+ 
+    const[flag,SetFlag] = useState(false)
     useEffect(()=>{
-        if(!isProductsFetched && !isFilterCrieteriasFetched &&!isProductsByCategoriesSet && !isKeySetUpdated && !isRangeSet && !isProductInformationFiltersFetched){
+        if(!flag){
             var modelNumbers = localStorage.getItem("Model Number").split(',');
             // console.log("Model Number",modelNumbers);
             var urls=[];
@@ -263,7 +263,7 @@ function FilterProduct(){
                 }).catch(function(error){
                     console.log("error",error);
                 })
-            
+                SetFlag(true);
             }
                     
     })
