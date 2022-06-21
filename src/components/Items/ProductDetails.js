@@ -43,12 +43,16 @@ import ProductSpecification from "./ProductSpecification";
  // it is compulsory method.
 //  toast.configure()
 
+var pin = "";
+
 function ProductDetails(){
   // let name = localStorage.getItem("Name")
   // var storedProduct = JSON.parse(localStorage.getItem("product"))
   // var id = storedProduct[0].id
   const [isReviewFetched,setIsReviewFetched] = useState(false);
   const [isPincodeFetched,setIsPincodeFetched] = useState(false);
+
+
 
   var productList = [
     {
@@ -460,6 +464,20 @@ function callProductDetails(index){
     navigate("/AddressForm")
   }
 
+  const InputPin = (e) => {
+    pin = e.target.value
+    console.log("Pincode: ",pin)
+  }
+
+  const CheckPinHandler = () => {
+    if(Pincode.includes(parseInt(pin))) {
+      alert("Delivery Available")
+    }
+    else {
+      alert("Delivery Not available")
+    }
+  }
+
   function fetchOfferAvailableBtn(offerPrice,productPrice){
     if(offerPrice===productPrice){
       return <Button variant="flat" size="m" style={{visibility:"hidden"}}>Offer Available</Button>
@@ -485,6 +503,7 @@ function callProductDetails(index){
     // alert("Added To Compare");
     
   }
+
 
   function ImgHandler(e) {
     imglink = { e };
@@ -843,10 +862,10 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
             <h5 >Enter Pincode</h5>
             </Col>
             <Col md={4}>
-              <Input type="number" style={{height:25}}></Input>
+              <Input type="number" style={{height:25}} onChange={InputPin}></Input>
             </Col>
             <Col md={3}>
-              <button style={{borderRadius:"5px", padding:3}}>Check Pincode</button>
+              <button style={{borderRadius:"5px", padding:3}} onClick={CheckPinHandler}>Check Pincode</button>
             </Col>
           </Row>
 
