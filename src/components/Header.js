@@ -119,7 +119,7 @@ const Header = ({productList}) => {
                 {(isUserLoggedIn) ? (null):( 
                         
                    )}                        */}
-                {
+                {/* {
                     (isUserLoggedIn)?(
                         <NavDropdown renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
                         <NavDropdown.Item onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  
@@ -129,7 +129,13 @@ const Header = ({productList}) => {
                     ):(
                         <Nav.Link  onClick={callLogin}>Hi, Sign In</Nav.Link>
                     )
-                }
+                } */}
+                 <NavDropdown renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                        <NavDropdown.Item onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  
+                        <NavDropdown.Item  onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
+                        <NavDropdown.Item target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
+                        </NavDropdown>
+
                     <Nav.Link ><i  class="fa fa-shopping-cart"  onClick={Cart} ></i></Nav.Link>
                 <NavDropdown renderMenuOnMount={false} title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
                     <NavDropdown.Item href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
