@@ -3,7 +3,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 
-const FeatureBrands = () => {
+function FeatureBrands ({posterList}) {
     return (
         <div>
             <h3 className="hometitle" style={{ textAlign: "left", marginTop: 20, marginLeft: 20 }}>Featured Brands</h3>
@@ -32,6 +32,18 @@ const FeatureBrands = () => {
                 
 
             >
+
+                {/* {
+                    posterList.map(index=>{
+                        return (
+                            <SwiperSlide>
+                                <Card>
+                                    <Card.Img src=""/>
+                                </Card>
+                            </SwiperSlide>
+                        )
+                    })
+                } */}
                 <SwiperSlide>
                     <Card style={{ width: '25rem' }} className="mb-2">
                         <Card.Img variant="top" src="https://d2d22nphq0yz8t.cloudfront.net/88e6cc4b-eaa1-4053-af65-563d88ba8b26/https://media.croma.com/image/upload/v1647245650/Croma%20Assets/CMS/Homepage%20Banners/Highlights/HP_PB_522x450_Air-Conditioners_14March2022_cav3zb.png/mxw_2048,f_auto" />
