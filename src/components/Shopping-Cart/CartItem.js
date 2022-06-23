@@ -28,18 +28,18 @@ const CartItem=({item})=>{
                 <tr>
                 <td><table>
                     <tr>
-                        <td>{item.productName}</td>
+                        <td><b>{item.productName}</b></td>
                         </tr>
                         <tr>
                         <td>{item.modelNumber}</td>
                         </tr>
                         <tr>
-                        <td>{item.productPrice}</td>
+                        <td><b>{item.productPrice}</b></td>
                         </tr>
                     </table>
                 </td>
                 <td></td>
-                <td><Button style={{height:"100%", width:"200px"}} variant="info">Proceed to Buy</Button></td>
+                <td><Button className="btn-flat">Remove</Button></td>
                 </tr>
                 </tbody>
             </Table>

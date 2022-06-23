@@ -5,7 +5,7 @@ import OrderItem from "./OrderItem";
 const MyOrders=()=>{
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkcyIsImV4cCI6MTY1NDQ0MzIwNSwiaWF0IjoxNjU0MzU2ODA1fQ.-6GCm7hIQrDj3U08zwPGe5rqEpDyVYAQrH69PHlcC14"
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZCxzaGl2YW1AdmVybWEuY29tand3ZCIsImV4cCI6MTY1NDAxOTA1NywiaWF0IjoxNjUzOTMyNjU3fQ.Ma7RU2CHo-RfQ_uSBHn4zxKzlyz5X0I9ZClMXIaY0oc";
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2RzIiwiZXhwIjoxNjU0NjE4ODgwLCJpYXQiOjE2NTQ1MTg4ODB9.kDTGQbDIDVTXqtEkm_35VqXzpWwJ8wUxOw8Cd8Wrgi0";
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbW1ubSIsImV4cCI6MTY1NTg0MzIyMCwiaWF0IjoxNjU1NzQzMjIwfQ.HWDPYrA71R1jOeHhn2sOZjseFt-0fKW92CL1iZIzkvI";
     const [orderDetails,setOrderDetails] = useState();
     const [isOrderDetailsSet,setIsOrderDetailsSet] = useState(false);
     var MyOrders = false;
@@ -15,7 +15,8 @@ const MyOrders=()=>{
             url: "http://localhost:8080/get-bought-products",
             headers:{
                 "Authorization":"Bearer "+token
-            }
+            },
+            mode:"no-cors"
         }).then(function(response){
             console.log(response);
             if(response.status==200){
@@ -57,12 +58,12 @@ const MyOrders=()=>{
         //     }
         // </div>
         <div>
-            {
+            {/* {
             (isOrderDetailsSet)?(
             (MyOrders)?(<h1>No Products Buyed</h1>):(<h1>Products Buyed</h1>)
             ):(
                     <h1>No Products buyed</h1>
-            )}
+            )} */}
             {
                 (isOrderDetailsSet)?(
 

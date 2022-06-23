@@ -111,34 +111,47 @@ function Cart() {
                 ):(null)
             }
             
-
-                </Col>
-            <Col sm={4}>
-            <Table style={{margin_top:"50px", color:'black'}} >
-            <thead>
-                <tr>
-                <th> Price Details</th>
-                <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>Price (1 Item)</td>
-                <td>₹ 37,480</td>
-                
-                </tr>
-                <tr>
-                <td>Delivery Charges</td>
-                <td>Free</td>
-                </tr>
-                <tr>
-                <td> Total Amount</td>
-                <td>₹ 37,480</td>
-                </tr>
-                    
-            </tbody>
-            </Table>
             </Col>
+            {
+                (isCartDetailsSet)?(
+                    <Col sm={4}>
+                    <Table style={{margin_top:"50px", color:'black'}} >
+                    <thead>
+                        <tr>
+                        <th> Price Details</th>
+                        <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>Price ({cartDetails.length} Item)</td>
+                        <td>₹ 37,480</td>
+                        
+                        </tr>
+                        <tr>
+                        <td>Delivery Charges</td>
+                        <td>Free</td>
+                        </tr>
+                        <tr>
+                        <td> Total Amount</td>
+                        <td>₹ 37,480</td>
+                        </tr>
+                            
+                    </tbody>
+                    </Table>
+                    </Col>
+                ):(
+                    null
+                )
+            }
+            
+            </Row>
+            <Row>
+                <Col md={5}>
+                </Col>
+                <Col >
+                <Button style={{width:"300px"}}className="btn-flat">Place Order</Button>
+                </Col>
             </Row>
            </div>
   
