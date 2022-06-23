@@ -305,3 +305,49 @@ body {
 .hometitle {
   text-transform: uppercase;
 }
+
+.orderfilter{
+  font-weight:400;
+  font-size: 18px;
+  padding: 0 16px;
+  border-top: 2px solid rgb(223 223 223)
+
+
+}
+.orderfiltertitle{
+  font-weight:500;
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 8px 0
+}
+
+.orderfiltercheck .form-check {
+  /* height: 12px; */
+  /* width: 12px; */
+  display: flex;
+  margin-bottom: 8px;
+  cursor: pointer;
+  display: block;
+  min-height: 2.0rem;
+  padding-left: 1.5em;
+  margin-bottom: .125rem;
+}
+
+.ordersbox{
+  
+    width: 100%;
+    font-size: 14px;
+    overflow: hidden;
+    transition: box-shadow .1s linear;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    position: relative;
+    cursor: pointer;
+    display: inline-flex;
+    box-shadow: 0 0 0 0 rgb(0 0 0 / 15%);
+    margin-top: 10px;
+    margin-left: 2px;
+   
+
+    border-radius: 4px;
+}

@@ -9,7 +9,7 @@ import { Row,Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../../App.css"
 
-function OfferItems(){
+function MiniPosterItems(){
 
     const navigate = useNavigate();
 
@@ -108,4 +108,4 @@ function OfferItems(){
     );
 }
 
-export default OfferItems;
+export default MiniPosterItems;

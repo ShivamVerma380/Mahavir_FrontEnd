@@ -43,11 +43,17 @@ import ProductSpecification from "./ProductSpecification";
  // it is compulsory method.
 //  toast.configure()
 
+var pin = "";
+
 function ProductDetails(){
   // let name = localStorage.getItem("Name")
   // var storedProduct = JSON.parse(localStorage.getItem("product"))
   // var id = storedProduct[0].id
   const [isReviewFetched,setIsReviewFetched] = useState(false);
+  const [isPincodeFetched,setIsPincodeFetched] = useState(false);
+
+
+
   var productList = [
     {
       "modelNumber": "IPH123",
@@ -238,7 +244,7 @@ function ProductDetails(){
   var productImg1;
   const [isProductFetched,setIsProductFetched]= useState(false);
   const [product,setProduct] = useState([]);
-
+  const [Pincode, setPincode] = useState([]);
   const [review,setReview] = useState([]);
 
   const [imglinkfinal, setimage] = React.useState();
@@ -259,7 +265,30 @@ function ProductDetails(){
   useEffect(()=>{
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
     var token = localStorage.getItem("jwtToken");
-    if(localStorage.getItem("productSelected")!=null && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched){
+    if(localStorage.getItem("productSelected")!=null && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched && !isPincodeFetched){
+
+      axios({
+        method:"get",
+        url:"http://localhost:8080/pincodes"
+      }).then(function(response){
+        console.log("Pincode response: ",response);
+        if(response.status==200) {
+         
+          response.data.map(index=>{
+            // setPincode(p=>new Set([...Pincode,index.pincode]))
+            Pincode.push(index.pincode)
+          })
+          console.log("Pincode Response: ",Pincode);
+          // setPincode(response.data);
+          setIsPincodeFetched(true);
+          
+          
+         
+        }
+      }).catch(function(error){
+        console.log("error",error);
+      })
+
       axios({
         method:"get",
         url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")
@@ -319,6 +348,9 @@ function ProductDetails(){
       }).catch(function(error){
         console.log("error",error);
       })
+
+
+      
       
       
 
@@ -331,6 +363,9 @@ function ProductDetails(){
     if(isProductInformationSet && !isKeysFetched){}
     
 }
+
+
+
 function callProductDetails(index){
   //alert(index);
   console.log("Index",index);
@@ -429,6 +464,20 @@ function callProductDetails(index){
     navigate("/AddressForm")
   }
 
+  const InputPin = (e) => {
+    pin = e.target.value
+    console.log("Pincode: ",pin)
+  }
+
+  const CheckPinHandler = () => {
+    if(Pincode.includes(parseInt(pin))) {
+      alert("Delivery Available")
+    }
+    else {
+      alert("Delivery Not available")
+    }
+  }
+
   function fetchOfferAvailableBtn(offerPrice,productPrice){
     if(offerPrice===productPrice){
       return <Button variant="flat" size="m" style={{visibility:"hidden"}}>Offer Available</Button>
@@ -454,6 +503,7 @@ function callProductDetails(index){
     // alert("Added To Compare");
     
   }
+
 
   function ImgHandler(e) {
     imglink = { e };
@@ -598,7 +648,16 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
           <br></br>
 
           <h2 className="text" >{product.productName}</h2>
-
+          
+          <Row>
+            <Col className="star" md={1} style={{textAlign:"right"}} >
+            {Math.round(review.averageRatings*10)/10}<AiFillStar/>
+            </Col>
+            <Col md={4}>
+              {review.totalRatings} Ratings & {review.totalReviews} Reviews
+            </Col>
+          </Row>
+          
           <br></br>
           <Row>
             
@@ -647,6 +706,9 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
                   Flat Cashback upto Rs. 2,500 on ICICI Credit card 
                   EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
                   </Card.Text>
+                  <Card.Text style={{textAlign:"left"}}>
+                    View More
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </SwiperSlide>
@@ -660,6 +722,9 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
                   <Card.Text>
                   Flat Cashback upto Rs. 2,500 on ICICI Credit card 
                   EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
+                  </Card.Text>
+                  <Card.Text style={{textAlign:"left"}}>
+                    View More
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -675,6 +740,9 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
                   Flat Cashback upto Rs. 2,500 on ICICI Credit card 
                   EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
                   </Card.Text>
+                  <Card.Text style={{textAlign:"left"}}>
+                    View More
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </SwiperSlide>
@@ -688,6 +756,9 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
                   <Card.Text>
                   Flat Cashback upto Rs. 2,500 on ICICI Credit card 
                   EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
+                  </Card.Text>
+                  <Card.Text style={{textAlign:"left"}}>
+                    View More
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -710,18 +781,24 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
           }       
           {/* <h6>{product.productHighlights}</h6> */}
           </Col>
-          <Col md={6}>
-            <h5 style={{textAlign:"center",color:"rgb(255,98,98)"}}><b><i>Free Gift Worth ₹12,400</i></b></h5>
-            <Row style={{marginTop:20}}>
-            <Col md={5}>
-            <img src="https://d2xamzlzrdbdbn.cloudfront.net/products/e342521a-d065-4663-9698-310768847a4a.jpg" style={{width:100, height:100}}></img>
+          {
+            (product.freeItem) ? (
+              <Col md={6}>
+              <h5 style={{textAlign:"center",color:"rgb(255,98,98)"}}><b><i>Free Gift Worth {product.freeItem.price}</i></b></h5>
+              <Row style={{marginTop:20}}>
+              <Col md={5}>
+              <img style={{width:120, height:120}} src={'data:image/jpg;base64,' + product.freeItem.image.data}></img>
+              
+              </Col>
+              <Col md={6}>
+                <h5>{product.freeItem.name}</h5>
+              </Col>
+              </Row>
+              
             </Col>
-            <Col md={6}>
-              <h5>Apple AirPods With Charging Case</h5>
-            </Col>
-            </Row>
-            
-          </Col>
+            ) : (null)
+          }
+          
           </Row>
           <br></br>
           <QuantityPicker className="quantitypicker" style={{ background: "red" }} min={0} smooth onChange={inputQuantityEvent} />
@@ -785,10 +862,10 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
             <h5 >Enter Pincode</h5>
             </Col>
             <Col md={4}>
-              <Input type="number" style={{height:25}}></Input>
+              <Input type="number" style={{height:25}} onChange={InputPin}></Input>
             </Col>
             <Col md={3}>
-              <button style={{borderRadius:"5px", padding:3}}>Check Pincode</button>
+              <button style={{borderRadius:"5px", padding:3}} onClick={CheckPinHandler}>Check Pincode</button>
             </Col>
           </Row>
 

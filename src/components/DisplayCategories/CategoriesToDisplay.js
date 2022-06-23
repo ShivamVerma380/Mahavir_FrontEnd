@@ -65,6 +65,7 @@ function CategoriesToDisplay({ categoryDetail }) {
                         <Nav.Link style={{ margin: 10 }}>
                           {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
                           {/* {<img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>} */}
+                          <img src={'data:image/jpg;base64,'+ index.category_image.data} className="categoryimage" style={{height:50,borderRadius:50}}></img>
                           <NavDropdown id="drop " style={{ color: "black" }} title={index.category} renderMenuOnMount={true}>
                             {
                               index.subCategories.map(subCat => {

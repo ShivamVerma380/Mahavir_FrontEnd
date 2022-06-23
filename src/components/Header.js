@@ -87,7 +87,7 @@ const Header = ({productList}) => {
   {['md'].map((expand) => (
     <Navbar key={expand} bg="light" expand={expand} >
       <Container fluid>
-        <Navbar.Brand href="/" style={{fontFamily:"Tapestry"}}><img className="logo_mahavir" src = {require ('../assets/logo.jpg')}/>MAHAVIR</Navbar.Brand>
+        <Navbar.Brand href="/" style={{fontFamily:"Tapestry"}}><img className="logo_mahavir" src = {require ('../assets/mahavirlogo.jpg')}/>MAHAVIR</Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${expand}`}
@@ -114,12 +114,12 @@ const Header = ({productList}) => {
                     <Nav.Link href="#action1"><i class="fa fa-search icon" ></i></Nav.Link> 
                 </Form> */}
                 <NavLink><i class="fa fa-user"  onClick={callAdmin}>Admin</i></NavLink>
-                <Nav.Link><i  class="fa fa-map-marker" >Pune</i></Nav.Link>
+                {/* <Nav.Link><i  class="fa fa-map-marker" >Pune</i></Nav.Link> */}
                 {/* {(isUserLoggedIn)?() :(null)}   
                 {(isUserLoggedIn) ? (null):( 
                         
                    )}                        */}
-                {
+                {/* {
                     (isUserLoggedIn)?(
                         <NavDropdown renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
                         <NavDropdown.Item onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  
@@ -129,7 +129,13 @@ const Header = ({productList}) => {
                     ):(
                         <Nav.Link  onClick={callLogin}>Hi, Sign In</Nav.Link>
                     )
-                }
+                } */}
+                 <NavDropdown renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                        <NavDropdown.Item onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  
+                        <NavDropdown.Item  onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
+                        <NavDropdown.Item target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
+                        </NavDropdown>
+
                     <Nav.Link ><i  class="fa fa-shopping-cart"  onClick={Cart} ></i></Nav.Link>
                 <NavDropdown renderMenuOnMount={false} title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
                     <NavDropdown.Item href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>

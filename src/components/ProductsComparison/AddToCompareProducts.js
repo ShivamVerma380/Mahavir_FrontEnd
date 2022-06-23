@@ -7,6 +7,7 @@ import ComparisonHighlights from "./ComparisonHighlights";
 import ComparisonVariants from "./ComparisonVariants";
 import ComparisonProductInformation from "./ComparisonProductInformation";
 import { useNavigate } from "react-router-dom";
+import RatingandReview from "./RatingandReview";
 function AddToCompareProducts(){
 
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ function AddToCompareProducts(){
     const [filteredProduct,SetFilteredProduct] = useState([]);
 
     const[length,SetLength] = useState(); 
+    const[reviewLength,SetReviewLength] = useState();
 
     const [Brands,SetBrands] = useState([]);
     const [isBrandsFetched,SetIsBrandsFetched] = useState(false);
@@ -28,6 +30,8 @@ function AddToCompareProducts(){
     const [isBrandSelected,SetIsBrandSelected] = useState(false);
     
     const [model,SetModel] = useState("Choose Model....")
+    const [review,setReview] = useState([]);
+    const [isReviewFetched,setIsReviewFetched] = useState(false);
 
 
     var keys=[];
@@ -44,7 +48,7 @@ function AddToCompareProducts(){
     }
 
     useEffect(()=>{
-        if(!isProductFetched && !isBrandsFetched){
+        if(!isProductFetched && !isBrandsFetched && !isReviewFetched){
             var modelNumbers = localStorage.getItem("CompareModels").split(',');
             console.log("Model Numbers",modelNumbers);
             var urls = [];
@@ -53,6 +57,7 @@ function AddToCompareProducts(){
                     urls.push(axios.get("http://localhost:8080/get-products/"+index));
                 }
             })
+            console.log("URL: ",urls)
             axios.all(urls).then(
                 axios.spread((...res)=>{
                     res.map((response)=>{
@@ -76,8 +81,31 @@ function AddToCompareProducts(){
                 }).catch(function(error){
                     console.log("error");
                 })
+            
+                var reviewurls=[];
+                modelNumbers.map(index=>{
+                    if(index!=''){
+                        reviewurls.push(axios.get("http://localhost:8080/get-reviews/"+index));
+                    }
+                })
+                axios.all(reviewurls).then(
+                    axios.spread((...res)=>{
+                        res.map((reviewresponse)=>{
+                            console.log("reviewresponse",reviewresponse);
+                            review.push(reviewresponse.data);
+                            console.log("review array: ",review);
+                        })
+                        SetReviewLength(review.length);
+                        setIsReviewFetched(true);
+                        
+                    })
+                )
+
                 
         }
+       
+            
+        
         
 
     })
@@ -158,6 +186,10 @@ function AddToCompareProducts(){
         SetModel(modelName);
     }
 
+    const BuyNowHandler=()=> {
+        navigate("/AddressForm")
+    }
+
     const removeProduct=(event)=>{
         var arr=[];
         console.log("Model number",event.target.name);
@@ -173,6 +205,12 @@ function AddToCompareProducts(){
         }
         SetProduct(product.filter(item=>item.modelNumber!==event.target.name))
         SetLength(length-1);
+    }
+
+    function ImgOnClickHandler(index){
+        localStorage.setItem("productSelected",index.modelNumber);
+        console.log("Product Selected",localStorage.getItem("productSelected"))
+        navigate("/productDetails")
     }
 
     return(
@@ -197,11 +235,12 @@ function AddToCompareProducts(){
                             product.map(index=>{
                                 return(
                                     <Col md={2}>
-                                        <Button name={index.modelNumber} onClick={removeProduct}>X</Button>
+                                        
                                     
-                                        <img style={{ width: "10rem", alignContent: "center" }}  src={'data:image/jpg;base64,' + index.productImage1.data}></img>
+                                        <img style={{ width: "10rem", alignContent: "center" }}  src={'data:image/jpg;base64,' + index.productImage1.data} onClick={()=>ImgOnClickHandler(index)}></img>
+                                        <Button name={index.modelNumber} style={{marginBottom:"120px",marginLeft:"10px"}} onClick={removeProduct}>X</Button>
                                         <br></br>
-                                        <h6 style={{ marginTop: "20px" }}>{index.productName}</h6>
+                                        <h6 style={{ marginTop: "20px" }} onClick={()=>ImgOnClickHandler(index)}>{index.productName}</h6>
                                         <h6 style={{}}>₹{index.productPrice}</h6>
                                     </Col>
                                 )
@@ -280,6 +319,7 @@ function AddToCompareProducts(){
                     <Container>
                     <hr></hr>
                     </Container>
+                    <RatingandReview review={review}/>
                     <ComparisonHighlights product={product} showOnlyDiff={showOnlyDiff}/>
                     <br></br>
                     <Row>
@@ -290,18 +330,25 @@ function AddToCompareProducts(){
                         product.map(index=>{
                             return(
                                 <Col md={2}>
-                                    <Button id={index.modelNumber} className="btn-flat">Buy Now</Button>
+                                    <Button id={index.modelNumber} className="btn-flat" onClick={BuyNowHandler}>Buy Now</Button>
                                 </Col>
                             );
                         })
                     }
                     </Row>
                     <ComparisonVariants product={product} showOnlyDiff={showOnlyDiff}/>
-                    <Container>
+                    <Row>
+
+                        <Col md={1}></Col>
+                        
+                        <Col md={10}>
                         <hr></hr>
                         <h3>Product Information</h3>
                         <hr></hr>
-                    </Container>
+                        </Col>
+                        
+                        
+                    </Row>
                     
                     
                     {

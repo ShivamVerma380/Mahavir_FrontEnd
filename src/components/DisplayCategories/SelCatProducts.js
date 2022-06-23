@@ -92,11 +92,18 @@ const SelCatProducts=()=>{
         }
     }
 
+
+
     function getCompareBtn(){
        
        
-          return(
-            <Button id="comparebtn" onClick={compareProducts}>Compare</Button>
+          return(               
+                (change>0) ? (
+                    <Button id="comparebtn" onClick={compareProducts}>Compare</Button>
+                ) : (null)
+                
+           
+               
           )
         
     }
@@ -159,7 +166,7 @@ const SelCatProducts=()=>{
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
     </div>
 
-    const handleAddToCompare=event=>{
+    const handleAddToCompare=(event)=>{
         
         if (event.target.checked) {
 
@@ -270,6 +277,15 @@ const SelCatProducts=()=>{
                         }
                         </Carousel>
                         <FilterProduct/>
+                        {/* {
+
+                            (change!=0) ? (
+                                
+                                    <Button id="comparebtn" onClick={compareProducts}>Compare</Button>  
+                                
+                                
+                            ) : (null)
+                        } */}
                         {/* <Row>
                         <Col md={2}>
                             <FilterProduct/>

@@ -29,7 +29,16 @@ function App() {
   const [Products,setProducts] = useState([]);
   const [isProductsFetched,setIsProductsFetched] = useState(false);
 
+  const [MegaPoster,setMegaPoster] = useState([]);
+  const [MiniPoster,setMiniPoster] = useState([]);
+
+  
+  
   localStorage.setItem("comparecount",0)
+
+  var count = 0;
+
+  var element = <div></div>;
 
   //const[cookies,SetCookie] = useCookies(["modelNumsToCompare"])
 
@@ -51,6 +60,7 @@ function App() {
   
   
   useEffect(() => {
+
     
     // var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
     if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched){
@@ -62,15 +72,31 @@ function App() {
         }
       }).then(function(response){
         console.log(response);
+        console.log("Poster response: ",response.data)
         if(response.status==200){
+          response.data.map(index=>{
+            if(index.isMegaPoster=="true") {
+              console.log("in if ")
+              MegaPoster.push(index)
+            }
+            else {
+              console.log("in else ")
+              MiniPoster.push(index);
+
+            }
+            
+          })
+          
           setOfferPosters(response.data);
-          setIsOfferPostersFetched(true);
+          
           console.log("OfferPosters",offerPosters);
+          console.log("Mini Posters: ",MiniPoster)
+          setIsOfferPostersFetched(true);
         }
+        
       }).catch(function(error){
         console.log("error",error);
       })
-
       axios.get("http://localhost:8080/get-categories").then(function(response){
         console.log(response);
         if(response.status==200){
@@ -100,15 +126,75 @@ function App() {
   },[]);
 
   function fetchSlideshow(){
-    if(offerPosters.length===0){
+    if(MegaPoster.length===0){
       return( 
         null
       );
     }else{
       return( 
-        <Slideshow offerPosters={offerPosters}/>
+        <Slideshow offerPosters={MegaPoster}/>
       );
     }
+  }
+
+  function fetchMiniPoster(){
+    if(MiniPoster.length===0){
+      return( 
+        null
+      );
+    }
+    else if(MiniPoster.length>6){
+      // var array = MiniPoster.slice(0,6)
+      // var miniarr = MiniPoster.slice(6)
+      // setMiniPoster(miniarr)
+      count+=6;
+      console.log("Mini: ",MiniPoster.slice(6))
+      return( 
+
+        
+        <MiniPosters MiniPosters={MiniPoster.slice(count-6,count)}/>
+      );
+    }
+
+    else if(MiniPoster.length<=6) {
+      return (
+        <MiniPosters MiniPosters={MiniPoster}/>
+      );
+      
+    }
+    
+  }
+
+  function fetchMiniPosterTwo(){
+    if(MiniPoster.length===0){
+      return( 
+        null
+      );
+    }
+    else if(MiniPoster.length>6){
+      // var array = MiniPoster.slice(0,6)
+      // var miniarr = MiniPoster.slice(6)
+      // setMiniPoster(miniarr)
+      // while(count<=MiniPoster.length) {
+        
+      //   count+=6;
+      //   element=<MiniPosters MiniPosters={MiniPoster.slice(count-6,count)}/>
+      //   console.log("Mini: ",MiniPoster.slice(6))
+      return( 
+        
+        <MiniPosters MiniPosters={MiniPoster.slice(count)}/>
+      );
+      
+      
+    }
+
+    else if(MiniPoster.length<=6) {
+      return (
+        <MiniPosters MiniPosters={MiniPoster}/>
+      );
+      
+    }
+    
   }
 
   
@@ -124,6 +210,7 @@ function App() {
   }
 
   return (
+
     <div className="App" >
       {
         (isProductsFetched)?(
@@ -141,26 +228,23 @@ function App() {
         fetchSlideshow()
       
       }
-
-      <MiniPosters/>
+      <br></br>
+      
       {
-        (isProductsFetched)?(
-            <Product title="Mahavir Special" className="title" productList={Products}/>
-        ):(
-          null
-        )
+        (isOfferPostersFetched)?(
+          fetchMiniPoster()
+        ) : (null)
+        
       }
-      { 
-        (isProductsFetched)?(
-          <Product title="Deals Of The Day" className="title" productList={Products}/>
-        ):(
-          null
-        )
-      }
-      
 
+      {/* <MiniPosters MiniPosters={MiniPoster}/> */}
       
-      <MiniPosters/>
+      <Product title="Mahavir Special" className="title" productList={Products}/>
+      <Product title="Deals Of The Day" className="title" productList={Products}/>
+      {
+        fetchMiniPosterTwo()
+      }
+      {/* <MiniPosters/> */}
       {/* <Test productList={Products} /> */}
       <FeatureBrands/>
        

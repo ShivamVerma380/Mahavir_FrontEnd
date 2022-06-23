@@ -54,6 +54,7 @@ const WishList = () => {
     // SetLength(length-1);
 }
 
+
 const RemoveFromWishListviaIcon=(event)=>{
     
   console.log("Model number",event.target.name);
