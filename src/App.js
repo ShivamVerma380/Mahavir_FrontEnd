@@ -29,6 +29,9 @@ function App() {
   const [Products,setProducts] = useState([]);
   const [isProductsFetched,setIsProductsFetched] = useState(false);
 
+  const [Posters, setPosters] = useState([]);
+  const [isPostersFetched, setIsPostersFetched] = useState(false);
+
   const [MegaPoster,setMegaPoster] = useState([]);
   const [MiniPoster,setMiniPoster] = useState([]);
 
@@ -63,7 +66,7 @@ function App() {
 
     
     // var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
-    if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched){
+    if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched){
       axios({
         method:"get",
         url:"http://localhost:8080/get-offers",
@@ -120,6 +123,19 @@ function App() {
       }).catch(function(error){
         console.log(error);
       })
+
+      axios.get("http://localhost:8080/get-posters").then(function(response){     
+      if(response.status==200){
+        console.log("Posters",response.data);
+        setPosters(response.data);
+        setIsPostersFetched(true);
+        console.log("Posters set",Posters)
+      }
+      
+      }).catch(function(error){
+        console.log(error);
+      })
+
     }
     
         
@@ -246,7 +262,7 @@ function App() {
       }
       {/* <MiniPosters/> */}
       {/* <Test productList={Products} /> */}
-      <FeatureBrands/>
+      <FeatureBrands posterList={Posters}/>
        
       {/* <Button id="comparebtn">Compare{localStorage.getItem("comparecount")}</Button> */}
       {

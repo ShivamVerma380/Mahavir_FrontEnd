@@ -21,7 +21,7 @@ function MiniPosterItems(){
         if(!isProductsFetched){
             var modelNumbers = localStorage.getItem("offerPostersModelNumber").split(',');
         console.log("Model Number",modelNumbers);
-        var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxIiwiZXhwIjoxNjU1ODkyNjA3LCJpYXQiOjE2NTU3OTI2MDd9.Z5haBu6yF7p66iA5CNSnuweio-5WfsNlAfsGpBAmyhw"
+        var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxcyIsImV4cCI6MTY1NjA5NTg2NCwiaWF0IjoxNjU1OTk1ODY0fQ.R4eyvl66awQPQyH83BppcnKVQar62YfjM0BOR7BACbs"
         //var token = localStorage.getItem("jwtToken");
         modelNumbers.map(modelNum=>{
             console.log("Model Num",modelNum);

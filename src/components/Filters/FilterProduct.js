@@ -185,6 +185,8 @@ function FilterProduct(){
     const [maxPrice,SetMaxPrice] = useState();
     const [isRangeSet,SetIsRangeSet] = useState(false);
 
+    const [isFilterSelected,SetIsFilterSelected] = useState(false);
+
  
     const[flag,SetFlag] = useState(false)
     useEffect(()=>{
@@ -206,6 +208,7 @@ function FilterProduct(){
 
                     })
 
+                    console.log("products",products);
                     setIsProductsFetched(true);
 
                 })
@@ -222,22 +225,39 @@ function FilterProduct(){
                         SetIsFilterCriteriasFetched(true);
                     }
                 }).catch(function(error){
-                    // console.log(error);
+                    console.log(error);
 
                 })
         
+                // axios({
+                //     method: 'get',
+                //     url: "http://localhost:8080/filtercriterias/"+Category,
+                //     mode: 'no-cors'
+                // }).then(function(response){
+                //     if(response.status==200){
+                //         // console.log("productFilters",response.data.productFilters);
+                //         SetProductInformationFilters(response.data.productFilters);
+                //         for(var key in response.data.productFilters){
+                //             productInformationKeys.push(key);
+                //         } 
+                //     }
+                // }).catch(function(error){
+                //     console.log(error);
+                // });
 
-                axios.get("http://localhost:8080/get-categories/"+Category)
+                axios.get("http://localhost:8080/filtercriterias/"+Category)
                 .then(function(response){
                     if(response.status==200){
                         // console.log("productFilters",response.data.productFilters);
-                        SetProductInformationFilters(response.data.productFilters);
-                        for(var key in response.data.productFilters){
+                        SetProductInformationFilters(response.data.filterCriterias);
+                        for(var key in response.data.filterCriterias){
                             productInformationKeys.push(key);
                         } 
+                        console.log("productInformationKeys",productInformationKeys);
+                        console.log("productInformationFilters",productInformationFilters);
                     }
                 }).catch(function(error){
-                    // console.log(error);
+                    console.log(error);
                 })
 
             axios.get("http://localhost:8080/get-products-by-category/"+Category)
@@ -342,12 +362,38 @@ function FilterProduct(){
     }
     }
 
+    const handleFilterClick=event=>{
+        // console.log("Filter Clicked");
+        // console.log("Filter Clicked",event.target.value);
+        // console.log("Filter Clicked",event.target.checked);
+        if(event.target.checked){
+            // setFilteredProducts([]);
+            console.log("FilterClick on",event.target.id,":",event.target.value);
+            var arr=[];
+            products.map(index=>{
+                    console.log("indexfiltercriterias",index.filtercriterias[event.target.id]);
+                    if(index.filtercriterias[event.target.id]===event.target.value){
+                        console.log("In if",index.productName);
+                        // filteredProducts.push(index);4
+                        setFilteredProducts(arr=>[...arr,index]);
+                        // setFilteredProducts(index);
+                    }
+                
+                
+            })
+            // setProducts(arr);
+            // console.log("arr",arr);
+            // setFilteredProducts(arr);
+            console.log("filteredProducts",filteredProducts);
+            SetIsFilterSelected(true);
+        }
+        else{
+            console.log("FilterClick off",event.target.id,":",event.target.value);
+            SetIsFilterSelected(false);
+        }
+    }
+
     function handlePriceRange({min,max}){
-        // console.log("Min",{min});
-        // console.log("Max",{max});
-        //alert("Hello")
-        // console.log("Min"+{min.min}+",Max"+{max.max});
-        // console.log("Min  "+{min}.min+",Max  "+{max}.max);
         
         var arr =[];
         products.map(index=>{
@@ -357,7 +403,9 @@ function FilterProduct(){
             }
         })
         // console.log("price",arr);
+        // console.log("Array",arr);
         setFilteredProducts(arr);
+        // console.log("Filtered products",filteredProducts);
          
         
     }
@@ -466,7 +514,7 @@ function FilterProduct(){
                                     productInformationFilters[key].map(values=>{
                                         return(
                                             <Form>
-                                                <Form.Check type="checkbox"  value={values}  label = {values}/>
+                                                <Form.Check id={key} type="checkbox"  value={values}  label = {values} onChange={(e)=>handleFilterClick(e)}/>
                                             </Form>
 
                                         );
@@ -494,29 +542,30 @@ function FilterProduct(){
         <Row>
             {
                 (isProductsFetched && !isProductSorted)?
-                [...filteredProducts].map(index=>{
-                    return(
-                        
-                        <Card  style={{ width: '15rem'}} 
-                        className="mb-2">
-                            <Card.Img  variant="top" style={{width:200,height:150,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
-                            <Card.Body>
-                            <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
-                            <Card.Text onClick={()=>callProductDetails(index)}>
-                            {index.productDescription}
-                            <br></br><br></br><strong>Rs {index.productPrice}</strong>
-                        </Card.Text>
-                            {
-                                callFormCheck(index.modelNumber)
-                            }
+                    
+                    filteredProducts.map(index=>{
+                        return(
                             
-                            
-                            
-                            <br></br>
-                            <Button variant="flat" size="1">Buy</Button>
-                            </Card.Body>
-                            
-                    </Card>
+                            <Card  style={{ width: '15rem'}} 
+                            className="mb-2">
+                                <Card.Img  variant="top" style={{width:200,height:150,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
+                                <Card.Body>
+                                <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
+                                <Card.Text onClick={()=>callProductDetails(index)}>
+                                {index.productDescription}
+                                <br></br><br></br><strong>Rs {index.productPrice}</strong>
+                            </Card.Text>
+                                {
+                                    callFormCheck(index.modelNumber)
+                                }
+                                
+                                
+                                
+                                <br></br>
+                                <Button variant="flat" size="1">Buy</Button>
+                                </Card.Body>
+                                
+                        </Card>
                     
                     
                     
@@ -541,7 +590,7 @@ function FilterProduct(){
                                 
                                 
                                 <br></br>
-                                <Button variant="flat" size="1">Buy</Button>
+                                <Button style={{textAlign:"centre"}} variant="flat" size="1">Buy</Button>
                                 </Card.Body>
                                 
                         </Card>

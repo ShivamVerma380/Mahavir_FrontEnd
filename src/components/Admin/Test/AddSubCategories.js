@@ -124,10 +124,16 @@ const AddSubCategories=()=>{
         // console.log("params",params);
         axios.post("http://localhost:8080/add-product-sub-categories/"+localStorage.getItem("ModelNos"),{
             headers:{
+<<<<<<< HEAD
                 "Authorization":"Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJhQGdtYWlsLmNvbSIsImV4cCI6MTY1NjE2MjY0NCwiaWF0IjoxNjU2MDYyNjQ0fQ.gDR7d0V5nmzbujuXp2CpGzsT0PqqtMjCvT3a4ge28NE",
                 
                 "Accept":"application/json",
                 "Content-Type":"application/json"
+=======
+                "Authorization":"Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3ciLCJleHAiOjE2NTYwOTUwMzYsImlhdCI6MTY1NTk5NTAzNn0.WnGVpf7UeR1h2ZIgHm4Tkms_3LnGcL1f4uxyff7WRr8",
+                "Content-Type":"application/json",
+                "Accept":"application/json"
+>>>>>>> 3f28f0605aafd7c0a1f60fa7dc6ed1c336da47fc
             },
             mode:"no-cors",
             data:mapState
