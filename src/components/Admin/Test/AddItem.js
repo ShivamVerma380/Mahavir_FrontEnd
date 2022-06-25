@@ -148,7 +148,7 @@ function CategoryComponent(props) {
                       <Accordion.Header>Upload Images</Accordion.Header>
                       <Accordion.Body>
                         {/* <Image /> */}
-                        <input type="file" name="img1" onChange={(e)=>handleImg(e)}/>
+                        <input type = "file" name="img1" onChange={(e)=>handleImg(e)}/>
                         <input type = "file" name="img2" onChange={(e)=>handleImg1(e)}/>
                         <input type = "file" name="img3" onChange={(e)=>handleImg2(e)}/>
                         <input type = "file" name="img4" onChange={(e)=>handleImg3(e)}/>
@@ -265,7 +265,7 @@ function AddItem() {
       "productPrice":price,
       "offerPrice":offerPrice,
       "category":SelectedCategory,
-      "productImage1":  file,
+      "productImage1": file,
       "productImage2": file1,
       "productImage3": file2,
       "productImage4": file3,

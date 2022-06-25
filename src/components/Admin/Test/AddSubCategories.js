@@ -4,6 +4,7 @@ import {Row,Col,Form, Button} from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { Container } from "@mui/system";
+import { constants } from "react-horizontal-scrolling-menu";
 const AddSubCategories=()=>{
     
     console.log("Category Selected",localStorage.getItem("CategorySelected"));
@@ -15,8 +16,9 @@ const AddSubCategories=()=>{
     const navigate = useNavigate();
     
     const[SubCategories,SetSubCategories] = useState([]);
-    var map = new Map();
-
+    const[mapState,setMapState] = useState(new Map());
+    //const map = new Map();
+    const params={};
     useEffect(()=>{
         if(!isCategoriesFetched){
             axios.get("http://localhost:8080/get-categories/admin")
@@ -37,13 +39,15 @@ const AddSubCategories=()=>{
     })
 
     const handleSubSubCatChange=(e)=>{
-        map = new Map();
+        //map = new Map();
 
         SubCategories.map(index=>{
             index.subSubCategories.map(subSubCat=>{
                 console.log(subSubCat, document.getElementById(subSubCat).checked)
                 if(document.getElementById(subSubCat).checked){
-                    map.set(index.subCategoryName,subSubCat);
+                    //map.set(index.subCategoryName,subSubCat);
+                    setMapState(map => new Map(map.set(index.subCategoryName, subSubCat)));
+
                 }
             })
             // console.log(document.getElementById(index.subCategoryName));
@@ -54,6 +58,16 @@ const AddSubCategories=()=>{
         // }else{
         //     console.log("false",e.target.value);    
         // }
+        console.log(mapState);
+        
+        // console.log(map);
+        // for(var key in map){
+        //     console.log("key:",key)
+        //     params={"$key":"$value"}
+        //     params+={key:map[key]}
+        // }
+        
+        // console.log("params",params);
         
     }
 
@@ -82,14 +96,26 @@ const AddSubCategories=()=>{
         // for(const[key,value] of map){
         //     params.append(key,value)
         // }
-        var params={};
-        for(var key in map){
-            console.log("key:",key)
-            // params={"$key":"$value"}
-            // params+={key:map[key]}
-        }
+        // const params={
+        //     "Brand":"Apple",
+        //     "Type":"Touchscreen"
+        // };
+
+        // const params = JSON.stringify(
+
+            
+        //     {"Brand":"Apple"}
+            
+        // );
+        const params={}
+        // console.log("Map"+map);
+        // for(var key in map){
+        //     console.log("key:",key)
+        //     params={"$key":"$value"}
+        //     params+={key:map[key]}
+        // }
         
-        console.log("params",params);
+        console.log("params",mapState);
         
 
 
@@ -103,7 +129,7 @@ const AddSubCategories=()=>{
                 "Accept":"application/json"
             },
             mode:"no-cors",
-            data:params
+            data:mapState
             
         }).then(function(response){
             console.log("response",response.data);
