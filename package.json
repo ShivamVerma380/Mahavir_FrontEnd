@@ -63,6 +63,7 @@
     "swiper": "^8.1.6",
     "uiw": "^4.21.11",
     "universal-cookie": "^4.0.4"
+    
   },
   "scripts": {
     "start": "react-scripts start",
@@ -91,5 +92,7 @@
   "devDependencies": {
     "@iconify/react": "^3.2.2",
     "web-vitals": "^2.1.4"
-  }
+  },
+  "proxy": "http://api.endpoint.com/v1"
+  
 }
