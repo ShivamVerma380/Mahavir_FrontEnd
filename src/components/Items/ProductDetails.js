@@ -515,7 +515,7 @@ function callProductDetails(index){
   }
 
   function handleBtnClick(variantName){
-    // console.log("Variant Btn Clicked",variantName.index);
+    console.log("Variant Btn Clicked",variantName.index);
     axios({
         method:"get",
         url:"http://localhost:8080/get-products/"+localStorage.getItem("productSelected")+"/"+variantName.index
