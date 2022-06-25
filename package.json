@@ -91,5 +91,6 @@
   "devDependencies": {
     "@iconify/react": "^3.2.2",
     "web-vitals": "^2.1.4"
-  }
+  },
+  "proxy": "http://api.endpoint.com/v1"
 }

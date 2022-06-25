@@ -148,7 +148,7 @@ function CategoryComponent(props) {
                       <Accordion.Header>Upload Images</Accordion.Header>
                       <Accordion.Body>
                         {/* <Image /> */}
-                        <input type="file" name="img1" onChange={(e)=>handleImg(e)}/>
+                        <input type = "file" name="img1" onChange={(e)=>handleImg(e)}/>
                         <input type = "file" name="img2" onChange={(e)=>handleImg1(e)}/>
                         <input type = "file" name="img3" onChange={(e)=>handleImg2(e)}/>
                         <input type = "file" name="img4" onChange={(e)=>handleImg3(e)}/>
@@ -265,7 +265,7 @@ function AddItem() {
       "productPrice":price,
       "offerPrice":offerPrice,
       "category":SelectedCategory,
-      "productImage1":  file,
+      "productImage1": file,
       "productImage2": file1,
       "productImage3": file2,
       "productImage4": file3,
@@ -274,7 +274,7 @@ function AddItem() {
 
     axios.post("http://localhost:8080/add-product",form_data_body,{
       headers:{
-        "Authorization":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsImV4cCI6MTY1NTU4MDY4MywiaWF0IjoxNjU1NDgwNjgzfQ.e_PWiAQ8yZV2FU6ChW1krAInQ4eLIWiKWrWnZuBlVY287vcIrqVVKC4gM1XxSMGCP9x-sgAvZNq0ArWfRPnXgw",
+        "Authorization":"Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJhQGdtYWlsLmNvbSIsImV4cCI6MTY1NjE2MjY0NCwiaWF0IjoxNjU2MDYyNjQ0fQ.gDR7d0V5nmzbujuXp2CpGzsT0PqqtMjCvT3a4ge28NE",
         "Content-Type":"multipart/form-data"
       },
       mode:"no-cors"
