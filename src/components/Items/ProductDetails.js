@@ -781,7 +781,7 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
           }       
           {/* <h6>{product.productHighlights}</h6> */}
           </Col>
-          {
+          {/* {
             (product.freeItem) ? (
               <Col md={6}>
               <h5 style={{textAlign:"center",color:"rgb(255,98,98)"}}><b><i>Free Gift Worth {product.freeItem.price}</i></b></h5>
@@ -797,7 +797,7 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
               
             </Col>
             ) : (null)
-          }
+          } */}
           
           </Row>
           <br></br>
