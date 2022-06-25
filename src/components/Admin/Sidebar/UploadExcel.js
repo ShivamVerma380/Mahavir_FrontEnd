@@ -5,6 +5,7 @@ import { Button , Col,Row,Container} from 'react-bootstrap';
 import  { useState } from 'react';
 import AdminHeader from "../../Admin/AdminHeader";
 import AdminNavbar from "./AdminNavbar";
+import axios from 'axios';
 const UploadExcel = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
@@ -17,24 +18,20 @@ const UploadExcel = () => {
   const handleSubmission = () => {
     const formData = new FormData();
 
-    formData.append('File', selectedFile);
-    console.log(formData)
+    formData.append('file', selectedFile);
+    console.log("Form Data",formData)
     alert("Submit Clicked")
 
-  //   fetch(
-  //   	'https://freeimage.host/api/1/upload?key=<YOUR_API_KEY>',
-  //   	{
-  //   		method: 'POST',
-  //   		body: formData,
-  //   	}
-  //   )
-  //   	.then((response) => response.json())
-  //   	.then((result) => {
-  //   		console.log('Success:', result);
-  //   	})
-  //   	.catch((error) => {
-  //   		console.error('Error:', error);
-  //   	});
+    axios.post("http://localhost:8080/excel",formData,{
+      headers:{
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzcyIsImV4cCI6MTY1NjIzODU5MCwiaWF0IjoxNjU2MTM4NTkwfQ.sHwZhPl0Uwx3XU6Gn3VI_ZaxWExHy7VBZonH3vbRGP8"
+      },
+      mode:"no-cors"
+    }).then(function(response){
+      console.log(response.data)
+    }).catch(function(error){
+      console.log(error)
+    })
 
 
   };
@@ -42,7 +39,7 @@ const UploadExcel = () => {
 
   return (
     <div>
-      <AdminHeader/>
+      {/* <AdminHeader/> */}
         <AdminNavbar/>
         <Container style={{padding:'50px'}}>
           <Row>

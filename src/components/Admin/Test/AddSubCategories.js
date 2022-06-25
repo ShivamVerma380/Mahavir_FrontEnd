@@ -4,6 +4,7 @@ import {Row,Col,Form, Button} from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { Container } from "@mui/system";
+import { constants } from "react-horizontal-scrolling-menu";
 const AddSubCategories=()=>{
     
     console.log("Category Selected",localStorage.getItem("CategorySelected"));
@@ -15,8 +16,9 @@ const AddSubCategories=()=>{
     const navigate = useNavigate();
     
     const[SubCategories,SetSubCategories] = useState([]);
-    var map = new Map();
-
+    const[mapState,setMapState] = useState(new Map());
+    //const map = new Map();
+    const params={};
     useEffect(()=>{
         if(!isCategoriesFetched){
             axios.get("http://localhost:8080/get-categories/admin")
@@ -37,13 +39,15 @@ const AddSubCategories=()=>{
     })
 
     const handleSubSubCatChange=(e)=>{
-        map = new Map();
+        //map = new Map();
 
         SubCategories.map(index=>{
             index.subSubCategories.map(subSubCat=>{
                 console.log(subSubCat, document.getElementById(subSubCat).checked)
                 if(document.getElementById(subSubCat).checked){
-                    map.set(index.subCategoryName,subSubCat);
+                    //map.set(index.subCategoryName,subSubCat);
+                    setMapState(map => new Map(map.set(index.subCategoryName, subSubCat)));
+
                 }
             })
             // console.log(document.getElementById(index.subCategoryName));
@@ -54,6 +58,16 @@ const AddSubCategories=()=>{
         // }else{
         //     console.log("false",e.target.value);    
         // }
+        console.log(mapState);
+        
+        // console.log(map);
+        // for(var key in map){
+        //     console.log("key:",key)
+        //     params={"$key":"$value"}
+        //     params+={key:map[key]}
+        // }
+        
+        // console.log("params",params);
         
     }
 
@@ -82,14 +96,26 @@ const AddSubCategories=()=>{
         // for(const[key,value] of map){
         //     params.append(key,value)
         // }
-        var params={};
-        for(var key in map){
-            console.log("key:",key)
-            // params={"$key":"$value"}
-            // params+={key:map[key]}
-        }
+        // const params={
+        //     "Brand":"Apple",
+        //     "Type":"Touchscreen"
+        // };
+
+        // const params = JSON.stringify(
+
+            
+        //     {"Brand":"Apple"}
+            
+        // );
+        const params={}
+        // console.log("Map"+map);
+        // for(var key in map){
+        //     console.log("key:",key)
+        //     params={"$key":"$value"}
+        //     params+={key:map[key]}
+        // }
         
-        console.log("params",params);
+        console.log("params",mapState);
         
 
 
@@ -98,12 +124,12 @@ const AddSubCategories=()=>{
         // console.log("params",params);
         axios.post("http://localhost:8080/add-product-sub-categories/"+localStorage.getItem("ModelNos"),{
             headers:{
-                "Authorization":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsImV4cCI6MTY1NTU4MDY4MywiaWF0IjoxNjU1NDgwNjgzfQ.e_PWiAQ8yZV2FU6ChW1krAInQ4eLIWiKWrWnZuBlVY287vcIrqVVKC4gM1XxSMGCP9x-sgAvZNq0ArWfRPnXgw",
+                "Authorization":"Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3ciLCJleHAiOjE2NTYwOTUwMzYsImlhdCI6MTY1NTk5NTAzNn0.WnGVpf7UeR1h2ZIgHm4Tkms_3LnGcL1f4uxyff7WRr8",
                 "Content-Type":"application/json",
                 "Accept":"application/json"
             },
             mode:"no-cors",
-            data:params
+            data:mapState
             
         }).then(function(response){
             console.log("response",response.data);

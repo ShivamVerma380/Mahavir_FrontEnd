@@ -842,9 +842,20 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
                     {
                       product.variants[variantName].map(index=>{
                         return(
-                          <Col md={1} style={{marginRight:30}}>
-                          <Button id={index}  variant="flat" style={{marginLeft:10}} onClick={()=>handleBtnClick({index})}>{index}</Button>
+                          (variantName=="Color") ? (
+                            <Col md={1} style={{marginRight:30}}>
+                              <div class="color_img">
+                                  <img src={'data:image/jpg;base64,' + product.productImage1.data} id={index}  variant="flat" style={{marginLeft:10, width:50, border:"1px solid black"}} onClick={()=>handleBtnClick({index})}></img>
+                                  <div>{index}</div>
+                              </div>
+                          
                           </Col>
+                          ) : (
+                            <Col md={1} style={{marginRight:30}}>
+                          <Button src={'data:image/jpg;base64,' + product.productImage1.data} id={index}  variant="flat" style={{marginLeft:10}} onClick={()=>handleBtnClick({index})}>{index}</Button>
+                          </Col>
+                          )
+                          
                         );
                       })
                     }

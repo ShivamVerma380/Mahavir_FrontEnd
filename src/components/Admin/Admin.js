@@ -53,7 +53,7 @@ export default function Admin () {
 
     return (
         <div>
-            <AdminHeader/>
+            {/* <AdminHeader/> */}
             <AdminNavbar/>
             <h1 style={{marginTop:"20px",textAlign:"center"}}>Mahavir Electronics</h1>
             {/* <AddCategory/>  */}
