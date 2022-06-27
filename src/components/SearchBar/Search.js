@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useNavigate } from "react-router-dom";
+import { AiFillWindows } from "react-icons/ai";
 function Search(){
     const[products,SetProducts] = useState([]);
     const[isProductsFetched,setIsProductsFetched] = useState(false);
 
     const navigate = useNavigate();
+
+    
 
     useEffect(()=>{
         if(!isProductsFetched){
@@ -40,7 +43,30 @@ function Search(){
         localStorage.setItem("Category",item.category);
         localStorage.setItem("SubCategory",item.subCategory);
         localStorage.setItem("SubSubCategory",item.subSubCategory);
-        navigate("/productDetails")
+        if(item.type==="category"){
+          navigate("/"+item.name);
+        }else if(item.type==="subSubCategory"){
+          localStorage.setItem("Model Number", item.modelNumbers);
+          // alert(item.name);
+          //navigate to Select Category Products
+          // navigate("")
+          console.log("window.location.href",window.location.href);
+          var str = window.location.href.slice(18);
+          var arr = str.split("/");
+          
+
+          console.log("arr",arr);
+          if(arr.length==4){
+            window.location.reload();
+          }else{
+            navigate("/"+item.category+"/"+item.subCategory+"/"+item.subSubCategory);  
+          } 
+        }else{
+          if(window.location.href.includes("productDetails"))
+            window.location.reload();
+          else
+            navigate("/productDetails");
+        }
       }
     
       const handleOnFocus = () => {

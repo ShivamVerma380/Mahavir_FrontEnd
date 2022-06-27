@@ -472,10 +472,12 @@ function WishlistHandler(index) {
 
 
   return (
-      
+    <div> 
+      <Header/> 
+    {
     (isProductFetched )?(
       <>
-     {/* <Header/> */}
+     
       <div className="container" style={{backgroudColor:'white'}}>
       <Row >
         <Col md={6}>
@@ -969,15 +971,16 @@ function WishlistHandler(index) {
     </div>
     </>
     ):(null)
-    
-    
+    }
+    </div>
 
   );
-  // <br></br>
+  {/* // <br></br> */}
 
-  // </div>
-
-
+  {/* // </div> */}
+    
+      
 }
+
 
 export default ProductDetails;

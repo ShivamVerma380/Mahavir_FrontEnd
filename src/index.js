@@ -38,6 +38,7 @@ import StoreLocator from './components/Footer/StoreLocator';
 import AddSubCategories from './components/Admin/Test/AddSubCategories';
 import AddProductInformation from './components/Admin/Test/AddProductInformation';
 import MiniPosterItems from './components/offers/MiniPosteritems';
+import ProductsByCategory from './components/Items/ProductsByCateory';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -81,6 +82,7 @@ root.render(
       <Route path='/aboutcompany' element = {<AboutCompany/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/contactus' element = {<ContactUs/>}/>
+      <Route path='/:Category'element={<ProductsByCategory/>}/>
       
 
       {/* <Route path='/AddNew' element={<AddNew/>}/> */}
