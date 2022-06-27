@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { AiOutlineKey } from "react-icons/ai";
 // import searchResults,{GetSearchResults} from "./history";
 import "./searchbar.css";
 
@@ -17,8 +18,14 @@ function SearchBar({productList}){
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown" && activeIndex + 1 < filteredSuggestions.length) {
-      setActiveIndex(activeIndex + 1);
-      setSearchQuery(filteredSuggestions[activeIndex + 1].text);
+      
+      try {
+        setActiveIndex(activeIndex + 1);
+        setSearchQuery(filteredSuggestions[activeIndex + 1].text);  
+      } catch (error) {
+        console.log(error);
+      }
+      
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       if (activeIndex - 1 >= 0) {
@@ -67,10 +74,13 @@ function SearchBar({productList}){
 
   const handleOnChange = (e) => {
     const filteredHistory = filterSuggestions(e.target.value);
+    setSearchQuery(e.target.value);
+    console.log(filteredHistory);
+    
     setfilteredSuggestions(filteredHistory);
     setInFocus(true);
     setActiveIndex(-1);
-    setSearchQuery(e.target.value);
+    
   };
   const getHighlightedText=(text, highlight) => {
     // Split text on highlight term, include term itself into parts, ignore case
@@ -97,6 +107,7 @@ function SearchBar({productList}){
     e.preventDefault();
     setInFocus(false);
     inputRef.current.blur();
+    // alert(e.target.value);
   };
 
   return (
@@ -161,7 +172,7 @@ function SearchBar({productList}){
             >
               <a className="item-link" href={`/search?q=${product.productName}`}>
                 <div className="search-suggestion-icon">
-                  <img src={product.productImage1} alt="" />
+                  <img src={"data:image/png;base64," + product.productImage1.data} alt="" />
                 </div>
                 <div className="search-suggestion-text">
                   {formatSuggestion(product.productName)}

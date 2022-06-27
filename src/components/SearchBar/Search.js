@@ -37,9 +37,10 @@ function Search(){
         // the item selected
         console.log(item.name)
         localStorage.setItem("productSelected",item.id);
+        localStorage.setItem("Category",item.category);
+        localStorage.setItem("SubCategory",item.subCategory);
+        localStorage.setItem("SubSubCategory",item.subSubCategory);
         navigate("/productDetails")
-        
-        
       }
     
       const handleOnFocus = () => {
@@ -59,7 +60,7 @@ function Search(){
             <div style={{ width: 400 }}>
               <ReactSearchAutocomplete
                 items={products}
-                fuseOptions={{keys:["name","price","highlights","category"]}}
+                fuseOptions={{keys:["name","price","highlights","category","subSubCategory","subSubCategory"]}}
                 resultStringKeyName="name"
                 onSearch={handleOnSearch}
                 onHover={handleOnHover}
