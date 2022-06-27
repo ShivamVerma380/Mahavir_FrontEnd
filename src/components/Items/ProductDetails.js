@@ -31,6 +31,7 @@ import 'react-toastify/dist/ReactToastify.css';
  
 import { Toast,ToastBody,ToastHeader } from "reactstrap";
  
+import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 
 
 import ProductRating from "./ProductRating";
@@ -441,6 +442,33 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
 }
 
 
+function WishlistHandler(index) {
+  // alert("Item added successfully to wishlist");
+  console.log(index.modelNumber)
+  if (localStorage.getItem("wishlistproduct")==null) {
+    localStorage.setItem("wishlistproduct",index.modelNumber)
+  }else {
+    var arr = localStorage.getItem("wishlistproduct").split(',')
+    var flag = true;
+    arr.map(i=>{
+     
+      console.log("i: ",i)
+      if( i=== index.modelNumber) {
+          arr.splice(arr.indexOf(i),1)
+          localStorage.setItem("wishlistproduct",arr)
+          console.log('del arr: ' + arr)
+          console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+         console.log("in if")
+        flag = false;
+      } 
+    }) 
+    // if(flag)
+    //   localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+    //   navigate('/')
+    
+  }
+  
+}
 
 
   return (
@@ -902,11 +930,12 @@ if((review.nosOfOneStars/review.totalReviews)*100>=70) {
               return (
                 <SwiperSlide >
               <Card style={{ width: '13rem' }} className="mb-2">
+                <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
                 <CardImg className="this.props.img" onClick={()=>callProductDetails(index)}
                   src={"data:image/png;base64," + index.productImage1.data}/>
                   <CardBody>
-                    <CardTitle className="this.props.h6 change" onClick={()=>callProductDetails(index)}> 
-                      <h6><b>{index.productName}</b></h6>
+                    <CardTitle className="this.props.h6 change"  onClick={()=>callProductDetails(index)}> 
+                      <h6  ><b>{index.productName}</b></h6>
                     </CardTitle>
                     <CardSubtitle onClick={()=>callProductDetails(index)}>
                     <s>₹{index.productPrice}</s>

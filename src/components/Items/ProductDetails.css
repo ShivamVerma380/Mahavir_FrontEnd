@@ -110,3 +110,12 @@ hr.vertical {
   visibility: visible;
   opacity: 0.7; 
  }
+
+ .textStyle{
+  display: '-webkit-box';
+  WebkitBoxOrient: 'vertical';
+  WebkitLineClamp: 3;
+  overflow: 'hidden';
+  textOverflow: 'ellipsis';
+};
+
