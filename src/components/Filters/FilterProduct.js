@@ -3,6 +3,7 @@ import { Col,Row,Button ,Form,Card, Container} from "react-bootstrap";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
+import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 
 function FilterProduct() {
     var category = localStorage.getItem("Category");
@@ -97,6 +98,34 @@ function FilterProduct() {
         navigate("/productDetails")
     }
 
+
+    function WishlistHandler(index) {
+        // alert("Item added successfully to wishlist");
+        console.log(index.modelNumber)
+        if (localStorage.getItem("wishlistproduct")==null) {
+          localStorage.setItem("wishlistproduct",index.modelNumber)
+        }else {
+          var arr = localStorage.getItem("wishlistproduct").split(',')
+          var flag = true;
+          arr.map(i=>{
+           
+            console.log("i: ",i)
+            if( i=== index.modelNumber) {
+                arr.splice(arr.indexOf(i),1)
+                localStorage.setItem("wishlistproduct",arr)
+                console.log('del arr: ' + arr)
+                console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+               console.log("in if")
+              flag = false;
+            } 
+          }) 
+        //   if(flag)
+        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        //     navigate('/')
+          
+        }
+        
+      }
 
     const handleFormCheck = event=>{
         if(event.target.checked){
@@ -201,6 +230,7 @@ function FilterProduct() {
                     filterSubCat.map((subCat,index)=>{
                         return(
                             <div>
+
                                 <h6>{subCat.subCategoryName}</h6>
                                 {
                                     subCat.subSubCategories.map(subSubCategories=>{
@@ -245,9 +275,10 @@ function FilterProduct() {
                 products.map(index=>{
                     return(
                             
-                        <Card  style={{ width: '15rem'}} 
+                        <Card  style={{ width: '20rem'}} 
                         className="mb-2">
-                            <Card.Img  variant="top" style={{width:200,height:150,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
+                             <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
+                            <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
                             <Card.Body>
                             <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
                             <Card.Text onClick={()=>callProductDetails(index)}>
