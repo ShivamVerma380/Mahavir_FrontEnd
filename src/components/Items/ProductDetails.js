@@ -168,29 +168,39 @@ function ProductDetails(){
         console.log("error",error);
       })
 
-      var modelNumbers = localStorage.getItem("Model Number").split(',');
-      var urls=[];
-      modelNumbers.map(modelNum=>{
-          if(modelNum!==localStorage.getItem("productSelected"))
-            urls.push(axios.get("http://localhost:8080/get-products/"+modelNum));
-      })
-      axios.all(urls).then(
-          axios.spread((...res)=>{
-              res.map(index=>{
+      
+      // modelNumbers.map(modelNum=>{
+      //     if(modelNum!==localStorage.getItem("productSelected"))
+      //       urls.push(axios.get("http://localhost:8080/similar-products/"+localStorage.getItem("productSelected")+"/"+localStorage.getItem("SubSubCategory")+
+      //       "/"+localStorage.getItem("SubCategory")+"/"+localStorage.getItem("Category")));
+      // })
+      // axios.all(urls).then(
+      //     axios.spread((...res)=>{
+      //         res.map(index=>{
                   
-                  productList.push(index.data);
-                  // filteredProducts.push(index.data);
+      //             productList.push(index.data);
+      //             // filteredProducts.push(index.data);
 
 
-              })
+      //         })
 
-              console.log("products",productList);
-              SetIsProductListFetched(true);
+      //         console.log("products",productList);
+      //         SetIsProductListFetched(true);
 
-          })
-      )
+      //     })
+      // )
 
-
+      axios.get("http://localhost:8080/similar-products/"+localStorage.getItem("productSelected")+"/"+localStorage.getItem("SubSubCategory")+"/"+localStorage.getItem("SubCategory")+"/"+localStorage.getItem("Category")).then(
+        function(response){
+          if(response.status==200){
+            console.log(response.data);
+            setProductList(response.data);
+            SetIsProductListFetched(true);
+          }
+        }).catch(function(error){
+          console.log("error",error);
+        }
+      );
       
       
       
@@ -212,6 +222,7 @@ function callProductDetails(index){
   console.log("Index",index);
   localStorage.setItem("productSelected",index.modelNumber);
   console.log("Product Selected",localStorage.getItem("productSelected"))
+  localStorage.setItem("SubSubCategory",index.subCategoryMap[localStorage.getItem("SubCategory")]);
   // navigate("/productDetails")
   window.location.reload();
 }
