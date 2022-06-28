@@ -69,16 +69,13 @@ function App() {
     if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched){
       axios({
         method:"get",
-        url:"http://localhost:8080/get-offers",
-        headers:{
-          "Authorization":"Bearer "+localStorage.getItem("jwtToken"),
-        }
+        url:"http://localhost:8080/get-offers"
       }).then(function(response){
         console.log(response);
         console.log("Poster response: ",response.data)
         if(response.status==200){
           response.data.map(index=>{
-            if(index.isMegaPoster=="true") {
+            if(index.isMegaPoster==="YES") {
               console.log("in if ")
               MegaPoster.push(index)
             }
@@ -112,7 +109,7 @@ function App() {
           console.log(error);
       })
 
-      axios.get("http://localhost:8080/get-products").then(function(response){     
+      axios.get("http://localhost:8080/hybrid-posters").then(function(response){     
       if(response.status==200){
         console.log("Products",response.data);
         setProducts(response.data);
@@ -255,14 +252,14 @@ function App() {
 
       {/* <MiniPosters MiniPosters={MiniPoster}/> */}
       
-      <Product title="Mahavir Special" className="title" productList={Products}/>
-      <Product title="Deals Of The Day" className="title" productList={Products}/>
+      {/* <Product title="Mahavir Special" className="title" productList={Products}/>
+      <Product title="Deals Of The Day" className="title" productList={Products}/> */}
       {
-        fetchMiniPosterTwo()
+        // fetchMiniPosterTwo()
       }
       {/* <MiniPosters/> */}
       {/* <Test productList={Products} /> */}
-      <FeatureBrands posterList={Posters}/>
+      {/* <FeatureBrands posterList={Posters}/> */}
        
       {/* <Button id="comparebtn">Compare{localStorage.getItem("comparecount")}</Button> */}
       {
