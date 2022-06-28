@@ -255,7 +255,7 @@ function App() {
       {/* <Product title="Mahavir Special" className="title" productList={Products}/>
       <Product title="Deals Of The Day" className="title" productList={Products}/> */}
       {
-        // fetchMiniPosterTwo()
+        fetchMiniPosterTwo()
       }
       {/* <MiniPosters/> */}
       {/* <Test productList={Products} /> */}
