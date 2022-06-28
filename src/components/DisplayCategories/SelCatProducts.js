@@ -110,49 +110,6 @@ const SelCatProducts=()=>{
 
 
 
-
-    // useEffect(()=>{
-    // if(!isProductsFetched && !isOfferPostersFetched){
-    //     if(!isOfferPostersFetched){
-    //         axios({
-    //           method:"get",
-    //           url:"http://localhost:8080/get-offers-by-category/"+localStorage.getItem("Category"),
-              
-    //         }).then(function(response){
-    //           console.log(response);
-    //           if(response.status==200){
-    //             setOfferPosters(response.data);
-    //             setIsOfferPostersFetched(true);
-    //             console.log("OfferPosters",offerPosters);
-    //           }
-    //         }).catch(function(error){
-    //           console.log("error",error);
-    //         })
-    //       }
-
-    //     if(!isProductsFetched){
-    //         var modelNumbers = localStorage.getItem("Model Number").split(',');
-    //     console.log("Model Number",modelNumbers);
-    //     var urls=[];
-    //     modelNumbers.map(modelNum=>{
-    //         urls.push(axios.get("http://localhost:8080/get-products/"+modelNum));
-    //     })
-
-    //     axios.all(urls).then(
-    //         axios.spread((...res)=>{
-    //             res.map(index=>{
-    //                 products.push(index.data);
-    //             })
-    //             setIsProductsFetched(true);
-    //         })
-    //     )
-    //     }
-    // }
-
-    // })
-
-
-
     function callProductDetails(index){
         //alert(index);
         console.log("Index",index);
