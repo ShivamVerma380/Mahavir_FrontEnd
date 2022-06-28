@@ -112,7 +112,7 @@ function App() {
           console.log(error);
       })
 
-      axios.get("http://localhost:8080/excel").then(function(response){     
+      axios.get("http://localhost:8080/get-products").then(function(response){     
       if(response.status==200){
         console.log("Products",response.data);
         setProducts(response.data);
