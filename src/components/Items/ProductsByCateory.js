@@ -76,7 +76,17 @@ function ProductsByCategory(){
                         // console.log("response",response.data);
 
                         setFilterSubCat(response.data);
-                        
+                        var set = new Set();
+                        response.data.map(index=>{
+                            console.log("index",index);
+                            index.subSubCategories.map(i=>{
+                                console.log("i: ",i.subSubCategoryName)
+                                set.add(i.subSubCategoryName);
+                            });
+                        })
+                        setKeyState(set);
+                        console.log("set",set);
+                        setKeyStateUpdated(true);
                         setAreSubCatFetched(true);
                     }
                 }).catch(function(error){
@@ -87,7 +97,7 @@ function ProductsByCategory(){
                 axios.get("http://localhost:8080/get-products-by-category/"+localStorage.getItem("Category"))
                 .then(function(response){
                     if(response.status==200){
-                        // console.log("GetProductsByCategory",response.data);
+                        console.log("GetProductsByCategory",response.data);
                         SetProductsByCat(response.data);
                         response.data.map(pro=>{
                             var price = parseInt(pro.productPrice);
@@ -99,8 +109,9 @@ function ProductsByCategory(){
                         SetMaxPrice(max);
                         SetIsRangeSet(true);
                     }
-                    setKeyState(prev=> new Set(prev.add(localStorage.getItem("SubSubCategory"))));
-                    setKeyStateUpdated(true);
+                    
+                    // setKeyState(prev=> new Set(prev.add(localStorage.getItem("SubSubCategory"))));
+                    // setKeyStateUpdated(true);
                 }).catch(function(error){
                     console.log("error",error);
                 })
