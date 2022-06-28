@@ -44,7 +44,17 @@ function Search(){
         localStorage.setItem("SubCategory",item.subCategory);
         localStorage.setItem("SubSubCategory",item.subSubCategory);
         if(item.type==="category"){
-          navigate("/"+item.name);
+          var arr = window.location.href.split("/")
+          console.log("Arr: ",arr)
+          if(arr.length==4) {
+            navigate("/"+item.name);
+            window.location.reload()
+            
+          }
+          else {
+            navigate("/"+item.name);
+          }
+          
         }else if(item.type==="subSubCategory"){
           localStorage.setItem("Model Number", item.modelNumbers);
           // alert(item.name);
@@ -57,6 +67,7 @@ function Search(){
 
           console.log("arr",arr);
           if(arr.length==4){
+            navigate("/"+item.category+"/"+item.subCategory+"/"+item.subSubCategory); 
             window.location.reload();
           }else{
             navigate("/"+item.category+"/"+item.subCategory+"/"+item.subSubCategory);  
