@@ -5,7 +5,6 @@ import {Input,Label} from 'reactstrap';
 import { useNavigate } from "react-router-dom";
 
 import "./SignIn.css"
-import EmailAuth from "./EmailAuth";
 import { useState } from "react";
 import { IoMdLogOut } from "react-icons/io";
 
@@ -182,9 +181,9 @@ function Login(){
        if(otp === inputOtpByUser){
            alert('Correct input otp');
            setIsOTPNotVerified(false);
-           navigate('/email-auth');
+        //    navigate('/email-auth');
         //    setIsOTPSent(false);
-        //setIsUserRegistered(true);
+            setIsUserRegistered(true);
         //    setIsEmailVerified(false);
        }
        else{
