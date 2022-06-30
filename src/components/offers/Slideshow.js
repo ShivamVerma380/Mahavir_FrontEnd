@@ -14,11 +14,11 @@ function Slideshow({offerPosters}){
 
     
     
-    const handleOfferPosterOnClick=(modelNumbers)=>{
+    const handleOfferPosterOnClick=(index)=>{
       // alert("Offer Poster clicked");
 
-      console.log(modelNumbers);
-      localStorage.setItem("offerPostersModelNumber",modelNumbers)
+      // console.log(modelNumbers);
+      localStorage.setItem("offerPostersModelNumber",index.modelNumbers)
       console.log(localStorage.getItem("offerPostersModelNumber"))
       navigate("/offers")
     }
@@ -32,7 +32,7 @@ function Slideshow({offerPosters}){
                 console.log("image",index.image.data);
                 // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
                 return(
-                    <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index.modelNumbers)}>
+                    <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index)}>
                     <img id = "classname" 
                     className="d-block w-100"
                     src={"data:image/png;base64," + index.image.data}

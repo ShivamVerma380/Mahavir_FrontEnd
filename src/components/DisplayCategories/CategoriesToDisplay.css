@@ -5,6 +5,10 @@
   
 }
 
+.categoryImage{
+  z-index: 9999;
+}
+
 .Category .dropbtn {
   
   color: black;

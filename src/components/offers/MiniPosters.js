@@ -21,13 +21,13 @@ const MiniPosters = ({MiniPosters}) => {
 
     const navigate = useNavigate();
 
-    const handleMiniPosteronClick=(modelNumbers)=>{
+    const handleMiniPosteronClick=(product)=>{
       // alert("Offer Poster clicked");
 
-      console.log(modelNumbers);
-      localStorage.setItem("offerPostersModelNumber",modelNumbers)
+      // console.log(modelNumbers);
+      localStorage.setItem("offerPostersModelNumber",product.modelNumbers)
       console.log(localStorage.getItem("offerPostersModelNumber"))
-      navigate("/miniposteritems")
+      navigate("/offers")
     }
     
      
@@ -43,7 +43,7 @@ const MiniPosters = ({MiniPosters}) => {
                   <Col>
                     
                     
-                    <img style={{width:400,height:400}} variant="top" src={'data:image/jpg;base64,' +product.image.data} onClick={()=>handleMiniPosteronClick(product.modelNumbers)}/>
+                    <img style={{width:400,height:400}} variant="top" src={'data:image/jpg;base64,' +product.image.data} onClick={()=>handleMiniPosteronClick(product)}/>
                     
                    
                   </Col>

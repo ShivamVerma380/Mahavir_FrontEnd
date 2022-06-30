@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useNavigate } from "react-router-dom";
 import { AiFillWindows } from "react-icons/ai";
+import "./Search.css";
 function Search(){
     const[products,SetProducts] = useState([]);
     const[isProductsFetched,setIsProductsFetched] = useState(false);
@@ -94,8 +95,8 @@ function Search(){
     
       return (
         (isProductsFetched)?(
-            <div style={{ width: 400 }}>
-              <ReactSearchAutocomplete
+            <div style={{ width: 400 }} className="search">
+              <ReactSearchAutocomplete 
                 items={products}
                 fuseOptions={{keys:["name","price","highlights","category","subSubCategory","subSubCategory"]}}
                 resultStringKeyName="name"

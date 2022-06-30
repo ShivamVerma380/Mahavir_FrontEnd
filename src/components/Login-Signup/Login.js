@@ -5,7 +5,6 @@ import {Input,Label} from 'reactstrap';
 import { useNavigate } from "react-router-dom";
 
 import "./SignIn.css"
-import EmailAuth from "./EmailAuth";
 import { useState } from "react";
 import { IoMdLogOut } from "react-icons/io";
 
@@ -100,7 +99,7 @@ function Login(){
         Email: email,
         Password: password
     }
-    var authorization = "Bearer "+localStorage.getItem("jwtToken");
+    var authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJhZGRoYW11bGF5QGdtYWlsLmNvbSIsImV4cCI6MTY1NTcyMjM2OSwiaWF0IjoxNjU1NjIyMzY5fQ.Ba-3LykZ5ysEfSc-22WQzwvM5WrSzqJoJ72JHb7XXok"  ;
     console.log(authorization);
 
     axios.post("http://localhost:8080/login-user",form_data_body,{
@@ -182,9 +181,9 @@ function Login(){
        if(otp === inputOtpByUser){
            alert('Correct input otp');
            setIsOTPNotVerified(false);
-           navigate('/email-auth');
+        //    navigate('/email-auth');
         //    setIsOTPSent(false);
-        //setIsUserRegistered(true);
+            setIsUserRegistered(true);
         //    setIsEmailVerified(false);
        }
        else{

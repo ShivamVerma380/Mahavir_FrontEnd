@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './components/Login-Signup/Login';
-import EmailAuth from './components/Login-Signup/EmailAuth';
 import ProductDetails from './components/Items/ProductDetails';
 import Admin from './components/Admin/Admin';
 import Cart from "./components/Shopping-Cart/Cart";
@@ -57,7 +56,6 @@ root.render(
     <Routes>
       <Route path='/' element={<App/>}/>
       <Route path='/login' element={<Login/>}/>
-      <Route path='/email-auth' element = {<EmailAuth/>}/>
       <Route path='/productDetails' element = {<ProductDetails/>}/>
       <Route path='/admin' element = {<Admin/>}/>
       <Route path='/cart' element = {<Cart/>}/>

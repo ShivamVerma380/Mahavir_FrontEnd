@@ -19,33 +19,28 @@ function OfferItems(){
     var productsArray=[];
     useEffect(()=>{
         if(!isProductsFetched){
-            var modelNumbers = localStorage.getItem("offerPostersModelNumber").split(',');
-        console.log("Model Number",modelNumbers);
-        var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxcyIsImV4cCI6MTY1NjA5NTg2NCwiaWF0IjoxNjU1OTk1ODY0fQ.R4eyvl66awQPQyH83BppcnKVQar62YfjM0BOR7BACbs"
-        //var token = localStorage.getItem("jwtToken");
-        modelNumbers.map(modelNum=>{
-            console.log("Model Num",modelNum);
-
-            axios({
-            method:"get",
-            url:"http://localhost:8080/get-products/"+modelNum,
-            headers:{
-                "Authorization":"Bearer "+token,
-            }
-            }).then(function(response){
-                console.log(response);
-                if(response.status==200){
-                    //console.log("response data",response.data);
-                    productsArray.push(response.data);
-                    products.push(response.data);
+            var modelNumbers = localStorage.getItem("offerPostersModelNumber");
+            var modelNumbersArray = modelNumbers.split(",");
+            console.log("modelNumbersArray: ",modelNumbersArray)
+            var urls=[]
+            modelNumbersArray.map(index=>{
+                if(index!=="")
+                    urls.push(axios.get("http://localhost:8080/get-products/"+index));
+            })
+            axios.all(urls).then(axios.spread((...response) => {
+                console.log("response: ",response)
+                response.map(index=>{
+                    productsArray.push(index.data);
                 }
-            }).catch(function(error){
+                )
+                setProduct(productsArray);
+                setIsProductsFetched(true);
+            }
+            )).catch(function(error){
                 console.log("error",error);
-            })
-            console.log("Products array",productsArray);
-            setProduct(productsArray);
-            setIsProductsFetched(true);
-            })
+            }
+            )
+       
         }
         
     },[]);
@@ -84,7 +79,7 @@ function OfferItems(){
                                     
                                     <Card  style={{ width: '25rem'}} onClick={()=>callProductDetails(index)}
                                       className="mb-2">
-                                        <Card.Img  variant="top" style={{width:200,height:200,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data}/>
+                                        <Card.Img  variant="top" style={{width:200,height:200,alignSelf:"center"}} src={"data:image/jpg;base64," + index.productImage1.data}/>
                                         <Card.Body>
                                         <Card.Title as="h6">{index.productName}</Card.Title>
                                         <Card.Text>
@@ -101,7 +96,7 @@ function OfferItems(){
                     </div>
                 </div>
             ):(
-                <h1>Product Not Fetched</h1>
+                null
             )
             
         
