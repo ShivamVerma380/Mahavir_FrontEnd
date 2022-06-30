@@ -478,12 +478,19 @@ function WishlistHandler(index) {
     (isProductFetched )?(
       <>
      
-      <div className="container" style={{backgroudColor:'white'}}>
+      <div  style={{backgroundColor: 'rgb(255, 255, 255)',
+                    padding: '16px',
+                    borderRadius: '2px',
+                    boxShadow: 'rgb(0 0 0 / 8%) 0px 2px 4px 0px',
+                    backgroundColor: 'rgb(255 255 255)',
+                    padding:' 16px',
+                    margin:' 20px'
+    }}>
       <Row >
-        <Col md={6}>
+        <Col md={6} style={{padding:'20px'}}>
           <div >
           <Row >
-            <Col md={2} >
+            <Col md={2} className='smallImg'>
               <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  style={{ width: "90px", height: "100px" }} />
               <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
               <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)} style={{ width: "90px", height: "100px", marginTop: "10px" }} />
@@ -493,8 +500,8 @@ function WishlistHandler(index) {
             </Col>
 
             <Col className="imageproduct" md={4} style={{marginTop: "100px", justifyContent: "center", marginLeft:35}}>
-              <br></br>
-              <br></br>
+              {/* <br></br>
+              <br></br> */}
 
               <div style={{ width: '400px', height: '513px' }}>
                 {/* width:'400px',height:'513px'      */}
@@ -520,24 +527,28 @@ function WishlistHandler(index) {
               </div>
             </Col>
           </Row >
+          <Row>
+          <Button  style={{width:'40%', height:'60px', marginLeft:'5%'}} variant="flat" size="1" onClick={handleAddToCart}>Add To Cart</Button>
+          <Button style={{width:'40%',height:'60px',  marginLeft:'5%'}} variant="flat" size="1"  onClick={handleBuyNow}>Buy Now</Button>
+
+          </Row>
           </div>
      
         </Col>
-        <Col md={6} style={{
-    height: '600px',
-    overflowY: 'scroll'}}>
+        <Col md={6} style={{padding:'20px',
+                    height: '800px',
+                    overflowY: 'scroll'}}>
         
-          <br></br>
-          <br></br>
 
-          <h2 className="text" >{product.productName}</h2>
+          
           
           <Row>
-            <Col className="star" md={1} style={{textAlign:"right"}} >
+            <h2 className="text" >{product.productName}</h2>
+            <Col className="star" md={2} style={{textAlign:"right"}} >
             {Math.round(review.averageRatings*10)/10}<AiFillStar/>
             </Col>
-            <Col md={4}>
-              {review.totalRatings} Ratings & {review.totalReviews} Reviews
+            <Col md={10}>
+              <h6>{review.totalRatings} Ratings & {review.totalReviews} Reviews</h6>
             </Col>
           </Row>
           
@@ -545,18 +556,19 @@ function WishlistHandler(index) {
           <Row>
             
             {
-              (product.offerPrice==product.productPrice) ? (<Col md={4}>
+              (product.offerPrice==product.productPrice) ? (<Col>
                 <h4>Price: <b>₹{product.productPrice}</b></h4>
-                </Col>):(<Col md={8}>
-            <h6>MSP: <b style={{marginRight:"20px",color:"rgb(255,98,98)"}}>₹{product.offerPrice}</b> MRP: <b style={{textDecorationLine:"line-through", textDecorationStyle:"solid"}}>₹{product.productPrice}</b></h6> 
+                </Col>):(<Col>
+            <h4>MSP: <b style={{marginRight:"20px",color:"rgb(255,98,98)"}}>₹{product.offerPrice}</b> MRP: <b style={{textDecorationLine:"line-through", textDecorationStyle:"solid"}}>₹{product.productPrice}</b></h4> 
             </Col>)
             }
             
           </Row>
-          <br></br>
+          
 
-          <h5><b><i>Available Offers</i></b></h5>
+          <hr></hr>
           <Row>
+          <h4><b><i>Available Offers</i></b></h4>
           <Swiper
                 slidesPerView={1}
                 spaceBetween={5}
@@ -650,40 +662,41 @@ function WishlistHandler(index) {
             </Swiper>
           </Row>
           
-          <br></br>
+          <hr></hr>
           <Row>
-          <Col md={5}>  
-          <h5><b><i>Product Highlights</i></b></h5>
-          {
-            product.productHighlights.split(';').map(index=>{
-              return(
-                <p>•<span> </span>{index}</p>
-              );
-              
-            })
-          }       
-          {/* <h6>{product.productHighlights}</h6> */}
-          </Col>
-          {
-            (product.freeItem) ? (
-              <Col md={6}>
-              <h5 style={{textAlign:"center",color:"rgb(255,98,98)"}}><b><i>Free Gift Worth {product.freeItem.price}</i></b></h5>
-              <Row style={{marginTop:20}}>
-              <Col md={5}>
-              <img style={{width:120, height:120}} src={'data:image/jpg;base64,' + product.freeItem.image.data}></img>
-              
-              </Col>
-              <Col md={6}>
-                <h5>{product.freeItem.name}</h5>
-              </Col>
-              </Row>
-              
+          <h4><b><i>Product Highlights</i></b></h4>
+            <Col >  
+            
+            {
+              product.productHighlights.split(';').map(index=>{
+                return(
+                  <h5 style={{marginLeft:'10px',marginBottom:'10px'}}>•<span style={{marginLeft:'10px'}}> </span>{index}</h5>
+                );
+                
+              })
+            }       
+            {/* <h6>{product.productHighlights}</h6> */}
             </Col>
-            ) : (null)
-          }
+            {
+              (product.freeItem) ? (
+                <Col md={6}>
+                  <h5 style={{textAlign:"center",color:"rgb(255,98,98)"}}><b><i>Free Gift Worth {product.freeItem.price}</i></b></h5>
+                  <Row style={{marginTop:20}}>
+                    <Col md={4}>
+                    <img style={{width:120, height:120}} src={'data:image/jpg;base64,' + product.freeItem.image.data}></img>
+                    
+                    </Col>
+                    <Col md={8}>
+                      <h5>{product.freeItem.name}</h5>
+                    </Col>
+                  </Row>
+                
+              </Col>
+              ) : (null)
+            }
           
           </Row>
-          <br></br>
+          <Row>
           <QuantityPicker className="quantitypicker" style={{ background: "red" }} min={0} smooth onChange={inputQuantityEvent} />
           {/* <Input id="Quantity"
             name="Quantity"
@@ -693,16 +706,14 @@ function WishlistHandler(index) {
             onChange={inputQuantityEvent}
             style={{ width: 300 }}>
           </Input> */}
-          <br></br>
-          {/* <Button onClick={handleAddToCart}>Add To Cart</Button> */}
-          <Button  variant="flat" size="1" onClick={handleAddToCart}>Add To Cart</Button>
-          <Button variant="flat" size="1" style={{marginLeft:30}} onClick={handleBuyNow}>Buy Now</Button>
+          
 
-          <br></br>
-          <br></br>
+          {/* <Button onClick={handleAddToCart}>Add To Cart</Button> */}
+          </Row>
+          <hr></hr>
+          <h4><b><i>Variants</i></b></h4>
           
           
-          <h3 style={{marginTop:30}}><b>Variants</b></h3>
           {/* {
             (isVariantKeysFetched)?(
               variantKeys.map(variant=>{
@@ -722,26 +733,29 @@ function WishlistHandler(index) {
                     <Col md={2}>
                       <h5>{variantName}</h5>
                     </Col>
+                    <Col md={10}>
                     {
+
                       product.variants[variantName].map(index=>{
                         return(
                           (variantName=="Color") ? (
-                            <Col md={1} style={{marginRight:30}}>
+                            
                               <div class="color_img">
-                                  <img src={'data:image/jpg;base64,' + product.productImage1.data} id={index}  variant="flat" style={{marginLeft:10, width:50, border:"1px solid black"}} onClick={()=>handleBtnClick({index})}></img>
+                                  <img src={'data:image/jpg;base64,' + product.productImage1.data} id={index}  variant="flat" style={{marginRight:'10px', width:'80px', border:"1px solid black"}} onClick={()=>handleBtnClick({index})}></img>
                                   <div>{index}</div>
                               </div>
                           
-                          </Col>
+                          
                           ) : (
-                            <Col md={1} style={{marginRight:30}}>
-                          <Button src={'data:image/jpg;base64,' + product.productImage1.data} id={index}  variant="flat" style={{marginLeft:10}} onClick={()=>handleBtnClick({index})}>{index}</Button>
-                          </Col>
+                            
+                          <Button src={'data:image/jpg;base64,' + product.productImage1.data} id={index}  variant="flat" style={{marginRight:'20px',width:'80px'}} onClick={()=>handleBtnClick({index})}>{index}</Button>
+                         
                           )
                           
                         );
                       })
                     }
+                    </Col>
                   </Row>
                 )  
               })
@@ -749,57 +763,62 @@ function WishlistHandler(index) {
               null
             )
           }
-          <br></br>
 
-          <Row style={{marginTop:20}}>
-            <Col md={3}>
-            <h5 >Enter Pincode</h5>
+          <Row style={{marginTop:40}}>
+            <Col md={2}>
+            <h5>Enter Pincode</h5>
             </Col>
             <Col md={4}>
-              <Input type="number" style={{height:25}} onChange={InputPin}></Input>
+              <Input type="number" style={{height:40}} onChange={InputPin}></Input>
             </Col>
-            <Col md={3}>
-              <button style={{borderRadius:"5px", padding:3}} onClick={CheckPinHandler}>Check Pincode</button>
+            <Col md={6}>
+              <Button variant="flat" style={{height:40,width:'50%',marginLeft:'20px'}} onClick={CheckPinHandler}>Check Pincode</Button>
+                         
             </Col>
           </Row>
-
-          <h3 className="text" style={{ marginTop: "50px" }}>Product Description</h3>
+          <br></br>
           <hr></hr>
-
+          
+          <br></br>
           <Row >
-            <Col md={2}>
+          <h4><b><i>Product Description</i></b></h4>
+
+            <Col md={4}>
 
               <img src={'data:image/jpg;base64,'+product.productImage1.data }style={{ width: "130px" }}></img>
 
             </Col>
-            <Col md={6}>
+            <Col md={8}>
+<br></br>
+              <h5>{product.modelNumber}</h5>
 
-              <h5 style={{marginLeft:'50px'}} >{product.modelNumber}</h5>
-
-              <p style={{marginLeft:'50px'}}>{product.productDescription}</p>
+              <p>{product.productHighlights}</p>
             </Col>
           </Row>
           <br></br>
-          <Row>
-            <Col md={6}>
-
-              <h4>Take Your Photos </h4>
-              <p>The iPhone 11 features dual 12 MP Ultra Wide (13mm) and Wide (26mm) cameras with 4K video recording up to 60 fps. The Ultra Wide camera provides 120° field of view, letting you capture four times more scene, and the Wide camera provides 100% Focus Pixels for up to three times faster autofocus in low light.</p>
-            </Col>
-            <Col md={2}>
-              <img src={'data:image/jpg;base64,'+product.productImage1.data } style={{ width: "130px" }}></img>
-            </Col>
-          </Row>
-          <br></br>
-          <h3 className="text" style={{ marginTop: "10px" }}>Specifications</h3>
+              <Row>
+                <Col md={8}>
+               <br></br>
+                  <h4>Take Your Photos </h4>
+                  <p>The iPhone 11 features dual 12 MP Ultra Wide (13mm) and Wide (26mm) cameras with 4K video recording up to 60 fps. The Ultra Wide camera provides 120° field of view, letting you capture four times more scene, and the Wide camera provides 100% Focus Pixels for up to three times faster autofocus in low light.</p>
+                </Col>
+                <Col md={2}>
+                  <img src={'data:image/jpg;base64,'+product.productImage1.data } style={{ width: "130px" }}></img>
+                </Col>
+              </Row>
+        
+          
           <hr></hr>
           <Row>
-         
+          <h4><b><i>Specifications</i></b></h4>
+          <br></br><br></br>
           {
             (isKeysFetched)?(
               keys.map(k=>{
                 return(
+                 
                   <ProductSpecification title={k} product={product}/> 
+                  
                 );
               })
             
@@ -811,14 +830,13 @@ function WishlistHandler(index) {
           
           </Row>
           <br></br>
-          <h4 className="text">Ratings and Reviews</h4>
           <hr></hr>
           <Row>
-            <Col md={1} style={{ display:"flex"}}>
+          <h4><b><i>Ratings and Reviews</i></b></h4>
+            <Col md={2} style={{ display:"flex"}}>
               
               <h3>{Math.round(review.averageRatings*10)/10}</h3>
-            </Col>
-            <Col md={1} style={{ paddingLeft: "10px" , paddingTop:'5px'}}>
+            <span style={{marginRight:'20px',marginTop:'20px'}}></span>
               <AiIcons.AiFillStar size={20}/>
             </Col>
 
@@ -895,7 +913,15 @@ function WishlistHandler(index) {
       </Row>
      
         
-    {/* </div> */}
+    </div>
+    <div style={{backgroundColor: 'rgb(255, 255, 255)',
+                    padding: '16px',
+                    borderRadius: '2px',
+                    boxShadow: 'rgb(0 0 0 / 8%) 0px 2px 4px 0px',
+                    backgroundColor: 'rgb(255 255 255)',
+                    padding:' 16px',
+                    margin:' 20px'
+    }}>
     {
       (isProductListFetched && productList.length!=0)?(
         <h4 className="textsimilar" style={{marginLeft:"20px"}}>Similar Products</h4>
