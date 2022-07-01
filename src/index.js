@@ -38,6 +38,7 @@ import AddSubCategories from './components/Admin/Test/AddSubCategories';
 import AddProductInformation from './components/Admin/Test/AddProductInformation';
 import MiniPosterItems from './components/offers/MiniPosteritems';
 import ProductsByCategory from './components/Items/ProductsByCateory';
+import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -88,6 +89,7 @@ root.render(
       <Route path='/addSubCategories/:ModelNos' element = {<AddSubCategories/>}/>
       <Route path='/addProductInformation/:ModelNos' element={<AddProductInformation/>}/>
       <Route path='/miniposteritems' element={<MiniPosterItems/>}/>
+      <Route path='/categoryproducts' element={<CategoryProductsSwiper/>}/>
 
     </Routes>
   </BrowserRouter>

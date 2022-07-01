@@ -14,6 +14,7 @@ import Footer from './components/Footer/Footer'
 import FeatureBrands from './components/Items/FeatureBrands';
 import MiniPosters from './components/offers/MiniPosters';
 import DeveloperPage from './components/DeveloperPage';
+import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 
 
 
@@ -28,6 +29,8 @@ function App() {
 
   const [Products,setProducts] = useState([]);
   const [isProductsFetched,setIsProductsFetched] = useState(false);
+
+  const [CategoryProducts,setCategoryProducts] = useState([]);
 
   const [Posters, setPosters] = useState([]);
   const [isPostersFetched, setIsPostersFetched] = useState(false);
@@ -131,6 +134,17 @@ function App() {
       
       }).catch(function(error){
         console.log(error);
+      })
+
+      axios.get("http://localhost:8080/get-products-by-category/MOBILES").then(function(response){
+        console.log(response);
+        if(response.status==200){
+            setCategoryProducts(response.data);
+            console.log("Products By Cat: ",response.data);
+        }
+        
+      }).catch(function(error){
+          console.log(error);
       })
 
     }
@@ -242,6 +256,8 @@ function App() {
       
       }
       <br></br>
+
+      <CategoryProductsSwiper cattitle="MOBILES" categoryList={CategoryProducts}/>
       
       {
         (isOfferPostersFetched)?(
