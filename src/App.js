@@ -37,7 +37,8 @@ function App() {
 
   const [MegaPoster,setMegaPoster] = useState([]);
   const [MiniPoster,setMiniPoster] = useState([]);
-
+ 
+ 
   
   
   localStorage.setItem("comparecount",0)
@@ -256,8 +257,22 @@ function App() {
       
       }
       <br></br>
+    
+    {
+      (isCategoryDisplayFetched)? ( 
+        categoryDisplay.map(index=>{
+          
+          return(
 
-      <CategoryProductsSwiper cattitle="MOBILES" categoryList={CategoryProducts}/>
+          <CategoryProductsSwiper cattitle={index.category}/> 
+          )
+        })
+      ) : (null)
+    }
+    
+     
+
+      
       
       {
         (isOfferPostersFetched)?(

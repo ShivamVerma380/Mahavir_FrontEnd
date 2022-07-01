@@ -5,11 +5,15 @@ import { Pagination, Navigation } from "swiper";
 import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
-
-function CategoryProductsSwiper({cattitle,categoryList}) {
+function CategoryProductsSwiper({cattitle}) {
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
+  
+    const [Products,setProducts] = useState([]);
+    const [isProductsFetched,setIsProductsFetched] = useState(false);
+
     const navigate = useNavigate();
     var cards=<div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
@@ -19,6 +23,23 @@ function CategoryProductsSwiper({cattitle,categoryList}) {
     //   navigate("/productDetails")
     //   //console.log("Product selected ",index);
     // }
+
+    useEffect(()=>{
+      if(!isProductsFetched ){
+      axios.get("http://localhost:8080/get-products-by-category/"+cattitle).then(function(response){
+        console.log(response);
+        if(response.status==200){
+            setProducts(response.data);
+            console.log("Products By Cat: ",response.data);
+            setIsProductsFetched(true);
+        }
+        
+      }).catch(function(error){
+          console.log(error);
+      })
+    }
+    })
+
 
     function callProductDetails(index){
       //alert(index);
@@ -90,6 +111,11 @@ function CategoryProductsSwiper({cattitle,categoryList}) {
     }
 
     return (
+     
+      
+      (isProductsFetched)?
+      (
+
         <div>
         <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>{cattitle}</h3> 
       <span section-separator section-separator-dk-blue></span>
@@ -115,7 +141,7 @@ function CategoryProductsSwiper({cattitle,categoryList}) {
         className="mySwiper"
       >
         {
-          cards = categoryList.map(index=>{
+          cards = Products.map(index=>{
             return(
               <SwiperSlide>
                
@@ -161,7 +187,7 @@ function CategoryProductsSwiper({cattitle,categoryList}) {
       
       
     
-    </div>
+    </div>):(null)
     
     )
 }
