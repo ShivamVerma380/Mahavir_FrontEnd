@@ -117,6 +117,7 @@ function CategoryProductsSwiper({cattitle,categoryList}) {
         {
           cards = categoryList.map(index=>{
             return(
+              <div>
               <SwiperSlide>
                
               <Card  style={{ width: '25rem' }}
@@ -152,6 +153,8 @@ function CategoryProductsSwiper({cattitle,categoryList}) {
 
                
               </SwiperSlide>
+              <br></br>
+              </div>
             )
           })
         }

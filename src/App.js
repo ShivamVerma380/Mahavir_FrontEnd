@@ -37,6 +37,8 @@ function App() {
 
   const [MegaPoster,setMegaPoster] = useState([]);
   const [MiniPoster,setMiniPoster] = useState([]);
+  const [catProducts,setCatProducts] = useState([]);
+  const [isCatProductFetched, setIsCatProductFetched] = useState(false);
 
   
   
@@ -69,7 +71,7 @@ function App() {
 
     
     // var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
-    if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched){
+    if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched){
       axios({
         method:"get",
         url:"http://localhost:8080/get-offers"
@@ -136,16 +138,37 @@ function App() {
         console.log(error);
       })
 
-      axios.get("http://localhost:8080/get-products-by-category/MOBILES").then(function(response){
-        console.log(response);
-        if(response.status==200){
-            setCategoryProducts(response.data);
-            console.log("Products By Cat: ",response.data);
-        }
+      var urls=[];
+            categoryDisplay.map(index => {
+                urls.push(axios.get("http://localhost:8080/get-products-by-category/"+index.category));
+            })
+            axios.all(urls).then(
+                axios.spread((...res)=>{
+                    res.map(index=>{
+                        
+                        catProducts.push(index.data);
+                        // filteredProducts.push(index.data);
+
+
+                    })
+
+                    console.log("products",catProducts);
+                    setIsCatProductFetched(true);
+
+                })
+            )
+      
+
+      // axios.get("http://localhost:8080/get-products-by-category/MOBILES").then(function(response){
+      //   console.log(response);
+      //   if(response.status==200){
+      //       setCategoryProducts(response.data);
+      //       console.log("Products By Cat: ",response.data);
+      //   }
         
-      }).catch(function(error){
-          console.log(error);
-      })
+      // }).catch(function(error){
+      //     console.log(error);
+      // })
 
     }
     
@@ -256,8 +279,18 @@ function App() {
       
       }
       <br></br>
-
-      <CategoryProductsSwiper cattitle="MOBILES" categoryList={CategoryProducts}/>
+      
+      {
+        (isCatProductFetched)?(categoryDisplay.map(index=>{
+          <div>
+          <CategoryProductsSwiper cattitle={index.category} categoryList={catProducts}/>
+          <br></br>
+          </div>
+        })):(null)
+        
+      }
+      <br></br>
+      {/* <CategoryProductsSwiper cattitle="MOBILES" categoryList={CategoryProducts}/> */}
       
       {
         (isOfferPostersFetched)?(
