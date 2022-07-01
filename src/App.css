@@ -182,3 +182,15 @@
   flex: 0 0 auto;
   width: 33.33333333%;
 }
+
+@media (min-width:320px) and (max-width: 480px) {
+  .card {
+    width: 400px;
+  }
+  .wishlisticon{
+    margin-top: 3%;
+    margin-left: -70%;
+  }
+ 
+
+}

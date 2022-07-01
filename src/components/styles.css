@@ -145,7 +145,7 @@ body {
     font-size: 8px;
   }
 }
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
   .card{
     height:fit-content; 
     margin:10px; 
@@ -159,7 +159,7 @@ body {
 .card-title {
   font-size: larger;
 }
-}
+} */
 
 .category-image {
   /* background-size: cover;
@@ -295,6 +295,8 @@ body {
 }
 
 .wishlisticon {
+  margin-top: 10px;
+    margin-left: 10px;
   background-color: white;
   
 }

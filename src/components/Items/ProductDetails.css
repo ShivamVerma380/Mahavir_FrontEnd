@@ -117,5 +117,23 @@ hr.vertical {
   WebkitLineClamp: 3;
   overflow: 'hidden';
   textOverflow: 'ellipsis';
-};
+}
 
+
+@media screen and (max-width: 480px) {
+ 
+  .imageproduct {
+    display: none;
+}
+  .smallImg {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    margin-bottom: 40px;
+}
+
+ 
+
+}
