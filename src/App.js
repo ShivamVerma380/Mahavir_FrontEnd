@@ -225,9 +225,10 @@ function App() {
   return (
 
     <div className="App" >
+      {/* <Header/> */}
       {
         (isProductsFetched)?(
-            <Header  productList={Products}/>
+            <Header />
         ):(
           null
         )
