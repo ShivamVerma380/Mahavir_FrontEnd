@@ -161,12 +161,14 @@ function CategoryProductsSwiper({cattitle}) {
         {
           cards = firstfourproducts.map(index=>{
             return(
+              <div>
               <SwiperSlide>
                
               <Card  style={{ width: '20rem' }}
                   className="mb-2"
                    >
-                    {(localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
+                
+                    {(localStorage.getItem("wishlistproduct")!=null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
                       <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>:
                       <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
                       }
@@ -196,6 +198,8 @@ function CategoryProductsSwiper({cattitle}) {
 
                
               </SwiperSlide>
+              <br></br>
+              </div>
             )
           })
         }

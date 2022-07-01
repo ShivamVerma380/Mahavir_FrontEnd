@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import "./SignIn.css"
 import { useState } from "react";
 import { IoMdLogOut } from "react-icons/io";
+import OTPInput, { ResendOTP } from "otp-input-react";
+import OtpTimer from "otp-timer";
+import Timer from "otp-timer";
 
 
 const axios = require('axios');
@@ -309,6 +312,10 @@ function Login() {
         console.log("Password:", password);
     }
 
+    const handleClick = () => {
+        alert("Resend Clicked")
+    }
+
     return (
         <div>
 
@@ -396,6 +403,11 @@ function Login() {
                                             </FormGroup>
 
                                         </div>
+                                        <div className="fields">
+                                            <Timer ButtonText="RESEND OTP" textColor={"#0000ff"} text="Resend OTP in: " seconds={30} minutes={0} resend={handleClick}/>
+                                        </div>
+                                       
+
                                         <div className="submit-container">
                                             <Button className="login-button" onClick={() => verifyOTP()}>Verify OTP</Button>
                                             <br></br><br></br>
@@ -418,6 +430,8 @@ function Login() {
                                                     onChange={inputNewPasswordEvent}
                                                 />
                                             </FormGroup>
+                                            
+
                                             <FormGroup >
                                                 
                                                 <br></br>
@@ -487,6 +501,8 @@ function Login() {
                                             <br></br>
                                             <Input id="otp" name="otp" placeholder="Enter OTP" className="input" onChange={inputOTPEvent} />
                                         </FormGroup>
+                                        
+
 
                                     </div>
                                     <div className="submit-container">
