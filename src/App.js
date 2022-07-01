@@ -262,9 +262,10 @@ function App() {
   return (
 
     <div className="App" >
+      {/* <Header/> */}
       {
         (isProductsFetched)?(
-            <Header  productList={Products}/>
+            <Header />
         ):(
           null
         )
@@ -279,18 +280,22 @@ function App() {
       
       }
       <br></br>
+    
+    {
+      (isCategoryDisplayFetched)? ( 
+        categoryDisplay.map(index=>{
+          
+          return(
+
+          <CategoryProductsSwiper cattitle={index.category}/> 
+          )
+        })
+      ) : (null)
+    }
+    
+     
+
       
-      {
-        (isCatProductFetched)?(categoryDisplay.map(index=>{
-          <div>
-          <CategoryProductsSwiper cattitle={index.category} categoryList={catProducts}/>
-          <br></br>
-          </div>
-        })):(null)
-        
-      }
-      <br></br>
-      {/* <CategoryProductsSwiper cattitle="MOBILES" categoryList={CategoryProducts}/> */}
       
       {
         (isOfferPostersFetched)?(

@@ -37,7 +37,7 @@ function CategoriesToDisplay({ categoryDetail }) {
 
       {['sm'].map((expand) => (
 
-        <Navbar key={expand} bg="dark" expand={expand} variant="dark">
+        <Navbar style={{ zIndex: '0' }} key={expand} bg="dark" expand={expand} variant="dark">
           <Container fluid>
 
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
