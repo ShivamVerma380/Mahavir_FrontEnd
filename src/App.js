@@ -240,7 +240,7 @@ function App() {
   return (
 
     <div className="App" >
-      {/* <Header/> */}
+      {/* <-------------------Header/> */}
       {
         (isProductsFetched)?(
             <Header />
