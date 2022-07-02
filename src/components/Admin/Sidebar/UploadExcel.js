@@ -45,10 +45,121 @@ const UploadExcel = () => {
           <Row>
             <Col sm={6}>
             <h5 >Upload Your Excel Datasheet here</h5>
-            <hr></hr>
+          
             <input  type="file" name="file" accept=".xlsx, .xls, .csv" onChange={changeHandler} />
             <br></br><br></br>
             <Button variant='flat' size="m" onClick={handleSubmission}>Submit</Button>
+            <br></br><br></br>
+            </Col>
+            <Col sm={6}>
+                  {isFilePicked ? (
+              <div style={{fontSize:'15px'}}>
+                <p ><b>Filename:</b> {selectedFile.name}</p>
+                <p ><b>Filetype:</b> {selectedFile.type}</p>
+                <p ><b>Size in bytes:</b> {selectedFile.size}</p>
+                <p >
+                  <b>lastModifiedDate:</b>{' '}
+                  {selectedFile.lastModifiedDate.toLocaleDateString()}
+                </p>
+              </div>
+            ) : (
+              <p>Select a file to show details</p>
+            )}
+      
+            </Col>
+          </Row>
+              <hr></hr>
+          <Row>
+            <Col sm={6}>
+            <h5 >Upload Your Categories Datasheet here</h5>
+          
+            <input  type="file" name="categoriesfile" accept=".xlsx, .xls, .csv"  />
+            <br></br><br></br>
+            <Button variant='flat' size="m" >Submit</Button>
+            <br></br><br></br>
+            </Col>
+            <Col sm={6}>
+                  {isFilePicked ? (
+              <div style={{fontSize:'15px'}}>
+                <p ><b>Filename:</b> {selectedFile.name}</p>
+                <p ><b>Filetype:</b> {selectedFile.type}</p>
+                <p ><b>Size in bytes:</b> {selectedFile.size}</p>
+                <p >
+                  <b>lastModifiedDate:</b>{' '}
+                  {selectedFile.lastModifiedDate.toLocaleDateString()}
+                </p>
+              </div>
+            ) : (
+              <p>Select a file to show details</p>
+            )}
+      
+            </Col>
+          </Row>
+
+          <hr></hr>
+          <Row>
+            <Col sm={6}>
+            <h5 >Upload filter criterias </h5>
+         
+            <input  type="file" name="filtercriteria" accept=".xlsx, .xls, .csv"  />
+            <br></br><br></br>
+            <Button variant='flat' size="m" >Submit</Button>
+            <br></br><br></br>
+            </Col>
+            <Col sm={6}>
+                  {isFilePicked ? (
+              <div style={{fontSize:'15px'}}>
+                <p ><b>Filename:</b> {selectedFile.name}</p>
+                <p ><b>Filetype:</b> {selectedFile.type}</p>
+                <p ><b>Size in bytes:</b> {selectedFile.size}</p>
+                <p >
+                  <b>lastModifiedDate:</b>{' '}
+                  {selectedFile.lastModifiedDate.toLocaleDateString()}
+                </p>
+              </div>
+            ) : (
+              <p>Select a file to show details</p>
+            )}
+      
+            </Col>
+          </Row>
+
+          <hr></hr>
+          <Row>
+            <Col sm={6}>
+            <h5 >Upload shop by brands </h5>
+          
+            <input  type="file" name="shopbybrands" accept=".xlsx, .xls, .csv"  />
+            <br></br><br></br>
+            <Button variant='flat' size="m" >Submit</Button>
+            <br></br><br></br>
+            </Col>
+            <Col sm={6}>
+                  {isFilePicked ? (
+              <div style={{fontSize:'15px'}}>
+                <p ><b>Filename:</b> {selectedFile.name}</p>
+                <p ><b>Filetype:</b> {selectedFile.type}</p>
+                <p ><b>Size in bytes:</b> {selectedFile.size}</p>
+                <p >
+                  <b>lastModifiedDate:</b>{' '}
+                  {selectedFile.lastModifiedDate.toLocaleDateString()}
+                </p>
+              </div>
+            ) : (
+              <p>Select a file to show details</p>
+            )}
+      
+            </Col>
+          </Row>
+
+          <hr></hr>
+          <Row>
+            <Col sm={6}>
+            <h5 >Upload mega mini posters </h5>
+            
+            <input  type="file" name="megaminiposters" accept=".xlsx, .xls, .csv"  />
+            <br></br><br></br>
+            <Button variant='flat' size="m" >Submit</Button>
             <br></br><br></br>
             </Col>
             <Col sm={6}>

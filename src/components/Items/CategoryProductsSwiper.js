@@ -1,5 +1,5 @@
 import React from "react";
-import {Card,Button, Form} from "react-bootstrap";
+import {Card,Button,Row,Col, Form,CardGroup, Container} from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
@@ -51,6 +51,12 @@ function CategoryProductsSwiper({cattitle}) {
 
     const CompareHandler=()=> {
       navigate("/compareproducts")
+    }
+
+    function CategoryProducts(cattitle){
+     
+
+      navigate("/categoryProductsall",{state:{id:1,name: cattitle}})
     }
 
 
@@ -109,6 +115,8 @@ function CategoryProductsSwiper({cattitle}) {
       }
       
     }
+    const firstfourproducts = Products.slice(0, 6);
+
 
     return (
      
@@ -117,7 +125,15 @@ function CategoryProductsSwiper({cattitle}) {
       (
 
         <div>
-        <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>{cattitle}</h3> 
+
+          <Row style={{marginBottom:'20px '}}>
+            <Col md={10}>
+            <h3  style={{textAlign:"left",marginLeft:'20px'}}>{cattitle}</h3> 
+            </Col>
+            <Col md={2}>
+            <Button style={{width:'70%'}} variant="flat" size="m" onClick={()=>CategoryProducts(cattitle)}>View More</Button>
+            </Col>
+        </Row>
       <span section-separator section-separator-dk-blue></span>
       <Swiper
         slidesPerView={1}
@@ -140,12 +156,15 @@ function CategoryProductsSwiper({cattitle}) {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
+
+        
         {
-          cards = Products.map(index=>{
+          cards = firstfourproducts.map(index=>{
             return(
+              <div>
               <SwiperSlide>
                
-              <Card  style={{ width: '25rem' }}
+              <Card  style={{ width: '20rem' }}
                   className="mb-2"
                    >
                 
@@ -179,9 +198,12 @@ function CategoryProductsSwiper({cattitle}) {
 
                
               </SwiperSlide>
+              <br></br>
+              </div>
             )
           })
         }
+        
       </Swiper>
 
       
