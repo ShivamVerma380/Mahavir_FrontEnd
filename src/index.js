@@ -39,6 +39,7 @@ import AddProductInformation from './components/Admin/Test/AddProductInformation
 import MiniPosterItems from './components/offers/MiniPosteritems';
 import ProductsByCategory from './components/Items/ProductsByCateory';
 import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
+import CategoryProducts from './components/Items/CategoryProducts';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -90,6 +91,7 @@ root.render(
       <Route path='/addProductInformation/:ModelNos' element={<AddProductInformation/>}/>
       <Route path='/miniposteritems' element={<MiniPosterItems/>}/>
       <Route path='/categoryproducts' element={<CategoryProductsSwiper/>}/>
+      <Route path='/categoryProductsall'element={<CategoryProducts/>}/>
 
     </Routes>
   </BrowserRouter>
