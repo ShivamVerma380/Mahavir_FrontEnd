@@ -470,6 +470,56 @@ function WishlistHandler(index) {
   
 }
 
+const getproductimg1=(product)=>{
+  try {
+    return (
+      <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  />
+    )
+  } catch (error) {
+    console.log("error: ",error)
+  }
+}
+
+const getproductimg2=(product)=>{
+  try {
+    return (
+      <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)}  />
+    )
+  } catch (error) {
+    console.log("error: ",error)
+  }
+}
+
+const getproductimg3=(product)=>{
+  try {
+    return (
+      <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)}  />
+    )
+  } catch (error) {
+    console.log("error: ",error)
+  }
+}
+
+const getproductimg4=(product)=>{
+  try {
+    return (
+      <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage4.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage4.data)}  />
+    )
+  } catch (error) {
+    console.log("error: ",error)
+  }
+}
+
+const getproductimg5=(product)=>{
+  try {
+    return (
+      <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)}  />
+    )
+  } catch (error) {
+    console.log("error: ",error)
+  }
+}
+
 
   return (
     <div> 
@@ -491,19 +541,27 @@ function WishlistHandler(index) {
           <div >
           <Row >
             <Col md={2} className='smallImg'> 
-              {/* {
-                (!(product.productImage1===null))?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  />):(null)
-                (!(product.productImage2===null))?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)}  />):(null)
-                (!(product.productImage3===null))?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)}  />):(null)
-                (!(product.productImage4===null))?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage4.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage4.data)}  />):(null)
-                (!(product.productImage5===null))?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)}  />):(null)
-              } */}
+
               
-              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)} />
+               
+                {/* // (product.productImage1!=null)?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  />):(<p>sa</p>)
+                // (product.productImage2!=null)?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)}  />):(<p>as</p>)
+                // (product.productImage3!=null)?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)}  />):(<p>as</p>)
+                // (product.productImage4!=null)?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage4.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage4.data)}  />):(<p>as</p>)
+                // (product.productImage5!=null)?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)}  />):(<p>as</p>) */}
+                {getproductimg1(product)}
+                {getproductimg2(product)}
+                {getproductimg3(product)}
+                {getproductimg4(product)}
+                {getproductimg5(product)}
+
+              
+              
+              {/* <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)} />
               <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)} />
               <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)} />
               <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage4.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage4.data)} />
-              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)} />
+              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)} /> */}
 
             </Col>
 
