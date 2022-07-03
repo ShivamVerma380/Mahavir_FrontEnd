@@ -40,6 +40,9 @@ import MiniPosterItems from './components/offers/MiniPosteritems';
 import ProductsByCategory from './components/Items/ProductsByCateory';
 import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 import CategoryProducts from './components/Items/CategoryProducts';
+import BrandDetails from './components/Items/BrandDetails';
+import BrandCatProducts from './components/Items/BrandCatProducts';
+import BrandOfferPosterProducts from './components/Items/BrandOfferPosterProducts';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -92,6 +95,9 @@ root.render(
       <Route path='/miniposteritems' element={<MiniPosterItems/>}/>
       <Route path='/categoryproducts' element={<CategoryProductsSwiper/>}/>
       <Route path='/categoryProductsall'element={<CategoryProducts/>}/>
+      <Route path='/branddetails' element={<BrandDetails/>}/>
+      <Route path='/brandcatproducts' element={<BrandCatProducts/>}/>
+      <Route path='/brandofferposterproducts' element={<BrandOfferPosterProducts/>}/>
 
     </Routes>
   </BrowserRouter>

@@ -16,6 +16,7 @@ import MiniPosters from './components/offers/MiniPosters';
 import DeveloperPage from './components/DeveloperPage';
 import Deals from './components/Items/Deals';
 import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
+import ShopByBrands from './components/Items/ShopByBrands';
 
 
 
@@ -297,6 +298,7 @@ function App() {
       
       }
       <br></br>
+      <br></br>
       {
         (isDealsFetched)?(
           deals.map(index=>{
@@ -314,12 +316,16 @@ function App() {
         categoryDisplay.map(index=>{
           
           return(
-
+          <div>
           <CategoryProductsSwiper cattitle={index.category}/> 
+          <br></br>
+          </div>
           )
         })
       ) : (null)
     }
+    <br></br>
+    <br></br>
     
      
 
@@ -332,6 +338,8 @@ function App() {
         
       }
 
+      
+
       {/* <MiniPosters MiniPosters={MiniPoster}/> */}
       
       {/* <Product title="Mahavir Special" className="title" productList={Products}/>
@@ -339,6 +347,7 @@ function App() {
       {
         fetchMiniPosterTwo()
       }
+      <ShopByBrands/>
       {/* <MiniPosters/> */}
       {/* <Test productList={Products} /> */}
       {/* <FeatureBrands posterList={Posters}/> */}

@@ -38,6 +38,7 @@ function Slideshow({offerPosters}){
                     src={"data:image/png;base64," + index.image.data}
                     alt={index.alt}
                     height={500}
+                    
                     />                    
                     </Carousel.Item>
                   

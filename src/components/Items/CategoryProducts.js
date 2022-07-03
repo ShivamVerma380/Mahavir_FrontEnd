@@ -133,7 +133,7 @@ function CategoryProducts(){
                     borderRadius: '2px',
                     boxShadow: '0 2px 4px 0 rgb(0 0 0 / 8%)'}}>
                         <Col md={2}>
-                            <img  onClick={()=>callProductDetails(index)} style={{height:'80%',width:'100%',cursor:'pointer',justifySelf:'center'}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
+                            <img  onClick={()=>callProductDetails(index)} style={{height:'80%',width:'100%',cursor:'pointer',justifySelf:'center'}} src={"data:image/png;base64," + index.productImage1.data} />
                
                         </Col>
                         <Col md={10} style={{padding:'2%'}}>
