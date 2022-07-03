@@ -14,6 +14,7 @@ import Footer from './components/Footer/Footer'
 import FeatureBrands from './components/Items/FeatureBrands';
 import MiniPosters from './components/offers/MiniPosters';
 import DeveloperPage from './components/DeveloperPage';
+import Deals from './components/Items/Deals';
 import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 
 
@@ -34,6 +35,9 @@ function App() {
 
   const [Posters, setPosters] = useState([]);
   const [isPostersFetched, setIsPostersFetched] = useState(false);
+
+  const [deals,setDeals] = useState([]);
+  const [isDealsFetched,SetIsDealsFetched] = useState(false);
 
   const [MegaPoster,setMegaPoster] = useState([]);
   const [MiniPoster,setMiniPoster] = useState([]);
@@ -71,7 +75,7 @@ function App() {
 
     
     // var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
-    if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched){
+    if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched && !isDealsFetched){
       axios({
         method:"get",
         url:"http://localhost:8080/get-offers"
@@ -113,6 +117,19 @@ function App() {
       }).catch(function(error){
           console.log(error);
       })
+
+      axios.get("http://localhost:8080/deals").then(
+            function(response){
+              if(response.status==200){
+                console.log(response.data);
+                setDeals(response.data);
+                SetIsDealsFetched(true);
+                console.log("Deals: ",deals);
+              }
+            }).catch(function(error){
+              console.log("error",error);
+            }
+          )
 
       axios.get("http://localhost:8080/hybrid-posters").then(function(response){     
       if(response.status==200){
@@ -262,10 +279,10 @@ function App() {
   return (
 
     <div className="App" >
-      {/* <Header/> */}
+      <Header/>
       {
         (isProductsFetched)?(
-            <Header />
+            <Header/>
         ):(
           null
         )
@@ -280,6 +297,17 @@ function App() {
       
       }
       <br></br>
+      {
+        (isDealsFetched)?(
+          deals.map(index=>{
+            return(
+              <Deals title={index.title}/>
+            )
+          })
+        ):(null)
+      }
+      
+      <Deals/>
     
     {
       (isCategoryDisplayFetched)? ( 

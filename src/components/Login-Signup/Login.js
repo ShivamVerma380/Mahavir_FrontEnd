@@ -312,8 +312,20 @@ function Login() {
         console.log("Password:", password);
     }
 
-    const handleClick = () => {
+    const handleResendClick = () => {
         alert("Resend Clicked")
+        axios({
+            method: "get",
+            url: "http://localhost:8080/resend-otp/" + email
+        }).then(function (response) {
+            console.log(response.data);
+            otp = response.data.otp;
+            console.log("otp:", otp);
+        }).catch(function (response) {
+            console.log(response);
+            return;
+        })
+
     }
 
     return (
@@ -404,7 +416,7 @@ function Login() {
 
                                         </div>
                                         <div className="fields">
-                                            <Timer ButtonText="RESEND OTP" textColor={"#0000ff"} text="Resend OTP in: " seconds={30} minutes={0} resend={handleClick}/>
+                                            <Timer ButtonText="RESEND OTP" textColor={"#0000ff"} text="Resend OTP in: " seconds={30} minutes={0} resend={handleResendClick}/>
                                         </div>
                                        
 
