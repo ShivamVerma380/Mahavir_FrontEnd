@@ -66,11 +66,12 @@ function BrandDetails() {
         navigate('/brandcatproducts')
     }
 
-    function handleOfferPosterOnClick(index){
+    const handleOfferPosterOnClick=(modelNumbers)=>{
         console("Item Clicked");
-        offermodel += index.modelNumbers;
+        
+        offermodel = modelNumbers;
         localStorage.setItem("offermodels",offermodel);
-        navigate('/brandofferposterproducts')
+        // navigate('/brandofferposterproducts')
     }
 
 
@@ -102,14 +103,15 @@ function BrandDetails() {
                         return (
                             
                             
-                            <Carousel.Item  interval={1000}>
+                            <Carousel.Item  interval={1000} >
                                 
                                 <img  id="classname"
                                     className="d-block w-100"
                                     src={"data:image/png;base64," + index.offerPoster.data}
                                     alt={index.alt}
-                                    height={500}    
-                                    onClick={() => handleOfferPosterOnClick(index)}
+                                    height={500}
+                                    onClick={() => handleOfferPosterOnClick(index.modelNumbers)}    
+                                    
                                     
                                                             
                                 />               
