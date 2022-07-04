@@ -83,7 +83,7 @@ const ShopByBrands = () => {
                         return (
                             
                                 <Col md={2}>
-                                <img style={{height:200,width:150,borderRadius:"50px"}} src={'data:image/jpg;base64,' + index.brandLogo.data} onClick={()=>BrandClickHandler(index)}/>
+                                <img style={{height:200,width:150,borderRadius:"100%"}} src={'data:image/jpg;base64,' + index.brandLogo.data} onClick={()=>BrandClickHandler(index)}/>
                                 </Col>
                                 
                             

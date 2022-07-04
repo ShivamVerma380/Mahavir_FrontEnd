@@ -56,6 +56,8 @@ function App() {
   //const[cookies,SetCookie] = useCookies(["modelNumsToCompare"])
 
   console.log("CompareModels",localStorage.getItem("CompareModels"))
+  console.log(localStorage.getItem("dealproduct"))
+  console.log("Index",localStorage.getItem("dealindex"))
   // console.log("Cookies size",cookies.CompareModelsLength)
 
   //SetCookie("CompareModels","IPH287373");
@@ -192,6 +194,7 @@ function App() {
     
         
   },[]);
+  console.log("deals..",deals);
 
   function fetchSlideshow(){
     if(MegaPoster.length===0){
@@ -302,14 +305,21 @@ function App() {
       {
         (isDealsFetched)?(
           deals.map(index=>{
+            console.log("Index ",index);
+            localStorage.setItem("dealindex",index)
+            const dealproducts = JSON.stringify(index.products);
+            localStorage.setItem("dealproduct", dealproducts);
+            console.log("Deal products: ",dealproducts)
+            // localStorage.setItem("dealproduct",index.products)
             return(
-              <Deals title={index.title}/>
+              <Deals deal={index}/>
             )
           })
+
         ):(null)
       }
       
-      <Deals/>
+      {/* <Deals/> */}
     
     {
       (isCategoryDisplayFetched)? ( 

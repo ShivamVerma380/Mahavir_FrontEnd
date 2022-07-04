@@ -24,7 +24,7 @@ function BrandDetails() {
     const [brands, setBrands] = useState([]);
     const [isBrandsFetched, setIsBrandsFetched] = useState(false);
     var videoLinks = localStorage.getItem("brandVideoLinks").split(',');
-    var categories = localStorage.getItem("finalBrandCategories").split(',');
+    // var categories = localStorage.getItem("finalBrandCategories").split(',');
 
     const str = localStorage.getItem("array");
     const string = localStorage.getItem("jsonarray");
@@ -37,7 +37,7 @@ function BrandDetails() {
     console.log("Stringify 1:", parsedArray);
 
     console.log("links:", videoLinks);
-    console.log("categories", categories);
+    // console.log("categories", categories);
 
     useEffect(() => {
         if (!isBrandsFetched) {
@@ -66,7 +66,7 @@ function BrandDetails() {
         navigate('/brandcatproducts')
     }
 
-    const handleOfferPosterOnClick=(index)=>{
+    function handleOfferPosterOnClick(index){
         console("Item Clicked");
         offermodel += index.modelNumbers;
         localStorage.setItem("offermodels",offermodel);
@@ -80,9 +80,14 @@ function BrandDetails() {
         <div>
             <Header />
             <br></br>
-            <center>
+            <Container style={{justifyContent:'center',alignItems:'center',flex:1}}>
+                <center>
+                <img style={{ height: 100, width: 150, borderRadius: "30px"}} src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
+                </center>
+            </Container>
+            {/* <center>
                 <img style={{ height: 100, width: 150, borderRadius: "50px" }} src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
-            </center>
+            </center> */}
             <br></br>
             <br></br>
         
@@ -96,19 +101,25 @@ function BrandDetails() {
                         // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
                         return (
                             
-                            <Carousel.Item onClick={() => handleOfferPosterOnClick(index)} interval={1000}>
+                            
+                            <Carousel.Item  interval={1000}>
                                 
-                                <img id="classname"
+                                <img  id="classname"
                                     className="d-block w-100"
                                     src={"data:image/png;base64," + index.offerPoster.data}
                                     alt={index.alt}
-                                    height={500}                               
-                                />
+                                    height={500}    
+                                    onClick={() => handleOfferPosterOnClick(index)}
+                                    
+                                                            
+                                />               
+                                
                             </Carousel.Item>
-                            
+                 
 
                         )
-
+                        
+                        
                     })
                 }
 
@@ -117,20 +128,23 @@ function BrandDetails() {
             <br></br>
             <br></br>
 
+            <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>FEATURED CATEGORIES</h3>
+            <br></br>
 
+                
 
             <Swiper
-                slidesPerView={1}
+                slidesPerView={4}
                 spaceBetween={5}
-                slidesPerGroup={1}
+                slidesPerGroup={4}
                 loop={false}
                 loopFillGroupWithBlank={true}
                 breakpoints={{
                     700: {
-                        slidesPerView: 1,
+                        slidesPerView: 4,
                     },
                     400: {
-                        slidesPerView: 1,
+                        slidesPerView: 4,
                     },
                 }}
                 pagination={{
@@ -145,9 +159,15 @@ function BrandDetails() {
                 {
                     cards = parsedArr.map(index => {
                         return (
-                            <div>
+                            <div >
                                 <SwiperSlide>
-                                    <Button onClick={() => handleClick(index)}>{index.category}</Button>
+                                    
+                                    <div>
+                                        <Container style={{height:50, width:200, justifyContent:'center',alignItems:"center",flex:1}} onClick={() => handleClick(index)}>
+                                         <h6>{index.category} </h6>
+                                        </Container>
+                                        
+                                    </div>
                                 </SwiperSlide>
                             </div>
                         )
@@ -176,7 +196,10 @@ function BrandDetails() {
                 }
 
             </Carousel> */}
-
+            <br></br>
+            <br></br>
+            <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>FEATURED VIDEOS</h3>
+            <br></br>
 
             <Swiper
                 slidesPerView={1}
