@@ -312,7 +312,7 @@ function App() {
             console.log("Deal products: ",dealproducts)
             // localStorage.setItem("dealproduct",index.products)
             return(
-              <Deals deal={index}/>
+              <Deals deals={index}/>
             )
           })
 

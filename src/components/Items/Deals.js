@@ -7,7 +7,7 @@ import { Pagination, Navigation } from "swiper";
 import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 import {Card,Button,Row,Col, Form,CardGroup, Container} from "react-bootstrap";
 
-function Deals({title}) {
+function Deals({deals}) {
     // var product = [];
     console.log("inside deals");
     const navigate = useNavigate();
@@ -27,26 +27,26 @@ function Deals({title}) {
     var cards=<div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
     </div>
-    useEffect(()=>{
-        if(!isDealFetched)
-        {
-            axios.get("http://localhost:8080/deals").then(
-            function(response){
-              if(response.status==200){
-                console.log(response.data);
-                setDeal(response.data);
-                SetIsDealFetched(true);
+    // useEffect(()=>{
+    //     if(!isDealFetched)
+    //     {
+    //         axios.get("http://localhost:8080/deals").then(
+    //         function(response){
+    //           if(response.status==200){
+    //             console.log(response.data);
+    //             setDeal(response.data);
+    //             SetIsDealFetched(true);
                 
-              }
-            }).catch(function(error){
-              console.log("error",error);
-            }
-          );
-        }
+    //           }
+    //         }).catch(function(error){
+    //           console.log("error",error);
+    //         }
+    //       );
+    //     }
           
         
         
-    })
+    // })
 
     function WishlistHandler(index) {
       // alert("Item added successfully to wishlist");
@@ -115,14 +115,14 @@ function Deals({title}) {
 
     return(
         <div>
-        {
-            (isDealFetched)?(
+    
+           
               <div>
               {/* <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>{title}</h3> */}
 
               <Row style={{marginBottom:'20px '}}>
                 <Col md={10}>
-                <h3  style={{textAlign:"left",marginLeft:'20px'}}>{title}</h3> 
+                <h3  style={{textAlign:"left",marginLeft:'20px'}}>{deals.title}</h3> 
                 </Col>
                 {/* <Col md={2}>
                 <Button style={{width:'70%'}} variant="flat" size="m" onClick={()=>CategoryProducts(cattitle)}>View More</Button>
@@ -153,7 +153,7 @@ function Deals({title}) {
     
             
             {
-              cards = product.map(index=>{
+              cards = deals.products.map(index=>{
                 return(
                   <div>
 
@@ -208,8 +208,8 @@ function Deals({title}) {
         </div>
                 
                
-            ):(null)
-        }
+            
+        
         </div>
     );
 }
