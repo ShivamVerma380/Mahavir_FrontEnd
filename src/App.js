@@ -16,6 +16,7 @@ import MiniPosters from './components/offers/MiniPosters';
 import DeveloperPage from './components/DeveloperPage';
 import Deals from './components/Items/Deals';
 import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
+import ShopByBrands from './components/Items/ShopByBrands';
 
 
 
@@ -55,6 +56,8 @@ function App() {
   //const[cookies,SetCookie] = useCookies(["modelNumsToCompare"])
 
   console.log("CompareModels",localStorage.getItem("CompareModels"))
+  console.log(localStorage.getItem("dealproduct"))
+  console.log("Index",localStorage.getItem("dealindex"))
   // console.log("Cookies size",cookies.CompareModelsLength)
 
   //SetCookie("CompareModels","IPH287373");
@@ -191,6 +194,7 @@ function App() {
     
         
   },[]);
+  console.log("deals..",deals);
 
   function fetchSlideshow(){
     if(MegaPoster.length===0){
@@ -301,29 +305,41 @@ function App() {
       
       }
       <br></br>
+      <br></br>
       {
         (isDealsFetched)?(
           deals.map(index=>{
+            console.log("Index ",index);
+            localStorage.setItem("dealindex",index)
+            const dealproducts = JSON.stringify(index.products);
+            localStorage.setItem("dealproduct", dealproducts);
+            console.log("Deal products: ",dealproducts)
+            // localStorage.setItem("dealproduct",index.products)
             return(
-              <Deals title={index.title}/>
+              <Deals deals={index}/>
             )
           })
+
         ):(null)
       }
       
-      <Deals/>
+      {/* <Deals/> */}
     
     {
       (isCategoryDisplayFetched)? ( 
         categoryDisplay.map(index=>{
           
           return(
-
+          <div>
           <CategoryProductsSwiper cattitle={index.category}/> 
+          <br></br>
+          </div>
           )
         })
       ) : (null)
     }
+    <br></br>
+    <br></br>
     
      
 
@@ -336,6 +352,8 @@ function App() {
         
       }
 
+      
+
       {/* <MiniPosters MiniPosters={MiniPoster}/> */}
       
       {/* <Product title="Mahavir Special" className="title" productList={Products}/>
@@ -343,6 +361,7 @@ function App() {
       {
         fetchMiniPosterTwo()
       }
+      <ShopByBrands/>
       {/* <MiniPosters/> */}
       {/* <Test productList={Products} /> */}
       {/* <FeatureBrands posterList={Posters}/> */}
