@@ -1,0 +1,59 @@
+.shopbybrandsrow{
+    padding: 2%;
+    /* margin: 2%; */
+    background-color: rgb(29, 29, 29);
+  
+}
+.shopbybrandsimg{
+    border-radius: 100%;
+    height: 100%;
+    width: 80%;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+.shopbybrandsimg:hover{
+    /* border-color: aqua;
+    border-width: 15px; */
+    transform: scale(1.1);
+    opacity: 1
+
+    
+}
+
+
+.brandheading{
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
+    background-color: white;
+    margin-left: 200px;
+    margin-right: 200px;
+    
+    
+}
+
+.brandimg{
+    height:100px;
+    width: 120px;
+}
+
+.brandcategory{
+  
+    height:80px;
+    width: 180px;
+    opacity: 0.8;
+    transition: 0.3s;
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(255, 88, 88);
+    color: black;
+    font-weight: 500;
+    
+}
+.brandcategory:hover{
+
+    background-color: rgb(255, 88, 88);
+    border-color: rgb(255, 88, 88);
+
+}
+.row{
+    margin-bottom: 40px;
+}

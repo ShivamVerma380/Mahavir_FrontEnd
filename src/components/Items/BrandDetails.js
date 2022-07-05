@@ -4,11 +4,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
+
 import { Button } from "react-bootstrap";
 import Header from "../Header";
-import { Col, Row, Form, Card, Container } from "react-bootstrap";
+import { Col, Row, Form, Card, Container ,Image} from "react-bootstrap";
 import Carousel from 'react-bootstrap/Carousel';
-
+import './ShopByBrands.css';
 
 function BrandDetails() {
     const navigate = useNavigate();
@@ -81,19 +82,18 @@ function BrandDetails() {
         <div>
             <Header />
             <br></br>
-            <Container style={{justifyContent:'center',alignItems:'center',flex:1}}>
+            <Row className="brandheading">
                 <center>
-                <img style={{ height: 100, width: 150, borderRadius: "30px"}} src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
+                <Image className="brandimg"  src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
                 </center>
-            </Container>
+            </Row>
             {/* <center>
                 <img style={{ height: 100, width: 150, borderRadius: "50px" }} src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
             </center> */}
-            <br></br>
-            <br></br>
-        
             
-            <Carousel style={{ zIndex: '-1' }}>
+       <Row>
+            
+            <Carousel>
                 {
                     offerPoster = parsedArray.map(index => {
                         //let Base64string = Buffer.from(index.image.data,"base64").toString();
@@ -105,7 +105,7 @@ function BrandDetails() {
                             
                             <Carousel.Item  interval={1000} >
                                 
-                                <img  id="classname"
+                                <Image  id="classname"
                                     className="d-block w-100"
                                     src={"data:image/png;base64," + index.offerPoster.data}
                                     alt={index.alt}
@@ -127,58 +127,48 @@ function BrandDetails() {
 
 
             </Carousel>
-            <br></br>
-            <br></br>
-
-            <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>FEATURED CATEGORIES</h3>
-            <br></br>
-
-                
-
+            </Row>
+            <Row>
+            <h3 style={{color:"rgb(255,98,98",margin:'2%'}}><i>FEATURED CATEGORIES</i></h3>
+            
             <Swiper
-                slidesPerView={4}
+                slidesPerView={1}
                 spaceBetween={5}
-                slidesPerGroup={4}
+                slidesPerGroup={3}
                 loop={false}
                 loopFillGroupWithBlank={true}
                 breakpoints={{
-                    700: {
-                        slidesPerView: 4,
-                    },
-                    400: {
-                        slidesPerView: 4,
-                    },
+                  700: {
+                    slidesPerView: 6,
+                  },
+                  400: {
+                    slidesPerView: 3,
+                  },
                 }}
                 pagination={{
-                    clickable: true,
+                  clickable: true,
                 }}
                 navigation={true}
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
+                style={{height:'150px'}}
             >
 
 
                 {
                     cards = parsedArr.map(index => {
                         return (
-                            <div >
+                            <div className="container">
                                 <SwiperSlide>
-                                    
-                                    <div>
-                                        <Container style={{height:50, width:200, justifyContent:'center',alignItems:"center",flex:1}} onClick={() => handleClick(index)}>
-                                         <h6>{index.category} </h6>
-                                        </Container>
-                                        
-                                    </div>
+                                    <Button variant="outline-primary" className="brandcategory">{index.category}</Button>
                                 </SwiperSlide>
-                            </div>
+                                </div>
                         )
                     })
                 }
 
             </Swiper>
-            <br></br>
-            <br></br>
+            </Row>
             {/* <Carousel style={{ zIndex: '-1' }}>
                 {
                     offerPoster = localStorage.getItem("finalBrandCategories").map(index => {
@@ -198,10 +188,9 @@ function BrandDetails() {
                 }
 
             </Carousel> */}
-            <br></br>
-            <br></br>
-            <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>FEATURED VIDEOS</h3>
-            <br></br>
+          <Row>
+          <h3 style={{color:"rgb(255,98,98",margin:'2%'}}><i>FEATURED VIDEOS</i></h3>
+            
 
             <Swiper
                 slidesPerView={1}
@@ -231,7 +220,7 @@ function BrandDetails() {
                         return (
                             <div>
                                 <SwiperSlide>
-                                    <iframe width="560" height="315" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe width="70%" height="500px" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </SwiperSlide>
                                 <br></br>
                             </div>
@@ -241,7 +230,7 @@ function BrandDetails() {
 
             </Swiper>
 
-
+            </Row>
 
 
         </div>

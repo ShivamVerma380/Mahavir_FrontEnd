@@ -7,6 +7,8 @@ import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 
 function FilterProduct() {
     var category = localStorage.getItem("Category");
+    
+var modelNumsToCompare = new Set();
     const navigate = useNavigate();
 
     const [products,SetProducts] = useState([]);
@@ -20,13 +22,32 @@ function FilterProduct() {
 
     const[keySet,setKeyState] = useState(new Set()); //To Store subSubCategories name
     const[isKeySetUpdated,setKeyStateUpdated] = useState(false);
+    
 
+    console.log("Models To Compare",localStorage.getItem("CompareModels"))
+    const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
+    const [change, setChange] = useState(0);
+
+    const [isCompareBtnClicked,SetIsCompareBtnClicked] = useState(false);
+
+    const [isAddToCompareProductsFetched,SetIsAddToCompareProductsFetched] =  useState(false);
+    const [addToCompareProducts,SetAddToCompareProducts] = useState([]);
 
     var min= Number.MAX_VALUE ,max = Number.MIN_VALUE;
     const [minPrice,SetMinPrice] = useState();
     const [maxPrice,SetMaxPrice] = useState();
     const [isRangeSet,SetIsRangeSet] = useState(false);
     
+    if(localStorage.getItem("CompareModels")===null){
+        var str="";
+    }else{
+        var str= localStorage.getItem("CompareModels")+",";
+        var arr = str.split(",");
+        arr.map(index=>{
+            modelNumsToCompare.add(index);
+        })
+        
+    }
 
     useEffect(() => {
         if(!areProductsFetched && !areSubCatFetched && !areProductsByCatFetched && !isKeySetUpdated){
@@ -90,6 +111,8 @@ function FilterProduct() {
         }
     })
 
+
+
     function callProductDetails(index){
         //alert(index);
         // console.log("Index",index);
@@ -98,6 +121,82 @@ function FilterProduct() {
         navigate("/productDetails")
     }
 
+    function getCompareBtn(){
+       
+       
+        return(               
+              (change>0) ? (
+                  <Button id="comparebtn" onClick={compareProducts}>Compare</Button>
+              ) : (null)
+              
+         
+             
+        )
+      
+  }
+
+  
+  const callFormCheck=(modelNumber)=>{
+    if(localStorage.getItem("CompareModels")===null || localStorage.getItem("CompareModels")===""){
+        //SetCookie("CompareModels","",{path:"/"});
+        return(
+            <Form style={{fontWeight: '700',
+        fontSize: '150%'}}>
+                <Form.Check id={modelNumber} value={modelNumber} type="checkbox"  label = "Add To Compare" onChange={handleAddToCompare}/>
+            </Form>
+            
+        );
+    }else{
+        var modelNums = localStorage.getItem("CompareModels").split(',');
+        console.log("Model Nums",modelNums)
+    
+        if(modelNums.includes(modelNumber)){
+            return(
+                <Form style={{fontWeight: '700',
+        fontSize: '150%'}}>
+                <Form.Check id={modelNumber} value={modelNumber} type="checkbox"  label = "Add To Compare" onChange={handleAddToCompare} defaultChecked="true"/>
+            </Form>
+            );
+        }
+        return(
+            <Form style={{fontWeight: '700',
+        fontSize: '150%'}}>
+                <Form.Check id={modelNumber} value={modelNumber} type="checkbox"  label = "Add To Compare" onChange={handleAddToCompare}/>
+            </Form>
+        )
+
+    }
+    
+    
+    
+}
+
+
+    function compareProducts(){
+        if(localStorage.getItem("CompareModels")===null || localStorage.getItem("CompareModels")===""){
+            alert("Please select products to compare");
+        }
+        else{
+            navigate("/compareproducts")
+        }
+    }
+
+    const handleAddToCompare = event => {
+        if (event.target.checked) {
+  
+          console.log('✅ Checkbox is checked');
+          setChange(change+1)
+          
+          
+          
+        } else {
+          console.log('⛔️ Checkbox is NOT checked');
+          setChange(change-1)
+        }
+        setisAddCompareClicked(current => !current);
+        // alert("Added To Compare");
+        
+    }
 
     function WishlistHandler(index) {
         // alert("Item added successfully to wishlist");
@@ -222,7 +321,9 @@ function FilterProduct() {
     return(
         <Row>
         
-        <Col md={2}>
+        <Col md={2} style={{padding:'2%',backgroundColor: '#fff',
+                        borderRadius: '2px',
+                        boxShadow: '0 2px 4px 0 rgb(0 0 0 / 8%)'}}>
             <h5>FilterProduct</h5>
             <br></br>
             {
@@ -268,37 +369,96 @@ function FilterProduct() {
         </Col>
         
         <Col md={10}>
-        <Row>
+       
         {
             (areProductsFetched)?
             (
                 products.map(index=>{
                     return(
+                        <Row style={{padding:'2%',margin:'1%',backgroundColor: '#fff',
+                        borderRadius: '2px',
+                        boxShadow: '0 2px 4px 0 rgb(0 0 0 / 8%)'}}>
+                            <Col md={2}>
+                                <img  onClick={()=>callProductDetails(index)} style={{height:'max-content',width:'100%',cursor:'pointer',justifySelf:'center',marginTop:'25%'}} src={"data:image/png;base64," + index.productImage1.data}/>
+                   
+                            </Col>
+                            <Col md={10} style={{padding:'2%'}}>
+                                <Row style={{marginBottom:'1%'}}>
+                                    <Col md={11}>
+                                        <h3 onClick={()=>callProductDetails(index)} style={{cursor:'pointer'}}>{index.productName}</h3>
+                                    </Col>
+                                    <Col md={1}>
+                                        {(localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
+                                        <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={50} onClick={()=>WishlistHandler(index)}/>:
+                                        <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={50} onClick={()=>WishlistHandler(index)}/>
+                                        }
+                                    </Col>
+                                    
+                                </Row>
+                                <Row style={{marginBottom:'1%'}}>
+                                    <Col md={11}>
+                                    <h5>
+                                         {
+                                            index.productHighlights.split(';').map(highlight=>{
+                                                return(
+                                                   <>{highlight}<span> </span>|<span> </span></>
+                                                );  
+                                            })
+                                        }
+                                    </h5>
+                                    </Col>
+                                    
+                                </Row>
+                                <Row style={{marginBottom:'1%'}}>
+                                    <Col md={10}>
+                                    <h4>MSP: <b style={{marginRight:"20px",color:"rgb(255,98,98)"}}>₹{index.offerPrice}</b> MRP: <b style={{textDecorationLine:"line-through", textDecorationStyle:"solid"}}>₹{index.productPrice}</b></h4> 
+               
+                                    </Col>
+                                    
+                                </Row>
+                                
+                                <Row style={{marginBottom:'2%'}}>
+                                {
+                                                callFormCheck(index.modelNumber)
+                                            }
+                                    
+                                        
+                                </Row>
+                                
+                                <Row style={{marginTop:'2%'}}>
+              <Button  style={{width:'30%', height:'60px',marginLeft:'1%', fontSize:'140%'}} variant="flat" size="1" >Add To Cart</Button>
+              <Button style={{width:'30%',height:'60px',  marginLeft:'5%',fontSize:'140%'}} variant="flat" size="1"  >Buy Now</Button>
+    
+              </Row>
+                            </Col>
+    
+    
+                        </Row>
+                   
+                        // <Card  style={{ width: '20rem'}} 
+                        // className="mb-2">
+                        //      <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
+                        //     <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
+                        //     <Card.Body>
+                        //     <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
+                        //     <Card.Text onClick={()=>callProductDetails(index)}>
+                        //     <s>₹{index.productPrice}</s>  
+                        //     <strong style={{marginLeft:20}}>₹{index.offerPrice}</strong>
+                        //     <br></br>
+                        //     {
+                        //         index.productHighlights.split(';').map(highlight=>{
+                        //             return(
+                        //                 <span>{highlight}<br></br></span>
+                        //             );  
+                        //         })
+                        //     }
+                        //     </Card.Text>
                             
-                        <Card  style={{ width: '20rem'}} 
-                        className="mb-2">
-                             <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
-                            <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
-                            <Card.Body>
-                            <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
-                            <Card.Text onClick={()=>callProductDetails(index)}>
-                            <s>₹{index.productPrice}</s>  
-                            <strong style={{marginLeft:20}}>₹{index.offerPrice}</strong>
-                            <br></br>
-                            {
-                                index.productHighlights.split(';').map(highlight=>{
-                                    return(
-                                        <span>{highlight}<br></br></span>
-                                    );  
-                                })
-                            }
-                            </Card.Text>
+                        //     <br></br>
+                        //     <Button variant="flat" size="1">Buy</Button>
+                        //     </Card.Body>
                             
-                            <br></br>
-                            <Button variant="flat" size="1">Buy</Button>
-                            </Card.Body>
-                            
-                        </Card>
+                        // </Card>
                 
                 
                 
@@ -308,7 +468,9 @@ function FilterProduct() {
                 null
             )
         }
-        </Row>
+    {
+                            getCompareBtn()      
+                        }
         </Col>
         
         </Row>

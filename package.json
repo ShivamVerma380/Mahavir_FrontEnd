@@ -62,7 +62,7 @@
     "reactstrap": "^9.0.3",
     "search-bar-react": "^1.1.0",
     "semantic-ui-react": "^2.1.3",
-    "swiper": "^8.1.6",
+    "swiper": "^8.2.6",
     "uiw": "^4.21.11",
     "universal-cookie": "^4.0.4"
   },

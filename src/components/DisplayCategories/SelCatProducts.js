@@ -127,7 +127,7 @@ const SelCatProducts=()=>{
         
         if (event.target.checked) {
 
-            //console.log('✅ Checkbox is checked');
+            console.log('✅ Checkbox is checked');
             setChange(change+1)
             //document.getElementById(event.value).checked = "false"
             console.log("Value",event.target.value);
