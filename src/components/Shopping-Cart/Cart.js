@@ -14,6 +14,9 @@ function Cart() {
     const [cartDetails,setCartDetails] = useState();
     // var isCartDetailsSet = false;x
     const [isCartDetailsSet,setisCartDetailsSet] = React.useState(false);
+    var price = 0;
+    var discount = 0;
+    var amount = 0;
     useEffect(()=>{
         if(!isCartDetailsSet){
             var isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -78,15 +81,15 @@ function Cart() {
                     <Table>
                     <thead>
                         <tr>
-                        <th> Order Summary ({cartDetails.length} items)</th>
-                        <th><Form className="d-flex">
+                        <th> MyCart ({cartDetails.length} items)</th>
+                        {/* <th><Form className="d-flex">
                                     <FormControl
                                     type="search"
                                     placeholder="Pincode Search"
                                 
                                     aria-label="Search"
                                     />        
-                                </Form></th>
+                                </Form></th> */}
                         </tr>
                     </thead>
                     </Table>
@@ -125,16 +128,53 @@ function Cart() {
                     <tbody>
                         <tr>
                         <td>Price ({cartDetails.length} Item)</td>
-                        <td>₹ 37,480</td>
+                        <td>
+                            {
+                                
+                                cartDetails.map(index=>{
+                                    {
+                                        (index.freeItem) ? (price+=(parseInt(index.productPrice)+parseInt(index.freeItem.price))) : (price+=parseInt(index.productPrice))
+                                    }
+                                    
+                                    
+                                    
+                                })
+                            }
+                            ₹ {price}
+                            {/* ₹ 37,480 */}
+                        </td>
                         
+                        </tr>
+                        <tr>
+                            <td>Discount</td>
+                            <td>
+                                {
+                                    cartDetails.map(index=>{
+                                        {
+                                            (index.freeItem) ? (discount+=(parseInt(index.freeItem.price)+(parseInt(index.productPrice)-parseInt(index.offerPrice)))) : (discount+=(parseInt(index.productPrice)-parseInt(index.offerPrice)))
+                                        }
+                                         
+                                    })
+                                }
+                                - ₹ {discount}
+                            </td>
                         </tr>
                         <tr>
                         <td>Delivery Charges</td>
                         <td>Free</td>
                         </tr>
+                        
                         <tr>
                         <td> Total Amount</td>
-                        <td>₹ 37,480</td>
+                        <td>
+                        ₹ {
+                                
+                                amount = parseInt(price)-parseInt(discount)
+
+                            }
+                            
+                            {/* ₹ 37,480 */}
+                        </td>
                         </tr>
                             
                     </tbody>
