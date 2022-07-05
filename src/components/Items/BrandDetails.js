@@ -6,10 +6,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 
 import { Button } from "react-bootstrap";
-import Header from "../Header";
-import { Col, Row, Form, Card, Container ,Image} from "react-bootstrap";
-import Carousel from 'react-bootstrap/Carousel';
+
 import './ShopByBrands.css';
+import { Carousel, CarouselItem } from "react-bootstrap";
+import Header from "../Header";
+import { Col, Row, Form, Card, Container,Image} from "react-bootstrap";
+
+
+
 
 function BrandDetails() {
     const navigate = useNavigate();
