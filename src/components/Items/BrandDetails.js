@@ -4,21 +4,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
-<<<<<<< HEAD
 
 import { Button } from "react-bootstrap";
 import Header from "../Header";
 import { Col, Row, Form, Card, Container ,Image} from "react-bootstrap";
 import Carousel from 'react-bootstrap/Carousel';
 import './ShopByBrands.css';
-=======
-import { Button, Carousel, CarouselItem } from "react-bootstrap";
-import Header from "../Header";
-import { Col, Row, Form, Card, Container } from "react-bootstrap";
-
-
-
->>>>>>> 1050786b2e95b808291616ca6a33124013bfd01e
 
 function BrandDetails() {
     const navigate = useNavigate();
@@ -100,13 +91,9 @@ function BrandDetails() {
                 <img style={{ height: 100, width: 150, borderRadius: "50px" }} src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
             </center> */}
             
-<<<<<<< HEAD
        <Row>
             
             <Carousel>
-=======
-            <Carousel style={{ zIndex: '-1' }}  onClick={() => handleOfferPosterOnClick()}  >
->>>>>>> 1050786b2e95b808291616ca6a33124013bfd01e
                 {
                     offerPoster = parsedArray.map(index => {
                         //let Base64string = Buffer.from(index.image.data,"base64").toString();
