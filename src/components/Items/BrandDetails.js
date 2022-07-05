@@ -4,10 +4,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
-import { Button } from "react-bootstrap";
+import { Button, Carousel, CarouselItem } from "react-bootstrap";
 import Header from "../Header";
 import { Col, Row, Form, Card, Container } from "react-bootstrap";
-import Carousel from 'react-bootstrap/Carousel';
+
+
 
 
 function BrandDetails() {
@@ -93,7 +94,7 @@ function BrandDetails() {
             <br></br>
         
             
-            <Carousel style={{ zIndex: '-1' }}>
+            <Carousel style={{ zIndex: '-1' }}  onClick={() => handleOfferPosterOnClick()}  >
                 {
                     offerPoster = parsedArray.map(index => {
                         //let Base64string = Buffer.from(index.image.data,"base64").toString();
@@ -103,20 +104,20 @@ function BrandDetails() {
                         return (
                             
                             
-                            <Carousel.Item  interval={1000} >
+                            <CarouselItem  interval={1000} >
                                 
                                 <img  id="classname"
                                     className="d-block w-100"
                                     src={"data:image/png;base64," + index.offerPoster.data}
                                     alt={index.alt}
                                     height={500}
-                                    onClick={() => handleOfferPosterOnClick(index.modelNumbers)}    
+                                     
                                     
                                     
                                                             
                                 />               
                                 
-                            </Carousel.Item>
+                            </CarouselItem>
                  
 
                         )

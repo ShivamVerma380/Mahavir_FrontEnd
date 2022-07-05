@@ -269,34 +269,36 @@ function Login() {
         else {
 
 
-            // const headers = { 
-            //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxc2EiLCJleHAiOjE2NTY2NzM0MzAsImlhdCI6MTY1NjU3MzQzMH0.h4vfExQjQ-p0bQWCxvXKmBhwGACPHspDcWMNMed_ncc"
+            const headers = { 
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxc2F3YSIsImV4cCI6MTY1NzEwMTU1NSwiaWF0IjoxNjU3MDAxNTU1fQ._jesI7VfBoiXAqTQjlNVyJo0i5YDLh_XJUBL7LNDzc4'
                 
-            // };
-            // axios.put('http://localhost:8080/updatePassword/'+newpassword,{headers})
-            // .then(function (response) {
-            //         if (response.status == 200) {
-            //             console.log("Password Updated successfully");
-            //             alert("Password Updated successfully")
-            //             navigate("/login");
-            //         }
-            //     }).catch(function (error) {
-            //         console.log("Error", error);
-            //     })
+            };
+            axios.put('http://localhost:8080/updatePassword/'+newpassword,{headers})
+            .then(function (response) {
+                    if (response.status == 200) {
+                        console.log("Password Updated successfully");
+                        alert("Password Updated successfully")
+                        navigate("/login");
+                    }
+                }).catch(function (error) {
+                    console.log("Error", error);
+                })
 
-            axios.put("http://localhost:8080/updatePassword/"+newpassword, {
-                headers: {
-                   "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxc2EiLCJleHAiOjE2NTY2NzM0MzAsImlhdCI6MTY1NjU3MzQzMH0.h4vfExQjQ-p0bQWCxvXKmBhwGACPHspDcWMNMed_ncc"
-                }
-            }).then(function (response) {
-                if (response.status == 200) {
-                    console.log("Password Updated successfully");
-                    alert("Password Updated successfully")
-                    navigate("/login");
-                }
-            }).catch(function (error) {
-                console.log("Error", error);
-            })
+            
+
+            // axios.put("http://localhost:8080/updatePassword/"+newpassword, {
+            //     headers: {
+            //        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxc2F3IiwiZXhwIjoxNjU3MTAwOTg5LCJpYXQiOjE2NTcwMDA5ODl9.VE0qs0oWdRInBUTHmKCKgMVEbBmlWnOMZzEtXPBXGKo"
+            //     }
+            // }).then(function (response) {
+            //     if (response.status == 200) {
+            //         console.log("Password Updated successfully");
+            //         alert("Password Updated successfully")
+            //         navigate("/login");
+            //     }
+            // }).catch(function (error) {
+            //     console.log("Error", error);
+            // })
         }
     }
 
