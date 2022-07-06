@@ -23,6 +23,9 @@ function Deals({deals}) {
     
     console.log("Products: ", product);
 
+    var title = deals.title;
+    console.log("Title: ",title);
+
 
     var cards=<div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
@@ -106,6 +109,13 @@ function Deals({deals}) {
     localStorage.setItem("comparecount",change)
     console.log("Get",localStorage.getItem("comparecount"))
 
+    function CategoryProducts(title,deals){
+     
+
+      navigate("/productsbydeal",{state:{id:1,name: title,index:deals}})
+
+    }
+
     function fetchOfferAvailableBtn(offerPrice,productPrice){
       if(offerPrice===productPrice){
         return <Button variant="flat" size="m" style={{visibility:"hidden"}}>Offer Available</Button>
@@ -124,9 +134,9 @@ function Deals({deals}) {
                 <Col md={10}>
                 <h3  style={{textAlign:"left",marginLeft:'20px'}}>{deals.title}</h3> 
                 </Col>
-                {/* <Col md={2}>
-                <Button style={{width:'70%'}} variant="flat" size="m" onClick={()=>CategoryProducts(cattitle)}>View More</Button>
-                </Col> */}
+                <Col md={2}>
+                <Button style={{width:'70%'}} variant="flat" size="m" onClick={()=>CategoryProducts(title,deals)}>View More</Button>
+                </Col>
             </Row>
           <span section-separator section-separator-dk-blue></span>
           <Swiper

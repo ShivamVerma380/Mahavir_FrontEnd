@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col } from "reactstrap";
 import axios from "axios";
+import {Image,Button} from 'react-bootstrap';
 import BrandDetails from "./BrandDetails";
 import { Navigate, useNavigate } from "react-router-dom";
 
-
+import './ShopByBrands.css';
 
 const ShopByBrands = () => {
 
@@ -77,13 +78,18 @@ const ShopByBrands = () => {
                 <div>
                 <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>SHOP BY BRANDS</h3>
                 
-                    <Row>
+
+                
+                    <Row thumbnail='true' roundedCircle='true' className="shopbybrandsrow">
                     {    
                     brands.map(index=>{
                         return (
-                            
-                                <Col md={2}>
-                                <img style={{height:200,width:150,borderRadius:"100%"}} src={'data:image/jpg;base64,' + index.brandLogo.data} onClick={()=>BrandClickHandler(index)}/>
+                          
+                                <Col sm={2}>
+                             
+                                 <Image thumbnail='true' className="shopbybrandsimg"  src={'data:image/jpg;base64,' + index.brandLogo.data} onClick={()=>BrandClickHandler(index)}/>
+                                 {/* <Image thumbnail='true' className="shopbybrandsimg"  src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-family-hero?wid=940&hei=1112&fmt=png-alpha&.v=1645036276543" onClick={()=>BrandClickHandler(index)}/> */}
+                           
                                 </Col>
                                 
                             

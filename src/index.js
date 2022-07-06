@@ -43,6 +43,7 @@ import CategoryProducts from './components/Items/CategoryProducts';
 import BrandDetails from './components/Items/BrandDetails';
 import BrandCatProducts from './components/Items/BrandCatProducts';
 import BrandOfferPosterProducts from './components/Items/BrandOfferPosterProducts';
+import ProductsByDeal from './components/Items/ProductsByDeal';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -98,6 +99,7 @@ root.render(
       <Route path='/branddetails' element={<BrandDetails/>}/>
       <Route path='/brandcatproducts' element={<BrandCatProducts/>}/>
       <Route path='/brandofferposterproducts' element={<BrandOfferPosterProducts/>}/>
+      <Route path='/productsbydeal' element={<ProductsByDeal/>}/>
 
     </Routes>
   </BrowserRouter>
