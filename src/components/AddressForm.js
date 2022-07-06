@@ -118,6 +118,7 @@ const AddressForm = () => {
         <Col md={10}>
           <h1 style={{marginTop:"40px",color:"rgb(255,98,98"}}>DELIVERY ADDRESS</h1>
         </Col>
+        <Col md={1}></Col>
       </Row>
       <Row>
         <Col md={1}></Col>
@@ -131,6 +132,7 @@ const AddressForm = () => {
 
           </Card>
         </Col>
+        <Col md={1}></Col>
       </Row>
 
       <Row>
@@ -145,6 +147,7 @@ const AddressForm = () => {
 
           </Card>
         </Col>
+        <Col md={1}></Col>
       </Row>
 
 
@@ -153,6 +156,7 @@ const AddressForm = () => {
         <Col md={8}>
           <Button style={{backgroundColor:"rgb(255,98,98)"}} onClick={HandleButtonClick}>Add a New Address</Button>
         </Col>
+
       </Row>
       <br></br>
       
@@ -247,11 +251,11 @@ const AddressForm = () => {
           <Row>
             <Col md={1}></Col>
             <Col md={10}>
-              <Card style={{ width: "80rem", height:"32rem" }}>
+              <Card style={{ width: "80rem" }}>
                 <Card.Body style={{marginLeft:50}}>
                   <Card.Title>Add New Address</Card.Title>
                   <Row style={{marginTop:40}}>
-                  <Col md={4}>
+                  <Col md={6}>
                       <Input
                         id="full_name"
                         type="text"
@@ -261,7 +265,7 @@ const AddressForm = () => {
                       />
                     </Col> 
 
-                  <Col md={4}>
+                  <Col md={6}>
                   <Input
                     id="Phone"
                     class="form-field"
@@ -276,7 +280,7 @@ const AddressForm = () => {
                   <br></br>
                   <br></br>
                   <Row>
-                    <Col md={8}>
+                    <Col>
                     
                         <Input
                           style={{height:"100px"}}
@@ -293,7 +297,7 @@ const AddressForm = () => {
                     <br></br>
                     <br></br>
                     <Row>
-                  <Col md={4}>
+                  <Col md={6}>
                   <Input
                     id="City"
                     class="form-field"
@@ -304,7 +308,7 @@ const AddressForm = () => {
                   />
                     </Col> 
 
-                  <Col md={4}>
+                  <Col md={6}>
                   <Input
                     id="State"
                     class="form-field"
@@ -319,7 +323,7 @@ const AddressForm = () => {
                   <br></br>
                   <br></br>
                   <Row>
-                  <Col md={4}>
+                  <Col md={6}>
                   <Input
                     id="Zip"
                     class="form-field"
@@ -330,7 +334,7 @@ const AddressForm = () => {
                   />
                     </Col> 
 
-                  <Col md={4}>
+                  <Col md={6}>
                   <Input
                     id="Country"
                     class="form-field"
@@ -345,10 +349,10 @@ const AddressForm = () => {
                   <br></br>
                   <br></br>
                   <Row>
-                    <Col md={3}>
+                    <Col md={6}>
                     
                     </Col>
-                    <Col md={3}>
+                    <Col md={6}>
                     <Button style={{backgroundColor:"rgb(255,98,98)"}} class="form-field" type="submit" onClick={ProceedHandler}>
                       Proceed
                     </Button>
@@ -361,6 +365,7 @@ const AddressForm = () => {
 
 
             </Col>
+            <Col md={1}></Col>
           </Row>
         ) : (null)
       }
