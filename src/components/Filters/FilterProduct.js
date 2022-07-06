@@ -244,7 +244,7 @@ function FilterProduct() {
     return (
         <Row>
 
-            <Col md={2}>
+            {/* <Col md={2}>
                 <h5>FilterProduct</h5>
                 <br></br>
                 {
@@ -287,7 +287,7 @@ function FilterProduct() {
                     )
                 }
 
-            </Col>
+            </Col> */}
 
             <Col md={10}>
                 <Row>

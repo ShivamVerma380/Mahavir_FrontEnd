@@ -4,10 +4,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
-import { Button, Carousel, CarouselItem } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Header from "../Header";
 import { Col, Row, Form, Card, Container } from "react-bootstrap";
-
+import { Carousel, CarouselItem} from "reactstrap";
 
 
 
@@ -76,7 +76,14 @@ function BrandDetails() {
     }
 
 
-
+    // const handleOfferPosterOnClick=(modelNumbers)=>{
+    //     // alert("Offer Poster clicked");
+  
+    //     console.log(modelNumbers);
+    //     localStorage.setItem("offerPostersModelNumber",modelNumbers)
+    //     console.log(localStorage.getItem("offerPostersModelNumber"))
+    //     navigate("/offers")
+    //   }
 
     return (
         <div>
@@ -94,40 +101,47 @@ function BrandDetails() {
             <br></br>
         
             
-            <Carousel style={{ zIndex: '-1' }}  onClick={() => handleOfferPosterOnClick()}  >
-                {
-                    offerPoster = parsedArray.map(index => {
-                        //let Base64string = Buffer.from(index.image.data,"base64").toString();
+    
+        <Carousel>
+        {
+            offerPoster= parsedArray.map(index=>{
+                //let Base64string = Buffer.from(index.image.data,"base64").toString();
+                
+                console.log("image",index.image.data);
+                // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
+                return(
+                    <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index.modelNumbers)}>
+                    <img id = "classname" 
+                    className="d-block w-100"
+                    src={"data:image/png;base64," + index.image.data}
+                    alt={index.alt}
+                    height={500}
+                    />                    
+                    </Carousel.Item>
+                  
+                )
 
-                        console.log("image", index.offerPoster.data);
-                        // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
-                        return (
-                            
-                            
-                            <CarouselItem  interval={1000} >
-                                
-                                <img  id="classname"
-                                    className="d-block w-100"
-                                    src={"data:image/png;base64," + index.offerPoster.data}
-                                    alt={index.alt}
-                                    height={500}
-                                     
-                                    
-                                    
-                                                            
-                                />               
-                                
-                            </CarouselItem>
-                 
-
-                        )
-                        
-                        
-                    })
-                }
-
-
-            </Carousel>
+            })
+        }
+  
+{/*   
+  <Carousel.Item interval={500}>
+    <img
+      className="d-block w-100"
+      src="https://cdn.dribbble.com/users/1803663/screenshots/11400179/media/25558ede8bcb553fd48d7ed339e136ee.png?compress=1&resize=400x300"
+      alt="Second slide"
+      height={300}
+    />
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://freerangestock.com/thumbnail/140669/baobab-tree-at-sunset--african-landscape--calm--relaxing--tr.jpg"
+      alt="Third slide"
+      height={300}
+    />
+  </Carousel.Item> */}
+</Carousel>
             <br></br>
             <br></br>
 

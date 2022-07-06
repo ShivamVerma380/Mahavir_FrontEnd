@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AddressForm.css";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Container, Row, Col } from "react-bootstrap";
-import {  Input } from "reactstrap";
+import { Input } from "reactstrap";
+import axios from "axios";
 
 
 var fullname = "";
@@ -17,17 +18,85 @@ var phoneNo = "";
 
 
 
+
+
 const AddressForm = () => {
   const navigate = useNavigate();
+  const [address, setAddress] = useState([]);
+  const [isAddressFetched, setIsAddressFetched] = useState(false);
+
+  useEffect(() => {
+    if (!isAddressFetched) {
+      axios({
+        method: "get",
+        url: "http://localhost:8080/address",
+        headers: {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tIiwiZXhwIjoxNjU3MjA1NzA3LCJpYXQiOjE2NTcxMDU3MDd9.kxDnbZkajCwWlVCMeukJnfe3UCU-O2QUp8MNvTzpKjQ"
+        }
+      }).then(function (response) {
+        console.log("Response", response);
+        if (response.status == 200) {
+          console.log("Address response", response.data);
+          setAddress(response.data);
+          console.log("Address: ", address)
+          setIsAddressFetched(true);
+
+        } else {
+          console.log(response.data.message);
+        }
+      }).catch(function (error) {
+        console.log(error);
+      })
+
+    }
+  }, [])
+
+  console.log("Address length: ",address.length)
+
   const ProceedHandler = () => {
 
 
-    if (fullname === "" || addressone === "" || addresstwo === "" || incity === "" || instate === "" || zip === "" || incountry === "" || phoneNo === "") {
+    if (fullname === "" || addressone === "" || incity === "" || instate === "" || zip === "" || incountry === "" || phoneNo === "") {
       alert("Please enter all details")
     }
+
     else {
+
+
+
+      var formdata = {
+        "name": localStorage.getItem("full-name"),
+        "pincode": localStorage.getItem("zip"),
+        "locality": "",
+        "landmark": "",
+        "address": localStorage.getItem("address-one"),
+        "city": localStorage.getItem("city"),
+        "state": localStorage.getItem("state"),
+        "alternateMobile": localStorage.getItem("phone"),
+        "addressType": ""
+
+      }
+
+      axios.post("http://localhost:8080/address", formdata, {
+        headers: {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tIiwiZXhwIjoxNjU3MjA1NzA3LCJpYXQiOjE2NTcxMDU3MDd9.kxDnbZkajCwWlVCMeukJnfe3UCU-O2QUp8MNvTzpKjQ",
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(function (response) {
+        if (response.status == 200) {
+          console.log("Address Added successfully");
+          console.log(response.data)
+          // navigate("/");
+        }
+      }).catch(function (error) {
+        console.log("Error", error);
+      })
+      console.log("Form: ", formdata)
       navigate("/OrderSummary")
     }
+
+
+
 
 
   }
@@ -35,7 +104,14 @@ const AddressForm = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const HandleButtonClick = () => {
-    setIsButtonClicked(true);
+    if (address.length<3) {
+      setIsButtonClicked(true);
+    }
+    else {
+      alert("You can save  only 3 addresses")
+    }
+    
+    
   }
 
   const InputFullNameHandler = (e) => {
@@ -113,13 +189,39 @@ const AddressForm = () => {
               Address 2, ............
           </label>
       </div> */}
+
       <Row >
         <Col md={1}></Col>
         <Col md={10}>
-          <h1 style={{marginTop:"40px",color:"rgb(255,98,98"}}>DELIVERY ADDRESS</h1>
+          <h1 style={{ marginTop: "40px", color: "rgb(255,98,98" }}>DELIVERY ADDRESS</h1>
         </Col>
       </Row>
-      <Row>
+
+      {
+        address.map(index => {
+          return (
+            <Row>
+            <Col md={1}></Col>
+            <Col md={10}>
+              <Card style={{ width: "60rem", height: "7rem" }}>
+                <Card.Body>
+                  <Card.Text>
+                    <input type="radio" value="Address1" name="add" /> <b style={{marginRight:20,marginLeft:10}}>{index.name}</b> <b>{index.mobileNumber}</b> 
+                    <p>{index.address} {index.city} {index.state} <b>- {index.pincode}</b>, Alternate Mobile Number: <b>{index.alternateMobile}</b></p> 
+                    
+                  </Card.Text>
+                </Card.Body>
+
+              </Card>
+            </Col>
+          </Row>
+          )
+          
+        })
+      }
+
+      
+      {/* <Row>
         <Col md={1}></Col>
         <Col md={10}>
           <Card style={{ width: "80rem", height: "7rem" }}>
@@ -145,17 +247,17 @@ const AddressForm = () => {
 
           </Card>
         </Col>
-      </Row>
+      </Row> */}
 
 
       <Row style={{ marginTop: 20 }}>
         <Col md={4}></Col>
         <Col md={8}>
-          <Button style={{backgroundColor:"rgb(255,98,98)"}} onClick={HandleButtonClick}>Add a New Address</Button>
+          <Button style={{ backgroundColor: "rgb(255,98,98)" }} onClick={HandleButtonClick}>Add a New Address</Button>
         </Col>
       </Row>
       <br></br>
-      
+
 
 
 
@@ -244,14 +346,15 @@ const AddressForm = () => {
           //     </button>
           //   </form>
           // </div>
+          
           <Row>
             <Col md={1}></Col>
             <Col md={10}>
-              <Card style={{ width: "80rem", height:"32rem" }}>
-                <Card.Body style={{marginLeft:50}}>
+              <Card style={{ width: "80rem", height: "32rem" }}>
+                <Card.Body style={{ marginLeft: 50 }}>
                   <Card.Title>Add New Address</Card.Title>
-                  <Row style={{marginTop:40}}>
-                  <Col md={4}>
+                  <Row style={{ marginTop: 40 }}>
+                    <Col md={4}>
                       <Input
                         id="full_name"
                         type="text"
@@ -259,102 +362,102 @@ const AddressForm = () => {
                         name="fullname"
                         onChange={InputFullNameHandler}
                       />
-                    </Col> 
+                    </Col>
 
-                  <Col md={4}>
-                  <Input
-                    id="Phone"
-                    class="form-field"
-                    type="text"
-                    placeholder="Phone No."
-                    name="Phone"
-                    onChange={InputPhoneNoHandler}
-                 />
-                 
-                  </Col>  
+                    <Col md={4}>
+                      <Input
+                        id="Phone"
+                        class="form-field"
+                        type="text"
+                        placeholder="Phone No."
+                        name="Phone"
+                        onChange={InputPhoneNoHandler}
+                      />
+
+                    </Col>
                   </Row>
                   <br></br>
                   <br></br>
                   <Row>
                     <Col md={8}>
-                    
-                        <Input
-                          style={{height:"100px"}}
-                          id="last-name"
-                          class="form-field"
-                          type="textarea"
-                          placeholder="Address Line 1 (Street Address, P.O.)"
-                          name="ADL1"
-                          onChange={InputAddressOneHandler}
-                        />
-                     
-                    </Col>
-                    </Row>
-                    <br></br>
-                    <br></br>
-                    <Row>
-                  <Col md={4}>
-                  <Input
-                    id="City"
-                    class="form-field"
-                    type="text"
-                    placeholder="City"
-                    name="City"
-                    onChange={InputCityHandler}
-                  />
-                    </Col> 
 
-                  <Col md={4}>
-                  <Input
-                    id="State"
-                    class="form-field"
-                    type="text"
-                    placeholder="State"
-                    name="State"
-                    onChange={InputStateHandler}
-                  />
-                 
-                  </Col>  
+                      <Input
+                        style={{ height: "100px" }}
+                        id="last-name"
+                        class="form-field"
+                        type="textarea"
+                        placeholder="Address Line 1 (Street Address, P.O.)"
+                        name="ADL1"
+                        onChange={InputAddressOneHandler}
+                      />
+
+                    </Col>
                   </Row>
                   <br></br>
                   <br></br>
                   <Row>
-                  <Col md={4}>
-                  <Input
-                    id="Zip"
-                    class="form-field"
-                    type="text"
-                    placeholder="Zip"
-                    name="Zip"
-                    onChange={InputZipHandler}
-                  />
-                    </Col> 
+                    <Col md={4}>
+                      <Input
+                        id="City"
+                        class="form-field"
+                        type="text"
+                        placeholder="City"
+                        name="City"
+                        onChange={InputCityHandler}
+                      />
+                    </Col>
 
-                  <Col md={4}>
-                  <Input
-                    id="Country"
-                    class="form-field"
-                    type="text"
-                    placeholder="Country"
-                    name="Country"
-                    onChange={InputCountryHandler}
-                  /> 
-                 
-                  </Col>  
+                    <Col md={4}>
+                      <Input
+                        id="State"
+                        class="form-field"
+                        type="text"
+                        placeholder="State"
+                        name="State"
+                        onChange={InputStateHandler}
+                      />
+
+                    </Col>
+                  </Row>
+                  <br></br>
+                  <br></br>
+                  <Row>
+                    <Col md={4}>
+                      <Input
+                        id="Zip"
+                        class="form-field"
+                        type="text"
+                        placeholder="Zip"
+                        name="Zip"
+                        onChange={InputZipHandler}
+                      />
+                    </Col>
+
+                    <Col md={4}>
+                      <Input
+                        id="Country"
+                        class="form-field"
+                        type="text"
+                        placeholder="Country"
+                        name="Country"
+                        onChange={InputCountryHandler}
+                      />
+
+                    </Col>
                   </Row>
                   <br></br>
                   <br></br>
                   <Row>
                     <Col md={3}>
-                    
+
                     </Col>
                     <Col md={3}>
-                    <Button style={{backgroundColor:"rgb(255,98,98)"}} class="form-field" type="submit" onClick={ProceedHandler}>
-                      Proceed
-                    </Button>
+                      <Button style={{ backgroundColor: "rgb(255,98,98)" }} class="form-field" type="submit" onClick={ProceedHandler}>
+                        Proceed
+                      </Button>
                     </Col>
                   </Row>
-                  
+
 
                 </Card.Body>
               </Card>
