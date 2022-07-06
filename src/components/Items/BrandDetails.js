@@ -4,10 +4,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
+
 import { Button } from "react-bootstrap";
+
+import './ShopByBrands.css';
+import { Carousel, CarouselItem } from "react-bootstrap";
 import Header from "../Header";
-import { Col, Row, Form, Card, Container } from "react-bootstrap";
-import { Carousel, CarouselItem} from "reactstrap";
+import { Col, Row, Form, Card, Container,Image} from "react-bootstrap";
+
 
 
 
@@ -89,111 +93,93 @@ function BrandDetails() {
         <div>
             <Header />
             <br></br>
-            <Container style={{justifyContent:'center',alignItems:'center',flex:1}}>
+            <Row className="brandheading">
                 <center>
-                <img style={{ height: 100, width: 150, borderRadius: "30px"}} src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
+                <Image className="brandimg"  src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
                 </center>
-            </Container>
+            </Row>
             {/* <center>
                 <img style={{ height: 100, width: 150, borderRadius: "50px" }} src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
             </center> */}
-            <br></br>
-            <br></br>
-        
             
-    
-        <Carousel>
-        {
-            offerPoster= parsedArray.map(index=>{
-                //let Base64string = Buffer.from(index.image.data,"base64").toString();
-                
-                console.log("image",index.image.data);
-                // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
-                return(
-                    <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index.modelNumbers)}>
-                    <img id = "classname" 
-                    className="d-block w-100"
-                    src={"data:image/png;base64," + index.image.data}
-                    alt={index.alt}
-                    height={500}
-                    />                    
-                    </Carousel.Item>
-                  
-                )
+       <Row>
+            
+            <Carousel>
+                {
+                    offerPoster = parsedArray.map(index => {
+                        //let Base64string = Buffer.from(index.image.data,"base64").toString();
 
-            })
-        }
-  
-{/*   
-  <Carousel.Item interval={500}>
-    <img
-      className="d-block w-100"
-      src="https://cdn.dribbble.com/users/1803663/screenshots/11400179/media/25558ede8bcb553fd48d7ed339e136ee.png?compress=1&resize=400x300"
-      alt="Second slide"
-      height={300}
-    />
-  </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="https://freerangestock.com/thumbnail/140669/baobab-tree-at-sunset--african-landscape--calm--relaxing--tr.jpg"
-      alt="Third slide"
-      height={300}
-    />
-  </Carousel.Item> */}
-</Carousel>
-            <br></br>
-            <br></br>
+                        console.log("image", index.offerPoster.data);
+                        // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
+                        return (
+                            
+                            
+                            <CarouselItem  interval={1000} >
+                                
+                                <Image  id="classname"
+                                    className="d-block w-100"
+                                    src={"data:image/png;base64," + index.offerPoster.data}
+                                    alt={index.alt}
+                                    height={500}
+                                     
+                                    
+                                    
+                                                            
+                                />               
+                                
+                            </CarouselItem>
+                 
 
-            <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>FEATURED CATEGORIES</h3>
-            <br></br>
+                        )
+                        
+                        
+                    })
+                }
 
-                
 
+            </Carousel>
+            </Row>
+            <Row>
+            <h3 style={{color:"rgb(255,98,98",margin:'2%'}}><i>FEATURED CATEGORIES</i></h3>
+            
             <Swiper
-                slidesPerView={4}
+                slidesPerView={1}
                 spaceBetween={5}
-                slidesPerGroup={4}
+                slidesPerGroup={3}
                 loop={false}
                 loopFillGroupWithBlank={true}
                 breakpoints={{
-                    700: {
-                        slidesPerView: 4,
-                    },
-                    400: {
-                        slidesPerView: 4,
-                    },
+                  700: {
+                    slidesPerView: 6,
+                  },
+                  400: {
+                    slidesPerView: 3,
+                  },
                 }}
                 pagination={{
-                    clickable: true,
+                  clickable: true,
                 }}
                 navigation={true}
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
+                style={{height:'150px'}}
             >
 
 
                 {
                     cards = parsedArr.map(index => {
                         return (
-                            <div >
+                            <div className="container">
                                 <SwiperSlide>
-                                    
-                                    <div>
-                                        <Container style={{height:50, width:200, justifyContent:'center',alignItems:"center",flex:1}} onClick={() => handleClick(index)}>
-                                         <h6>{index.category} </h6>
-                                        </Container>
-                                        
-                                    </div>
+                                    <Button variant="outline-primary" className="brandcategory">{index.category}</Button>
                                 </SwiperSlide>
-                            </div>
+                                </div>
                         )
                     })
                 }
 
             </Swiper>
-            <br></br>
-            <br></br>
+            </Row>
             {/* <Carousel style={{ zIndex: '-1' }}>
                 {
                     offerPoster = localStorage.getItem("finalBrandCategories").map(index => {
@@ -213,10 +199,9 @@ function BrandDetails() {
                 }
 
             </Carousel> */}
-            <br></br>
-            <br></br>
-            <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>FEATURED VIDEOS</h3>
-            <br></br>
+          <Row>
+          <h3 style={{color:"rgb(255,98,98",margin:'2%'}}><i>FEATURED VIDEOS</i></h3>
+            
 
             <Swiper
                 slidesPerView={1}
@@ -246,7 +231,7 @@ function BrandDetails() {
                         return (
                             <div>
                                 <SwiperSlide>
-                                    <iframe width="560" height="315" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe width="70%" height="500px" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </SwiperSlide>
                                 <br></br>
                             </div>
@@ -256,7 +241,7 @@ function BrandDetails() {
 
             </Swiper>
 
-
+            </Row>
 
 
         </div>

@@ -173,7 +173,8 @@ function CategoryProductsSwiper({cattitle}) {
                       <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
                       }
                     {/* <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/> */}
-                    <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
+                    {/* <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/> */}
+                    <Card.Img  variant="top" src={index.productImage1} onClick={()=>callProductDetails(index)}/>
                
                     <Card.Body >
                     <Card.Title as="h6"  onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>

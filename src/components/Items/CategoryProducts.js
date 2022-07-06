@@ -133,7 +133,9 @@ function CategoryProducts(){
                     borderRadius: '2px',
                     boxShadow: '0 2px 4px 0 rgb(0 0 0 / 8%)'}}>
                         <Col md={2}>
-                            <img  onClick={()=>callProductDetails(index)} style={{height:'80%',width:'100%',cursor:'pointer',justifySelf:'center'}} src={"data:image/png;base64," + index.productImage1.data} />
+                            {/* <img  onClick={()=>callProductDetails(index)} style={{height:'80%',width:'100%',cursor:'pointer',justifySelf:'center'}} src={"data:image/png;base64," + index.productImage1.data} /> */}
+                            <img  onClick={()=>callProductDetails(index)} style={{height:'80%',width:'100%',cursor:'pointer',justifySelf:'center'}} src={index.productImage1} />
+
                
                         </Col>
                         <Col md={10} style={{padding:'2%'}}>
@@ -142,10 +144,10 @@ function CategoryProducts(){
                                     <h3 onClick={()=>callProductDetails(index)} style={{cursor:'pointer'}}>{index.productName}</h3>
                                 </Col>
                                 <Col md={1}>
-                                    {(localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
-                                    <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={50} onClick={()=>WishlistHandler(index)}/>:
-                                    <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={50} onClick={()=>WishlistHandler(index)}/>
-                                    }
+                                  {(localStorage.getItem("wishlistproduct")!=null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
+                                  <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>:
+                                  <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
+                                  }
                                 </Col>
                                 
                             </Row>

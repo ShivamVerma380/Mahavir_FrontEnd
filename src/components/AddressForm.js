@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./AddressForm.css";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Container, Row, Col } from "react-bootstrap";
-import { Input } from "reactstrap";
+import {  Input } from "reactstrap";
 import axios from "axios";
 
 
@@ -18,12 +18,11 @@ var phoneNo = "";
 
 
 
-
-
 const AddressForm = () => {
   const navigate = useNavigate();
   const [address, setAddress] = useState([]);
   const [isAddressFetched, setIsAddressFetched] = useState(false);
+
 
   useEffect(() => {
     if (!isAddressFetched) {
@@ -53,17 +52,14 @@ const AddressForm = () => {
 
   console.log("Address length: ",address.length)
 
+
   const ProceedHandler = () => {
 
 
     if (fullname === "" || addressone === "" || incity === "" || instate === "" || zip === "" || incountry === "" || phoneNo === "") {
       alert("Please enter all details")
     }
-
     else {
-
-
-
       var formdata = {
         "name": localStorage.getItem("full-name"),
         "pincode": localStorage.getItem("zip"),
@@ -96,9 +92,6 @@ const AddressForm = () => {
     }
 
 
-
-
-
   }
 
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -108,10 +101,8 @@ const AddressForm = () => {
       setIsButtonClicked(true);
     }
     else {
-      alert("You can save  only 3 addresses")
+      alert("You can save only 3 addresses")
     }
-    
-    
   }
 
   const InputFullNameHandler = (e) => {
@@ -189,12 +180,12 @@ const AddressForm = () => {
               Address 2, ............
           </label>
       </div> */}
-
       <Row >
         <Col md={1}></Col>
         <Col md={10}>
-          <h1 style={{ marginTop: "40px", color: "rgb(255,98,98" }}>DELIVERY ADDRESS</h1>
+          <h1 style={{marginTop:"40px",color:"rgb(255,98,98"}}>DELIVERY ADDRESS</h1>
         </Col>
+        <Col md={1}></Col>
       </Row>
 
       {
@@ -214,6 +205,7 @@ const AddressForm = () => {
 
               </Card>
             </Col>
+            <Col md={1}></Col>
           </Row>
           )
           
@@ -221,43 +213,17 @@ const AddressForm = () => {
       }
 
       
-      {/* <Row>
-        <Col md={1}></Col>
-        <Col md={10}>
-          <Card style={{ width: "80rem", height: "7rem" }}>
-            <Card.Body>
-              <Card.Text>
-                <input type="radio" value="Address1" name="add" /> Address 1 ..............
-              </Card.Text>
-            </Card.Body>
-
-          </Card>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col md={1}></Col>
-        <Col md={10}>
-          <Card style={{ width: "80rem", height: "7rem" }}>
-            <Card.Body>
-              <Card.Text>
-                <input type="radio" value="Address2" name="add" /> Address 2 ..............
-              </Card.Text>
-            </Card.Body>
-
-          </Card>
-        </Col>
-      </Row> */}
 
 
       <Row style={{ marginTop: 20 }}>
         <Col md={4}></Col>
         <Col md={8}>
-          <Button style={{ backgroundColor: "rgb(255,98,98)" }} onClick={HandleButtonClick}>Add a New Address</Button>
+          <Button style={{backgroundColor:"rgb(255,98,98)"}} onClick={HandleButtonClick}>Add a New Address</Button>
         </Col>
+
       </Row>
       <br></br>
-
+      
 
 
 
@@ -346,15 +312,14 @@ const AddressForm = () => {
           //     </button>
           //   </form>
           // </div>
-          
           <Row>
             <Col md={1}></Col>
             <Col md={10}>
-              <Card style={{ width: "80rem", height: "32rem" }}>
-                <Card.Body style={{ marginLeft: 50 }}>
+              <Card style={{ width: "80rem" }}>
+                <Card.Body style={{marginLeft:50}}>
                   <Card.Title>Add New Address</Card.Title>
-                  <Row style={{ marginTop: 40 }}>
-                    <Col md={4}>
+                  <Row style={{marginTop:40}}>
+                  <Col md={6}>
                       <Input
                         id="full_name"
                         type="text"
@@ -362,108 +327,109 @@ const AddressForm = () => {
                         name="fullname"
                         onChange={InputFullNameHandler}
                       />
-                    </Col>
+                    </Col> 
 
-                    <Col md={4}>
-                      <Input
-                        id="Phone"
-                        class="form-field"
-                        type="text"
-                        placeholder="Phone No."
-                        name="Phone"
-                        onChange={InputPhoneNoHandler}
-                      />
-
-                    </Col>
+                  <Col md={6}>
+                  <Input
+                    id="Phone"
+                    class="form-field"
+                    type="text"
+                    placeholder="Phone No."
+                    name="Phone"
+                    onChange={InputPhoneNoHandler}
+                 />
+                 
+                  </Col>  
                   </Row>
                   <br></br>
                   <br></br>
                   <Row>
-                    <Col md={8}>
-
-                      <Input
-                        style={{ height: "100px" }}
-                        id="last-name"
-                        class="form-field"
-                        type="textarea"
-                        placeholder="Address Line 1 (Street Address, P.O.)"
-                        name="ADL1"
-                        onChange={InputAddressOneHandler}
-                      />
-
+                    <Col>
+                    
+                        <Input
+                          style={{height:"100px"}}
+                          id="last-name"
+                          class="form-field"
+                          type="textarea"
+                          placeholder="Address Line 1 (Street Address, P.O.)"
+                          name="ADL1"
+                          onChange={InputAddressOneHandler}
+                        />
+                     
                     </Col>
+                    </Row>
+                    <br></br>
+                    <br></br>
+                    <Row>
+                  <Col md={6}>
+                  <Input
+                    id="City"
+                    class="form-field"
+                    type="text"
+                    placeholder="City"
+                    name="City"
+                    onChange={InputCityHandler}
+                  />
+                    </Col> 
+
+                  <Col md={6}>
+                  <Input
+                    id="State"
+                    class="form-field"
+                    type="text"
+                    placeholder="State"
+                    name="State"
+                    onChange={InputStateHandler}
+                  />
+                 
+                  </Col>  
                   </Row>
                   <br></br>
                   <br></br>
                   <Row>
-                    <Col md={4}>
-                      <Input
-                        id="City"
-                        class="form-field"
-                        type="text"
-                        placeholder="City"
-                        name="City"
-                        onChange={InputCityHandler}
-                      />
-                    </Col>
+                  <Col md={6}>
+                  <Input
+                    id="Zip"
+                    class="form-field"
+                    type="text"
+                    placeholder="Zip"
+                    name="Zip"
+                    onChange={InputZipHandler}
+                  />
+                    </Col> 
 
-                    <Col md={4}>
-                      <Input
-                        id="State"
-                        class="form-field"
-                        type="text"
-                        placeholder="State"
-                        name="State"
-                        onChange={InputStateHandler}
-                      />
-
-                    </Col>
+                  <Col md={6}>
+                  <Input
+                    id="Country"
+                    class="form-field"
+                    type="text"
+                    placeholder="Country"
+                    name="Country"
+                    onChange={InputCountryHandler}
+                  /> 
+                 
+                  </Col>  
                   </Row>
                   <br></br>
                   <br></br>
                   <Row>
-                    <Col md={4}>
-                      <Input
-                        id="Zip"
-                        class="form-field"
-                        type="text"
-                        placeholder="Zip"
-                        name="Zip"
-                        onChange={InputZipHandler}
-                      />
+                    <Col md={6}>
+                    
                     </Col>
-
-                    <Col md={4}>
-                      <Input
-                        id="Country"
-                        class="form-field"
-                        type="text"
-                        placeholder="Country"
-                        name="Country"
-                        onChange={InputCountryHandler}
-                      />
-
+                    <Col md={6}>
+                    <Button style={{backgroundColor:"rgb(255,98,98)"}} class="form-field" type="submit" onClick={ProceedHandler}>
+                      Proceed
+                    </Button>
                     </Col>
                   </Row>
-                  <br></br>
-                  <br></br>
-                  <Row>
-                    <Col md={3}>
-
-                    </Col>
-                    <Col md={3}>
-                      <Button style={{ backgroundColor: "rgb(255,98,98)" }} class="form-field" type="submit" onClick={ProceedHandler}>
-                        Proceed
-                      </Button>
-                    </Col>
-                  </Row>
-
+                  
 
                 </Card.Body>
               </Card>
 
 
             </Col>
+            <Col md={1}></Col>
           </Row>
         ) : (null)
       }

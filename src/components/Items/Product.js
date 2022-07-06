@@ -155,7 +155,9 @@ function Product({title,productList}){
                       <AiOutlineHeart  className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
                       }
                     {/* <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/> */}
-                    <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
+                    {/* <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/> */}
+               
+                    <Card.Img  style={{width:200,height:175,alignSelf:"center"}} variant="top" src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-family-hero?wid=940&hei=1112&fmt=png-alpha&.v=1645036276543" onClick={()=>callProductDetails(index)}/>
                
                     <Card.Body >
                     <Card.Title as="h6"  onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
