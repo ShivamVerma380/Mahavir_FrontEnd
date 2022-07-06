@@ -283,11 +283,7 @@ function App() {
   return (
 
     <div className="App" >
-<<<<<<< HEAD
       {/* <-------------------Header/> */}
-=======
-      <Header/>
->>>>>>> dff131574c0d4230ff93d85801156f2d5ba6e4b1
       {
         (isProductsFetched)?(
             <Header/>

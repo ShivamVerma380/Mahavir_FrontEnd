@@ -124,7 +124,7 @@ function ProductDetails(){
           //setimage(imglink);
           //productImg1 = 'data:image/jpg;base64,'+ product.productImage1.data;
           //console.log("Product Image 1:",productImg1);
-          setimage('data:image/jpg;base64,'+response.data.productImage1.data);
+          setimage(response.data.productImage1);
           console.log(response.data.productInformation);
           productInformation = response.data.productInformation;
           for(var k in response.data.productInformation){
@@ -377,7 +377,7 @@ function callProductDetails(index){
         if(response.status==200){
             console.log("response data",response.data);
             setProduct(response.data);
-            setimage('data:image/jpg;base64,'+response.data.productImage1.data);
+            setimage(response.data.productImage1);
         }
     }).catch(function(error){
         console.log("error",error);
@@ -473,7 +473,7 @@ function WishlistHandler(index) {
 const getproductimg1=(product)=>{
   try {
     return (
-      <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  />
+      <img className="productdetailimg" src={product.productImage1} onClick={() => ImgHandler(product.productImage1)}  />
     )
   } catch (error) {
     console.log("error: ",error)
@@ -483,7 +483,7 @@ const getproductimg1=(product)=>{
 const getproductimg2=(product)=>{
   try {
     return (
-      <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)}  />
+      <img className="productdetailimg" src={product.productImage2} onClick={() => ImgHandler(product.productImage2)}  />
     )
   } catch (error) {
     console.log("error: ",error)
@@ -493,7 +493,7 @@ const getproductimg2=(product)=>{
 const getproductimg3=(product)=>{
   try {
     return (
-      <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)}  />
+      <img className="productdetailimg" src={product.productImage3} onClick={() => ImgHandler(product.productImage3)}  />
     )
   } catch (error) {
     console.log("error: ",error)
@@ -503,7 +503,7 @@ const getproductimg3=(product)=>{
 const getproductimg4=(product)=>{
   try {
     return (
-      <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage4.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage4.data)}  />
+      <img className="productdetailimg" src={product.productImage4} onClick={() => ImgHandler(product.productImage4)}  />
     )
   } catch (error) {
     console.log("error: ",error)
@@ -513,7 +513,7 @@ const getproductimg4=(product)=>{
 const getproductimg5=(product)=>{
   try {
     return (
-      <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)}  />
+      <img className="productdetailimg" src={product.productImage5} onClick={() => ImgHandler(product.productImage5)}  />
     )
   } catch (error) {
     console.log("error: ",error)
@@ -749,7 +749,7 @@ const getproductimg5=(product)=>{
                   <h5 style={{textAlign:"center",color:"rgb(255,98,98)"}}><b><i>Free Gift Worth {product.freeItem.price}</i></b></h5>
                   <Row style={{marginTop:20}}>
                     <Col md={4}>
-                    <img style={{width:120, height:120}} src={'data:image/jpg;base64,' + product.freeItem.image.data}></img>
+                    <img style={{width:120, height:120}} src={product.freeItem.image}></img>
                     
                     </Col>
                     <Col md={8}>
@@ -807,14 +807,14 @@ const getproductimg5=(product)=>{
                           (variantName=="Color") ? (
                             
                               <div class="color_img">
-                                  <img src={'data:image/jpg;base64,' + product.productImage1.data} id={index}  variant="flat" style={{marginRight:'10px', width:'80px', border:"1px solid black"}} onClick={()=>handleBtnClick({index})}></img>
+                                  <img src={product.productImage1} id={index}  variant="flat" style={{marginRight:'10px', width:'80px', border:"1px solid black"}} onClick={()=>handleBtnClick({index})}></img>
                                   <div>{index}</div>
                               </div>
                           
                           
                           ) : (
                             
-                          <Button src={'data:image/jpg;base64,' + product.productImage1.data} id={index}  variant="flat" style={{marginRight:'20px',width:'80px'}} onClick={()=>handleBtnClick({index})}>{index}</Button>
+                          <Button src={product.productImage1} id={index}  variant="flat" style={{marginRight:'20px',width:'80px'}} onClick={()=>handleBtnClick({index})}>{index}</Button>
                          
                           )
                           
@@ -851,7 +851,7 @@ const getproductimg5=(product)=>{
 
             <Col md={4}>
 
-              <img src={'data:image/jpg;base64,'+product.productImage1.data }style={{ width: "130px" }}></img>
+              <img src={product.productImage1 }style={{ width: "130px" }}></img>
 
             </Col>
             <Col md={8}>
@@ -869,7 +869,7 @@ const getproductimg5=(product)=>{
                   <p>The iPhone 11 features dual 12 MP Ultra Wide (13mm) and Wide (26mm) cameras with 4K video recording up to 60 fps. The Ultra Wide camera provides 120° field of view, letting you capture four times more scene, and the Wide camera provides 100% Focus Pixels for up to three times faster autofocus in low light.</p>
                 </Col>
                 <Col md={2}>
-                  <img src={'data:image/jpg;base64,'+product.productImage1.data } style={{ width: "130px" }}></img>
+                  <img src={product.productImage1 } style={{ width: "130px" }}></img>
                 </Col>
               </Row>
         
@@ -1026,7 +1026,7 @@ const getproductimg5=(product)=>{
               <Card style={{ width: '13rem' }} className="mb-2">
                 <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
                 <CardImg className="this.props.img" onClick={()=>callProductDetails(index)}
-                  src={"data:image/png;base64," + index.productImage1.data}/>
+                  src={index.productImage1}/>
                   <CardBody>
                     <CardTitle className="this.props.h6 change"  onClick={()=>callProductDetails(index)}> 
                       <h6  ><b>{index.productName}</b></h6>
