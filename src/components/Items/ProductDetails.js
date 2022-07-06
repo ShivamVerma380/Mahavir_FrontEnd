@@ -471,52 +471,42 @@ function WishlistHandler(index) {
 }
 
 const getproductimg1=(product)=>{
-  try {
+  if(product.productImage1!=null){
     return (
       <img className="productdetailimg" src={product.productImage1} onClick={() => ImgHandler(product.productImage1)}  />
     )
-  } catch (error) {
-    console.log("error: ",error)
   }
 }
 
 const getproductimg2=(product)=>{
-  try {
+  if(product.productImage2!=null){
     return (
       <img className="productdetailimg" src={product.productImage2} onClick={() => ImgHandler(product.productImage2)}  />
     )
-  } catch (error) {
-    console.log("error: ",error)
   }
 }
 
 const getproductimg3=(product)=>{
-  try {
+  if(product.productImage3!=null){
     return (
       <img className="productdetailimg" src={product.productImage3} onClick={() => ImgHandler(product.productImage3)}  />
     )
-  } catch (error) {
-    console.log("error: ",error)
   }
 }
 
 const getproductimg4=(product)=>{
-  try {
+  if(product.productImage4!=null){
     return (
       <img className="productdetailimg" src={product.productImage4} onClick={() => ImgHandler(product.productImage4)}  />
     )
-  } catch (error) {
-    console.log("error: ",error)
   }
 }
 
 const getproductimg5=(product)=>{
-  try {
+  if(product.productImage5!=null){
     return (
       <img className="productdetailimg" src={product.productImage5} onClick={() => ImgHandler(product.productImage5)}  />
     )
-  } catch (error) {
-    console.log("error: ",error)
   }
 }
 
