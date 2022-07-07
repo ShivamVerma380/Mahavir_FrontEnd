@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Button, Form, Card, Container } from "react-bootstrap";
+import { Col, Row, Button, Form, Card, Container ,Image} from "react-bootstrap";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
+import './FilterProducts.css';
 
 function FilterProduct() {
     var category = localStorage.getItem("Category");
@@ -121,9 +122,9 @@ function FilterProduct() {
                     flag = false;
                 }
             })
-            //   if(flag)
-            //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
-            //     navigate('/')
+              if(flag)
+                localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+                navigate('/filterproducts')
 
         }
 
@@ -242,7 +243,9 @@ function FilterProduct() {
 
 
     return (
-        <Row>
+
+       
+        <Row className="filterproductsContainer">
 
             {/* <Col md={2}>
                 <h5>FilterProduct</h5>
@@ -288,9 +291,9 @@ function FilterProduct() {
                 }
 
             </Col> */}
-
+            <Col md={2}></Col>
             <Col md={10}>
-                <Row>
+                
                     {
                         (areProductsFetched) ?
                             (
@@ -322,55 +325,52 @@ function FilterProduct() {
 
                                         // </Card>
 
-                                        <Row style={{
-                                            padding: '2%', margin: '2%', backgroundColor: '#fff',
-                                            borderRadius: '2px',
-                                            boxShadow: '0 2px 4px 0 rgb(0 0 0 / 8%)'
-                                        }}>
+                                        <Row className="filterproductsRow">
                                             <Col md={2}>
-                                                <img onClick={() => callProductDetails(index)} style={{ height: '80%', width: '100%', cursor: 'pointer', justifySelf: 'center' }} src={index.productImage1} />
+                                                <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
 
                                             </Col>
-                                            <Col md={10} style={{ padding: '2%' }}>
-                                                <Row style={{ marginBottom: '1%' }}>
+                                            <Col md={10} >
+                                                <Row className="innerrow">
                                                     <Col md={11}>
-                                                        <h3 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h3>
+                                                        <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
                                                     </Col>
-                                                    <Col md={1}>
+                                                    <Col md={1} >
                                                         {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
-                                                            <AiFillHeart style={{ marginTop: "10px", marginLeft: "10px", fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={50} onClick={() => WishlistHandler(index)} /> :
-                                                            <AiOutlineHeart style={{ marginTop: "10px", marginLeft: "10px" }} className="wishlisticon" size={50} onClick={() => WishlistHandler(index)} />
+                                                            <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
+                                                            <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
                                                         }
                                                     </Col>
 
                                                 </Row>
-                                                <Row style={{ marginBottom: '1%' }}>
+                                                <Row className="innerrow">
                                                     <Col md={11}>
-                                                        <h5 >{index.productHighlights}</h5>
+                                                        <h6 style={{color:'GrayText'}}>{index.productHighlights}</h6>
                                                     </Col>
 
                                                 </Row>
-                                                <Row style={{ marginBottom: '1%' }}>
+                                                <Row className="innerrow">
                                                     <Col md={10}>
-                                                        <h4>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h4>
+                                                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
 
                                                     </Col>
 
                                                 </Row>
 
-                                                <Row style={{ marginBottom: '2%' }}>
+                                                <Row className="innerrow">
                                                     <Form style={{
-                                                        fontWeight: '700',
-                                                        fontSize: '150%'
+                                                        fontWeight: '500',
+                                                        fontSize: '120%'
                                                     }}>
                                                         <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} />
                                                     </Form>
 
                                                 </Row>
 
-                                                <Row style={{ marginTop: '2%' }}>
-                                                    <Button style={{ width: '30%', height: '60px', marginLeft: '1%', fontSize: '140%' }} variant="flat" size="1" >Add To Cart</Button>
-                                                    <Button style={{ width: '30%', height: '60px', marginLeft: '5%', fontSize: '140%' }} variant="flat" size="1"  >Buy Now</Button>
+                                                <Row className="innerrow">
+                                                    <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" >Add To Cart</Button></Col>
+                                                    <Col><Button className="filterproductBtn" variant="outline-primary"  >Buy Now</Button></Col>
+                                                   
 
                                                 </Row>
                                             </Col>
@@ -386,10 +386,11 @@ function FilterProduct() {
                                 null
                             )
                     }
-                </Row>
+               
             </Col>
 
         </Row>
+      
     );
 }
 
