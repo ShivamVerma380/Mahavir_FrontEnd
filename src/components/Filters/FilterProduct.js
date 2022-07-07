@@ -31,8 +31,14 @@ function FilterProduct() {
     const [isRangeSet, SetIsRangeSet] = useState(false);
 
 
+    const [filters,SetFilters] = useState();
+    const [filterkey,SetFilterKey] = useState([]);
+    const [isFiltersSet, SetIsFiltersSet] = useState(false);
+
+
+
     useEffect(() => {
-        if (!areProductsFetched && !areSubCatFetched && !areProductsByCatFetched && !isKeySetUpdated) {
+        if (!areProductsFetched && !areSubCatFetched && !areProductsByCatFetched && !isKeySetUpdated && !isFiltersSet) {
             var modelNumbers = localStorage.getItem("Model Number").split(',');
             var urls = [];
             modelNumbers.map(modelNum => {
@@ -87,6 +93,21 @@ function FilterProduct() {
                     setKeyStateUpdated(true);
                 }).catch(function (error) {
                     console.log("error", error);
+                })
+            
+            axios.get("http://localhost:8080/filtercriterias/" + category)
+                .then(function(response){
+                    if(response.status == 200){
+                        for(var key in response.data.filterCriterias){
+                            filterkey.push(key);
+                        }
+                        // response.data.filterCriterias
+                        SetFilters(response.data.filterCriterias);
+                        console.log("filters",response.data.filterCriterias)
+                        SetIsFiltersSet(true);
+                    }
+                }).catch(function(error){
+                    console.log(error);
                 })
 
 
@@ -247,7 +268,7 @@ function FilterProduct() {
        
         <Row className="filterproductsContainer">
 
-            {/* <Col md={2}>
+            <Col md={2}>
                 <h5>FilterProduct</h5>
                 <br></br>
                 {
@@ -277,7 +298,7 @@ function FilterProduct() {
 
                 }
                 <br></br>
-                {
+                {/* {
                     (isRangeSet) ? (
                         <MultiRangeSlider
                             min={minPrice}
@@ -288,10 +309,32 @@ function FilterProduct() {
                     ) : (
                         null
                     )
+                } */}
+                {
+                    (isFiltersSet)?(
+                        filterkey.map(key=>{
+                            return(
+                                <div>
+                                    <h5>{key}</h5>
+                                    {
+                                        filters[key].map(values=>{
+                                            return(
+                                                <Form>
+                                                    <Form.Check id={key} type="checkbox"  value={values}  label = {values}/>
+                                                </Form>
+    
+                                            );
+                                        })
+                                    }
+                                </div>
+                            );
+                        })
+                    ):(
+                        null
+                    )
                 }
 
-            </Col> */}
-            <Col md={2}></Col>
+            </Col> 
             <Col md={10}>
                 
                     {
