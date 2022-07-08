@@ -2,6 +2,7 @@ import React  from "react";
 
 import Carousel from 'react-bootstrap/Carousel';
 import NavbarOffcanvas from "react-bootstrap/esm/NavbarOffcanvas";
+import {Container} from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 
 function Slideshow({offerPosters}){
@@ -24,7 +25,9 @@ function Slideshow({offerPosters}){
     }
 
     return(
-        <Carousel style={{ zIndex: '-1' }}>
+    
+      <div style={{margin:'1%'}}>
+        <Carousel style={{ zIndex: '0' }}>
         {
             offerPoster= offerPosters.map(index=>{
                 //let Base64string = Buffer.from(index.image.data,"base64").toString();
@@ -65,6 +68,8 @@ function Slideshow({offerPosters}){
     />
   </Carousel.Item> */}
 </Carousel>
+
+</div>
     );
 }
 export default Slideshow; 

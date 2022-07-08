@@ -1,0 +1,62 @@
+.Header .dropdown-menu.show {
+    display: block;
+    border-radius: 10px;
+    margin-top: 10px;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-color: #ff3844;
+    width: -webkit-fill-available;
+    padding: 10px;
+    pad: 200px;
+    border-top: 5px solid #ff3b46;
+   
+}
+.Header .navbar-light .navbar-nav .nav-link{
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #212529;
+}
+.Header .dropdown-toggle {
+    font-size: 22px;
+    font-weight: 1000;
+}
+
+#offcanvasNavbarDropdown-expand-md {
+   
+    color: white;
+}
+
+.Header .navbar-nav{
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: bold;
+}
+@media screen and (min-width:320px) and (max-width:480px) {
+    .offcanvas-body {
+        background-image: linear-gradient(225deg, #101214, transparent);
+        
+    }
+    
+    .offcanvas{
+        width: 80%;
+    }
+    
+    .Header .navbar-toggler-icon {
+        display: inline-block;
+        width: 2.5em;
+        height: 2.5em;
+        vertical-align: middle;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        margin-top: 10px;
+    }
+    
+    .Header .navbar-light .navbar-toggler {
+        width: 60px;
+        color: rgb(255 255 255);
+        border-color: rgb(255 255 255);
+    }
+    
+    
+}

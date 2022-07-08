@@ -43,6 +43,7 @@
     "react-cookie": "^4.1.1",
     "react-dom": "^18.1.0",
     "react-dual-range-slider": "^1.0.4",
+    "react-helmet": "^6.1.0",
     "react-horizontal-scrolling-menu": "^2.8.2",
     "react-icons": "^4.3.1",
     "react-iframe": "^1.8.0",
