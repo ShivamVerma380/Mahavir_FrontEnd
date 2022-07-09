@@ -1,12 +1,12 @@
 import React from "react";
-import {Card,Button,Row,Col, Form,CardGroup, Container} from "react-bootstrap";
+import {Card,Button,Row,Col, Form,CardGroup, Container,Image} from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import './Categoryproducts.css';
 function CategoryProductsSwiper({cattitle}) {
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
@@ -115,7 +115,7 @@ function CategoryProductsSwiper({cattitle}) {
       }
       
     }
-    const firstfourproducts = Products.slice(0, 6);
+    const firstfourproducts = Products.slice(0, 4);
 
 
     return (
@@ -123,19 +123,11 @@ function CategoryProductsSwiper({cattitle}) {
       
       (isProductsFetched)?
       (
-
-        <div>
-
-          <Row style={{marginBottom:'20px '}}>
-            <Col md={10}>
-            <h3  style={{textAlign:"left",marginLeft:'20px'}}>{cattitle}</h3> 
-            </Col>
-            <Col md={2}>
-            <Button style={{width:'70%'}} variant="flat" size="m" onClick={()=>CategoryProducts(cattitle)}>View More</Button>
-            </Col>
-        </Row>
-      <span section-separator section-separator-dk-blue></span>
-      <Swiper
+<>
+        <div className="categoryproductswiper">
+          <Row>
+            <Col sm={10}>
+            <Swiper
         slidesPerView={1}
         spaceBetween={5}
         slidesPerGroup={3}
@@ -164,8 +156,7 @@ function CategoryProductsSwiper({cattitle}) {
               <div>
               <SwiperSlide>
                
-              <Card  style={{ width: '20rem' }}
-                  className="mb-2"
+              <Card  style={{ width: '25rem' }}
                    >
                 
                     {(localStorage.getItem("wishlistproduct")!=null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
@@ -207,11 +198,101 @@ function CategoryProductsSwiper({cattitle}) {
         
       </Swiper>
 
+            </Col>
+            
+            <Col sm={2}>
+              
+                <Image className="CategoryProduct" src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTawovDMvOO1Jtbbs8AsMD2nrxsE-rgA-TegA&usqp=CAU'}/>
+                <br></br>
+                <Button className="viewMorebtn" variant="flat" size="m" onClick={()=>CategoryProducts(cattitle)}>View More</Button>
+            </Col>
+          </Row>
+          </div>
+<div>
+          <Row style={{marginBottom:'20px '}}>
+            <Col md={10}>
+            <h3  style={{textAlign:"left",marginLeft:'20px'}}>{cattitle}</h3> 
+            </Col>
+            <Col md={2}>
+            <Button style={{width:'70%'}} variant="flat" size="m" onClick={()=>CategoryProducts(cattitle)}>View More</Button>
+            </Col>
+        </Row>
+      <span section-separator section-separator-dk-blue></span>
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={5}
+        slidesPerGroup={3}
+        loop={false}
+        loopFillGroupWithBlank={true}
+        breakpoints={{
+          700: {
+            slidesPerView: 6,
+          },
+          400: {
+            slidesPerView: 3,
+          },
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        className="mySwiper"
+      >
+
+        
+        {
+          cards = firstfourproducts.map(index=>{
+            return(
+              <div>
+              <SwiperSlide>
+               
+              <Card  style={{ width: '30rem' }}>
+                
+                    {(localStorage.getItem("wishlistproduct")!=null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
+                      <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>:
+                      <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
+                      }
+                    {/* <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/> */}
+                    {/* <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/> */}
+                    <Card.Img  variant="top" src={index.productImage1} onClick={()=>callProductDetails(index)}/>
+               
+                    <Card.Body >
+                    <Card.Title as="h6"  onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
+                    <Card.Text as="h5" onClick={()=>callProductDetails(index)} >
+                    {index.productHighlights}
+                    <br></br><b style={{fontWeight:"bolder",color:"rgb(255, 88, 88)", fontSize:20}}>Rs {index.productPrice}</b>
+                    </Card.Text>
+                    <Form>
+                      <Form.Check type="checkbox"  label = "Add To Compare" onChange={handleAddToCompare}/>
+                    </Form>
+                    
+                      <br></br>
+                      {
+                        fetchOfferAvailableBtn(index.offerPrice,index.productPrice)
+                      }                    
+                    
+                  </Card.Body>
+
+                  
+              </Card>
+
+
+               
+              </SwiperSlide>
+              <br></br>
+              </div>
+            )
+          })
+        }
+        
+      </Swiper>
+
       
       
       
     
-    </div>):(null)
+    </div></>):(null)
     
     )
 }

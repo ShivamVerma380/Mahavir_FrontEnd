@@ -18,7 +18,7 @@ import Deals from './components/Items/Deals';
 import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 import ShopByBrands from './components/Items/ShopByBrands';
 
-
+import {Helmet} from 'react-helmet';
 
 
 function App() {
@@ -283,7 +283,8 @@ function App() {
   return (
 
     <div className="App" >
-      <Header/>
+      
+      {/* <-------------------Header/> */}
       {
         (isProductsFetched)?(
             <Header/>
@@ -291,11 +292,13 @@ function App() {
           null
         )
       }
-    
-
+     <Header/>
+     
+      
       {/* <AddItem/> */}
 
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
+      
       {
         fetchSlideshow()
       

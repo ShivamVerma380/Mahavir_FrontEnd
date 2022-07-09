@@ -336,8 +336,12 @@ function FilterProduct() {
 
             </Col> 
             <Col md={10}>
+                    {
+                        (change>0) ? (<Button id="comparebtn">ADD TO COMPARE {change}</Button>) : (null)
+                    }
                 
                     {
+                       
                         (areProductsFetched) ?
                             (
                                 products.map(index => {
@@ -420,6 +424,8 @@ function FilterProduct() {
 
 
                                         </Row>
+
+                                       
 
 
 

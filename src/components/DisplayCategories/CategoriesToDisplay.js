@@ -1,7 +1,7 @@
 import React from "react";
 import Button from '@mui/material/Button';
 
-import { Nav, Navbar, FormControl, Container, NavLink, Form, NavDropdown, Offcanvas, ListGroup } from 'react-bootstrap';
+import { Nav, Navbar, FormControl, Container, NavLink, Form, NavDropdown, Offcanvas, ListGroup ,Image} from 'react-bootstrap';
 
 import { useNavigate } from "react-router-dom";
 import "./CategoriesToDisplay.css"
@@ -37,7 +37,7 @@ function CategoriesToDisplay({ categoryDetail }) {
 
       {['sm'].map((expand) => (
 
-        <Navbar style={{ zIndex: '0' }} key={expand} bg="dark" expand={expand} variant="dark">
+        <Navbar style={{ zIndex: '1' }} bg="light" key={expand} class="border-top" expand={expand} variant="light">
           <Container fluid>
 
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -65,20 +65,20 @@ function CategoriesToDisplay({ categoryDetail }) {
                         <Nav.Link style={{ margin: 10 }}>
                           {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
                           {/* {<img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>} */}
-                          <img src={'data:image/jpg;base64,'+ index.category_image.data} className="categorymage" style={{height:50,borderRadius:50}}></img>
-                          <NavDropdown id="drop " style={{ color: "black" }} title={index.category} renderMenuOnMount={true}>
+                          <Image thumbnail='true' src={'data:image/jpg;base64,'+ index.category_image.data} className="categorymage" style={{height:60,borderRadius:50}}></Image>
+                          <NavDropdown style={{ color: "white",fontFamily:'Roboto',fontSize:'18px' }} title={index.category} renderMenuOnMount={true}>
                             {
                               index.subCategories.map(subCat => {
                                 return (
-                                  <div style={{ display: 'block', padding: 10 }}>
-                                    <h6>{subCat.subCategoryName}</h6>
+                                  <div style={{ display: 'block', padding: 10 ,width:'200px'}}>
+                                    <h5>{subCat.subCategoryName}</h5>
                                     <ListGroup>
                                       {/*  <NavDropdown id="drop" style={{ color: "#00000" }} title={subCat.subCategoryName}>*/}
                                       {
                                         subCat.subSubCategories.map(subSubCategories => {
                                           return (
 
-                                            <ListGroup.Item onClick={() => handleSubSubCategoriesClick(index.category, subCat.subCategoryName, subSubCategories.subSubCategoryName, subSubCategories.modelNumber)}>{subSubCategories.subSubCategoryName}</ListGroup.Item>
+                                            <ListGroup.Item style={{marginTop:'4px'}} onClick={() => handleSubSubCategoriesClick(index.category, subCat.subCategoryName, subSubCategories.subSubCategoryName, subSubCategories.modelNumber)}>{subSubCategories.subSubCategoryName}</ListGroup.Item>
 
                                           );
                                         })

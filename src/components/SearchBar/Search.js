@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AiFillWindows } from "react-icons/ai";
 import "./Search.css";
 function Search(){
+    console.log("inside search");
     const[products,SetProducts] = useState([]);
     const[isProductsFetched,setIsProductsFetched] = useState(false);
 

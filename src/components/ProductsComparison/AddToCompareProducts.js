@@ -273,7 +273,7 @@ function AddToCompareProducts(){
                         <Col md={2}>
                         <img style={{ width: "10rem", alignContent: "center", visibility: "hidden" }}></img>
                         <br></br>
-                        <h6 style={{ marginTop: "20px" }} >Add a Product</h6>
+                        <h6 style={{ marginTop: "20px" }}>Add a Product</h6>
                         <br></br>
                         {
                             (isBrandsFetched)?(
