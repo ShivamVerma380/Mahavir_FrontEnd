@@ -160,19 +160,19 @@ function FilterProduct() {
                     var valueflag= false;
                     values.map(v=>{
                         console.log(index.filtercriterias[key])
-                        if(index.filtercriterias[key]!==v){
-                            flag=false;  
+                        if(index.filtercriterias[key]===v){
+                            valueflag=true;  
                         }
                     })
-                    // if(!valueflag){
-                    //     flag = false;
-                    // }
+                    if(!valueflag){
+                        flag = false;
+                    }
                 })
                 if(flag){
                     productsArray.push(index);
                 }
             })
-            console.log("Products Array",productsArray);
+            console.log("Products Array",productsArray.length);
             
             SetSelectedProducts(productsArray);
 
@@ -199,6 +199,35 @@ function FilterProduct() {
                 }
             })
             SetFilterSelected(arr);
+            var productsArray = [];
+            console.log("products",products)
+            console.log("filterSelected",filterselected);
+            products.map(index=>{
+                var flag = true;
+                filterselected.map(a=>{
+                    var pair = a.split("-");
+                    // console.log("pair",pair)
+                    var key = pair[0];
+                    var values = pair[1].split(";");
+                    console.log("values",values)
+                    var valueflag= false;
+                    values.map(v=>{
+                        console.log(index.filtercriterias[key])
+                        if(index.filtercriterias[key]===v){
+                            valueflag=true;  
+                        }
+                    })
+                    if(!valueflag){
+                        flag = false;
+                    }
+                })
+                if(flag){
+                    productsArray.push(index);
+                }
+            })
+            console.log("Products Array",productsArray.length);
+            
+            SetSelectedProducts(productsArray);
         }
         
         /*
