@@ -91,7 +91,7 @@ function BrandDetails() {
 
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
             <br></br>
             <Row className="brandheading">
                 <center>
