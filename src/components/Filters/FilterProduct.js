@@ -2,115 +2,66 @@ import React, { useEffect, useState } from "react";
 import { Col, Row, Button, Form, Card, Container ,Image} from "react-bootstrap";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
-import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
-import './FilterProducts.css';
+import e from "cors";
+
 
 function FilterProduct() {
     var category = localStorage.getItem("Category");
     const navigate = useNavigate();
 
-    const [products, SetProducts] = useState([]);
-    const [areProductsFetched, SetAreProductsFetched] = useState(false);
+    //To save selected products
+    const[selectedProducts,SetSelectedProducts] = useState([]);
+    const[isSelectedProductsFetched,SetIsSelectedProductsFetched] = useState(false);
+
+    //To save all products
+    const[products,SetProducts] = useState([]);
+    const[isProductsFetched,SetIsProductsFetched] = useState(false);
+
+    //For Add To Compare
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
 
-    const [filterSubCat, SetFilterSubCat] = useState([]);
-    const [areSubCatFetched, SetAreSubCatFetched] = useState(false);
 
-    const [productsByCat, SetProductsByCat] = useState([]);
-    const [areProductsByCatFetched, SetAreProductsByCatFetched] = useState(false);
+    //For  filter criterias
+    const [filters, SetFilters] = useState();
+    const [isFiltersFetched, SetIsFiltersFetched] = useState(false);
 
-    const [keySet, setKeyState] = useState(new Set()); //To Store subSubCategories name
-    const [isKeySetUpdated, setKeyStateUpdated] = useState(false);
+    const [keySet, setKeyState] = useState([]); //To Store filters name
 
+    
+    // const[filtersSelected,SetFiltersSelected] = useState([]);
 
-    var min = Number.MAX_VALUE, max = Number.MIN_VALUE;
-    const [minPrice, SetMinPrice] = useState();
-    const [maxPrice, SetMaxPrice] = useState();
-    const [isRangeSet, SetIsRangeSet] = useState(false);
+    const[filterselected,SetFilterSelected] = useState([])
 
-
-    const [filters,SetFilters] = useState();
-    const [filterkey,SetFilterKey] = useState([]);
-    const [isFiltersSet, SetIsFiltersSet] = useState(false);
-
-
-
-    useEffect(() => {
-        if (!areProductsFetched && !areSubCatFetched && !areProductsByCatFetched && !isKeySetUpdated && !isFiltersSet) {
-            var modelNumbers = localStorage.getItem("Model Number").split(',');
-            var urls = [];
-            modelNumbers.map(modelNum => {
-                urls.push(axios.get("http://localhost:8080/get-products/" + modelNum));
-            })
-            axios.all(urls).then(
-                axios.spread((...res) => {
-                    res.map(index => {
-
-                        products.push(index.data);
-                        // filteredProducts.push(index.data);
-
-
-                    })
-
-                    console.log("products", products);
-                    SetAreProductsFetched(true);
-
-                })
-            )
-
-            axios.get("http://localhost:8080/get-sub-categories-detail/" + category)
-                .then(function (response) {
-                    if (response.status == 200) {
-                        // console.log("response",response.data);
-
-                        SetFilterSubCat(response.data);
-
-                        SetAreSubCatFetched(true);
-                    }
-                }).catch(function (error) {
-                    console.log(error);
-
-                })
-
-            axios.get("http://localhost:8080/get-products-by-category/" + category)
-                .then(function (response) {
-                    if (response.status == 200) {
-                        // console.log("GetProductsByCategory",response.data);
-                        SetProductsByCat(response.data);
-                        response.data.map(pro => {
-                            var price = parseInt(pro.productPrice);
-                            if (price > max) max = price;
-                            if (price < min) min = price;
-                        })
-                        SetAreProductsByCatFetched(true);
-                        SetMinPrice(min);
-                        SetMaxPrice(max);
-                        SetIsRangeSet(true);
-                    }
-                    setKeyState(prev => new Set(prev.add(localStorage.getItem("SubSubCategory"))));
-                    setKeyStateUpdated(true);
-                }).catch(function (error) {
-                    console.log("error", error);
-                })
-            
-            axios.get("http://localhost:8080/filtercriterias/" + category)
+    useEffect(()=>{
+        // console.log("category", category);
+        if(!isSelectedProductsFetched && !isProductsFetched && !isFiltersFetched){
+            axios.get("http://localhost:8080/get-products-by-category/"+category)
                 .then(function(response){
-                    if(response.status == 200){
-                        for(var key in response.data.filterCriterias){
-                            filterkey.push(key);
-                        }
-                        // response.data.filterCriterias
-                        SetFilters(response.data.filterCriterias);
-                        console.log("filters",response.data.filterCriterias)
-                        SetIsFiltersSet(true);
-                    }
+                    SetProducts(response.data);
+                    SetSelectedProducts(response.data);
+                    console.log("products", products);
+                    console.log("selected products",selectedProducts);
+                    SetIsProductsFetched(true);
+                    SetIsSelectedProductsFetched(true);
                 }).catch(function(error){
                     console.log(error);
                 })
-
-
+        
+            axios.get("http://localhost:8080/filtercriterias/"+category)
+                .then(function(response){
+                    console.log("response",response.data.filterCriterias)
+                    SetFilters(response.data.filterCriterias);
+                    for(var key in response.data.filterCriterias){
+                        keySet.push(key);
+                    }
+                    console.log("keySet",keySet)
+                    SetIsFiltersFetched(true)
+                }).catch(function(error){
+                    console.log("error in filtercriterias:"+error);
+                })
+        
         }
     })
 
@@ -121,7 +72,6 @@ function FilterProduct() {
         // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
     }
-
 
     function WishlistHandler(index) {
         // alert("Item added successfully to wishlist");
@@ -151,94 +101,6 @@ function FilterProduct() {
 
     }
 
-    const handleFormCheck = event => {
-        if (event.target.checked) {
-            //alert(event.target.value+"on");
-
-            productsByCat.map(index => {
-                var flag = true;
-                // console.log("Index",index);
-                var subCategoryMap = index.subCategoryMap;
-                for (var key in subCategoryMap) {
-                    // console.log("key",key);
-                    if (subCategoryMap[key] === event.target.value) {
-                        // console.log("God Inside if");
-                        //add product index here in set
-
-                        products.map(p => {
-                            if (p.modelNumber === index.modelNumber) {
-                                // console.log("P",p.modelNumber);
-                                // console.log('index',index.modelNumber);
-                                flag = false;
-                            }
-                        })
-                        if (flag) {
-                            SetProducts(arr => [...arr, index]);
-                            // setFilteredProducts(arr=>[...arr,index]);
-                            // setFilteredProducts(arr=>[...arr,])
-                        }
-
-                    }
-                }
-
-            })
-            setKeyState(prev => new Set([...prev, event.target.value]))
-            // console.log("KeySet",keySet);
-
-        } else {
-            var mySet = new Set(keySet);
-            // mySet = new Set(prev=>new Set([...prev].filter(x=>x!==event.target.value)));
-            console.log("mySet", mySet);
-            mySet.delete(event.target.value);
-            console.log("mySet", mySet);
-            var arr = [];
-
-            productsByCat.map(index => {
-                // console.log("Index",index);
-                var subCategoryMap = index.subCategoryMap;
-                for (var key in subCategoryMap) {
-                    // console.log("key",key);
-                    var flag = true;
-                    [...mySet].map(k => {
-                        if (subCategoryMap[key] === k) {
-                            // arr.push(index);
-                            arr.map(a => {
-                                if (a.modelNumber === index.modelNumber) {
-                                    flag = false;
-                                }
-                            })
-                            if (flag) {
-                                arr.push(index);
-
-                            }
-                        }
-                    })
-                }
-            })
-            SetProducts(arr);
-            setKeyState(mySet);
-        }
-
-
-    }
-
-    function handlePriceRange({ min, max }) {
-
-        var arr = [];
-        products.map(index => {
-            var price = parseInt(index.productPrice);
-            if (price >= { min }.min && price <= { max }.max) {
-                arr.push(index);
-            }
-        })
-        // console.log("price",arr);
-        // console.log("Array",arr);
-        // setFilteredProducts(arr);
-        SetProducts(arr);
-        // console.log("Filtered products",filteredProducts);
-
-
-    }
 
     const handleAddToCompare = event => {
         if (event.target.checked) {
@@ -249,198 +111,312 @@ function FilterProduct() {
           
           
         } else {
-          console.log('⛔️ Checkbox is NOT checked');
+          console.log('⛔ Checkbox is NOT checked');
           setChange(change-1)
         }
         setisAddCompareClicked(current => !current);
         // alert("Added To Compare");
         
     }
-      
-      localStorage.setItem("comparecount",change)
-      console.log("Get",localStorage.getItem("comparecount"))
 
+    const handleFormCheck=(index,f)=>{
 
+        // console.log("event",index);
+        // console.log("df",f);
+        var element = document.getElementById(f);
+        // console.log("element",element);
+        // console.log("status",element.checked);
+        
+        /*if checkbox is checked 
+            1. Add it to localStorage
+            2. From use state variable add it 
+            3.Load all use states condition satisfying variables
+        */
+        if(element.checked){
+            var  arr= filterselected;
+            var flag = true;
+            arr.map((i,pos)=>{
+                var pair = i.split("-");
+                if(index===pair[0]){
+                    arr[pos]= index+"-"+pair[1]+";"+f;
+                    flag = false;
+                }
+            })
+            if(flag){
+                arr.push(index+"-"+f);
+            }
+            SetFilterSelected(arr);
+            var productsArray = [];
+            console.log("products",products)
+            console.log("filterSelected",filterselected);
+            products.map(index=>{
+                var flag = true;
+                filterselected.map(a=>{
+                    var pair = a.split("-");
+                    // console.log("pair",pair)
+                    var key = pair[0];
+                    var values = pair[1].split(";");
+                    console.log("values",values)
+                    var valueflag= false;
+                    values.map(v=>{
+                        console.log(index.filtercriterias[key])
+                        if(index.filtercriterias[key]===v){
+                            valueflag=true;  
+                        }
+                    })
+                    if(!valueflag){
+                        flag = false;
+                    }
+                })
+                if(flag){
+                    productsArray.push(index);
+                }
+            })
+            console.log("Products Array",productsArray.length);
+            
+            SetSelectedProducts(productsArray);
 
+        }else{
+            var arr = filterselected;
+            arr.map((i,pos)=>{
+                var pair = i.split("-");
+                if(index===pair[0]){
+                    var values= pair[1].split(";");
+                    if(values.length==1){
+                        arr.splice(pos,1);
+                    }
+                    else{
+                        var str=index+"-";
+                        values.map(v=>{
+                            if(v!==f){
+                                str+=v+";";
+                            }
+                        })
+                        str= str.slice(0,str.length-1);
+                        arr[pos]=str;
 
-    return (
+                    }
+                }
+            })
+            SetFilterSelected(arr);
+            var productsArray = [];
+            console.log("products",products)
+            console.log("filterSelected",filterselected);
+            products.map(index=>{
+                var flag = true;
+                filterselected.map(a=>{
+                    var pair = a.split("-");
+                    // console.log("pair",pair)
+                    var key = pair[0];
+                    var values = pair[1].split(";");
+                    console.log("values",values)
+                    var valueflag= false;
+                    values.map(v=>{
+                        console.log(index.filtercriterias[key])
+                        if(index.filtercriterias[key]===v){
+                            valueflag=true;  
+                        }
+                    })
+                    if(!valueflag){
+                        flag = false;
+                    }
+                })
+                if(flag){
+                    productsArray.push(index);
+                }
+            })
+            console.log("Products Array",productsArray.length);
+            
+            SetSelectedProducts(productsArray);
+        }
+        
+        /*
+        if(element.checked){
 
-       
+            var arr = filterselected
+            arr.push(index+"-"+f)
+            var productsArray = [];
+            console.log("arr",arr)
+            products.map(product=>{
+                var flag = true;
+                // arr.map(a=>{
+                //     var pair= a.split("-")
+                //     var key = pair[0]
+                //     var value = pair[1]
+                //     console.log("key",key)
+                //     console.log("value",value)
+                //     // var key = a.split("-")[0] 
+                //     // var value = a.split("-")[1]
+                //     // console.log("filterKey",product.filtercriterias[key])
+                //     // if(product.filtercriterias[key] !== value){
+                //     //     flag = false;
+                //     // }
+                // })
+                if(flag){
+                    productsArray.push(product)
+                }
+            })
+            console.log("productsarray",productsArray)
+            SetSelectedProducts(productsArray)
+            SetFilterSelected(arr)
+        }
+        */
+    }
+   
+    return(
         <Row className="filterproductsContainer">
-
             <Col md={2}>
                 <h5>FilterProduct</h5>
                 <br></br>
                 {
-                    (areSubCatFetched) ? (
-                        filterSubCat.map((subCat, index) => {
-                            return (
-                                <div>
-
-                                    <h6>{subCat.subCategoryName}</h6>
-                                    {
-                                        subCat.subSubCategories.map(subSubCategories => {
-                                            return (
-                                                <Form>
-                                                    <Form.Check type="checkbox" value={subSubCategories.subSubCategoryName} label={subSubCategories.subSubCategoryName} defaultChecked={(subSubCategories.subSubCategoryName === localStorage.getItem("SubSubCategory")) ? (true) : (false)} onChange={handleFormCheck} />
-                                                </Form>
-                                            );
-                                        })
-                                    }
-                                </div>
-                            );
-                        })
-                    ) : (
-                        null
-                    )
-
-
-
-                }
-                <br></br>
-                {/* {
-                    (isRangeSet) ? (
-                        <MultiRangeSlider
-                            min={minPrice}
-                            max={maxPrice}
-                            // onChange={({ min, max }) =>  console.log(`min = ${min}, max = ${max}`)}
-                            onChange={({ min, max }) => { handlePriceRange({ min, max }) }}
-                        />
-                    ) : (
-                        null
-                    )
-                } */}
-                {
-                    (isFiltersSet)?(
-                        filterkey.map(key=>{
+                    (isFiltersFetched)?(
+                        keySet.map(index=>{
                             return(
                                 <div>
-                                    <h5>{key}</h5>
+                                    <h6>{index}</h6>
                                     {
-                                        filters[key].map(values=>{
+                                        filters[index].map(f=>{
                                             return(
                                                 <Form>
-                                                    <Form.Check id={key} type="checkbox"  value={values}  label = {values}/>
+                                                    <Form.Check type="checkbox" id={f} value={f} label={f} onChange={()=>handleFormCheck(index,f)}/>
                                                 </Form>
-    
                                             );
                                         })
                                     }
                                 </div>
-                            );
+                            )
                         })
                     ):(
                         null
                     )
                 }
-
-            </Col> 
+                {/* {
+                    (areSubCatFetched) ?(
+                        filterSubCat.map((subCat,index)=>{
+                            return(
+                                <div>
+                                    <h6>{subCat.subCategoryName}</h6>
+                                    {
+                                        subCat.subSubCategories.map(subSubCategories=>{
+                                            return(
+                                                <Form>
+                                                    <Form.Check type="checkbox" value={subSubCategories.subSubCategoryName} label={subSubCategories.subSubCategoryName} defaultChecked={(subSubCategories.subSubCategoryName === localStorage.getItem("SubSubCategory")) ? (true) : (false)} onChange={handleFormCheck}  />
+                                                </Form>
+                                            );
+                                        })
+                                    }
+                                </div>
+                            )
+                        })
+                    ):(
+                        null
+                    )
+                } */}
+            </Col>
             <Col md={10}>
-                    {
-                        (change>0) ? (<Button id="comparebtn">ADD TO COMPARE {change}</Button>) : (null)
-                    }
-                
-                    {
-                       
-                        (areProductsFetched) ?
-                            (
-                                products.map(index => {
-                                    return (
+                {
+                    (isSelectedProductsFetched)?(
+                        selectedProducts.map(index => {
+                            return (
 
-                                        // <Card  style={{ width: '20rem'}} 
-                                        // className="mb-2">
-                                        //      <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
-                                        //     <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
-                                        //     <Card.Body>
-                                        //     <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
-                                        //     <Card.Text onClick={()=>callProductDetails(index)}>
-                                        //     <s>₹{index.productPrice}</s>  
-                                        //     <strong style={{marginLeft:20}}>₹{index.offerPrice}</strong>
-                                        //     <br></br>
-                                        //     {
-                                        //         index.productHighlights.split(';').map(highlight=>{
-                                        //             return(
-                                        //                 <span>{highlight}<br></br></span>
-                                        //             );  
-                                        //         })
-                                        //     }
-                                        //     </Card.Text>
+                                // <Card  style={{ width: '20rem'}} 
+                                // className="mb-2">
+                                //      <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
+                                //     <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
+                                //     <Card.Body>
+                                //     <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
+                                //     <Card.Text onClick={()=>callProductDetails(index)}>
+                                //     <s>₹{index.productPrice}</s>  
+                                //     <strong style={{marginLeft:20}}>₹{index.offerPrice}</strong>
+                                //     <br></br>
+                                //     {
+                                //         index.productHighlights.split(';').map(highlight=>{
+                                //             return(
+                                //                 <span>{highlight}<br></br></span>
+                                //             );  
+                                //         })
+                                //     }
+                                //     </Card.Text>
 
-                                        //     <br></br>
-                                        //     <Button variant="flat" size="1">Buy</Button>
-                                        //     </Card.Body>
+                                //     <br></br>
+                                //     <Button variant="flat" size="1">Buy</Button>
+                                //     </Card.Body>
 
-                                        // </Card>
+                                // </Card>
 
-                                        <Row className="filterproductsRow">
-                                            <Col md={2}>
-                                                <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                <Row className="filterproductsRow">
+                                    <Col md={2}>
+                                        <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
 
+                                    </Col>
+                                    <Col md={10} >
+                                        <Row className="innerrow">
+                                            <Col md={11}>
+                                                <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
                                             </Col>
-                                            <Col md={10} >
-                                                <Row className="innerrow">
-                                                    <Col md={11}>
-                                                        <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
-                                                    </Col>
-                                                    <Col md={1} >
-                                                        {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
-                                                            <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
-                                                            <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
-                                                        }
-                                                    </Col>
-
-                                                </Row>
-                                                <Row className="innerrow">
-                                                    <Col md={11}>
-                                                        <h6 style={{color:'GrayText'}}>{index.productHighlights}</h6>
-                                                    </Col>
-
-                                                </Row>
-                                                <Row className="innerrow">
-                                                    <Col md={10}>
-                                                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
-
-                                                    </Col>
-
-                                                </Row>
-
-                                                <Row className="innerrow">
-                                                    <Form style={{
-                                                        fontWeight: '500',
-                                                        fontSize: '120%'
-                                                    }}>
-                                                        <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} />
-                                                    </Form>
-
-                                                </Row>
-
-                                                <Row className="innerrow">
-                                                    <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" >Add To Cart</Button></Col>
-                                                    <Col><Button className="filterproductBtn" variant="outline-primary"  >Buy Now</Button></Col>
-                                                   
-
-                                                </Row>
+                                            <Col md={1} >
+                                                {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
+                                                    <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
+                                                    <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
+                                                }
                                             </Col>
 
+                                        </Row>
+                                        <Row className="innerrow">
+                                            <Col md={11}>
+                                                {
+                                                    index.productHighlights.split(';').map(highlight => {
+                                                        return (
+                                                            <h6 style={{color:'GrayText'}}>•{highlight}<br></br></h6>
+                                                        );
+                                                    })
+                                                }
+                                                {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
+                                            </Col>
+
+                                        </Row>
+                                        <Row className="innerrow">
+                                            <Col md={10}>
+                                                <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
+
+                                            </Col>
 
                                         </Row>
 
-                                       
+                                        <Row className="innerrow">
+                                            <Form style={{
+                                                fontWeight: '500',
+                                                fontSize: '120%'
+                                            }}>
+                                                <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} />
+                                            </Form>
+
+                                        </Row>
+
+                                        <Row className="innerrow">
+                                            <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" >Add To Cart</Button></Col>
+                                            <Col><Button className="filterproductBtn" variant="outline-primary"  >Buy Now</Button></Col>
+                                           
+
+                                        </Row>
+                                    </Col>
+
+
+                                </Row>
 
 
 
-                                    )
-                                })
-                            ) : (
-                                null
                             )
-                    }
-               
+                        })
+                    ):(
+                        null
+                    )
+                }
             </Col>
-
         </Row>
-      
     );
+
+
 }
 
 export default FilterProduct;
