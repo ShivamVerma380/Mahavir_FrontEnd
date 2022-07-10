@@ -121,17 +121,7 @@ function FilterProduct() {
 
     const handleFormCheck=(index,f)=>{
 
-        // console.log("event",index);
-        // console.log("df",f);
         var element = document.getElementById(f);
-        // console.log("element",element);
-        // console.log("status",element.checked);
-        
-        /*if checkbox is checked 
-            1. Add it to localStorage
-            2. From use state variable add it 
-            3.Load all use states condition satisfying variables
-        */
         if(element.checked){
             var  arr= filterselected;
             var flag = true;
