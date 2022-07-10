@@ -11,6 +11,7 @@ const CartItem = ({ item }) => {
             {
                 (!item.freeItem) ? (
                     <Container>
+                    <Container>
                         <Row>
                             <Col md={12}>
                                 <Row>
@@ -41,6 +42,8 @@ const CartItem = ({ item }) => {
                                                 <Button className="btn-flat">REMOVE</Button>
                                             </Col>
                                         </Row>
+                                        <br></br>
+                                        <br></br>
 
                                     </Col>
                                 </Row >
@@ -50,6 +53,11 @@ const CartItem = ({ item }) => {
                             </Col >
                         </Row >
                     </Container>
+                        <br></br>
+                    </Container>
+
+                    
+                    
                 ) : (
 
                     <Container>
@@ -118,9 +126,10 @@ const CartItem = ({ item }) => {
                                 </Row>
                             </Col >
                         </Row >
-                        <hr></hr>
+                        {/* <hr></hr> */}
 
                     </Container >
+                    
                 )
             }
         </div>

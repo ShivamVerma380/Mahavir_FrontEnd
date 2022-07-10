@@ -18,12 +18,14 @@ const CompareProducts = () => {
     const navigate = useNavigate();
     const [products,setProducts] = useState([]);
     const [isProductsFetched,SetIsProductFetched] = useState(false);
+   
     
     useEffect(()=>{
         if(!isProductsFetched){
             var productsArray = [];
-            var modelNumbers = localStorage.getItem("CompareModels").split(',');
+            var modelNumbers = localStorage.getItem("comparecount").split(',');
             console.log("Model Numbers",modelNumbers);
+            
 
             var urls = [];
             modelNumbers.map(index=>{

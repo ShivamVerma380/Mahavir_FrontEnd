@@ -9,7 +9,7 @@ import CartItem from './CartItem';
 
 function Cart() {
 
-    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tbW1zc2RzIiwiZXhwIjoxNjU0NjE4ODgwLCJpYXQiOjE2NTQ1MTg4ODB9.kDTGQbDIDVTXqtEkm_35VqXzpWwJ8wUxOw8Cd8Wrgi0"
+    var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbSIsImV4cCI6MTY1NzM2MjIyNiwiaWF0IjoxNjU3MjYyMjI2fQ.4rzArP34anc9EoiPzfKRIz58vS2ZKmclLcg71L2ZHgo"
     //var token = localStorage.getItem("jwtToken");
     const [cartDetails,setCartDetails] = useState();
     // var isCartDetailsSet = false;x
@@ -179,6 +179,13 @@ function Cart() {
                             
                     </tbody>
                     </Table>
+                    <br></br>
+                    <br></br>
+                    <Row>
+                        <center>
+                        <Button style={{width:"300px"}}className="btn-flat">Place Order</Button>
+                        </center>
+                    </Row>
                     </Col>
                 ):(
                     null
@@ -186,13 +193,13 @@ function Cart() {
             }
             
             </Row>
-            <Row>
-                <Col md={5}>
+            {/* <Row>
+                <Col md={7}>
                 </Col>
                 <Col >
                 <Button style={{width:"300px"}}className="btn-flat">Place Order</Button>
                 </Col>
-            </Row>
+            </Row> */}
            </div>
   
     </div>    

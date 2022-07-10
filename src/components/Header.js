@@ -24,6 +24,7 @@ const Header = ({productList}) => {
         flag = true;
     }
     const[isUserLoggedIn,setIsUserLoggedIn] = React.useState(flag);
+    console.log("logged:",isUserLoggedIn);
     // if(loginStatus=="true"){
     //     console.log("In login status")
     //     setIsUserLoggedIn(true);
@@ -66,11 +67,13 @@ const Header = ({productList}) => {
     }
 
     const handleLogout=()=>{
+        console.log("logout clicked");
         setIsUserLoggedIn(false);
         // alert(localStorage.getItem("isLoggedIn"));
         localStorage.setItem("isLoggedIn",false);
         // alert(localStorage.getItem("isLoggedIn"));
         setIsUserLoggedIn(false);
+        console.log("log",isUserLoggedIn);
         
         
     }
@@ -125,6 +128,7 @@ const Header = ({productList}) => {
                         <NavDropdown.Item  onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
                         <NavDropdown.Item target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
                         </NavDropdown>
+                        
                     ):(
                         <Nav.Link  onClick={callLogin}>Hi, Sign In</Nav.Link>
                     )
@@ -135,12 +139,22 @@ const Header = ({productList}) => {
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} href="https://goo.gl/maps/eLmvYz7aLYgTuiSa7" target="_blank">Kothrud</NavDropdown.Item>
                 </NavDropdown>
+                {
+                    (isUserLoggedIn)?(
+                        <NavDropdown style={{backgroundImage:'linear-gradient(135deg, rgb(255, 51, 66) 0%, rgb(255, 48, 64) 0.01%, rgb(255, 125, 102) 100%)',borderRadius:'12px',fontWeight:'900',paddingLeft:'20px',paddingRight:'20px'}} renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  
+                        <NavDropdown.Item  style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
+                        </NavDropdown>
+                    ):(<Nav.Link style={{backgroundImage:'linear-gradient(135deg, rgb(255, 51, 66) 0%, rgb(255, 48, 64) 0.01%, rgb(255, 125, 102) 100%)',borderRadius:'12px',fontWeight:'900',paddingLeft:'20px',paddingRight:'20px'}} onClick={callLogin}>Hi, Sign In</Nav.Link>)
+                }
+                {/* <NavDropdown style={{backgroundImage:'linear-gradient(135deg, rgb(255, 51, 66) 0%, rgb(255, 48, 64) 0.01%, rgb(255, 125, 102) 100%)',borderRadius:'12px',fontWeight:'900',paddingLeft:'20px',paddingRight:'20px'}} renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  
+                        <NavDropdown.Item  style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
+                        </NavDropdown> */}
                 
-                <NavDropdown style={{backgroundImage:'linear-gradient(135deg, rgb(255, 51, 66) 0%, rgb(255, 48, 64) 0.01%, rgb(255, 125, 102) 100%)',borderRadius:'12px',fontWeight:'900',paddingLeft:'20px',paddingRight:'20px'}} renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
-                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  
-                    <NavDropdown.Item  style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
-                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
-                </NavDropdown>
+                
                         
 
                     
