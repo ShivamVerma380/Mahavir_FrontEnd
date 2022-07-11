@@ -45,6 +45,7 @@ import BrandCatProducts from './components/Items/BrandCatProducts';
 import BrandOfferPosterProducts from './components/Items/BrandOfferPosterProducts';
 import ProductsByDeal from './components/Items/ProductsByDeal';
 import FilterProduct from './components/Filters/FilterProduct';
+import WishlistProducts from './components/WishlistProducts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
@@ -103,6 +104,7 @@ root.render(
       <Route path='/brandofferposterproducts' element={<BrandOfferPosterProducts/>}/>
       <Route path='/productsbydeal' element={<ProductsByDeal/>}/>
       <Route path='/filterproducts' element={<FilterProduct/>}/>
+      <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
 
     </Routes>
   </BrowserRouter>

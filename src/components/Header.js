@@ -100,7 +100,7 @@ const Header = ({productList}) => {
 
     const handleWishlist=()=>{
         alert("Wishlist clicked")
-        navigate("/wishlist")
+        navigate("/wishlistproducts")
     }
     
     return(
