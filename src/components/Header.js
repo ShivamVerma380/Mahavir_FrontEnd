@@ -15,16 +15,39 @@ import '../assets/fonts/Olive Compact MN Regular.ttf'
 import './Header.css';
 const Header = ({productList}) => {
 
-    let name = localStorage.getItem("Name")
-   // let isUserLoggedIn = localStorage.getItem("isUserLoggedIn")
-    const navigate = useNavigate();
-    var loginStatus = localStorage.getItem("isLoggedIn");
-    var flag= false;
-    if(localStorage.getItem("isLoggedIn")==="true"){
-        flag = true;
+    
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
-    const[isUserLoggedIn,setIsUserLoggedIn] = React.useState(flag);
-    console.log("logged:",isUserLoggedIn);
+    var name = getCookie("Name");
+    var isUserLoggedIn=getCookie("isLoggedIn");
+    const navigate = useNavigate();
+    // var loginStatus = localStorage.getItem("isLoggedIn");
+    // var flag= false;
+    // if(localStorage.getItem("isLoggedIn")==="true"){
+    //     flag = true;
+    // }
+    // const[isUserLoggedIn,setIsUserLoggedIn] = React.useState(flag);
+    // console.log("logged:",isUserLoggedIn);
     // if(loginStatus=="true"){
     //     console.log("In login status")
     //     setIsUserLoggedIn(true);
@@ -54,7 +77,7 @@ const Header = ({productList}) => {
         navigate("/login")
     }
     const Cart=()=>{
-        setIsUserLoggedIn(true);
+        // setIsUserLoggedIn(true);
         navigate("/cart")
     }
 
@@ -68,12 +91,9 @@ const Header = ({productList}) => {
 
     const handleLogout=()=>{
         console.log("logout clicked");
-        setIsUserLoggedIn(false);
-        // alert(localStorage.getItem("isLoggedIn"));
-        localStorage.setItem("isLoggedIn",false);
-        // alert(localStorage.getItem("isLoggedIn"));
-        setIsUserLoggedIn(false);
-        console.log("log",isUserLoggedIn);
+        
+        setCookie("isLoggedIn",false,20)
+        navigate('/')
         
         
     }
@@ -140,7 +160,8 @@ const Header = ({productList}) => {
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} href="https://goo.gl/maps/eLmvYz7aLYgTuiSa7" target="_blank">Kothrud</NavDropdown.Item>
                 </NavDropdown>
                 {
-                    (isUserLoggedIn)?(
+                    
+                    (isUserLoggedIn==="true")?(
                         <NavDropdown style={{backgroundImage:'linear-gradient(135deg, rgb(255, 51, 66) 0%, rgb(255, 48, 64) 0.01%, rgb(255, 125, 102) 100%)',borderRadius:'12px',fontWeight:'900',paddingLeft:'20px',paddingRight:'20px'}} renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  
                         <NavDropdown.Item  style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
