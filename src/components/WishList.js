@@ -6,13 +6,16 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
 
 
+
 const WishList = () => {
+  var modelnums = [];
   // var arr = localStorage.getItem("wishlistproduct").split(',')
   const [arr,setarr] = useState(localStorage.getItem("wishlistproduct").split(','))
   console.log("array: ", arr)
   const [product, setProduct] = useState([]);
   const [isProductFetched, setIsProductFetched] = useState(false);
   const [array,setarray] = useState([]);  
+  const [wish,setWish] = useState([]);
   const navigate = useNavigate();
   function callProductDetails(index){
     //alert(index);
@@ -113,29 +116,65 @@ const RemoveFromWishListviaIcon=(event)=>{
         //     })
         //   })
         // }
-        var urls = [];
-        arr.map(index => {
-          if (index != '') {
-            urls.push(axios.get("http://localhost:8080/get-products/" + index));
+
+        axios({
+          method: "get",
+          url: "http://localhost:8080/wishlist",
+          headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
           }
+        }).then(function (response) {
+          console.log("Response", response);
+          if (response.status == 200) {
+            console.log("Wishlist response", response.data);
+            setWish(response.data);
+            // setAddress(response.data);
+            // console.log("Address: ", address)
+            // setIsAddressFetched(true);
+  
+          } else {
+            console.log(response.data.message);
+          }
+        }).catch(function (error) {
+          console.log(error);
         })
-        axios.all(urls).then(
-          axios.spread((...res) => {
-            res.map((response) => {
-              console.log("response", response);
-              setProduct(response.data)
-              array.push(response.data);
-            })
-            // SetLength(product.length);
-            setIsProductFetched(true);
-            console.log("Array: ", array);
+
+        
+       
+
+
+        // var urls = [];
+        // arr.map(index => {
+        //   if (index != '') {
+        //     urls.push(axios.get("http://localhost:8080/get-products/" + index));
+        //   }
+        // })
+        // axios.all(urls).then(
+        //   axios.spread((...res) => {
+        //     res.map((response) => {
+        //       console.log("response", response);
+        //       setProduct(response.data)
+        //       array.push(response.data);
+        //     })
+        //     // SetLength(product.length);
+        //     setIsProductFetched(true);
+        //     console.log("Array: ", array);
             
-          })
-        )
+        //   })
+        // )
+
+        wish.map(index=>{
+          var urls=[];
+          
+          modelnums += index;
+          
+        })
+        
       
       
 
     }});
+    console.log("Model nos: ",modelnums);
 
   return (
     <>
@@ -147,7 +186,7 @@ const RemoveFromWishListviaIcon=(event)=>{
         (isProductFetched) ? (
 
           
-              array.map(index => {
+              wish.map(index => {
                 return (
       <Row style={{margin:'2%',padding:'2%',border:"1px solid black",borderRadius:'5px',boxShadow:' 0 2px 10px #bdbdbd'}}>
         <Col sm={3}>

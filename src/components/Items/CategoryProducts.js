@@ -78,29 +78,53 @@ function CategoryProducts(){
     function WishlistHandler(index) {
         // alert("Item added successfully to wishlist");
         console.log(index.modelNumber)
-        if (localStorage.getItem("wishlistproduct")==null) {
-          localStorage.setItem("wishlistproduct",index.modelNumber)
-        }else {
-          var arr = localStorage.getItem("wishlistproduct").split(',')
-          var flag = true;
-          arr.map(i=>{
+        // if (localStorage.getItem("wishlistproduct")==null) {
+        //   localStorage.setItem("wishlistproduct",index.modelNumber)
+        // }else {
+        //   var arr = localStorage.getItem("wishlistproduct").split(',')
+        //   var flag = true;
+        //   arr.map(i=>{
            
-            console.log("i: ",i)
-            if( i=== index.modelNumber) {
-                arr.splice(arr.indexOf(i),1)
-                localStorage.setItem("wishlistproduct",arr)
-                console.log('del arr: ' + arr)
-                console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
-               console.log("in if")
-              flag = false;
-            } 
-          }) 
-          if(flag)
-            localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
-            //navigate('/categoryProductsall')
-            CategoryProducts(location.state.name)
+        //     console.log("i: ",i)
+        //     if( i=== index.modelNumber) {
+        //         arr.splice(arr.indexOf(i),1)
+        //         localStorage.setItem("wishlistproduct",arr)
+        //         console.log('del arr: ' + arr)
+        //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+        //        console.log("in if")
+        //       flag = false;
+        //     } 
+        //   }) 
+        //   if(flag)
+        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        //     //navigate('/categoryProductsall')
+        //     CategoryProducts(location.state.name)
           
+        // }
+
+        console.log("Wishlist clicked")
+
+      
+        var formdata = {
+          "modelNumber": index.modelNumber
+  
         }
+  
+        axios.post("http://localhost:8080/wishlist", formdata, {
+          headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s",
+            "Content-Type": "multipart/form-data"
+          }
+        }).then(function (response) {
+          if (response.status == 200) {
+            console.log("Added to wishlist successfully");
+            
+            console.log(response.data)
+            // navigate("/");
+          }
+        }).catch(function (error) {
+          console.log("Error", error);
+        })
         
     }
     function CategoryProducts(cattitle){

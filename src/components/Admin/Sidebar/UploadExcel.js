@@ -7,26 +7,139 @@ import AdminHeader from "../../Admin/AdminHeader";
 import AdminNavbar from "./AdminNavbar";
 import axios from 'axios';
 const UploadExcel = () => {
-  const [selectedFile, setSelectedFile] = useState();
-  const [isFilePicked, setIsFilePicked] = useState(false);
+  const [selectedproductFile, setSelectedProductFile] = useState();
+  const [selectedcategoryFile, setSelectedCategoryFile] = useState();
+  const [selectedfilterFile, setSelectedFilterFile] = useState();
+  const [selectedbrandsFile, setSelectedBrandsFile] = useState();
+  const [selectedposterFile, setSelectedPosterFile] = useState();
+  const [isProductFilePicked, setIsProductFilePicked] = useState(false);
+  const [isCategoryFilePicked, setIsCategoryFilePicked] = useState(false);
+  const [isFilterFilePicked, setIsFilterFilePicked] = useState(false);
+  const [isBrandsFilePicked, setIsBrandsFilePicked] = useState(false);
+  const [isPosterFilePicked, setIsPosterFilePicked] = useState(false);
 
-  const changeHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
-    setIsFilePicked(true);
+
+  const ProductFileHandler = (event) => {
+    setSelectedProductFile(event.target.files[0]);
+    setIsProductFilePicked(true);
   };
 
-  const handleSubmission = () => {
+  const handleProductsFileSubmission = () => {
     const formData = new FormData();
 
-    formData.append('file', selectedFile);
+    formData.append('file', selectedproductFile);
     console.log("Form Data",formData)
     alert("Submit Clicked")
 
-    axios.post("http://localhost:8080/excel",formData,{
+    axios.post("http://localhost:8080/excel/products",formData,{
       headers:{
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2EiLCJleHAiOjE2NTYzNjM1NTMsImlhdCI6MTY1NjI2MzU1M30.3g2xGWCpQ8J_SBzkJ3hzOKIDUpyk6ujKa9WjInuXLUE"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2FhYSIsImV4cCI6MTY1NzYyNjExMiwiaWF0IjoxNjU3NTI2MTEyfQ.Qrrp3Zt9z6lxc3kT0KmOXeG0Jb_pyWwkPo_jzLZKpqQ"
       },
-      mode:"no-cors"
+      
+    }).then(function(response){
+      console.log(response.data)
+    }).catch(function(error){
+      console.log(error)
+    })
+
+
+  };
+
+  const CategoryFileHandler = (event) => {
+    setSelectedCategoryFile(event.target.files[0]);
+    setIsCategoryFilePicked(true);
+  };
+
+  const handleCategoryFileSubmission = () => {
+    const formData = new FormData();
+
+    formData.append('file', selectedcategoryFile);
+    console.log("Form Data",formData)
+    alert("Submit Clicked")
+
+    axios.post("http://localhost:8080/excel/Categories",formData,{
+      headers:{
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2FhYSIsImV4cCI6MTY1NzYyNjExMiwiaWF0IjoxNjU3NTI2MTEyfQ.Qrrp3Zt9z6lxc3kT0KmOXeG0Jb_pyWwkPo_jzLZKpqQ"
+      },
+      
+    }).then(function(response){
+      console.log(response.data)
+    }).catch(function(error){
+      console.log(error)
+    })
+
+
+  };
+
+  const FilterFileHandler = (event) => {
+    setSelectedFilterFile(event.target.files[0]);
+    setIsFilterFilePicked(true);
+  };
+
+  const handleFilterFileSubmission = () => {
+    const formData = new FormData();
+
+    formData.append('file', selectedfilterFile);
+    console.log("Form Data",formData)
+    alert("Submit Clicked")
+
+    axios.post("http://localhost:8080/excel/filters",formData,{
+      headers:{
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2FhYSIsImV4cCI6MTY1NzYyNjExMiwiaWF0IjoxNjU3NTI2MTEyfQ.Qrrp3Zt9z6lxc3kT0KmOXeG0Jb_pyWwkPo_jzLZKpqQ"
+      },
+      
+    }).then(function(response){
+      console.log(response.data)
+    }).catch(function(error){
+      console.log(error)
+    })
+
+
+  };
+
+  const BrandFileHandler = (event) => {
+    setSelectedBrandsFile(event.target.files[0]);
+    setIsBrandsFilePicked(true);
+  };
+
+  const handleBrandFileSubmission = () => {
+    const formData = new FormData();
+
+    formData.append('file', selectedbrandsFile);
+    console.log("Form Data",formData)
+    alert("Submit Clicked")
+
+    axios.post("http://localhost:8080/excel/shopByBrands",formData,{
+      headers:{
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2FhYSIsImV4cCI6MTY1NzYyNjExMiwiaWF0IjoxNjU3NTI2MTEyfQ.Qrrp3Zt9z6lxc3kT0KmOXeG0Jb_pyWwkPo_jzLZKpqQ"
+      },
+      
+    }).then(function(response){
+      console.log(response.data)
+    }).catch(function(error){
+      console.log(error)
+    })
+
+
+  };
+
+  const PosterFileHandler = (event) => {
+    setSelectedPosterFile(event.target.files[0]);
+    setIsPosterFilePicked(true);
+  };
+
+  const handlePosterFileSubmission = () => {
+    const formData = new FormData();
+
+    formData.append('file', selectedposterFile);
+    console.log("Form Data",formData)
+    alert("Submit Clicked")
+
+    axios.post("http://localhost:8080/excel/offerposters",formData,{
+      headers:{
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2FhYSIsImV4cCI6MTY1NzYyNjExMiwiaWF0IjoxNjU3NTI2MTEyfQ.Qrrp3Zt9z6lxc3kT0KmOXeG0Jb_pyWwkPo_jzLZKpqQ"
+      },
+      
     }).then(function(response){
       console.log(response.data)
     }).catch(function(error){
@@ -44,22 +157,22 @@ const UploadExcel = () => {
         <Container style={{padding:'50px'}}>
           <Row>
             <Col sm={6}>
-            <h5 >Upload Your Excel Datasheet here</h5>
+            <h5 >Upload Your Products Excel Datasheet here</h5>
           
-            <input  type="file" name="file" accept=".xlsx, .xls, .csv" onChange={changeHandler} />
+            <input  type="file" name="file" accept=".xlsx, .xls, .csv" onChange={ProductFileHandler} />
             <br></br><br></br>
-            <Button variant='flat' size="m" onClick={handleSubmission}>Submit</Button>
+            <Button variant='flat' size="m" onClick={handleProductsFileSubmission}>Submit</Button>
             <br></br><br></br>
             </Col>
             <Col sm={6}>
-                  {isFilePicked ? (
+                  {isProductFilePicked ? (
               <div style={{fontSize:'15px'}}>
-                <p ><b>Filename:</b> {selectedFile.name}</p>
-                <p ><b>Filetype:</b> {selectedFile.type}</p>
-                <p ><b>Size in bytes:</b> {selectedFile.size}</p>
+                <p ><b>Filename:</b> {selectedproductFile.name}</p>
+                <p ><b>Filetype:</b> {selectedproductFile.type}</p>
+                <p ><b>Size in bytes:</b> {selectedproductFile.size}</p>
                 <p >
                   <b>lastModifiedDate:</b>{' '}
-                  {selectedFile.lastModifiedDate.toLocaleDateString()}
+                  {selectedproductFile.lastModifiedDate.toLocaleDateString()}
                 </p>
               </div>
             ) : (
@@ -73,20 +186,20 @@ const UploadExcel = () => {
             <Col sm={6}>
             <h5 >Upload Your Categories Datasheet here</h5>
           
-            <input  type="file" name="categoriesfile" accept=".xlsx, .xls, .csv"  />
+            <input  type="file" name="categoriesfile" accept=".xlsx, .xls, .csv" onChange={CategoryFileHandler}/>
             <br></br><br></br>
-            <Button variant='flat' size="m" >Submit</Button>
+            <Button variant='flat' size="m" onClick={handleCategoryFileSubmission}>Submit</Button>
             <br></br><br></br>
             </Col>
             <Col sm={6}>
-                  {isFilePicked ? (
+                  {isCategoryFilePicked ? (
               <div style={{fontSize:'15px'}}>
-                <p ><b>Filename:</b> {selectedFile.name}</p>
-                <p ><b>Filetype:</b> {selectedFile.type}</p>
-                <p ><b>Size in bytes:</b> {selectedFile.size}</p>
+                <p ><b>Filename:</b> {selectedcategoryFile.name}</p>
+                <p ><b>Filetype:</b> {selectedcategoryFile.type}</p>
+                <p ><b>Size in bytes:</b> {selectedcategoryFile.size}</p>
                 <p >
                   <b>lastModifiedDate:</b>{' '}
-                  {selectedFile.lastModifiedDate.toLocaleDateString()}
+                  {selectedcategoryFile.lastModifiedDate.toLocaleDateString()}
                 </p>
               </div>
             ) : (
@@ -101,20 +214,20 @@ const UploadExcel = () => {
             <Col sm={6}>
             <h5 >Upload filter criterias </h5>
          
-            <input  type="file" name="filtercriteria" accept=".xlsx, .xls, .csv"  />
+            <input  type="file" name="filtercriteria" accept=".xlsx, .xls, .csv" onChange={FilterFileHandler}/>
             <br></br><br></br>
-            <Button variant='flat' size="m" >Submit</Button>
+            <Button variant='flat' size="m" onClick={handleFilterFileSubmission}>Submit</Button>
             <br></br><br></br>
             </Col>
             <Col sm={6}>
-                  {isFilePicked ? (
+                  {isFilterFilePicked ? (
               <div style={{fontSize:'15px'}}>
-                <p ><b>Filename:</b> {selectedFile.name}</p>
-                <p ><b>Filetype:</b> {selectedFile.type}</p>
-                <p ><b>Size in bytes:</b> {selectedFile.size}</p>
+                <p ><b>Filename:</b> {selectedfilterFile.name}</p>
+                <p ><b>Filetype:</b> {selectedfilterFile.type}</p>
+                <p ><b>Size in bytes:</b> {selectedfilterFile.size}</p>
                 <p >
                   <b>lastModifiedDate:</b>{' '}
-                  {selectedFile.lastModifiedDate.toLocaleDateString()}
+                  {selectedfilterFile.lastModifiedDate.toLocaleDateString()}
                 </p>
               </div>
             ) : (
@@ -129,20 +242,20 @@ const UploadExcel = () => {
             <Col sm={6}>
             <h5 >Upload shop by brands </h5>
           
-            <input  type="file" name="shopbybrands" accept=".xlsx, .xls, .csv"  />
+            <input  type="file" name="shopbybrands" accept=".xlsx, .xls, .csv" onChange={BrandFileHandler}/>
             <br></br><br></br>
-            <Button variant='flat' size="m" >Submit</Button>
+            <Button variant='flat' size="m" onClick={handleBrandFileSubmission}>Submit</Button>
             <br></br><br></br>
             </Col>
             <Col sm={6}>
-                  {isFilePicked ? (
+                  {isBrandsFilePicked ? (
               <div style={{fontSize:'15px'}}>
-                <p ><b>Filename:</b> {selectedFile.name}</p>
-                <p ><b>Filetype:</b> {selectedFile.type}</p>
-                <p ><b>Size in bytes:</b> {selectedFile.size}</p>
+                <p ><b>Filename:</b> {selectedbrandsFile.name}</p>
+                <p ><b>Filetype:</b> {selectedbrandsFile.type}</p>
+                <p ><b>Size in bytes:</b> {selectedbrandsFile.size}</p>
                 <p >
                   <b>lastModifiedDate:</b>{' '}
-                  {selectedFile.lastModifiedDate.toLocaleDateString()}
+                  {selectedbrandsFile.lastModifiedDate.toLocaleDateString()}
                 </p>
               </div>
             ) : (
@@ -157,20 +270,20 @@ const UploadExcel = () => {
             <Col sm={6}>
             <h5 >Upload mega mini posters </h5>
             
-            <input  type="file" name="megaminiposters" accept=".xlsx, .xls, .csv"  />
+            <input  type="file" name="megaminiposters" accept=".xlsx, .xls, .csv" onChange={PosterFileHandler}/>
             <br></br><br></br>
-            <Button variant='flat' size="m" >Submit</Button>
+            <Button variant='flat' size="m" onClick={handlePosterFileSubmission}>Submit</Button>
             <br></br><br></br>
             </Col>
             <Col sm={6}>
-                  {isFilePicked ? (
+                  {isPosterFilePicked ? (
               <div style={{fontSize:'15px'}}>
-                <p ><b>Filename:</b> {selectedFile.name}</p>
-                <p ><b>Filetype:</b> {selectedFile.type}</p>
-                <p ><b>Size in bytes:</b> {selectedFile.size}</p>
+                <p ><b>Filename:</b> {selectedposterFile.name}</p>
+                <p ><b>Filetype:</b> {selectedposterFile.type}</p>
+                <p ><b>Size in bytes:</b> {selectedposterFile.size}</p>
                 <p >
                   <b>lastModifiedDate:</b>{' '}
-                  {selectedFile.lastModifiedDate.toLocaleDateString()}
+                  {selectedposterFile.lastModifiedDate.toLocaleDateString()}
                 </p>
               </div>
             ) : (
