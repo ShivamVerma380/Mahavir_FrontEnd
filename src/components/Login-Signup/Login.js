@@ -88,11 +88,16 @@ function Login() {
         console.log("Confirm Password:", confirmPassword);
     }
 
-
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
     const homepage = () => {
-        let token = localStorage.getItem("jwtToken");
+        let tokenn = localStorage.getItem("jwtToken");
 
-        console.log("token", token);
+        // alert("token", localStorage.getItem("jwtToken"));
         if (email === "") {
             console.log("Email is empty");
             alert("enter email")
@@ -108,7 +113,7 @@ function Login() {
             Email: email,
             Password: password
         }
-        var authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxc2EiLCJleHAiOjE2NTY2NzM0MzAsImlhdCI6MTY1NjU3MzQzMH0.h4vfExQjQ-p0bQWCxvXKmBhwGACPHspDcWMNMed_ncc";
+        var authorization = "Bearer "+{tokenn};
         console.log(authorization);
 
         axios.post("http://localhost:8080/login-user", form_data_body, {
@@ -119,10 +124,24 @@ function Login() {
         }).then(function (response) {
             console.log(response);
             if (response.status == 200) {
-                localStorage.setItem("isLoggedIn", "true");
-                localStorage.setItem("Name", response.data.message);
-                localStorage.setItem("jwtToken", response.data.token);
+                // localStorage.setItem("isLoggedIn", "true");
+                // localStorage.setItem("Name", response.data.message);
+                // localStorage.setItem("jwtToken", response.data.token);
+                // var token = localStorage.getItem("jwtToken");
+                //alert("token "+localStorage.getItem("jwtToken"));
                 console.log(response.data.message);
+                // var cookiedata=[];
+                // cookiedata.add(localStorage.getItem("isLoggedIn"))
+                // alert('cookie data'+cookiedata);
+                //alert("loginh");
+                // response.cookie("jwttoken",localStorage.getItem("jwtToken"),{
+                //     expires: new Date(Date.now()+25892000000),
+                //     httpOnly:true
+                // });
+                setCookie("jwtToken",response.data.token,20);
+                setCookie("Name",response.data.message,20);
+                setCookie("isLoggedIn",true,20);
+                alert("loginh11");
                 navigate("/");
             }
             console.log(response.data.message);
