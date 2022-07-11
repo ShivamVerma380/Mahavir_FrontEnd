@@ -4,12 +4,13 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import e from "cors";
-
+import {setCookie,getCookie} from '../Cookies';
 
 function FilterProduct() {
     var category = localStorage.getItem("Category");
     const navigate = useNavigate();
 
+    var cart=getCookie("CartModels").split(',');
     //To save selected products
     const[selectedProducts,SetSelectedProducts] = useState([]);
     const[isSelectedProductsFetched,SetIsSelectedProductsFetched] = useState(false);
@@ -252,6 +253,25 @@ function FilterProduct() {
         }
         */
     }
+
+    //Add to cart function
+    const addtocart=(model)=>{
+        
+        
+        
+        if(cart.includes(model)){
+            alert("Item is already present in cart")
+        }
+        else{
+            console.log("adddd"+model);
+            cart.push(model);
+            setCookie("CartModels",cart,20);
+            alert("Added to cart"+model);
+        }
+    
+        
+        
+    }
    
     return(
         <Row className="filterproductsContainer">
@@ -384,7 +404,7 @@ function FilterProduct() {
                                         </Row>
 
                                         <Row className="innerrow">
-                                            <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" >Add To Cart</Button></Col>
+                                            <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
                                             <Col><Button className="filterproductBtn" variant="outline-primary"  >Buy Now</Button></Col>
                                            
 

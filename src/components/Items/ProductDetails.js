@@ -38,7 +38,7 @@ import ProductRating from "./ProductRating";
 import UserReviewRating from "./UserReviewRating";
 import ComparisonProductInformation from "../ProductsComparison/ComparisonProductInformation";
 import ProductSpecification from "./ProductSpecification";
-
+import {setCookie,getCookie} from '../Cookies';
 
 // toast-configuration method,
  // it is compulsory method.
@@ -80,6 +80,8 @@ function ProductDetails(){
   const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
   //const[productInformation,SetProductInformation] = useState();
   const[isProductInformationSet,SetIsProductInformationSet] = useState(false);
+
+  var cart=getCookie("CartModels").split(',');
   var productInformation;
   var averagerate;
   useEffect(()=>{
@@ -509,6 +511,18 @@ const getproductimg5=(product)=>{
     )
   }
 }
+const addtocart=(model)=>{
+        if(cart.includes(model)){
+            alert("Item is already present in cart")
+        }
+        else{
+            console.log("adddd"+model);
+            cart.push(model);
+            setCookie("CartModels",cart,20);
+            alert("Added to cart"+model);
+        }  
+    }   
+
 
 
   return (
@@ -584,7 +598,7 @@ const getproductimg5=(product)=>{
             </Col>
           </Row >
           <Row>
-          <Button  style={{width:'40%', height:'60px', marginLeft:'5%'}} variant="flat" size="1" onClick={handleAddToCart}>Add To Cart</Button>
+          <Button  style={{width:'40%', height:'60px', marginLeft:'5%'}} variant="flat" size="1" onClick={()=>addtocart(product.modelNumber)}>Add To Cart</Button>
           <Button style={{width:'40%',height:'60px',  marginLeft:'5%'}} variant="flat" size="1"  onClick={handleBuyNow}>Buy Now</Button>
 
           </Row>
