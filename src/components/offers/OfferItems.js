@@ -11,9 +11,10 @@ import "../../App.css"
 import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 import {useLocation} from 'react-router-dom';
 import Header from "../Header";
+import {setCookie,getCookie} from '../Cookies';
 
 function OfferItems() {
-
+    var cart=getCookie("CartModels").split(',');
     const navigate = useNavigate();
     const location = useLocation();
     const [products, setProduct] = useState([]);
@@ -48,7 +49,17 @@ function OfferItems() {
 
     }, []);
 
-   
+    const addtocart=(model)=>{
+        if(cart.includes(model)){
+            alert("Item is already present in cart")
+        }
+        else{
+            console.log("adddd"+model);
+            cart.push(model);
+            setCookie("CartModels",cart,20);
+            alert("Added to cart"+model);
+        }  
+    }  
 
     function callProductDetails(index) {
         //alert(index);
@@ -216,7 +227,7 @@ function OfferItems() {
                                     </Row>
 
                                     <Row style={{ marginTop: '2%' }}>
-                                        <Button style={{ width: '30%', height: '60px', marginLeft: '1%', fontSize: '140%' }} variant="flat" size="1" >Add To Cart</Button>
+                                        <Button onClick={()=>addtocart(index.modelNumber)} style={{ width: '30%', height: '60px', marginLeft: '1%', fontSize: '140%' }} variant="flat" size="1" >Add To Cart</Button>
                                         <Button style={{ width: '30%', height: '60px', marginLeft: '5%', fontSize: '140%' }} variant="flat" size="1"  >Buy Now</Button>
 
                                     </Row>
