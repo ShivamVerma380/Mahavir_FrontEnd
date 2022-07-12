@@ -148,7 +148,7 @@ function CategoryProductsSwiper({cattitle}) {
   
         axios.post("http://localhost:8080/wishlist", formdata, {
           headers: {
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW1tIiwiZXhwIjoxNjU3NzI2NTY5LCJpYXQiOjE2NTc2MjY1Njl9.XinnEULBtXiS0BauiGj1q_XQqdWQFnZVLuM8cEG2Jkc",
             "Content-Type": "multipart/form-data"
           }
         }).then(function (response) {
