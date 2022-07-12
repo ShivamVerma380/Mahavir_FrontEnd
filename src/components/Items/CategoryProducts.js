@@ -6,11 +6,11 @@ import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import {setCookie,getCookie} from '../Cookies'
 import {useLocation} from 'react-router-dom';
 
 function CategoryProducts(){
-
+  var cart=getCookie("CartModels").split(',');
     const location = useLocation();
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
@@ -132,6 +132,17 @@ function CategoryProducts(){
 
         navigate("/categoryProductsall",{state:{id:1,name: cattitle}})
       }
+      const addtocart=(model)=>{
+        if(cart.includes(model)){
+            alert("Item is already present in cart")
+        }
+        else{
+            console.log("adddd"+model);
+            cart.push(model);
+            setCookie("CartModels",cart,20);
+            alert("Added to cart"+model);
+        }  
+    }  
   
     return(
         
@@ -198,7 +209,7 @@ function CategoryProducts(){
                             </Row>
                             
                             <Row style={{marginTop:'2%'}}>
-          <Button  style={{width:'30%', height:'60px',marginLeft:'1%', fontSize:'140%'}} variant="flat" size="1" >Add To Cart</Button>
+          <Button  onClick={()=>addtocart(index.modelNumber)} style={{width:'30%', height:'60px',marginLeft:'1%', fontSize:'140%'}} variant="flat" size="1" >Add To Cart</Button>
           <Button style={{width:'30%',height:'60px',  marginLeft:'5%',fontSize:'140%'}} variant="flat" size="1"  >Buy Now</Button>
 
           </Row>
