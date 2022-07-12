@@ -10,7 +10,7 @@ import { IoMdLogOut } from "react-icons/io";
 import OTPInput, { ResendOTP } from "otp-input-react";
 import OtpTimer from "otp-timer";
 import Timer from "otp-timer";
-
+import OtpInput from "react-otp-input";
 
 const axios = require('axios');
 
@@ -40,9 +40,12 @@ function Login() {
     const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
     const [isNewOtpSent, setIsNewOtpSent] = useState(false);
     const [isNewOtpVerified, setIsNewOtpVerified] = useState(false);
+    const [isForgotOtpSent,setIsForgotOtpSent] = useState(false);
     let token = localStorage.getItem("jwtToken");
     console.log("token", token);
+    const [code, setCode] = useState("");
 
+    const handleChange = (code) => setCode(code);
     const inputEmailEvent = (event) => {
         email = event.target.value;
         // console.log("email",email);
@@ -186,7 +189,7 @@ function Login() {
             console.log("Email", email);
             axios({
                 method: "get",
-                url: "http://localhost:8080/forgotPassword/" + email
+                url: "http://localhost:8080/verify-email/" + email
             }).then(function (response) {
                 console.log(response.data);
                 otp = response.data.otp;
@@ -205,9 +208,40 @@ function Login() {
         }
 
     }
+
+    const sendForgotOTP = () => {
+        // alert(email);
+
+        if (email === "") {
+            console.log("Email is empty")
+            alert("Please Enter Email")
+        } else {
+            console.log("Email", email);
+            axios({
+                method: "get",
+                url: "http://localhost:8080/forgotPassword/" + email
+            }).then(function (response) {
+                console.log(response.data);
+                otp = response.data.otp;
+                console.log("otp:", otp);
+            }).catch(function (response) {
+                console.log(response);
+                return;
+            })
+
+
+            // setIsOTPSent(false);
+            setIsForgotOtpSent(true);
+            //setIsOTPVerified(true);
+            console.log("isOTPSent", isOTPSent);
+            console.log("isOTPVerified", isOTPNotVerified);
+        }
+
+    }
+
     const verifyOTP = () => {
         //    alert(otp);
-        if (otp === inputOtpByUser) {
+        if (otp === code) {
             alert('Correct input otp');
             setIsOTPNotVerified(false);
             //    navigate('/email-auth');
@@ -353,8 +387,7 @@ function Login() {
         <div>
 
             <Header />
-            <br></br>
-            <br></br>
+            <center>
 
             <div className="form-parent">
 
@@ -364,7 +397,8 @@ function Login() {
                     {
                         (!isForgotPasswordClicked) ? (
                             <div className="form" id="sign-in-form">
-                                <h1 className="title">SignIn</h1>
+                                <center>
+                                 <h1 className="title">SignIn</h1>
                                 <div className="fields">
                                     <FormGroup>
                                         <Label
@@ -377,6 +411,7 @@ function Login() {
                                             placeholder="Enter Email"
                                             type="email" className="input"
                                             onChange={inputEmailEvent}
+                                            style={{borderRadius:'2px'}}
                                         />
                                     </FormGroup>
                                     <FormGroup >
@@ -391,36 +426,41 @@ function Login() {
                                             placeholder="Enter Password"
                                             type="password" className="input"
                                             onChange={inputPasswordEvent}
+                                            style={{borderRadius:'2px'}}
                                         />
                                     </FormGroup>
-                                    <p className="forgotpass" style={{ color: "blue", textDecorationLine: "underline" }} onClick={forgotPassword}>Forgot Password?</p>
+                                    <p className="forgotpass" style={{ color: "blue", textDecorationLine: "underline" ,cursor:'pointer'}} onClick={forgotPassword}>Forgot Password?</p>
                                 </div>
                                 <div className="submit-container">
                                     <Button className="login-button" onClick={homepage}>
                                         Login
-                                    </Button><br></br><br></br>
+                                    </Button>
                                     <h6>
                                         <p className="link" onClick={() => switchForm('register')}>New user? Sign up</p>
                                     </h6>
                                 </div>
+                                </center>
+
                             </div>
                         ) : (
-                            (!isNewOtpSent) ? (
+                            (!isForgotOtpSent) ? (
                                 <div className="form" id="sign-in-form">
+                                    <center>
                                     <h1 className="title">Forgot Password</h1>
                                     <div className="fields">
                                         <FormGroup>
                                             <Label id="email-input" for="email"></Label>
-                                            <br></br>
-                                            <Input id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
+                                            <Input style={{borderRadius:'2px'}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
                                         </FormGroup>
 
                                     </div>
+                                    <br></br>
                                     <div className="submit-container">
-                                        <Button className="login-button" onClick={() => sendOTP()}>Send OTP on Email</Button>
-                                        <br></br><br></br>
+                                        <Button className="login-button" onClick={() => sendForgotOTP()}>Send OTP on Email</Button>
+                                       
 
                                     </div>
+                                    </center>
                                 </div>
                             ) : (
 
@@ -429,11 +469,34 @@ function Login() {
                                         <h1 className="title">Verify your OTP</h1>
                                         <div className="fields">
                                             <h1>Enter your OTP</h1>
-                                            <FormGroup>
+                                            <OtpInput
+                                                    value={code}
+                                                    onChange={handleChange}
+                                                    numInputs={6}
+                                                    separator={<span style={{ width: "8px" }}></span>}
+                                                    isInputNum={true}
+                                                    shouldAutoFocus={true}
+                                                    inputStyle={{
+                                                    border: "1px solid black",
+                                                    borderRadius: "8px",
+                                                    width: "54px",
+                                                    height: "54px",
+                                                    fontSize: "12px",
+                                                    color: "#000",
+                                                    fontWeight: "400",
+                                                    caretColor: "blue"
+                                                    }}
+                                                    focusStyle={{
+                                                    border: "1px solid #CFD3DB",
+                                                    outline: "none",
+                                                    backgroundColor:'white',
+                                                    }}
+                                                />
+                                            {/* <FormGroup>
                                                 <Label for="otp-input" id="Enter-otp-input">Enter OTP</Label>
                                                 <br></br>
                                                 <Input id="otp" name="otp" placeholder="Enter OTP" className="input" onChange={inputOTPEvent} />
-                                            </FormGroup>
+                                            </FormGroup> */}
 
                                         </div>
                                         <div className="fields">
@@ -461,6 +524,7 @@ function Login() {
                                                     placeholder="Enter New Password"
                                                     type="password" className="input"
                                                     onChange={inputNewPasswordEvent}
+                                                    style={{borderRadius:'2px'}}
                                                 />
                                             </FormGroup>
                                             
@@ -474,6 +538,7 @@ function Login() {
                                                     placeholder="Confirm New Password"
                                                     type="password" className="input"
                                                     onChange={inputNewConfirmPasswordEvent}
+                                                    style={{borderRadius:'2px'}}
                                                 />
                                             </FormGroup>
 
@@ -504,23 +569,26 @@ function Login() {
                     {
                         (isOTPSent) ? (
                             <div className="form" id="sign-up-form">
+                                <center>
                                 <h1 className="title">Sign up</h1>
                                 {/* <p style={{color:"white"}}>Enter your Email</p> */}
                                 <div className="fields">
                                     <FormGroup>
                                         <Label id="email-input" for="email"></Label>
                                         <br></br>
-                                        <Input id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
+                                        <Input style={{borderRadius:'2px'}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
                                     </FormGroup>
 
                                 </div>
+                                <br></br>
                                 <div className="submit-container">
                                     <Button className="login-button" onClick={() => sendOTP()}>Send OTP on Email</Button>
-                                    <br></br><br></br>
+                                    <br></br>
                                     <h6>
                                         <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
                                     </h6>
                                 </div>
+                                </center>
                             </div>
                         ) : (
 
@@ -529,18 +597,42 @@ function Login() {
                                     <h1 className="title">Verify your OTP</h1>
                                     <div className="fields">
                                         <h1>Enter your OTP</h1>
-                                        <FormGroup>
+                                        <OtpInput
+                                                    value={code}
+                                                    onChange={handleChange}
+                                                    numInputs={6}
+                                                    separator={<span style={{ width: "8px" }}></span>}
+                                                    isInputNum={true}
+                                                    shouldAutoFocus={true}
+                                                    inputStyle={{
+                                                    border: "1px solid black",
+                                                    borderRadius: "8px",
+                                                    width: "54px",
+                                                    height: "54px",
+                                                    fontSize: "12px",
+                                                    color: "#000",
+                                                    fontWeight: "400",
+                                                    caretColor: "blue"
+                                                    }}
+                                                    focusStyle={{
+                                                    border: "1px solid #CFD3DB",
+                                                    outline: "none",
+                                                    backgroundColor:'white',
+                                                    }}
+                                                />
+                                        {/* <FormGroup>
                                             <Label for="otp-input" id="Enter-otp-input">Enter OTP</Label>
                                             <br></br>
                                             <Input id="otp" name="otp" placeholder="Enter OTP" className="input" onChange={inputOTPEvent} />
-                                        </FormGroup>
+                                        </FormGroup> */}
                                         
 
 
                                     </div>
+                                    <br></br><br></br>
                                     <div className="submit-container">
                                         <Button className="login-button" onClick={() => verifyOTP()}>Verify OTP</Button>
-                                        <br></br><br></br>
+                                        
 
                                         <h6>
                                             <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
@@ -549,24 +641,28 @@ function Login() {
                                 </div>
                             ) : (
                                 <div className="form" id="sign-up-form">
+                                    <center>                                    
                                     <h1 className="title">User Registration</h1>
+
                                     <div className="fields">
                                         <FormGroup>
-                                            <Input id="firstName" name="firstName" placeholder="First name" defaultValue="" type="name" className="input" onChange={inputFirstNameEvent} />
-                                            <Input id="lastName" name="lastName" placeholder="Last name" defaultValue="" type="name" className="input" onChange={inputLastNameEvent} />
-                                            <Input id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" defaultValue="" type="name" className="input" onChange={inputPhoneNumberEvent} />
-                                            <Input id="password" name="password" placeholder="Password" defaultValue="" type="password" className="input" onChange={inputPasswordEvent} />
-                                            <Input id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" defaultValue="" type="password" className="input" onChange={inputConfirmPasswordEvent} />
+                                            <Input style={{borderRadius:'2px'}} id="firstName" name="firstName" placeholder="First name" defaultValue="" type="name" className="input" onChange={inputFirstNameEvent} />
+                                            <Input style={{borderRadius:'2px'}} id="lastName" name="lastName" placeholder="Last name" defaultValue="" type="name" className="input" onChange={inputLastNameEvent} />
+                                            <Input style={{borderRadius:'2px'}} id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" defaultValue="" type="name" className="input" onChange={inputPhoneNumberEvent} />
+                                            <Input style={{borderRadius:'2px'}} id="password" name="password" placeholder="Password" defaultValue="" type="password" className="input" onChange={inputPasswordEvent} />
+                                            <Input style={{borderRadius:'2px'}} id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" defaultValue="" type="password" className="input" onChange={inputConfirmPasswordEvent} />
                                         </FormGroup>
 
                                     </div>
+                                    <br></br>
                                     <div className="submit-container">
                                         <Button className="login-button" onClick={() => registerUser()}>Register User</Button>
-                                        <br></br><br></br>
+                                       
                                         <h6>
                                             <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
                                         </h6>
                                     </div>
+                                    </center>
                                 </div>
 
                             )
@@ -577,7 +673,7 @@ function Login() {
 
                 </div>
             </div>
-
+            </center>
         </div>
 
 
