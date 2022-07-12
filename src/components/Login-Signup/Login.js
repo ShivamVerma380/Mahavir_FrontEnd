@@ -457,7 +457,11 @@ function Login() {
                                     <br></br>
                                     <div className="submit-container">
                                         <Button className="login-button" onClick={() => sendForgotOTP()}>Send OTP on Email</Button>
+<<<<<<< HEAD
                                        
+=======
+                                        <br></br><br></br>
+>>>>>>> f14cdc52954d4ac56d6ca06a687478e4e3e617be
 
                                     </div>
                                     </center>

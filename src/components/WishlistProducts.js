@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Row, Col, Button ,Container} from "react-bootstrap";
+import { Row, Col, Button, Container } from "react-bootstrap";
 import * as AiIcons from 'react-icons/ai';
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
@@ -12,13 +12,14 @@ const WishlistProducts = () => {
   const [wish, setWish] = useState([]);
   const [product, setProduct] = useState([]);
   const [isProductFetched, setIsProductFetched] = useState(false);
+  const [removeClicked,setRemoveClicked] = useState(false)
 
   const navigate = useNavigate();
-  function callProductDetails(index){
+  function callProductDetails(index) {
     //alert(index);
-    console.log("Index",index);
-    localStorage.setItem("productSelected",index.modelNumber);
-    console.log("Product Selected",localStorage.getItem("productSelected"))
+    console.log("Index", index);
+    localStorage.setItem("productSelected", index.modelNumber);
+    console.log("Product Selected", localStorage.getItem("productSelected"))
     navigate("/productDetails")
   }
 
@@ -34,9 +35,9 @@ const WishlistProducts = () => {
         console.log("Response", response);
         if (response.status == 200) {
           console.log("Wishlist response", response.data);
-          wish.push(response.data);
+          setWish(response.data);
           setIsWishlistFetched(true);
-          console.log("Wish ", wish);
+          
           // setAddress(response.data);
           // console.log("Address: ", address)
           // setIsAddressFetched(true);
@@ -47,60 +48,95 @@ const WishlistProducts = () => {
       }).catch(function (error) {
         console.log(error);
       })
+      
+
+      
 
 
-
-      //   wish.map(index=>{
-      //     console.log("In wish map")
-      //     if (index != '') {
-      //             urls.push(axios.get("http://localhost:8080/get-products/" + index));
-      //           }
-      //         })
-      //         axios.all(urls).then(
-      //           axios.spread((...res) => {
-      //             res.map((response) => {
-      //               console.log("response", response);
-      //               product.push(response.data)
-
-      //             })
-      //             // SetLength(product.length);
-      //             setIsProductFetched(true);
-      //             console.log("Products: ",product);
-      // }))
+     
     }
+    // if (removeClicked) {
+    //   axios({
+    //     method: "get",
+    //     url: "http://localhost:8080/wishlist",
+    //     headers: {
+    //       "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
+    //     }
+    //   }).then(function (response) {
+    //     console.log("Response", response);
+    //     if (response.status == 200) {
+    //       console.log("Wishlist response", response.data);
+    //       wish.push(response.data);
+    //       setIsWishlistFetched(true);
+    //       console.log("Wish ", wish);
+    //       // setAddress(response.data);
+    //       // console.log("Address: ", address)
+    //       // setIsAddressFetched(true);
+
+    //     } else {
+    //       console.log(response.data.message);
+    //     }
+    //   }).catch(function (error) {
+    //     console.log(error);
+    //   })
+    // }
+
+    
 
   })
+  console.log("Wish ", wish);
 
-  const RemoveFromWishList=(index)=>{
-    var formdata = {
-      "modelNumber": index.modelNumber
-    }
+  const RemoveFromWishList = (modelnum) => {
+    var arr= [];
+    console.log("Wish ",wish)
+        wish.map(pro=>{
+          if(pro.modelNumber!==modelnum) {
+            arr.push(pro);
+          }
+          console.log("i Modelnum ",pro.modelNumber, "Index Modelnum ",modelnum)
+        })
+        setWish(arr);
+        console.log("Arr ",arr)
+       
+    // localStorage.setItem("RemoveIndex",index.modelNumber);
+
+    // setRemoveClicked(true);
+    // var formdata = {
+    //   "modelNumber": index.modelNumber
+    // }
+
+    // console.log("Model Num: ", index.modelNumber)
     
-    console.log("Model Num: ",index.modelNumber)
-    console.log("Form Data: ",formdata);
-  //   const headers = { 
-  //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
-      
-  // };
-    axios.delete("http://localhost:8080/wishlist",  {
+    // console.log("Form Data: ", formdata);
+    //   const headers = { 
+    //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
+
+    // };
+    axios.delete("http://localhost:8080/wishlist/" + modelnum, {
       headers: {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
-        
-      }, formdata
-    } 
-      
+
+      }
+    }
+
       // data: {
       //   "modelNumber": index.modelNumber
       // }
-    ).then(function(response){
+    ).then(function (response) {
       if (response.status == 200) {
         console.log("Deleted successfully");
         console.log(response.data)
+        // setRemoveClicked(true)
+        
+        // window.location.reload();
+        
         // navigate("/");
       }
     }).catch(function (error) {
       console.log("Error", error);
     });
+    
+    // setWish((products) => products.filter((i) => i !== index.modelNumber));
 
   }
 
@@ -115,7 +151,7 @@ const WishlistProducts = () => {
           (isWishlistFetched) ? (
 
 
-            wish[0].map(index => {
+            wish.map(index => {
               return (
                 <Row style={{ margin: '2%', padding: '2%', border: "1px solid black", borderRadius: '5px', boxShadow: ' 0 2px 10px #bdbdbd' }}>
                   <Col sm={3}>
@@ -129,7 +165,7 @@ const WishlistProducts = () => {
                   </Col>
                   <Col style={{ padding: '3%' }} sm={3} >
                     <Row>
-                      <Button variant="flat" size="1" name={index.modelNumber} onClick={()=>RemoveFromWishList(index)} style={{ marginBottom: '10px', width: 150, height: 50 }}>Remove</Button>
+                      <Button variant="flat" size="1" name={index.modelNumber} onClick={() => RemoveFromWishList(index.modelNumber)} style={{ marginBottom: '10px', width: 150, height: 50 }}>Remove</Button>
                     </Row>
                     <Row>
                       <Button variant="flat" size="1" style={{ width: 150, height: 50 }}>Add To Cart</Button>
