@@ -40,6 +40,7 @@ function Login() {
     const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
     const [isNewOtpSent, setIsNewOtpSent] = useState(false);
     const [isNewOtpVerified, setIsNewOtpVerified] = useState(false);
+    const [isForgotOtpSent,setIsForgotOtpSent] = useState(false);
     let token = localStorage.getItem("jwtToken");
     console.log("token", token);
 
@@ -186,7 +187,7 @@ function Login() {
             console.log("Email", email);
             axios({
                 method: "get",
-                url: "http://localhost:8080/forgotPassword/" + email
+                url: "http://localhost:8080/verify-email/" + email
             }).then(function (response) {
                 console.log(response.data);
                 otp = response.data.otp;
@@ -205,6 +206,37 @@ function Login() {
         }
 
     }
+
+    const sendForgotOTP = () => {
+        // alert(email);
+
+        if (email === "") {
+            console.log("Email is empty")
+            alert("Please Enter Email")
+        } else {
+            console.log("Email", email);
+            axios({
+                method: "get",
+                url: "http://localhost:8080/forgotPassword/" + email
+            }).then(function (response) {
+                console.log(response.data);
+                otp = response.data.otp;
+                console.log("otp:", otp);
+            }).catch(function (response) {
+                console.log(response);
+                return;
+            })
+
+
+            // setIsOTPSent(false);
+            setIsForgotOtpSent(true);
+            //setIsOTPVerified(true);
+            console.log("isOTPSent", isOTPSent);
+            console.log("isOTPVerified", isOTPNotVerified);
+        }
+
+    }
+
     const verifyOTP = () => {
         //    alert(otp);
         if (otp === inputOtpByUser) {
@@ -405,7 +437,7 @@ function Login() {
                                 </div>
                             </div>
                         ) : (
-                            (!isNewOtpSent) ? (
+                            (!isForgotOtpSent) ? (
                                 <div className="form" id="sign-in-form">
                                     <h1 className="title">Forgot Password</h1>
                                     <div className="fields">
@@ -417,7 +449,7 @@ function Login() {
 
                                     </div>
                                     <div className="submit-container">
-                                        <Button className="login-button" onClick={() => sendOTP()}>Send OTP on Email</Button>
+                                        <Button className="login-button" onClick={() => sendForgotOTP()}>Send OTP on Email</Button>
                                         <br></br><br></br>
 
                                     </div>

@@ -6,8 +6,10 @@ import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import './Categoryproducts.css';
 function CategoryProductsSwiper({cattitle}) {
+    
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
 
@@ -157,7 +159,13 @@ function CategoryProductsSwiper({cattitle}) {
             // navigate("/");
           }
         }).catch(function (error) {
-          console.log("Error", error);
+          if(error.response.status==406) {
+            alert("Item already present in wishlist")
+          }
+          else {
+            console.log("Error", error);
+          }
+          
         })
    
     }
