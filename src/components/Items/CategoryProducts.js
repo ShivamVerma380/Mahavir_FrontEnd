@@ -8,10 +8,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import {setCookie,getCookie} from '../Cookies'
 import {useLocation} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 function CategoryProducts(){
-  var cart=getCookie("CartModels").split(',');
+    var token=getCookie("jwtToken");
+    var cart=getCookie("CartModels").split(',');
     const location = useLocation();
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
@@ -149,13 +152,21 @@ function CategoryProducts(){
           }
         }).then(function (response) {
           if (response.status == 200) {
-            console.log("Added to wishlist successfully");
+            // console.log("Added to wishlist successfully");
+            toast.success(<b>Added to wishlist successfully</b>)
             
             console.log(response.data)
             // navigate("/");
           }
         }).catch(function (error) {
-          console.log("Error", error);
+          if(error.response.status==406) {
+            toast.warn(<b>Item already present in Wishlist</b>)
+            // alert("Item already present in wishlist")
+          }
+          else {
+            console.log("Error", error);
+          }
+          
         })
 
         window.location.reload();
@@ -246,6 +257,7 @@ function CategoryProducts(){
       (
 
         <div style={{fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif ' }}>
+          <ToastContainer position="top-center"/>
 
 
   

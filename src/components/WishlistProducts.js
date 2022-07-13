@@ -4,8 +4,15 @@ import { Row, Col, Button, Container } from "react-bootstrap";
 import * as AiIcons from 'react-icons/ai';
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
+<<<<<<< HEAD
 import {getCookie} from '../components/Cookies';
+=======
+import {getCookie} from "./Cookies";
+
+
+>>>>>>> 704abd43076f0cdbaadf12d640dac6d02914d4c2
 const WishlistProducts = () => {
+  var token=getCookie("jwtToken");
   var modelnums = [];
   var urls = [];
   const [isWishlistFetched, setIsWishlistFetched] = useState(false);

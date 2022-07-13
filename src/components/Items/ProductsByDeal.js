@@ -5,9 +5,13 @@ import { useEffect, useState } from "react";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
+import {getCookie} from "../Cookies";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const ProductsByDeal = () => {
+    var token=getCookie("jwtToken");
     const location = useLocation();
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
@@ -20,29 +24,61 @@ const ProductsByDeal = () => {
     function WishlistHandler(index) {
         // alert("Item added successfully to wishlist");
         console.log(index.modelNumber)
-        if (localStorage.getItem("wishlistproduct") == null) {
-            localStorage.setItem("wishlistproduct", index.modelNumber)
-        } else {
-            var arr = localStorage.getItem("wishlistproduct").split(',')
-            var flag = true;
-            arr.map(i => {
+        // if (localStorage.getItem("wishlistproduct") == null) {
+        //     localStorage.setItem("wishlistproduct", index.modelNumber)
+        // } else {
+        //     var arr = localStorage.getItem("wishlistproduct").split(',')
+        //     var flag = true;
+        //     arr.map(i => {
 
-                console.log("i: ", i)
-                if (i === index.modelNumber) {
-                    arr.splice(arr.indexOf(i), 1)
-                    localStorage.setItem("wishlistproduct", arr)
-                    console.log('del arr: ' + arr)
-                    console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
-                    console.log("in if")
-                    flag = false;
-                }
-            })
-            if (flag)
-                localStorage.setItem("wishlistproduct", localStorage.getItem("wishlistproduct") + "," + index.modelNumber)
-            //navigate('/categoryProductsall')
-            ProductsByDeal(location.state.name)
+        //         console.log("i: ", i)
+        //         if (i === index.modelNumber) {
+        //             arr.splice(arr.indexOf(i), 1)
+        //             localStorage.setItem("wishlistproduct", arr)
+        //             console.log('del arr: ' + arr)
+        //             console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+        //             console.log("in if")
+        //             flag = false;
+        //         }
+        //     })
+        //     if (flag)
+        //         localStorage.setItem("wishlistproduct", localStorage.getItem("wishlistproduct") + "," + index.modelNumber)
+        //     //navigate('/categoryProductsall')
+        //     ProductsByDeal(location.state.name)
 
+        // }
+
+        console.log("Wishlist clicked")
+
+      
+        var formdata = {
+          "modelNumber": index.modelNumber
+  
         }
+  
+        axios.post("http://localhost:8080/wishlist", formdata, {
+          headers: {
+            "Authorization": "Bearer "+token,
+            "Content-Type": "multipart/form-data"
+          }
+        }).then(function (response) {
+          if (response.status == 200) {
+            // console.log("Added to wishlist successfully");
+            toast.success(<b>Added to wishlist successfully</b>)
+            
+            console.log(response.data)
+            // navigate("/");
+          }
+        }).catch(function (error) {
+          if(error.response.status==406) {
+            toast.warn(<b>Item already present in Wishlist</b>)
+            // alert("Item already present in wishlist")
+          }
+          else {
+            console.log("Error", error);
+          }
+          
+        })
 
     }
 
@@ -82,6 +118,7 @@ const ProductsByDeal = () => {
 
 
         <div style={{ fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif ' }}>
+            <ToastContainer position="top-center"/>
             <Header/>
 
 
@@ -102,7 +139,7 @@ const ProductsByDeal = () => {
                         }}>
                             <Col md={2}>
                                 {/* <img onClick={() => callProductDetails(index)} style={{ height: '60%', width: '100%', cursor: 'pointer', justifySelf: 'center' }} src={"data:image/png;base64," + index.productImage1.data} /> */}
-                                <img onClick={() => callProductDetails(index)} style={{ height: '60%', width: '100%', cursor: 'pointer', justifySelf: 'center' }} src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-family-hero?wid=940&hei=1112&fmt=png-alpha&.v=1645036276543" />
+                                <img onClick={() => callProductDetails(index)} style={{ height: '60%', width: '100%', cursor: 'pointer', justifySelf: 'center' }} src={index.productImage1} />
 
                             </Col>
                             <Col md={8} style={{ padding: '2%' }}>
