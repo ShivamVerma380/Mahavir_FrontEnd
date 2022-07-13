@@ -4,11 +4,13 @@ import { Row, Col, Button ,Container} from "react-bootstrap";
 import * as AiIcons from 'react-icons/ai';
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
-
+import {getCookie} from './Cookies';
 
 
 const WishList = () => {
   var modelnums = [];
+  var token=getCookie("jwtToken");
+  alert("token "+token);
   // var arr = localStorage.getItem("wishlistproduct").split(',')
   const [arr,setarr] = useState(localStorage.getItem("wishlistproduct").split(','))
   console.log("array: ", arr)
@@ -121,7 +123,7 @@ const RemoveFromWishListviaIcon=(event)=>{
           method: "get",
           url: "http://localhost:8080/wishlist",
           headers: {
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
+            "Authorization": "Bearer "+token
           }
         }).then(function (response) {
           console.log("Response", response);
