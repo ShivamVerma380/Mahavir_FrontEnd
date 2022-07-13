@@ -17,10 +17,12 @@ import DeveloperPage from './components/DeveloperPage';
 import Deals from './components/Items/Deals';
 import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 import ShopByBrands from './components/Items/ShopByBrands';
+import { getCookie, setCookie } from "./components/Cookies";
 
 import {Helmet} from 'react-helmet';
+import { RiCompassDiscoverLine } from 'react-icons/ri';
 
-
+var count = 0;
 function App() {
 
   const [offerPosters,setOfferPosters] = useState([]);
@@ -44,12 +46,27 @@ function App() {
   const [MiniPoster,setMiniPoster] = useState([]);
   const [catProducts,setCatProducts] = useState([]);
   const [isCatProductFetched, setIsCatProductFetched] = useState(false);
+  
+  if (localStorage.getItem("comparecount")==null || localStorage.getItem("comparecount")==undefined) {
+    count = 0;
+  } else {
+    count = localStorage.getItem("comparecount")
+  }
+  const [countc,setCountc] = useState(count);
+  
+  // while (true) {
+  //   if (localStorage.getItem("comparecount")!=countc) {
+  //     setCountc(localStorage.getItem("comparecount"))
+  //   }
+  // }
 
   
   
-  localStorage.setItem("comparecount",0)
+  // localStorage.setItem("comparecount",0)
 
-  var count = 0;
+  
+ 
+  // console.log("Count comp: ",getCookie("countcompare"))
 
   var element = <div></div>;
 
@@ -58,6 +75,7 @@ function App() {
   console.log("CompareModels",localStorage.getItem("CompareModels"))
   console.log(localStorage.getItem("dealproduct"))
   console.log("Index",localStorage.getItem("dealindex"))
+  console.log("Count C: ",countc)
   // console.log("Cookies size",cookies.CompareModelsLength)
 
   //SetCookie("CompareModels","IPH287373");
@@ -75,10 +93,12 @@ function App() {
   
   
   useEffect(() => {
-
+    
+    // setCountc(getCookie("countcompare"));
     
     // var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
     if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched && !isDealsFetched){
+      
       axios({
         method:"get",
         url:"http://localhost:8080/get-offers"
@@ -236,6 +256,10 @@ function App() {
     
   }
 
+  function HandleCompareClick() {
+    
+  }
+
   function fetchMiniPosterTwo(){
     if(MiniPoster.length===0){
       return( 
@@ -275,10 +299,12 @@ function App() {
     //var size = cookies.CompareModelsLength;
     
       return(
-        <Button id="comparebtn">Compare</Button>
+        <Button id="comparebtn">Compare {localStorage.getItem("comparecount")}</Button>
       )
     
   }
+
+  console.log("Compare count: ",localStorage.getItem("comparecount"))
 
   return (
 
@@ -366,9 +392,15 @@ function App() {
       {/* <FeatureBrands posterList={Posters}/> */}
        
       {/* <Button id="comparebtn">Compare{localStorage.getItem("comparecount")}</Button> */}
-      {
+      {/* {
         getCompareBtn()
-     }
+     } */}
+
+      {
+                ({countc}!=0) ? ( 
+                  <Button id="comparebtn" onClick={HandleCompareClick}>COMPARE {countc}</Button>   
+                ) : (null)
+      }
 
     
      <Footer/>

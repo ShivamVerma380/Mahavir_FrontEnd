@@ -6,7 +6,7 @@ import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getCookie } from "../Cookies";
+import { getCookie, setCookie } from "../Cookies";
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -14,6 +14,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import './Categoryproducts.css';
 function CategoryProductsSwiper({ cattitle }) {
   var token = getCookie("jwtToken");
+  
 
   const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
   const [change, setChange] = useState(0);
@@ -97,8 +98,10 @@ function CategoryProductsSwiper({ cattitle }) {
     return <Button variant="flat" size="m">Offer, Free Gift Available</Button>
   }
 
-  const handleAddToCompare = event => {
-    if (event.target.checked) {
+  function handleAddToCompare (index) {
+    var element = document.getElementById(index.modelNumber);
+    console.log("Element: ",element)
+    if (element.checked) {
 
       console.log('✅ Checkbox is checked');
       setChange(change + 1)
@@ -110,11 +113,17 @@ function CategoryProductsSwiper({ cattitle }) {
       setChange(change - 1)
     }
     setisAddCompareClicked(current => !current);
+    console.log("Current: ",isAddCompareClicked)
+    
     // alert("Added To Compare");
+    localStorage.setItem("modeltocompare",index.modelNumber);
 
   }
+  console.log("Model: ",localStorage.getItem("modeltocompare"))
 
   localStorage.setItem("comparecount", change)
+  setCookie("countcompare",change,20);
+  
   console.log("Get", localStorage.getItem("comparecount"))
 
 
@@ -188,81 +197,7 @@ function CategoryProductsSwiper({ cattitle }) {
           <div className="categoryproductswiper">
           <ToastContainer position="top-center"/>
             <Row>
-              <Col sm={10}>
-                <Swiper
-                  slidesPerView={1}
-                  spaceBetween={5}
-                  slidesPerGroup={3}
-                  loop={false}
-                  loopFillGroupWithBlank={true}
-                  breakpoints={{
-                    700: {
-                      slidesPerView: 6,
-                    },
-                    400: {
-                      slidesPerView: 3,
-                    },
-                  }}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  navigation={true}
-                  modules={[Pagination, Navigation]}
-                  className="mySwiper"
-                >
-
-
-                  {
-                    cards = firstfourproducts.map(index => {
-                      return (
-                        <div>
-                          <SwiperSlide>
-
-                            <Card style={{ width: '25rem' }}
-                            >
-
-                              {(localStorage.getItem("wishlistproduct") != null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
-                                <AiFillHeart style={{ marginTop: "10px", marginLeft: "10px", fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> :
-                                <AiOutlineHeart style={{ marginTop: "10px", marginLeft: "10px" }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
-                                
-                              }
-                              
-                              {/* <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/> */}
-                              {/* <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/> */}
-                              <Card.Img variant="top" src={index.productImage1} onClick={() => callProductDetails(index)} />
-
-                              <Card.Body >
-                                <Card.Title as="h6" onClick={() => callProductDetails(index)}>{index.productName}</Card.Title>
-                                <Card.Text onClick={() => callProductDetails(index)} >
-                                  {index.productHighlights}
-                                  <br></br><b style={{ fontWeight: "bolder", color: "rgb(255, 88, 88)", fontSize: 20 }}>Rs {index.productPrice}</b>
-                                </Card.Text>
-                                <Form>
-                                  <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} />
-                                </Form>
-
-                                <br></br>
-                                {
-                                  fetchOfferAvailableBtn(index.offerPrice, index.productPrice)
-                                }
-
-                              </Card.Body>
-
-
-                            </Card>
-
-
-
-                          </SwiperSlide>
-                          <br></br>
-                        </div>
-                      )
-                    })
-                  }
-
-                </Swiper>
-
-              </Col>
+              
 
               <Col sm={2}>
 
@@ -328,7 +263,7 @@ function CategoryProductsSwiper({ cattitle }) {
                               <br></br><b style={{ fontWeight: "bolder", color: "rgb(255, 88, 88)", fontSize: 20 }}>Rs {index.productPrice}</b>
                             </Card.Text>
                             <Form>
-                              <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} />
+                              <Form.Check id={index.modelNumber} type="checkbox" label="Add To Compare" onChange={()=>handleAddToCompare(index)} />
                             </Form>
 
                             <br></br>
@@ -351,12 +286,19 @@ function CategoryProductsSwiper({ cattitle }) {
               }
 
             </Swiper>
-
+              {
+                (localStorage.getItem("comparecount")!=0) ? (
+                  <Button>COMPARE {localStorage.getItem("comparecount")}</Button>
+                ) : (null)
+              }
+             
+            
 
 
 
 
           </div></>) : (null)
+          
 
   )
 }
