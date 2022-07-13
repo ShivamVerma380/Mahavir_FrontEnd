@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import e from "cors";
 import {setCookie,getCookie} from '../Cookies';
+import { ToastContainer, toast } from 'react-toastify';
 
 function FilterProduct() {
     var category = localStorage.getItem("Category");
     const navigate = useNavigate();
+    var token=getCookie("jwtToken");
 
     var cart=getCookie("CartModels").split(',');
     //To save selected products
@@ -76,29 +78,61 @@ function FilterProduct() {
 
     function WishlistHandler(index) {
         // alert("Item added successfully to wishlist");
-        console.log(index.modelNumber)
-        if (localStorage.getItem("wishlistproduct") == null) {
-            localStorage.setItem("wishlistproduct", index.modelNumber)
-        } else {
-            var arr = localStorage.getItem("wishlistproduct").split(',')
-            var flag = true;
-            arr.map(i => {
+        // console.log(index.modelNumber)
+        // if (localStorage.getItem("wishlistproduct") == null) {
+        //     localStorage.setItem("wishlistproduct", index.modelNumber)
+        // } else {
+        //     var arr = localStorage.getItem("wishlistproduct").split(',')
+        //     var flag = true;
+        //     arr.map(i => {
 
-                console.log("i: ", i)
-                if (i === index.modelNumber) {
-                    arr.splice(arr.indexOf(i), 1)
-                    localStorage.setItem("wishlistproduct", arr)
-                    console.log('del arr: ' + arr)
-                    console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
-                    console.log("in if")
-                    flag = false;
-                }
-            })
-              if(flag)
-                localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
-                navigate('/filterproducts')
+        //         console.log("i: ", i)
+        //         if (i === index.modelNumber) {
+        //             arr.splice(arr.indexOf(i), 1)
+        //             localStorage.setItem("wishlistproduct", arr)
+        //             console.log('del arr: ' + arr)
+        //             console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+        //             console.log("in if")
+        //             flag = false;
+        //         }
+        //     })
+        //       if(flag)
+        //         localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        //         navigate('/filterproducts')
 
+        // }
+
+        console.log("Wishlist clicked")
+
+      
+        var formdata = {
+          "modelNumber": index.modelNumber
+  
         }
+  
+        axios.post("http://localhost:8080/wishlist", formdata, {
+          headers: {
+            "Authorization": "Bearer "+token,
+            "Content-Type": "multipart/form-data"
+          }
+        }).then(function (response) {
+          if (response.status == 200) {
+            // console.log("Added to wishlist successfully");
+            toast.success(<b>Added to wishlist successfully</b>)
+            
+            console.log(response.data)
+            // navigate("/");
+          }
+        }).catch(function (error) {
+          if(error.response.status==406) {
+            // alert("Item already present in wishlist")
+            toast.warn(<b>Item already present in Wishlist</b>)
+          }
+          else {
+            console.log("Error", error);
+          }
+          
+        })
 
     }
 
@@ -275,6 +309,7 @@ function FilterProduct() {
    
     return(
         <Row className="filterproductsContainer">
+            <ToastContainer position="top-center"/>
             <Col md={2}>
                 <h5>FilterProduct</h5>
                 <br></br>

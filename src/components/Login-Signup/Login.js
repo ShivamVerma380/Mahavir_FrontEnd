@@ -499,9 +499,11 @@ function Login() {
                                             </FormGroup> */}
 
                                         </div>
+                                        <br></br>
                                         <div className="fields">
-                                            <Timer ButtonText="RESEND OTP" textColor={"#0000ff"} text="Resend OTP in: " seconds={30} minutes={0} resend={handleResendClick}/>
+                                            <Timer ButtonText="RESEND OTP" background={"#0000"} style={{textDecorationLine:"underline"}} text="Resend OTP in: " seconds={5} minutes={0} resend={handleResendClick}/>
                                         </div>
+                                        <br></br>
                                        
 
                                         <div className="submit-container">

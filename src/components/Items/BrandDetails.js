@@ -49,7 +49,7 @@ function BrandDetails() {
             axios.get("http://localhost:8080/excel/shopByBrands").then(
                 function (response) {
                     if (response.status == 200) {
-                        console.log(response.data);
+                        console.log("Response",response.data);
                         setBrands(response.data);
                         setIsBrandsFetched(true);
                     }
@@ -95,7 +95,7 @@ function BrandDetails() {
             <br></br>
             <Row className="brandheading">
                 <center>
-                <Image className="brandimg"  src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
+                <Image className="brandimg"  src={localStorage.getItem("brandLogo")} />
                 </center>
             </Row>
             {/* <center>
@@ -109,7 +109,7 @@ function BrandDetails() {
                     offerPoster = parsedArray.map(index => {
                         //let Base64string = Buffer.from(index.image.data,"base64").toString();
 
-                        console.log("image", index.offerPoster.data);
+                        console.log("image", index.offerPoster);
                         // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
                         return (
                             
@@ -118,7 +118,7 @@ function BrandDetails() {
                                 
                                 <Image  id="classname"
                                     className="d-block w-100"
-                                    src={"data:image/png;base64," + index.offerPoster.data}
+                                    src={index.offerPoster}
                                     alt={index.alt}
                                     height={500}
                                      
@@ -150,7 +150,7 @@ function BrandDetails() {
                 loopFillGroupWithBlank={true}
                 breakpoints={{
                   700: {
-                    slidesPerView: 6,
+                    slidesPerView: 5,
                   },
                   400: {
                     slidesPerView: 3,
@@ -168,9 +168,12 @@ function BrandDetails() {
 
                 {
                     cards = parsedArr.map(index => {
+                        console.log("Cat Img: ",index.catImage)
                         return (
                             <div className="container">
+                                
                                 <SwiperSlide>
+                                    <Image src={index.catImage} style={{width:100,margin:5}}/>
                                     <Button variant="outline-primary" className="brandcategory">{index.category}</Button>
                                 </SwiperSlide>
                                 </div>
