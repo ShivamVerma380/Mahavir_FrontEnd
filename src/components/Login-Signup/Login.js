@@ -17,7 +17,7 @@ const axios = require('axios');
 
 var email = "";
 var password = "";
-var otp = "123456";
+var otp = "";
 var inputOtpByUser = "";
 var isUserLoggedIn = false;
 var name = ""
