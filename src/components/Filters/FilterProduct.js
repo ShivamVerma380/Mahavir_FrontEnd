@@ -3,6 +3,8 @@ import { Col, Row, Button, Form, Card, Container ,Image} from "react-bootstrap";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 import e from "cors";
 import {setCookie,getCookie} from '../Cookies';
 
@@ -35,15 +37,46 @@ function FilterProduct() {
 
     const[filterselected,SetFilterSelected] = useState([])
 
+    //For Price Slider
+    const [value, setValue] = React.useState([0, 100]);
+    const [isValueSet,SetIsValueSet] = useState(false);
+    // var min=0,max=100;
+    var minPrice = 0
+    var maxPrice = 100;    
+    const rangeSelector = (event, newValue) => {
+        setValue([parseInt(newValue[0]) ,parseInt(newValue[1])]);
+        // console.log(event)
+    };
+
     useEffect(()=>{
         // console.log("category", category);
-        if(!isSelectedProductsFetched && !isProductsFetched && !isFiltersFetched){
+        if(!isSelectedProductsFetched && !isProductsFetched && !isFiltersFetched && !isValueSet){
             axios.get("http://localhost:8080/get-products-by-category/"+category)
                 .then(function(response){
                     SetProducts(response.data);
                     SetSelectedProducts(response.data);
                     console.log("products", products);
                     console.log("selected products",selectedProducts);
+                    var min,max;
+                    response.data.map((product,index)=>{
+                        if(index==0){
+                            min = product.productPrice;
+                            max = product.productPrice;
+                        }
+                        else{
+                            if(product.productPrice<min){
+                                min = product.productPrice;
+                            }
+                            if(product.productPrice>max){
+                                max = product.productPrice;
+                            }
+                        }
+                    })
+                    minPrice = min;
+                    maxPrice = max;
+                    console.log("minPrice",minPrice,"    maxPrice ",maxPrice);
+                    setValue([min,max]);
+                    SetIsValueSet(true);
                     SetIsProductsFetched(true);
                     SetIsSelectedProductsFetched(true);
                 }).catch(function(error){
@@ -275,6 +308,7 @@ function FilterProduct() {
    
     return(
         <Row className="filterproductsContainer">
+            <Col md = {1}></Col>
             <Col md={2}>
                 <h5>FilterProduct</h5>
                 <br></br>
@@ -296,6 +330,24 @@ function FilterProduct() {
                                 </div>
                             )
                         })
+                    ):(
+                        null
+                    )
+                }
+                {
+
+                    (isValueSet)?(
+                        <div>
+                            <Typography id="range-slider" gutterBottom>Select Price Range:</Typography>
+                            <Slider
+                                
+                                onChange={rangeSelector}
+                                min= {parseInt(value[0])}
+                                max= {parseInt(value[1])}
+                                value={value}
+                            />
+                            <p>Your range of Price is between {value[0]} and {value[1]}</p>
+                        </div>
                     ):(
                         null
                     )
@@ -323,7 +375,7 @@ function FilterProduct() {
                     )
                 } */}
             </Col>
-            <Col md={10}>
+            <Col md={9}>
                 {
                     (isSelectedProductsFetched)?(
                         selectedProducts.map(index => {
