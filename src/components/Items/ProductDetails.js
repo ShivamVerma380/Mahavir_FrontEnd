@@ -551,7 +551,7 @@ function ProductDetails() {
         .then(function(response){
           if(response.status==200){
             console.log("product",response)
-            localStorage.setItem("productSelected",response.data.modelNumber)
+            localStorage.setItem("productSelected",response.data.message)
             window.location.reload()
             // setProduct(response.data);
             // setimage(response.data.productImage1);
