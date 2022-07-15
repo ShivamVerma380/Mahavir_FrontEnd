@@ -85,6 +85,7 @@ function ProductDetails() {
   var cart = getCookie("CartModels").split(',');
   var productInformation;
   var averagerate;
+  
   useEffect(() => {
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
     var token = localStorage.getItem("jwtToken");
@@ -176,27 +177,6 @@ function ProductDetails() {
       })
 
 
-      // modelNumbers.map(modelNum=>{
-      //     if(modelNum!==localStorage.getItem("productSelected"))
-      //       urls.push(axios.get("http://localhost:8080/similar-products/"+localStorage.getItem("productSelected")+"/"+localStorage.getItem("SubSubCategory")+
-      //       "/"+localStorage.getItem("SubCategory")+"/"+localStorage.getItem("Category")));
-      // })
-      // axios.all(urls).then(
-      //     axios.spread((...res)=>{
-      //         res.map(index=>{
-
-      //             productList.push(index.data);
-      //             // filteredProducts.push(index.data);
-
-
-      //         })
-
-      //         console.log("products",productList);
-      //         SetIsProductListFetched(true);
-
-      //     })
-      // )
-
       axios.get("http://localhost:8080/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category")).then(
         function (response) {
           if (response.status == 200) {
@@ -209,9 +189,6 @@ function ProductDetails() {
         }
         );
 
-
-
-
     }
   }, []);
 
@@ -222,8 +199,6 @@ function ProductDetails() {
 
   }
 
-
-
   function callProductDetails(index) {
     //alert(index);
     console.log("Index", index);
@@ -233,7 +208,6 @@ function ProductDetails() {
     // navigate("/productDetails")
     window.location.reload();
   }
-
 
   const notify = () => {
     return (
@@ -247,7 +221,6 @@ function ProductDetails() {
       </Toast>
     );
   }
-
 
   const inputQuantityEvent = (event) => {
     flag = true;
@@ -576,6 +549,7 @@ function ProductDetails() {
           }
         }).catch(function(error){
           console.log(error);
+          alert("Sorry No Product Found with this combination")
         })
         
    }
@@ -847,7 +821,14 @@ function ProductDetails() {
                     {/* <Button onClick={handleAddToCart}>Add To Cart</Button> */}
                   </Row>
                   <hr></hr>
-                  <h4><b><i>Variants</i></b></h4>
+                  {
+                    (variantKeys.length > 0) ? (
+                      <h4><b><i>Variants</i></b></h4>
+                    ):(
+                      null
+                    )
+                  }
+                  
                   {
                     (isVariantKeysFetched)?(
                       variantKeys.map((key,pos) => {

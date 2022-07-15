@@ -58,9 +58,16 @@ function FilterProduct() {
             axios.get("http://localhost:8080/get-products-by-category/"+category)
                 .then(function(response){
                     SetProducts(response.data);
-                    SetSelectedProducts(response.data);
-                    console.log("products", products);
-                    console.log("selected products",selectedProducts);
+                    response.data.map(product=>{
+                        if(product.filtercriterias[localStorage.getItem("SubCategory")]===localStorage.getItem("SubSubCategory")){
+                            selectedProducts.push(product);
+                        }
+                        
+                    })
+                    // SetSelectedProducts(response.data);
+                    // console.log("products", products);
+                    // console.log("selected products",selectedProducts);
+                    // console.log(localStorage.getItem("SubCategory"),"     ",localStorage.getItem("SubSubCategory"));
                     var min,max;
                     response.data.map((product,index)=>{
                         if(index==0){
@@ -78,7 +85,7 @@ function FilterProduct() {
                     })
                     minPrice = min;
                     maxPrice = max;
-                    console.log("minPrice",minPrice,"    maxPrice ",maxPrice);
+                    // console.log("minPrice",minPrice,"    maxPrice ",maxPrice);
                     setValue([min,max]);
                     SetIsValueSet(true);
                     SetIsProductsFetched(true);
@@ -89,7 +96,7 @@ function FilterProduct() {
         
             axios.get("http://localhost:8080/filtercriterias/"+category)
                 .then(function(response){
-                    console.log("response",response.data.filterCriterias)
+                    // console.log("response",response.data.filterCriterias)
                     SetFilters(response.data.filterCriterias);
                     for(var key in response.data.filterCriterias){
                         keySet.push(key);
@@ -190,6 +197,7 @@ function FilterProduct() {
     }
 
     const handleFormCheck=(index,f)=>{
+        console.log("index:",index,"    f:",f)
 
         var element = document.getElementById(f);
         if(element.checked){
@@ -207,8 +215,8 @@ function FilterProduct() {
             }
             SetFilterSelected(arr);
             var productsArray = [];
-            console.log("products",products)
-            console.log("filterSelected",filterselected);
+            // console.log("products",products)
+            // console.log("filterSelected",filterselected);
             products.map(index=>{
                 var flag = true;
                 filterselected.map(a=>{
@@ -220,7 +228,7 @@ function FilterProduct() {
                     var valueflag= false;
                     values.map(v=>{
                         console.log(index.filtercriterias[key])
-                        if(index.filtercriterias[key]===v){
+                        if(index.filtercriterias[key].includes(v)){
                             valueflag=true;  
                         }
                     })
@@ -232,7 +240,7 @@ function FilterProduct() {
                     productsArray.push(index);
                 }
             })
-            console.log("Products Array",productsArray.length);
+            // console.log("Products Array",productsArray.length);
             
             SetSelectedProducts(productsArray);
 
@@ -269,7 +277,7 @@ function FilterProduct() {
                     // console.log("pair",pair)
                     var key = pair[0];
                     var values = pair[1].split(";");
-                    console.log("values",values)
+                    // console.log("values",values)
                     var valueflag= false;
                     values.map(v=>{
                         console.log(index.filtercriterias[key])
@@ -342,6 +350,14 @@ function FilterProduct() {
         
     }
    
+    function checkDefault(index,f){
+        console.log("In Check Default")
+        console.log(localStorage.getItem("SubCategory"),":",index,"\n",localStorage.getItem("SubSubCategory"),":",f)
+        if(localStorage.getItem("SubCategory")==={index} && localStorage.getItem("SubSubCategory")==={f})
+            return true;
+        return false
+    }
+
     return(
         <Row className="filterproductsContainer">
             <Col md = {1}></Col>
@@ -358,9 +374,11 @@ function FilterProduct() {
                                         filters[index].map(f=>{
                                             return(
                                                 <Form>
-                                                    <Form.Check type="checkbox" id={f} value={f} label={f} onChange={()=>handleFormCheck(index,f)}/>
+                                                    <Form.Check type="checkbox" id={f} value={f}  label={f} defaultChecked={(f===localStorage.getItem("SubSubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
                                                 </Form>
-                                            );
+                                            )
+                                        
+                                            
                                         })
                                     }
                                 </div>
@@ -403,6 +421,16 @@ function FilterProduct() {
                     )
                 } */}
             </Col>
+
+            {/* <Col md={1}>
+                {
+                (isSelectedProductsFetched)?(
+                    <h1>{selectedProducts.length} products found</h1>
+                ):(
+                    null
+                )
+                }
+            </Col> */}
             
             <Col md={9}>
                 {
@@ -440,7 +468,8 @@ function FilterProduct() {
                                 <Row className="filterproductsRow">
                                     <Col md={2}>
                                         <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
-
+                                        <br></br>
+                                        <p>{index.modelNumber}</p>
                                     </Col>
                                     <Col md={10} >
                                         <Row className="innerrow">
