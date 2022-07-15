@@ -6,8 +6,11 @@ import { useNavigate } from "react-router-dom";
 import FilterProduct from "../Filters/FilterProduct";
 import Header from "../Header";
 import MultiRangeSlider from "../Filters/multiRangeSlider/MultiRangeSlider";
+import {getCookie} from "../Cookies";
+import { ToastContainer, toast } from 'react-toastify';
 
 function ProductsByCategory(){
+    var token=getCookie("jwtToken");
 
     const [products,SetProducts] = useState([]);
     const [isProductsFetched,setIsProductsFetched] = useState(false);
@@ -32,28 +35,60 @@ function ProductsByCategory(){
     function WishlistHandler(index) {
         // alert("Item added successfully to wishlist");
         console.log(index.modelNumber)
-        if (localStorage.getItem("wishlistproduct")==null) {
-          localStorage.setItem("wishlistproduct",index.modelNumber)
-        }else {
-          var arr = localStorage.getItem("wishlistproduct").split(',')
-          var flag = true;
-          arr.map(i=>{
+        // if (localStorage.getItem("wishlistproduct")==null) {
+        //   localStorage.setItem("wishlistproduct",index.modelNumber)
+        // }else {
+        //   var arr = localStorage.getItem("wishlistproduct").split(',')
+        //   var flag = true;
+        //   arr.map(i=>{
            
-            console.log("i: ",i)
-            if( i=== index.modelNumber) {
-                arr.splice(arr.indexOf(i),1)
-                localStorage.setItem("wishlistproduct",arr)
-                console.log('del arr: ' + arr)
-                console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
-               console.log("in if")
-              flag = false;
-            } 
-          }) 
-        //   if(flag)
-        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
-        //     navigate('/')
+        //     console.log("i: ",i)
+        //     if( i=== index.modelNumber) {
+        //         arr.splice(arr.indexOf(i),1)
+        //         localStorage.setItem("wishlistproduct",arr)
+        //         console.log('del arr: ' + arr)
+        //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+        //        console.log("in if")
+        //       flag = false;
+        //     } 
+        //   }) 
+        // //   if(flag)
+        // //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        // //     navigate('/')
           
+        // }
+
+        console.log("Wishlist clicked")
+
+      
+        var formdata = {
+          "modelNumber": index.modelNumber
+  
         }
+  
+        axios.post("http://localhost:8080/wishlist", formdata, {
+          headers: {
+            "Authorization": "Bearer "+token,
+            "Content-Type": "multipart/form-data"
+          }
+        }).then(function (response) {
+          if (response.status == 200) {
+            // console.log("Added to wishlist successfully");
+            toast.success(<b>Added to wishlist successfully</b>)
+            
+            console.log(response.data)
+            // navigate("/");
+          }
+        }).catch(function (error) {
+          if(error.response.status==406) {
+            toast.warn(<b>Item already present in Wishlist</b>)
+            // alert("Item already present in wishlist")
+          }
+          else {
+            console.log("Error", error);
+          }
+          
+        })
         
       }
 
@@ -219,6 +254,7 @@ function ProductsByCategory(){
     return(
         
         <div>
+            <ToastContainer position="top-center"/>
             <Header/>
             <Row>
             <Col md={2}>
@@ -283,7 +319,7 @@ function ProductsByCategory(){
                             <Card  style={{ width: '20rem'}} 
                             className="mb-2">
                                  <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
-                    <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-family-hero?wid=940&hei=1112&fmt=png-alpha&.v=1645036276543" onClick={()=>callProductDetails(index)}/>
+                    <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={index.productImage1} onClick={()=>callProductDetails(index)}/>
                                
                                 {/* <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/> */}
                                 <Card.Body>

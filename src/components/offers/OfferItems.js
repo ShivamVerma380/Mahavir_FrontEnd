@@ -12,8 +12,10 @@ import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 import {useLocation} from 'react-router-dom';
 import Header from "../Header";
 import {setCookie,getCookie} from '../Cookies';
+import { ToastContainer, toast } from 'react-toastify';
 
 function OfferItems() {
+    var token=getCookie("jwtToken");
     var cart=getCookie("CartModels").split(',');
     const navigate = useNavigate();
     const location = useLocation();
@@ -104,19 +106,21 @@ function OfferItems() {
     
           axios.post("http://localhost:8080/wishlist", formdata, {
             headers: {
-              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s",
+              "Authorization": "Bearer "+token,
               "Content-Type": "multipart/form-data"
             }
           }).then(function (response) {
             if (response.status == 200) {
-              console.log("Added to wishlist successfully");
+              toast.success(<b>Added to wishlist successfully</b>)  
+            //   console.log("Added to wishlist successfully");
               
               console.log(response.data)
               // navigate("/");
             }
           }).catch(function (error) {
             if(error.response.status==406) {
-              alert("Item already present in wishlist")
+                toast.warn(<b>Item already present in Wishlist</b>)
+            //   alert("Item already present in wishlist")
             }
             else {
               console.log("Error", error);
@@ -135,10 +139,12 @@ function OfferItems() {
         <>
        <Header/>
        {
+    
 
         (isProductsFetched) ? (
             <>
             <div>
+            <ToastContainer position="top-center"/>
                 
                 <div className="grid-container">
                 {

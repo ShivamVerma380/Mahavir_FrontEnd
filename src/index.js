@@ -68,7 +68,7 @@ root.render(
       <Route path='/login' element={<Login/>}/>
       <Route path='/productDetails' element = {<ProductDetails/>}/>
       <Route path='/admin' element = {<AdminLogin/>}/>
-      <Route path='/admindetail' element = {<Admin/>}/>
+      {/* <Route path='/admindetail' element = {<Admin/>}/> */}
       <Route path='/cart' element = {<Cart/>}/>
       <Route path='/categorydrop' element = {<CategoryDropdowns/>}/>
       <Route path='/pendingdelivery' element = {<PendingDelivery/>}/>

@@ -8,20 +8,27 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import {setCookie,getCookie} from '../Cookies'
 import {useLocation} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+
+
 
 function CategoryProducts(){
-  var cart=getCookie("CartModels").split(',');
+    var token=getCookie("jwtToken");
+    var cart=getCookie("CartModels").split(',');
     const location = useLocation();
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
-
+ var token=getCookie("jwtToken");
     const [Products,setProducts] = useState([]);
     const [isProductsFetched,setIsProductsFetched] = useState(false);
     const navigate = useNavigate();
     var cards=<div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
     </div>
-
+    const [isWishlistFetched, setIsWishlistFetched] = useState(false);
+    
+  const [isProductFetched, setIsProductFetched] = useState(false);
+    const [wish, setWish] = useState([]);
     useEffect(()=>{
         if(!isProductsFetched ){
         axios.get("http://localhost:8080/get-products-by-category/"+location.state.name).then(function(response){
@@ -35,6 +42,34 @@ function CategoryProducts(){
         }).catch(function(error){
             console.log(error);
         })
+
+
+    }
+
+    if (!isWishlistFetched && !isProductFetched) {
+      axios({
+        method: "get",
+        url: "http://localhost:8080/wishlist",
+        headers: {
+          "Authorization": "Bearer "+token
+        }
+      }).then(function (response) {
+        console.log("Response", response);
+        if (response.status == 200) {
+          console.log("Wishlist response", response.data);
+          setWish(response.data);
+          setIsWishlistFetched(true);
+          console.log("...."+wishlist);
+          // setAddress(response.data);
+          // console.log("Address: ", address)
+          // setIsAddressFetched(true);
+
+        } else {
+          console.log(response.data.message);
+        }
+      }).catch(function (error) {
+        console.log(error);
+      })
     }
     })
 
@@ -110,23 +145,87 @@ function CategoryProducts(){
   
         }
   
-        axios.post("http://localhost:8080/wishlist", formdata, {
+        axios.post("/wishlist", formdata, {
           headers: {
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s",
+            "Authorization": "Bearer "+token,
             "Content-Type": "multipart/form-data"
           }
         }).then(function (response) {
           if (response.status == 200) {
-            console.log("Added to wishlist successfully");
+            // console.log("Added to wishlist successfully");
+            toast.success(<b>Added to wishlist successfully</b>)
             
             console.log(response.data)
             // navigate("/");
           }
         }).catch(function (error) {
-          console.log("Error", error);
+          if(error.response.status==406) {
+            toast.warn(<b>Item already present in Wishlist</b>)
+            // alert("Item already present in wishlist")
+          }
+          else {
+            console.log("Error", error);
+          }
+          
         })
+
+        window.location.reload();
         
     }
+
+    const RemoveFromWishList = (modelnum) => {
+      var arr= [];
+      console.log("Wish ",wish)
+          wish.map(pro=>{
+            if(pro.modelNumber!==modelnum) {
+              arr.push(pro);
+            }
+            console.log("i Modelnum ",pro.modelNumber, "Index Modelnum ",modelnum)
+          })
+          setWish(arr);
+          console.log("Arr ",arr)
+         
+      // localStorage.setItem("RemoveIndex",index.modelNumber);
+  
+      // setRemoveClicked(true);
+      // var formdata = {
+      //   "modelNumber": index.modelNumber
+      // }
+  
+      // console.log("Model Num: ", index.modelNumber)
+      
+      // console.log("Form Data: ", formdata);
+      //   const headers = { 
+      //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
+  
+      // };
+      axios.delete("/wishlist/" + modelnum, {
+        headers: {
+          "Authorization": "Bearer "+token,
+        }
+      }
+  
+        // data: {
+        //   "modelNumber": index.modelNumber
+        // }
+      ).then(function (response) {
+        if (response.status == 200) {
+          console.log("Deleted successfully");
+          console.log(response.data)
+          // setRemoveClicked(true)
+          
+          // window.location.reload();
+          
+          // navigate("/");
+        }
+      }).catch(function (error) {
+        console.log("Error", error);
+      });
+      
+      // setWish((products) => products.filter((i) => i !== index.modelNumber));
+  
+    }
+
     function CategoryProducts(cattitle){
      
 
@@ -143,7 +242,13 @@ function CategoryProducts(){
             alert("Added to cart"+model);
         }  
     }  
-  
+    
+    //var wish = JSON.stringify(wishlist);
+    var wishlist=[];
+    wish.map(i=>{
+      wishlist.push(i.modelNumber);
+    })
+    console.log("wish "+wishlist)
     return(
         
        
@@ -152,6 +257,7 @@ function CategoryProducts(){
       (
 
         <div style={{fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif ' }}>
+          <ToastContainer position="top-center"/>
 
 
   
@@ -179,8 +285,9 @@ function CategoryProducts(){
                                     <h3 onClick={()=>callProductDetails(index)} style={{cursor:'pointer'}}>{index.productName}</h3>
                                 </Col>
                                 <Col md={1}>
-                                  {(localStorage.getItem("wishlistproduct")!=null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
-                                  <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>:
+                                  {}
+                                  {(wishlist!=null && wishlist.includes(index.modelNumber)) ? 
+                                  <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={30} onClick={()=>RemoveFromWishList(index.modelNumber)}/>:
                                   <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
                                   }
                                 </Col>

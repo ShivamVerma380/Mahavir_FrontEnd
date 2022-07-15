@@ -4,8 +4,11 @@ import { Row, Col, Button, Container } from "react-bootstrap";
 import * as AiIcons from 'react-icons/ai';
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
+import {getCookie} from "./Cookies";
+
 
 const WishlistProducts = () => {
+  var token=getCookie("jwtToken");
   var modelnums = [];
   var urls = [];
   const [isWishlistFetched, setIsWishlistFetched] = useState(false);
@@ -13,7 +16,7 @@ const WishlistProducts = () => {
   const [product, setProduct] = useState([]);
   const [isProductFetched, setIsProductFetched] = useState(false);
   const [removeClicked,setRemoveClicked] = useState(false)
-
+  var token=getCookie("jwtToken");
   const navigate = useNavigate();
   function callProductDetails(index) {
     //alert(index);
@@ -27,9 +30,9 @@ const WishlistProducts = () => {
     if (!isWishlistFetched && !isProductFetched) {
       axios({
         method: "get",
-        url: "http://localhost:8080/wishlist",
+        url: "/wishlist",
         headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
+          "Authorization": "Bearer "+token
         }
       }).then(function (response) {
         console.log("Response", response);
@@ -112,9 +115,9 @@ const WishlistProducts = () => {
     //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
 
     // };
-    axios.delete("http://localhost:8080/wishlist/" + modelnum, {
+    axios.delete("/wishlist/" + modelnum, {
       headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
+        "Authorization": "Bearer "+token
 
       }
     }

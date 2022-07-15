@@ -3,6 +3,7 @@ import { Input, Label } from 'reactstrap';
 import { Button, Container, Form, FormGroup, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import Admin from './Admin';
 
 var email = "";
 var adminotp = "";
@@ -10,11 +11,13 @@ var admininputotp = "";
 var inputsecretkey = "";
 
 
+
 const AdminLogin = () => {
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [isNewOtpSent, setIsNewOtpSent] = useState(false)
     const [isOtpVerified,setIsOtpVerified] = useState(false);
     const [isSecretKeyVerified,setIsSecretKeyVerified] = useState(false);
+    const [isLoggedIn,setIsLoggedIn] = useState(false);
     
     const inputEmailEvent = (event) => {
         email = event.target.value;
@@ -86,7 +89,8 @@ const AdminLogin = () => {
         if (inputsecretkey==="123456") {
             alert("Correct key");
             setIsSecretKeyVerified(true);
-            navigate("/admindetail")
+           // navigate("/admindetail")
+            setIsLoggedIn(true);
         }
         else {
             alert("Wrong Key");
@@ -104,6 +108,7 @@ const AdminLogin = () => {
 
                 
                 {
+                    (isLoggedIn) ? (<Admin/>):(
                     (!isOtpSent) ? (
                         <div>
                             <h1>Please Login First</h1>
@@ -149,6 +154,7 @@ const AdminLogin = () => {
 
                         
 
+                    )
                     )
                 }
 
