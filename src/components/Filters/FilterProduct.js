@@ -374,7 +374,7 @@ function FilterProduct() {
                                         filters[index].map(f=>{
                                             return(
                                                 <Form>
-                                                    <Form.Check type="checkbox" id={f} value={f}  label={f} defaultChecked={(f===localStorage.getItem("SubSubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
+                                                    <Form.Check type="checkbox" id={f} value={f}  label={f} defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
                                                 </Form>
                                             )
                                         
