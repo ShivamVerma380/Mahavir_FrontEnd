@@ -37,7 +37,7 @@ function CategoriesToDisplay({ categoryDetail }) {
 
       {['sm'].map((expand) => (
 
-        <Navbar style={{ zIndex: '1' }} bg="light" key={expand} class="border-top" expand={expand} variant="light">
+        <Navbar style={{background:'#2b2d42', zIndex: '1',}} bg="dark" key={expand} class="border-top" expand={expand} variant="dark">
           <Container fluid>
 
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -52,7 +52,7 @@ function CategoriesToDisplay({ categoryDetail }) {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <Nav className="justify-content-start flex-grow-1 pe-3">
+                <Nav className="justify-content-center flex-grow-1 pe-3">
                   {
 
                     console.log("CategoryDetail", categoryDetail)
@@ -62,11 +62,12 @@ function CategoriesToDisplay({ categoryDetail }) {
                     cards = categoryDetail.map(index => {
                       return (
 
-                        <Nav.Link style={{ margin: 10 }}>
+                        <Nav.Link >
                           {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
                           {/* {<img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>} */}
-                          <Image thumbnail='true' src={'data:image/jpg;base64,'+ index.category_image.data} className="categorymage" style={{height:60,borderRadius:50}}></Image>
-                          <NavDropdown style={{ color: "white",fontFamily:'Roboto',fontSize:'18px' }} title={index.category} renderMenuOnMount={true}>
+                          <Image thumbnail='true'  src={'data:image/jpg;base64,'+ index.category_image.data} className="categorymage" style={{height:60,borderRadius:50,height: '60px', borderRadius: '50px',filter: 'invert(1)'}}></Image>
+                          
+                          <NavDropdown style={{ color: "white",fontSize:'18px' }} title={index.category} renderMenuOnMount={true}>
                             {
                               index.subCategories.map(subCat => {
                                 return (

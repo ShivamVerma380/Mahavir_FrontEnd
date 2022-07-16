@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
-import {Card,Button,Row,Col, Form,CardGroup, Container} from "react-bootstrap";
+import {Carousel,Card,Button,Row,Col, Form,CardGroup, Container} from "react-bootstrap";
 import {getCookie} from "../Cookies";
 import { ToastContainer, toast } from 'react-toastify';
+import { MDBCarousel,MDBCol,MDBCarouselInner,MDBCarouselItem,MDBCarouselElement,MDBCardHeader,MDBCardFooter,MDBBtn,MDBRow,MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardLink, MDBCardImage ,MDBContainer } from 'mdb-react-ui-kit';
 
 function Deals({deals}) {
     // var product = [];
@@ -151,106 +152,125 @@ function Deals({deals}) {
 
     }
 
-    function fetchOfferAvailableBtn(offerPrice,productPrice){
-      if(offerPrice===productPrice){
-        return <Button variant="flat" size="m" style={{visibility:"hidden"}}>Offer Available</Button>
+    function fetchOfferAvailableBtn(offerPrice, productPrice) {
+      if (offerPrice !== productPrice) {
+        return <MDBCardText className="text">Offer Available</MDBCardText>
       }
-      return <Button variant="flat" size="m">Offer, Free Gift Available</Button>
+      else{
+        return <MDBCardText className="text">No Offer Available</MDBCardText>
+      }
+      
     }
+
+    const firstfourproducts = deals.products.slice(0, 4);
+
 
     return(
         <div>
+
+          
           <ToastContainer position="top-center"/>
-           
-              <div>
-              {/* <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>{deals.title}</h3> */}
+          
+          
+              
+              <MDBContainer className="categoryproductscontainer">
+            <Row style={{padding: '10px',margin: '10px'}}>
+              <Col md={6} >
+              <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
 
-              <Row style={{marginBottom:'20px '}}>
-                <Col md={10}>
-                <h3 className="hometitle" style={{textAlign:"left",marginLeft:'20px'}}>{deals.title}</h3> 
-                </Col>
-                <Col md={2}>
-                <Button style={{width:'70%'}} variant="flat" size="m" onClick={()=>CategoryProducts(title,deals)}>View More</Button>
-                </Col>
+
+              <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
+
+
+                <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
+              </filter>
+              </svg>
+              <span className="categorytitle" filter-content="S">{deals.title}</span>
+              
+              </Col>
+              <Col cd={6}>
+              <button class="explore" onClick={()=>CategoryProducts(title,deals)}>View More<span class="icon-right after"></span></button>
+
+              </Col>
             </Row>
-          <span section-separator section-separator-dk-blue></span>
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={5}
-            slidesPerGroup={3}
-            loop={false}
-            loopFillGroupWithBlank={true}
-            breakpoints={{
-              700: {
-                slidesPerView: 6,
-              },
-              400: {
-                slidesPerView: 3,
-              },
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
-            className="mySwiper"
-          >
-    
-            
+          
+          
+          <MDBRow style={{justifyContent: 'left',padding: '10px'}} className='row-cols-1 row-cols-md-3 g-4'>
             {
-              cards = deals.products.map(index=>{
+              firstfourproducts.map(index=>{
+                const images = [
+                  { url: index.productImage1,
+                    url: index.productImage1 ,
+                    url: index.productImage1  }
+                ];
                 return(
-                  <div>
+                <MDBCard className="categoryproductscard" >
+                  <MDBCardImage className="cardimage" src={index.productImage1} alt='...' position='top' />
+                  {
+                    (index.productImage1!==null && index.productImage2!==null && index.productImage3!==null)?
+                    <Carousel interval={1000} className="cardimage2" indicators=''   variant="dark">
+                      <Carousel.Item>
+                        <img
+                          className="d-block w-100"
+                          src={index.productImage1}
+                          alt="First slide"
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item>
+                        <img
+                          className="d-block w-100"
+                          src={index.productImage2}
+                          alt="Second slide"
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item>
+                        <img
+                          className="d-block w-100"
+                          src={index.productImage3}
+                          alt="Third slide"
+                        />
+                      </Carousel.Item>
+                    </Carousel>
+                     : <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
 
-                  <SwiperSlide>
-                   
-                  <Card  style={{ width: '20rem' }}
-                      className="mb-2"
-                       >
+
+                  }
+                  
+                  
+                  {
+                    (localStorage.getItem("wishlistproduct") != null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
+                            <AiFillHeart style={{ marginLeft:'0px',marginTop:'10px',marginRight:'10px',alignSelf:'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> :
+                            <AiOutlineHeart style={{  marginLeft:'0px',marginTop:'10px',marginRight:'10px',alignSelf:'end'}} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
+                    }
+                  <MDBCardBody className="categoryproductscardbody">
+                    <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
+                    <MDBCardSubTitle style={{    marginTop: '5px',marginBottom: '5px',fontSize: '18px'}}>Rs. {index.offerPrice}</MDBCardSubTitle>
                     
-                        {(localStorage.getItem("wishlistproduct")!=null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
-                          <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>:
-                          <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
-                          }
-                        {/* <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/> */}
-                        <Card.Img  variant="top" src={index.productImage1} onClick={()=>callProductDetails(index)}/>
-                   
-                        <Card.Body >
-                        <Card.Title as="h6"  onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
-                        <Card.Text onClick={()=>callProductDetails(index)} >
-                        {index.productHighlights}
-                        <br></br><b style={{fontWeight:"bolder",color:"rgb(255, 88, 88)", fontSize:20}}>Rs {index.productPrice}</b>
-                        </Card.Text>
-                        <Form>
-                          <Form.Check type="checkbox"  label = "Add To Compare" onChange={handleAddToCompare}/>
-                        </Form>
-                        
-                          <br></br>
-                          {
-                            fetchOfferAvailableBtn(index.offerPrice,index.productPrice)
-                          }                    
-                        
-                      </Card.Body>
-    
-                      
-                  </Card>
-    
-    
-                   
-                  </SwiperSlide>
-                  <br></br>
-                  </div>
+                    {
+                      fetchOfferAvailableBtn(index.offerPrice, index.productPrice)
+                    }
+                  </MDBCardBody>
+                  <MDBCardBody className="categoryproductscardbodyonhover">
+                  <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
+                  <MDBCardSubTitle style={{    marginTop: '5px',marginBottom: '5px', fontSize: '18px'}}>Rs. {index.offerPrice}</MDBCardSubTitle>
+                  
+                  <MDBCardText className="text" onClick={()=>callProductDetails(index)}>
+                    View Details
+                  </MDBCardText>
+                  
+                  </MDBCardBody>
+                </MDBCard>
                 )
               })
             }
+
             
-          </Swiper>
-    
+            </MDBRow>
+            </MDBContainer >
           
-          
-          
-        
-        </div>
+              
+            
+              
                 
                
             

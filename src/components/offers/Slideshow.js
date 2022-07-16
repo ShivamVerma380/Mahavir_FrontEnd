@@ -26,7 +26,7 @@ function Slideshow({offerPosters}){
 
     return(
     
-      <div style={{margin:'1%'}}>
+      <div >
         <Carousel style={{ zIndex: '0' }}>
         {
             offerPoster= offerPosters.map(index=>{

@@ -4,17 +4,17 @@
     margin-top: 10px;
     border-top-right-radius: 2px;
     border-top-left-radius: 2px;
-    border-top-color: #ff3844;
+    border-top-color: #04001d;
     width: -webkit-fill-available;
     padding: 10px;
     pad: 200px;
-    border-top: 5px solid #ff3b46;
+    border-top: 5px solid #04001d;
    
 }
 .Header .navbar-light .navbar-nav .nav-link{
     margin-left: 20px;
     margin-right: 20px;
-    color: #212529;
+    color: #ffffff;
 }
 .Header .dropdown-toggle {
     font-size: 22px;
@@ -23,11 +23,10 @@
 
 #offcanvasNavbarDropdown-expand-md {
    
-    color: white;
+    color: #04001d;
 }
 
 .Header .navbar-nav{
-    font-family: Roboto;
     font-size: 20px;
     font-weight: bold;
 }
@@ -60,3 +59,38 @@
     
     
 }
+
+/* mahavir title */
+
+.mahavir {
+    margin-bottom: 0.5em;
+    font-size: 2rem;
+    color: #E4E5E6;
+  }
+  
+  .mahavir {
+    position: relative;
+    background: linear-gradient(to right, #24243e, #141E30, #0f0c29);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .mahavir:before,
+  .mahavir:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .mahavir:before {
+    z-index: -1;
+    text-shadow: -0.001em -0.001em 1px rgba(255, 255, 255, 0.15);
+  }
+  
+  .mahavir:after {
+    z-index: -2;
+    text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5), 20px 20px 20px rgba(0, 0, 0, 0.4), 30px 30px 30px rgba(0, 0, 0, 0.1);
+    mix-blend-mode: multiply;
+  }
+/* mahavir title  end */

@@ -22,7 +22,6 @@
 }
 
 .success-message {
-  font-family: "Roboto", sans-serif;
   background-color: #3f89f8;
   padding: 15px;
   color: white;
@@ -33,7 +32,6 @@
   padding: 10px;
   font-size: 13px;
   border: 0;
-  font-family: "Roboto", sans-serif;
 }
 .form-field:focus{
   
@@ -41,7 +39,6 @@
   border-color: rgb(255, 88, 88);
 }
 span {
-  font-family: "Roboto", sans-serif;
   font-size: 10px;
   color:red;
   margin-bottom: 15px;

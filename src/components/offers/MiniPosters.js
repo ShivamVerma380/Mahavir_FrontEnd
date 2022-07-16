@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Row, Col, Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import MiniPosterHelper from "./MiniPosterHelper";
-
+import './MiniPoster.css';
 const MiniPosters = ({MiniPosters}) => {
     console.log("MinPosters: ",MiniPosters)
     // const element = MiniPosters.map((product,index) =>
@@ -30,66 +30,37 @@ const MiniPosters = ({MiniPosters}) => {
       navigate("/offers")
     }
     
+    var coll=[]
+    var len=MiniPosters.length;
+    var grid_len;
+    if(len%2===0){
+      grid_len=len/2;
+    }
+    else{
+      grid_len=parseInt(len/2)+1;
+    }
+    
      
     return (
         
-        <div>
-          <Row>
-            <Row md={3} xs={1}>
-              {
-                MiniPosters.map((product,index) => {
-                    return (
-                        <div key={index}> {/*refer you key in within a div*/}
-                  <Col>
-                    
-                    
-                    <img style={{width:400,height:400}} variant="top" src={'data:image/jpg;base64,' +product.image.data} onClick={()=>handleMiniPosteronClick(product)}/>
-                    
-                   
-                  </Col>
-                  <br></br>
-                </div>
-                    )
-                })
+        <div style={{marginLeft:'10px'}}>
+          
+          <div class="image-container" style={{gridTemplateColumns: 'repeat('+grid_len+', 1fr)',}}>
+
+            {
+              MiniPosters.map((product,index) => {
+                return(
+                    <div class="image_p" >
+                    <img src={'data:image/jpg;base64,' +product.image.data}/>
+                    <img src={'data:image/jpg;base64,' +product.image.data} onClick={()=>handleMiniPosteronClick(product)}/>
+                  </div>
                 
-                
-              }
-            </Row>  
-            
-          </Row>               
+                )
+              })
+            }
+            </div>             
         </div>
 
-        // <Row>
-            
-        // {
-        // MiniPosters.map((index,pos)=>{
-        //     array = MiniPosters.slice(pos,pos+3)
-        //     pos = pos+3;
-        //     return (
-        //         <Row>
-        //             {
-        //                 array.map(i=>{
-        //                     return (
-        //                         <Col md={3}>
-        //                         <img src={'data:image/jpg;base64,' +i.image.data}></img>
-        //                     </Col>
-        //                     )
-        //                 })
-        //             }
-        //         </Row>
-        //     )
-        //     })
-        // }
-
-
-           
-
-        
-           
-            
-        
-       
-        // </Row>
         
         
     )

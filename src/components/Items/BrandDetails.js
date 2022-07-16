@@ -174,7 +174,7 @@ function BrandDetails() {
                                 
                                 <SwiperSlide>
                                     <Image src={index.catImage} style={{width:100,margin:5}}/>
-                                    <Button variant="outline-primary" className="brandcategory">{index.category}</Button>
+                                    <Button onClick={()=>handleClick()} variant="outline-primary" className="brandcategory">{index.category}</Button>
                                 </SwiperSlide>
                                 </div>
                         )
