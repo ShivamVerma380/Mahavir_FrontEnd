@@ -38,7 +38,7 @@ function FilterProduct() {
     
     // const[filtersSelected,SetFiltersSelected] = useState([]);
 
-    const[filterselected,SetFilterSelected] = useState([])
+    const[filterselected,SetFilterSelected] = useState([localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory")])
 
     // //For Price Slider
     // const [value, setValue] = React.useState([0, 100]);
@@ -239,7 +239,7 @@ function FilterProduct() {
             SetFilterSelected(arr);
             var productsArray = [];
             // console.log("products",products)
-            // console.log("filterSelected",filterselected);
+            console.log("filterSelected",filterselected);
             products.map(index=>{
                 var flag = true;
                 filterselected.map(a=>{

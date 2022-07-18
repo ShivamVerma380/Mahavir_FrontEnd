@@ -51,7 +51,9 @@ function BrandDetails() {
                     if (response.status == 200) {
                         console.log("Response",response.data);
                         setBrands(response.data);
+                    
                         setIsBrandsFetched(true);
+                        console.log("Brands", brands);
                     }
                 }).catch(function (error) {
                     console.log("error", error);
@@ -59,6 +61,8 @@ function BrandDetails() {
                 );
         }
     })
+
+    
 
     function handleClick(index) {
         // parsedArr.map(index=>{
@@ -88,6 +92,7 @@ function BrandDetails() {
     //     console.log(localStorage.getItem("offerPostersModelNumber"))
     //     navigate("/offers")
     //   }
+    
 
     return (
         <div>
@@ -183,25 +188,9 @@ function BrandDetails() {
 
             </Swiper>
             </Row>
-            {/* <Carousel style={{ zIndex: '-1' }}>
-                {
-                    offerPoster = localStorage.getItem("finalBrandCategories").map(index => {
-                        return (
-                            <Carousel.Item interval={1000} onClick={() => handleOfferPosterOnClick(index)}>
-                                <img id="classname"
-                                    className="d-block w-100"
-                                    src={"data:image/png;base64," + index.image.data}
-                                    alt={index.alt}
-                                    height={500}
-                                />
-                            </Carousel.Item>
+            
+           
 
-                        )
-
-                    })
-                }
-
-            </Carousel> */}
           <Row>
           <h3 style={{color:"rgb(255,98,98",margin:'2%'}}><i>FEATURED VIDEOS</i></h3>
             
