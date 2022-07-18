@@ -43,7 +43,7 @@ const ShopByBrands = () => {
         
 
         const jsonArr = JSON.stringify(index.brandCategories);
-        const jsonArray = JSON.stringify(index.brandOfferPosters)
+        const jsonArray = JSON.stringify(index.brandOfferPosters);
 
         // save to localStorage
         localStorage.setItem("array", jsonArr);

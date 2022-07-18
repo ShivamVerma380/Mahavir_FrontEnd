@@ -20,25 +20,38 @@ const BrandCatProducts = () => {
         if (!areProductsFetched) {
 
 
-            var urls = [];
-            models.map(modelNum => {
-                urls.push(axios.get("http://localhost:8080/get-products/" + modelNum));
-            })
-            axios.all(urls).then(
-                axios.spread((...res) => {
-                    res.map(index => {
+            axios.get("http://localhost:8080/excel/shopByBrands/"+ localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")).then(
+                function (response) {
+                    if (response.status == 200) {
+                        console.log("Response",response.data);
+                        setProducts(response.data);
+                        SetAreProductsFetched(true);
+                    }
+                }).catch(function (error) {
+                    console.log("error", error);
+                }
+            );
 
-                        products.push(index.data);
-                        // filteredProducts.push(index.data);
+
+            // var urls = [];
+            // models.map(modelNum => {
+            //     urls.push(axios.get("http://localhost:8080/excel/shopByBrands/" + localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")));
+            // })
+            // axios.all(urls).then(
+            //     axios.spread((...res) => {
+            //         res.map(index => {
+
+            //             products.push(index.data);
+            //             // filteredProducts.push(index.data);
 
 
-                    })
+            //         })
 
-                    console.log("products", products);
-                    SetAreProductsFetched(true);
+            //         console.log("products", products);
+            //         SetAreProductsFetched(true);
 
-                })
-            )
+            //     })
+            // )
         }
     })
 
@@ -93,7 +106,7 @@ const BrandCatProducts = () => {
                         className="mb-2">
                              <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
                             {/* <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/> */}
-                            <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-family-hero?wid=940&hei=1112&fmt=png-alpha&.v=1645036276543" onClick={()=>callProductDetails(index)}/>
+                            <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={index.productImage1} onClick={()=>callProductDetails(index)}/>
                             
                             <Card.Body>
                             <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>

@@ -64,19 +64,25 @@ function BrandDetails() {
         // parsedArr.map(index=>{
         //      models += index.modelNumbers;
         // })
-        models += index.modelNumbers;
-        localStorage.setItem("models", models);
-        console.log("model", models);
+        localStorage.setItem("shopbrandcat",index)
+        console.log("Get cat: ",localStorage.getItem("shopbrandcat"))
+        // console.log("Model Num: ",index.products.modelNumber)
+        // models.push(index.products.modelNumber);
+        // console.log("model", models);
+        // localStorage.setItem("models", models);
+        // console.log("Models: ",localStorage.getItem("models"));
+        // console.log("model", models);
         console.log("on cat click");
         navigate('/brandcatproducts')
     }
 
     const handleOfferPosterOnClick=(modelNumbers)=>{
-        console("Item Clicked");
+        console.log("Item Clicked");
         
         offermodel = modelNumbers;
         localStorage.setItem("offermodels",offermodel);
-        // navigate('/brandofferposterproducts')
+        console.log("Offer Models: ",localStorage.getItem("offermodels"));
+        navigate('/brandofferposterproducts')
     }
 
 
@@ -114,7 +120,7 @@ function BrandDetails() {
                         return (
                             
                             
-                            <CarouselItem  interval={1000} >
+                            <CarouselItem  interval={1000} onClick={()=>handleOfferPosterOnClick(index.modelNumbers)}>
                                 
                                 <Image  id="classname"
                                     className="d-block w-100"
@@ -174,7 +180,7 @@ function BrandDetails() {
                                 
                                 <SwiperSlide>
                                     <Image src={index.catImage} style={{width:100,margin:5}}/>
-                                    <Button onClick={()=>handleClick()} variant="outline-primary" className="brandcategory">{index.category}</Button>
+                                    <Button onClick={()=>handleClick(index.category)} variant="outline-primary" className="brandcategory">{index.category}</Button>
                                 </SwiperSlide>
                                 </div>
                         )
