@@ -13,11 +13,11 @@ import CategoryDropdowns from './components/Admin/CategoryDropdowns';
 import PendingDelivery from './components/Admin/Sidebar/PendingDelivery'
 import UserComplaint from './components/Items/UserComplaint'
 import AddressForm from './components/AddressForm';
-import OrderSummary from './components/OrderSummary';
+// import OrderSummary from './components/OrderSummary';
 import PaymentOption from './components/PaymentOption';
 
 
-import MyOrders from './components/Orders/MyOrders';
+// import MyOrders from './components/Orders/MyOrders';
 import AddCategory from './components/Admin/AddCategory';
 import SelCatProducts from './components/DisplayCategories/SelCatProducts';
 import OfferItems from './components/offers/OfferItems';
@@ -47,7 +47,7 @@ import ProductsByDeal from './components/Items/ProductsByDeal';
 import FilterProduct from './components/Filters/FilterProduct';
 import WishlistProducts from './components/WishlistProducts';
 import AdminLogin from './components/Admin/AdminLogin';
-
+import Orders from './components/OrderDetails/Orders';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -74,13 +74,13 @@ root.render(
       <Route path='/pendingdelivery' element = {<PendingDelivery/>}/>
       <Route path='/allcomplaints' element = {<AllComplaints/>}/>
       <Route path='/AddressForm' element = {<AddressForm/>}/>
-      <Route path='/OrderSummary' element = {<OrderSummary/>}/>
+      {/* <Route path='/OrderSummary' element = {<OrderSummary/>}/> */}
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
       <Route path='/offers' element={<OfferItems/>}/>
       <Route path='/compareproducts' element={<AddToCompareProducts/>}/>
       {/* <Route path="/SearchBar" element={<SearchBar/>}/> */}
-      <Route path='/my-orders' element={<MyOrders/>}/>
+      <Route path='/my-orders' element={<Orders/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>
       <Route path='/onlyreviews' element = {<OnlyReviews/>}/>
       <Route path='/ratereview' element = {<RateReviewProducts/>}/>
