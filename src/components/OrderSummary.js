@@ -6,7 +6,26 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
+const productBoughtbyUser =[
+    {
+        modelNumber:"71620",
+        DateofDelivery:"",
+        BuyDate:"18-07-2022",
+        BuyerEmail:"shraddhamulay09@gmail.com"
+    },
+    {
+        modelNumber:"21391",
+        DateofDelivery:"",
+        BuyDate:"18-07-2022",
+        BuyerEmail:"shraddhamulay09@gmail.com"
+    },
+    {
+        modelNumber:"CMC33S05NI",
+        DateofDelivery:"",
+        BuyDate:"18-07-2022",
+        BuyerEmail:"shraddhamulay09@gmail.com"
+    }
+]
 
 const OrderSummary = () => {
 
