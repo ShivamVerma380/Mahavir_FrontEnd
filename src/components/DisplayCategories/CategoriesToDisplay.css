@@ -39,26 +39,22 @@
   border-radius: 10px;
   border-top-right-radius: 2px;
   border-top-left-radius: 2px;
-  border-top-color: #ff3844;
-  border-top: 5px solid #ff3b46;
+  border-top-color: #d90429;
+  border-top: 5px solid #d90429;
   display: flex;
 }
 
 
 
 .Category .list-group-item{
-  border: 0px ;
-  /* font-feature-settings: "pcap", "c2pc";
-  font-variant-caps: all-petite-caps; */
-  font-size:medium;
-  position: relative;
+  border: 0px;
+    font-size: larger;
+    position: relative;
     display: flex;
     padding: 1px;
-    color: #212529;
+    color: #000000;
     text-decoration: none;
     background-color: #fff;
-    
-    font-family: 'Roboto', sans-serif;
 }
 
 .Category .list-group-item:hover{
@@ -71,10 +67,10 @@
 .Category .dropdown-menu.show {
   display: flex;
   border-radius: 10px;
-  border-top: 5px solid #ff3b46;
+  border-top: 5px solid #d90429;
     border-top-right-radius: 2px;
     border-top-left-radius: 2px;
-    border-top-color: #ff3844;
+    border-top-color: #d90429;
     align-items: stretch;
     justify-content: flex-start;
     flex-wrap: nowrap;

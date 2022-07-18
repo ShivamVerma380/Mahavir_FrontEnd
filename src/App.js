@@ -228,69 +228,69 @@ function App() {
     }
   }
 
-  function fetchMiniPoster(){
-    if(MiniPoster.length===0){
-      return( 
-        null
-      );
-    }
-    else if(MiniPoster.length>6){
-      // var array = MiniPoster.slice(0,6)
-      // var miniarr = MiniPoster.slice(6)
-      // setMiniPoster(miniarr)
-      count+=6;
-      console.log("Mini: ",MiniPoster.slice(6))
-      return( 
+  // function fetchMiniPoster(){
+  //   if(MiniPoster.length===0){
+  //     return( 
+  //       null
+  //     );
+  //   }
+  //   else if(MiniPoster.length>6){
+  //     // var array = MiniPoster.slice(0,6)
+  //     // var miniarr = MiniPoster.slice(6)
+  //     // setMiniPoster(miniarr)
+  //     count+=6;
+  //     console.log("Mini: ",MiniPoster.slice(6))
+  //     return( 
 
         
-        <MiniPosters MiniPosters={MiniPoster.slice(count-6,count)}/>
-      );
-    }
+  //       <MiniPosters MiniPosters={MiniPoster.slice(count-6,count)}/>
+  //     );
+  //   }
 
-    else if(MiniPoster.length<=6) {
-      return (
-        <MiniPosters MiniPosters={MiniPoster}/>
-      );
+  //   else if(MiniPoster.length<=6) {
+  //     return (
+  //       <MiniPosters MiniPosters={MiniPoster}/>
+  //     );
       
-    }
+  //   }
     
-  }
+  // }
 
   function HandleCompareClick() {
     
   }
 
-  function fetchMiniPosterTwo(){
-    if(MiniPoster.length===0){
-      return( 
-        null
-      );
-    }
-    else if(MiniPoster.length>6){
-      // var array = MiniPoster.slice(0,6)
-      // var miniarr = MiniPoster.slice(6)
-      // setMiniPoster(miniarr)
-      // while(count<=MiniPoster.length) {
+  // function fetchMiniPosterTwo(){
+  //   if(MiniPoster.length===0){
+  //     return( 
+  //       null
+  //     );
+  //   }
+  //   else if(MiniPoster.length>6){
+  //     // var array = MiniPoster.slice(0,6)
+  //     // var miniarr = MiniPoster.slice(6)
+  //     // setMiniPoster(miniarr)
+  //     // while(count<=MiniPoster.length) {
         
-      //   count+=6;
-      //   element=<MiniPosters MiniPosters={MiniPoster.slice(count-6,count)}/>
-      //   console.log("Mini: ",MiniPoster.slice(6))
-      return( 
+  //     //   count+=6;
+  //     //   element=<MiniPosters MiniPosters={MiniPoster.slice(count-6,count)}/>
+  //     //   console.log("Mini: ",MiniPoster.slice(6))
+  //     return( 
         
-        <MiniPosters MiniPosters={MiniPoster.slice(count)}/>
-      );
+  //       <MiniPosters MiniPosters={MiniPoster.slice(count)}/>
+  //     );
       
       
-    }
+  //   }
 
-    else if(MiniPoster.length<=6) {
-      return (
-        <MiniPosters MiniPosters={MiniPoster}/>
-      );
+  //   else if(MiniPoster.length<=6) {
+  //     return (
+  //       <MiniPosters MiniPosters={MiniPoster}/>
+  //     );
       
-    }
+  //   }
     
-  }
+  // }
 
   
 
@@ -325,12 +325,10 @@ function App() {
 
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
       
-      {
+     {
         fetchSlideshow()
       
-      }
-      <br></br>
-      <br></br>
+      } 
       {
         (isDealsFetched)?(
           deals.map(index=>{
@@ -363,19 +361,17 @@ function App() {
         })
       ) : (null)
     }
-    <br></br>
-    <br></br>
     
      
 
       
       
-      {
+      {/* {
         (isOfferPostersFetched)?(
           fetchMiniPoster()
         ) : (null)
         
-      }
+      } */}
 
       
 
@@ -383,10 +379,13 @@ function App() {
       
       {/* <Product title="Mahavir Special" className="title" productList={Products}/>
       <Product title="Deals Of The Day" className="title" productList={Products}/> */}
-      {
+      {/* {
         fetchMiniPosterTwo()
-      }
+      } */}
+      
       <ShopByBrands/>
+      <MiniPosters MiniPosters={MiniPoster}/>
+
       {/* <MiniPosters/> */}
       {/* <Test productList={Products} /> */}
       {/* <FeatureBrands posterList={Posters}/> */}
@@ -404,7 +403,7 @@ function App() {
 
     
      <Footer/>
-     <DeveloperPage/>
+     {/* <DeveloperPage/> */}
     </div>
     
      

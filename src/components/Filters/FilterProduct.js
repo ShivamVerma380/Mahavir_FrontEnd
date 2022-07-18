@@ -10,7 +10,6 @@ import {setCookie,getCookie} from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
 import "./Slider.css"
 
-
 function FilterProduct() {
     var category = localStorage.getItem("Category");
     const navigate = useNavigate();
@@ -41,17 +40,41 @@ function FilterProduct() {
 
     const[filterselected,SetFilterSelected] = useState([localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory")])
 
-    //For Price Slider
-    const [value, setValue] = React.useState([0, 100]);
+    // //For Price Slider
+    // const [value, setValue] = React.useState([0, 100]);
     const [isValueSet,SetIsValueSet] = useState(false);
-    // var min=0,max=100;
-    var minPrice = 0
-    var maxPrice = 100;    
-    const rangeSelector = (event, newValue) => {
-        setValue([parseInt(newValue[0]) ,parseInt(newValue[1])]);
-        // console.log(event)
-    };
+    const [minPrice,SetminPrice] = useState(0);
+    const [maxPrice,SetmaxPrice] = useState(0);
+    // var min,max;
+    // var minPrice;
+    // var maxPrice;    
+    // const rangeSelector = (event, newValue) => {
+    //     setValue([parseInt(newValue[0]) ,parseInt(newValue[1])]);
+    //     // console.log(event)
+    // };
 
+    // Our States
+  const [value, setValue] =  React.useState([0,0]);
+  
+  // Changing State when volume increases/decreases
+  const rangeSelector = (event, newValue) => {
+    setValue(newValue);
+    var arr=[];
+    var flag=false;
+    products.map(index=>{
+        if(index.offerPrice>=newValue[0] && index.offerPrice<=newValue[1]){
+            console.log("here");
+            arr.push(index);
+            flag=true;
+        }
+        
+        if(flag){
+            SetSelectedProducts(arr);
+        }
+
+    })
+    console.log(newValue)
+  };
     useEffect(()=>{
         // console.log("category", category);
         if(!isSelectedProductsFetched && !isProductsFetched && !isFiltersFetched && !isValueSet){
@@ -361,8 +384,21 @@ function FilterProduct() {
     return(
         <Row className="filterproductsContainer">
             <Col md = {1}></Col>
+            
             <Col md={2}>
                 <h5>FilterProduct</h5>
+                <Typography id="range-slider" gutterBottom>
+                    Select Price Range:
+                </Typography>
+                <Slider
+                    value={value}
+                    onChange={rangeSelector}
+                    valueLabelDisplay="auto"
+                    min={0}
+                    max={maxPrice}
+                    disableSwap
+                />
+      Your range of Price is between {value[0]} /- and {value[1]} /-
                 <br></br>
                 {
                     (isFiltersFetched)?(

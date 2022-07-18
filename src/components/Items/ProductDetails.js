@@ -369,7 +369,7 @@ function ProductDetails() {
   var variantcolorthree = "";
   var variantcolorfour = "";
   var variantcolorfive = "";
-  console.log("Percentage: ", (review.nosOfFiveStars / review.totalReviews) * 100);
+  // console.log("Percentage: ", (review.nosOfFiveStars / review.totalReviews) * 100);
   if ((review.nosOfFiveStars / review.totalReviews) * 100 >= 70) {
     variantcolorfive = "success";
   } else if ((review.nosOfFiveStars / review.totalReviews) * 100 >= 50 && (review.nosOfFiveStars / review.totalReviews) * 100 < 70) {
@@ -890,7 +890,9 @@ function ProductDetails() {
                   <br></br>
                   <Row >
                     <h4><b><i>Product Description</i></b></h4>
-                    {
+                    
+                    {/* {
+                     
                       product.productDescriptions.map(index => {
                         return (
                           <>
@@ -910,7 +912,7 @@ function ProductDetails() {
                         )
 
                       })
-                    }
+                    } */}
                   </Row>
 
                     {/* <Col md={4}>

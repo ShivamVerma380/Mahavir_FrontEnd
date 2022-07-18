@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col } from "reactstrap";
 import axios from "axios";
-import {Image,Button} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import BrandDetails from "./BrandDetails";
 import { Navigate, useNavigate } from "react-router-dom";
-
+import Carousel from "react-grid-carousel";
 import './ShopByBrands.css';
 
 const ShopByBrands = () => {
@@ -73,39 +73,64 @@ const ShopByBrands = () => {
 
     return (
         <div>
+        <Container style={{marginBottom:'70px'}}>
+        <h3 className="brand_title">Shop by brands</h3>
         {
             (isBrandsFetched) ? (
-                <div>
-                <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>SHOP BY BRANDS</h3>
+              <Carousel cols={6} rows={1} gap={10} loop>
+                
+                {
+                  brands.map(index=>{
+                    return(
+                      <Carousel.Item>
+                        <div className="promo" onClick={()=>BrandClickHandler(index)} style={{width:'100%',overlayColor: 'hotpink'}}>
+                          <div className="image-wrapper"><img src={index.brandLogo}  /></div>
+                          {/* <h2 className="brandtitle">{index.brandName}</h2> */}
+                        </div>
+                        {/* <img style={{width:'100%'}} src={"https://picsum.photos/800/600?random=3"} /> */}
+                      </Carousel.Item>
+                    )
+                  })
+                }
+
+              </Carousel>
+              
+                // <div>
+
+
+
+
+                // <h3 className="hometitle" style={{textAlign:"left",margin:10 ,padding:5}}>SHOP BY BRANDS</h3>
                 
 
                 
-                    <Row thumbnail='true' roundedCircle='true' className="shopbybrandsrow">
-                    {    
-                    brands.map(index=>{
-                        return (
+                //     <Row thumbnail='true' roundedCircle='true' className="shopbybrandsrow">
+                //     {    
+                //     brands.map(index=>{
+                //         return (
                           
-                                <Col sm={2}>
+                //                 <Col sm={2}>
                              
-                                 <Image thumbnail='true' className="shopbybrandsimg"  src={index.brandLogo} onClick={()=>BrandClickHandler(index)}/>
-                                 {/* <Image thumbnail='true' className="shopbybrandsimg"  src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-family-hero?wid=940&hei=1112&fmt=png-alpha&.v=1645036276543" onClick={()=>BrandClickHandler(index)}/> */}
+                //                  <Image thumbnail='true' className="shopbybrandsimg"  src={index.brandLogo} onClick={()=>BrandClickHandler(index)}/>
+                //                  {/* <Image thumbnail='true' className="shopbybrandsimg"  src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-family-hero?wid=940&hei=1112&fmt=png-alpha&.v=1645036276543" onClick={()=>BrandClickHandler(index)}/> */}
                            
-                                </Col>
+                //                 </Col>
                                 
                             
-                        );
+                //         );
                     
                     
-                })
-                }
-                </Row>
+                // })
+                // }
+                // </Row>
                 
-                </div>
+                // </div>
                 
                
                 
             ) : (null)
         }
+        </Container>
     </div>
     )
 }

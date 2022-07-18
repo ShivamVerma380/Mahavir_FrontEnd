@@ -2,7 +2,7 @@
     
     animation: mymove 20s infinite;
   } */
-  .CategoryProduct {
+  /* .CategoryProduct {
     height: 60%;
     width: 80%;
     margin-top: 40%;
@@ -28,4 +28,260 @@
     width: 150px;
     position: relative;
     animation: btmmove 5s forwards;
+  } */
+
+
+  .categoryproductscontainer{
+    box-shadow: 0 20px 50px rgb(0 0 0 / 7%);
+    margin-bottom: 20px;
+    background: aliceblue;
+    justify-content: center;
+    padding: 20px;
+  }
+  .categoryproductscard{
+    transition: transform 0.2s ease;
+    
+    border-radius: 0;
+     border: solid 0.5px #ffc7d19e;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 18rem;
+    text-align: left;
+    padding: 0px;
+    cursor: pointer;
+  }
+
+  .categoryproductscardbody{
+    
+  }
+
+  .text{
+    font-size: 22px;
+    font-weight: 700;
+    color: #d90429;
+    transition: all 0.3s ease 0s;
+  }
+
+  .categoryproductscard:hover{
+    /* box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18); */
+    box-shadow: rgb(0 0 0 / 16%) 0px 6px 12px;
+    transform: scale(1.02);
+  }
+  .categoryproductscardbodyonhover{
+    display: none;
+  }
+ 
+  .categoryproductscard:hover .categoryproductscardbodyonhover{
+    /* background-color: rgb(255, 204, 186); */
+    cursor: pointer;
+    display: block; 
+    
+  }
+
+  .categoryproductscard:hover .cardimage{
+    box-shadow: 0 2px 2px 0 #ffdbe1;
+    display: none;
+    /* box-shadow: inset 0 0 10px 20px rgba(0,0,0,0.6); */
+    
+  }
+
+  .categoryproductscard:hover .categoryproductscardbody{
+    
+    display: none; 
+    
+  }
+  .categoryproductscard:hover .cardimage2{
+    box-shadow: 0 2px 2px 0 #ffdbe1;
+    
+    display: block; 
+    
+  }
+ 
+  .cardtitle{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .cardimage{
+    box-shadow: 0 2px 2px 0 #ffdbe1;
+    
+    /* box-shadow: inset 0 0 10px 20px rgba(0,0,0,0.6); */
+  }
+
+  .cardimage2{
+    display:none;
+  }
+
+  /*  view more button */
+
+  .explore {
+    
+    /* margin-left: 75%; */
+    /* font-family: "Space Mono", monospace; */
+    letter-spacing: 5px;
+    background: #8d99ae;
+    color: white;
+    position: relative;
+    outline: none;
+    border: none;
+    height: 60px;
+    width: 250px;
+    font-size: 14px;
+    z-index: 2;
+    transition: 0.01s 0.23s ease-out all;
+    overflow: hidden;
+    font-size: 20px;
+  }
+  .explore:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    background: #202020;
+    z-index: -1;
+    transition: 0.3s ease-in all;
+  }
+  .explore:after {
+    content: "";
+    position: absolute;
+    left: -5%;
+    top: 5%;
+    height: 90%;
+    width: 5%;
+    background: #8d99ae;
+    z-index: -1;
+    transition: 0.4s 0.02s ease-in all;
+  }
+  .explore:hover {
+    cursor: pointer;
+    color: transparent;
+  }
+  .explore:hover:before {
+    left: 100%;
+    width: 25%;
+  }
+  .explore:hover:after {
+    left: 100%;
+    width: 70%;
+  }
+  .explore:hover .icon-right.after:after {
+    left: -101px;
+    color: white;
+    transition: 0.2s 0.2s ease all;
+    top: 30px;
+  }
+  
+  
+  .icon-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .icon-right:after {
+    font-family: "FontAwesome";
+    content: "→";
+    font-size: 24px;
+    display: inline-block;
+    position: relative;
+    top: 30px;
+    left: -101px;
+
+    transform: translate3D(0, -50%, 0);
+  }
+  .icon-right.after:after {
+    left: -250px;
+    color: black;
+    transition: 0.15s 0.25s ease left, 0.5s 0.05s ease color;
+  }
+  .icon-right.after:before {
+    content: "Explore";
+    position: absolute;
+    left: -230px;
+    top: 14px;
+    opacity: 0;
+    transition: 0.2s ease-in all;
+  }
+ /* view more button  end */
+
+
+ /* title  */
+ .categorytitle {
+  position: relative;
+  margin-bottom: 0;
+  color: #212529;
+  /* position: relative; */
+  /* font-family: "Roboto"; */
+  font-weight: 900;
+  font-size: 40px;
+  /* text-transform: uppercase; */
+  /* font-style: italic; */
+  letter-spacing: 0.05em;
+  display: inline-block;
+}
+
+/* We create a pseudo element and blur it using the SVG filter. We’ll grab the content from the custom HTML attribute. */
+
+.categorytitle:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: attr(filter-content);
+
+  filter: url(#motion-blur-filter);
+}
+
+/* We hide the SVG filter element from the DOM as it would take up some space */
+
+.svgtitle {
+  display: none;
+}
+ /* title end */
+/* laplops and small screens */
+  @media screen and (min-width: 769px) and (max-width:1024px)
+  {
+
+  }
+
+  /* desktop and large screens */
+  @media screen and (min-width: 1025px) and (max-width:1200px)
+  {
+
+  }
+
+  /* mobiles */
+  @media screen and (min-width: 320px) and (max-width:480px)
+  {
+    .categoryproductscard{
+      transition: transform 0.2s ease;
+      
+      border-radius: 0;
+       border: solid 0.5px rgb(197 252 245);
+      margin-left: 5px;
+      margin-right: 5px;
+      width: 11rem;
+      text-align: left;
+      padding: 0px;
+      cursor: pointer;
+    }
+
+    .explore{
+      height: 40px;
+      width: 200px;
+    }
+  }
+  /* ipads and tablets */
+  @media screen and (min-width: 481px) and (max-width:768px)
+  {
+
+  }
+
+  /* extra large screens */
+  @media screen and (min-width: 1201px) 
+  {
+
   }

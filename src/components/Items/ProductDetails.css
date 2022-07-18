@@ -1,7 +1,6 @@
 .textsimilar{
     font-size: large;
     font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
     
     z-index: -1;
@@ -9,8 +8,8 @@
 }
 
 .container{
-    background-color:white;
-
+    /* background-color:white; */
+/*  */
 }
 
 .columnone {
@@ -102,7 +101,6 @@ hr.vertical {
   background: black;
   color: white;
   /* margin-bottom: 5px; */
-  font-family: sans-serif;
   opacity: 0;
   visibility: hidden;
   -webkit-transition: visibility 0s, opacity 0.5s linear; 
