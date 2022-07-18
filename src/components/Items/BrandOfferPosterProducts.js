@@ -12,7 +12,7 @@ const BrandOfferPosterProducts =()=>{
 
 
     const navigate = useNavigate();
-    var models = localStorage.getItem("offermodel").split(',');
+    var models = localStorage.getItem("offermodels").split(',');
     useEffect(() => {
         if (!areProductsFetched) {
 
@@ -91,7 +91,7 @@ const BrandOfferPosterProducts =()=>{
                             <Card  style={{ width: '20rem'}} 
                         className="mb-2">
                              <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
-                            <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
+                            <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={index.productImage1} onClick={()=>callProductDetails(index)}/>
                             <Card.Body>
                             <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
                             <Card.Text onClick={()=>callProductDetails(index)}>
