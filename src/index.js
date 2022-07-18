@@ -48,6 +48,8 @@ import FilterProduct from './components/Filters/FilterProduct';
 import WishlistProducts from './components/WishlistProducts';
 import AdminLogin from './components/Admin/AdminLogin';
 import Orders from './components/OrderDetails/Orders';
+import CompareProducts from './components/AddtoCompare/CompareProducts';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -78,7 +80,7 @@ root.render(
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
       <Route path='/offers' element={<OfferItems/>}/>
-      <Route path='/compareproducts' element={<AddToCompareProducts/>}/>
+      {/* <Route path='/compareproducts' element={<AddToCompareProducts/>}/> */}
       {/* <Route path="/SearchBar" element={<SearchBar/>}/> */}
       <Route path='/my-orders' element={<Orders/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>
@@ -107,6 +109,7 @@ root.render(
       <Route path='/productsbydeal' element={<ProductsByDeal/>}/>
       <Route path='/filterproducts' element={<FilterProduct/>}/>
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
+      <Route path='/compareProducts' element={<CompareProducts/>}/>
       
 
     </Routes>

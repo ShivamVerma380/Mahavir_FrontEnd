@@ -9,16 +9,19 @@ import axios from "axios";
 import {setCookie,getCookie} from '../Cookies'
 import {useLocation} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-
+import Header from "../Header";
+// import {getCookie,setCookie} from '../Cookies';
 
 
 function CategoryProducts(){
     var token=getCookie("jwtToken");
     var cart=getCookie("CartModels").split(',');
+    var comparemodels=getCookie("addToCompare").split(',');
+    const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
     const location = useLocation();
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
- var token=getCookie("jwtToken");
+//  var token=getCookie("jwtToken");
     const [Products,setProducts] = useState([]);
     const [isProductsFetched,setIsProductsFetched] = useState(false);
     const navigate = useNavigate();
@@ -89,20 +92,51 @@ function CategoryProducts(){
       }
 
     
-      const handleAddToCompare = event => {
-        if (event.target.checked) {
-  
-          console.log('✅ Checkbox is checked');
-          setChange(change+1)
+      function handleAddToCompare(modelNumber){
+        
+        var element = document.getElementById(modelNumber);
+        
+        if(element.checked){
           
           
+            console.log("adddd"+modelNumber);
+            comparemodels.push(modelNumber);
+            setCookie("addToCompare",comparemodels,20);
+            setLen(getCookie("addToCompare").split(',').length)
+          console.log(comparemodels);
+          console.log("checked "+modelNumber);
+            
+            
+        
           
-        } else {
-          console.log('⛔️ Checkbox is NOT checked');
-          setChange(change-1)
         }
-        setisAddCompareClicked(current => !current);
-        // alert("Added To Compare");
+        else {
+          for (var i = 0; i < comparemodels.length; i++) {
+            if (comparemodels[i] === modelNumber) {
+              comparemodels.splice(i, 1);
+                console.log(comparemodels);
+                setCookie("addToCompare",comparemodels,20);
+                setLen(getCookie("addToCompare").split(',').length)
+                // window.location.reload();
+                break;
+            }
+        }
+          console.log("unchecked "+modelNumber);
+
+        }
+        // if (event.target.checked) {
+  
+        //   console.log('✅ Checkbox is checked');
+        //   setChange(change+1)
+          
+          
+          
+        // } else {
+        //   console.log('⛔️ Checkbox is NOT checked');
+        //   setChange(change-1)
+        // }
+        // setisAddCompareClicked(current => !current);
+        // // alert("Added To Compare");
         
     }
       
@@ -249,6 +283,7 @@ function CategoryProducts(){
       wishlist.push(i.modelNumber);
     })
     console.log("wish "+wishlist)
+
     return(
         
        
@@ -256,13 +291,19 @@ function CategoryProducts(){
       (isProductsFetched)?
       (
 
-        <div style={{fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif ' }}>
+        <div >
+          <Header/>
+          {
+          (((len-1)>0) ? <Button style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
+          
+          }
           <ToastContainer position="top-center"/>
 
 
   
           
             <h1 style={{color:"rgb(255,98,98", marginLeft:'2%',marginTop:'2%'}}><i>{location.state.name}</i></h1>
+            
         
         
       {
@@ -310,7 +351,7 @@ function CategoryProducts(){
                             <Row style={{marginBottom:'2%'}}>
                                 <Form style={{fontWeight: '700',
     fontSize: '150%'}}>
-                                    <Form.Check type="checkbox"  label = "Add To Compare" onChange={handleAddToCompare}/>
+                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
                                     </Form>
                                     
                             </Row>
