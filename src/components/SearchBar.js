@@ -4,7 +4,7 @@ import { AiOutlineKey } from "react-icons/ai";
 import "./searchbar.css";
 
 function SearchBar({productList}){
-  console.log(productList)
+  console.log("Product List: ",productList)
   const [inFocus, setInFocus] = useState(false);
   // const [history, setHistory] = useState(initialHistory);
   const [searchQuery, setSearchQuery] = useState("");

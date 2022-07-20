@@ -13,6 +13,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Header from "../Header";
 import NavbarOffcanvas from "react-bootstrap/esm/NavbarOffcanvas";
 import FilterProduct from "../Filters/FilterProduct";
+import TestFilterProducts from "../Filters/TestFilterProducts";
 
 
 
@@ -233,7 +234,8 @@ const SelCatProducts=()=>{
                             )
                         }
                         </Carousel>
-                        <FilterProduct/>
+                        {/* <FilterProduct/> */}
+                        <TestFilterProducts/>
                         {/* {
 
                             (change!=0) ? (

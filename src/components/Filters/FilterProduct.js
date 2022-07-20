@@ -142,30 +142,7 @@ function FilterProduct() {
     }
 
     function WishlistHandler(index) {
-        // alert("Item added successfully to wishlist");
-        // console.log(index.modelNumber)
-        // if (localStorage.getItem("wishlistproduct") == null) {
-        //     localStorage.setItem("wishlistproduct", index.modelNumber)
-        // } else {
-        //     var arr = localStorage.getItem("wishlistproduct").split(',')
-        //     var flag = true;
-        //     arr.map(i => {
-
-        //         console.log("i: ", i)
-        //         if (i === index.modelNumber) {
-        //             arr.splice(arr.indexOf(i), 1)
-        //             localStorage.setItem("wishlistproduct", arr)
-        //             console.log('del arr: ' + arr)
-        //             console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
-        //             console.log("in if")
-        //             flag = false;
-        //         }
-        //     })
-        //       if(flag)
-        //         localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
-        //         navigate('/filterproducts')
-
-        // }
+       
 
         console.log("Wishlist clicked")
 
@@ -553,7 +530,7 @@ function FilterProduct() {
 
                                         <Row className="innerrow">
                                             <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
-                                            <Col><Button className="filterproductBtn" variant="outline-primary"  >Buy Now</Button></Col>
+                                            <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
                                            
 
                                         </Row>
