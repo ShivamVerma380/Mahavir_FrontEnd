@@ -109,9 +109,7 @@ root.render(
       <Route path='/productsbydeal' element={<ProductsByDeal/>}/>
       <Route path='/filterproducts' element={<FilterProduct/>}/>
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
-      <Route path='/compareProducts' element={<CompareProducts/>}/>
-      
-
+      <Route path='/compareProducts' element={<AddToCompareProducts/>}/>
     </Routes>
   </BrowserRouter>
 );
