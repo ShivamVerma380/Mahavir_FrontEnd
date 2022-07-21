@@ -12,7 +12,8 @@ import Cart from "./components/Shopping-Cart/Cart";
 import CategoryDropdowns from './components/Admin/CategoryDropdowns';
 import PendingDelivery from './components/Admin/Sidebar/PendingDelivery'
 import UserComplaint from './components/Items/UserComplaint'
-import AddressForm from './components/AddressForm';
+import AddressForm from './components/OrderSummary/AddressForm';
+import Payment from './components/OrderSummary/Payment';
 // import OrderSummary from './components/OrderSummary';
 import PaymentOption from './components/PaymentOption';
 
@@ -49,7 +50,8 @@ import WishlistProducts from './components/WishlistProducts';
 import AdminLogin from './components/Admin/AdminLogin';
 import Orders from './components/OrderDetails/Orders';
 import CompareProducts from './components/AddtoCompare/CompareProducts';
-
+import Checkout from './components/OrderSummary/Checkout';
+import Invoice from './components/OrderSummary/Invoice';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -110,8 +112,9 @@ root.render(
       <Route path='/filterproducts' element={<FilterProduct/>}/>
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
       <Route path='/compareProducts' element={<CompareProducts/>}/>
-      
-
+      <Route path='/checkout' element={<Checkout/>}/>
+      <Route path='/invoice' element={<Invoice/>}/>
+      <Route path='/payment' element={<Payment/>}/>
     </Routes>
   </BrowserRouter>
 );
