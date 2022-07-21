@@ -3,7 +3,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Row,Col ,NavItem ,NavDropdown,Form} from "react-bootstrap";
 
-import {setCookie,getCookie} from '../Cookies';
 
 function ComparisonHeader({product}){
     const[length,SetLength] = useState(product.length); 
@@ -52,22 +51,8 @@ function ComparisonHeader({product}){
     })
    
         
-    const handleFormCheck=(event)=>{
-        if(event.target.checked){
-            console.log("checked")
-            // setCookie("isChecked","true",20);
-            localStorage.setItem("isChecked",true)
-        }
-        else{
-            console.log("unchecked")
-            localStorage.removeItem("isChecked")
-        }
-        window.location.reload();
-            
-        
-        // localStorage.setItem("showOnlyDiff",event.target.value);
-        // alert(event.target.value)
-        // console.log("event",localStorage.getItem("showOnlyDiff"));
+    const handleFormCheck=event=>{
+        alert(event.target.value)
     }
 
     function handleBrandClick(brandName){
@@ -83,11 +68,22 @@ function ComparisonHeader({product}){
     }
 
     function handleModelClick(modelName,modelNumber){
-        var modelNumbers = getCookie("addToCompare").split(",")
-        modelNumbers.push(modelNumber)
-        setCookie("addToCompare",modelNumbers,20)
-        window.location.reload();
+
+        console.log("model number",modelNumber);
+        axios.get("http://localhost:8080/get-products/"+modelNumber)
+            .then(function(response){
+                if(response.status==200){
+                    // product.push(response.data);
+                    
+                    SetProductArr([...productArr,response.data])
+                    SetModel(modelName);
+                    SetLength(length+1);
+                }
+            }).catch(function(error){
+                console.log(error);
+            })
         
+        SetModel(modelName);
     }
 
     console.log("length",length);
@@ -99,7 +95,7 @@ function ComparisonHeader({product}){
                 <h5>{product[0].productName} vs others</h5>
                 <br></br>
                 <Form>
-                    <Form.Check type="checkbox"   label = "Show Only Differences" onChange={handleFormCheck} defaultChecked={(localStorage.getItem("isChecked"))?true:false}/>
+                    <Form.Check type="checkbox"   label = "Show Only Differences" onChange={handleFormCheck}/>
                 </Form>
             </Col>
             {
@@ -107,7 +103,7 @@ function ComparisonHeader({product}){
                 productArr.map(index=>{
                     return(
                         <Col md={2}>
-                            <img style={{ width: "10rem", alignContent: "center" }}  src={index.productImage1}></img>
+                            <img style={{ width: "10rem", alignContent: "center" }}  src={'data:image/jpg;base64,' + index.productImage1.data}></img>
                             <br></br>
                             <h6 style={{ marginTop: "20px" }}>{index.productName}</h6>
                             <h6 style={{}}>₹{index.productPrice}</h6>

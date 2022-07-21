@@ -3,10 +3,7 @@ import { Row,Col } from "react-bootstrap";
 import { Container } from "reactstrap";
 import { Flag } from "semantic-ui-react";
 
-// var showOnlyDiff = localStorage.getItem("showOnlyDiff");
 function ComparisonHighlights({product,showOnlyDiff}){
-    // showOnlyDiff
-    // console.log("diff",showOnlyDiff)
 
     var arr = product[0].productHighlights.split(';');
     const [ans,SetAns] = useState(new Set());
@@ -30,10 +27,7 @@ function ComparisonHighlights({product,showOnlyDiff}){
     }
 
     return(
-        (localStorage.getItem("isChecked"))?(
-            null
-        ):(
-            <Row>
+        <Row>
             <Col md={1}>
             </Col> 
             {
@@ -117,8 +111,6 @@ function ComparisonHighlights({product,showOnlyDiff}){
             }
 
         </Row>
-        )
-        
     );
 }
 

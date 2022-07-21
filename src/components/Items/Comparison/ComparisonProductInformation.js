@@ -2,7 +2,6 @@ import React from "react";
 
 import { Row,Col, Container } from "react-bootstrap";
 function ComparisonProductInformation({title,product}){
-    //title,
 
     console.log(product[0].productInformation[title]);
     
@@ -41,7 +40,7 @@ function ComparisonProductInformation({title,product}){
                             {
                                 key.map((k,pos)=>{
                                     return(
-                                        <p>{k}{values[pos]}</p>
+                                        <p>{k}:{values[pos]}</p>
                                     );
                                 })
                             }                                

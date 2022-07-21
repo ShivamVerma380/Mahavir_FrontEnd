@@ -10,16 +10,17 @@ import { Button } from "react-bootstrap";
 import './ShopByBrands.css';
 import { Carousel, CarouselItem } from "react-bootstrap";
 import Header from "../Header";
-import { Col, Row, Form, Card, Container,Image} from "react-bootstrap";
-
+import { Col, Row, Form, Card, Container, Image } from "react-bootstrap";
+import { MDBCarousel, MDBCol, MDBCarouselInner, MDBCarouselItem, MDBCarouselElement, MDBCardHeader, MDBCardFooter, MDBBtn, MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardLink, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
+import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 
 
 
 function BrandDetails() {
     const navigate = useNavigate();
     var offerPoster = <div>
-        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="Mandala" />
-      </div>
+        <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="Mandala" />
+    </div>
     var models = [];
     var offermodel = [];
     console.log("In Brand details")
@@ -28,6 +29,7 @@ function BrandDetails() {
     </div>
     const [brands, setBrands] = useState([]);
     const [isBrandsFetched, setIsBrandsFetched] = useState(false);
+
     var videoLinks = localStorage.getItem("brandVideoLinks").split(',');
     // var categories = localStorage.getItem("finalBrandCategories").split(',');
 
@@ -49,27 +51,48 @@ function BrandDetails() {
             axios.get("http://localhost:8080/excel/shopByBrands").then(
                 function (response) {
                     if (response.status == 200) {
-                        console.log("Response",response.data);
-                        setBrands(response.data);
-                    
+                        console.log("Response", response.data);
+                        brands.push(response.data);
+
                         setIsBrandsFetched(true);
                         console.log("Brands", brands);
+
                     }
                 }).catch(function (error) {
                     console.log("error", error);
                 }
                 );
-        }
-    })
 
-    
+
+        }
+    });
+
+    // brands.map(index => {
+    //     console.log("index", index)
+    //     index.map(i => {
+    //         console.log("i", i.brandCategories)
+
+    //         i.brandCategories.map(f=>{
+    //             console.log("title",f.category)
+    //             f.products.map(d=>{
+    //                 console.log("d",d.productImage1);
+    //             })
+    //         })
+    //     })
+    // })
+    parsedArr.map(index => {
+        console.log("arr", index.category)
+        index.products.map(i=>{
+            console.log("in",i.productImage1)
+        })
+    })
 
     function handleClick(index) {
         // parsedArr.map(index=>{
         //      models += index.modelNumbers;
         // })
-        localStorage.setItem("shopbrandcat",index)
-        console.log("Get cat: ",localStorage.getItem("shopbrandcat"))
+        localStorage.setItem("shopbrandcat", index)
+        console.log("Get cat: ", localStorage.getItem("shopbrandcat"))
         // console.log("Model Num: ",index.products.modelNumber)
         // models.push(index.products.modelNumber);
         // console.log("model", models);
@@ -80,25 +103,27 @@ function BrandDetails() {
         navigate('/brandcatproducts')
     }
 
-    const handleOfferPosterOnClick=(modelNumbers)=>{
+    const handleOfferPosterOnClick = (modelNumbers) => {
         console.log("Item Clicked");
-        
+
         offermodel = modelNumbers;
-        localStorage.setItem("offermodels",offermodel);
-        console.log("Offer Models: ",localStorage.getItem("offermodels"));
+        localStorage.setItem("offermodels", offermodel);
+        console.log("Offer Models: ", localStorage.getItem("offermodels"));
         navigate('/brandofferposterproducts')
     }
 
 
     // const handleOfferPosterOnClick=(modelNumbers)=>{
     //     // alert("Offer Poster clicked");
-  
+
     //     console.log(modelNumbers);
     //     localStorage.setItem("offerPostersModelNumber",modelNumbers)
     //     console.log(localStorage.getItem("offerPostersModelNumber"))
     //     navigate("/offers")
     //   }
-    
+
+
+
 
     return (
         <div>
@@ -106,138 +131,275 @@ function BrandDetails() {
             <br></br>
             <Row className="brandheading">
                 <center>
-                <Image className="brandimg"  src={localStorage.getItem("brandLogo")} />
+                    <Image className="brandimg" src={localStorage.getItem("brandLogo")} />
                 </center>
             </Row>
             {/* <center>
                 <img style={{ height: 100, width: 150, borderRadius: "50px" }} src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
             </center> */}
-            
-       <Row>
-            
-            <Carousel>
-                {
-                    offerPoster = parsedArray.map(index => {
-                        //let Base64string = Buffer.from(index.image.data,"base64").toString();
 
-                        console.log("image", index.offerPoster);
-                        // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
-                        return (
-                            
-                            
-                            <CarouselItem  interval={1000} onClick={()=>handleOfferPosterOnClick(index.modelNumbers)}>
-                                
-                                <Image  id="classname"
-                                    className="d-block w-100"
-                                    src={index.offerPoster}
-                                    alt={index.alt}
-                                    height={500}
-                                     
-                                    
-                                    
-                                                            
-                                />               
-                                
-                            </CarouselItem>
-                 
-
-                        )
-                        
-                        
-                    })
-                }
-
-
-            </Carousel>
-            </Row>
             <Row>
-            <h3 style={{color:"rgb(255,98,98",margin:'2%'}}><i>FEATURED CATEGORIES</i></h3>
-            
-            <Swiper
-                slidesPerView={1}
-                spaceBetween={5}
-                slidesPerGroup={3}
-                loop={false}
-                loopFillGroupWithBlank={true}
-                breakpoints={{
-                  700: {
-                    slidesPerView: 5,
-                  },
-                  400: {
-                    slidesPerView: 3,
-                  },
-                }}
-                pagination={{
-                  clickable: true,
-                }}
-                navigation={true}
-                modules={[Pagination, Navigation]}
-                className="mySwiper"
-                style={{height:'150px'}}
-            >
+
+                <Carousel>
+                    {
+                        offerPoster = parsedArray.map(index => {
+                            //let Base64string = Buffer.from(index.image.data,"base64").toString();
+
+                            console.log("image", index.offerPoster);
+                            // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
+                            return (
 
 
-                {
-                    cards = parsedArr.map(index => {
-                        console.log("Cat Img: ",index.catImage)
-                        return (
-                            <div className="container">
-                                
-                                <SwiperSlide>
-                                    <Image src={index.catImage} style={{width:100,margin:5}}/>
-                                    <Button onClick={()=>handleClick(index.category)} variant="outline-primary" className="brandcategory">{index.category}</Button>
-                                </SwiperSlide>
-                                </div>
-                        )
-                    })
-                }
+                                <CarouselItem interval={1000} onClick={() => handleOfferPosterOnClick(index.modelNumbers)}>
 
-            </Swiper>
+                                    <Image id="classname"
+                                        className="d-block w-100"
+                                        src={index.offerPoster}
+                                        alt={index.alt}
+                                        height={500}
+
+
+
+
+                                    />
+
+                                </CarouselItem>
+
+
+                            )
+
+
+                        })
+                    }
+
+
+                </Carousel>
             </Row>
+
+
+
+
+            <Row>
+                <h3 style={{ color: "rgb(255,98,98", margin: '2%' }}><i>FEATURED CATEGORIES</i></h3>
+
+                <Swiper
+                    slidesPerView={1}
+                    spaceBetween={5}
+                    slidesPerGroup={3}
+                    loop={false}
+                    loopFillGroupWithBlank={true}
+                    breakpoints={{
+                        700: {
+                            slidesPerView: 5,
+                        },
+                        400: {
+                            slidesPerView: 3,
+                        },
+                    }}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                    className="mySwiper"
+                    style={{ height: '150px' }}
+                >
+
+
+                    {
+                        cards = parsedArr.map(index => {
+                            console.log("Cat Img: ", index.catImage)
+                            return (
+                                <div className="container">
+
+                                    <SwiperSlide>
+                                        <Image src={index.catImage} style={{ width: 100, margin: 5 }} />
+                                        <Button onClick={() => handleClick(index.category)} variant="outline-primary" className="brandcategory">{index.category}</Button>
+                                    </SwiperSlide>
+                                </div>
+                            )
+                        })
+                    }
+
+                </Swiper>
+            </Row>
+
+            {
+                parsedArr.map(index => {
+                    return (
+                        
+                            <Row>
+
+                                <h3 style={{ color: "rgb(255,98,98", margin: '2%' }}><i>{index.category}</i></h3>
+                                {
+                                            // console.log("Cat Img: ", index.catImage)
+                                            
+                                            index.products.map(i=>{
+                                                
+                                                return(
+                                                    
+                                                    <Swiper
+                                                    slidesPerView={1}
+                                                    spaceBetween={5}
+                                                    slidesPerGroup={3}
+                                                    loop={false}
+                                                    loopFillGroupWithBlank={true}
+                                                    breakpoints={{
+                                                        700: {
+                                                            slidesPerView: 5,
+                                                        },
+                                                        400: {
+                                                            slidesPerView: 3,
+                                                        },
+                                                    }}
+                                                    pagination={{
+                                                        clickable: true,
+                                                    }}
+                                                    navigation={true}
+                                                    modules={[Pagination, Navigation]}
+                                                    className="mySwiper"
+                                                    style={{ height: '150px' }}
+                                                >
+                
+                
+                                                    {
+                                                            index.products.map(i=>{
+                                                                console.log("inside products")
+                                                                console.log("in pro",i.productName)
+                                                                return(
+                                                                    <SwiperSlide>
+                                                                        
+                                                                        <Image src={i.productImage1} style={{ width: 100, margin: 5 }} />
+                                                                        <h6>{i.productName}</h6>
+
+                                                                    </SwiperSlide>
+                                                                    
+                                                                )
+                                                            })
+                                                            // return (
+                                                            //     <div className="container">
+                
+                                                            //         <SwiperSlide>
+                                                            //             <Image src={index.catImage} style={{ width: 100, margin: 5 }} />
+                                                            //             <Button onClick={() => handleClick(index.category)} variant="outline-primary" className="brandcategory">{index.category}</Button>
+                                                            //         </SwiperSlide>
+                                                            //     </div>
+                                                            // )
+                                                        
+                                                    }
+                
+                                                </Swiper>   
+                                                )
+                                            })
+                                            
+                                        
+                                    }
+                                <Swiper
+                                    slidesPerView={1}
+                                    spaceBetween={5}
+                                    slidesPerGroup={1}
+                                    loop={false}
+                                    loopFillGroupWithBlank={true}
+                                    breakpoints={{
+                                        700: {
+                                            slidesPerView: 1,
+                                        },
+                                        400: {
+                                            slidesPerView: 1,
+                                        },
+                                    }}
+                                    pagination={{
+                                        clickable: true,
+                                    }}
+                                    navigation={true}
+                                    modules={[Pagination, Navigation]}
+                                    className="mySwiper"
+                                    style={{ height: '150px' }}
+                                >
+
+
+                                    {
+                                        cards = parsedArr.map(index => {
+                                            // console.log("Cat Img: ", index.catImage)
+                                            console.log("insided parsedarr")
+                                            index.products.map(i=>{
+                                                console.log("inside products")
+                                                console.log("in pro",i.productName)
+                                                return(
+                                                    <SwiperSlide>
+                                                        <h6>{i.productName}</h6>
+                                                    </SwiperSlide>
+                                                    
+                                                )
+                                            })
+                                            // return (
+                                            //     <div className="container">
+
+                                            //         <SwiperSlide>
+                                            //             <Image src={index.catImage} style={{ width: 100, margin: 5 }} />
+                                            //             <Button onClick={() => handleClick(index.category)} variant="outline-primary" className="brandcategory">{index.category}</Button>
+                                            //         </SwiperSlide>
+                                            //     </div>
+                                            // )
+                                        })
+                                    }
+
+                                </Swiper>
+                            </Row>
+                       
+                    )
+
+                })
+            }
             
-           
-
-          <Row>
-          <h3 style={{color:"rgb(255,98,98",margin:'2%'}}><i>FEATURED VIDEOS</i></h3>
-            
-
-            <Swiper
-                slidesPerView={1}
-                spaceBetween={5}
-                slidesPerGroup={1}
-                loop={false}
-                loopFillGroupWithBlank={true}
-                breakpoints={{
-                    700: {
-                        slidesPerView: 1,
-                    },
-                    400: {
-                        slidesPerView: 1,
-                    },
-                }}
-                pagination={{
-                    clickable: true,
-                }}
-                navigation={true}
-                modules={[Pagination, Navigation]}
-                className="mySwiper"
-            >
 
 
-                {
-                    cards = videoLinks.map(index => {
-                        return (
-                            <div>
-                                <SwiperSlide>
-                                    <iframe width="70%" height="500px" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </SwiperSlide>
-                                <br></br>
-                            </div>
-                        )
-                    })
-                }
 
-            </Swiper>
+
+
+
+
+            <Row>
+                <h3 style={{ color: "rgb(255,98,98", margin: '2%' }}><i>FEATURED VIDEOS</i></h3>
+
+
+                <Swiper
+                    slidesPerView={1}
+                    spaceBetween={5}
+                    slidesPerGroup={1}
+                    loop={false}
+                    loopFillGroupWithBlank={true}
+                    breakpoints={{
+                        700: {
+                            slidesPerView: 1,
+                        },
+                        400: {
+                            slidesPerView: 1,
+                        },
+                    }}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                    className="mySwiper"
+                >
+
+
+                    {
+                        cards = videoLinks.map(index => {
+                            return (
+                                <div>
+                                    <SwiperSlide>
+                                        <iframe width="70%" height="500px" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </SwiperSlide>
+                                    <br></br>
+                                </div>
+                            )
+                        })
+                    }
+
+                </Swiper>
 
             </Row>
 
