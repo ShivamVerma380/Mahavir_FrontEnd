@@ -66,7 +66,9 @@ function AddToCompareProducts(){
                         product.map(index=>{
                             return(
                                 <Col md={2}>
-                                    <Button className="flat">Buy Now</Button>
+                                    <Button  className="flat">Buy Now</Button>
+                                    <br></br>
+                                    <br></br>
                                 </Col>
                                 
                             )
@@ -77,13 +79,13 @@ function AddToCompareProducts(){
                         getProductInformationKeys(product[0].productInformation)
                     }
                     {
-                        keys.map(k=>{
+                        keys.map(   k=>{
                             return(
                                 <ComparisonProductInformation title={k} product={product}/>
                             );
                         })
                     }
-                    <ComparisonProductInformation product={product}/>
+                    {/* <ComparisonProductInformation product={product}/> */}
                     </div>
                 ):(
                     null
