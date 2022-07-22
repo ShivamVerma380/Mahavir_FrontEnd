@@ -1,7 +1,7 @@
 import { ComboBox } from "@progress/kendo-react-dropdowns";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Row,Col ,NavItem ,NavDropdown,Form} from "react-bootstrap";
+import { Row,Col ,NavItem ,NavDropdown,Form,Button} from "react-bootstrap";
 
 import {setCookie,getCookie} from '../Cookies';
 
@@ -90,6 +90,27 @@ function ComparisonHeader({product}){
         
     }
 
+    function handleRemoveProduct(modelNumber){
+        var modelNumbers = getCookie("addToCompare").split(",")
+        var flag = true;
+        var arr=[]
+        modelNumbers.map(model=>{
+            if(flag){
+                if(model===modelNumber){
+                    flag = false;
+                }
+                if(flag){
+                    arr.push(model)
+                }
+            }else{
+                arr.push(model)
+            }
+        })
+        // modelNumbers.splice(pos,1)
+        setCookie("addToCompare",arr,20)
+        window.location.reload();
+    }
+
     console.log("length",length);
     return(
             <Row style={{marginTop:15}}>
@@ -104,9 +125,10 @@ function ComparisonHeader({product}){
             </Col>
             {
                 (isProductArrUpdated)?(
-                productArr.map(index=>{
+                productArr.map((index,pos)=>{
                     return(
                         <Col md={2}>
+                            <Button onClick={()=>handleRemoveProduct(index.modelNumber)}>X</Button>
                             <img style={{ width: "10rem", alignContent: "center" }}  src={index.productImage1}></img>
                             <br></br>
                             <h6 style={{ marginTop: "20px" }}>{index.productName}</h6>

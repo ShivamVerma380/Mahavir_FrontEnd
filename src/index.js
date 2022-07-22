@@ -111,14 +111,10 @@ root.render(
       <Route path='/productsbydeal' element={<ProductsByDeal/>}/>
       <Route path='/filterproducts' element={<FilterProduct/>}/>
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
-<<<<<<< HEAD
-      <Route path='/compareProducts' element={<CompareProducts/>}/>
       <Route path='/checkout' element={<Checkout/>}/>
       <Route path='/invoice' element={<Invoice/>}/>
       <Route path='/payment' element={<Payment/>}/>
-=======
       <Route path='/compareProducts' element={<AddToCompareProducts/>}/>
->>>>>>> 23d9b9410249bf4e6e9f3d2ad2fb6ab1ec1b6797
     </Routes>
   </BrowserRouter>
 );
