@@ -116,6 +116,7 @@ function ComparisonProductInformation({title,product}){
     }
 
     return(
+        
         (localStorage.getItem("isChecked"))?(
             <Row>
             <Row>

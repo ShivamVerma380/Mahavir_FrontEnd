@@ -17,6 +17,11 @@ function ComparisonHeader({product}){
         arr.push("God");
     }else if(length===3){
         arr.push("God");
+    }else if(length===0){
+        arr.push("God");
+        arr.push("God");
+        arr.push("God");
+        arr.push("God");
     }
     
     const [Brands,SetBrands] = useState([]);
@@ -117,19 +122,34 @@ function ComparisonHeader({product}){
             <Col md={1}>  
             </Col>
             <Col md={2}>
-                <h5>{product[0].productName} vs others</h5>
+                {
+                    (product.length>0)?(
+                        <h5>{product[0].productName} vs others</h5>
+                    ):(
+                        <br></br>
+                    )
+                }
+                
                 <br></br>
-                <Form>
-                    <Form.Check type="checkbox"   label = "Show Only Differences" onChange={handleFormCheck} defaultChecked={(localStorage.getItem("isChecked"))?true:false}/>
-                </Form>
+                {
+                    (product.length>0)?(
+                        <Form>
+                            <Form.Check type="checkbox"   label = "Show Only Differences" onChange={handleFormCheck} defaultChecked={(localStorage.getItem("isChecked"))?true:false}/>
+                        </Form>
+                    ):(
+                        <br></br>
+                    )
+                }
+                
             </Col>
             {
                 (isProductArrUpdated)?(
                 productArr.map((index,pos)=>{
                     return(
                         <Col md={2}>
-                            <Button onClick={()=>handleRemoveProduct(index.modelNumber)}>X</Button>
+                            
                             <img style={{ width: "10rem", alignContent: "center" }}  src={index.productImage1}></img>
+                            <Button style={{marginBottom:"50px"}} onClick={()=>handleRemoveProduct(index.modelNumber)}>X</Button>
                             <br></br>
                             <h6 style={{ marginTop: "20px" }}>{index.productName}</h6>
                             <h6 style={{}}>₹{index.productPrice}</h6>

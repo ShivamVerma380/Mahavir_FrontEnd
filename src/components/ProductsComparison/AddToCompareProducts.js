@@ -53,11 +53,31 @@ function AddToCompareProducts(){
                 (isProductFetched)?(
                     <div>
                     <ComparisonHeader product={product}/>
-                    <hr></hr>
-                    <RatingandReview review={product}/>
-                    <hr></hr>
+                    {
+                        (product.length>0)?(
+                            <hr></hr>
+                        ):(
+                            null
+                        )
+                    }
+                    {/* <hr></hr> */}
+                    {
+                        (product.length>0)?(
+                            <RatingandReview review={product}/>
+                        ):(
+                            null
+                        )
+                    }
                     
-                    <ComparisonHighlights product={product}/>
+                    <hr></hr>
+                    {
+                        (product.length>0)?(
+                            <ComparisonHighlights product={product}/>
+                        ):(
+                            null
+                        )
+                    }
+                    
                     <br></br>
                     <Row>
                     <Col md={1}></Col>
@@ -75,11 +95,16 @@ function AddToCompareProducts(){
                         })
                     }
                     </Row>
+                    
                     {
-                        getProductInformationKeys(product[0].productInformation)
+                        (product.length>0)?(
+                            getProductInformationKeys(product[0].productInformation)
+                        ):(
+                            null
+                        )
                     }
                     {
-                        keys.map(   k=>{
+                        keys.map(k=>{
                             return(
                                 <ComparisonProductInformation title={k} product={product}/>
                             );
