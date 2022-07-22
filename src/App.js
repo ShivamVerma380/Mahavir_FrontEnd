@@ -96,9 +96,27 @@ function App() {
     
     // setCountc(getCookie("countcompare"));
     
+
+
     // var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
     if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched && !isDealsFetched){
       
+      console.log("InventoryToken is null")
+      var form_data_body={
+        "UserName":"MahaStock",
+        "password":"abcd@123"
+      }
+      if(localStorage.getItem("InventoryToken")==null){
+        axios.post("http://116.72.253.118:9896/Login/chkUserLogin",form_data_body)
+        .then(function(response){
+          localStorage.setItem("InventoryToken",response.data.status);
+          console.log("InventoryToken",localStorage.getItem("InventoryToken"));
+        }).catch(function(error){
+          console.log("error",error);
+        })
+      }
+      
+
       axios({
         method:"get",
         url:"http://localhost:8080/get-offers"

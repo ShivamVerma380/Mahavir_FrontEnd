@@ -115,6 +115,7 @@ const SelCatProducts=()=>{
         //alert(index);
         console.log("Index",index);
         localStorage.setItem("productSelected",index.modelNumber);
+        localStorage.setItem("productId",index.productId)
         console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
       }
