@@ -260,6 +260,12 @@ function CategoryProducts(){
   
     }
 
+    function buyNow(index){
+      localStorage.setItem("buyProduct",JSON.stringify(index));
+      navigate('/checkout')
+      
+    }
+
     function CategoryProducts(cattitle){
      
 
@@ -283,6 +289,8 @@ function CategoryProducts(){
       wishlist.push(i.modelNumber);
     })
     console.log("wish "+wishlist)
+
+   
 
     return(
         
@@ -358,7 +366,7 @@ function CategoryProducts(){
                             
                             <Row style={{marginTop:'2%'}}>
           <Button  onClick={()=>addtocart(index.modelNumber)} style={{width:'30%', height:'60px',marginLeft:'1%', fontSize:'140%'}} variant="flat" size="1" >Add To Cart</Button>
-          <Button style={{width:'30%',height:'60px',  marginLeft:'5%',fontSize:'140%'}} variant="flat" size="1"  >Buy Now</Button>
+          <Button onClick={()=>buyNow(index)} style={{width:'30%',height:'60px',  marginLeft:'5%',fontSize:'140%'}} variant="flat" size="1"  >Buy Now</Button>
 
           </Row>
                         </Col>

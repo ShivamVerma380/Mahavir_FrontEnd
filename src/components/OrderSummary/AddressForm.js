@@ -1,11 +1,11 @@
 import React, { useState, useEffect} from "react";
 import "./AddressForm.css";
-import Header from "./Header";
+import Header from "../Header";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Container, Row, Col } from "react-bootstrap";
 import {  Input } from "reactstrap";
 import axios from "axios";
-
+import {getCookie} from '../Cookies';
 
 var fullname = "";
 var addressone = "";
@@ -23,14 +23,15 @@ const AddressForm = () => {
   const [address, setAddress] = useState([]);
   const [isAddressFetched, setIsAddressFetched] = useState(false);
 
-
+  var token = getCookie("jwtToken");
+  console.log(token);
   useEffect(() => {
     if (!isAddressFetched) {
       axios({
         method: "get",
-        url: "http://localhost:8080/address",
+        url: "/address",
         headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbSIsImV4cCI6MTY1NzM2MjIyNiwiaWF0IjoxNjU3MjYyMjI2fQ.4rzArP34anc9EoiPzfKRIz58vS2ZKmclLcg71L2ZHgo"
+          "Authorization": "Bearer "+token
         }
       }).then(function (response) {
         console.log("Response", response);
@@ -73,9 +74,9 @@ const AddressForm = () => {
 
       }
 
-      axios.post("http://localhost:8080/address", formdata, {
+      axios.post("/address", formdata, {
         headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbSIsImV4cCI6MTY1NzM2MjIyNiwiaWF0IjoxNjU3MjYyMjI2fQ.4rzArP34anc9EoiPzfKRIz58vS2ZKmclLcg71L2ZHgo",
+          "Authorization": "Bearer "+token,
           "Content-Type": "multipart/form-data"
         }
       }).then(function (response) {
@@ -88,7 +89,7 @@ const AddressForm = () => {
         console.log("Error", error);
       })
       console.log("Form: ", formdata)
-      navigate("/OrderSummary")
+      // navigate("/OrderSummary")
     }
 
 
@@ -165,6 +166,17 @@ const AddressForm = () => {
 
   }
 
+  function selectedaddress(index,id){
+
+    var element = document.getElementById(id);
+    // console.log("addddd "+JSON.stringify(index))
+    if (element.checked){
+        localStorage.setItem("selectedaddress",JSON.stringify(index));
+        console.log("add   "+localStorage.getItem("selectedaddress"));
+    }
+
+  }
+
   return (
     <div >
       {/* <Header/>  */}
@@ -189,7 +201,7 @@ const AddressForm = () => {
       </Row>
 
       {
-        address.map(index => {
+        address.map((index,i)=> {
           return (
             <Row>
             <Col md={1}></Col>
@@ -197,7 +209,7 @@ const AddressForm = () => {
               <Card style={{ width: "60rem", height: "7rem" }}>
                 <Card.Body>
                   <Card.Text>
-                    <input type="radio" value="Address1" name="add" /> <b style={{marginRight:20,marginLeft:10}}>{index.name}</b> <b>{index.mobileNumber}</b> 
+                    <input type="radio" value="Address1" name="add" id={index.name+""+i} onChange={()=>selectedaddress(index,index.name+""+i)} /> <b style={{marginRight:20,marginLeft:10}}>{index.name}</b> <b>{index.mobileNumber}</b> 
                     <p>{index.address} {index.city} {index.state} <b>- {index.pincode}</b>, Alternate Mobile Number: <b>{index.alternateMobile}</b></p> 
                     
                   </Card.Text>

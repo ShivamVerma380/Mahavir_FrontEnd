@@ -5,12 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import {setCookie,getCookie} from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
+import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 function TestFilterProducts(){
 
+    var min=100;
+    var max=150;
     var category = localStorage.getItem("Category");
     const navigate = useNavigate();
     var token=getCookie("jwtToken");
+    console.log("min",min,"  max",max);
 
     var cart=getCookie("CartModels").split(',');
     //To save selected products
@@ -37,6 +43,7 @@ function TestFilterProducts(){
     const [keySet, setKeyState] = useState([]); //To Store filters name
 
     const[filterselected,SetFilterSelected] = useState([])
+    const [value, setValue] =  React.useState([0,100]);
     
     if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
         filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
@@ -55,6 +62,7 @@ function TestFilterProducts(){
                 SetProducts(response.data);
                 if(localStorage.getItem("SubCategory")==null || localStorage.getItem("SubSubCategory")==null){
                     SetSelectedProducts(response.data);
+
                 }else{
                     response.data.map(product=>{
                         if(product.filtercriterias[localStorage.getItem("SubCategory")]===localStorage.getItem("SubSubCategory")){
@@ -62,6 +70,22 @@ function TestFilterProducts(){
                         }                  
                     })
                 }
+                
+                selectedProducts.map((index,pos)=>{
+                    if(pos==0){
+                        min = index.productPrice
+                        max = index.productPrice
+                    }else{
+                        if(min<index.productPrice){
+                            min = index.productPrice
+                        }
+                        if(max>index.productPrice){
+                            max = index.productPrice
+                        }
+                    }
+                    })
+                    console.log("min ",min,"  max",max);
+                    setValue([min,max])
                 
                 // SetSelectedProducts(response.data);
                 SetIsSelectedProductsFetched(true);
@@ -297,6 +321,21 @@ function TestFilterProducts(){
             SetSelectedProducts(productsArray);
         }
     }
+
+    const [minValue, set_minValue] = useState(25);
+  const [maxValue, set_maxValue] = useState(75);
+    const handleInput = (e) => {
+        set_minValue(e.minValue);
+        set_maxValue(e.maxValue);
+    };
+  
+  // Changing State when volume increases/decreases
+  const rangeSelector = (event, newValue) => {
+    setValue(newValue);
+    console.log(newValue)
+  };
+  
+  
     
 
     return(
@@ -314,6 +353,31 @@ function TestFilterProducts(){
                     ):(
                         null
                     )
+                }
+                <br></br>
+                <Typography id="range-slider" gutterBottom>
+                    Select Price Range:
+                </Typography>
+                <Slider
+                    value={value}
+                    onChange={rangeSelector}
+                    valueLabelDisplay="auto"
+                />
+                Your range of Price is between {value[0]} /- and {value[1]} /-
+                {
+                //     <MultiRangeSlider
+                //     min={0}
+                //     max={100}
+                //     step={5}
+                //     ruler={true}
+                //     label={true}
+                //     preventWheel={false}
+                //     minValue={minValue}
+                //     maxValue={maxValue}
+                //     onInput={(e) => {
+                //       handleInput(e);
+                //     }}
+                //   />
                 }
                 <br></br>
                 <h4>Filters</h4>
