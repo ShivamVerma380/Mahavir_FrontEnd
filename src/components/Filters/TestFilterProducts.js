@@ -414,6 +414,23 @@ function TestFilterProducts(){
         SetSelectedProducts([...arr])
     }
 
+    function SortByDiscount(){
+        console.log("in sort function")
+        var arr=[]; 
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
+        })
+        arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
+        console.log("After sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating--",index.averageRating)
+        })
+        SetSelectedProducts([...arr])
+    }
+
     return(
         <Row>
             <Col md={1}></Col>
@@ -496,7 +513,7 @@ function TestFilterProducts(){
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
-                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Discount: More To Less</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
                 </NavDropdown>
             }
             {
