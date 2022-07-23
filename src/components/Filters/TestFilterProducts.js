@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import Box from '@mui/material/Box';
 import { sortBy } from "underscore";
 
 function TestFilterProducts(){
@@ -357,16 +358,24 @@ function TestFilterProducts(){
                     )
                 }
                 <br></br>
+                {/* <React.Fragment> */}
+                
                 <Typography id="range-slider" gutterBottom>
                     Select Price Range:
                 </Typography>
+                
                 <Slider
-                    defaultValue={[Number(min),Number(max)]}
+                    orientation='horizontal'
+                    defaultValue={[Number(max),Number(min)]}
+                    aria-labelledby="range-slider"  
                     onChange={rangeSelector}
                     valueLabelDisplay="auto"
+                    step={10}
                     min={Number(min)}
                     max={Number(max)}
                 />
+                
+                {/* </React.Fragment> */}
                 Your range of Price is between {value[0]} /- and {value[1]} /-
 
                 
