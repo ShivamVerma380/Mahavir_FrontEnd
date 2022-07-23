@@ -11,8 +11,6 @@ import Slider from '@material-ui/core/Slider';
 
 function TestFilterProducts(){
 
-    var min=100;
-    var max=150;
     var category = localStorage.getItem("Category");
     const navigate = useNavigate();
     var token=getCookie("jwtToken");
@@ -43,17 +41,14 @@ function TestFilterProducts(){
     const [keySet, setKeyState] = useState([]); //To Store filters name
 
     const[filterselected,SetFilterSelected] = useState([])
-    const [value, setValue] =  React.useState([0,100]);
     
     if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
         filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
     }
     
 
-
-    
-    
-    
+    const [min,SetMin] = useState(0);
+    const [max,SetMax] = useState(100);
 
     useEffect(()=>{
         if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched){
@@ -71,21 +66,22 @@ function TestFilterProducts(){
                     })
                 }
                 
+                var minPrice, maxPrice;
                 selectedProducts.map((index,pos)=>{
                     if(pos==0){
-                        min = index.productPrice
-                        max = index.productPrice
+                        minPrice = index.productPrice
+                        maxPrice = index.productPrice
                     }else{
-                        if(min<index.productPrice){
-                            min = index.productPrice
+                        if(minPrice<index.productPrice){
+                            minPrice = index.productPrice
                         }
-                        if(max>index.productPrice){
-                            max = index.productPrice
+                        if(maxPrice>index.productPrice){
+                            maxPrice = index.productPrice
                         }
                     }
                     })
-                    console.log("min ",min,"  max",max);
-                    setValue([min,max])
+                    console.log("min ",minPrice,"  max",maxPrice);
+                    // setValue([min,max])
                 
                 // SetSelectedProducts(response.data);
                 SetIsSelectedProductsFetched(true);
@@ -323,18 +319,7 @@ function TestFilterProducts(){
         }
     }
 
-    const [minValue, set_minValue] = useState(25);
-  const [maxValue, set_maxValue] = useState(75);
-    const handleInput = (e) => {
-        set_minValue(e.minValue);
-        set_maxValue(e.maxValue);
-    };
-  
-  // Changing State when volume increases/decreases
-  const rangeSelector = (event, newValue) => {
-    setValue(newValue);
-    console.log(newValue)
-  };
+    
   
   
     
@@ -359,12 +344,7 @@ function TestFilterProducts(){
                 <Typography id="range-slider" gutterBottom>
                     Select Price Range:
                 </Typography>
-                <Slider
-                    value={value}
-                    onChange={rangeSelector}
-                    valueLabelDisplay="auto"
-                />
-                Your range of Price is between {value[0]} /- and {value[1]} /-
+                
                 {
                 //     <MultiRangeSlider
                 //     min={0}

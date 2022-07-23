@@ -89,6 +89,9 @@ function ProductDetails() {
   var productInformation;
   var averagerate;
   
+  
+
+
   useEffect(() => {
 
 
@@ -182,7 +185,7 @@ function ProductDetails() {
         console.log("error", error);
       })
 
-
+      console.log("Url","http://localhost:8080/similar-products/" + localStorage.getItem("productSelected")+ "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category"));
       axios.get("http://localhost:8080/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category")).then(
         function (response) {
           if (response.status == 200) {
@@ -231,6 +234,7 @@ function ProductDetails() {
     console.log("Index", index);
     localStorage.setItem("productSelected", index.modelNumber);
     console.log("Product Selected", localStorage.getItem("productSelected"))
+    localStorage.setItem("productId", index.productId);
     localStorage.setItem("SubSubCategory", index.subCategoryMap[localStorage.getItem("SubCategory")]);
     // navigate("/productDetails")
     window.location.reload();
@@ -586,7 +590,7 @@ function ProductDetails() {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       {
         (isQuantitySet)?(
           <div>
