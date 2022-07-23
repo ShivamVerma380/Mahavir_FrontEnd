@@ -8,13 +8,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import { sortBy } from "underscore";
 
 function TestFilterProducts(){
 
     var category = localStorage.getItem("Category");
     const navigate = useNavigate();
     var token=getCookie("jwtToken");
-    console.log("min",min,"  max",max);
+    // console.log("min",min,"  max",max);
 
     var cart=getCookie("CartModels").split(',');
     //To save selected products
@@ -41,6 +42,8 @@ function TestFilterProducts(){
     const [keySet, setKeyState] = useState([]); //To Store filters name
 
     const[filterselected,SetFilterSelected] = useState([])
+
+    
     
     if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
         filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
@@ -50,6 +53,7 @@ function TestFilterProducts(){
     const [min,SetMin] = useState(0);
     const [max,SetMax] = useState(100);
 
+    const [value,SetValue] = useState([]);
     useEffect(()=>{
         if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched){
             axios.get("http://localhost:8080/get-products-by-category/"+localStorage.getItem("Category"))
@@ -66,21 +70,26 @@ function TestFilterProducts(){
                     })
                 }
                 
-                var minPrice, maxPrice;
+                var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
+                // var priceArr=[]
                 selectedProducts.map((index,pos)=>{
-                    if(pos==0){
+                    if(minPrice>parseInt(index.productPrice)){
                         minPrice = index.productPrice
-                        maxPrice = index.productPrice
-                    }else{
-                        if(minPrice<index.productPrice){
-                            minPrice = index.productPrice
-                        }
-                        if(maxPrice>index.productPrice){
-                            maxPrice = index.productPrice
-                        }
                     }
-                    })
-                    console.log("min ",minPrice,"  max",maxPrice);
+                    if(maxPrice<parseInt(index.productPrice)){
+                        maxPrice = index.productPrice
+                    }
+                    
+                })
+                // response.data.map(index=>{
+                //     console.log("price",index.productPrice)
+                //     priceArr.push(parseInt(index.productPrice))
+                // })
+                // priceArr.sort();
+                console.log("min ",minPrice,"  max",maxPrice);
+                SetMin(minPrice);
+                SetMax(maxPrice);
+                SetValue([minPrice,maxPrice]);
                     // setValue([min,max])
                 
                 // SetSelectedProducts(response.data);
@@ -90,7 +99,8 @@ function TestFilterProducts(){
                 console.log("error",error);
             })
 
-            axios.get("http://localhost:8080/get-categories")
+            if(!isCategoriesFetched){
+                axios.get("http://localhost:8080/get-categories")
                 .then(function(response){
                     response.data.map(cat=>{
                         categories.push(cat.category);
@@ -99,6 +109,8 @@ function TestFilterProducts(){
                 }).catch(function(error){
                     console.log("error",error);
                 })
+            }
+            
             
             
             axios.get("http://localhost:8080/filtercriterias/"+localStorage.getItem("Category"))
@@ -319,6 +331,10 @@ function TestFilterProducts(){
         }
     }
 
+    const rangeSelector = (event, newValue) => {
+        SetValue([Number(newValue[0]), Number(newValue[1])]);
+        console.log(newValue)
+    };
     
   
   
@@ -344,6 +360,15 @@ function TestFilterProducts(){
                 <Typography id="range-slider" gutterBottom>
                     Select Price Range:
                 </Typography>
+                <Slider
+                    defaultValue={[Number(min),Number(max)]}
+                    onChange={rangeSelector}
+                    valueLabelDisplay="auto"
+                    min={Number(min)}
+                    max={Number(max)}
+                />
+                Your range of Price is between {value[0]} /- and {value[1]} /-
+
                 
                 {
                 //     <MultiRangeSlider
