@@ -490,7 +490,15 @@ function TestFilterProducts(){
                                         </Row>
                                         <Row className="innerrow">
                                             <Col md={10}>
-                                                <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
+                                                {
+                                                    (index.offerPrice==null) ? (
+                                                        <h5>MRP: <b>₹{index.productPrice}</b></h5>
+                                                    ) : (
+                                                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
+                                                    )
+                                                }
+                                                
+                                                
 
                                             </Col>
 

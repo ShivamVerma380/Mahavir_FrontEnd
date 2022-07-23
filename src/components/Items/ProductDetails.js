@@ -82,14 +82,14 @@ function ProductDetails() {
   //const[productInformation,SetProductInformation] = useState();
   const [isProductInformationSet, SetIsProductInformationSet] = useState(false);
 
-  const [Quantity,SetQuantity] = useState();
-  const [isQuantitySet,SetIsQuantitySet] = useState(false);
+  const [Quantity, SetQuantity] = useState();
+  const [isQuantitySet, SetIsQuantitySet] = useState(false);
 
   var cart = getCookie("CartModels").split(',');
   var productInformation;
   var averagerate;
-  
-  
+
+
 
 
   useEffect(() => {
@@ -185,7 +185,7 @@ function ProductDetails() {
         console.log("error", error);
       })
 
-      console.log("Url","http://localhost:8080/similar-products/" + localStorage.getItem("productSelected")+ "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category"));
+      console.log("Url", "http://localhost:8080/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category"));
       axios.get("http://localhost:8080/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category")).then(
         function (response) {
           if (response.status == 200) {
@@ -198,26 +198,26 @@ function ProductDetails() {
         }
         );
 
-        var form_data_body={
-          "prodid":localStorage.getItem("productId"),
-          "sid": 0,
-          "qty": 0
+      var form_data_body = {
+        "prodid": localStorage.getItem("productId"),
+        "sid": 0,
+        "qty": 0
+      }
+      axios.post("http://116.72.253.118:9896/invoice/GetSerialNosAccordingToGodownsJsonNew", form_data_body, {
+        headers: {
+          "Authorization": localStorage.getItem("InventoryToken")
         }
-        axios.post("http://116.72.253.118:9896/invoice/GetSerialNosAccordingToGodownsJsonNew",form_data_body,{
-          headers:{
-            "Authorization":localStorage.getItem("InventoryToken")
-          }
-        }).then(function(response){
-          if(response.data[0].ProductID==-1){
-            SetQuantity(0);
-          }else{
-            console.log("Quantity:",response.data);
-            SetQuantity(response.data.length);
-          }
-          SetIsQuantitySet(true);
-        }).catch(function(error){
-          console.log("error",error);
-        })
+      }).then(function (response) {
+        if (response.data[0].ProductID == -1) {
+          SetQuantity(0);
+        } else {
+          console.log("Quantity:", response.data);
+          SetQuantity(response.data.length);
+        }
+        SetIsQuantitySet(true);
+      }).catch(function (error) {
+        console.log("error", error);
+      })
 
     }
   }, []);
@@ -532,30 +532,30 @@ function ProductDetails() {
   }
 
 
-  const handleVariantChange=(event)=>{
+  const handleVariantChange = (event) => {
     var string = "";
     var count = 0;
     var required = "";
-    variantKeys.map(key=>{
-      product.variantTypes[key].map(index=>{
-        if(document.getElementById(index).checked){
-          string = string + index+" ";
+    variantKeys.map(key => {
+      product.variantTypes[key].map(index => {
+        if (document.getElementById(index).checked) {
+          string = string + index + " ";
           required = index;
           count++;
         }
       })
     })
-    if(count==variantKeys.length){
-      console.log("string",string);
-      console.log("required",required);
-      console.log("model No",product.modelNumber)
-      console.log("url","http://localhost:8080/variant"+product.modelNumber+"/"+string.trim()+"/"+required.trim());
-      
-      axios.get("http://localhost:8080/variant/"+product.modelNumber+"/"+string.trim()+"/"+required.trim())
-        .then(function(response){
-          if(response.status==200){
-            console.log("product",response)
-            localStorage.setItem("productSelected",response.data.message)
+    if (count == variantKeys.length) {
+      console.log("string", string);
+      console.log("required", required);
+      console.log("model No", product.modelNumber)
+      console.log("url", "http://localhost:8080/variant" + product.modelNumber + "/" + string.trim() + "/" + required.trim());
+
+      axios.get("http://localhost:8080/variant/" + product.modelNumber + "/" + string.trim() + "/" + required.trim())
+        .then(function (response) {
+          if (response.status == 200) {
+            console.log("product", response)
+            localStorage.setItem("productSelected", response.data.message)
             window.location.reload()
             // setProduct(response.data);
             // setimage(response.data.productImage1);
@@ -578,12 +578,12 @@ function ProductDetails() {
             // variantKeys.sort()
 
           }
-        }).catch(function(error){
+        }).catch(function (error) {
           console.log(error);
           alert("Sorry No Product Found with this combination")
         })
-        
-   }
+
+    }
   }
 
 
@@ -592,15 +592,15 @@ function ProductDetails() {
     <div>
       {/* <Header /> */}
       {
-        (isQuantitySet)?(
+        (isQuantitySet) ? (
           <div>
             <p>{Quantity}</p>
           </div>
-        ):(
+        ) : (
           null
         )
       }
-      
+
       {
         (isProductFetched) ? (
           <>
@@ -673,28 +673,26 @@ function ProductDetails() {
                     </Row >
                     {
                       (isQuantitySet) ? (
-                        ({Quantity}==0) ? (
+                        
+                        (Quantity == 0) ? (
+                          <Row>
+                            <center>
+                            <h6 style={{color:"rgb(255,98,98)"}}><b>OUT OF STOCK</b></h6>
+                            </center>
+                          </Row>
+
+                        ) : (
 
                           <Row>
-                          <h6>OUT OF STOCK</h6>
+                            <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={() => addtocart(product.modelNumber)}>Add To Cart</Button>
+                            <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={handleBuyNow}>Buy Now</Button>
+
                           </Row>
-                      
-                          
-                       
-                        
-                      ) : (
-                        
-                        <Row>
-                        <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={() => addtocart(product.modelNumber)}>Add To Cart</Button>
-                        <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={handleBuyNow}>Buy Now</Button>
-  
-                        </Row>
-                      
-                      )
+                        )
                       ) : (null)
                     }
-                    
-                    
+
+
                   </div>
 
                 </Col>
@@ -720,12 +718,19 @@ function ProductDetails() {
                   <br></br>
                   <Row>
 
-                    {
+                    {/* {
                       (product.offerPrice == product.productPrice) ? (<Col>
                         <h4>Price: <b>₹{product.productPrice}</b></h4>
                       </Col>) : (<Col>
                         <h4>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{product.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{product.productPrice}</b></h4>
                       </Col>)
+                    } */}
+                    {
+                      (product.offerPrice == null) ? (
+                        <h5>MRP: <b>₹{product.productPrice}</b></h5>
+                      ) : (
+                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{product.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{product.productPrice}</b></h5>
+                      )
                     }
 
                   </Row>
@@ -833,17 +838,17 @@ function ProductDetails() {
                     <Col >
 
                       {
-                        (product.productHighlights!=null)?(
+                        (product.productHighlights != null) ? (
                           product.productHighlights.split(';').map(index => {
                             return (
                               <h5 style={{ marginLeft: '10px', marginBottom: '10px' }}>•<span style={{ marginLeft: '10px' }}> </span>{index}</h5>
                             );
-  
+
                           })
-                        ):(
+                        ) : (
                           null
                         )
-                        
+
                       }
                       {/* <h6>{product.productHighlights}</h6> */}
                     </Col>
@@ -884,36 +889,36 @@ function ProductDetails() {
                   {
                     (variantKeys.length > 0) ? (
                       <h4><b><i>Variants</i></b></h4>
-                    ):(
+                    ) : (
                       null
                     )
                   }
-                  
+
                   {
-                    (isVariantKeysFetched)?(
-                      variantKeys.map((key,pos) => {
-                        return(
+                    (isVariantKeysFetched) ? (
+                      variantKeys.map((key, pos) => {
+                        return (
                           <div>
-                          <h5>{key.substring(1)}</h5>
-                          {
-                            product.variantTypes[key].map((index) => {
-                              return(
-                                <Form.Check
-                                  type="radio"
-                                  value={index}
-                                  id={index}
-                                  name={key}
-                                  label={index}
-                                  onChange={handleVariantChange}
-                                />
-                              )
-                            })
-                          }
+                            <h5>{key.substring(1)}</h5>
+                            {
+                              product.variantTypes[key].map((index) => {
+                                return (
+                                  <Form.Check
+                                    type="radio"
+                                    value={index}
+                                    id={index}
+                                    name={key}
+                                    label={index}
+                                    onChange={handleVariantChange}
+                                  />
+                                )
+                              })
+                            }
                           </div>
-                          
+
                         );
                       })
-                    ):(
+                    ) : (
                       null
                     )
                   }
@@ -929,7 +934,7 @@ function ProductDetails() {
               null
             )
           } */}
-                  
+
 
                   <Row style={{ marginTop: 40 }}>
                     <Col md={2}>
@@ -950,7 +955,7 @@ function ProductDetails() {
                   <br></br>
                   <Row >
                     <h4><b><i>Product Description</i></b></h4>
-                    
+
                     {/* {
                      
                       product.productDescriptions.map(index => {
@@ -975,7 +980,7 @@ function ProductDetails() {
                     } */}
                   </Row>
 
-                    {/* <Col md={4}>
+                  {/* <Col md={4}>
 
                       <img src={product.productImage1} style={{ width: "130px" }}></img>
 
