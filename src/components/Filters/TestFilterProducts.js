@@ -8,13 +8,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import { sortBy } from "underscore";
 
 function TestFilterProducts(){
 
     var category = localStorage.getItem("Category");
     const navigate = useNavigate();
     var token=getCookie("jwtToken");
-    console.log("min",min,"  max",max);
+    // console.log("min",min,"  max",max);
 
     var cart=getCookie("CartModels").split(',');
     //To save selected products
@@ -66,21 +67,23 @@ function TestFilterProducts(){
                     })
                 }
                 
-                var minPrice, maxPrice;
+                var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
+                // var priceArr=[]
                 selectedProducts.map((index,pos)=>{
-                    if(pos==0){
+                    if(minPrice>parseInt(index.productPrice)){
                         minPrice = index.productPrice
-                        maxPrice = index.productPrice
-                    }else{
-                        if(minPrice<index.productPrice){
-                            minPrice = index.productPrice
-                        }
-                        if(maxPrice>index.productPrice){
-                            maxPrice = index.productPrice
-                        }
                     }
-                    })
-                    console.log("min ",minPrice,"  max",maxPrice);
+                    if(maxPrice<parseInt(index.productPrice)){
+                        maxPrice = index.productPrice
+                    }
+                    
+                })
+                // response.data.map(index=>{
+                //     console.log("price",index.productPrice)
+                //     priceArr.push(parseInt(index.productPrice))
+                // })
+                // priceArr.sort();
+                console.log("min ",minPrice,"  max",maxPrice);
                     // setValue([min,max])
                 
                 // SetSelectedProducts(response.data);
