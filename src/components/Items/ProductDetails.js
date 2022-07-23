@@ -671,11 +671,30 @@ function ProductDetails() {
                         </div>
                       </Col>
                     </Row >
-                    <Row>
-                      <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={() => addtocart(product.modelNumber)}>Add To Cart</Button>
-                      <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={handleBuyNow}>Buy Now</Button>
+                    {
+                      (isQuantitySet) ? (
+                        ({Quantity}==0) ? (
 
-                    </Row>
+                          <Row>
+                          <h6>OUT OF STOCK</h6>
+                          </Row>
+                      
+                          
+                       
+                        
+                      ) : (
+                        
+                        <Row>
+                        <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={() => addtocart(product.modelNumber)}>Add To Cart</Button>
+                        <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={handleBuyNow}>Buy Now</Button>
+  
+                        </Row>
+                      
+                      )
+                      ) : (null)
+                    }
+                    
+                    
                   </div>
 
                 </Col>
