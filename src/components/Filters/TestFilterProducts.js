@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Button, Form, Card, Container ,Image} from "react-bootstrap";
+import { Col, Row, Button, Form, Card, Container ,Image, NavDropdown} from "react-bootstrap";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
@@ -364,8 +364,73 @@ function TestFilterProducts(){
     };
     
   
-  
+    function SortByLowPrice(){
+        console.log("in sort function")
+        var arr=[]; 
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexProductPrice",index.productPrice)
+        })
+        arr.sort((a,b)=>a.productPrice-b.productPrice);
+        console.log("After sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexProductPrice--",index.productPrice)
+        })
+        SetSelectedProducts([...arr])
+    }
     
+    function SortByHighPrice(){
+        console.log("in sort function")
+        var arr=[]; 
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexProductPrice",index.productPrice)
+        })
+        arr.sort((a,b)=>b.productPrice-a.productPrice);
+        console.log("After sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexProductPrice--",index.productPrice)
+        })
+        SetSelectedProducts([...arr])
+    }
+
+    function SortByTopRated(){
+        console.log("in sort function")
+        var arr=[]; 
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating",index.averageRating)
+        })
+        arr.sort((a,b)=>b.averageRating-a.averageRating);
+        console.log("After sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating--",index.averageRating)
+        })
+        SetSelectedProducts([...arr])
+    }
+
+    function SortByDiscount(){
+        console.log("in sort function")
+        var arr=[]; 
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
+        })
+        arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
+        console.log("After sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating--",index.averageRating)
+        })
+        SetSelectedProducts([...arr])
+    }
 
     return(
         <Row>
@@ -443,6 +508,16 @@ function TestFilterProducts(){
                 }
             </Col>
             <Col>
+            {
+                // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
+                    <NavDropdown title="Sort By">
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
+                </NavDropdown>
+            }
             {
                     
                     (isSelectedProductsFetched)?(
