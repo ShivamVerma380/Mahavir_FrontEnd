@@ -397,6 +397,23 @@ function TestFilterProducts(){
         SetSelectedProducts([...arr])
     }
 
+    function SortByTopRated(){
+        console.log("in sort function")
+        var arr=[]; 
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating",index.averageRating)
+        })
+        arr.sort((a,b)=>b.averageRating-a.averageRating);
+        console.log("After sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating--",index.averageRating)
+        })
+        SetSelectedProducts([...arr])
+    }
+
     return(
         <Row>
             <Col md={1}></Col>
@@ -474,10 +491,10 @@ function TestFilterProducts(){
             <Col>
             {
                 // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
-                <NavDropdown title="Sort By">
+                    <NavDropdown title="Sort By">
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
-                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Top Rated</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Discount: More To Less</NavDropdown.Item>
                 </NavDropdown>
