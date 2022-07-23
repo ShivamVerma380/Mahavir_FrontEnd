@@ -413,11 +413,7 @@ function App() {
         getCompareBtn()
      } */}
 
-      {
-                ({countc}!=0) ? ( 
-                  <Button id="comparebtn" onClick={HandleCompareClick}>COMPARE {countc}</Button>   
-                ) : (null)
-      }
+     
 
     
      <Footer/>

@@ -10,9 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Box from '@mui/material/Box';
 import { sortBy } from "underscore";
+import { AiFillStar } from "react-icons/ai";
 
 function TestFilterProducts(){
-
+    var comparemodels=getCookie("addToCompare").split(',');
     var category = localStorage.getItem("Category");
     const navigate = useNavigate();
     var token=getCookie("jwtToken");
@@ -22,6 +23,8 @@ function TestFilterProducts(){
     //To save selected products
     const[selectedProducts,SetSelectedProducts] = useState([]);
     const[isSelectedProductsFetched,SetIsSelectedProductsFetched] = useState(false);
+
+    const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
 
     //To save all products
     const[products,SetProducts] = useState([]);
@@ -151,22 +154,56 @@ function TestFilterProducts(){
         
     }
 
-    const handleAddToCompare = event => {
-        if (event.target.checked) {
-  
-          console.log('✅ Checkbox is checked');
-          setChange(change+1)
+    function handleAddToCompare(modelNumber){
+        
+        var element = document.getElementById(modelNumber);
+        
+        if(element.checked){
           
           
+            console.log("adddd"+modelNumber);
+            comparemodels.push(modelNumber);
+            setCookie("addToCompare",comparemodels,20);
+            setLen(getCookie("addToCompare").split(',').length)
+          console.log(comparemodels);
+          console.log("checked "+modelNumber);
+            
+            
+        
           
-        } else {
-          console.log('⛔ Checkbox is NOT checked');
-          setChange(change-1)
         }
-        setisAddCompareClicked(current => !current);
-        // alert("Added To Compare");
+        else {
+          for (var i = 0; i < comparemodels.length; i++) {
+            if (comparemodels[i] === modelNumber) {
+              comparemodels.splice(i, 1);
+                console.log(comparemodels);
+                setCookie("addToCompare",comparemodels,20);
+                setLen(getCookie("addToCompare").split(',').length)
+                // window.location.reload();
+                break;
+            }
+        }
+          console.log("unchecked "+modelNumber);
+
+        }
+        // if (event.target.checked) {
+  
+        //   console.log('✅ Checkbox is checked');
+        //   setChange(change+1)
+          
+          
+          
+        // } else {
+        //   console.log('⛔️ Checkbox is NOT checked');
+        //   setChange(change-1)
+        // }
+        // setisAddCompareClicked(current => !current);
+        // // alert("Added To Compare");
         
     }
+      
+      localStorage.setItem("comparecount",change)
+      console.log("Get",localStorage.getItem("comparecount"))
 
     function WishlistHandler(index) {
        
@@ -433,7 +470,13 @@ function TestFilterProducts(){
     }
 
     return(
+        <div>
+             {
+          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
+          
+          }
         <Row>
+           
             <Col md={1}></Col>
             <Col md={2}>
                 <h3>Category</h3>
@@ -510,23 +553,40 @@ function TestFilterProducts(){
             <Col>
             {
                 // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
-                    <NavDropdown title="Sort By">
-                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
-                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
-                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
-                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
-                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
-                </NavDropdown>
+                <Row>
+                    <Col md={9}>
+                        <NavDropdown title="Sort By">
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
+                        </NavDropdown>
+                    </Col> 
+                    
+                    <Col md={3}>
+                        <br></br>
+                    <p>{selectedProducts.length} products found</p>
+                    </Col> 
+                
+                    
+                    
+                </Row>
             }
+            <br></br>
+
+            
             {
                     
                     (isSelectedProductsFetched)?(
                     
                         selectedProducts.map(index => {
                             return (
+                               
 
 
                                 <Row className="filterproductsRow">
+                                    
                                     <Col md={2}>
                                         <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
                                         <br></br>
@@ -545,6 +605,14 @@ function TestFilterProducts(){
                                             </Col>
 
                                         </Row>
+                                        <Row>
+                                            <Col md={11} className="star">
+                                            {Math.round(index.averageRating * 10) / 10}<AiFillStar />
+                                               
+                                            </Col>
+                                            
+                                        </Row>
+                                        <br></br>
                                         <Row className="innerrow">
                                             <Col md={11}>
                                                 {
@@ -584,7 +652,7 @@ function TestFilterProducts(){
                                                 fontWeight: '500',
                                                 fontSize: '120%'
                                             }}>
-                                                <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} />
+                                                <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
                                             </Form>
 
                                         </Row>
@@ -612,6 +680,7 @@ function TestFilterProducts(){
                 }
             </Col>
         </Row>
+        </div>
         
     )
 }
