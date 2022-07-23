@@ -332,7 +332,33 @@ function TestFilterProducts(){
     }
 
     const rangeSelector = (event, newValue) => {
-        SetValue([Number(newValue[0]), Number(newValue[1])]);
+        SetValue([parseInt(newValue[0]), parseInt(newValue[1])]);
+        var arr=[];
+        products.map(index=>{
+            var flag = true;
+            filterselected.map(a=>{
+                var pair = a.split("-");
+                console.log("pair",pair)
+                var key = pair[0];
+                var values = pair[1].split(";");
+                console.log("values",values)
+                var valueflag= false;
+                values.map(v=>{
+                    console.log(index.filtercriterias[key])
+                    if(index.filtercriterias[key].includes(v)){
+                        valueflag=true;  
+                    }
+                })
+                if(!valueflag){
+                    flag = false;
+                }
+            })
+            if(flag && index.productPrice>=parseInt(newValue[0]) && index.productPrice<=parseInt(newValue[1])){
+                arr.push(index);
+            }
+        })
+        SetSelectedProducts(arr)
+
         console.log(newValue)
     };
     
@@ -357,16 +383,18 @@ function TestFilterProducts(){
                     )
                 }
                 <br></br>
+                <React.Fragment>
                 <Typography id="range-slider" gutterBottom>
                     Select Price Range:
                 </Typography>
                 <Slider
-                    defaultValue={[Number(min),Number(max)]}
+                    defaultValue={[parseInt(min),parseInt(max)]}
                     onChange={rangeSelector}
-                    valueLabelDisplay="auto"
-                    min={Number(min)}
-                    max={Number(max)}
+                    valueLabelDisplay="on"
+                    min={parseInt(min)}
+                    max={parseInt(max)}
                 />
+                </React.Fragment>
                 Your range of Price is between {value[0]} /- and {value[1]} /-
 
                 
