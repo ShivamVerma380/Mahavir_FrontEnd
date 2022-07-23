@@ -18,6 +18,11 @@ function Search(){
             axios.get("http://localhost:8080/get-search-products")
                 .then(function(response){
                     if(response.status==200) {
+                        // response.data.map(index=>{
+                        //   if(!index.productHighlights==null && !index.productName==null){
+                        //     products.push(index);
+                        //   }
+                        // })
                         SetProducts(response.data);
                         setIsProductsFetched(true);
                     }
