@@ -25,6 +25,8 @@ import { RiCompassDiscoverLine } from 'react-icons/ri';
 var count = 0;
 function App() {
 
+  localStorage.setItem("quantity",1);
+
   const [offerPosters,setOfferPosters] = useState([]);
   const [isOfferPostersFetched,setIsOfferPostersFetched] = useState(false);
 

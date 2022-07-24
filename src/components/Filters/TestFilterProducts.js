@@ -11,6 +11,7 @@ import Slider from '@material-ui/core/Slider';
 import Box from '@mui/material/Box';
 import { sortBy } from "underscore";
 import { AiFillStar } from "react-icons/ai";
+import Header from "../Header";
 
 function TestFilterProducts(){
     var comparemodels=getCookie("addToCompare").split(',');
@@ -29,6 +30,8 @@ function TestFilterProducts(){
     //To save all products
     const[products,SetProducts] = useState([]);
     const[isProductsFetched,SetIsProductsFetched] = useState(false);
+
+    
     
 
     //For Add To Compare
@@ -167,7 +170,7 @@ function TestFilterProducts(){
 
     const addtocart=(model)=>{
         
-        
+        // event.preventDefault();
         
         if(cart.includes(model)){
             alert("Item is already present in cart")
@@ -179,6 +182,7 @@ function TestFilterProducts(){
             alert("Added to cart"+model);
         }
     
+        // Header.location.reload()
         
         
     }

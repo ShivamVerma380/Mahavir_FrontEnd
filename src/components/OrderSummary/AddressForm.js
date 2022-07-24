@@ -89,6 +89,7 @@ const AddressForm = () => {
         console.log("Error", error);
       })
       console.log("Form: ", formdata)
+      window.location.reload()
       // navigate("/OrderSummary")
     }
 

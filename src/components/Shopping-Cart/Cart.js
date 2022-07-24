@@ -19,8 +19,27 @@ function Cart() {
     const navigate = useNavigate();
     var total=0;
     const [cartItems, setcartItems] = useState([]);
-    
+    console.log("Cart Products",localStorage.getItem("CartProducts"))
+
+    const [qty,SetQuantity] = useState([])
+
     modelnums=getCookie("CartModels").split(',');
+    var products = localStorage.getItem("CartProducts").split(',');
+    var arr=[]
+    // var qty=[]
+    modelnums.map(index=>{
+        if(index!=="")
+            arr.push(index+"=1");
+
+    })
+    products.map(index=>{
+        if(index!==""){
+            var pair = index.split("=")
+            qty.push(pair[1]);
+        }  
+    })
+    console.log("Quantity",qty)
+    // localStorage.setItem("CartProducts",arr)
     console.log(modelnums,"hjdshj")
     const[cartItemsFetched,setcartItemsFetched]=useState(false);
 
@@ -185,10 +204,10 @@ function Cart() {
             }
             {
                 (cartItemsFetched)?(
-                    cartItems.map(index=>{
+                    cartItems.map((index,pos)=>{
                     console.log("Model Number:",index.modelNumber)
                     return(
-                    <CartItem item={index}/>
+                    <CartItem item={index} quantity={(qty[pos]!=null)?(qty[pos]):(1)}/>
                     );
                 })
                 ):(null)
