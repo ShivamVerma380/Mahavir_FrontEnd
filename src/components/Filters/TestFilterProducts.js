@@ -618,100 +618,104 @@ function TestFilterProducts(){
             {
                     
                     (isSelectedProductsFetched)?(
+                        (selectedProducts.length==0)?(
+                            <h6>No Products Found</h6>
+                        ):(
                     
-                        selectedProducts.map(index => {
-                            return (
-                               
+                            selectedProducts.map(index => {
+                                return (
+                                
 
 
-                                <Row className="filterproductsRow">
-                                    
-                                    <Col md={2}>
-                                        <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
-                                        <br></br>
-                                        <p>{index.modelNumber}</p>
-                                    </Col>
-                                    <Col md={10} >
-                                        <Row className="innerrow">
-                                            <Col md={11}>
-                                                <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
-                                            </Col>
-                                            <Col md={1} >
-                                                {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
-                                                    <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
-                                                    <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
-                                                }
-                                            </Col>
+                                    <Row className="filterproductsRow">
+                                        
+                                        <Col md={2}>
+                                            <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            <br></br>
+                                            <p>{index.modelNumber}</p>
+                                        </Col>
+                                        <Col md={10} >
+                                            <Row className="innerrow">
+                                                <Col md={11}>
+                                                    <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
+                                                </Col>
+                                                <Col md={1} >
+                                                    {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
+                                                        <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
+                                                        <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
+                                                    }
+                                                </Col>
 
-                                        </Row>
-                                        <Row>
-                                            <Col md={11} className="star">
-                                            {Math.round(index.averageRating * 10) / 10}<AiFillStar />
-                                               
-                                            </Col>
-                                            
-                                        </Row>
-                                        <br></br>
-                                        <Row className="innerrow">
-                                            <Col md={11}>
-                                                {
-                                                    (index.productHighlights!=null)?(
-                                                        index.productHighlights.split(';').map(highlight => {
-                                                            return (
-                                                                <h6 style={{color:'GrayText'}}>•{highlight}<br></br></h6>
-                                                            );
-                                                        })
-                                                    ):(
-                                                        null
-                                                    )
+                                            </Row>
+                                            <Row>
+                                                <Col md={11} className="star">
+                                                {Math.round(index.averageRating * 10) / 10}<AiFillStar />
+                                                
+                                                </Col>
+                                                
+                                            </Row>
+                                            <br></br>
+                                            <Row className="innerrow">
+                                                <Col md={11}>
+                                                    {
+                                                        (index.productHighlights!=null)?(
+                                                            index.productHighlights.split(';').map(highlight => {
+                                                                return (
+                                                                    <h6 style={{color:'GrayText'}}>•{highlight}<br></br></h6>
+                                                                );
+                                                            })
+                                                        ):(
+                                                            null
+                                                        )
+                                                        
+                                                    }
+                                                    {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
+                                                </Col>
+
+                                            </Row>
+                                            <Row className="innerrow">
+                                                <Col md={10}>
+                                                    {
+                                                        (index.offerPrice==null) ? (
+                                                            <h5>MRP: <b>₹{index.productPrice}</b></h5>
+                                                        ) : (
+                                                            <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
+                                                        )
+                                                    }
                                                     
-                                                }
-                                                {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
-                                            </Col>
+                                                    
 
-                                        </Row>
-                                        <Row className="innerrow">
-                                            <Col md={10}>
-                                                {
-                                                    (index.offerPrice==null) ? (
-                                                        <h5>MRP: <b>₹{index.productPrice}</b></h5>
-                                                    ) : (
-                                                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
-                                                    )
-                                                }
-                                                
-                                                
+                                                </Col>
 
-                                            </Col>
+                                            </Row>
 
-                                        </Row>
+                                            <Row className="innerrow">
+                                                <Form style={{
+                                                    fontWeight: '500',
+                                                    fontSize: '120%'
+                                                }}>
+                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+                                                </Form>
 
-                                        <Row className="innerrow">
-                                            <Form style={{
-                                                fontWeight: '500',
-                                                fontSize: '120%'
-                                            }}>
-                                                <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
-                                            </Form>
+                                            </Row>
 
-                                        </Row>
+                                            <Row className="innerrow">
+                                                <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
+                                                <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
+                                            
 
-                                        <Row className="innerrow">
-                                            <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
-                                            <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
-                                           
-
-                                        </Row>
-                                    </Col>
+                                            </Row>
+                                        </Col>
 
 
-                                </Row>
+                                    </Row>
 
 
 
-                            )
-                        
-                        })
+                                )
+                            
+                            })
+                        )
                         
                     ):(
                         null
