@@ -149,6 +149,10 @@ function TestFilterProducts(){
                         keySet.push(key);
                     }
                     console.log("keySet",keySet)
+                    if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
+                        // filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
+                        SetFilterSelected([localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory")])
+                    }
                     SetIsFiltersFetched(true)
                     // SetFilters(response.data.filterCriterias)
                     // SetIsFiltersFetched(true)
