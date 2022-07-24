@@ -277,6 +277,8 @@ function TestFilterProducts(){
         // console.log("Index",index);
         localStorage.setItem("productId",index.productId);
         localStorage.setItem("productSelected", index.modelNumber);
+        localStorage.removeItem("SubCategory")
+        localStorage.removeItem("SubSubCategory")
         // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
     }
