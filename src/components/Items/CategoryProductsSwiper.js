@@ -88,7 +88,8 @@ function CategoryProductsSwiper({ cattitle }) {
 
   function CategoryProducts(cattitle) {
 
-
+    localStorage.removeItem("SubCategory")
+    localStorage.removeItem("SubSubCategory")
     navigate("/categoryProductsall", { state: { id: 1, name: cattitle } })
   }
 

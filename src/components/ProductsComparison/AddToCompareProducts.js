@@ -46,6 +46,12 @@ function AddToCompareProducts(){
         }
     })
 
+    function buyNow(index){
+        localStorage.setItem("buyProduct",JSON.stringify(index));
+        navigate('/checkout')
+        
+      }
+
 
     return(
         <Row>
@@ -86,7 +92,7 @@ function AddToCompareProducts(){
                         product.map(index=>{
                             return(
                                 <Col md={2}>
-                                    <Button  className="flat">Buy Now</Button>
+                                    <Button  className="flat" onClick={()=>buyNow(index)}>Buy Now</Button>
                                     <br></br>
                                     <br></br>
                                 </Col>

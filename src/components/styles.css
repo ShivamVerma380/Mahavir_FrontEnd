@@ -61,6 +61,25 @@ body {
     width: 40px;
     color: #ff3434;
 }
+
+[data-quantity] button.sub {
+  border-radius: 0%;
+  background-color: #ff3434;
+  left: -.1rem;
+  color: white;
+}
+[data-quantity] button.add {
+  border-radius: 0%;
+  background-color: #ff3434;
+  right: -.1rem;
+  background-position-x: -2.2rem;
+}
+
+[data-quantity] input[type=number] {
+  
+  border-radius: 0;
+  border: solid 1px #ff3434;
+}
 /* 
 
 .card{

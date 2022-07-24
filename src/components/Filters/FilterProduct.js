@@ -4,7 +4,8 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
+// import Slider from '@material-ui/core/Slider';
+import Slider from '@mui/material/Slider';
 import e from "cors";
 import {setCookie,getCookie} from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
@@ -54,7 +55,7 @@ function FilterProduct() {
     // };
 
     // Our States
-  const [value, setValue] =  React.useState([0,0]);
+//   const [value, setValue] =  React.useState([0,maxPrice]);
   
   // Changing State when volume increases/decreases
   const rangeSelector = (event, newValue) => {
@@ -357,6 +358,7 @@ function FilterProduct() {
             return true;
         return false
     }
+    const [value, setValue] = useState(0,0);
 
     return(
         <Row className="filterproductsContainer">
@@ -373,6 +375,7 @@ function FilterProduct() {
                     valueLabelDisplay="auto"
                     min={0}
                     max={maxPrice}
+                    
                     disableSwap
                 />
       Your range of Price is between {value[0]} /- and {value[1]} /-

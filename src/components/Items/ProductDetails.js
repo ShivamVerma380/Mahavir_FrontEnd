@@ -319,13 +319,13 @@ function ProductDetails() {
   const handleBuyNow = () => {
 
     if (flag == false) {
-      alert("Add To Cart:1");
+      alert("Buy Now ");
     } else if (quantity <= 0) {
       alert("Please enter a positive number");
     } else {
       alert("Quantity:" + quantity);
     }
-    navigate("/AddressForm")
+    navigate("/checkout")
   }
 
   const InputPin = (e) => {
