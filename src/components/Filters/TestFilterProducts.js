@@ -65,6 +65,18 @@ function TestFilterProducts(){
                 SetProducts(response.data);
                 if(localStorage.getItem("SubCategory")==null || localStorage.getItem("SubSubCategory")==null){
                     SetSelectedProducts(response.data);
+                    var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
+                    // var priceArr=[]
+                    response.data.map((index,pos)=>{
+                        console.log("In selected products map...")
+                        if(minPrice>parseInt(index.productPrice)){
+                            minPrice = index.productPrice
+                        }
+                        if(maxPrice<parseInt(index.productPrice)){
+                            maxPrice = index.productPrice
+                        }
+                        
+                    })
 
                 }else{
                     response.data.map(product=>{
@@ -72,19 +84,32 @@ function TestFilterProducts(){
                             selectedProducts.push(product);
                         }                  
                     })
+                    var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
+                    // var priceArr=[]
+                    selectedProducts.map((index,pos)=>{
+                        console.log("In selected products map...")
+                        if(minPrice>parseInt(index.productPrice)){
+                            minPrice = index.productPrice
+                        }
+                        if(maxPrice<parseInt(index.productPrice)){
+                            maxPrice = index.productPrice
+                        }
+                        
+                    })
                 }
                 
-                var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
-                // var priceArr=[]
-                selectedProducts.map((index,pos)=>{
-                    if(minPrice>parseInt(index.productPrice)){
-                        minPrice = index.productPrice
-                    }
-                    if(maxPrice<parseInt(index.productPrice)){
-                        maxPrice = index.productPrice
-                    }
+                // var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
+                // // var priceArr=[]
+                // response.data.map((index,pos)=>{
+                //     console.log("In selected products map...")
+                //     if(minPrice>parseInt(index.productPrice)){
+                //         minPrice = index.productPrice
+                //     }
+                //     if(maxPrice<parseInt(index.productPrice)){
+                //         maxPrice = index.productPrice
+                //     }
                     
-                })
+                // })
                 // response.data.map(index=>{
                 //     console.log("price",index.productPrice)
                 //     priceArr.push(parseInt(index.productPrice))
