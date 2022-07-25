@@ -34,6 +34,8 @@ function TestFilterProducts(){
     //To save all products
     const[products,SetProducts] = useState([]);
     const[isProductsFetched,SetIsProductsFetched] = useState(false);
+
+    
     
 
     //For Add To Compare
@@ -54,9 +56,9 @@ function TestFilterProducts(){
 
     
     
-    if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
-        filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
-    }
+    // if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
+    //     filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
+    // }
     
 
     const [min,SetMin] = useState(0);
@@ -70,6 +72,18 @@ function TestFilterProducts(){
                 SetProducts(response.data);
                 if(localStorage.getItem("SubCategory")==null || localStorage.getItem("SubSubCategory")==null){
                     SetSelectedProducts(response.data);
+                    var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
+                    // var priceArr=[]
+                    response.data.map((index,pos)=>{
+                        console.log("In selected products map...")
+                        if(minPrice>parseInt(index.productPrice)){
+                            minPrice = index.productPrice
+                        }
+                        if(maxPrice<parseInt(index.productPrice)){
+                            maxPrice = index.productPrice
+                        }
+                        
+                    })
 
                 }else{
                     response.data.map(product=>{
@@ -77,19 +91,32 @@ function TestFilterProducts(){
                             selectedProducts.push(product);
                         }                  
                     })
+                    var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
+                    // var priceArr=[]
+                    selectedProducts.map((index,pos)=>{
+                        console.log("In selected products map...")
+                        if(minPrice>parseInt(index.productPrice)){
+                            minPrice = index.productPrice
+                        }
+                        if(maxPrice<parseInt(index.productPrice)){
+                            maxPrice = index.productPrice
+                        }
+                        
+                    })
                 }
                 
-                var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
-                // var priceArr=[]
-                selectedProducts.map((index,pos)=>{
-                    if(minPrice>parseInt(index.productPrice)){
-                        minPrice = index.productPrice
-                    }
-                    if(maxPrice<parseInt(index.productPrice)){
-                        maxPrice = index.productPrice
-                    }
+                // var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
+                // // var priceArr=[]
+                // response.data.map((index,pos)=>{
+                //     console.log("In selected products map...")
+                //     if(minPrice>parseInt(index.productPrice)){
+                //         minPrice = index.productPrice
+                //     }
+                //     if(maxPrice<parseInt(index.productPrice)){
+                //         maxPrice = index.productPrice
+                //     }
                     
-                })
+                // })
                 // response.data.map(index=>{
                 //     console.log("price",index.productPrice)
                 //     priceArr.push(parseInt(index.productPrice))
@@ -129,6 +156,10 @@ function TestFilterProducts(){
                         keySet.push(key);
                     }
                     console.log("keySet",keySet)
+                    if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
+                        // filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
+                        SetFilterSelected([localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory")])
+                    }
                     SetIsFiltersFetched(true)
                     // SetFilters(response.data.filterCriterias)
                     // SetIsFiltersFetched(true)
@@ -143,7 +174,7 @@ function TestFilterProducts(){
 
     const addtocart=(model)=>{
         
-        
+        // event.preventDefault();
         
         if(cart.includes(model)){
             alert("Item is already present in cart")
@@ -155,6 +186,7 @@ function TestFilterProducts(){
             alert("Added to cart"+model);
         }
     
+        // Header.location.reload()
         
         
     }
@@ -253,6 +285,8 @@ function TestFilterProducts(){
         // console.log("Index",index);
         localStorage.setItem("productId",index.productId);
         localStorage.setItem("productSelected", index.modelNumber);
+        localStorage.removeItem("SubCategory")
+        localStorage.removeItem("SubSubCategory")
         // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
     }
@@ -320,6 +354,7 @@ function TestFilterProducts(){
             SetSelectedProducts(productsArray);
 
         }else{
+            console.log("Filter selected",filterselected)
             var arr = filterselected;
             arr.map((i,pos)=>{
                 var pair = i.split("-");
@@ -341,6 +376,15 @@ function TestFilterProducts(){
                     }
                 }
             })
+
+            console.log("Array:",arr)
+
+            // if(arr.length==0){
+            //     console.log("In if")
+            //     // localStorage.removeItem("SubCategory");
+            //     // localStorage.removeItem("SubSubCategory");
+            //     // window.location.reload();
+            // }
             SetFilterSelected(arr);
             var productsArray = [];
             console.log("products",products)
@@ -611,102 +655,104 @@ function TestFilterProducts(){
             {
                     
                     (isSelectedProductsFetched)?(
+                        (selectedProducts.length==0)?(
+                            <h6>No Products Found</h6>
+                        ):(
                     
-                        selectedProducts.map(index => {
-                            return (
-                               
+                            selectedProducts.map(index => {
+                                return (
+                                
 
 
-                                <Row className="filterproductsRow">
-                                    
-                                    <Col md={2}>
-                                        <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
-                                        <br></br>
-                                        <p>{index.modelNumber}</p>
-                                    </Col>
-                                    <Col md={10} >
-                                        <Row className="innerrow">
-                                            <Col md={11}>
-                                                <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
-                                            </Col>
-                                            <Col md={1} >
-                                                {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
-                                                    <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
-                                                    <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
-                                                }
-                                            </Col>
+                                    <Row className="filterproductsRow">
+                                        
+                                        <Col md={2}>
+                                            <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            <br></br>
+                                            <p>{index.modelNumber}</p>
+                                        </Col>
+                                        <Col md={10} >
+                                            <Row className="innerrow">
+                                                <Col md={11}>
+                                                    <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
+                                                </Col>
+                                                <Col md={1} >
+                                                    {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
+                                                        <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
+                                                        <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
+                                                    }
+                                                </Col>
 
-                                        </Row>
-                                        <Row>
-                                            <Col md={11} className="star">
-                                            {Math.round(index.averageRating * 10) / 10}<AiFillStar />
-                                               
-                                            </Col>
-                                            
-                                        </Row>
-                                        <br></br>
-                                        <Row className="innerrow">
-                                            <Col md={11}>
-                                                {
-                                                    (index.productHighlights!=null)?(
-                                                        index.productHighlights.split(';').map(highlight => {
-                                                            return (
-                                                                <h6 style={{color:'GrayText'}}>•{highlight}<br></br></h6>
-                                                            );
-                                                        })
-                                                    ):(
-                                                        null
-                                                    )
+                                            </Row>
+                                            <Row>
+                                                <Col md={11} className="star">
+                                                {Math.round(index.averageRating * 10) / 10}<AiFillStar />
+                                                
+                                                </Col>
+                                                
+                                            </Row>
+                                            <br></br>
+                                            <Row className="innerrow">
+                                                <Col md={11}>
+                                                    {
+                                                        (index.productHighlights!=null)?(
+                                                            index.productHighlights.split(';').map(highlight => {
+                                                                return (
+                                                                    <h6 style={{color:'GrayText'}}>•{highlight}<br></br></h6>
+                                                                );
+                                                            })
+                                                        ):(
+                                                            null
+                                                        )
+                                                        
+                                                    }
+                                                    {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
+                                                </Col>
+
+                                            </Row>
+                                            <Row className="innerrow">
+                                                <Col md={10}>
+                                                    {
+                                                        (index.offerPrice==null) ? (
+                                                            <h5>MRP: <b>₹{index.productPrice}</b></h5>
+                                                        ) : (
+                                                            <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
+                                                        )
+                                                    }
                                                     
-                                                }
-                                                {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
-                                            </Col>
+                                                    
 
-                                        </Row>
-                                        <Row className="innerrow">
-                                            <Col md={8}>
-                                                {
-                                                    (index.offerPrice==null) ? (
-                                                        <h5>MRP: <b>₹{index.productPrice}</b></h5>
-                                                    ) : (
-                                                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginRight:70 }}>₹{index.productPrice}</b> <b style={{color:"green"}}>{Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h5> 
-                                                    )
-                                                }
+                                                </Col>
 
-                                               
-                                                
-                                                
+                                            </Row>
 
-                                            </Col>
+                                            <Row className="innerrow">
+                                                <Form style={{
+                                                    fontWeight: '500',
+                                                    fontSize: '120%'
+                                                }}>
+                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+                                                </Form>
 
-                                        </Row>
+                                            </Row>
 
-                                        <Row className="innerrow">
-                                            <Form style={{
-                                                fontWeight: '500',
-                                                fontSize: '120%'
-                                            }}>
-                                                <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
-                                            </Form>
+                                            <Row className="innerrow">
+                                                <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
+                                                <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
+                                            
 
-                                        </Row>
-
-                                        <Row className="innerrow">
-                                            <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
-                                            <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
-                                           
-
-                                        </Row>
-                                    </Col>
+                                            </Row>
+                                        </Col>
 
 
-                                </Row>
+                                    </Row>
 
 
 
-                            )
-                        
-                        })
+                                )
+                            
+                            })
+                        )
                         
                     ):(
                         null

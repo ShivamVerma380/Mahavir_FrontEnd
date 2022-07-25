@@ -9,6 +9,7 @@ import { Preview, print } from 'react-html2pdf';
 const Invoice = () => {
 
     var selectedaddress=localStorage.getItem("selectedaddress");
+    console.log(localStorage.getItem("buyProduct"));
     var buyproducts=localStorage.getItem("buyProduct");
     var d = new Date();
     console.log("date "+d)
@@ -40,8 +41,8 @@ const Invoice = () => {
                     id: buyproducts.modelNumber,
                     name: buyproducts.productName,
                     
-                    price: buyproducts.offerPrice,
-                    quantity: 1
+                    price: buyproducts.offerPrice*parseInt(localStorage.getItem("quantity")),
+                    quantity: parseInt(localStorage.getItem("quantity"))
                 }]}
                 pagination={false}
                 >
@@ -51,7 +52,7 @@ const Invoice = () => {
                 
                 
                 </Table>
-                <h5>Total: {buyproducts.offerPrice}</h5>
+                <h5>Total: {buyproducts.offerPrice*parseInt(localStorage.getItem("quantity"))}</h5>
             </Preview>
             <Button onClick={()=>print('a', 'jsx-template')}> print</Button>
           </div>

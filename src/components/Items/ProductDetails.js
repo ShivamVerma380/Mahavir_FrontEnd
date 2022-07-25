@@ -253,10 +253,12 @@ function ProductDetails() {
     );
   }
 
-  const inputQuantityEvent = (event) => {
+  function inputQuantityEvent(event){
     flag = true;
-    quantity = event.target.value;
-    console.log(quantity);
+    console.log("value",event.target.value);
+    // quantity = event.target.value;
+    // localStorage.setItem("quantity", parseInt(event.target.value));
+    // console.log("quantity",localStorage.getItem("quantity"));
   }
   const navigate = useNavigate();
 
@@ -316,16 +318,18 @@ function ProductDetails() {
 
 
 
-  const handleBuyNow = () => {
+  const handleBuyNow = (product) => {
 
     if (flag == false) {
-      alert("Add To Cart:1");
+      alert("Buy Now ");
     } else if (quantity <= 0) {
       alert("Please enter a positive number");
     } else {
       alert("Quantity:" + quantity);
     }
-    navigate("/AddressForm")
+    console.log("Product", product);
+    localStorage.setItem("buyProduct",JSON.stringify(product))
+    navigate("/checkout")
   }
 
   const InputPin = (e) => {
@@ -685,7 +689,7 @@ function ProductDetails() {
 
                           <Row>
                             <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={() => addtocart(product.modelNumber)}>Add To Cart</Button>
-                            <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={handleBuyNow}>Buy Now</Button>
+                            <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
 
                           </Row>
                         )
@@ -872,7 +876,10 @@ function ProductDetails() {
 
                   </Row>
                   <Row>
-                    <QuantityPicker className="quantitypicker" style={{ background: "red" }} min={0} smooth onChange={inputQuantityEvent} />
+                    {/* <QuantityPicker className="quantitypicker" style={{ background: "red" }} min={1} smooth onChange={(value)=>{
+                      console.log("value",value)
+                      localStorage.setItem("quantity",value)
+                    }} /> */}
                     {/* <Input id="Quantity"
             name="Quantity"
             placeholder="Enter Quantity"

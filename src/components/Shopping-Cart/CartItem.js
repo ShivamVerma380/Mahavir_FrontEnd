@@ -60,7 +60,25 @@ const CartItem = ({item}) => {
                                         <Row>
                                             
                                             <Col md={6} style={{ marginLeft: 50 }}>
-                                                <QuantityPicker smooth />
+                                                <QuantityPicker className="quantitypicker" style={{ background: "red" }} value={1} min={1} smooth onChange={(value)=>{
+                                                    console.log("value",value)
+                                                    var arr=[]
+                                                    // if(localStorage.getItem("CartModels")!=null){
+                                                    //     arr = localStorage.getItem("CartProducts").split(',');
+                                                    // }
+                                                    arr = localStorage.getItem("CartProducts").split(',');
+                                                    // console.log("arr",arr)
+                                                    var arr1=[]
+                                                    arr.map((index,pos)=>{
+                                                        var pair = index.split("=");
+                                                        if(pair[0]===item.modelNumber){
+                                                            pair[1]=value;
+                                                        }
+                                                        arr[pos]= pair[0]+"="+pair[1]
+                                                    })
+                                                    localStorage.setItem("CartProducts",arr)
+                                                    console.log("Cart Products",arr)
+                                                    }} />
                                             </Col>
                                             <Col md={3}>
                                                 <Button className="btn-flat" onClick={removefromcart}>REMOVE</Button>

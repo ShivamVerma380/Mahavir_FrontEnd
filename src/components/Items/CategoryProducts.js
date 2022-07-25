@@ -10,6 +10,7 @@ import {setCookie,getCookie} from '../Cookies'
 import {useLocation} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import Header from "../Header";
+import TestFilterProducts from "../Filters/TestFilterProducts";
 // import {getCookie,setCookie} from '../Cookies';
 
 
@@ -313,146 +314,12 @@ function CategoryProducts(){
   
           
             <h1 style={{color:"rgb(255,98,98", marginLeft:'2%',marginTop:'2%'}}><i>{location.state.name}</i></h1>
+
+            <TestFilterProducts/>
             
         
         
-      {
-          cards = Products.map(index=>{
-            return(
-
-                
-                    <Row style={{padding:'2%',margin:'2%',backgroundColor: '#fff',
-                    borderRadius: '2px',
-                    boxShadow: '0 2px 4px 0 rgb(0 0 0 / 8%)'}}>
-                        <Col md={2}>
-                            {/* <img  onClick={()=>callProductDetails(index)} style={{height:'80%',width:'100%',cursor:'pointer',justifySelf:'center'}} src={"data:image/png;base64," + index.productImage1.data} /> */}
-                            <img  onClick={()=>callProductDetails(index)} style={{height:'80%',width:'100%',cursor:'pointer',justifySelf:'center'}} src={index.productImage1} />
-
-               
-                        </Col>
-                        <Col md={10} style={{padding:'2%'}}>
-                            <Row style={{marginBottom:'1%'}}>
-                                <Col md={11}>
-                                    <h3 onClick={()=>callProductDetails(index)} style={{cursor:'pointer'}}>{index.productName}</h3>
-                                </Col>
-                                <Col md={1}>
-                                  {}
-                                  {(wishlist!=null && wishlist.includes(index.modelNumber)) ? 
-                                  <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={30} onClick={()=>RemoveFromWishList(index.modelNumber)}/>:
-                                  <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
-                                  }
-                                </Col>
-                                
-                            </Row>
-                            <Row style={{marginBottom:'1%'}}>
-                                <Col md={11}>
-                                <h5 >{index.productHighlights}</h5>
-                                </Col>
-                                
-                            </Row>
-                            <Row style={{marginBottom:'1%'}}>
-                                <Col md={10}>
-                                <h4>MSP: <b style={{marginRight:"20px",color:"rgb(255,98,98)"}}>₹{index.offerPrice}</b> MRP: <b style={{textDecorationLine:"line-through", textDecorationStyle:"solid"}}>₹{index.productPrice}</b></h4> 
-           
-                                </Col>
-                                
-                            </Row>
-                            
-                            <Row style={{marginBottom:'2%'}}>
-                                <Form style={{fontWeight: '700',
-    fontSize: '150%'}}>
-                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
-                                    </Form>
-                                    
-                            </Row>
-                            
-                            <Row style={{marginTop:'2%'}}>
-          <Button  onClick={()=>addtocart(index.modelNumber)} style={{width:'30%', height:'60px',marginLeft:'1%', fontSize:'140%'}} variant="flat" size="1" >Add To Cart</Button>
-          <Button onClick={()=>buyNow(index)} style={{width:'30%',height:'60px',  marginLeft:'5%',fontSize:'140%'}} variant="flat" size="1"  >Buy Now</Button>
-
-          </Row>
-                        </Col>
-
-
-                    </Row>
-             
-     
-            )})}
-
-{/* 
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={5}
-        slidesPerGroup={3}
-        loop={false}
-        loopFillGroupWithBlank={true}
-        breakpoints={{
-          700: {
-            slidesPerView: 6,
-          },
-          400: {
-            slidesPerView: 3,
-          },
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
-
-        
-        {
-          cards = Products.map(index=>{
-            return(
-<Container>
- 
-              <SwiperSlide>
-               
-              <Card  style={{ width: '20rem' }}
-                  className="mb-2"
-                   >
-                    {(localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ? 
-                      <AiFillHeart style={{marginTop:"10px",marginLeft:"10px", fill:'rgb(255, 88, 88)'}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>:
-                      <AiOutlineHeart style={{marginTop:"10px",marginLeft:"10px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
-                      }
-                     <Card.Img  variant="top" src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/>
-               
-                    <Card.Body >
-                    <Card.Title as="h6"  onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
-                    <Card.Text onClick={()=>callProductDetails(index)} >
-                    {index.productHighlights}
-                    <br></br><b style={{fontWeight:"bolder",color:"rgb(255, 88, 88)", fontSize:20}}>Rs {index.productPrice}</b>
-                    </Card.Text>
-                    <Form>
-                      <Form.Check type="checkbox"  label = "Add To Compare" onChange={handleAddToCompare}/>
-                    </Form>
-                    
-                      <br></br>
-                      {
-                        fetchOfferAvailableBtn(index.offerPrice,index.productPrice)
-                      }                    
-                    
-                  </Card.Body>
-
-                  
-              </Card>
-
-
-               
-              </SwiperSlide>
-              </Container>
-            )
-          })
-        }
-        
-      </Swiper> */}
-
       
-      
-      
-    
     </div>):(null)
     
     )

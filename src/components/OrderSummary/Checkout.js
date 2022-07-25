@@ -9,7 +9,8 @@ import {Container} from 'react-bootstrap';
 import AddressForm from './AddressForm';
 import Invoice from './Invoice';
 import Payment from './Payment';
-const steps = ['Add Address', 'Payment', 'Bill'];
+import Summary from './Summary';
+const steps = ['Add Address', 'Order Summary','Payment', 'Bill'];
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -66,11 +67,16 @@ export default function Checkout() {
     }
     else if(activeStep===1){
       return(
+        <Summary/>
+      )
+    }
+    else if(activeStep===2){
+      return(
         <Payment/>
 
         )
     }
-    else if(activeStep===2){
+    else if(activeStep===3){
       return(
         <Invoice/>
       )
