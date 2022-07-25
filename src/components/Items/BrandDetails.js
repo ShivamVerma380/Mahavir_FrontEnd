@@ -114,7 +114,7 @@ function BrandDetails() {
     console.log("Models: ",models)
 
 
-    const handleScroll=(ref)=> {
+    const handleScroll=(index)=> {
         // parsedArr.map(index=>{
         //      models += index.modelNumbers;
         // })
@@ -126,11 +126,19 @@ function BrandDetails() {
         // localStorage.setItem("models", models);
         // console.log("Models: ",localStorage.getItem("models"));
         // console.log("model", models);
+        // window.scrollTo({
+        //     top: ref.current.offsetTop,
+        //     behavior: 'smooth',
+        // });
+        let offset = 100;
         window.scrollTo({
-            top: ref.current.offsetTop,
-            behavior: 'smooth',
+            behavior: "smooth",
+            top:
+            document.getElementById(index).getBoundingClientRect().top -
+            document.body.getBoundingClientRect().top -
+            offset
         });
-        console("Index: ",ref)
+        console("Index: ",index)
         console.log("on cat click");
         // ref.current?.scrollIntoView({behavior: 'smooth'});
         // console.log("Ref: ",ref.current)
@@ -257,7 +265,7 @@ function BrandDetails() {
                                 <div className="container">
 
                                     <SwiperSlide>
-                                        <Container onClick={() => handleScroll(iMac)}>
+                                        <Container onClick={() => handleScroll(index.category)}>
                                          <center>   
                                         <Image src={index.catImage} style={{ width: 100, margin: 5, height: 100 }} />
 
@@ -286,7 +294,7 @@ function BrandDetails() {
 
                                 
                                     <Col md={3}>
-                                    <h3 ref={iMac} style={{ color: "rgb(255,98,98", margin: '2%' }}><i>{index.category}</i></h3>
+                                    <h3 id={index.category} style={{ color: "rgb(255,98,98", margin: '2%' }}><i>{index.category}</i></h3>
                                     
                                     </Col>
                                     <Col md={7}>
