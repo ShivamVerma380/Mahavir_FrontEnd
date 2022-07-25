@@ -27,6 +27,8 @@ function TestFilterProducts(){
     const[selectedProducts,SetSelectedProducts] = useState([]);
     const[isSelectedProductsFetched,SetIsSelectedProductsFetched] = useState(false);
 
+    const[showTopBtn,setShowTopBtn] = useState(false);
+
     const [visible, setVisible] = useState(false)
 
     const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
@@ -66,6 +68,7 @@ function TestFilterProducts(){
 
     const [value,SetValue] = useState([]);
     useEffect(()=>{
+        window.addEventListener('scroll', () => { if (window.scrollY > 400) { setShowTopBtn(true); } else { setShowTopBtn(false); } });
         if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched){
             axios.get("http://localhost:8080/get-products-by-category/"+localStorage.getItem("Category"))
             .then(function(response){
@@ -545,10 +548,15 @@ function TestFilterProducts(){
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
           }
-        <Button className="scrolltopbtn">
+          {
+            (showTopBtn)?(
+                <Button className="scrolltopbtn">
             <FaArrowCircleUp onClick={scrollToTop} 
-            style={{display: visible ? 'inline' : 'none'}} />
+             />
         </Button>
+            ):(null)
+          }
+        
         <Row>
            
             <Col md={1}></Col>

@@ -50,6 +50,7 @@ function BrandDetails() {
     // console.log("categories", categories);
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         if (!isBrandsFetched) {
             axios.get("http://localhost:8080/excel/shopByBrands").then(
                 function (response) {
@@ -114,30 +115,19 @@ function BrandDetails() {
     console.log("Models: ",models)
 
 
-    const handleScroll=(index)=> {
-        // parsedArr.map(index=>{
-        //      models += index.modelNumbers;
-        // })
-        // localStorage.setItem("shopbrandcat", index)
-        // console.log("Get cat: ", localStorage.getItem("shopbrandcat"))
-        // console.log("Model Num: ",index.products.modelNumber)
-        // models.push(index.products.modelNumber);
-        // console.log("model", models);
-        // localStorage.setItem("models", models);
-        // console.log("Models: ",localStorage.getItem("models"));
-        // console.log("model", models);
+    const handleScroll= async (index)=> {
+        
+        
+        // let offset = 20;
         // window.scrollTo({
-        //     top: ref.current.offsetTop,
-        //     behavior: 'smooth',
+        //     behavior: "smooth",
+        //     top:
+        //     document.getElementById(index).getBoundingClientRect().top -
+        //     document.body.getBoundingClientRect().top -
+        //     offset
+            
         // });
-        let offset = 100;
-        window.scrollTo({
-            behavior: "smooth",
-            top:
-            document.getElementById(index).getBoundingClientRect().top -
-            document.body.getBoundingClientRect().top -
-            offset
-        });
+        document.getElementById(index).scrollIntoView();
         console("Index: ",index)
         console.log("on cat click");
         // ref.current?.scrollIntoView({behavior: 'smooth'});
