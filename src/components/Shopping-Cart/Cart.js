@@ -24,7 +24,10 @@ function Cart() {
     const [qty,SetQuantity] = useState([])
 
     modelnums=getCookie("CartModels").split(',');
-    var products = localStorage.getItem("CartProducts").split(',');
+    if (localStorage.getItem("CartProducts")!=null) {
+        var products = localStorage.getItem("CartProducts").split(',');
+    }
+    
     var arr=[]
     // var qty=[]
     modelnums.map(index=>{

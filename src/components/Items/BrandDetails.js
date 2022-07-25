@@ -294,7 +294,7 @@ function BrandDetails() {
                                             
                                         
                                     }
-                                <Swiper
+                                {/* <Swiper
                                     slidesPerView={1}
                                     spaceBetween={5}
                                     slidesPerGroup={1}
@@ -344,7 +344,7 @@ function BrandDetails() {
                                         })
                                     }
 
-                                </Swiper>
+                                </Swiper> */}
                             </Row>
                        
                     )

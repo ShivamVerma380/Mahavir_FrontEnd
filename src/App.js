@@ -149,6 +149,25 @@ function App() {
       }).catch(function(error){
         console.log("error",error);
       })
+
+      axios.get("http://localhost:8080/refresh-token",{
+        headers:{
+          "Authorization":"Bearer "+getCookie("jwtToken"),
+          "isRefreshToken":"true"
+        }
+      }).then(function(response){
+        if(response.status==200){
+          setCookie("jwtToken",response.data.token,20);
+          // setIsCategoryDisplayFetched(true);
+          console.log("Token",response.data.token);
+      }
+      
+    }).catch(function(error){
+        console.log(error);
+    
+      })
+
+
       axios.get("http://localhost:8080/get-categories").then(function(response){
         console.log(response);
         if(response.status==200){
