@@ -263,7 +263,7 @@ function Cart() {
                     <br></br>
                     <Row>
                         <center>
-                        <Button style={{width:"300px"}}className="btn-flat">Place Order</Button>
+                        <Button style={{width:"300px"}}className="btn-flat">Check Out</Button>
                         </center>
                     </Row>
                     </Col>

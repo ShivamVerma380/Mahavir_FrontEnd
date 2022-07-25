@@ -729,7 +729,7 @@ function ProductDetails() {
                       (product.offerPrice == null) ? (
                         <h5>MRP: <b>₹{product.productPrice}</b></h5>
                       ) : (
-                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{product.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{product.productPrice}</b></h5>
+                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{product.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginRight:40 }}>₹{product.productPrice}</b> <b style={{color:"green"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h5>
                       )
                     }
 

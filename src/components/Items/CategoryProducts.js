@@ -304,7 +304,7 @@ function CategoryProducts(){
         <div >
           <Header/>
           {
-          (((len-1)>0) ? <Button style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
+          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
           }
           <ToastContainer position="top-center"/>

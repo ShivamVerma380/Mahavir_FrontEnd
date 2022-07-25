@@ -106,3 +106,25 @@
   background: #04AA6D; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
+
+.scrolltopbtn {
+  
+    position:fixed;
+    background-color: blue;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* font-family: 'Courier New', Courier, monospace; */
+    font-size:17px;
+    z-index: 9999;
+    margin: 10px;               
+    top:0;
+    width: fit-content;
+    border-radius: 0%;
+    left:50%;
+    margin-top: 7%;
+    
+    
+  
+}

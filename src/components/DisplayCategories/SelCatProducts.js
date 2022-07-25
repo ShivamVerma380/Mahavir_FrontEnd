@@ -199,7 +199,7 @@ const SelCatProducts=()=>{
     var modelNums;
     return(
                 <div>
-                    <Header  productList={products}/>
+                    <Header className="header" style={{position:"sticky"}} productList={products}/>
                     
                     
                         {/* <Header/> */}

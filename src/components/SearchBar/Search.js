@@ -45,6 +45,7 @@ function Search(){
         localStorage.setItem("Category",item.category);
         localStorage.setItem("SubCategory",item.subCategory);
         localStorage.setItem("SubSubCategory",item.subSubCategory);
+        console.log("Sub: ",localStorage.getItem("SubCategory"))
         if(item.type==="category"){
           var arr = window.location.href.split("/")
           console.log("Arr: ",arr)
@@ -69,9 +70,15 @@ function Search(){
 
           console.log("arr",arr);
           if(arr.length==4){
+            localStorage.setItem("Category",item.category)
+            localStorage.setItem("SubCategory",item.subCategory)
+            localStorage.setItem("SubSubCategory",item.subSubCategory)
             navigate("/"+item.category+"/"+item.subCategory+"/"+item.subSubCategory); 
             window.location.reload();
           }else{
+            localStorage.setItem("Category",item.category)
+            localStorage.setItem("SubCategory",item.subCategory)
+            localStorage.setItem("SubSubCategory",item.subSubCategory)
             navigate("/"+item.category+"/"+item.subCategory+"/"+item.subSubCategory);  
           } 
         }else{

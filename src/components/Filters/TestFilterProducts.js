@@ -11,6 +11,9 @@ import Slider from '@material-ui/core/Slider';
 import Box from '@mui/material/Box';
 import { sortBy } from "underscore";
 import { AiFillStar } from "react-icons/ai";
+import "./FilterProducts.css"
+import {FaArrowCircleUp} from 'react-icons/fa';
+import { Dropdown } from "reactstrap";
 
 function TestFilterProducts(){
     var comparemodels=getCookie("addToCompare").split(',');
@@ -23,6 +26,8 @@ function TestFilterProducts(){
     //To save selected products
     const[selectedProducts,SetSelectedProducts] = useState([]);
     const[isSelectedProductsFetched,SetIsSelectedProductsFetched] = useState(false);
+
+    const [visible, setVisible] = useState(false)
 
     const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
 
@@ -469,12 +474,37 @@ function TestFilterProducts(){
         SetSelectedProducts([...arr])
     }
 
+    const toggleVisible = () => {
+        const scrolled = document.documentElement.scrollTop;
+        if (scrolled > 300){
+          setVisible(true)
+        } 
+        else if (scrolled <= 300){
+          setVisible(false)
+        }
+      };
+
+    const scrollToTop = () =>{
+        window.scrollTo({
+          top: 0, 
+          behavior: 'smooth'
+          /* you can also use 'auto' behaviour
+             in place of 'smooth' */
+        });
+      };
+      
+      window.addEventListener('scroll', toggleVisible);
+
     return(
         <div>
              {
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
           }
+        <Button className="scrolltopbtn">
+            <FaArrowCircleUp onClick={scrollToTop} 
+            style={{display: visible ? 'inline' : 'none'}} />
+        </Button>
         <Row>
            
             <Col md={1}></Col>
@@ -530,6 +560,8 @@ function TestFilterProducts(){
                         keySet.map(index=>{
                             return(
                                 <div>
+                                    
+                                    
                                     <h6>{index}</h6>
                                     {
                                         filters[index].map(f=>{
@@ -632,14 +664,16 @@ function TestFilterProducts(){
 
                                         </Row>
                                         <Row className="innerrow">
-                                            <Col md={10}>
+                                            <Col md={8}>
                                                 {
                                                     (index.offerPrice==null) ? (
                                                         <h5>MRP: <b>₹{index.productPrice}</b></h5>
                                                     ) : (
-                                                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
+                                                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginRight:70 }}>₹{index.productPrice}</b> <b style={{color:"green"}}>{Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h5> 
                                                     )
                                                 }
+
+                                               
                                                 
                                                 
 

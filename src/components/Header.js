@@ -13,6 +13,7 @@ import Login from "./Login-Signup/Login";
 import Search from "./SearchBar/Search";
 import '../assets/fonts/Olive Compact MN Regular.ttf'
 import './Header.css';
+import './styles.css'
 const Header = ({productList}) => {
       
     
@@ -112,7 +113,7 @@ const Header = ({productList}) => {
         <div className="Header">
 
   {['md'].map((expand) => (
-    <Navbar  key={expand} bg="light" expand={expand} >
+    <Navbar className="header" key={expand} bg="light" expand={expand} >
       <Container fluid>
         <Navbar.Brand href="/" style={{fontFamily:"Olive Compact MN Regular", fontSize:'42px',color:' rgb(217 4 41)'}}><img className="logo_mahavir" src = {require ('../assets/mahavirlogo.jpg')}/><span style={{marginLeft:'10px'}}></span>Mahavir</Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
