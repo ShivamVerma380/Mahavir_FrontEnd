@@ -16,16 +16,34 @@ const CartItem = ({item,quantity}) => {
 
     function removefromcart(){
         console.log("Remove clicked")
-       
-        for (var i = 0; i < cartmodelnums.length; i++) {
-            if (cartmodelnums[i] === item.modelNumber) {
-                cartmodelnums.splice(i, 1);
-                console.log(cartmodelnums);
-                setCookie("CartModels",cartmodelnums,20);
-                window.location.reload();
-                break;
+
+        var arr=[];
+        // for(var k in cartmodelnums){
+        //     if(k!==item.modelNumber){
+        //         arr.push(k+"="+cartmodelnums[k]);
+        //     }
+        // }
+        cartmodelnums.map(index=>{
+            if(index!=""){
+                if(index.split("=")[0]!=item.modelNumber){
+                    arr.push(index);
+                }
             }
-        }
+        })
+        console.log("arr remove item",arr)
+        setCookie("CartModels",arr,20);
+        window.location.reload();
+
+       
+        // for (var i = 0; i < cartmodelnums.length; i++) {
+        //     if (cartmodelnums[i] === item.modelNumber) {
+        //         cartmodelnums.splice(i, 1);
+        //         console.log(cartmodelnums);
+        //         setCookie("CartModels",cartmodelnums,20);
+        //         window.location.reload();
+        //         break;
+        //     }
+        // }
         
                 
         

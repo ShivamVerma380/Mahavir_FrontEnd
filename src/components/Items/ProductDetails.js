@@ -529,10 +529,19 @@ function ProductDetails() {
     }
   }
   const addtocart = (model) => {
-    if (cart.includes(model+"=1")) {
-      alert("Item is already present in cart")
-    }
-    else {
+    var flag = false;
+    cart.map(index=>{
+      if(index!=""){
+        if(index.split("=")[0]===model){
+          flag = true;
+          alert("Item is already present in cart")
+        }
+      }
+    })
+    // if (cart.has(model+"=1")) {
+    //   alert("Item is already present in cart")
+    // }
+    if(!flag){
       console.log("adddd" + model);
       cart.push(model+"=1");
       setCookie("CartModels", cart, 20);
