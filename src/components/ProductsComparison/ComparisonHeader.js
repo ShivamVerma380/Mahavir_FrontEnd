@@ -1,10 +1,10 @@
 import { ComboBox } from "@progress/kendo-react-dropdowns";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Row,Col ,NavItem ,NavDropdown,Form,Button} from "react-bootstrap";
+import { Row,Col ,NavItem ,NavDropdown,Form,Button,Image} from "react-bootstrap";
 
 import {setCookie,getCookie} from '../Cookies';
-
+import './Compare.css';
 function ComparisonHeader({product}){
     const[length,SetLength] = useState(product.length); 
     var arr=[];
@@ -116,15 +116,32 @@ function ComparisonHeader({product}){
         window.location.reload();
     }
 
+    localStorage.setItem("Arr",arr);
+
     console.log("length",length);
     return(
-            <Row style={{marginTop:15}}>
-            <Col md={1}>  
-            </Col>
-            <Col md={2}>
+        
+            <Row className="ComparisonHeader">
+            
+            <Col md={2} style={{justifyContent:'center'}} className="colll">
                 {
                     (product.length>0)?(
-                        <h5>{product[0].productName} vs others</h5>
+                        <>
+                        <Row>
+                            <p>Compare</p>
+                        </Row>
+                        <Row>
+                        <h5>{product[0].productName}</h5>
+                        </Row>
+                        <Row>
+                            <p><i>VS</i></p>
+                        </Row>
+                        <Row>
+                            <h5>Others</h5>
+                        </Row>
+                        
+                        </>
+                        
                     ):(
                         <br></br>
                     )
@@ -133,9 +150,10 @@ function ComparisonHeader({product}){
                 <br></br>
                 {
                     (product.length>0)?(
+                        <h6>
                         <Form>
                             <Form.Check type="checkbox"   label = "Show Only Differences" onChange={handleFormCheck} defaultChecked={(localStorage.getItem("isChecked"))?true:false}/>
-                        </Form>
+                        </Form></h6>
                     ):(
                         <br></br>
                     )
@@ -146,13 +164,20 @@ function ComparisonHeader({product}){
                 (isProductArrUpdated)?(
                 productArr.map((index,pos)=>{
                     return(
-                        <Col md={2}>
+                        <Col md={2} className="colll">
+                        
+                            <Row>
+                                
+                        <Image thumbnail="true" style={{ alignContent: "center" }}  src={index.productImage1}/>
+                        <Button className="cross" style={{height:'50px', width:'50px',marginTop:'-90%',marginLeft:'80%'}} onClick={()=>handleRemoveProduct(index.modelNumber)}>X</Button>
+                               
+                                
+                                
+                            </Row>
                             
-                            <img style={{ width: "10rem", alignContent: "center" }}  src={index.productImage1}></img>
-                            <Button style={{marginBottom:"50px"}} onClick={()=>handleRemoveProduct(index.modelNumber)}>X</Button>
-                            <br></br>
-                            <h6 style={{ marginTop: "20px" }}>{index.productName}</h6>
-                            <h6 style={{}}>₹{index.productPrice}</h6>
+                            
+                            <h5 style={{ marginTop: "20px" }}>{index.productName}</h5>
+                            <h5 style={{}}>₹{index.productPrice}</h5>
                         </Col>
                     );
                 })
@@ -166,15 +191,16 @@ function ComparisonHeader({product}){
             {
                 arr.map(index=>{
                     return(
-                        <Col md={2}>
-                            <img style={{ width: "10rem", alignContent: "center", visibility: "hidden" }}></img>
-                            <br></br>
-                            <h6 style={{ marginTop: "20px" }} >Add a Product</h6>
-                            <br></br>
+                        <Col md={2} className="colll">
+
+                            <Image  thumbnail="true" height={250} width={200} style={{backgroundColor:'gray'}} />
+                            
+                            <h6 style={{ fontSize:'20px', marginTop: "20px" }} >Add a Product</h6>
+                            
                             {
                                 (isBrandsFetched)?(
-                                    <div>
-                                    <NavDropdown title = {brand} id="brand">
+                                    <div className="choosebrand">
+                                    <NavDropdown  title = {brand} id="brand">
                                         {
                                             Brands.map(index=>{
                                                 return(
@@ -191,8 +217,8 @@ function ComparisonHeader({product}){
                             {
 
                                 (isBrandSelected)?(
-                                    <div>
-                                    <NavDropdown title={model} id = "Models">
+                                    <div className="choosebrand">
+                                    <NavDropdown  title={model} id = "Models">
                                         {   
                                             Models.map(model=>{
                                                 return(

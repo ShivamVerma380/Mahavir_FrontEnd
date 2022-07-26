@@ -301,9 +301,10 @@ function CategoryProducts(){
         
       (isProductsFetched)?
       (
-
-        <div >
-          <Header/>
+        <>
+<Header/>
+        <div style={{marginLeft:'2%',marginRight:'2%'}} >
+          
           {
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
@@ -311,16 +312,29 @@ function CategoryProducts(){
           <ToastContainer position="top-center"/>
 
 
-  
+  <Row>
+  <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
+
+
+<filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
+
+
+  <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
+</filter>
+</svg>
+<span className="categorytitle" filter-content="S">{location.state.name}</span>
+  </Row>
           
-            <h1 style={{color:"rgb(255,98,98", marginLeft:'2%',marginTop:'2%'}}><i>{location.state.name}</i></h1>
+              
+            {/* <h1 style={{color:"rgb(255,98,98", marginLeft:'2%',marginTop:'2%'}}><i>{location.state.name}</i></h1> */}
 
             <TestFilterProducts/>
             
         
         
       
-    </div>):(null)
+    </div>
+    </>):(null)
     
     )
 

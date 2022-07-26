@@ -42,32 +42,57 @@ const RatingandReview = ({review}) => {
             })
 }})
 
+function blankspace(){
+    var dif=4-review.length;
+    var d=[];
+    for (var index = 0; index < dif; index++) {
+        // alert(index);
+        d.push(0);    
+    }
+    console.log("d"+d)
+    return d;
+    // d.map(m=>{
+    //     return(
+    //         <Col md={2}></Col>
+    //     )
+    // })
+}
 
     return (
         
             (isReviewsFetched)?(
                 <div>
-                    <Row>
-                    <Col md={1}></Col>
-                    <Col md={2}>
+                    <Row className="ComparisonHeader">
+                    
+                    <Col md={2} className="colll">
                         <h5>Rating & Reviews</h5>
                     </Col>
                     
                     {
                         reviews.map(index=>{
                             return(
-                                <Col md={2}>
+                                <Col md={2} className="colll">
                                 <Row>
-                                    <h6 className="star" style={{padding:5}}>{index.averageRatings} <AiFillStar /></h6>
+                                    <h6 className="star" >{index.averageRatings} <AiFillStar /></h6>
                                 </Row>
+                                <br></br>
                                 <Row>  
-                                    <h6>{index.totalReviews} Reviews & {index.totalRatings} Ratings</h6>
+                                    <h5>{index.totalReviews} Reviews & {index.totalRatings} Ratings</h5>
                                 </Row>
                                 
                                 </Col>
                             )
                         })
                     }
+                   {
+                    blankspace().map(m=>{
+                        return(
+                            <Col md={2}></Col>
+                        )
+                    })
+                   }
+                   
+                    
                     </Row>
                 </div>
                 

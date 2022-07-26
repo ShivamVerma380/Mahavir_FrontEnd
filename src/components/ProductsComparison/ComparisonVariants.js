@@ -13,12 +13,21 @@ function ComparisonVariants({product,showOnlyDiff}){
         }
     }
 
-    
+    function blankspace(){
+        var dif=4-product.length;
+        var d=[];
+        for (var index = 0; index < dif; index++) {
+            alert(index);
+            d.push(0);    
+        }
+        console.log("d"+d)
+        return d;
+    }
 
     return(
         (!showOnlyDiff)?(
-        <Row style={{marginTop:20}}>
-            <Col md={1}></Col>
+        <Row style={{marginTop:20}} className="ComparisonHeader">
+            
             <Col md={2}>
                 <h5 style={{marginTop:10}}>Variants</h5>
             </Col>
@@ -68,6 +77,13 @@ function ComparisonVariants({product,showOnlyDiff}){
                     );
                 })
             }
+            {
+                    blankspace().map(m=>{
+                        return(
+                            <Col md={2}></Col>
+                        )
+                    })
+                   }
         </Row>
         ):(
             null
