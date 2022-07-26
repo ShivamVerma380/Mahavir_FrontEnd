@@ -29,17 +29,27 @@ function ComparisonHighlights({product,showOnlyDiff}){
             console.log("ans",ans);
     }
 
+    function blankspace(){
+        var dif=4-product.length;
+        var d=[];
+        for (var index = 0; index < dif; index++) {
+            // alert(index);
+            d.push(0);    
+        }
+        console.log("d"+d)
+        return d;
+    }
+
     return(
         (localStorage.getItem("isChecked"))?(
             null
         ):(
-            <Row>
-            <Col md={1}>
-            </Col> 
+            <Row className="ComparisonHeader">
+            
             {
                 (!showOnlyDiff)?(
                     
-                    <Col md={2}>
+                    <Col md={2} className="colll">
                         <h5>Product Highlights</h5>
                     </Col>
                 ):(null)
@@ -50,9 +60,9 @@ function ComparisonHighlights({product,showOnlyDiff}){
                     
                         product.map(index=>{
                             return(
-                                <Col md={2}>
+                                <Col md={2} className="colll">
                                     {
-                                        index.productHighlights.split(';').map(str=><p>•{str}</p>)
+                                        index.productHighlights.split(';').map(str=><h6>• {str} </h6>)
                                     }
                                 </Col>
                             );
@@ -76,8 +86,8 @@ function ComparisonHighlights({product,showOnlyDiff}){
             {
                 (showOnlyDiff)?(
                     
-                    <Col md={2}>
-                        <h5>Product hightlights</h5>
+                    <Col md={2} className="colll">
+                        <h5 >Product hightlights</h5>
                     </Col>
                     
                 ):(
@@ -88,7 +98,7 @@ function ComparisonHighlights({product,showOnlyDiff}){
                 (showOnlyDiff)?(
                     product.map(p=>{
                         return(
-                        <Col md={2}>
+                        <Col md={2} className="colll">
                             {
                                 p.productHighlights.split(';').map((highlight,pos)=>{
                                     
@@ -115,6 +125,13 @@ function ComparisonHighlights({product,showOnlyDiff}){
                     null
                 )
             }
+            {
+                    blankspace().map(m=>{
+                        return(
+                            <Col md={2}></Col>
+                        )
+                    })
+                   }
 
         </Row>
         )

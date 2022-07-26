@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Button, Form, Card, Container ,Image, NavDropdown} from "react-bootstrap";
+import { Col, Row, Button, Form, Card, Container ,Image, NavDropdown,Accordion } from "react-bootstrap";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
@@ -558,14 +558,20 @@ function TestFilterProducts(){
             <FaArrowCircleUp onClick={scrollToTop} 
              />
         </Button>
+<<<<<<< HEAD
+
+        <div style={{margin:'20px'}}>
+                    <Row>
+=======
             ):(null)
           }
         
         <Row>
+>>>>>>> 773f685a1ecffbc108a34b9262d16664616fb810
            
-            <Col md={1}></Col>
-            <Col md={2}>
-                <h3>Category</h3>
+            
+            <Col md={2} className="filtercol">
+                <h4>Category</h4>
                 {
                     (isCategoriesFetched)?(
                         categories.map(cat=>{
@@ -609,27 +615,41 @@ function TestFilterProducts(){
                 //     }}
                 //   />
                 }
-                <br></br>
-                <h4>Filters</h4>
+                <br></br><br></br>
+                {/* <h4>Filters</h4> */}
                 {
                     (isFiltersFetched)?(
-                        keySet.map(index=>{
+                        keySet.map((index,pos)=>{
                             return(
                                 <div>
                                     
-                                    
-                                    <h6>{index}</h6>
+                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
+                                    <Accordion.Item eventKey={pos}>
+                                                    <Accordion.Header>{index}</Accordion.Header>
+                                                    <Accordion.Body>
+                                                                    
+                                    {/* <h5>{index}</h5> */}
                                     {
                                         filters[index].map(f=>{
                                             return(
-                                                <Form>
-                                                    <Form.Check type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
-                                                </Form>
+                                                <>
+                                                
+                                                    <Form>
+                                                        <Form.Check style={{fontSize:'18px',fontWeight:'600'}} type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
+                                                    </Form>
+                                                     
+                                                </>
+                                                
+                                                
                                             )
                                         
                                             
                                         })
                                     }
+                                    </Accordion.Body>
+                                    </Accordion.Item>
+                                    </Accordion>
+                                    <hr></hr>
                                 </div>
                             )
                         })
@@ -638,10 +658,10 @@ function TestFilterProducts(){
                     )
                 }
             </Col>
-            <Col>
+            <Col md={10}>
             {
                 // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
-                <Row>
+                <Row className="filterproductsRow">
                     <Col md={9}>
                         <NavDropdown title="Sort By">
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
@@ -661,8 +681,7 @@ function TestFilterProducts(){
                     
                 </Row>
             }
-            <br></br>
-
+           
             
             {
                     
@@ -678,10 +697,10 @@ function TestFilterProducts(){
 
                                     <Row className="filterproductsRow">
                                         
-                                        <Col md={2}>
-                                            <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
-                                            <br></br>
-                                            <p>{index.modelNumber}</p>
+                                        <Col md={2} >
+                                            <Image  className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            {/* <br></br>
+                                            <p>{index.modelNumber}</p> */}
                                         </Col>
                                         <Col md={10} >
                                             <Row className="innerrow">
@@ -697,20 +716,20 @@ function TestFilterProducts(){
 
                                             </Row>
                                             <Row>
-                                                <Col md={11} className="star">
-                                                {Math.round(index.averageRating * 10) / 10}<AiFillStar />
+                                                <Col md={11} style={{    paddingBottom: '40px',width: '10%'}} className="star">
+                                                {Math.round(index.averageRating * 10) / 10} <span> </span><AiFillStar />
                                                 
                                                 </Col>
                                                 
                                             </Row>
-                                            <br></br>
+                                            
                                             <Row className="innerrow">
-                                                <Col md={11}>
+                                                <Col>
                                                     {
                                                         (index.productHighlights!=null)?(
                                                             index.productHighlights.split(';').map(highlight => {
                                                                 return (
-                                                                    <h6 style={{color:'GrayText'}}>•{highlight}<br></br></h6>
+                                                                    <h6 style={{color:'GrayText'}}>• {highlight}<br></br></h6>
                                                                 );
                                                             })
                                                         ):(
@@ -723,7 +742,7 @@ function TestFilterProducts(){
 
                                             </Row>
                                             <Row className="innerrow">
-                                                <Col md={10}>
+                                                <Col >
                                                     {
                                                         (index.offerPrice==null) ? (
                                                             <h5>MRP: <b>₹{index.productPrice}</b></h5>
@@ -772,6 +791,8 @@ function TestFilterProducts(){
                 }
             </Col>
         </Row>
+        </div>
+
         </div>
         
     )

@@ -20,7 +20,16 @@ function ComparisonProductInformation({title,product}){
 
     const[isKeysFetched,SetIsKeysFetched] = useState(false);
 
-
+    function blankspace(){
+        var dif=4-product.length;
+        var d=[];
+        for (var index = 0; index < dif; index++) {
+            // alert(index);
+            d.push(0);    
+        }
+        console.log("d"+d)
+        return d;
+    }
     function fetchKeys(){
         if(!isKeysFetched){
             key=[];
@@ -71,6 +80,10 @@ function ComparisonProductInformation({title,product}){
                 }
             }
         }
+
+        
+    
+
         console.log("keyArray",keyArray)
         console.log(".....",product[0].productInformation[k][keyArray[0]])
         var i=0;
@@ -85,21 +98,20 @@ function ComparisonProductInformation({title,product}){
         // console.log("valuesPos",valuesPos)
         return(
             (keyArray.length>0)?(
-                <Row>
-                    <hr></hr>
-                    <Col md={1}></Col>
-                    <Col md={2}>
+                <>
+                     
+                    <Col md={2} className="colll">
                         <h5>{title}</h5>
                     </Col>
                     {
                         product.map(p=>{
                             return(
-                                <Col md={2}>
+                                <Col md={2} className="colll">
                                     {
                                         keyArray.map(k1=>{
                                             console.log("k1",k1)
                                             return(
-                                                <p>{k1}{p.productInformation[k][k1]}</p>
+                                                <h6>{k1}<span> </span>{p.productInformation[k][k1]}</h6>
                                                 // <p>{p.productInformation[k][k1]}</p>
                                             )
                                         })
@@ -108,7 +120,15 @@ function ComparisonProductInformation({title,product}){
                             )
                         })
                     }   
-                </Row>
+                    {
+                    blankspace().map(m=>{
+                        return(
+                            <Col md={2}></Col>
+                        )
+                    })
+                   }
+                   </>
+                
             ):(
                 null
             )
@@ -118,8 +138,8 @@ function ComparisonProductInformation({title,product}){
     return(
         
         (localStorage.getItem("isChecked"))?(
-            <Row>
-            <Row>
+            
+            <Row className="ComparisonHeader">
                 {/* <Col md={1}></Col> */}
                 
                 {/* <Col md={12}> */}
@@ -138,19 +158,14 @@ function ComparisonProductInformation({title,product}){
                 }
                 {/* </Col> */}
             </Row>
-            </Row>
+            
         ):(
-            <Row>
-            <Row>
-                <Col md={1}></Col>
-                <Col md={10}>
-                    <hr></hr>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={1}></Col>
+            <>
+            
+            <Row className="ComparisonHeader">
                 
-                <Col md={2}>
+                
+                <Col md={2} className="colll">
                     <h5>{title}</h5>
                 </Col>
                 {
@@ -159,11 +174,11 @@ function ComparisonProductInformation({title,product}){
                             fetchArray(index.productInformation[title])
                         }
                         return(
-                            <Col md={2}>
+                            <Col md={2} className="colll">
                                 {
                                     key.map((k,pos)=>{
                                         return(
-                                            <p>{k}{values[pos]}</p>
+                                            <h6>{k}<span> </span>{values[pos]}</h6>
                                         );
                                     })
                                 }                                
@@ -171,9 +186,15 @@ function ComparisonProductInformation({title,product}){
                         );
                     })   
                 }
-            
+            {
+                    blankspace().map(m=>{
+                        return(
+                            <Col md={2}></Col>
+                        )
+                    })
+                   }
             </Row>
-            </Row>
+            </>
         )
     );
 }

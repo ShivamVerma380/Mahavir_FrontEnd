@@ -13,6 +13,7 @@ function AddToCompareProducts(){
 
     const navigate = useNavigate();
 
+
     const [product,SetProduct] = useState([]);
     const [isProductFetched,SetIsProductFetched] = useState(false);
     var keys=[];
@@ -52,20 +53,25 @@ function AddToCompareProducts(){
         
       }
 
-
+      function blankspace(){
+        var dif=4-product.length;
+        var d=[];
+        for (var index = 0; index < dif; index++) {
+            // alert(index);
+            d.push(0);    
+        }
+        console.log("d"+d)
+        return d;
+        }
     return(
+        <>
+       <Header/>
         <Row>
             {
                 (isProductFetched)?(
                     <div>
                     <ComparisonHeader product={product}/>
-                    {
-                        (product.length>0)?(
-                            <hr></hr>
-                        ):(
-                            null
-                        )
-                    }
+                   
                     {/* <hr></hr> */}
                     {
                         (product.length>0)?(
@@ -75,7 +81,6 @@ function AddToCompareProducts(){
                         )
                     }
                     
-                    <hr></hr>
                     {
                         (product.length>0)?(
                             <ComparisonHighlights product={product}/>
@@ -84,22 +89,31 @@ function AddToCompareProducts(){
                         )
                     }
                     
-                    <br></br>
-                    <Row>
-                    <Col md={1}></Col>
-                    <Col md={2}></Col>
+                    
+                    <Row className="ComparisonHeader">
+                    
+                    <Col md={2} className="colll"></Col>
                     {
                         product.map(index=>{
                             return(
-                                <Col md={2}>
-                                    <Button  className="flat" onClick={()=>buyNow(index)}>Buy Now</Button>
-                                    <br></br>
-                                    <br></br>
+                                <Col md={2} className="colll">
+                                    <button style={{width:"180px"}} onClick={()=>buyNow(index)} class="explore">Buy Now<span class="icon-right after"></span></button>
+
+                                    {/* <Button  className="explore" onClick={()=>buyNow(index)}>Buy Now</Button> */}
+                                    
                                 </Col>
                                 
                             )
                         })
                     }
+
+                    {
+                    blankspace().map(m=>{
+                        return(
+                            <Col md={2}></Col>
+                        )
+                    })
+                   }
                     </Row>
                     
                     {
@@ -125,6 +139,7 @@ function AddToCompareProducts(){
             }
             
         </Row>
+        </>
     )
 }
 
