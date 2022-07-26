@@ -8,22 +8,42 @@ import {setCookie,getCookie} from '../Cookies';
 import { QuantityPicker } from 'react-qty-picker';
 
 
-const CartItem = ({item}) => {
+const CartItem = ({item,quantity}) => {
     var cartmodelnums=new Array();
+
+    console.log("quantity",item.modelNumber,":",quantity)
     cartmodelnums=getCookie("CartModels").split(',');
 
     function removefromcart(){
         console.log("Remove clicked")
-       
-        for (var i = 0; i < cartmodelnums.length; i++) {
-            if (cartmodelnums[i] === item.modelNumber) {
-                cartmodelnums.splice(i, 1);
-                console.log(cartmodelnums);
-                setCookie("CartModels",cartmodelnums,20);
-                window.location.reload();
-                break;
+
+        var arr=[];
+        // for(var k in cartmodelnums){
+        //     if(k!==item.modelNumber){
+        //         arr.push(k+"="+cartmodelnums[k]);
+        //     }
+        // }
+        cartmodelnums.map(index=>{
+            if(index!=""){
+                if(index.split("=")[0]!=item.modelNumber){
+                    arr.push(index);
+                }
             }
-        }
+        })
+        console.log("arr remove item",arr)
+        setCookie("CartModels",arr,20);
+        window.location.reload();
+
+       
+        // for (var i = 0; i < cartmodelnums.length; i++) {
+        //     if (cartmodelnums[i] === item.modelNumber) {
+        //         cartmodelnums.splice(i, 1);
+        //         console.log(cartmodelnums);
+        //         setCookie("CartModels",cartmodelnums,20);
+        //         window.location.reload();
+        //         break;
+        //     }
+        // }
         
                 
         
@@ -60,24 +80,29 @@ const CartItem = ({item}) => {
                                         <Row>
                                             
                                             <Col md={6} style={{ marginLeft: 50 }}>
-                                                <QuantityPicker className="quantitypicker" style={{ background: "red" }} value={1} min={1} smooth onChange={(value)=>{
+                                                <QuantityPicker className="quantitypicker" style={{ background: "red" }} value={quantity} min={1} smooth onChange={(value)=>{
                                                     console.log("value",value)
                                                     var arr=[]
                                                     // if(localStorage.getItem("CartModels")!=null){
                                                     //     arr = localStorage.getItem("CartProducts").split(',');
                                                     // }
-                                                    arr = localStorage.getItem("CartProducts").split(',');
+                                                    arr = getCookie("CartModels").split(',');
                                                     // console.log("arr",arr)
                                                     var arr1=[]
                                                     arr.map((index,pos)=>{
-                                                        var pair = index.split("=");
-                                                        if(pair[0]===item.modelNumber){
-                                                            pair[1]=value;
+                                                        if(index!=""){
+                                                            var pair = index.split("=");
+                                                            if(pair[0]===item.modelNumber){
+                                                                pair[1]=value;
+                                                            }
+                                                            arr1.push(pair[0]+"="+pair[1])
                                                         }
-                                                        arr[pos]= pair[0]+"="+pair[1]
+                                                        
                                                     })
-                                                    localStorage.setItem("CartProducts",arr)
-                                                    console.log("Cart Products",arr)
+                                                    setCookie("CartModels",arr1,20);
+                                                    // localStorage.setItem("CartProducts",arr)
+                                                    console.log("CartModels",arr1)
+                                                    window.location.reload()
                                                     }} />
                                             </Col>
                                             <Col md={3}>

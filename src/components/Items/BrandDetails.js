@@ -13,10 +13,13 @@ import Header from "../Header";
 import { Col, Row, Form, Card, Container, Image } from "react-bootstrap";
 import { MDBCarousel, MDBCol, MDBCarouselInner, MDBCarouselItem, MDBCarouselElement, MDBCardHeader, MDBCardFooter, MDBBtn, MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardLink, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
+import {useRef} from 'react';
 
 
 
 function BrandDetails() {
+    
+    const iMac = useRef(null);
     const navigate = useNavigate();
     var offerPoster = <div>
         <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="Mandala" />
@@ -47,6 +50,7 @@ function BrandDetails() {
     // console.log("categories", categories);
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         if (!isBrandsFetched) {
             axios.get("http://localhost:8080/excel/shopByBrands").then(
                 function (response) {
@@ -103,6 +107,34 @@ function BrandDetails() {
         navigate('/brandcatproducts')
     }
 
+
+    parsedArr.map(index=>{
+        // models+=index.category+",";
+        models.push(index.category);
+    })
+    console.log("Models: ",models)
+
+
+    const handleScroll= async (index)=> {
+        
+        
+        // let offset = 20;
+        // window.scrollTo({
+        //     behavior: "smooth",
+        //     top:
+        //     document.getElementById(index).getBoundingClientRect().top -
+        //     document.body.getBoundingClientRect().top -
+        //     offset
+            
+        // });
+        document.getElementById(index).scrollIntoView();
+        console("Index: ",index)
+        console.log("on cat click");
+        // ref.current?.scrollIntoView({behavior: 'smooth'});
+        // console.log("Ref: ",ref.current)
+        
+    }
+
     const handleOfferPosterOnClick = (modelNumbers) => {
         console.log("Item Clicked");
 
@@ -111,6 +143,16 @@ function BrandDetails() {
         console.log("Offer Models: ", localStorage.getItem("offermodels"));
         navigate('/brandofferposterproducts')
     }
+
+    function callProductDetails(index) {
+        //alert(index);
+        console.log("Index", index);
+        localStorage.setItem("productSelected", index.modelNumber);
+        localStorage.setItem("productId", index.productId);
+        console.log("Product Id",localStorage.getItem("productId"));
+        console.log("Product Selected", localStorage.getItem("productSelected"))
+        navigate("/productDetails")
+      }
 
 
     // const handleOfferPosterOnClick=(modelNumbers)=>{
@@ -202,7 +244,7 @@ function BrandDetails() {
                     navigation={true}
                     modules={[Pagination, Navigation]}
                     className="mySwiper"
-                    style={{ height: '150px' }}
+                    style={{ height: '180px' }}
                 >
 
 
@@ -213,8 +255,13 @@ function BrandDetails() {
                                 <div className="container">
 
                                     <SwiperSlide>
-                                        <Image src={index.catImage} style={{ width: 100, margin: 5 }} />
-                                        <Button onClick={() => handleClick(index.category)} variant="outline-primary" className="brandcategory">{index.category}</Button>
+                                        <Container onClick={() => handleScroll(index.category)}>
+                                         <center>   
+                                        <Image src={index.catImage} style={{ width: 100, margin: 5, height: 100 }} />
+
+                                        <h3>{index.category}</h3>
+                                        </center>
+                                        </Container>
                                     </SwiperSlide>
                                 </div>
                             )
@@ -223,33 +270,50 @@ function BrandDetails() {
 
                 </Swiper>
             </Row>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
 
             {
                 parsedArr.map(index => {
                     return (
-                        
+                            <>
                             <Row>
+                                <Row>
 
-                                <h3 style={{ color: "rgb(255,98,98", margin: '2%' }}><i>{index.category}</i></h3>
+                                
+                                    <Col md={3}>
+                                    <h3 id={index.category} style={{ color: "rgb(255,98,98", margin: '2%' }}><i>{index.category}</i></h3>
+                                    
+                                    </Col>
+                                    <Col md={7}>
+                                    
+                                    </Col>
+                                    <Col md={2}>
+                                        <button onClick={() => handleClick(index.category)} class="explore">View More<span class="icon-right after"></span></button>
+                                    </Col>
+                                </Row>
+                                
                                 {
                                             // console.log("Cat Img: ", index.catImage)
                                             
-                                            index.products.map(i=>{
+                                            
                                                 
-                                                return(
+                                                
                                                     
                                                     <Swiper
                                                     slidesPerView={1}
                                                     spaceBetween={5}
-                                                    slidesPerGroup={3}
+                                                    slidesPerGroup={4}
                                                     loop={false}
                                                     loopFillGroupWithBlank={true}
                                                     breakpoints={{
                                                         700: {
-                                                            slidesPerView: 5,
+                                                            slidesPerView: 4,
                                                         },
                                                         400: {
-                                                            slidesPerView: 3,
+                                                            slidesPerView: 4,
                                                         },
                                                     }}
                                                     pagination={{
@@ -258,7 +322,7 @@ function BrandDetails() {
                                                     navigation={true}
                                                     modules={[Pagination, Navigation]}
                                                     className="mySwiper"
-                                                    style={{ height: '150px' }}
+                                                    style={{ height: '350px' }}
                                                 >
                 
                 
@@ -267,10 +331,16 @@ function BrandDetails() {
                                                                 console.log("inside products")
                                                                 console.log("in pro",i.productName)
                                                                 return(
+                                                                
+                                                                   
                                                                     <SwiperSlide>
-                                                                        
-                                                                        <Image src={i.productImage1} style={{ width: 100, margin: 5 }} />
+                                                                        <Container onClick={()=>callProductDetails(i)}>
+                                                                        <center> 
+                                                                        <Image src={i.productImage1} style={{ width: 100, margin: 5, height:250, cursor:"pointer" }} />
+                                                                        </center>  
                                                                         <h6>{i.productName}</h6>
+                                                                        </Container>
+                                                                        
 
                                                                     </SwiperSlide>
                                                                     
@@ -289,8 +359,8 @@ function BrandDetails() {
                                                     }
                 
                                                 </Swiper>   
-                                                )
-                                            })
+                                               
+                                            
                                             
                                         
                                     }
@@ -346,6 +416,8 @@ function BrandDetails() {
 
                                 </Swiper> */}
                             </Row>
+                            <br></br>
+                            </>
                        
                     )
 

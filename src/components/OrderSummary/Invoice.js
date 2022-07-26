@@ -19,6 +19,16 @@ const Invoice = () => {
     console.log("test "+buyproducts);
     console.log("address: "+ selectedaddress);
 
+    var products=[
+      {
+        "productId": "1",
+        "productName": "Product 1",
+      },{
+        "productId": "2",
+        "productName": "Product 2",
+      }
+    ]
+
     
   return (
     <div>

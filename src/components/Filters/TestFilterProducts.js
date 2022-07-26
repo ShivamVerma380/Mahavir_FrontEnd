@@ -27,6 +27,8 @@ function TestFilterProducts(){
     const[selectedProducts,SetSelectedProducts] = useState([]);
     const[isSelectedProductsFetched,SetIsSelectedProductsFetched] = useState(false);
 
+    const[showTopBtn,setShowTopBtn] = useState(false);
+
     const [visible, setVisible] = useState(false)
 
     const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
@@ -66,6 +68,7 @@ function TestFilterProducts(){
 
     const [value,SetValue] = useState([]);
     useEffect(()=>{
+        window.addEventListener('scroll', () => { if (window.scrollY > 400) { setShowTopBtn(true); } else { setShowTopBtn(false); } });
         if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched){
             axios.get("http://localhost:8080/get-products-by-category/"+localStorage.getItem("Category"))
             .then(function(response){
@@ -172,24 +175,28 @@ function TestFilterProducts(){
 
     
 
-    const addtocart=(model)=>{
-        
-        // event.preventDefault();
-        
-        if(cart.includes(model)){
-            alert("Item is already present in cart")
-        }
-        else{
-            console.log("adddd"+model);
-            cart.push(model);
-            setCookie("CartModels",cart,20);
-            alert("Added to cart"+model);
-        }
-    
-        // Header.location.reload()
-        
-        
-    }
+    // const addtocart = (model) => {
+    //     var flag = false;
+    //     cart.map(index=>{
+    //       if(index!=""){
+    //         if(index.split("=")[0]===model){
+    //           flag = true;
+    //           alert("Item is already present in cart")
+    //         }
+    //       }
+    //     })
+    //     // if (cart.has(model+"=1")) {
+    //     //   alert("Item is already present in cart")
+    //     // }
+    //     if(!flag){
+    //       console.log("adddd" + model);
+    //       cart.push(model+"=1");
+    //       setCookie("CartModels", cart, 20);
+    //       console.log("Cart Models",cart)
+    //       navigate("/cart")
+    //       // alert("Added to cart" + model);
+    //     }
+    //   }
 
     function handleAddToCompare(modelNumber){
         
@@ -545,13 +552,22 @@ function TestFilterProducts(){
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
           }
-        <Button className="scrolltopbtn">
+          {
+            (showTopBtn)?(
+                <Button className="scrolltopbtn">
             <FaArrowCircleUp onClick={scrollToTop} 
-            style={{display: visible ? 'inline' : 'none'}} />
+             />
         </Button>
+<<<<<<< HEAD
 
         <div style={{margin:'20px'}}>
                     <Row>
+=======
+            ):(null)
+          }
+        
+        <Row>
+>>>>>>> 773f685a1ecffbc108a34b9262d16664616fb810
            
             
             <Col md={2} className="filtercol">
@@ -750,13 +766,13 @@ function TestFilterProducts(){
                                                 </Form>
 
                                             </Row>
-
+{/* 
                                             <Row className="innerrow">
                                                 <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
                                                 <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
                                             
 
-                                            </Row>
+                                            </Row> */}
                                         </Col>
 
 

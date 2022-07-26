@@ -124,6 +124,7 @@
     /* top: 0; */
     width: -moz-fit-content;
     width: fit-content;
+<<<<<<< HEAD
     border-radius: -8%;
     /* left: 90%; */
     /* margin-top: 60%; */
@@ -141,6 +142,12 @@
 }
 
 .accordion-button{
+=======
+    border-radius: 0%;
+    left:50%;
+    /* margin-top: 7%; */
+    
+>>>>>>> 773f685a1ecffbc108a34b9262d16664616fb810
     
     font-size: 20px;
     font-weight: bold;
