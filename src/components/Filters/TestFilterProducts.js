@@ -175,24 +175,28 @@ function TestFilterProducts(){
 
     
 
-    const addtocart=(model)=>{
-        
-        // event.preventDefault();
-        
-        if(cart.includes(model)){
-            alert("Item is already present in cart")
-        }
-        else{
-            console.log("adddd"+model);
-            cart.push(model);
-            setCookie("CartModels",cart,20);
-            alert("Added to cart"+model);
-        }
-    
-        // Header.location.reload()
-        
-        
-    }
+    // const addtocart = (model) => {
+    //     var flag = false;
+    //     cart.map(index=>{
+    //       if(index!=""){
+    //         if(index.split("=")[0]===model){
+    //           flag = true;
+    //           alert("Item is already present in cart")
+    //         }
+    //       }
+    //     })
+    //     // if (cart.has(model+"=1")) {
+    //     //   alert("Item is already present in cart")
+    //     // }
+    //     if(!flag){
+    //       console.log("adddd" + model);
+    //       cart.push(model+"=1");
+    //       setCookie("CartModels", cart, 20);
+    //       console.log("Cart Models",cart)
+    //       navigate("/cart")
+    //       // alert("Added to cart" + model);
+    //     }
+    //   }
 
     function handleAddToCompare(modelNumber){
         
@@ -743,13 +747,13 @@ function TestFilterProducts(){
                                                 </Form>
 
                                             </Row>
-
+{/* 
                                             <Row className="innerrow">
                                                 <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
                                                 <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
                                             
 
-                                            </Row>
+                                            </Row> */}
                                         </Col>
 
 
