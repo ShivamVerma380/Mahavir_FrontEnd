@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../Header";
 import { Card, CardHeader, CardText, CardBody,Row,
   CardTitle, CardFooter, Button, Col,Container ,Image} from 'react-bootstrap';
@@ -18,6 +18,8 @@ function Cart() {
     var price=0;
     var discount=0;
     var amount=0;
+
+    const navigate = useNavigate();
     
     const[cartModels,SetCartModels] = useState(new Map());
     var qty=[];
@@ -69,6 +71,11 @@ function Cart() {
         )
       }
     })
+
+
+    function handleCheckout(){
+        navigate("/checkout");
+    }
 
     return(
       <div >   
@@ -178,7 +185,7 @@ function Cart() {
                 <br></br>
                 <Row>
                     <center>
-                    <Button style={{width:"300px"}}className="btn-flat">Check Out</Button>
+                    <Button style={{width:"300px"}}className="btn-flat" onClick={handleCheckout}>Check Out</Button>
                     </center>
                 </Row>
                 </Col>
