@@ -83,7 +83,7 @@ function Summary(){
                   <Table>
                   <thead>
                       <tr>
-                      <th> MyCart ({cartItems.length} items)</th>
+                      <th> Order Summary ({cartItems.length} items)</th>
                       </tr>
                   </thead>
                   </Table>
