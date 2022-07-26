@@ -85,7 +85,12 @@ function ProductDetails() {
   const [Quantity, SetQuantity] = useState();
   const [isQuantitySet, SetIsQuantitySet] = useState(false);
 
-  var cart = getCookie("CartModels").split(',');
+  
+  var cart = [];
+  if(getCookie("CartModels")!=null){
+    cart = getCookie("CartModels").split(',');
+  }
+
   var productInformation;
   var averagerate;
 
@@ -524,14 +529,25 @@ function ProductDetails() {
     }
   }
   const addtocart = (model) => {
-    if (cart.includes(model)) {
-      alert("Item is already present in cart")
-    }
-    else {
+    var flag = false;
+    cart.map(index=>{
+      if(index!=""){
+        if(index.split("=")[0]===model){
+          flag = true;
+          alert("Item is already present in cart")
+        }
+      }
+    })
+    // if (cart.has(model+"=1")) {
+    //   alert("Item is already present in cart")
+    // }
+    if(!flag){
       console.log("adddd" + model);
-      cart.push(model);
+      cart.push(model+"=1");
       setCookie("CartModels", cart, 20);
-      alert("Added to cart" + model);
+      console.log("Cart Models",cart)
+      navigate("/cart")
+      // alert("Added to cart" + model);
     }
   }
 
@@ -561,25 +577,6 @@ function ProductDetails() {
             console.log("product", response)
             localStorage.setItem("productSelected", response.data.message)
             window.location.reload()
-            // setProduct(response.data);
-            // setimage(response.data.productImage1);
-            // productInformation = response.data.productInformation;
-            // var arr=[]
-            // for (var k in response.data.productInformation) {
-            //   arr.push(k);
-            // }
-
-            // SetKeys(arr)
-
-            // var arr1=[]
-            // for (var k in response.data.variantTypes) {
-            //   arr1.push(k);
-            // }
-            // arr1.sort();
-
-            // SetVariantKeys(arr1)
-
-            // variantKeys.sort()
 
           }
         }).catch(function (error) {
@@ -624,26 +621,11 @@ function ProductDetails() {
                     <Row >
                       <Col md={2} className='smallImg'>
 
-
-
-                        {/* // (product.productImage1!=null)?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)}  />):(<p>sa</p>)
-                // (product.productImage2!=null)?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)}  />):(<p>as</p>)
-                // (product.productImage3!=null)?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)}  />):(<p>as</p>)
-                // (product.productImage4!=null)?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage4.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage4.data)}  />):(<p>as</p>)
-                // (product.productImage5!=null)?(<img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)}  />):(<p>as</p>) */}
                         {getproductimg1(product)}
                         {getproductimg2(product)}
                         {getproductimg3(product)}
                         {getproductimg4(product)}
                         {getproductimg5(product)}
-
-
-
-                        {/* <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage1.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage1.data)} />
-              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage2.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage2.data)} />
-              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage3.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage3.data)} />
-              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage4.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage4.data)} />
-              <img className="productdetailimg" src={'data:image/jpg;base64,' + product.productImage5.data} onClick={() => ImgHandler('data:image/jpg;base64,' +product.productImage5.data)} /> */}
 
                       </Col>
 
@@ -652,7 +634,6 @@ function ProductDetails() {
               <br></br> */}
 
                         <div className="largeimg" >
-                          {/* width:'400px',height:'513px'      */}
 
 
                           <ReactImageMagnify {...{
@@ -721,14 +702,6 @@ function ProductDetails() {
 
                   <br></br>
                   <Row>
-
-                    {/* {
-                      (product.offerPrice == product.productPrice) ? (<Col>
-                        <h4>Price: <b>₹{product.productPrice}</b></h4>
-                      </Col>) : (<Col>
-                        <h4>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{product.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{product.productPrice}</b></h4>
-                      </Col>)
-                    } */}
                     {
                       (product.offerPrice == null) ? (
                         <h5>MRP: <b>₹{product.productPrice}</b></h5>
@@ -875,23 +848,7 @@ function ProductDetails() {
                     }
 
                   </Row>
-                  <Row>
-                    {/* <QuantityPicker className="quantitypicker" style={{ background: "red" }} min={1} smooth onChange={(value)=>{
-                      console.log("value",value)
-                      localStorage.setItem("quantity",value)
-                    }} /> */}
-                    {/* <Input id="Quantity"
-            name="Quantity"
-            placeholder="Enter Quantity"
-            type="number"
-            min={0}
-            onChange={inputQuantityEvent}
-            style={{ width: 300 }}>
-          </Input> */}
-
-
-                    {/* <Button onClick={handleAddToCart}>Add To Cart</Button> */}
-                  </Row>
+                  
                   <hr></hr>
                   {
                     (variantKeys.length > 0) ? (

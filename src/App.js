@@ -157,6 +157,7 @@ function App() {
         }
       }).then(function(response){
         if(response.status==200){
+          console.log("In refresh token")
           setCookie("jwtToken",response.data.token,20);
           // setIsCategoryDisplayFetched(true);
           console.log("Token",response.data.token);
