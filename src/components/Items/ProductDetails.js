@@ -546,6 +546,7 @@ function ProductDetails() {
       cart.push(model+"=1");
       setCookie("CartModels", cart, 20);
       console.log("Cart Models",cart)
+      navigate("/cart")
       // alert("Added to cart" + model);
     }
   }
@@ -576,25 +577,6 @@ function ProductDetails() {
             console.log("product", response)
             localStorage.setItem("productSelected", response.data.message)
             window.location.reload()
-            // setProduct(response.data);
-            // setimage(response.data.productImage1);
-            // productInformation = response.data.productInformation;
-            // var arr=[]
-            // for (var k in response.data.productInformation) {
-            //   arr.push(k);
-            // }
-
-            // SetKeys(arr)
-
-            // var arr1=[]
-            // for (var k in response.data.variantTypes) {
-            //   arr1.push(k);
-            // }
-            // arr1.sort();
-
-            // SetVariantKeys(arr1)
-
-            // variantKeys.sort()
 
           }
         }).catch(function (error) {

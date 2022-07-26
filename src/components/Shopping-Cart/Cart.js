@@ -9,11 +9,16 @@ import axios from 'axios';
 import CartItem from './CartItem';
 import {setCookie,getCookie} from '../Cookies';
 import { Table } from 'reactstrap';
-var price=0;
-var discount = 0;
-var amount=0;
+// var price=0;
+// var discount = 0;
+// var amount=0;
 
 function Cart() {
+
+    var price=0;
+    var discount=0;
+    var amount=0;
+    
     const[cartModels,SetCartModels] = useState(new Map());
     var qty=[];
     
@@ -78,14 +83,6 @@ function Cart() {
                 <thead>
                     <tr>
                     <th> MyCart ({cartItems.length} items)</th>
-                    {/* <th><Form className="d-flex">
-                                <FormControl
-                                type="search"
-                                placeholder="Pincode Search"
-                            
-                                aria-label="Search"
-                                />        
-                            </Form></th> */}
                     </tr>
                 </thead>
                 </Table>
@@ -131,7 +128,7 @@ function Cart() {
                             
                             cartItems.map(index=>{
                                 {
-                                    (index.freeItem) ? (price+=(parseInt(index.productPrice)+parseInt(index.freeItem.price))) : (price+=parseInt(index.productPrice))
+                                    (index.freeItem) ? (price+=(parseInt(index.productPrice)+parseInt(index.freeItem.price))*parseInt(cartModels.get(index.modelNumber))) : (price+=parseInt(index.productPrice)*parseInt(cartModels.get(index.modelNumber)))
                                 }
                                 
                                 
@@ -149,7 +146,7 @@ function Cart() {
                             {
                                 cartItems.map(index=>{
                                     {
-                                        (index.freeItem) ? (discount+=(parseInt(index.freeItem.price)+(parseInt(index.productPrice)-parseInt(index.offerPrice)))) : (discount+=(parseInt(index.productPrice)-parseInt(index.offerPrice)))
+                                        (index.freeItem) ? (discount+=((parseInt(index.freeItem.price)+(parseInt(index.productPrice)-parseInt(index.offerPrice)))*parseInt(cartModels.get(index.modelNumber)))) : (discount+=((parseInt(index.productPrice)-parseInt(index.offerPrice))*parseInt(cartModels.get(index.modelNumber))))
                                     }
                                       
                                 })

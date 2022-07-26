@@ -102,6 +102,7 @@ const CartItem = ({item,quantity}) => {
                                                     setCookie("CartModels",arr1,20);
                                                     // localStorage.setItem("CartProducts",arr)
                                                     console.log("CartModels",arr1)
+                                                    window.location.reload()
                                                     }} />
                                             </Col>
                                             <Col md={3}>
