@@ -6,6 +6,8 @@ import 'antd/dist/antd.css';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Preview, print } from 'react-html2pdf';
+import { Tab } from "material-ui";
+import {setCookie,getCookie} from '../Cookies'; 
 const Invoice = () => {
 
     var selectedaddress=localStorage.getItem("selectedaddress");
@@ -18,16 +20,60 @@ const Invoice = () => {
     buyproducts=JSON.parse(buyproducts);
     console.log("test "+buyproducts);
     console.log("address: "+ selectedaddress);
+    console.log("Cookie: ",getCookie("CartModels"))
 
     var products=[
       {
         "productId": "1",
         "productName": "Product 1",
+        "quantity": "2",
+        "price": "3000",
       },{
         "productId": "2",
         "productName": "Product 2",
+        "quantity": "1",
+        "price": "6000",
       }
     ]
+
+    const dataSource = [
+      {
+        key: '1',
+        productName: 'fefefefef thththt tjyjyjy    efefefefwfwfw grgrgrgr',
+        quantity: 32,
+        price: 9000,
+      },
+      {
+        key: '2',
+        productName: 'John',
+        quantity: 42,
+        price: 10000,
+      },
+      {
+        key: '3',
+        productName: 'John',
+        quantity: 42,
+        price: 10000,
+      }
+    ];
+    
+    const columns = [
+      {
+        title: 'Items',
+        dataIndex: 'productName',
+        key: 'productName',
+      },
+      {
+        title: 'Quantity',
+        dataIndex: 'quantity',
+        key: 'quantity',
+      },
+      {
+        title: 'Price',
+        dataIndex: 'price',
+        key: 'price',
+      },
+    ];
 
     
   return (
@@ -47,6 +93,12 @@ const Invoice = () => {
                 </Card.Body>
 
               </Card>
+              
+              
+               
+                 
+                
+              
             <Table dataSource={[{
                     id: buyproducts.modelNumber,
                     name: buyproducts.productName,
@@ -61,7 +113,9 @@ const Invoice = () => {
                 <Table.Column title="Price" dataIndex='price' />
                 
                 
+                
                 </Table>
+                <Table dataSource={dataSource} columns={columns} />;
                 <h5>Total: {buyproducts.offerPrice*parseInt(localStorage.getItem("quantity"))}</h5>
             </Preview>
             <Button onClick={()=>print('a', 'jsx-template')}> print</Button>
