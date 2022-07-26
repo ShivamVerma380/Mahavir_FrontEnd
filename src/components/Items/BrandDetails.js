@@ -14,6 +14,8 @@ import { Col, Row, Form, Card, Container, Image } from "react-bootstrap";
 import { MDBCarousel, MDBCol, MDBCarouselInner, MDBCarouselItem, MDBCarouselElement, MDBCardHeader, MDBCardFooter, MDBBtn, MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardLink, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import {useRef} from 'react';
+import { white } from "material-ui/styles/colors";
+import { fullWhite } from "material-ui/styles/colors";
 
 
 
@@ -96,6 +98,7 @@ function BrandDetails() {
         //      models += index.modelNumbers;
         // })
         localStorage.setItem("shopbrandcat", index)
+        localStorage.setItem("brandcatname",index.category)
         console.log("Get cat: ", localStorage.getItem("shopbrandcat"))
         // console.log("Model Num: ",index.products.modelNumber)
         // models.push(index.products.modelNumber);
@@ -169,13 +172,17 @@ function BrandDetails() {
 
     return (
         <div>
-            {/* <Header /> */}
+            <Header />
             <br></br>
             <Row className="brandheading">
+                <Container style={{width:"100%", backgroundColor: fullWhite}}>
                 <center>
                     <Image className="brandimg" src={localStorage.getItem("brandLogo")} />
                 </center>
+                </Container>
+
             </Row>
+            <br></br>
             {/* <center>
                 <img style={{ height: 100, width: 150, borderRadius: "50px" }} src={'data:image/jpg;base64,' + localStorage.getItem("brandLogo")} />
             </center> */}
