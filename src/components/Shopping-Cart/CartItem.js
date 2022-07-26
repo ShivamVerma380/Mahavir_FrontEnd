@@ -8,8 +8,10 @@ import {setCookie,getCookie} from '../Cookies';
 import { QuantityPicker } from 'react-qty-picker';
 
 
-const CartItem = ({item}) => {
+const CartItem = ({item,quantity}) => {
     var cartmodelnums=new Array();
+
+    console.log("quantity",item.modelNumber,":",quantity)
     cartmodelnums=getCookie("CartModels").split(',');
 
     function removefromcart(){
@@ -60,24 +62,28 @@ const CartItem = ({item}) => {
                                         <Row>
                                             
                                             <Col md={6} style={{ marginLeft: 50 }}>
-                                                <QuantityPicker className="quantitypicker" style={{ background: "red" }} value={1} min={1} smooth onChange={(value)=>{
+                                                <QuantityPicker className="quantitypicker" style={{ background: "red" }} value={quantity} min={1} smooth onChange={(value)=>{
                                                     console.log("value",value)
                                                     var arr=[]
                                                     // if(localStorage.getItem("CartModels")!=null){
                                                     //     arr = localStorage.getItem("CartProducts").split(',');
                                                     // }
-                                                    arr = localStorage.getItem("CartProducts").split(',');
+                                                    arr = getCookie("CartModels").split(',');
                                                     // console.log("arr",arr)
                                                     var arr1=[]
                                                     arr.map((index,pos)=>{
-                                                        var pair = index.split("=");
-                                                        if(pair[0]===item.modelNumber){
-                                                            pair[1]=value;
+                                                        if(index!=""){
+                                                            var pair = index.split("=");
+                                                            if(pair[0]===item.modelNumber){
+                                                                pair[1]=value;
+                                                            }
+                                                            arr1.push(pair[0]+"="+pair[1])
                                                         }
-                                                        arr[pos]= pair[0]+"="+pair[1]
+                                                        
                                                     })
-                                                    localStorage.setItem("CartProducts",arr)
-                                                    console.log("Cart Products",arr)
+                                                    setCookie("CartModels",arr1,20);
+                                                    // localStorage.setItem("CartProducts",arr)
+                                                    console.log("CartModels",arr1)
                                                     }} />
                                             </Col>
                                             <Col md={3}>
