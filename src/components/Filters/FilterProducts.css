@@ -6,39 +6,80 @@
 }
 
 .filterproductsRow{
-    width: 80%;
+    width: 100%;
     padding: 1%;
     border-radius: 2px;
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
+    
     background: rgb(255, 255, 255);
-    margin: 20px;
+    /* margin: 20px; */
+    border-bottom:solid 1px #0b4268;
+}
+
+.filterproductsRow:hover{
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
 }
 
 .filterproductImage{
-
+/* margin-top: 25%;  */
+width: 100%;
+/* height: 0%; */
    
 }
 
 .innerrow{
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 2px;
+    margin-top: 2px;
 }
 
 .filterproductBtn{
+    margin-left: 20px;
     width: 80%;
     height:50px;
     font-size: 18px;
     font-weight: bold;
-    color: rgb(255,98,98);
-    border-color: rgb(255,98,98);
+    color: #0b4268;
+    border-color: #0b4268;
+}
+
+.filterproductBtn1{
+    margin-left: 20px;
+    width: 80%;
+    height:50px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #0b4268;
+    border-color: #0b4268;
+    margin-bottom: 10px;
 }
 
 .filterproductBtn:hover{
-    background-color: rgb(255,98,98);
-    border-color: rgb(255,98,98);
+    background-color: #0b4268;
+    border-color: #0b4268;
+   
+}
+.filterproductBtn1:hover{
+    background-color: #0b4268;
+    border-color: #0b4268;
 }
 
+.filtercol{
+    background-color: white;
+    border-right: solid 1px #0b4268;
+}
 
+.lastcol{
+    padding: 1%;
+    border-left: solid 1px #0b4268;
+}
+
+.checkboxx .form-check-input[type=checkbox] {
+    border-radius: 0;
+    border:solid 1px #0b4268;
+}
+
+.checkboxx .form-check-input :checked {
+    background-color: #0b4268;
+}
 @media only screen and (max-width: 1024px){
     .filterproductsRow{
         width: 100%;
@@ -109,22 +150,44 @@
 
 .scrolltopbtn {
   
-    position:fixed;
-    background-color: blue;
+    height: 50px;
+    border-color: #ED1C24;
+    top: 94%;
+    position: fixed;
+    background-color: #ED1C24;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 5px;
     padding-bottom: 5px;
     /* font-family: 'Courier New', Courier, monospace; */
-    font-size:17px;
+    font-size: 17px;
     z-index: 9999;
-    margin: 10px;               
-    top:0;
+    /* margin: 10px; */
+    /* top: 0; */
+    width: -moz-fit-content;
     width: fit-content;
     border-radius: 0%;
-    left:50%;
-    /* margin-top: 7%; */
+    /* left: 50%; */
+    /* margin-top: 7%;*/
     
     
   
 }
+
+.scrolltopbtn:hover{
+    border-color: #ED1C24;
+    background-color: #ED1C24;
+}
+
+.mainpage{
+    margin: 2%;
+}
+
+.ratings i{font-size: 16px;color: red}
+.strike-text{color: red;text-decoration: line-through}
+.product-image{width: 100%}
+.dot{height: 7px;width: 7px;margin-left: 6px;margin-right: 6px;margin-top: 3px;background-color: blue;border-radius: 50%;
+display: inline-block}
+.spec-1{color: #938787;font-size: 15px}
+h5{font-weight: 400}
+.para{font-size: 16px}

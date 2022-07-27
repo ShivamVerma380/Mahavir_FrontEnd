@@ -1,4 +1,7 @@
 body {
+
+  background-color: #EDF2F4;
+  font-family: 'Roboto';
   
 }
 
@@ -10,5 +13,12 @@ code {
   font-family: "Olive Compact MN Regular";
   src: local("Olive Compact MN Regular"),
     url("./assets/fonts/Olive Compact MN Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "PublicaSans-Bold";
+  src: local("PublicaSans-Bold"),
+    url("./assets/fonts/PublicaSans-Bold.otf") format("truetype");
   font-weight: normal;
 }

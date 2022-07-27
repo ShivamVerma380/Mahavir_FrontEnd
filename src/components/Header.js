@@ -115,7 +115,7 @@ const Header = ({productList}) => {
   {['md'].map((expand) => (
     <Navbar className="header" key={expand} bg="light" expand={expand} >
       <Container fluid>
-        <Navbar.Brand href="/" style={{fontFamily:"Olive Compact MN Regular", fontSize:'42px',color:' rgb(217 4 41)'}}><img className="logo_mahavir" src = {require ('../assets/mahavirlogo.jpg')}/><span style={{marginLeft:'10px'}}></span>Mahavir</Navbar.Brand>
+        <Navbar.Brand href="/" style={{fontFamily:"PublicaSans-Bold", fontSize:'42px',color:' #ED1C24'}}><img className="logo_mahavir" src = {require ('../assets/mahavirlogo.jpg')}/><span style={{marginLeft:'10px'}}></span>Mahavir</Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${expand}`}
@@ -160,7 +160,7 @@ const Header = ({productList}) => {
                     )
                 } */}
                 {/* <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg"  onClick={Cart} ><b style={{verticalAlign: "super", color:"red"}}>{modelnums.length-1}</b></i></Nav.Link> */}
-                <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg"  onClick={Cart} ><b style={{verticalAlign: "super", color:"red"}}>{getCookie("CartModels").split(',').length}</b></i></Nav.Link>
+                <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg"  onClick={Cart} ><b style={{verticalAlign: "super", color:"#0b4268"}}>{getCookie("CartModels").split(',').length}</b></i></Nav.Link>
                 <NavDropdown className="location" renderMenuOnMount={false} title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
@@ -169,12 +169,12 @@ const Header = ({productList}) => {
                 {
                     
                     (isUserLoggedIn==="true")?(
-                        <NavDropdown style={{background:'#d90429',borderRadius:'12px',fontWeight:'900',paddingLeft:'20px',paddingRight:'20px'}} renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
+                        <NavDropdown style={{background:' #0B4268',borderRadius:'12px',fontWeight:'900',paddingLeft:'20px',paddingRight:'20px'}} renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  
                         <NavDropdown.Item  style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
                         </NavDropdown>
-                    ):(<Nav.Link style={{background:'#d90429',borderRadius:'12px',fontWeight:'900',paddingLeft:'20px',paddingRight:'20px'}} onClick={callLogin}>Hi, Sign In</Nav.Link>)
+                    ):(<Nav.Link style={{background:' #0B4268',borderRadius:'12px',fontWeight:'900',paddingLeft:'20px',paddingRight:'20px'}} onClick={callLogin}>Hi, Sign In</Nav.Link>)
                 }
                 {/* <NavDropdown style={{backgroundImage:'linear-gradient(135deg, rgb(255, 51, 66) 0%, rgb(255, 48, 64) 0.01%, rgb(255, 125, 102) 100%)',borderRadius:'12px',fontWeight:'900',paddingLeft:'20px',paddingRight:'20px'}} renderMenuOnMount={false} title={"Hi, "+(name)} id="collasible-nav-dropdown" >
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} onClick={()=>handleWishlist()}>WishList</NavDropdown.Item>  

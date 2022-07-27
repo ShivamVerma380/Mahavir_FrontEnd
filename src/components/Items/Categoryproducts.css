@@ -58,7 +58,7 @@
   .text{
     font-size: 22px;
     font-weight: 700;
-    color: #d90429;
+    color: #ED1C24;
     transition: all 0.3s ease 0s;
   }
 
@@ -122,7 +122,7 @@
     /* margin-left: 75%; */
     /* font-family: "Space Mono", monospace; */
     letter-spacing: 5px;
-    background: #8d99ae;
+    background: #0b4268;
     color: white;
     position: relative;
     outline: none;
@@ -153,7 +153,7 @@
     top: 5%;
     height: 90%;
     width: 5%;
-    background: #8d99ae;
+    background: #0b4268;
     z-index: -1;
     transition: 0.4s 0.02s ease-in all;
   }
@@ -213,7 +213,7 @@
  .categorytitle {
   position: relative;
   margin-bottom: 0;
-  color: #212529;
+  color: #0b4268;
   /* position: relative; */
   /* font-family: "Roboto"; */
   font-weight: 900;
