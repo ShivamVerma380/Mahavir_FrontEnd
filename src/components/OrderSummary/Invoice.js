@@ -22,8 +22,25 @@ const Invoice = () => {
     console.log("address: "+ selectedaddress);
     console.log("Cookie: ",getCookie("CartModels"))
 
+    var cartmodels = [];
+    var modelnums = [];
+    var modelquantity = [];
+    cartmodels = getCookie("CartModels").split(",");
+    console.log("Models: ",cartmodels)
+    cartmodels.map(index=>{
+      modelnums.push(index.slice(0,-2));
+    })
+    console.log("Model Nums: ",modelnums);
+
+    cartmodels.map(index=>{
+      modelquantity.push(index.charAt(index.length-1));
+      
+    })
+    console.log("Model Quantity: ",modelquantity);
+
     var products=[
       {
+        
         "productId": "1",
         "productName": "Product 1",
         "quantity": "2",
@@ -37,7 +54,11 @@ const Invoice = () => {
     ]
 
     const dataSource = [
+
+      
+     
       {
+        
         key: '1',
         productName: 'fefefefef thththt tjyjyjy    efefefefwfwfw grgrgrgr',
         quantity: 32,
@@ -54,7 +75,61 @@ const Invoice = () => {
         productName: 'John',
         quantity: 42,
         price: 10000,
-      }
+      },
+      // {
+      //   key: '4',
+      //   productName: 'John',
+      //   quantity: 42,
+      //   price: 10000,
+      // },
+      // {
+      //   key: '5',
+      //   productName: 'John',
+      //   quantity: 42,
+      //   price: 10000,
+      // },
+      // {
+      //   key: '6',
+      //   productName: 'John',
+      //   quantity: 42,
+      //   price: 10000,
+      // },
+      // {
+      //   key: '7',
+      //   productName: 'John',
+      //   quantity: 42,
+      //   price: 10000,
+      // },
+      // {
+      //   key: '8',
+      //   productName: 'John',
+      //   quantity: 42,
+      //   price: 10000,
+      // },
+      // {
+      //   key: '9',
+      //   productName: 'John',
+      //   quantity: 42,
+      //   price: 10000,
+      // },
+      // {
+      //   key: '10',
+      //   productName: 'John',
+      //   quantity: 42,
+      //   price: 10000,
+      // },
+      // {
+      //   key: '11',
+      //   productName: 'John',
+      //   quantity: 42,
+      //   price: 10000,
+      // },
+      // {
+      //   key: '12',
+      //   productName: 'John',
+      //   quantity: 42,
+      //   price: 10000,
+      // },
     ];
     
     const columns = [
@@ -99,7 +174,7 @@ const Invoice = () => {
                  
                 
               
-            <Table dataSource={[{
+            {/* <Table dataSource={[{
                     id: buyproducts.modelNumber,
                     name: buyproducts.productName,
                     
@@ -114,8 +189,16 @@ const Invoice = () => {
                 
                 
                 
-                </Table>
-                <Table dataSource={dataSource} columns={columns} />;
+                </Table> */}
+
+                
+                {
+                  (dataSource.length>4) ? (
+                    <Table dataSource={dataSource} columns={columns} pagination={true}/>
+                    
+                  ) : (<Table dataSource={dataSource} columns={columns} pagination={false}/>)
+                }
+
                 <h5>Total: {buyproducts.offerPrice*parseInt(localStorage.getItem("quantity"))}</h5>
             </Preview>
             <Button onClick={()=>print('a', 'jsx-template')}> print</Button>

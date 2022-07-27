@@ -558,16 +558,10 @@ function TestFilterProducts(){
             <FaArrowCircleUp onClick={scrollToTop} 
              />
         </Button>
-<<<<<<< HEAD
-
-        <div style={{margin:'20px'}}>
-                    <Row>
-=======
             ):(null)
           }
         
         <Row>
->>>>>>> 773f685a1ecffbc108a34b9262d16664616fb810
            
             
             <Col md={2} className="filtercol">
@@ -793,7 +787,7 @@ function TestFilterProducts(){
         </Row>
         </div>
 
-        </div>
+        
         
     )
 }
