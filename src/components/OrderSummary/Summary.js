@@ -164,9 +164,12 @@ function Summary(){
                       <td> Total Amount</td>
                       <td>
                       ₹ {
-                              
                               amount = parseInt(price)-parseInt(discount)
-  
+                              
+
+                          }
+                          {
+                            localStorage.setItem("price",amount)
                           }
                           
                           {/* ₹ 37,480 */}
