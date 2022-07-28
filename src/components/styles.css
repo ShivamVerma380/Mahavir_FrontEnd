@@ -204,18 +204,21 @@ body {
 }
 
 #comparebtn {
-  position:fixed;
-  background-color: rgb(255, 88, 88);
+  font-weight: 800;
+  border-color: #0b4268;
+  position: fixed;
+  background-color: #0b4268;
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 5px;
   padding-bottom: 5px;
   /* font-family: 'Courier New', Courier, monospace; */
-  font-size:17px;
+  font-size: 17px;
   z-index: 9999;
-  margin: 10px;               
-  bottom:0;                        
-  right:0; 
+  margin: 10px;
+  bottom: 0;
+  right: 0;
+  width: -moz-fit-content;
   width: fit-content;
   
   
