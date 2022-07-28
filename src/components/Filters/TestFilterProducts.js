@@ -554,9 +554,8 @@ function TestFilterProducts(){
           }
           {
             (showTopBtn)?(
-                <Button className="scrolltopbtn">
-            <FaArrowCircleUp onClick={scrollToTop} 
-             />
+                <Button className="scrolltopbtn" onClick={scrollToTop}>
+            <FaArrowCircleUp  />
         </Button>
             ):(null)
           }
@@ -565,7 +564,7 @@ function TestFilterProducts(){
            
             
             <Col md={2} className="filtercol">
-                <h4>Category</h4>
+                <h5>Category</h5>
                 {
                     (isCategoriesFetched)?(
                         categories.map(cat=>{
@@ -577,11 +576,11 @@ function TestFilterProducts(){
                         null
                     )
                 }
-                <br></br>
+                <hr></hr><br></br>
                 <React.Fragment>
-                <Typography id="range-slider" gutterBottom>
+                {/* <Typography id="range-slider" gutterBottom>
                     Select Price Range:
-                </Typography>
+                </Typography> */}
                 
                 <Slider
                     defaultValue={[parseInt(min),parseInt(max)]}
@@ -591,7 +590,7 @@ function TestFilterProducts(){
                     max={parseInt(max)}
                 />
                 </React.Fragment>
-                Your range of Price is between {value[0]} /- and {value[1]} /-
+                {/* Your range of Price is between {value[0]} /- and {value[1]} /- */}
 
                 
                 {
@@ -656,7 +655,7 @@ function TestFilterProducts(){
             {
                 // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
                 <Row className="filterproductsRow">
-                    <Col md={9}>
+                    <Col md={8}>
                         <NavDropdown title="Sort By">
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
@@ -666,9 +665,9 @@ function TestFilterProducts(){
                         </NavDropdown>
                     </Col> 
                     
-                    <Col md={3}>
-                        <br></br>
-                    <p>{selectedProducts.length} products found</p>
+                    <Col md={4}>
+                        
+                    <p className="products"><b>{selectedProducts.length}</b> Products Found</p>
                     </Col> 
                 
                     
@@ -789,7 +788,7 @@ function TestFilterProducts(){
                                                         (index.offerPrice==null) ? (
                                                             <h4>MRP: <b>₹{index.productPrice}</b></h4>
                                                         ) : (
-                                                            <><h4>MSP: <b style={{ color: "#ed1c24" }}>₹{index.offerPrice}</b> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h4></>
+                                                            <><h5>MSP: <b style={{ color: "#ed1c24" }}>₹{index.offerPrice}</b> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5></>
                                                         )
                                                     }
                                                 </Col>
