@@ -35,6 +35,9 @@ const Payment=()=>
 
     const[isPaymentDone,SetIsPaymentDone] = useState(false);
 
+
+    let date = new Date()
+
     var form_data_body={
         products,
         "userAddress":{
@@ -47,6 +50,7 @@ const Payment=()=>
         "state":address.state,
         "addressType":"home"
         },
+        "buyDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear(),
         "paymentMode":"Cash On Delivery",
         "paymentAmount":localStorage.getItem("price")
     }
@@ -62,6 +66,7 @@ const Payment=()=>
             }).then(res=>{
                 if(res.status==200){
                     console.log("response",res)
+                    SetIsPaymentDone(true)
                     SetIsPaymentDone(true)
                 }
             }).catch(err=>{
