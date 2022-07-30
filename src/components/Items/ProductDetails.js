@@ -1,5 +1,5 @@
 import { Input } from "reactstrap";
-import { ProgressBar, Form, Button, Col, Container, Row, Card } from "react-bootstrap";
+import { ProgressBar, Form, Button, Col, Container, Row, Card ,Modal,Image} from "react-bootstrap";
 import Header from "../Header";
 import Zoom from "react-img-zoom";
 import "./ProductDetails.css"
@@ -586,13 +586,16 @@ function ProductDetails() {
 
     }
   }
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 
   return (
     <div>
-      {/* <Header /> */}
-      {
+      <Header />
+      {/* {
         (isQuantitySet) ? (
           <div>
             <p>{Quantity}</p>
@@ -600,25 +603,17 @@ function ProductDetails() {
         ) : (
           null
         )
-      }
+      } */}
 
       {
         (isProductFetched) ? (
           <>
 
-            <div style={{
-              backgroundColor: 'rgb(255, 255, 255)',
-              padding: '16px',
-              borderRadius: '2px',
-              boxShadow: 'rgb(0 0 0 / 8%) 0px 2px 4px 0px',
-              backgroundColor: 'rgb(255 255 255)',
-              padding: ' 16px',
-              margin: ' 20px'
-            }}>
-              <Row >
-                <Col md={6} style={{ padding: '20px' }}>
+            <div className="productdetailrow">
+              <Row className="row1">
+                <Col md={6} className="innercol">
                   <div >
-                    <Row >
+                    <Row style={{marginBottom:'20px'}}>
                       <Col md={2} className='smallImg'>
 
                         {getproductimg1(product)}
@@ -629,14 +624,14 @@ function ProductDetails() {
 
                       </Col>
 
-                      <Col className="imageproduct" md={4} >
+                      <Col className="imageproduct" md={10} >
                         {/* <br></br>
               <br></br> */}
 
                         <div className="largeimg" >
 
 
-                          <ReactImageMagnify {...{
+                          <ReactImageMagnify className="imgg" {...{
                             smallImage: {
                               alt: 'Wristwatch by Ted Baker London',
                               isFluidWidth: true,
@@ -646,9 +641,9 @@ function ProductDetails() {
                             },
                             largeImage: {
                               src: imglinkfinal,
-                              width: 800,
-                              height: 800
-
+                              width: 1000,
+                              height: 1000,
+                              border: 'solid 1px #0000'
                               // width: 1200, height: 1800
                             }
                           }} />
@@ -656,21 +651,39 @@ function ProductDetails() {
                         </div>
                       </Col>
                     </Row >
+
                     {
                       (isQuantitySet) ? (
                         
                         (Quantity == 0) ? (
                           <Row>
+                            <Col md={2}></Col>
+                            <Col md={10}>
                             <center>
-                            <h6 style={{color:"rgb(255,98,98)"}}><b>OUT OF STOCK</b></h6>
+                            {/* <h4 style={{color:"rgb(255,98,98)"}}><b>OUT OF STOCK</b></h6> */}
+                            <Button className="buynow">OUT OF STOCK</Button>
+
                             </center>
+                            </Col>
+                            
                           </Row>
 
                         ) : (
 
                           <Row>
-                            <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={() => addtocart(product.modelNumber)}>Add To Cart</Button>
-                            <Button style={{ width: '40%', height: '60px', marginLeft: '5%' }} variant="flat" size="1" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
+                            <Col md={2}></Col>
+                            <Col md={10}>
+                              <Row>
+                            <Col className="addtocartcol">
+                            <Button className="addtocart"  onClick={() => addtocart(product.modelNumber)}>Add To Cart<span> </span><i class="fa fa-shopping-cart" aria-hidden="true"></i></Button>
+                            
+                            </Col>
+                            <Col className="buynowcol">
+                            <Button className="buynow" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
+
+                            </Col>
+                            </Row>
+                            </Col>
 
                           </Row>
                         )
@@ -681,8 +694,8 @@ function ProductDetails() {
                   </div>
 
                 </Col>
-                <Col md={6} style={{
-                  padding: '20px',
+                <Col md={6} className="innercol" style={{
+                  
                   height: '800px',
                   overflowY: 'scroll'
                 }}>
@@ -690,33 +703,65 @@ function ProductDetails() {
 
 
 
-                  <Row>
-                    <h2 className="text" >{product.productName}</h2>
-                    <Col className="star" md={2} style={{ textAlign: "right" }} >
+                  <Row className="innerrow">
+                    <h2 className="productname">{product.productName}</h2>
+                    {/* <Col className="star" md={2} style={{ textAlign: "right" }} >
                       {Math.round(review.averageRatings * 10) / 10}<AiFillStar />
-                    </Col>
-                    <Col md={10}>
+                    </Col> */}
+                    {/* <Col md={10}>
                       <h6>{review.totalRatings} Ratings & {review.totalReviews} Reviews</h6>
-                    </Col>
-                  </Row>
+                    </Col> */}
+                    <ul className="list-inline small">
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
+                      <span style={{marginRight:'10px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
+                      <span style={{marginRight:'10px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
+                      <span style={{marginRight:'10px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
+                      <span style={{marginRight:'10px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-3x"></i></li>
+                      <span style={{marginRight:'10px'}}></span>
+                      </ul>
 
-                  <br></br>
-                  <Row>
-                    {
+                      {
                       (product.offerPrice == null) ? (
-                        <h5>MRP: <b>₹{product.productPrice}</b></h5>
+                        <h4>MRP: <b>₹{product.productPrice}</b></h4>
                       ) : (
-                        <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{product.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginRight:40 }}>₹{product.productPrice}</b> <b style={{color:"green"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h5>
+                        <h4>MSP: <b style={{ marginRight: "20px", color: "#ed1c24" }}>₹{product.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginRight:40 }}>₹{product.productPrice}</b> <b style={{color:"green"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h4>
                       )
                     }
-
                   </Row>
-
-
+                 
+                  
                   <hr></hr>
+                  <Row style={{display:'flex',padding:'2%'}} >
+                    <h4 className="rowtitle">Offers</h4>
+                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
+                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
+                    <Button onClick={handleShow}  className="offerbtn" >IDBI BANK</Button>
+                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
+                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
+                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
+                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
+                    
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>IDBI BANK</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>Flat Cashback upto Rs. 2,500 on ICICI Credit card
+                              EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.</Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                       
+                      </Modal.Footer>
+                    </Modal>
+                  </Row>
                   <Row>
-                    <h4><b><i>Available Offers</i></b></h4>
-                    <Swiper
+                    {/* <h4><b><i>Available Offers</i></b></h4> */}
+                    {/* <Swiper
                       slidesPerView={1}
                       spaceBetween={5}
                       slidesPerGroup={3}
@@ -744,7 +789,7 @@ function ProductDetails() {
                             <Card.Title>
                               "IDBI BANK"
                             </Card.Title>
-                            <Card.Text>
+                            <Card.Text>   
                               Flat Cashback upto Rs. 2,500 on ICICI Credit card
                               EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
                             </Card.Text>
@@ -806,19 +851,19 @@ function ProductDetails() {
                         </Card>
                       </SwiperSlide>
 
-                    </Swiper>
+                    </Swiper> */}
                   </Row>
-
-                  <hr></hr>
-                  <Row>
-                    <h4><b><i>Product Highlights</i></b></h4>
-                    <Col >
+                  <Row className="producthigh">
+                    <h4 className="rowtitle">Product Highlights</h4>
+                    <Col style={{display:'block'}}>
 
                       {
                         (product.productHighlights != null) ? (
                           product.productHighlights.split(';').map(index => {
                             return (
-                              <h5 style={{ marginLeft: '10px', marginBottom: '10px' }}>•<span style={{ marginLeft: '10px' }}> </span>{index}</h5>
+                              <Row>
+                              <h5 style={{ marginLeft: '10px' }}>•<span style={{ marginLeft: '10px' }}> </span>{index}</h5>
+                              </Row>
                             );
 
                           })
@@ -848,11 +893,10 @@ function ProductDetails() {
                     }
 
                   </Row>
-                  
-                  <hr></hr>
+                  <Row className="innerrow">
                   {
                     (variantKeys.length > 0) ? (
-                      <h4><b><i>Variants</i></b></h4>
+                      <h4 className="rowtitle">Variants</h4>
                     ) : (
                       null
                     )
@@ -862,8 +906,12 @@ function ProductDetails() {
                     (isVariantKeysFetched) ? (
                       variantKeys.map((key, pos) => {
                         return (
-                          <div>
-                            <h5>{key.substring(1)}</h5>
+                          <Row style={{display:'flex'}} className="variants">
+                            <Col md={2}>
+                            <h5 className="infotitle">{key.substring(1)}</h5>
+
+                            </Col>
+                            <Col md={10} style={{display:'flex'}}>
                             {
                               product.variantTypes[key].map((index) => {
                                 return (
@@ -878,7 +926,8 @@ function ProductDetails() {
                                 )
                               })
                             }
-                          </div>
+                            </Col>
+                          </Row>
 
                         );
                       })
@@ -886,7 +935,7 @@ function ProductDetails() {
                       null
                     )
                   }
-
+</Row>
                   {/* {
             (isVariantKeysFetched)?(
               variantKeys.map(variant=>{
@@ -900,27 +949,24 @@ function ProductDetails() {
           } */}
 
 
-                  <Row style={{ marginTop: 40 }}>
-                    <Col md={2}>
-                      <h5>Enter Pincode</h5>
-                    </Col>
-                    <Col md={4}>
-                      <Input type="number" style={{ height: 40 }} onChange={InputPin}></Input>
+                  <Row className="innerrow">
+                    <Col md={3}>
+                      <h4 className="rowtitle">Enter Pincode:</h4>
                     </Col>
                     <Col md={6}>
-                      <Button variant="flat" style={{ height: 40, width: '50%', marginLeft: '20px' }} onClick={CheckPinHandler}>Check Pincode</Button>
+                      <Input type="number" onChange={InputPin}></Input>
+                    </Col>
+                    <Col md={3}>
+                      <Button className="checkpinbtn" onClick={CheckPinHandler}>Check Pincode</Button>
 
                     </Col>
                   </Row>
-                  <br></br>
-                  <hr></hr>
-                  <h5><b>Model Number: </b>{product.modelNumber}</h5>
-                  <hr></hr>
-                  <br></br>
-                  <Row >
-                    <h4><b><i>Product Description</i></b></h4>
+                  
+                  
+                  {/* <Row >
+                    <h4>Product Description</h4>
 
-                    {/* {
+                    {
                      
                       product.productDescriptions.map(index => {
                         return (
@@ -941,38 +987,38 @@ function ProductDetails() {
                         )
 
                       })
-                    } */}
+                    }
                   </Row>
+                  <Row>
+                  <Col md={2}>
 
-                  {/* <Col md={4}>
-
-                      <img src={product.productImage1} style={{ width: "130px" }}></img>
+                      <Image thumbnail="true" src={product.productImage1}/>
 
                     </Col>
-                    <Col md={8}>
+                    <Col md={10}>
                       <br></br>
                       <h5>{product.modelNumber}</h5>
 
                       <p>{product.productHighlights}</p>
                     </Col>
                   </Row>
-                  <br></br>
                   <Row>
-                    <Col md={8}>
+                    <Col md={9}>
                       <br></br>
                       <h4>Take Your Photos </h4>
                       <p>The iPhone 11 features dual 12 MP Ultra Wide (13mm) and Wide (26mm) cameras with 4K video recording up to 60 fps. The Ultra Wide camera provides 120° field of view, letting you capture four times more scene, and the Wide camera provides 100% Focus Pixels for up to three times faster autofocus in low light.</p>
                     </Col>
-                    <Col md={2}>
-                      <img src={product.productImage1} style={{ width: "130px" }}></img>
+                    <Col md={3}>
+                    <br></br>
+                      <Image src={product.productImage1} thumbnail="true"/>
                     </Col>
                   </Row> */}
 
+                  <Row className="innerrow">
+                  <h4 className="rowtitle">Model Number: <b>{product.modelNumber}</b> </h4>
 
-                  <hr></hr>
-                  <Row>
-                    <h4><b><i>Specifications</i></b></h4>
-                    <br></br><br></br>
+                    <h4 className="rowtitle">Specifications</h4>
+                    
                     {
                       (isKeysFetched) ? (
                         keys.map(k => {
@@ -990,10 +1036,8 @@ function ProductDetails() {
                     }
 
                   </Row>
-                  <br></br>
-                  <hr></hr>
                   <Row>
-                    <h4><b><i>Ratings and Reviews</i></b></h4>
+                    <h4 className="rowtitle">Ratings and Reviews</h4>
                     <Col md={2} style={{ display: "flex" }}>
 
                       <h3>{Math.round(review.averageRatings * 10) / 10}</h3>
