@@ -8,6 +8,7 @@ import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 import {Carousel,Card,Button,Row,Col, Form,CardGroup, Container} from "react-bootstrap";
 import {getCookie} from "../Cookies";
 import { ToastContainer, toast } from 'react-toastify';
+import MovingComponent from 'react-moving-text'
 import { MDBCarousel,MDBCol,MDBCarouselInner,MDBCarouselItem,MDBCarouselElement,MDBCardHeader,MDBCardFooter,MDBBtn,MDBRow,MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardLink, MDBCardImage ,MDBContainer } from 'mdb-react-ui-kit';
 
 function Deals({deals}) {
@@ -21,6 +22,8 @@ function Deals({deals}) {
     // product = localStorage.getItem("dealproduct")
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
+
+    const[animation,setAnimation] = useState(false);
 
     const str = localStorage.getItem("dealproduct");
     const product = JSON.parse(str);
@@ -54,6 +57,10 @@ function Deals({deals}) {
         
         
     // })
+
+    useEffect(()=>{
+      window.addEventListener('scroll', () => { if (window.scrollY > 120) { setAnimation(true); } else { setAnimation(false); } });
+    })
 
     function WishlistHandler(index) {
       // alert("Item added successfully to wishlist");
@@ -185,7 +192,22 @@ function Deals({deals}) {
                 <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
               </filter>
               </svg>
-              <span className="categorytitle" filter-content="S">{deals.title}</span>
+              
+              {
+                (animation) ? (
+                  <MovingComponent
+                    type="fadeInFromLeft"
+                    duration="1000ms"
+                    delay="0s"
+                    direction="normal"
+                    timing="ease"
+                    iteration="1"
+                    fillMode="none">
+                    <span className="categorytitle" filter-content="S">{deals.title}</span>
+                  </MovingComponent>
+                ) : (null)
+              }
+              
               
               </Col>
               <Col cd={6}>

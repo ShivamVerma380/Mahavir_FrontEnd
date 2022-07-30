@@ -6,6 +6,7 @@ import  { useState } from 'react';
 import AdminHeader from "../../Admin/AdminHeader";
 import AdminNavbar from "./AdminNavbar";
 import axios from 'axios';
+import { getCookie } from '../../Cookies';
 const UploadExcel = () => {
   const [selectedproductFile, setSelectedProductFile] = useState();
   const [selectedcategoryFile, setSelectedCategoryFile] = useState();
@@ -18,6 +19,7 @@ const UploadExcel = () => {
   const [isBrandsFilePicked, setIsBrandsFilePicked] = useState(false);
   const [isPosterFilePicked, setIsPosterFilePicked] = useState(false);
 
+   var token = getCookie("jwtToken");
 
   const ProductFileHandler = (event) => {
     setSelectedProductFile(event.target.files[0]);
@@ -33,7 +35,7 @@ const UploadExcel = () => {
 
     axios.post("http://localhost:8080/excel/products",formData,{
       headers:{
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2FhYSIsImV4cCI6MTY1NzYyNjExMiwiaWF0IjoxNjU3NTI2MTEyfQ.Qrrp3Zt9z6lxc3kT0KmOXeG0Jb_pyWwkPo_jzLZKpqQ"
+        "Authorization": "Bearer "+token
       },
       
     }).then(function(response){
@@ -59,7 +61,7 @@ const UploadExcel = () => {
 
     axios.post("http://localhost:8080/excel/Categories",formData,{
       headers:{
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2FhYSIsImV4cCI6MTY1NzYyNjExMiwiaWF0IjoxNjU3NTI2MTEyfQ.Qrrp3Zt9z6lxc3kT0KmOXeG0Jb_pyWwkPo_jzLZKpqQ"
+        "Authorization": "Bearer "+token
       },
       
     }).then(function(response){
@@ -85,7 +87,7 @@ const UploadExcel = () => {
 
     axios.post("http://localhost:8080/excel/filters",formData,{
       headers:{
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2FhYSIsImV4cCI6MTY1NzYyNjExMiwiaWF0IjoxNjU3NTI2MTEyfQ.Qrrp3Zt9z6lxc3kT0KmOXeG0Jb_pyWwkPo_jzLZKpqQ"
+        "Authorization": "Bearer "+token
       },
       
     }).then(function(response){
@@ -111,7 +113,7 @@ const UploadExcel = () => {
 
     axios.post("http://localhost:8080/excel/shopByBrands",formData,{
       headers:{
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2FhYSIsImV4cCI6MTY1NzYyNjExMiwiaWF0IjoxNjU3NTI2MTEyfQ.Qrrp3Zt9z6lxc3kT0KmOXeG0Jb_pyWwkPo_jzLZKpqQ"
+        "Authorization": "Bearer "+token
       },
       
     }).then(function(response){
@@ -137,7 +139,7 @@ const UploadExcel = () => {
 
     axios.post("http://localhost:8080/excel/offerposters",formData,{
       headers:{
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGJjYWFmZGFhaHN0c3NhYWFhc3dzc2FhYSIsImV4cCI6MTY1NzYyNjExMiwiaWF0IjoxNjU3NTI2MTEyfQ.Qrrp3Zt9z6lxc3kT0KmOXeG0Jb_pyWwkPo_jzLZKpqQ"
+        "Authorization": "Bearer "+token
       },
       
     }).then(function(response){
