@@ -19,25 +19,26 @@ function ProductSpecification({title,product}){
 
     return(
         <div>
-            <h5>{title}</h5>
+            <h4 className="infotitle">{title}</h4>
+            <Table className="infotable" >
             {
                 (isKeysFetched)?(
                     key.map((k)=>{
                        
                             return(
                                 <>
-                                <table >
+                                
                                   
                                         <tr>
-                                            <td style={{width:'150px'}}>
-                                            {k}
+                                            <td style={{width:'30%'}}>
+                                            <h5>{k}</h5>
                                             </td>
                                             <td>
                                             {product.productInformation[title][k]}
                                             </td>
                                         </tr>
                                         
-                                </table>
+                                
                                 
                                 {/* <p><b>{k}<span> </span></b>:<span> </span>{product.productInformation[title][k]}</p> */}
                                 </>
@@ -47,6 +48,7 @@ function ProductSpecification({title,product}){
                     null
                 )
             }
+            </Table>
         </div>
     );
 }
