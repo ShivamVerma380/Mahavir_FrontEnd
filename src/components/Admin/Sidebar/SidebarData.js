@@ -14,8 +14,14 @@ export const SidebarData = [
   },
   
   {
-    title: 'Pending Deliveries',
+    title: 'Pending Orders',
     path: '/pendingdelivery',
+    icon: <MdIcons.MdOutlineDeliveryDining />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Completed Orders',
+    path: '/completedorders',
     icon: <MdIcons.MdOutlineDeliveryDining />,
     cName: 'nav-text'
   },

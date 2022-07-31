@@ -38,7 +38,6 @@ import StoreLocator from './components/Footer/StoreLocator';
 import AddSubCategories from './components/Admin/Test/AddSubCategories';
 import AddProductInformation from './components/Admin/Test/AddProductInformation';
 import MiniPosterItems from './components/offers/MiniPosteritems';
-import ProductsByCategory from './components/Items/ProductsByCateory';
 import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 import CategoryProducts from './components/Items/CategoryProducts';
 import BrandDetails from './components/Items/BrandDetails';
@@ -53,6 +52,7 @@ import CompareProducts from './components/AddtoCompare/CompareProducts';
 import Checkout from './components/OrderSummary/Checkout';
 import Invoice from './components/OrderSummary/Invoice';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
+import CompletedOrders from './components/Admin/Sidebar/CompletedOrders';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -72,7 +72,8 @@ root.render(
       <Route path='/' element={<App/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/productDetails' element = {<ProductDetails/>}/>
-      <Route path='/admin' element = {<AdminLogin/>}/>
+      {/* <Route path='/admin' element = {<AdminLogin/>}/> */}
+      <Route path='/admin' element = {<Admin/>}/>
       {/* <Route path='/admindetail' element = {<Admin/>}/> */}
       <Route path='/cart' element = {<Cart/>}/>
       <Route path='/categorydrop' element = {<CategoryDropdowns/>}/>
@@ -96,8 +97,8 @@ root.render(
       <Route path='/aboutcompany' element = {<AboutCompany/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/contactus' element = {<ContactUs/>}/>
-      <Route path='/:Category'element={<ProductsByCategory/>}/>
-      
+      {/* <Route path='/:Category'element={<ProductsByCategory/>}/> */}
+      <Route path='/completedorders' element={<CompletedOrders/>}/>    
 
       {/* <Route path='/AddNew' element={<AddNew/>}/> */}
       <Route path='/storelocator' element={<StoreLocator/>}/>

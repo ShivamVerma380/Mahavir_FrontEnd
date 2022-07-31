@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import {setCookie,getCookie} from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
-import MultiRangeSlider from "./multiRangeSlider/MultiRangeSlider";
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Box from '@mui/material/Box';
@@ -79,11 +78,11 @@ function TestFilterProducts(){
                     // var priceArr=[]
                     response.data.map((index,pos)=>{
                         console.log("In selected products map...")
-                        if(minPrice>parseInt(index.productPrice)){
-                            minPrice = index.productPrice
+                        if(minPrice>parseInt(index.offerPrice)){
+                            minPrice = index.offerPrice
                         }
-                        if(maxPrice<parseInt(index.productPrice)){
-                            maxPrice = index.productPrice
+                        if(maxPrice<parseInt(index.offerPrice)){
+                            maxPrice = index.offerPrice
                         }
                         
                     })
@@ -98,11 +97,11 @@ function TestFilterProducts(){
                     // var priceArr=[]
                     selectedProducts.map((index,pos)=>{
                         console.log("In selected products map...")
-                        if(minPrice>parseInt(index.productPrice)){
-                            minPrice = index.productPrice
+                        if(minPrice>parseInt(index.offerPrice)){
+                            minPrice = index.offerPrice
                         }
-                        if(maxPrice<parseInt(index.productPrice)){
-                            maxPrice = index.productPrice
+                        if(maxPrice<parseInt(index.offerPrice)){
+                            maxPrice = index.offerPrice
                         }
                         
                     })
@@ -447,7 +446,7 @@ function TestFilterProducts(){
                     flag = false;
                 }
             })
-            if(flag && index.productPrice>=parseInt(newValue[0]) && index.productPrice<=parseInt(newValue[1])){
+            if(flag && index.offerPrice>=parseInt(newValue[0]) && index.offerPrice<=parseInt(newValue[1])){
                 arr.push(index);
             }
         })
@@ -464,12 +463,12 @@ function TestFilterProducts(){
         arr = selectedProducts;
         console.log("Before sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexProductPrice",index.productPrice)
+            console.log("indexOfferPrice",index.offerPrice)
         })
-        arr.sort((a,b)=>a.productPrice-b.productPrice);
+        arr.sort((a,b)=>a.offerPrice-b.offerPrice);
         console.log("After sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexProductPrice--",index.productPrice)
+            console.log("indexOfferPrice--",index.offerPrice)
         })
         SetSelectedProducts([...arr])
     }
@@ -481,12 +480,12 @@ function TestFilterProducts(){
         arr = selectedProducts;
         console.log("Before sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexProductPrice",index.productPrice)
+            console.log("indexOfferPrice",index.offerPrice)
         })
-        arr.sort((a,b)=>b.productPrice-a.productPrice);
+        arr.sort((a,b)=>b.offerPrice-a.offerPrice);
         console.log("After sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexProductPrice--",index.productPrice)
+            console.log("indexOfferPrice--",index.offerPrice)
         })
         SetSelectedProducts([...arr])
     }
