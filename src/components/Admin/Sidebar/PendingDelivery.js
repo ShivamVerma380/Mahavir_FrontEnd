@@ -27,11 +27,36 @@ const PendingDelivery = () => {
         }
     })
 
+    function handleOrderClick(order){
+        console.log("Order clicked",order);
+        let date = new Date();
+        var form_data_body={
+            "orderId":""+order.orderId,
+            "deliveryDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()
+        }
+        console.log("form data body",form_data_body)
+        axios.post("http://localhost:8080/order-status",form_data_body,{
+            headers:{
+                "Authorization":"Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tIiwiZXhwIjoxNjU5MzU2NDMzLCJpYXQiOjE2NTkyNTY0MzN9.Ud7lcX7Dhmg9AJuvSRUcTULEsKhHz7Rlp2cwGsqCVss",
+                "Content-Type": "multipart/form-data"
+            }
+        }).then(function(response){
+                if(response.status==200){
+                    console.log("Success",response.data);
+                    window.location.reload();
+                }else{
+                    console.log("Error",response);
+                }
+            }).catch(function(error){
+                console.log("Error",error);
+            })
+    }
+
     return (
         <div>
         <h4 style={{margin:"20px",textAlign:"center"}}>Pending Orders</h4>
         <Container>
-            <Table striped bordered hover variant="dark">
+            <Table striped bordered hover >
                 <thead>
                     <tr>
                     <th>Order Id</th>
@@ -59,7 +84,7 @@ const PendingDelivery = () => {
                                         <td>{order.paymentAmount}</td>
                                         <td>{order.paymentMode}</td>
                                         <td>👁️‍🗨️</td>
-                                        <td>✅</td>
+                                        <td><Button onClick={()=>handleOrderClick(order)}>✅</Button></td>
                                     </tr>
                                 );
                             })

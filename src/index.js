@@ -51,6 +51,7 @@ import Orders from './components/OrderDetails/Orders';
 import CompareProducts from './components/AddtoCompare/CompareProducts';
 import Checkout from './components/OrderSummary/Checkout';
 import Invoice from './components/OrderSummary/Invoice';
+import CompletedOrders from './components/Admin/Sidebar/CompletedOrders';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -96,7 +97,7 @@ root.render(
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/contactus' element = {<ContactUs/>}/>
       {/* <Route path='/:Category'element={<ProductsByCategory/>}/> */}
-      
+      <Route path='/completedorders' element={<CompletedOrders/>}/>    
 
       {/* <Route path='/AddNew' element={<AddNew/>}/> */}
       <Route path='/storelocator' element={<StoreLocator/>}/>
