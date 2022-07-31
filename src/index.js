@@ -38,7 +38,6 @@ import StoreLocator from './components/Footer/StoreLocator';
 import AddSubCategories from './components/Admin/Test/AddSubCategories';
 import AddProductInformation from './components/Admin/Test/AddProductInformation';
 import MiniPosterItems from './components/offers/MiniPosteritems';
-import ProductsByCategory from './components/Items/ProductsByCateory';
 import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 import CategoryProducts from './components/Items/CategoryProducts';
 import BrandDetails from './components/Items/BrandDetails';
@@ -71,7 +70,8 @@ root.render(
       <Route path='/' element={<App/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/productDetails' element = {<ProductDetails/>}/>
-      <Route path='/admin' element = {<AdminLogin/>}/>
+      {/* <Route path='/admin' element = {<AdminLogin/>}/> */}
+      <Route path='/admin' element = {<Admin/>}/>
       {/* <Route path='/admindetail' element = {<Admin/>}/> */}
       <Route path='/cart' element = {<Cart/>}/>
       <Route path='/categorydrop' element = {<CategoryDropdowns/>}/>
@@ -95,7 +95,7 @@ root.render(
       <Route path='/aboutcompany' element = {<AboutCompany/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/contactus' element = {<ContactUs/>}/>
-      <Route path='/:Category'element={<ProductsByCategory/>}/>
+      {/* <Route path='/:Category'element={<ProductsByCategory/>}/> */}
       
 
       {/* <Route path='/AddNew' element={<AddNew/>}/> */}

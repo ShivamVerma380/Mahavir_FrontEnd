@@ -7,7 +7,7 @@ const PendingDelivery = () => {
     return (
         // <h1>Pending Deliveries</h1>
         <>
-        <AdminHeader/>
+        {/* <AdminHeader/> */}
         <AdminNavbar/>
         <Container>
             
