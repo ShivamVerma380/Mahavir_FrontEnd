@@ -181,7 +181,7 @@ function Deals({deals}) {
           
               
               <MDBContainer className="categoryproductscontainer">
-            <Row style={{padding: '10px',margin: '10px'}}>
+            <Row style={{paddingTop:"10px",marginBottom:"15px"}}>
               <Col md={6} >
               <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
 
@@ -214,6 +214,7 @@ function Deals({deals}) {
               <button class="explore" onClick={()=>CategoryProducts(title,deals)}>View More<span class="icon-right after"></span></button>
 
               </Col>
+            
             </Row>
           
           
@@ -272,7 +273,7 @@ function Deals({deals}) {
                                                         (index.offerPrice==null) ? (
                                                             <h4><b style={{fontSize:"17px"}}>₹{index.productPrice}</b></h4>
                                                         ) : (
-                                                            <><h5><b style={{ color: "#ed1c24", fontSize:"17px" }}>₹{index.offerPrice}</b> <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginLeft:20, color:"#3c3c3c", fontSize:"17px"}}>₹{index.productPrice}</b></h5></>
+                                                            <><h5><b style={{ color: "#ED1C24", fontSize:"16px", fontWeight:600, lineHeight:"16px" }}>₹{index.offerPrice}</b> <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginLeft:20, color:"rgba(45,45,45,0.8)", fontSize:"15px", fontWeight:600, lineHeight:"16px"}}>₹{index.productPrice}</b></h5></>
                                                         )
                                                     }
                     </MDBCardSubTitle>

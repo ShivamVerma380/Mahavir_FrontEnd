@@ -21,6 +21,8 @@ import { getCookie, setCookie } from "./components/Cookies";
 
 import {Helmet} from 'react-helmet';
 import { RiCompassDiscoverLine } from 'react-icons/ri';
+import MiniPostersBottom from './components/offers/MiniPostersBottom';
+import HomeBottom from './components/Items/HomeBottom';
 
 var count = 0;
 function App() {
@@ -427,7 +429,7 @@ function App() {
       } */}
       
       <ShopByBrands/>
-      <MiniPosters MiniPosters={MiniPoster}/>
+      <MiniPostersBottom MiniPosters={MiniPoster}/>
 
       {/* <MiniPosters/> */}
       {/* <Test productList={Products} /> */}
@@ -438,7 +440,7 @@ function App() {
         getCompareBtn()
      } */}
 
-     
+     <HomeBottom/>
 
     
      <Footer/>

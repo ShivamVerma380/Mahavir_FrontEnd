@@ -52,6 +52,7 @@ import Orders from './components/OrderDetails/Orders';
 import CompareProducts from './components/AddtoCompare/CompareProducts';
 import Checkout from './components/OrderSummary/Checkout';
 import Invoice from './components/OrderSummary/Invoice';
+import MiniPostersBottom from './components/offers/MiniPostersBottom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -115,6 +116,8 @@ root.render(
       <Route path='/invoice' element={<Invoice/>}/>
       <Route path='/payment' element={<Payment/>}/>
       <Route path='/compareProducts' element={<AddToCompareProducts/>}/>
+      <Route path='/minibottom' element={<MiniPostersBottom/>}/>
+      
     </Routes>
   </BrowserRouter>
 );

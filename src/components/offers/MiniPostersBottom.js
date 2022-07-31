@@ -3,7 +3,7 @@ import { Card, Row, Col, Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import MiniPosterHelper from "./MiniPosterHelper";
 import './MiniPoster.css';
-const MiniPosters = ({MiniPosters}) => {
+const MiniPostersBottom = ({MiniPosters}) => {
     console.log("MinPosters: ",MiniPosters)
     // const element = MiniPosters.map((product,index) =>
     // <div key={index}> {/*refer you key in within a div*/}
@@ -49,7 +49,7 @@ const MiniPosters = ({MiniPosters}) => {
 
             {
               
-              MiniPosters.slice(0,5).map((product,index) => {
+              MiniPosters.slice(5,len).map((product,index) => {
                 
                 return(
                     <div class="image_p">
@@ -69,4 +69,4 @@ const MiniPosters = ({MiniPosters}) => {
     )
 
 }
-export default MiniPosters;
+export default MiniPostersBottom;

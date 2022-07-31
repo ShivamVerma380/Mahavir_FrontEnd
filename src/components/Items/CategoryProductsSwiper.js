@@ -216,7 +216,7 @@ function CategoryProductsSwiper({ cattitle }) {
 
 
             <MDBContainer className="categoryproductscontainer">
-              <Row style={{ padding: '10px', margin: '10px' }}>
+              <Row style={{paddingTop:"10px",marginBottom:"15px"}}>
                 <Col md={6} >
                   <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
 
