@@ -3,7 +3,7 @@ import React, { useEffect, useState }  from "react";
 import {Row,Col,Form,Button} from 'react-bootstrap';
 // import { Header } from "semantic-ui-react";
 import Header from "../Header";
-
+import {setCookie,getCookie} from '../Cookies';
 
 
 const productBoughtbyUser =[
@@ -25,7 +25,7 @@ const productBoughtbyUser =[
         "ProductImage":"https://github.com/ShivamVerma380/MahavirImages/blob/main/Whirlpool/Refrigerators/Double%20Door/21391-Omega-Steel-1.jpeg?raw=true",
         "DateofDelivery":"25-07-2022",
         "BuyDate":"18-07-2020",
-        "OrderStatus":"On_the_Way",
+        "OrderStatus":"On_the_Way", 
         "BuyerEmail":"shraddhamulay09@gmail.com"
     },
     {
@@ -62,6 +62,9 @@ const productBoughtbyUser =[
 ]
 
 const Orders=()=>{
+
+    
+
     console.log("orders "+productBoughtbyUser[0]);
     console.log("orders type"+typeof productBoughtbyUser);
 
@@ -70,6 +73,27 @@ const Orders=()=>{
     // const[products,setProducts]=useState(new Array());
     const[orderStatus,setOrderStatus] = useState([]);
     const[orderTime,setOrderTime] = useState([]);
+
+
+    const[isOrdersFetched,SetIsOrdersFetched] = useState(false);
+
+    useEffect(()=>{
+        if(!isOrdersFetched){
+            axios.get("http://localhost:8080/my-orders",{
+                headers:{
+                    "Authorization":"Bearer "+getCookie("jwtToken")
+                }
+            }).then(function(response){
+                if(response.status==200){
+                    console.log("Success",response.data);
+                    SetIsOrdersFetched(true);
+                }
+            }).catch(function(error){
+                console.log("Error",error);
+            })
+        }
+
+    })
 
     function filters_ordertime(id){
         var element = document.getElementById(id);
