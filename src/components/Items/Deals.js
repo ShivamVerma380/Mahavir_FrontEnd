@@ -266,7 +266,16 @@ function Deals({deals}) {
                     }
                   <MDBCardBody className="categoryproductscardbody">
                     <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
-                    <MDBCardSubTitle style={{    marginTop: '5px',marginBottom: '5px',fontSize: '18px'}}>Rs. {index.offerPrice}</MDBCardSubTitle>
+                    
+                    <MDBCardSubTitle style={{    marginTop: '5px',marginBottom: '5px',fontSize:'18px'}}>
+                    {
+                                                        (index.offerPrice==null) ? (
+                                                            <h4><b style={{fontSize:"17px"}}>₹{index.productPrice}</b></h4>
+                                                        ) : (
+                                                            <><h5><b style={{ color: "#ed1c24", fontSize:"17px" }}>₹{index.offerPrice}</b> <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginLeft:20, color:"#3c3c3c", fontSize:"17px"}}>₹{index.productPrice}</b></h5></>
+                                                        )
+                                                    }
+                    </MDBCardSubTitle>
                     
                     {
                       fetchOfferAvailableBtn(index.offerPrice, index.productPrice)

@@ -386,6 +386,9 @@ function App() {
         ):(null)
       }
       
+      <MiniPosters MiniPosters={MiniPoster}/>
+      
+      
       {/* <Deals/> */}
     
     {

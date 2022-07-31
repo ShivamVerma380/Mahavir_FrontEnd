@@ -48,14 +48,17 @@ const MiniPosters = ({MiniPosters}) => {
           <div class="image-container" style={{gridTemplateColumns: 'repeat('+grid_len+', 1fr)',}}>
 
             {
+              
               MiniPosters.map((product,index) => {
+                
                 return(
-                    <div class="image_p" >
-                    <img src={'data:image/jpg;base64,' +product.image.data}/>
+                    <div class="image_p">
+                    {/* <img src={'data:image/jpg;base64,' +product.image.data}/> */}
                     <img src={'data:image/jpg;base64,' +product.image.data} onClick={()=>handleMiniPosteronClick(product)}/>
                   </div>
                 
                 )
+                
               })
             }
             </div>             

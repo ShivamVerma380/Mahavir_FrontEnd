@@ -5,10 +5,9 @@
 }
 .image-container {
     display: grid;
-    
     grid-template-rows: repeat(2, 1fr);
     width: 100%;
-    grid-gap: 0.5rem;
+    grid-gap: 1rem;
   }
   .image-container .image_p {
     filter: grayscale(0) brightness(100%);

@@ -73,18 +73,18 @@ const ShopByBrands = () => {
 
     return (
         <div>
-        <Container style={{marginBottom:'70px'}}>
+        <Container style={{marginBottom:'70px',backgroundColor:"white"}}>
         <h3 className="brand_title">Shop by brands</h3>
         {
             (isBrandsFetched) ? (
-              <Carousel cols={6} rows={1} gap={10} loop>
+              <Carousel cols={4} rows={1} gap={2} loop>
                 
                 {
                   brands.map(index=>{
                     return(
                       <Carousel.Item>
                         <div className="promo" onClick={()=>BrandClickHandler(index)} style={{width:'100%',overlayColor: 'hotpink'}}>
-                          <div className="image-wrapper"><img src={index.brandLogo}  /></div>
+                          <img style={{height:"126px",width:"126px"}} src={index.brandLogo}  />
                           {/* <h2 className="brandtitle">{index.brandName}</h2> */}
                         </div>
                         {/* <img style={{width:'100%'}} src={"https://picsum.photos/800/600?random=3"} /> */}

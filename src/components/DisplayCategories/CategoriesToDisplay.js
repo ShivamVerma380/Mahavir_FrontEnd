@@ -37,7 +37,7 @@ function CategoriesToDisplay({ categoryDetail }) {
 
       {['sm'].map((expand) => (
 
-        <Navbar style={{background:'#2b2d42', zIndex: '1',}} bg="dark" key={expand} class="border-top" expand={expand} variant="dark">
+        <Navbar style={{background:'#2b2d42', zIndex: '1', height:60}} bg="dark" key={expand} class="border-top" expand={expand} variant="dark">
           <Container fluid>
 
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -65,9 +65,9 @@ function CategoriesToDisplay({ categoryDetail }) {
                         <Nav.Link >
                           {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
                           {/* {<img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>} */}
-                          <Image thumbnail='true'  src={'data:image/jpg;base64,'+ index.category_image.data} className="categorymage" style={{height:60,borderRadius:50,height: '60px', borderRadius: '50px',filter: 'invert(1)'}}></Image>
+                          <Image thumbnail='true'  src={'data:image/jpg;base64,'+ index.category_image.data} className="categorymage" style={{height:50,borderRadius:50,filter: 'invert(1)'}}></Image>
                           
-                          <NavDropdown style={{ color: "white",fontSize:'18px' }} title={index.category} renderMenuOnMount={true}>
+                          <NavDropdown className="catdropdown" style={{ color: "white",fontSize:'15px' }} title={index.category} renderMenuOnMount={true}>
                             {
                               index.subCategories.map(subCat => {
                                 return (

@@ -42,7 +42,7 @@ function CategoryProductsSwiper({ cattitle }) {
   // }
 
   useEffect(() => {
-    window.addEventListener('scroll', () => { if (window.scrollY > 500) { setAnimation(true); } else { setAnimation(false); } });
+    window.addEventListener('scroll', () => { if (window.scrollY > 700) { setAnimation(true); } else { setAnimation(false); } });
 
 
 
