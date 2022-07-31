@@ -1,164 +1,82 @@
-import React  from "react";
+import React, { useEffect, useState }  from "react";
 import { Row,Button, Col,Container ,Table,Accordion} from 'react-bootstrap';
-
+import {setCookie,getCookie} from '../../Cookies';
+import axios from "axios";
 import AdminHeader from "../../Admin/AdminHeader";
 import AdminNavbar from "./AdminNavbar";
 const PendingDelivery = () => {
+    
+    const [orders,SetOrders] = useState([]);
+    const [isOrdersFetched,SetIsOrdersFetched] = useState(false);
+
+
+    useEffect(()=>{
+        if(!isOrdersFetched){
+            axios.get("http://localhost:8080/pending-orders")
+                .then(function(response){
+                    if(response.status==200){
+                        console.log("Success",response.data)
+                        SetOrders(response.data);
+                        SetIsOrdersFetched(true);
+                    }else{
+                        console.log("response",response);
+                    }
+                }).catch(function(error){
+                    console.log("Error In Fetching orders",error);
+                })
+        }
+    })
+
     return (
-        // <h1>Pending Deliveries</h1>
-        <>
-        {/* <AdminHeader/> */}
-        <AdminNavbar/>
+        <div>
+        <h4 style={{margin:"20px",textAlign:"center"}}>Pending Orders</h4>
         <Container>
-            
-            <h1 style={{textAlign:"center",marginTop:"20px"}}>Pending Deliveries</h1><hr></hr>
-            <Accordion>
-            <Accordion.Item eventKey="0">
-                <Accordion.Header>iPhone 11</Accordion.Header>
-                <Accordion.Body>
-                    <Row>
-                    <Col sm={2}>
-                    
-                    <img  style={{height:"200px", width:"200px"}} src = {"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg"}/>
-
-                    </Col>
-                    <Col sm={1}></Col>
-                    <Col sm={6}>
-                    <Table hover size="sm"  >
-                                <thead>
+            <Table striped bordered hover variant="dark">
+                <thead>
+                    <tr>
+                    <th>Order Id</th>
+                    <th>Email</th>
+                    <th>Buy Date</th>
+                    <th>Address</th>
+                    <th>Mobile Number</th>
+                    <th>Payment Amount</th>
+                    <th>Payment Mode</th>
+                    <th>Invoice</th>
+                    <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        (isOrdersFetched)?(
+                            orders.map((order,index)=>{
+                                return(
                                     <tr>
-                                        <th style={{textAlign:'center'}} colSpan={2}>iPhone 11</th>
+                                        <td>{order.orderId}</td>
+                                        <td>{order.buyerEmail}</td>
+                                        <td>{order.buyDate}</td>
+                                        <td>{order.userAddress.address+","+order.userAddress.city+"-"+order.userAddress.pincode}</td>
+                                        <td>{order.userAddress.mobileNumber}</td>
+                                        <td>{order.paymentAmount}</td>
+                                        <td>{order.paymentMode}</td>
+                                        <td>👁️‍🗨️</td>
+                                        <td>✅</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Tracking Id:</td>
-                                        <td>Track122</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ordered By:</td>
-                                        <td>Shivam Verma</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Phone No:</td>
-                                        <td>9876543210</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Address:</td>
-                                        <td>Bibwewadi Pune</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Order Date:</td>
-                                        <td>22/05/2022</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Delivery Date:</td>
-                                        <td>27/05/2022</td>
-                                    </tr>
-                                </tbody>
-
-                            </Table>
-                    </Col>
-                    <Col sm={3}>
-                    <Button style={{width: '140px', marginBottom:'10px', marginRight:'10px'}} variant="success" disabled >Delivered</Button>
-                            <Button style={{width: '140px', marginBottom:'10px'}}variant="danger">Track Delivery</Button>
-
-                    </Col>
-                </Row>
-                
-                </Accordion.Body>
-            </Accordion.Item>
-            
-            </Accordion>
-            </Container>
-            </>
-        // <div>
-        //     <h1 style={{textAlign:"center",marginTop:"20px"}}>Pending Deliveries</h1>
-        //     <Table style={{margin:"100px"}}>
-        //         <tbody>
-        //             <tr>
-        //             <td style={{textAlign:"center"}}><img  style={{height:"200px", width:"200px"}} src = {"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg"}/>
-        //             </td>
-                    
-        //             <tr> 
-        //             <td style={{paddingRight:"500px"}}>iPhone 11</td>
-        //             </tr>
-                    
-        //             <tr style={{marginTop:"50px"}}>
-        //             <td>Ordered By: Shivam Verma</td>
-        //             </tr>
-        //             <tr>
-        //             <td>Phone No: 8756562321</td>
-        //             </tr>
-        //             <tr>
-        //             <td>Address: Bibwewadi Pune</td>
-        //             </tr>
-        //             <tr>
-        //             <td>Order Date: 22/05/2022</td>
-        //             </tr>
-        //             <tr>
-        //             <td>Delivery Date: 23/05/2022</td>
-        //             </tr>
-        //             <td><table>
-        //                 <tr>
-        //                     <td style={{paddingRight:"500px"}}><Button>Delivered</Button></td>
-        //                 </tr>
-        //                 </table>
-        //             </td>
-        //             </tr>
-        //             <tr>
-        //             <td><table>
-                        
-        //                 </table>
-        //             </td>
-        //             <td></td>
-        //             </tr>
-        //         </tbody>
-        // </Table>
-        // <Table style={{margin:"100px"}}>
-        //     <tbody>
-        //         <tr>
-        //         <td style={{textAlign:"center"}}><img  style={{height:"200px", width:"200px"}} src = {"https://m.media-amazon.com/images/I/61YVqHdFRxL._AC_SL1322_.jpg"}/>
-        //         </td>
-                
-        //         <tr> 
-        //         <td style={{paddingRight:"500px"}}>Macbook Pro</td>
-        //         </tr>
-                
-        //         <tr style={{marginTop:"50px"}}>
-        //         <td>Ordered By: Shivam Verma</td>
-        //         </tr>
-        //         <tr>
-        //         <td>Phone No: 8756562321</td>
-        //         </tr>
-        //         <tr>
-        //         <td>Address: Bibwewadi Pune</td>
-        //         </tr>
-        //         <tr>
-        //         <td>Order Date: 22/05/2022</td>
-        //         </tr>
-        //         <tr>
-        //         <td>Delivery Date: 23/05/2022</td>
-        //         </tr>
-        //         <td><table>
-        //             <tr>
-        //                 <td style={{paddingRight:"500px"}}><Button>Delivered</Button></td>
-        //             </tr>
-        //             </table>
-        //         </td>
-        //         </tr>
-        //         <tr>
-        //         <td><table>
-                    
-        //             </table>
-        //         </td>
-        //         <td></td>
-        //         </tr>
-        //     </tbody>
-        // </Table>
-        
-        // </div>
-        
+                                );
+                            })
+                        ):(
+                            null
+                        )
+                    }
+                    {/* <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    </tr> */}
+                </tbody>
+            </Table>
+        </Container>
+        </div>
     )
 
 }
