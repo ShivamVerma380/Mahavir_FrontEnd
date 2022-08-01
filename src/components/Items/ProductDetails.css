@@ -281,7 +281,7 @@ hr.vertical {
   border-width: 2px;
 }
 
-.innerrow{
+.inerrow1{
   padding: 2%;
   margin-bottom: 20px;
 }
@@ -386,7 +386,8 @@ hr.vertical {
   .list-inline{
     /* padding: 0; */
   }
-  .innerrow{
+ 
+  .inerrow1{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 0;
@@ -434,5 +435,8 @@ hr.vertical {
 
   .checkpinbtn{
     padding: 0;
+  }
+  .buynowcol{
+    margin-bottom: 20px;
   }
 }

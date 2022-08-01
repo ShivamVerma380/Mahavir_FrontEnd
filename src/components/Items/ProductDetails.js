@@ -731,7 +731,7 @@ function ProductDetails() {
 
 
 
-                  <Row className="innerrow">
+                  <Row className="inerrow1">
                     <h2 className="productname">{product.productName}</h2>
                     {/* <Col className="star" md={2} style={{ textAlign: "right" }} >
                       {Math.round(review.averageRatings * 10) / 10}<AiFillStar />
@@ -921,7 +921,7 @@ function ProductDetails() {
                     }
 
                   </Row>
-                  <Row className="innerrow">
+                  <Row className="inerrow1">
                   {
                     (variantKeys.length > 0) ? (
                       <h4 className="rowtitle">Variants</h4>
@@ -977,7 +977,7 @@ function ProductDetails() {
           } */}
 
 
-                  <Row className="innerrow">
+                  <Row className="inerrow1">
                     <Col>
                       <h4 className="rowtitle">Enter Pincode:</h4>
                     </Col>
@@ -1042,7 +1042,7 @@ function ProductDetails() {
                     </Col>
                   </Row> */}
 
-                  <Row className="innerrow">
+                  <Row className="inerrow1">
                   <h4 className="rowtitle">Model Number: <b>{product.modelNumber}</b> </h4>
 
                     <h4 className="rowtitle">Specifications</h4>
@@ -1066,14 +1066,26 @@ function ProductDetails() {
                   </Row>
                   <Row>
                     <h4 className="rowtitle">Ratings and Reviews</h4>
-                    <Col md={2} style={{ display: "flex" }}>
 
-                      <h3>{Math.round(review.averageRatings * 10) / 10}</h3>
+                      {/* <h3>{Math.round(review.averageRatings * 10) / 10}</h3>
                       <span style={{ marginRight: '20px', marginTop: '20px' }}></span>
-                      <AiIcons.AiFillStar size={20} />
-                    </Col>
+                      <AiIcons.AiFillStar size={20} /> */}
+                      <center>
+                      <ul className="list-inline small">
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
+                      <span style={{marginRight:'10px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
+                      <span style={{marginRight:'10px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
+                      <span style={{marginRight:'10px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
+                      <span style={{marginRight:'10px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-3x"></i></li>
+                      <span style={{marginRight:'10px'}}></span>
+                      </ul>
+                      </center>
 
-                    <Col md={1} style={{ paddingLeft: "5px" }}>
+                    <Col style={{display:'inline-grid',justifyContent:'end'}}>
                       <p >5⭐</p>
                       <p >4⭐</p>
                       <p >3⭐</p>
@@ -1082,7 +1094,7 @@ function ProductDetails() {
                     </Col>
 
 
-                    <Col md={3}>
+                    <Col >
 
                       <div>
                         <ProgressBar style={{ marginBottom: "2px" }} animated striped variant={variantcolorfive} now={(review.nosOfFiveStars / review.totalReviews) * 100} />
@@ -1096,7 +1108,7 @@ function ProductDetails() {
                         <ProgressBar style={{ marginBottom: "2px" }} animated striped variant={variantcolorone} now={(review.nosOfOneStars / review.totalReviews) * 100} />
                       </div>
                     </Col>
-                    <Col md={1}>
+                    <Col>
                       <p >{review.nosOfFiveStars}</p>
                       <p >{review.nosOfFourStars}</p>
                       <p >{review.nosOfThreeStars}</p>
