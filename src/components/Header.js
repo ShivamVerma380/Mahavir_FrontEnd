@@ -113,7 +113,7 @@ const Header = ({productList}) => {
         <div className="Header">
 
   {['md'].map((expand) => (
-    <Navbar className="header" key={expand} bg="light" expand={expand} >
+    <Navbar className="header" key={expand} bg="light" expand={expand} fixed="top" >
       <Container fluid>
         <Navbar.Brand href="/" style={{fontFamily:"PublicaSans-Bold", fontSize:'42px',color:' #ED1C24'}}><img className="logo_mahavir" src = {require ('../assets/mahavirlogo.jpg')}/><span style={{marginLeft:'10px'}}></span>Mahavir</Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />

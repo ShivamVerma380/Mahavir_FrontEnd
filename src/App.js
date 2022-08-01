@@ -366,7 +366,7 @@ function App() {
       {/* <AddItem/> */}
 
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
-      
+      <div>
      {
         fetchSlideshow()
       
@@ -444,6 +444,7 @@ function App() {
 
     
      <Footer/>
+     </div>
      {/* <DeveloperPage/> */}
     </div>
     
