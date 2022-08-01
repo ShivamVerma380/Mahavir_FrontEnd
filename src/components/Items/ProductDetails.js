@@ -1,5 +1,5 @@
 import { Input } from "reactstrap";
-import { ProgressBar, Form, Button, Col, Container, Row, Card ,Modal,Image} from "react-bootstrap";
+import { ProgressBar, Form, Button, Col, Container, Row, Card ,Modal,Image,Carousel} from "react-bootstrap";
 import Header from "../Header";
 import Zoom from "react-img-zoom";
 import "./ProductDetails.css"
@@ -590,6 +590,11 @@ function ProductDetails() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
 
 
   return (
@@ -609,11 +614,34 @@ function ProductDetails() {
         (isProductFetched) ? (
           <>
 
+
             <div className="productdetailrow">
+              
               <Row className="row1">
                 <Col md={6} className="innercol">
                   <div >
-                    <Row style={{marginBottom:'20px'}}>
+                  <Row className="imageslider">
+              <Carousel activeIndex={index} onSelect={handleSelect}>
+                  <Carousel.Item>
+                    {
+                      getproductimg1(product)
+                    }
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    {getproductimg2(product)}
+                  </Carousel.Item>
+                  <Carousel.Item>
+                  {getproductimg3(product)}
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    {getproductimg4(product)}
+                  </Carousel.Item>
+                  <Carousel.Item>
+                  {getproductimg5(product)}
+                  </Carousel.Item>
+                </Carousel>
+              </Row>
+                    <Row className="laptopimg" style={{marginBottom:'20px'}}>
                       <Col md={2} className='smallImg'>
 
                         {getproductimg1(product)}
@@ -735,7 +763,7 @@ function ProductDetails() {
                  
                   
                   <hr></hr>
-                  <Row style={{display:'flex',padding:'2%'}} >
+                  <Row className="offerrow" >
                     <h4 className="rowtitle">Offers</h4>
                     <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
                     <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
@@ -911,7 +939,7 @@ function ProductDetails() {
                             <h5 className="infotitle">{key.substring(1)}</h5>
 
                             </Col>
-                            <Col md={10} style={{display:'flex'}}>
+                            <Col md={10} className="infovalues">
                             {
                               product.variantTypes[key].map((index) => {
                                 return (
@@ -950,13 +978,13 @@ function ProductDetails() {
 
 
                   <Row className="innerrow">
-                    <Col md={3}>
+                    <Col>
                       <h4 className="rowtitle">Enter Pincode:</h4>
                     </Col>
-                    <Col md={6}>
+                    <Col>
                       <Input type="number" onChange={InputPin}></Input>
                     </Col>
-                    <Col md={3}>
+                    <Col>
                       <Button className="checkpinbtn" onClick={CheckPinHandler}>Check Pincode</Button>
 
                     </Col>

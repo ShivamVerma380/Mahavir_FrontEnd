@@ -3,7 +3,11 @@ body{
 }
 
 .Header{
+    background-color: white;
+    width: 100%;
+    position: fixed;
     font-family: 'Roboto';
+    z-index: 2;
 }
 
 .Header .dropdown-menu.show {
@@ -40,7 +44,7 @@ body{
 }
 @media screen and (min-width:320px) and (max-width:480px) {
     .offcanvas-body {
-        background-image: linear-gradient(225deg, #101214, transparent);
+        /* background-image: linear-gradient(225deg, #101214, transparent); */
         
     }
     
