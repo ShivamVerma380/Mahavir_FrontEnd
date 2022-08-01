@@ -7,7 +7,7 @@ body{
     width: 100%;
     position: fixed;
     font-family: 'Roboto';
-    z-index: 2;
+    z-index: 4;
 }
 
 .Header .dropdown-menu.show {
