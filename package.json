@@ -112,5 +112,7 @@
     "@iconify/react": "^3.2.2",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com",
+  "start": "react-scripts --max_old_space_size=4096 start",
+  "build": "react-scripts --max_old_space_size=4096 build"
 }
