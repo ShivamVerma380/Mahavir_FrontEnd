@@ -121,7 +121,7 @@ function ComparisonHeader({product}){
     console.log("length",length);
     return(
         
-            <Row className="ComparisonHeader">
+            <Row className="CompareHeader">
             
             <Col md={2} style={{justifyContent:'center'}} className="colll">
                 {
@@ -167,9 +167,10 @@ function ComparisonHeader({product}){
                         <Col md={2} className="colll">
                         
                             <Row>
-                                
-                        <Image thumbnail="true" style={{ alignContent: "center" }}  src={index.productImage1}/>
-                        <Button className="cross" style={{height:'50px', width:'50px',marginTop:'-90%',marginLeft:'80%'}} onClick={()=>handleRemoveProduct(index.modelNumber)}>X</Button>
+                            
+                        <Image  style={{ height:'130px',width:'190px', alignContent: "center" }}  src={index.productImage1}/>
+                        <Button className="cross" style={{height:'40px', width:'40px'}} onClick={()=>handleRemoveProduct(index.modelNumber)}>X</Button>
+                        
                                
                                 
                                 
@@ -193,7 +194,7 @@ function ComparisonHeader({product}){
                     return(
                         <Col md={2} className="colll">
 
-                            <Image  thumbnail="true" height={250} width={200} style={{backgroundColor:'gray'}} />
+                            <Image  thumbnail="true" height={130} width={190} />
                             
                             <h6 style={{ fontSize:'20px', marginTop: "20px" }} >Add a Product</h6>
                             

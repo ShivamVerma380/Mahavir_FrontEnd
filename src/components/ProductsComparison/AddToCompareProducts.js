@@ -65,7 +65,10 @@ function AddToCompareProducts(){
         }
     return(
         <>
-       <Header/>
+        <Row>
+        <Header/>
+        </Row>
+       
         <Row>
             {
                 (isProductFetched)?(

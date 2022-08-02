@@ -1,5 +1,13 @@
 .ComparisonHeader{
-    /* margin-top: 40px; */
+    /* margin-top: 80px; */
+    margin-left: 40px;
+    margin-right: 40px;
+    justify-content: center;
+    border-top: solid 1px grey;
+}
+
+.CompareHeader {
+    margin-top: 80px;
     margin-left: 40px;
     margin-right: 40px;
     justify-content: center;
@@ -10,14 +18,14 @@
     /* position: absolute; */
     z-index: 2;
     top: 0;
-    right: 15px;
-    height: 34px;
-    width: 34px;
+    /* right: 15px; */
+    /* height: 34px;
+    width: 34px; */
     background-color: #fff;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
     border: 1px solid rgba(0,0,0,.06);
     border-radius: 50%;
-    font-size: 15px;
+    /* font-size: 15px; */
     line-height: 32px;
     color: #878787;
     text-align: center;

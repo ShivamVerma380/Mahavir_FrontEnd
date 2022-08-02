@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Button, Form, Card, Container ,Image, NavDropdown,Accordion } from "react-bootstrap";
+import { Col, Row, Button, Form, Card, Container ,Image, NavDropdown,Accordion,Offcanvas,Navbar } from "react-bootstrap";
+
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
@@ -299,6 +300,7 @@ function TestFilterProducts(){
 
 
     function handleCategoryCheck(cat){
+        alert("hi")
         var element = document.getElementById(cat)
         if(element.checked ==true){
             console.log(cat," is checked")
@@ -546,8 +548,99 @@ function TestFilterProducts(){
       window.addEventListener('scroll', toggleVisible);
 
     return(
-        <div>
-             {
+        <>
+
+
+             
+           <Row className="offcampusfilters">
+         {[false].map((expand) => (
+        <Navbar key={expand} bg="light" expand={expand} className="mb-3" className="filternav" >
+          <Container fluid>
+            <Navbar.Brand href="#">Filters</Navbar.Brand>
+            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+            <Navbar.Offcanvas
+              id={`offcanvasNavbar-expand-${expand}`}
+              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+              placement="end"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                Filters
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body >
+                {
+                    (isCategoriesFetched)?(
+                        categories.map(cat=>{
+                            return(
+                                <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
+                            )
+                        })
+                    ):(
+                        null
+                    )
+                }
+                <hr></hr><br></br>
+                <React.Fragment>
+               
+                
+                <Slider
+                    defaultValue={[parseInt(min),parseInt(max)]}
+                    onChange={rangeSelector}
+                    valueLabelDisplay="on"
+                    min={parseInt(min)}
+                    max={parseInt(max)}
+                />
+                </React.Fragment>
+
+                
+               
+                <br></br><br></br>
+                {
+                    (isFiltersFetched)?(
+                        keySet.map((index,pos)=>{
+                            return(
+                                <div >
+                                    
+                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
+                                    <Accordion.Item eventKey={pos}>
+                                                    <Accordion.Header>{index}</Accordion.Header>
+                                                    <Accordion.Body>
+                                                                
+                                    {
+                                        filters[index].map(f=>{
+                                            return(
+                                                <>
+                                                
+                                                    <Form>
+                                                        <Form.Check style={{fontSize:'18px',fontWeight:'600'}} type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
+                                                    </Form>
+                                                     
+                                                </>
+                                                
+                                                
+                                            )
+                                        
+                                            
+                                        })
+                                    }
+                                    </Accordion.Body>
+                                    </Accordion.Item>
+                                    </Accordion>
+                                </div>
+                            )
+                        })
+                    ):(
+                        null
+                    )
+                }
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Container>
+        </Navbar>
+      ))} 
+            </Row>
+            {
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
           }
@@ -560,8 +653,6 @@ function TestFilterProducts(){
           }
         
         <Row className="mainpage">
-           
-            
             <Col md={2} className="filtercol">
                 <h5>Category</h5>
                 {
@@ -654,7 +745,7 @@ function TestFilterProducts(){
             {
                 // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
                 <Row className="filterproductsRow">
-                    <Col md={8}>
+                    <Col>
                         <NavDropdown title="Sort By">
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
@@ -664,7 +755,7 @@ function TestFilterProducts(){
                         </NavDropdown>
                     </Col> 
                     
-                    <Col md={4}>
+                    <Col>
                         
                     <p className="products"><b>{selectedProducts.length}</b> Products Found</p>
                     </Col> 
@@ -712,7 +803,7 @@ function TestFilterProducts(){
             </div>
             </div>
             </div> */}
-                                        <Col md={2} >
+                                        <Col md={2} className="imagecol">
                                             <Image thumbnail="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
                                             {/* <br></br>
                                             <p>{index.modelNumber}</p> */}
@@ -793,29 +884,28 @@ function TestFilterProducts(){
                                                 </Col>
                                             </Row>
                                             <Row className="checkboxx">
-                                                <Form style={{
-                                                    fontWeight: '500',
-                                                    fontSize: '175%',
-                                                    marginLeft:'10px'
-                                                }}>
+                                                <Form className="check">
                                                     <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
                                                 </Form>
                                             </Row>
                                             <br></br>
 
-                                            <Row >
-                                                                                           
-                                                    <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button>
-                                               
-                                               
+                                            <Row className="btnrow">
+                                            <Col>
+                                                <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button>
+                                            </Col>   
+                                            <Col>
+                                                <Button className="filterproductBtn" variant="outline-primary">Add to wishlist</Button>
+                                            </Col>                                                                                                                  
+                                            </Row>
+
+                                            <Row className="btnrow2">
+                                            <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button>
+                                            <Button className="filterproductBtn" variant="outline-primary">Add to wishlist</Button>
 
                                             </Row>
                                              
-                                            <Row >
-                                             
-                                            <Button className="filterproductBtn" variant="outline-primary">Add to wishlist</Button>
-                                           
-                                            </Row >
+                                            
 
                                         </Col>
                                         
@@ -835,7 +925,7 @@ function TestFilterProducts(){
                 }
             </Col>
         </Row>
-        </div>
+        </>
 
         
         

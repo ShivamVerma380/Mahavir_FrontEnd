@@ -30,6 +30,11 @@ width: 100%;
    
 }
 
+.imagecol{
+    display: grid;
+    align-content: center;
+}
+
 .innerrow{
     margin-bottom: 2px;
     margin-top: 2px;
@@ -193,6 +198,10 @@ width: 100%;
     color: #fff;
     transform: translateY(10px);
 }
+
+.offcampusfilters{
+    display: none; 
+}
 @media only screen and (max-width: 1024px){
     .filterproductsRow{
         width: 100%;
@@ -292,10 +301,22 @@ width: 100%;
     background-color: #ED1C24;
 }
 
-.mainpage{
-    margin: 2%;
+.mainpage {
+    margin: 7% 2% 2% 2%;
 }
 
+.check{
+    
+        font-weight: 500;
+        font-size: 175%;
+        margin-left:0px
+}
+.filternav{
+    width: 100%;
+}
+.btnrow{
+    display: none;
+}
 .ratings i{font-size: 16px;color: red}
 .strike-text{color: red;text-decoration: line-through}
 .product-image{width: 100%}
@@ -304,3 +325,92 @@ display: inline-block}
 .spec-1{color: #938787;font-size: 15px}
 h5{font-weight: 400}
 .para{font-size: 16px}
+
+@media screen and (min-width:320px) and (max-width:480px){
+/* mobile  */
+    .filtercol{
+        display: none;
+    }
+    .filterproductsRow{
+        width: 100%;
+        margin: 0;
+        margin-bottom: 20px;
+        border: solid 2px #0b4268;
+    }
+    .products{
+        font-size: medium;
+    }
+    .filterproductsRow .nav-link{
+        padding-left: 0%;
+    }
+    
+    .filterproductImage {
+        height: 90%;
+        width: 70%;
+    }
+    .lastcol{
+        display: inline-grid;
+        justify-content: center;
+        border-left: none;
+    }
+    .innerrow{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .check{
+        display: none;
+        font-weight: 500;
+        font-size: 135%;
+        margin-left:0px
+    }
+    .imagecol{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .filterproductBtn1{
+        margin-left: 0;
+    width: 100%;
+    height: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #0b4268;
+    border-color: #0b4268;
+    margin-bottom: 0px;
+    }
+    .filterproductBtn {
+        margin-left: 0px;
+        width: 100%;
+        height: 50px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #0b4268;
+        border-color: #0b4268;
+    }
+    #comparebtn{
+        display: none;
+    }
+
+    .offcampusfilters{
+        display: grid;
+    }
+    .filternav {
+        margin-top: 84px;
+        position: fixed;
+        width: 100%;
+        background-color: white;
+    }
+   
+    .mainpage {
+        margin: 40% 1% 1% 1%;
+    }
+    .btnrow{
+        display: inline-flex;
+    }
+    .btnrow2{
+        display: none;
+    }
+
+}

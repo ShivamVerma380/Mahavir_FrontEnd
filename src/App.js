@@ -94,7 +94,8 @@ function App() {
 
   //localStorage.setItem("product",JSON.stringify(products));
 
-  
+  // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+  var uri = "http://localhost:8080";
   
   useEffect(() => {
     
@@ -123,7 +124,7 @@ function App() {
 
       axios({
         method:"get",
-        url:"http://localhost:8080/get-offers"
+        url:uri+"/get-offers"
       }).then(function(response){
         console.log(response);
         console.log("Poster response: ",response.data)
@@ -152,7 +153,7 @@ function App() {
         console.log("error",error);
       })
 
-      axios.get("http://localhost:8080/refresh-token",{
+      axios.get(uri+"/refresh-token",{
         headers:{
           "Authorization":"Bearer "+getCookie("jwtToken"),
           "isRefreshToken":"true"
@@ -171,7 +172,7 @@ function App() {
       })
 
 
-      axios.get("http://localhost:8080/get-categories").then(function(response){
+      axios.get(uri+"/get-categories").then(function(response){
         console.log(response);
         if(response.status==200){
             setcategoryDisplay(response.data);
@@ -183,7 +184,7 @@ function App() {
           console.log(error);
       })
 
-      axios.get("http://localhost:8080/deals").then(
+      axios.get(uri+"/deals").then(
             function(response){
               if(response.status==200){
                 console.log(response.data);
@@ -196,7 +197,7 @@ function App() {
             }
           )
 
-      axios.get("http://localhost:8080/hybrid-posters").then(function(response){     
+      axios.get(uri+"/hybrid-posters").then(function(response){     
       if(response.status==200){
         console.log("Products",response.data);
         setProducts(response.data);
@@ -208,7 +209,7 @@ function App() {
         console.log(error);
       })
 
-      axios.get("http://localhost:8080/get-posters").then(function(response){     
+      axios.get(uri+"/get-posters").then(function(response){     
       if(response.status==200){
         console.log("Posters",response.data);
         setPosters(response.data);
@@ -222,7 +223,7 @@ function App() {
 
       var urls=[];
             categoryDisplay.map(index => {
-                urls.push(axios.get("http://localhost:8080/get-products-by-category/"+index.category));
+                urls.push(axios.get(uri+"/get-products-by-category/"+index.category));
             })
             axios.all(urls).then(
                 axios.spread((...res)=>{
@@ -366,7 +367,7 @@ function App() {
       {/* <AddItem/> */}
 
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
-      
+      <div>
      {
         fetchSlideshow()
       
@@ -444,6 +445,7 @@ function App() {
 
     
      <Footer/>
+     </div>
      {/* <DeveloperPage/> */}
     </div>
     

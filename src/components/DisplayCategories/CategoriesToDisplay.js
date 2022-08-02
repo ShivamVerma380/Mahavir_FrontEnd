@@ -34,8 +34,7 @@ function CategoriesToDisplay({ categoryDetail }) {
   }
 
   return (
-    <div className="Category" >
-      
+    <div className="Category" style={{marginTop:'92px'}} >
 
       {['sm'].map((expand) => (
 
