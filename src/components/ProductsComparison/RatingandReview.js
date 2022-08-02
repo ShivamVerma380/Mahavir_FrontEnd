@@ -10,6 +10,8 @@ const RatingandReview = ({review}) => {
     const[reviews,setReviews] = useState([]);
     const[isReviewsFetched,setIsReviewsFetched] = useState(false);
 
+    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    //var uri = "http://localhost:8080";
     useEffect(()=>{
         if(!isReviewsFetched){
         // axios.get("http://localhost:8080/get-reviews/"+review.modelNumber)
@@ -28,7 +30,7 @@ const RatingandReview = ({review}) => {
             var urls = []
             review.map(index=>{
                 if(index!=="")
-                    urls.push(axios.get("http://localhost:8080/get-reviews/"+index.modelNumber))
+                    urls.push(axios.get(uri+"/get-reviews/"+index.modelNumber))
             })
             axios.all(urls).then(axios.spread((...response) => {
                 console.log("response",response)

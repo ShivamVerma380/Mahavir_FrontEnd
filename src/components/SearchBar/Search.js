@@ -11,11 +11,13 @@ function Search(){
 
     const navigate = useNavigate();
 
+    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    //var uri = "http://localhost:8080";
     
 
     useEffect(()=>{
         if(!isProductsFetched){
-            axios.get("http://localhost:8080/get-search-products")
+            axios.get(uri+"/get-search-products")
                 .then(function(response){
                     if(response.status==200) {
                         // response.data.map(index=>{

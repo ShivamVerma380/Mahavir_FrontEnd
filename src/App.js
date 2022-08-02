@@ -94,8 +94,8 @@ function App() {
 
   //localStorage.setItem("product",JSON.stringify(products));
 
-  // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-  var uri = "http://localhost:8080";
+  var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+  // var uri = "http://localhost:8080";
   
   useEffect(() => {
     

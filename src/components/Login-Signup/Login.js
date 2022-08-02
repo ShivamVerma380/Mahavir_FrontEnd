@@ -32,6 +32,9 @@ var newtoken="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxc2EiL
 localStorage.setItem("isUserLoggedIn", isUserLoggedIn);
 
 function Login() {
+    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    //var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+
     const navigate = useNavigate();
 
     const [isOTPSent, setIsOTPSent] = useState(true);
@@ -119,7 +122,7 @@ function Login() {
         var authorization = "Bearer "+{tokenn};
         console.log(authorization);
 
-        axios.post("http://localhost:8080/login-user", form_data_body, {
+        axios.post(uri+"/login-user", form_data_body, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
@@ -189,7 +192,7 @@ function Login() {
             console.log("Email", email);
             axios({
                 method: "get",
-                url: "http://localhost:8080/verify-email/" + email
+                url: uri+"/verify-email/" + email
             }).then(function (response) {
                 console.log(response.data);
                 otp = response.data.otp;
@@ -219,7 +222,7 @@ function Login() {
             console.log("Email", email);
             axios({
                 method: "get",
-                url: "http://localhost:8080/forgotPassword/" + email
+                url: uri+"/forgotPassword/" + email
             }).then(function (response) {
                 console.log(response.data);
                 otp = response.data.otp;
@@ -283,7 +286,7 @@ function Login() {
                 "last_name": lastName,
                 "PhoneNo": phoneNo
             }
-            axios.post("http://localhost:8080/add-user", form_data_body, {
+            axios.post(uri+"/add-user", form_data_body, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
@@ -326,7 +329,7 @@ function Login() {
                 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxc2F3YSIsImV4cCI6MTY1NzEwMTU1NSwiaWF0IjoxNjU3MDAxNTU1fQ._jesI7VfBoiXAqTQjlNVyJo0i5YDLh_XJUBL7LNDzc4'
                 
             };
-            axios.put('http://localhost:8080/updatePassword/'+newpassword,{headers})
+            axios.put(uri+'/updatePassword/'+newpassword,{headers})
             .then(function (response) {
                     if (response.status == 200) {
                         console.log("Password Updated successfully");
@@ -371,7 +374,7 @@ function Login() {
         alert("Resend Clicked")
         axios({
             method: "get",
-            url: "http://localhost:8080/resend-otp/" + email
+            url: uri+"/resend-otp/" + email
         }).then(function (response) {
             console.log(response.data);
             otp = response.data.otp;

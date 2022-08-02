@@ -4,10 +4,10 @@ import { Container ,Table} from 'react-bootstrap';
 function CompletedOrders(){
     const [completedOrders,SetCompletedOrders] = useState([]);
     const [isCompletedOrdersFetched,SetIsCompletedOrdersFetched] = useState(false);
-    
+    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
     useEffect(()=>{
         if(!isCompletedOrdersFetched){
-            axios.get("http://localhost:8080/completed-orders")
+            axios.get(uri+"/completed-orders")
                 .then(function(response){
                     if(response.status==200){
                         console.log("Response success:",response.data);
