@@ -641,14 +641,63 @@ function ProductDetails() {
                   </Carousel.Item>
                 </Carousel>
               </Row> */}
+
+                    
                     <Row className="laptopimg" style={{marginBottom:'20px'}}>
                       <Col md={2} className='smallImg'>
+                      <div className="swiper-button-next"></div>
+                      <Swiper style={{marginTop:35}}
+                      height={350}
+                      
+                slidesPerView={4}
+                spaceBetween={5}
+                slidesPerGroup={4}
+                loop={false}
+                loopFillGroupWithBlank={true}
+                breakpoints={{
+                  700: {
+                    slidesPerView: 4,
+                  },
+                  400: {
+                    slidesPerView: 1,
+                  },
+                }}
+                direction={"vertical"}
+                pagination={{
+                  clickable: true,
+                }}
+                navigation={{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"}}
+            
+                modules={[Pagination,Navigation]}
+                className="mySwiper"
+              > 
+                
+                  
 
+                      
+                      <SwiperSlide>                     
                         {getproductimg1(product)}
+                                        
+                      </SwiperSlide>
+                      <SwiperSlide>
                         {getproductimg2(product)}
-                        {getproductimg3(product)}
-                        {getproductimg4(product)}
-                        {getproductimg5(product)}
+                      </SwiperSlide>
+                      <SwiperSlide>
+                      {getproductimg3(product)}
+                    </SwiperSlide>
+                    <SwiperSlide>
+                    {getproductimg4(product)}
+                  </SwiperSlide>
+                  <SwiperSlide>
+                  {getproductimg5(product)}
+                </SwiperSlide>
+                
+                    
+                  
+                
+              </Swiper>
+              <div className="swiper-button-prev"></div>
+                        
 
                       </Col>
 
