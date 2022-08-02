@@ -5,6 +5,7 @@ import { Nav, Navbar, FormControl, Container, NavLink, Form, NavDropdown, Offcan
 
 import { useNavigate } from "react-router-dom";
 import "./CategoriesToDisplay.css"
+import { slide as Menu } from 'react-burger-menu'
 
 function CategoriesToDisplay({ categoryDetail }) {
 
@@ -34,12 +35,13 @@ function CategoriesToDisplay({ categoryDetail }) {
 
   return (
     <div className="Category" >
+      
 
       {['sm'].map((expand) => (
 
         <Navbar style={{background:'#2b2d42', zIndex: '1', height:60}} bg="dark" key={expand} class="border-top" expand={expand} variant="dark">
           <Container fluid>
-
+          
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -52,6 +54,7 @@ function CategoriesToDisplay({ categoryDetail }) {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
+              
                 <Nav className="justify-content-center flex-grow-1 pe-3">
                   {
 
