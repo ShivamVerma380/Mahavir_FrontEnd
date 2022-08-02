@@ -96,6 +96,9 @@ function ProductDetails() {
 
 
 
+  var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+  //var uri = "http://localhost:8080";
+
 
   useEffect(() => {
 
@@ -107,7 +110,7 @@ function ProductDetails() {
 
       axios({
         method: "get",
-        url: "http://localhost:8080/pincodes"
+        url: uri+"/pincodes"
       }).then(function (response) {
         console.log("Pincode response: ", response);
         if (response.status == 200) {
@@ -129,7 +132,7 @@ function ProductDetails() {
 
       axios({
         method: "get",
-        url: "http://localhost:8080/get-products/" + localStorage.getItem("productSelected")
+        url: uri+"/get-products/" + localStorage.getItem("productSelected")
       }).then(function (response) {
         console.log(response);
         if (response.status == 200) {
@@ -173,7 +176,7 @@ function ProductDetails() {
 
       axios({
         method: "get",
-        url: "http://localhost:8080/get-reviews/" + localStorage.getItem("productSelected")
+        url: uri+"/get-reviews/" + localStorage.getItem("productSelected")
       }).then(function (reviewresponse) {
         console.log(reviewresponse);
         if (reviewresponse.status == 200) {
@@ -190,8 +193,8 @@ function ProductDetails() {
         console.log("error", error);
       })
 
-      console.log("Url", "http://localhost:8080/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category"));
-      axios.get("http://localhost:8080/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category")).then(
+      console.log("Url", uri+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category"));
+      axios.get(uri+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category")).then(
         function (response) {
           if (response.status == 200) {
             console.log(response.data);
@@ -286,7 +289,7 @@ function ProductDetails() {
         modelNumber: product.modelNumber,
       }
 
-      axios.post("http://localhost:8080/add-to-cart", form_data_body, {
+      axios.post(uri+"/add-to-cart", form_data_body, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Authorization": "Bearer " + localStorage.getItem("jwtToken")
@@ -569,9 +572,9 @@ function ProductDetails() {
       console.log("string", string);
       console.log("required", required);
       console.log("model No", product.modelNumber)
-      console.log("url", "http://localhost:8080/variant" + product.modelNumber + "/" + string.trim() + "/" + required.trim());
+      console.log("url", uri+"/variant" + product.modelNumber + "/" + string.trim() + "/" + required.trim());
 
-      axios.get("http://localhost:8080/variant/" + product.modelNumber + "/" + string.trim() + "/" + required.trim())
+      axios.get(uri+"/variant/" + product.modelNumber + "/" + string.trim() + "/" + required.trim())
         .then(function (response) {
           if (response.status == 200) {
             console.log("product", response)

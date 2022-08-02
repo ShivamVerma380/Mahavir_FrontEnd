@@ -23,6 +23,11 @@ var flag = false;
 
 const SelCatProducts=()=>{
 
+    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+
+    //var uri = "http://localhost:8080";
+
+
     const navigate = useNavigate();
 
     const [products,setProduct]= useState([]);

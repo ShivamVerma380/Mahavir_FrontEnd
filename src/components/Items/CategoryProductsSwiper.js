@@ -40,14 +40,16 @@ function CategoryProductsSwiper({ cattitle }) {
   //   navigate("/productDetails")
   //   //console.log("Product selected ",index);
   // }
+  var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
 
+  // var uri = "http://localhost:8080";
   useEffect(() => {
     window.addEventListener('scroll', () => { if (window.scrollY > 700) { setAnimation(true); } else { setAnimation(false); } });
 
 
-
+    
     if (!isProductsFetched) {
-      axios.get("http://localhost:8080/get-products-by-category/" + cattitle).then(function (response) { 
+      axios.get(uri+"/get-products-by-category/" + cattitle).then(function (response) { 
         console.log(response);
         if (response.status == 200) {
           setProducts(response.data);
@@ -177,7 +179,7 @@ function CategoryProductsSwiper({ cattitle }) {
 
     }
 
-    axios.post("http://localhost:8080/wishlist", formdata, {
+    axios.post(uri+"/wishlist", formdata, {
       headers: {
         "Authorization": "Bearer " + token,
         "Content-Type": "multipart/form-data"

@@ -56,6 +56,9 @@ function TestFilterProducts(){
 
     const[filterselected,SetFilterSelected] = useState([])
 
+
+    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    //var uri = "http://localhost:8080";
     
     
     // if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
@@ -70,7 +73,7 @@ function TestFilterProducts(){
     useEffect(()=>{
         window.addEventListener('scroll', () => { if (window.scrollY > 400) { setShowTopBtn(true); } else { setShowTopBtn(false); } });
         if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched){
-            axios.get("http://localhost:8080/get-products-by-category/"+localStorage.getItem("Category"))
+            axios.get(uri+"/get-products-by-category/"+localStorage.getItem("Category"))
             .then(function(response){
                 SetProducts(response.data);
                 if(localStorage.getItem("SubCategory")==null || localStorage.getItem("SubSubCategory")==null){
@@ -139,7 +142,7 @@ function TestFilterProducts(){
             })
 
             if(!isCategoriesFetched){
-                axios.get("http://localhost:8080/get-categories")
+                axios.get(uri+"/get-categories")
                 .then(function(response){
                     response.data.map(cat=>{
                         categories.push(cat.category);
@@ -152,7 +155,7 @@ function TestFilterProducts(){
             
             
             
-            axios.get("http://localhost:8080/filtercriterias/"+localStorage.getItem("Category"))
+            axios.get(uri+"/filtercriterias/"+localStorage.getItem("Category"))
                 .then(function(response){
                     SetFilters(response.data.filterCriterias);
                     for(var key in response.data.filterCriterias){
@@ -260,7 +263,7 @@ function TestFilterProducts(){
   
         }
   
-        axios.post("http://localhost:8080/wishlist", formdata, {
+        axios.post(uri+"/wishlist", formdata, {
           headers: {
             "Authorization": "Bearer "+token,
             "Content-Type": "multipart/form-data"
