@@ -230,20 +230,20 @@ hr.vertical {
  
 
 } */
-.swiper-button-prev {
+/* .swiper-button-prev {
   left: 9.5%;
   top:2%;
   
   transform: rotate(90deg);
   transform-origin: left-center;
-}
+} */
 
-.swiper-button-next {
+/* .swiper-button-next {
   left:9.5%;
   top:69%;
   transform: rotate(90deg);
   transform-origin: left-center;
-}
+} */
 
 .innercol{
   /* padding: 1%; */

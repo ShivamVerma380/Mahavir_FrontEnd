@@ -648,7 +648,7 @@ function ProductDetails() {
                     
                     <Row className="laptopimg" style={{marginBottom:'20px'}}>
                       <Col md={2} className='smallImg'>
-                      <div className="swiper-button-next"></div>
+                      {/* <div className="swiper-button-next"></div>
                       <Swiper style={{marginTop:35}}
                       height={350}
                       
@@ -669,16 +669,18 @@ function ProductDetails() {
                 pagination={{
                   clickable: true,
                 }}
-                navigation={{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"}}
+                navigation={true}
             
                 modules={[Pagination,Navigation]}
-                className="mySwiper"
-              > 
+                // className="mySwiper"
+              >  */}
                 
-                  
-
-                      
-                      <SwiperSlide>                     
+                {getproductimg1(product)}
+                {getproductimg2(product)}
+                {getproductimg3(product)}
+                {getproductimg4(product)}
+                {getproductimg5(product)}
+                      {/* <SwiperSlide>                     
                         {getproductimg1(product)}
                                         
                       </SwiperSlide>
@@ -693,13 +695,13 @@ function ProductDetails() {
                   </SwiperSlide>
                   <SwiperSlide>
                   {getproductimg5(product)}
-                </SwiperSlide>
+                </SwiperSlide> */}
                 
                     
                   
                 
-              </Swiper>
-              <div className="swiper-button-prev"></div>
+              {/* </Swiper>
+              <div className="swiper-button-prev"></div> */}
                         
 
                       </Col>

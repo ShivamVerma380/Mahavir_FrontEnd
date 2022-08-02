@@ -105,7 +105,7 @@ const ShopByBrands = () => {
                 }}
                 navigation={true}
                 modules={[Pagination, Navigation]}
-                // className="mySwiper"
+                className="mySwiper"
               > 
                 {
                   brands.map(index => {
