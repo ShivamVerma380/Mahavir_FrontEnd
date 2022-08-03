@@ -7,8 +7,8 @@ import {setCookie,getCookie} from '../Cookies';
 import './Compare.css';
 function ComparisonHeader({product}){
 
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    //var uri = "http://localhost:8080";
+    // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    var uri = "http://localhost:8080";
 
     const[length,SetLength] = useState(product.length); 
     var arr=[];
@@ -46,7 +46,7 @@ function ComparisonHeader({product}){
 
     useEffect(()=>{
         if(length<4 && !isBrandsFetched){
-            axios.get(uri+"=/get-add-to-compare-subcat/"+localStorage.getItem("Category")+"/Brand")
+            axios.get(uri+"/get-add-to-compare-subcat/"+localStorage.getItem("Category")+"/Brand")
                 .then(function(response){
                     if(response.status==200){
                         console.log("Add To Compare SubCat",response.data);
@@ -123,6 +123,7 @@ function ComparisonHeader({product}){
     localStorage.setItem("Arr",arr);
 
     console.log("length",length);
+    console.log("isBrandsFetched",isBrandsFetched);
     return(
         
             <Row className="CompareHeader">

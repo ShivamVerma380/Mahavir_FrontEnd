@@ -16,10 +16,11 @@ const ShopByBrands = () => {
 
   const [brands, setBrands] = useState([]);
   const [isBrandsFetched, setIsBrandsFetched] = useState(false);
+  var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
 
   useEffect(() => {
     if (!isBrandsFetched) {
-      axios.get("http://localhost:8080/excel/shopByBrands").then(
+      axios.get(uri+"/excel/shopByBrands").then(
         function (response) {
           if (response.status == 200) {
             console.log(response.data);
