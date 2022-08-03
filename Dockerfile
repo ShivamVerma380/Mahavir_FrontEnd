@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY . .
 
+ENV GENERATE_SOURCEMAP false
+
 RUN yarn build
 
 FROM nginx:alpine
