@@ -1,0 +1,18 @@
+.summaryTable{
+    margin-left: -25px;
+    margin-top: -50px;
+    width: 800px;
+    
+    box-sizing: border-box;
+    border: 1px solid #E2E2E2;
+    /* margin-top: px; */
+}
+
+.summarypriceTable{
+    width: 500px;
+    box-sizing: border-box;
+    border: 1px solid #E2E2E2;
+    margin-left: 40px;
+    margin-top: -50px;
+    height:300px;
+}

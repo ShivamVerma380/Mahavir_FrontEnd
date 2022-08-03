@@ -9,6 +9,10 @@ import axios from 'axios';
 import CartItem from '../Shopping-Cart/CartItem';
 import {setCookie,getCookie} from '../Cookies';
 import { Table } from 'reactstrap';
+import '../Shopping-Cart/Cart.css';
+import 'typeface-roboto'
+import './Summary.css'
+
 
 function Summary(){
 
@@ -72,136 +76,267 @@ function Summary(){
       
 
       return(
-        <div >   
-          <Header/> 
-          <div className="Cart">
-          <Row>
+    //     <div >   
+    //       <Header/> 
+    //       <div className="Cart">
+    //       <Row>
   
-          <Col sm={8}>
-          {
-              (isCartItemsFetched)?(
-                  <Table>
-                  <thead>
-                      <tr>
-                      <th> Order Summary ({cartItems.length} items)</th>
-                      </tr>
-                  </thead>
-                  </Table>
-              ):(
-                  null
-              )
-          }
+    //       <Col sm={8}>
+    //       {
+    //           (isCartItemsFetched)?(
+    //               <Table>
+    //               <thead>
+    //                   <tr>
+    //                   <th className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Order Summary ({cartItems.length} items)</th>
+    //                   </tr>
+    //               </thead>
+    //               </Table>
+    //           ):(
+    //               null
+    //           )
+    //       }
           
   
-          {/* <CartItem/> */}
-          {
-              console.log("cartDetails",cartItems)
-          }
-          {
-              (isCartItemsFetched)?(
-                  cartItems.map((index,pos)=>{
-                  console.log("CartModel in map",cartModels)
-                  console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
-                  console.log("Model Number:",index.modelNumber)
-                  return(
-                  <CartItem item={index} quantity={cartModels.get(index.modelNumber)}/>
-                  );
-              })
-              ):(null)
-          }
+    //       {/* <CartItem/> */}
+    //       {
+    //           console.log("cartDetails",cartItems)
+    //       }
+    //       {
+    //           (isCartItemsFetched)?(
+    //               cartItems.map((index,pos)=>{
+    //               console.log("CartModel in map",cartModels)
+    //               console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
+    //               console.log("Model Number:",index.modelNumber)
+    //               return(
+    //               <CartItem item={index} quantity={cartModels.get(index.modelNumber)}/>
+    //               );
+    //           })
+    //           ):(null)
+    //       }
           
-          </Col>
-          {
-              (isCartItemsFetched)?(
-                  <Col sm={4}>
-                  <Table style={{margin_top:"50px", color:'black'}} >
-                  <thead>
-                      <tr>
-                      <th> Price Details</th>
-                      <th></th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                      <td>Price ({cartItems.length} Item)</td>
-                      <td>
-                          {
+    //       </Col>
+    //       {
+    //           (isCartItemsFetched)?(
+    //               <Col sm={4}>
+    //               <Table style={{margin_top:"50px", color:'black'}} >
+    //               <thead>
+    //                   <tr>
+    //                   <th> Price Details</th>
+    //                   <th></th>
+    //                   </tr>
+    //               </thead>
+    //               <tbody>
+    //                   <tr>
+    //                   <td>Price ({cartItems.length} Item)</td>
+    //                   <td>
+    //                       {
                               
-                              cartItems.map(index=>{
-                                  {
-                                      (index.freeItem) ? (price+=(parseInt(index.productPrice)+parseInt(index.freeItem.price))*parseInt(cartModels.get(index.modelNumber))) : (price+=parseInt(index.productPrice)*parseInt(cartModels.get(index.modelNumber)))
-                                  }
+    //                           cartItems.map(index=>{
+    //                               {
+    //                                   (index.freeItem) ? (price+=(parseInt(index.productPrice)+parseInt(index.freeItem.price))*parseInt(cartModels.get(index.modelNumber))) : (price+=parseInt(index.productPrice)*parseInt(cartModels.get(index.modelNumber)))
+    //                               }
                                   
                                   
                                   
-                              })
-                          }
-                          ₹ {price}
-                          {/* ₹ 37,480 */}
-                      </td>
+    //                           })
+    //                       }
+    //                       ₹ {price}
+    //                       {/* ₹ 37,480 */}
+    //                   </td>
                       
-                      </tr>
-                      <tr>
-                          <td>Discount</td>
-                          <td>
-                              {
-                                  cartItems.map(index=>{
-                                      {
-                                          (index.freeItem) ? (discount+=((parseInt(index.freeItem.price)+(parseInt(index.productPrice)-parseInt(index.offerPrice)))*parseInt(cartModels.get(index.modelNumber)))) : (discount+=((parseInt(index.productPrice)-parseInt(index.offerPrice))*parseInt(cartModels.get(index.modelNumber))))
-                                      }
+    //                   </tr>
+    //                   <tr>
+    //                       <td>Discount</td>
+    //                       <td>
+    //                           {
+    //                               cartItems.map(index=>{
+    //                                   {
+    //                                       (index.freeItem) ? (discount+=((parseInt(index.freeItem.price)+(parseInt(index.productPrice)-parseInt(index.offerPrice)))*parseInt(cartModels.get(index.modelNumber)))) : (discount+=((parseInt(index.productPrice)-parseInt(index.offerPrice))*parseInt(cartModels.get(index.modelNumber))))
+    //                                   }
                                         
-                                  })
-                              }
-                              - ₹ {discount}
-                          </td>
-                      </tr>
-                      <tr>
-                      <td>Delivery Charges</td>
-                      <td>Free</td>
-                      </tr>
+    //                               })
+    //                           }
+    //                           - ₹ {discount}
+    //                       </td>
+    //                   </tr>
+    //                   <tr>
+    //                   <td>Delivery Charges</td>
+    //                   <td>Free</td>
+    //                   </tr>
                       
-                      <tr>
-                      <td> Total Amount</td>
-                      <td>
-                      ₹ {
-                              amount = parseInt(price)-parseInt(discount)
+    //                   <tr>
+    //                   <td> Total Amount</td>
+    //                   <td>
+    //                   ₹ {
+    //                           amount = parseInt(price)-parseInt(discount)
                               
 
-                          }
-                          {
-                            localStorage.setItem("price",amount)
-                          }
+    //                       }
+    //                       {
+    //                         localStorage.setItem("price",amount)
+    //                       }
                           
-                          {/* ₹ 37,480 */}
-                      </td>
-                      </tr>
+    //                       {/* ₹ 37,480 */}
+    //                   </td>
+    //                   </tr>
                           
-                  </tbody>
-                  </Table>
-                  <br></br>
-                  <br></br>
-                  <Row>
-                      <center>
-                      {/* <Button style={{width:"300px"}}className="btn-flat" onClick={handleCheckout}>Check Out</Button> */}
-                      </center>
-                  </Row>
-                  </Col>
-              ):(
-                  null
-              )
-          }
+    //               </tbody>
+    //               </Table>
+    //               <br></br>
+    //               <br></br>
+    //               <Row>
+    //                   <center>
+    //                   {/* <Button style={{width:"300px"}}className="btn-flat" onClick={handleCheckout}>Check Out</Button> */}
+    //                   </center>
+    //               </Row>
+    //               </Col>
+    //           ):(
+    //               null
+    //           )
+    //       }
           
-          </Row>
-          {/* <Row>
-              <Col md={7}>
-              </Col>
-              <Col >
-              <Button style={{width:"300px"}}className="btn-flat">Place Order</Button>
-              </Col>
-          </Row> */}
-          </div>
+    //       </Row>
+    //       {/* <Row>
+    //           <Col md={7}>
+    //           </Col>
+    //           <Col >
+    //           <Button style={{width:"300px"}}className="btn-flat">Place Order</Button>
+    //           </Col>
+    //       </Row> */}
+    //       </div>
   
-    </div>
-      );
+    // </div>
+    //   );
+    <div  className="cartpage">   
+        {/* <Header/>  */}
+        <div className="Cart" style={{boxSizing:"border-box"}}>
+        <Row>
+
+        <Col sm={8} className='summaryTable'>
+        {
+            (isCartItemsFetched)?(
+                <Table >
+                <thead className='cartTitle'>
+                    <tr >
+                    <th className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>ORDER SUMMARY</th>
+                    </tr>
+                </thead>
+                </Table>
+            ):(
+                null
+            )
+        }
+        
+
+        {/* <CartItem/> */}
+        {
+            console.log("cartDetails",cartItems)
+        }
+        {
+            (isCartItemsFetched)?(
+                cartItems.map((index,pos)=>{
+                console.log("CartModel in map",cartModels)
+                console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
+                console.log("Model Number:",index.modelNumber)
+                return(
+                <CartItem item={index} quantity={cartModels.get(index.modelNumber)}/>
+                );
+            })
+            ):(null)
+        }
+        
+        </Col>
+        {
+            (isCartItemsFetched)?(
+                <Col sm={4} className="summarypriceTable">
+                <Table style={{margin_top:"50px", color:'black',width:"470px"}} >
+                <thead>
+                    <tr>
+                    <th  className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Price Details</th>
+                    <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Price ({cartItems.length} Item)</td>
+                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}}>
+                        {
+                            
+                            cartItems.map(index=>{
+                                {
+                                    (index.freeItem) ? (price+=(parseInt(index.productPrice)+parseInt(index.freeItem.price))*parseInt(cartModels.get(index.modelNumber))) : (price+=parseInt(index.productPrice)*parseInt(cartModels.get(index.modelNumber)))
+                                }
+                                
+                                
+                                
+                            })
+                        }
+                        ₹ {price}
+                        {/* ₹ 37,480 */}
+                    </td>
+                    
+                    </tr>
+                    <tr>
+                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Discount</td>
+                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}} >
+                            {
+                                cartItems.map(index=>{
+                                    {
+                                        (index.freeItem) ? (discount+=((parseInt(index.freeItem.price)+(parseInt(index.productPrice)-parseInt(index.offerPrice)))*parseInt(cartModels.get(index.modelNumber)))) : (discount+=((parseInt(index.productPrice)-parseInt(index.offerPrice))*parseInt(cartModels.get(index.modelNumber))))
+                                    }
+                                      
+                                })
+                            }
+                            - ₹ {discount}
+                        </td>
+                    </tr>
+                    <tr>
+                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Delivery Charges</td>
+                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px",color:"rgba(52,184,58,1)"}}>Free</td>
+                    </tr>
+                    
+                    <tr>
+                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Total Amount</td>
+                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px"}}>
+                    ₹ {
+                            
+                            amount = parseInt(price)-parseInt(discount)
+
+                        }
+                        
+                        {/* ₹ 37,480 */}
+                    </td>
+                    </tr>
+                    <p style={{color:"rgba(52,184,58,1)",fontFamily:"typeface-roboto",fontSize:"20px",fontWeight:500,marginTop:"20px",marginLeft:"0.4rem"}}>
+                        You will save ₹{discount} on this order
+                    </p>
+                        
+                </tbody>
+                </Table>
+                <br></br>
+                <br></br>
+                {/* <Row>
+                    <center>
+                    <Button style={{height:"50px",width:"250px",background:"#C10000", fontFamily:"typeface-roboto",letterSpacing:"1px"}} className="btn-flat" onClick={handleCheckout}>CHECK OUT</Button>
+                    </center>
+                </Row> */}
+                </Col>
+            ):(
+                null
+            )
+        }
+        
+        </Row>
+        {/* <Row>
+            <Col md={7}>
+            </Col>
+            <Col >
+            <Button style={{width:"300px"}}className="btn-flat">Place Order</Button>
+            </Col>
+        </Row> */}
+        </div>
+
+  </div>
+    );
 }
 export default Summary;
