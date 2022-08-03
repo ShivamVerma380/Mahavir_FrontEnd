@@ -18,6 +18,9 @@ const ShopByBrands = () => {
   const [isBrandsFetched, setIsBrandsFetched] = useState(false);
   var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
 
+  var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+  // var uri = "http://localhost:8080";
+
   useEffect(() => {
     if (!isBrandsFetched) {
       axios.get(uri+"/excel/shopByBrands").then(

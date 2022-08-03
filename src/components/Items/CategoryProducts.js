@@ -31,11 +31,16 @@ function CategoryProducts(){
     </div>
     const [isWishlistFetched, setIsWishlistFetched] = useState(false);
     
+
+
   const [isProductFetched, setIsProductFetched] = useState(false);
     const [wish, setWish] = useState([]);
+   
+    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    // var uri = "http://localhost:8080";
     useEffect(()=>{
         if(!isProductsFetched ){
-        axios.get("http://localhost:8080/get-products-by-category/"+location.state.name).then(function(response){
+        axios.get(uri+"/get-products-by-category/"+location.state.name).then(function(response){
         console.log(response);
         if(response.status==200){
             setProducts(response.data);
@@ -53,7 +58,7 @@ function CategoryProducts(){
     if (!isWishlistFetched && !isProductFetched) {
       axios({
         method: "get",
-        url: "http://localhost:8080/wishlist",
+        url: uri+"/wishlist",
         headers: {
           "Authorization": "Bearer "+token
         }
