@@ -98,6 +98,7 @@ function App() {
   // var uri = "http://localhost:8080";
   
   useEffect(() => {
+    window.scrollTo(0, 0)
     
     // setCountc(getCookie("countcompare"));
     
@@ -351,7 +352,7 @@ function App() {
 
   return (
 
-    <div className="App" >
+    <div  >
       
       {/* <-------------------Header/> */}
       {
@@ -366,8 +367,9 @@ function App() {
       
       {/* <AddItem/> */}
 
+      
+      <div >
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
-      <div>
      {
         fetchSlideshow()
       

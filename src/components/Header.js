@@ -144,11 +144,11 @@ const Header = ({productList}) => {
       <>
       <div className="top-header">
         <Row>
-          <Col md={3}>
+          <Col md={3} style={{marginLeft:"0px"}}>
             <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginTop:"4px"}}><MdOutlineLocalShipping style={{color:"white",height:"25px",width:"25px"}}/> FREE Express Shipping On All Orders</p>
           </Col>
           <Col md={4}></Col>
-          <Col md={1}>
+          <Col md={1} style={{marginLeft:"00px"}}>
           <NavDropdown style={{color:'white',marginTop:"-6px"}} title={<p style={{color:"white",fontSize:"18px",fontFamily:'typeface-roboto'}}><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store<RiArrowDropDownLine style={{color:"white"}} size={25}/></p>} >
                     <NavDropdown.Item style={{color:'black',fontSize:"18px",fontWeight:'bold'}} href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"18px",fontWeight:'bold'}} href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
@@ -156,14 +156,14 @@ const Header = ({productList}) => {
           </NavDropdown>
           {/* <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginLeft:"30px",marginTop:"3px"}} ><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store</p> */}
           </Col>
-          <Col md={2}>
-            <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginRight:"110px",marginTop:"3px"}} ><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
+          <Col md={2} >
+            <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginTop:"3px"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
           </Col>
           <Col md={1}>
-          <AiOutlineInstagram style={{color:"white",height:"20px",width:"20px", marginTop:"7px",marginLeft:"120px"}}/>
+          <AiOutlineInstagram style={{color:"white",height:"20px",width:"20px", marginTop:"7px",marginLeft:"100px"}}/>
           </Col>
           <Col md={1}>
-            <AiOutlineFacebook style={{color:"white",height:"20px",width:"20px", marginTop:"7px",marginRight:"40px"}}/>
+            <AiOutlineFacebook style={{color:"white",height:"20px",width:"20px", marginTop:"7px",marginRight:"80px"}}/>
           </Col>
         </Row>
         
@@ -227,7 +227,7 @@ const Header = ({productList}) => {
                   (isUserLoggedIn==="true")?(
                     // <Nav.Link style={{color:'#04001d'}} title={"Hi, "+(name)}><p><FaUserAlt size={30}/>Hi, {name}</p></Nav.Link>
                     <NavDropdown style={{color:'#04001d'}} title={<><b style={{color:"#04001d",fontSize:"18px"}}><FaUserAlt style={{color:"#04001d"}} size={30}/> Hi, {name}<RiArrowDropDownLine style={{color:"#04001d"}} size={25} /></b></>} id="collasible-nav-dropdown">
-                      <NavDropdown.Item style={{color:'black'}}>My Profile</NavDropdown.Item>
+                      <NavDropdown.Item style={{color:'black'}} onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
                       <NavDropdown.Item style={{color:'black'}} target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
                     </NavDropdown>
                   ):(

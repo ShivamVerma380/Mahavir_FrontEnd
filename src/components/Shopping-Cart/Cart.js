@@ -83,7 +83,7 @@ function Cart() {
     return(
       <div  className="cartpage">   
         <Header/> 
-        <div className="Cart" style={{boxSizing:"border-box"}}>
+        <div className="Cartbody" style={{boxSizing:"border-box"}}>
         <Row>
 
         <Col sm={7} className='cartTable'>

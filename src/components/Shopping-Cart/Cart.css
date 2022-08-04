@@ -34,8 +34,14 @@
     height: 100%;
     min-height : '100vh';
     background: rgba(255, 255, 255, 0.95);
+
 }
 
 .btn-flat{
     border: none;
 }
+
+.Cartbody{
+    /* margin-bottom: 50 ; */
+}
+

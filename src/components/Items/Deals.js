@@ -184,7 +184,7 @@ function Deals({deals}) {
               
               <MDBContainer className="categoryproductscontainer">
             <Row style={{paddingTop:"10px",marginBottom:"15px"}}>
-              <Col md={6} >
+              <Col md={9} >
               <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
 
 
@@ -205,14 +205,14 @@ function Deals({deals}) {
                     timing="ease"
                     iteration="1"
                     fillMode="none">
-                    <span className="categorytitle" filter-content="S">{deals.title}</span>
+                    <span className="categorytitle" style={{marginLeft:"20px"}} filter-content="S">{deals.title}</span>
                   </MovingComponent>
                 ) : (null)
               }
               
               
               </Col>
-              <Col cd={6}>
+              <Col cd={3} style={{marginLeft:"75px"}}>
               <button class="explore" onClick={()=>CategoryProducts(title,deals)}>View More<span class="icon-right after"></span></button>
 
               </Col>
