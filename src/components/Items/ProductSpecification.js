@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Table} from 'react-bootstrap';
+import {Table,Row} from 'react-bootstrap';
 
 function ProductSpecification({title,product}){
     console.log("productInfo",product.productInformation);
@@ -18,9 +18,10 @@ function ProductSpecification({title,product}){
     })
 
     return(
-        <div>
+
+        <div style={{  borderBottom: '1px solid rgb(226, 226, 226)' }}> 
             <h4 className="infotitle">{title}</h4>
-            <Table className="infotable" >
+            <Table borderless className="infotable" >
             {
                 (isKeysFetched)?(
                     key.map((k)=>{
@@ -30,11 +31,30 @@ function ProductSpecification({title,product}){
                                 
                                   
                                         <tr>
-                                            <td style={{width:'30%'}}>
-                                            <h5>{k}</h5>
+                                            <td style={{
+                                                fontFamily: 'Roboto',
+                                                fontStyle: 'normal',
+                                                fontWeight: '400',
+                                                fontSize: '14px',
+                                                lineHeight: '16px',
+                                                letterSpacing: '0.02em',
+                                                
+                                                color: '#878787',
+                                                width:'30%'
+                                            }}>
+                                            <p >{k}</p>
                                             </td>
-                                            <td>
+                                            <td style={{fontFamily: 'Roboto',
+                                                fontStyle: 'normal',
+                                                fontWeight: '400',
+                                                fontSize: '14px',
+                                                lineHeight: '16px',
+                                                letterSpacing: '0.02em',
+
+                                                color: '#212121'}}>
+                                            <p >
                                             {product.productInformation[title][k]}
+                                            </p>
                                             </td>
                                         </tr>
                                         
