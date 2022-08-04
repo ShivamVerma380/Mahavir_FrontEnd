@@ -110,8 +110,18 @@ function Search(){
     
       return (
         (isProductsFetched)?(
-            <div style={{ width: 400 }} className="search">
+            <div style={{ width: 600 ,marginRight:"70px"}} className="search">
               <ReactSearchAutocomplete 
+                styling={
+                  {
+                  backgroundColor: "black",
+                  // hoverBackgroundColor:"white",
+                  hoverBackgroundColor:"white",
+                  placeholderColor: "grey",
+                  iconColor: "grey",
+                  color: "white"
+                  }
+                }
                 items={products}
                 fuseOptions={{keys:["name","price","highlights","category","subSubCategory","subSubCategory"]}}
                 resultStringKeyName="name"
@@ -121,6 +131,7 @@ function Search(){
                 onFocus={handleOnFocus}
                 autoFocus
                 formatResult={formatResult}
+                placeholder="Search"
               />
         </div>
         ):(

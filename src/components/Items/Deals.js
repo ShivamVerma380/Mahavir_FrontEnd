@@ -33,6 +33,8 @@ function Deals({deals}) {
     var title = deals.title;
     console.log("Title: ",title);
 
+    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+
 
     var cards=<div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
@@ -96,7 +98,7 @@ function Deals({deals}) {
   
         }
   
-        axios.post("http://localhost:8080/wishlist", formdata, {
+        axios.post(uri+"/wishlist", formdata, {
           headers: {
             "Authorization": "Bearer "+token,
             "Content-Type": "multipart/form-data"

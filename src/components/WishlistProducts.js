@@ -30,7 +30,7 @@ const WishlistProducts = () => {
     if (!isWishlistFetched && !isProductFetched) {
       axios({
         method: "get",
-        url: "/wishlist",
+        url: "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/wishlist",
         headers: {
           "Authorization": "Bearer "+token
         }
@@ -115,7 +115,7 @@ const WishlistProducts = () => {
     //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
 
     // };
-    axios.delete("/wishlist/" + modelnum, {
+    axios.delete("http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/wishlist/" + modelnum, {
       headers: {
         "Authorization": "Bearer "+token
 
@@ -148,7 +148,7 @@ const WishlistProducts = () => {
     <>
       <Header />
 
-      <Container style={{ width: '80%' }}>
+      <Container style={{ width: '80%' , marginTop:"100px"}}>
         <h1 style={{ color: "rgb(255,98,98)", margin: '2%', padding: '2%' }}><i>My WishList</i></h1>
         {
           (isWishlistFetched) ? (
