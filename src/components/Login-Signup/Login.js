@@ -11,6 +11,7 @@ import OTPInput, { ResendOTP } from "otp-input-react";
 import OtpTimer from "otp-timer";
 import Timer from "otp-timer";
 import OtpInput from "react-otp-input";
+import Footer from "../Footer/Footer";
 
 const axios = require('axios');
 
@@ -400,8 +401,8 @@ function Login() {
                     {
                         (!isForgotPasswordClicked) ? (
                             <div className="form" id="sign-in-form">
-                                <center>
-                                 <h1 className="title">SignIn</h1>
+                                {/* <center style={{marginTop:"30px"}}> */}
+                                 <h1 className="title">Login</h1>
                                 <div className="fields">
                                     <FormGroup>
                                         <Label
@@ -414,7 +415,7 @@ function Login() {
                                             placeholder="Enter Email"
                                             type="email" className="input"
                                             onChange={inputEmailEvent}
-                                            style={{borderRadius:'2px'}}
+                                            style={{justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2"}}
                                         />
                                     </FormGroup>
                                     <FormGroup >
@@ -429,26 +430,29 @@ function Login() {
                                             placeholder="Enter Password"
                                             type="password" className="input"
                                             onChange={inputPasswordEvent}
-                                            style={{borderRadius:'2px'}}
+                                            style={{backgroundColor:"white",borderBottom:"1px Solid #E2E2E2"}}  
                                         />
                                     </FormGroup>
-                                    <p className="forgotpass" style={{ color: "blue", textDecorationLine: "underline" ,cursor:'pointer'}} onClick={forgotPassword}>Forgot Password?</p>
+                                    <p style={{ color: "red" ,cursor:'pointer',textAlign:"right"}} onClick={forgotPassword}>Forgot Password?</p>
+                                    {/* className="forgotpass" */}
                                 </div>
                                 <div className="submit-container">
                                     <Button className="login-button" onClick={homepage}>
                                         Login
                                     </Button>
-                                    <h6>
-                                        <p className="link" onClick={() => switchForm('register')}>New user? Sign up</p>
-                                    </h6>
+                                    <h5 style={{fontSize:"18px",color:"rgba(0,0,0,0.5)"}}>OR</h5>
+                                    <br></br>
+                                    <h5 style={{fontSize:"16px",color:"rgba(0,0,0,0.5)",fontWeight:"600"}}>New to Mahavir?</h5>
+                                        <button className="New-account-button" onClick={() => switchForm('register')}>Create an Account</button>
+                                    
                                 </div>
-                                </center>
+                                {/* </center> */}
 
                             </div>
                         ) : (
                             (!isForgotOtpSent) ? (
                                 <div className="form" id="sign-in-form">
-                                    <center>
+                                    {/* <center> */}
                                     <h1 className="title">Forgot Password</h1>
                                     <div className="fields">
                                         <FormGroup>
@@ -463,7 +467,7 @@ function Login() {
                                        
 
                                     </div>
-                                    </center>
+                                    {/* </center> */}
                                 </div>
                             ) : (
 
@@ -679,6 +683,7 @@ function Login() {
                 </div>
             </div>
             </center>
+            <Footer/>
         </div>
 
 

@@ -42,7 +42,7 @@ function CategoryProductsSwiper({ cattitle }) {
   // }
   var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
 
-  // var uri = "http://localhost:8080";
+  var uri = "http://localhost:8080";
   useEffect(() => {
     window.addEventListener('scroll', () => { if (window.scrollY > 700) { setAnimation(true); } else { setAnimation(false); } });
 

@@ -33,8 +33,8 @@ function Deals({deals}) {
     var title = deals.title;
     console.log("Title: ",title);
 
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-
+    // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    var uri = "http://localhost:8080";
 
     var cards=<div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />

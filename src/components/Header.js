@@ -29,7 +29,8 @@ const Header = ({productList}) => {
   const [categoryDisplay,setcategoryDisplay] = useState([]);
   const [isCategoryDisplayFetched,setIsCategoryDisplayFetched]=useState(false);
 
-      var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+      // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+      var uri = "http://localhost:8080";
 
       useEffect(()=>{
         if(!isCategoryDisplayFetched){
