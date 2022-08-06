@@ -64,21 +64,22 @@ body {
 
 [data-quantity] button.sub {
   border-radius: 0%;
-  background-color: #ff3434;
+  background-color: #919090;
   left: -.1rem;
-  color: white;
+  /* color: white; */
 }
 [data-quantity] button.add {
   border-radius: 0%;
-  background-color: #ff3434;
+  background-color: #919090;
   right: -.1rem;
+  color:red !important;
   background-position-x: -2.2rem;
 }
 
 [data-quantity] input[type=number] {
   
   border-radius: 0;
-  border: solid 1px #ff3434;
+  border: solid 1px #E2E2E2;
 }
 /* 
 

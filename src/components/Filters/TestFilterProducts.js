@@ -57,8 +57,8 @@ function TestFilterProducts(){
     const[filterselected,SetFilterSelected] = useState([])
 
 
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    //var uri = "http://localhost:8080";
+    // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    var uri = "http://localhost:8080";
     
     
     // if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){

@@ -29,7 +29,7 @@ const AddressForm = () => {
     if (!isAddressFetched) {
       axios({
         method: "get",
-        url: "/address",
+        url: "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/address",
         headers: {
           "Authorization": "Bearer "+token
         }
@@ -74,7 +74,7 @@ const AddressForm = () => {
 
       }
 
-      axios.post("/address", formdata, {
+      axios.post("http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/address", formdata, {
         headers: {
           "Authorization": "Bearer "+token,
           "Content-Type": "multipart/form-data"

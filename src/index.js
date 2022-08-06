@@ -16,6 +16,7 @@ import AddressForm from './components/OrderSummary/AddressForm';
 import Payment from './components/OrderSummary/Payment';
 // import OrderSummary from './components/OrderSummary';
 import PaymentOption from './components/PaymentOption';
+import 'typeface-roboto';
 
 
 // import MyOrders from './components/Orders/MyOrders';

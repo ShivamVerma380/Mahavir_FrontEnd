@@ -37,6 +37,7 @@ function BrandDetails() {
 
     var videoLinks = localStorage.getItem("brandVideoLinks").split(',');
     // var categories = localStorage.getItem("finalBrandCategories").split(',');
+    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
 
     const str = localStorage.getItem("array");
     const string = localStorage.getItem("jsonarray");
@@ -54,7 +55,7 @@ function BrandDetails() {
     useEffect(() => {
         window.scrollTo(0, 0)
         if (!isBrandsFetched) {
-            axios.get("http://localhost:8080/excel/shopByBrands").then(
+            axios.get(uri+"/excel/shopByBrands").then(
                 function (response) {
                     if (response.status == 200) {
                         console.log("Response", response.data);
@@ -174,7 +175,7 @@ function BrandDetails() {
         <div>
             <Header />
             <br></br>
-            <Row className="brandheading">
+            <Row style={{marginTop:'100px'}}className="brandheading">
                 <Container style={{width:"100%", backgroundColor: fullWhite}}>
                 <center>
                     <Image className="brandimg" src={localStorage.getItem("brandLogo")} />
