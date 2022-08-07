@@ -179,6 +179,7 @@ const AddressForm = () => {
   }
 
   return (
+    
     <div >
       {/* <Header/>  */}
       {/* <div className="radio">
@@ -196,7 +197,10 @@ const AddressForm = () => {
       <Row >
         <Col md={1}></Col>
         <Col md={10}>
-          <h1 style={{marginTop:"40px",color:"rgb(255,98,98"}}>DELIVERY ADDRESS</h1>
+          <center>
+          <h1 style={{marginTop:"40px",color:"black",fontSize:"20px"}}>DELIVERY ADDRESS</h1>
+          </center>
+          
         </Col>
         <Col md={1}></Col>
       </Row>

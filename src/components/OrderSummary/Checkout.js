@@ -11,9 +11,12 @@ import Invoice from './Invoice';
 import Payment from './Payment';
 import Summary from './Summary';
 import Footer from '../Footer/Footer';
+import { black } from 'material-ui/styles/colors';
+import { Navigate, useNavigate } from 'react-router-dom';
 const steps = ['Add Address', 'Order Summary','Payment', 'Bill'];
 
 export default function Checkout() {
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -59,11 +62,19 @@ export default function Checkout() {
     setActiveStep(0);
   };
 
+  const handleClick =() => {
+    navigate('/')
+  }
+
   const getStep = () => {
     if(activeStep===0){
       return(
-      <AddressForm/>
+        <>
+        <br></br>
+        <AddressForm/>
 
+        </>
+     
       )
     }
     else if(activeStep===1){
@@ -87,22 +98,23 @@ export default function Checkout() {
   return (
     <div>
     <Container>
-    <Box sx={{ width: '100%' }}>
-      <Stepper activeStep={activeStep}>
+    <Box sx={{ width: '100%'}} >
+      <Stepper activeStep={activeStep} style={{background:"white",marginTop:"20px",height:"37px",paddingTop:"10px"}}>
         {steps.map((label, index) => {
+          console.log("steps",index,"label",label)
           const stepProps = {};
           const labelProps = {};
-          if (isStepOptional(index)) {
-            labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
-            );
-          }
+          // if (isStepOptional(index)) {
+          //   labelProps.optional = (
+          //     <Typography variant="caption">Optional</Typography>
+          //   );
+          // }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
           return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+            <Step key={label} {...stepProps} style={{marginTop:"20px"}}>
+              <StepLabel {...labelProps} style={{color:"black"}}>{label}</StepLabel>
             </Step>
           );
         })}
@@ -112,6 +124,9 @@ export default function Checkout() {
           <Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed - you&apos;re finished
           </Typography>
+          <center>
+            <Button onClick={handleClick}>Continue Shopping</Button>
+          </center>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
             {/* <Button onClick={handleReset}>Reset</Button> */}

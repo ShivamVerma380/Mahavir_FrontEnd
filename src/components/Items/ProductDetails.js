@@ -96,8 +96,8 @@ function ProductDetails() {
 
 
 
-  var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-  // var uri = "http://localhost:8080";
+  //var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+   var uri = "http://localhost:8080";
 
 
   useEffect(() => {
@@ -900,7 +900,7 @@ function ProductDetails() {
                     
                     <Modal show={show} onHide={handleClose}>
                       <Modal.Header closeButton>
-                        <Modal.Title>IDBI BANK</Modal.Title>
+                        <Modal.Title style={{fontWeight:600}}>IDBI BANK</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>Flat Cashback upto Rs. 2,500 on ICICI Credit card
                               EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.</Modal.Body>
