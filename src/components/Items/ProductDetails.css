@@ -7,7 +7,7 @@
   margin: auto;
   margin: 7% auto 1% auto;
   /* display: flex; */
-  width: 90%;
+  width: 80%;
 }
 
 .row1{
@@ -58,6 +58,7 @@ margin: 2%;
   }
 
   .largeimg{
+    display:contents;
     width: 400px;
     height: 400px;
     padding: 2%;
@@ -90,8 +91,9 @@ margin: 2%;
 
 .productdetailimg {
   width: 90px;
-  height: 100px;
-  margin-bottom: 20px;
+  height: 90px;
+  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
+filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.25));
 }
 
 
@@ -118,7 +120,53 @@ hr.vertical {
   margin-right: 10px;
  }
 
- 
+ .pincoderow{
+  display: flex;
+  width: 570px;
+  height: 43px;
+  /* left: 693px; */
+  /* top: 526px; */
+  background: rgb(238 238 238);
+  border-radius: 5px;
+  align-items: center;
+  margin-bottom: 20px;
+ }
+ .pininput{
+  width: 257px;
+  height: 30px;
+  background: #FFFFFF;
+  border-radius: 5px;
+  border: 0;
+ }
+
+ .specifications{
+  box-sizing: border-box;
+  margin-bottom: 20px;
+width: 97%;
+padding: 1%;
+  background: #FFFFFF;
+  border: 1px solid #E2E2E2;
+ }
+
+ .ratings td{
+  padding: 3%;
+ }
+
+ .rowtitlespec{
+  width: 160px;
+height: 23px;
+left: 20px;
+top: 20px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 23px;
+letter-spacing: 0.02em;
+
+color: #212121;
+ }
  
  /* Child Text Container */
  .color_img div{
@@ -170,9 +218,9 @@ hr.vertical {
   
 
     height: 60px;
-  color: #0b4268;
+  color: #ED1C24;
   background-color: #ffffff;
-  border:solid 3px #0b4268;
+  border:solid 2px #ED1C24;
   width: 90%;
   font-size: 20px;
 }
@@ -184,8 +232,8 @@ hr.vertical {
 }
 
 .addtocart:hover{
-  background-color: #0b4268;
-  border-color: #0b4268;
+  background-color: #ED1C24;
+  border-color: #ED1C24;
 }
 
 .addtocartcol{
@@ -245,30 +293,42 @@ hr.vertical {
   transform-origin: left-center;
 } */
 
-.innercol{
-  /* padding: 1%; */
+.innercol1{
+  background: #FFFFFF;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%), inset 2px 2px 2px rgb(0 0 0 / 25%);
+    height: fit-content;
+    padding: 4%;
+    /* width: 569px; */
+/* height: 477px; */
+margin: 2%;
 }
 
 .producthigh{
-  border-radius: 10px;
-    border: solid 3px #ED1C24;
-    padding: 2%;
+  margin-bottom: 20px;
+
 }
 
 .offerbtn{
-  margin: 10px;
-  height: 70px;
-  width: 120px;
-  background-color: #0b4268;
-  border-color: #0b4268;
+  /* width: 50px;
+  height: 13px;
+  left: 736px;
+  top: 721px; */
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 12px;
+cursor: pointer;
+  color: #FA0000;
 }
 .offerbtn:hover{
-  background-color: #11639d;
+  /* background-color: #11639d; */
 }
 
 .offerbtn:focus{
-  background-color: #0b4268;
-  box-shadow: none;
+  /* background-color: #0b4268; */
+  /* box-shadow: none; */
 }
 .variants{
   margin-top: 10px;
@@ -296,8 +356,21 @@ hr.vertical {
 }
 
 .inerrow1{
-  padding: 2%;
-  margin-bottom: 20px;
+  /* padding: 2%; */
+  /* margin-bottom: 20px; */
+}
+
+.productprice{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 600;
+font-size: 28px;
+line-height: 33px;
+/* identical to box height */
+margin-bottom: 0;
+
+color: #FA0000;
+
 }
 
 .variants label{
@@ -305,64 +378,159 @@ hr.vertical {
 }
 
 .infotable .tbody, td, tfoot, th, thead, tr {
-  padding: 1%;
+  /* padding: 1%;
   border-color: #0b4268;
   border-style: solid;
   border-width: 0;
   font-family: Verdana;
   font-size: 18px;
-  cursor: pointer;
+  cursor: pointer; */
 }
 
 .infotable{
-  border: solid 2px #0b4268;
-  margin-bottom: 40px;
+  border: 0;
+  /* margin-bottom: 20px; */
 }
 
 .infotable tr:hover{
  
-  background-color: #92bedd52;
+  /* background-color: #92bedd52; */
   
 }
 
+.swiper-button-next, .swiper-button-prev{
+  color: #fa0000;
+}
+
+.swiper-pagination-clickable .swiper-pagination-bullet {
+  /* color: red; */
+  cursor: pointer;
+  background-color: #fa0000;
+}
 .infotitle{
-    font-variant-caps: all-petite-caps;
-    color: rgb(11 66 104);
-    /* text-decoration: underline; */
-    font-weight: 600;
-    font-family: monospace;
-    font-size: 35px;
-    margin-bottom: initial;
+margin-top: 10px;  
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.02em;
+  
+  color: #212121;
     
 }
 
 .checkpinbtn{
-  background-color: #0b4268;
-  border-color: #0b4268;
+  width: 119px;
+  height: 43px;
+  font-size: 12px;
+  background: #FA0000;
+  border-radius: 0px 5px 5px 0px;
+  border-color: #FA0000;
 }
 
 
 .rowtitle{
-  /* margin-bottom: auto; */
-    /* font-size: 30px; */
-    /* letter-spacing: 1px; */
-    /* font-weight: 500; */
-    /* font-family: 'Segoe UI'; */
-    text-decoration: dotted;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 15px;
+  letter-spacing: 0.01em;
+  font-variant-caps: all-petite-caps;
+  color: #212121;
 }
 
 .imageslider{
   display: none;
 }
 
-.offerrow{
-  display:flex;
-  padding:2%;
+.offercard{
+  display: grid;
+  width: 139px;
+  height: 80px;
+  padding: 5%;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 8px;
+  border: solid 1px #00000036;
 }
 
+.offercard p{
+  /* width: 51px;
+  height: 13px;
+  left: 736px;
+  top: 658px; */
+margin-bottom: 0;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 13px;
+  /* identical to box height */
+
+
+  color: #212121;
+}
+
+.offerrow .swiper{
+  height: 150px;
+  z-index: 0;
+}
+
+.offercard h4{
+  /* width: 112px; */
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 12px;
+
+  color: #212121;
+}
+
+.offerrow{
+  /* display:flex; */
+  /* padding:2%; */
+}
+
+.text-success{
+  color: #fa0000;
+}
 .infovalues{
   display: flex;
 }
+
+.productname{
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  /* or 133% */
+  /* position: absolute; */
+  width: 773px;
+  height: 88px;
+  letter-spacing: 0.01em;
+
+  color: #0F1111;
+}
+
+.producthigh h5{
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 17px;
+  /* or 131% */
+
+  letter-spacing: 0.01em;
+
+  color: #212121;
+}
+
+
+
 @media screen and (min-width:320px) and (max-width:480px){
   /* mobile */
   .productdetailrow{
@@ -390,10 +558,7 @@ hr.vertical {
     font-size: 14px;
     width: 100%;
   }
-  .productname {
-    font-size: 22px;
-    /* padding: 2px; */
-  }
+  
   .fa-3x {
     font-size: 30px;
   }

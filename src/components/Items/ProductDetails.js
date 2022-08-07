@@ -2,7 +2,7 @@ import { Input } from "reactstrap";
 import { ProgressBar, Form, Button, Col, Container, Row, Card ,Modal,Image,Carousel} from "react-bootstrap";
 import Header from "../Header";
 import Zoom from "react-img-zoom";
-import "./ProductDetails.css"
+import "./ProductDetails.css";
 import { AiOutlineMinus } from "react-icons/fa"
 import { useNavigate } from "react-router-dom";
 import ReactImageMagnify from 'react-image-magnify';
@@ -40,7 +40,7 @@ import ComparisonProductInformation from "../ProductsComparison/ComparisonProduc
 import ProductSpecification from "./ProductSpecification";
 import { setCookie, getCookie } from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
-
+// import './ProductDetails.css';
 // toast-configuration method,
 // it is compulsory method.
 //  toast.configure()
@@ -621,8 +621,8 @@ function ProductDetails() {
             <div className="productdetailrow">
               
               <Row className="row1">
-                <Col md={6} className="innercol">
-                  <div >
+                <Col >
+                  <div className="innercol1">
                   {/* <Row className="imageslider">
               <Carousel activeIndex={index} onSelect={handleSelect}>
                   <Carousel.Item>
@@ -646,7 +646,7 @@ function ProductDetails() {
               </Row> */}
 
                     
-                    <Row className="laptopimg" style={{marginBottom:'20px'}}>
+                    <Row className="laptopimg" >
                       <Col md={2} className='smallImg'>
                       {/* <div className="swiper-button-next"></div>
                       <Swiper style={{marginTop:35}}
@@ -724,7 +724,7 @@ function ProductDetails() {
                             largeImage: {
                               src: imglinkfinal,
                               width: 1000,
-                              height: 1000,
+                              height: 1400,
                               border: 'solid 1px #0000'
                               // width: 1200, height: 1800
                             }
@@ -743,7 +743,7 @@ function ProductDetails() {
                             <Col md={10}>
                             <center>
                             {/* <h4 style={{color:"rgb(255,98,98)"}}><b>OUT OF STOCK</b></h6> */}
-                            <Button className="buynow">OUT OF STOCK</Button>
+                            <Button className="addtocart">OUT OF STOCK</Button>
 
                             </center>
                             </Col>
@@ -761,7 +761,7 @@ function ProductDetails() {
                             
                             </Col>
                             <Col className="buynowcol">
-                            <Button className="buynow" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
+                            <Button className="addtocart" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
 
                             </Col>
                             </Row>
@@ -776,8 +776,8 @@ function ProductDetails() {
                   </div>
 
                 </Col>
-                <Col md={6} className="innercol" style={{
-                  
+                <Col  className="innercol" style={{
+                  padding: '2%',
                   height: '800px',
                   overflowY: 'scroll'
                 }}>
@@ -794,38 +794,109 @@ function ProductDetails() {
                       <h6>{review.totalRatings} Ratings & {review.totalReviews} Reviews</h6>
                     </Col> */}
                     <ul className="list-inline small">
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
-                      <span style={{marginRight:'10px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
-                      <span style={{marginRight:'10px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
-                      <span style={{marginRight:'10px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
-                      <span style={{marginRight:'10px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-3x"></i></li>
-                      <span style={{marginRight:'10px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
+                      <span style={{marginRight:'5px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
+                      <span style={{marginRight:'5px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
+                      <span style={{marginRight:'5px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
+                      <span style={{marginRight:'5px'}}></span>
+                      <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-2x"></i></li>
+                      <span style={{marginRight:'5px'}}></span>
                       </ul>
 
                       {
                       (product.offerPrice == null) ? (
-                        <h4>MRP: <b>₹{product.productPrice}</b></h4>
+                        <h4 className="productprice">MRP: <b>₹{product.productPrice}</b></h4>
                       ) : (
-                        <h4>MSP: <b style={{ marginRight: "20px", color: "#ed1c24" }}>₹{product.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginRight:40 }}>₹{product.productPrice}</b> <b style={{color:"green"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h4>
+                        <h4 className="productprice">MSP: <b style={{ marginRight: "20px", color: "#ed1c24" }}>₹{product.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginRight:40 }}>₹{product.productPrice}</b> <b style={{color:"green"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h4>
                       )
                     }
                   </Row>
-                 
-                  
                   <hr></hr>
                   <Row className="offerrow" >
+
+
                     <h4 className="rowtitle">Offers</h4>
-                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
-                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
-                    <Button onClick={handleShow}  className="offerbtn" >IDBI BANK</Button>
-                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
-                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
-                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
-                    <Button onClick={handleShow} className="offerbtn" >IDBI BANK</Button>
+
+                    
+              <Swiper
+                slidesPerView={1}
+                spaceBetween={5}
+                slidesPerGroup={3}
+                loop={false}
+                loopFillGroupWithBlank={true}
+                breakpoints={{
+                  700: {
+                    slidesPerView: 5,
+                  },
+                  400: {
+                    slidesPerView: 1,
+                  },
+                }}
+                pagination={{
+                  clickable: true,
+                }}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper"
+              > 
+                
+                        <SwiperSlide>
+                          <div className="offercard">
+                            <p>EMI</p>
+                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
+                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
+
+                          </div>
+                        </SwiperSlide>
+
+                        <SwiperSlide>
+                          <div className="offercard">
+                            <p>EMI</p>
+                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
+                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
+
+                          </div>
+                        </SwiperSlide><SwiperSlide>
+                          <div className="offercard">
+                            <p>EMI</p>
+                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
+                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
+
+                          </div>
+                        </SwiperSlide><SwiperSlide>
+                          <div className="offercard">
+                            <p>EMI</p>
+                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
+                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
+
+                          </div>
+                        </SwiperSlide><SwiperSlide>
+                          <div className="offercard">
+                            <p>EMI</p>
+                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
+                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
+
+                          </div>
+                        </SwiperSlide><SwiperSlide>
+                          <div className="offercard">
+                            <p>EMI</p>
+                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
+                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
+
+                          </div>
+                        </SwiperSlide><SwiperSlide>
+                          <div className="offercard">
+                            <p>EMI</p>
+                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
+                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
+
+                          </div>
+                        </SwiperSlide>
+                    
+              </Swiper>
                     
                     <Modal show={show} onHide={handleClose}>
                       <Modal.Header closeButton>
@@ -1031,12 +1102,12 @@ function ProductDetails() {
           } */}
 
 
-                  <Row className="inerrow1">
+                  <Row className="pincoderow">
                     <Col>
                       <h4 className="rowtitle">Enter Pincode:</h4>
                     </Col>
                     <Col>
-                      <Input type="number" onChange={InputPin}></Input>
+                      <Input className="pininput" type="number" onChange={InputPin}></Input>
                     </Col>
                     <Col>
                       <Button className="checkpinbtn" onClick={CheckPinHandler}>Check Pincode</Button>
@@ -1096,11 +1167,13 @@ function ProductDetails() {
                     </Col>
                   </Row> */}
 
-                  <Row className="inerrow1">
-                  <h4 className="rowtitle">Model Number: <b>{product.modelNumber}</b> </h4>
+                  <Row className="specifications">
+                  {/* <h4 className="rowtitle">Model Number: <b>{product.modelNumber}</b> </h4> */}
+<Row style={{borderBottom:'1px solid #E2E2E2'}}>
+<h4 className="rowtitlespec">Specifications</h4>
 
-                    <h4 className="rowtitle">Specifications</h4>
-                    
+</Row>
+                   <Row>
                     {
                       (isKeysFetched) ? (
                         keys.map(k => {
@@ -1114,17 +1187,23 @@ function ProductDetails() {
                       ) : (
                         null
                       )
-
-                    }
-
+                      }
+</Row>
                   </Row>
-                  <Row>
+                  <Row className="specifications">
+                    <Row style={{borderBottom:'1px solid #E2E2E2'}}>
                     <h4 className="rowtitle">Ratings and Reviews</h4>
 
-                      {/* <h3>{Math.round(review.averageRatings * 10) / 10}</h3>
-                      <span style={{ marginRight: '20px', marginTop: '20px' }}></span>
-                      <AiIcons.AiFillStar size={20} /> */}
-                      <center>
+                    </Row>
+                  <Col md={2} style={{padding:'2%'}}>
+                  <Row >
+                  <h3>{Math.round(review.averageRatings * 10) / 10}<span style={{marginLeft:'20px'}}> </span><AiIcons.AiFillStar size={20} /></h3>
+                                        
+                  </Row>
+
+                  </Col>
+                      
+                      {/* <center>
                       <ul className="list-inline small">
                       <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
                       <span style={{marginRight:'10px'}}></span>
@@ -1137,18 +1216,49 @@ function ProductDetails() {
                       <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-3x"></i></li>
                       <span style={{marginRight:'10px'}}></span>
                       </ul>
-                      </center>
+                      </center> */}
 
-                    <Col style={{display:'inline-grid',justifyContent:'end'}}>
+                    <Col md={10} style={{padding:'2%'}}>
+                    <table className="ratings">
+                      <tr>
+                        <td>5⭐<span> </span></td>
+                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={40} /></td>
+                        <td><span style={{marginLeft:'10px'}}> </span>{review.nosOfFiveStars}</td>
+                      </tr>
+                      <tr>
+                        <td>4⭐<span> </span></td>
+                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={40} /></td>
+                        <td><span style={{marginLeft:'10px'}}> </span>{review.nosOfFourStars}</td>
+                      </tr>
+                      <tr>
+                        <td>3⭐<span> </span></td>
+                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={40} /></td>
+                        <td><span style={{marginLeft:'10px'}}> </span>{review.nosOfThreeStars}</td>
+                      </tr>
+                      <tr>
+                        <td>2⭐<span> </span></td>
+                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={40} /></td>
+                        <td><span style={{marginLeft:'10px'}}> </span>{review.nosOfTwoStars}</td>
+                      </tr>
+                      <tr>
+                        <td>1⭐<span> </span></td>
+                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={40} /></td>
+                        <td><span style={{marginLeft:'10px'}}> </span>{review.nosOfOneStars}</td>
+                      </tr>
+                    
+                    </table>
+                    </Col>
+                    
+                    {/* <Col style={{display:'inline-grid',justifyContent:'end'}}>
                       <p >5⭐</p>
                       <p >4⭐</p>
                       <p >3⭐</p>
                       <p >2⭐</p>
                       <p>1⭐</p>
-                    </Col>
+                    </Col> */}
 
 
-                    <Col >
+                    {/* <Col >
 
                       <div>
                         <ProgressBar style={{ marginBottom: "2px" }} animated striped variant={variantcolorfive} now={(review.nosOfFiveStars / review.totalReviews) * 100} />
@@ -1161,14 +1271,14 @@ function ProductDetails() {
                         <br></br>
                         <ProgressBar style={{ marginBottom: "2px" }} animated striped variant={variantcolorone} now={(review.nosOfOneStars / review.totalReviews) * 100} />
                       </div>
-                    </Col>
-                    <Col>
+                    </Col> */}
+                    {/* <Col>
                       <p >{review.nosOfFiveStars}</p>
                       <p >{review.nosOfFourStars}</p>
                       <p >{review.nosOfThreeStars}</p>
                       <p >{review.nosOfTwoStars}</p>
                       <p>{review.nosOfOneStars}</p>
-                    </Col>
+                    </Col> */}
                   </Row>
                   <Row>
                     <br></br>
