@@ -17,8 +17,8 @@ import './styles.css'
 const Header = ({productList}) => {
       
 
-      var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    
+      // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+      var uri = "http://localhost:8080";
       function getCookie(cname) {
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
