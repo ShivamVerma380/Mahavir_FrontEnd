@@ -6,7 +6,7 @@ import { Button, Card, Container, Row, Col } from "react-bootstrap";
 import {  Input } from "reactstrap";
 import axios from "axios";
 import {getCookie} from '../Cookies';
-
+import 'typeface-roboto';
 var fullname = "";
 var addressone = "";
 var addresstwo = "";
@@ -22,6 +22,8 @@ const AddressForm = () => {
   const navigate = useNavigate();
   const [address, setAddress] = useState([]);
   const [isAddressFetched, setIsAddressFetched] = useState(false);
+  // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com"
+  var uri = "http://localhost:8080"
 
   var token = getCookie("jwtToken");
   console.log(token);
@@ -29,7 +31,7 @@ const AddressForm = () => {
     if (!isAddressFetched) {
       axios({
         method: "get",
-        url: "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/address",
+        url: uri+"/address",
         headers: {
           "Authorization": "Bearer "+token
         }
@@ -74,7 +76,7 @@ const AddressForm = () => {
 
       }
 
-      axios.post("http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/address", formdata, {
+      axios.post(uri+"/address", formdata, {
         headers: {
           "Authorization": "Bearer "+token,
           "Content-Type": "multipart/form-data"
@@ -179,7 +181,8 @@ const AddressForm = () => {
   }
 
   return (
-    <div >
+    
+    <div style={{border:"2px solid #E2E2E2"}} >
       {/* <Header/>  */}
       {/* <div className="radio">
           <label>
@@ -196,18 +199,23 @@ const AddressForm = () => {
       <Row >
         <Col md={1}></Col>
         <Col md={10}>
-          <h1 style={{marginTop:"40px",color:"rgb(255,98,98"}}>DELIVERY ADDRESS</h1>
+          <center>
+          <h1 style={{marginTop:"40px",color:"black",fontSize:"20px",fontWeight:"600",fontFamily:"typeface-roboto",marginLeft:"2px"}}>DELIVERY ADDRESS</h1>
+          </center>
+          
         </Col>
         <Col md={1}></Col>
       </Row>
+      <br></br>
 
       {
         address.map((index,i)=> {
           return (
+            <>
             <Row>
             <Col md={1}></Col>
             <Col md={10}>
-              <Card style={{ width: "60rem", height: "7rem" }}>
+              <Card style={{ width: "65rem", height: "7rem" }}>
                 <Card.Body>
                   <Card.Text>
                     <input type="radio" value="Address1" name="add" id={index.name+""+i} onChange={()=>selectedaddress(index,index.name+""+i)} /> <b style={{marginRight:20,marginLeft:10}}>{index.name}</b> <b>{index.mobileNumber}</b> 
@@ -218,8 +226,10 @@ const AddressForm = () => {
 
               </Card>
             </Col>
-            <Col md={1}></Col>
+            {/* <Col md={1}></Col> */}
           </Row>
+          <br></br>
+          </>
           )
           
         })
@@ -229,9 +239,12 @@ const AddressForm = () => {
 
 
       <Row style={{ marginTop: 20 }}>
-        <Col md={4}></Col>
-        <Col md={8}>
-          <Button style={{backgroundColor:"rgb(255,98,98)"}} onClick={HandleButtonClick}>Add a New Address</Button>
+        <Col md={1}></Col>
+        <Col md={10}>
+          <center>
+            <Button style={{backgroundColor:"#C10000",border:"none"}} onClick={HandleButtonClick}>Add a New Address</Button>
+          </center>
+          
         </Col>
 
       </Row>
@@ -325,10 +338,11 @@ const AddressForm = () => {
           //     </button>
           //   </form>
           // </div>
+          <>
           <Row>
             <Col md={1}></Col>
             <Col md={10}>
-              <Card style={{ width: "80rem" }}>
+              <Card >
                 <Card.Body style={{marginLeft:50}}>
                   <Card.Title>Add New Address</Card.Title>
                   <Row style={{marginTop:40}}>
@@ -339,6 +353,7 @@ const AddressForm = () => {
                         placeholder="Full Name"
                         name="fullname"
                         onChange={InputFullNameHandler}
+                        style={{borderRadius:"20px"}}
                       />
                     </Col> 
 
@@ -350,6 +365,7 @@ const AddressForm = () => {
                     placeholder="Phone No."
                     name="Phone"
                     onChange={InputPhoneNoHandler}
+                    style={{borderRadius:"20px"}}
                  />
                  
                   </Col>  
@@ -367,6 +383,7 @@ const AddressForm = () => {
                           placeholder="Address Line 1 (Street Address, P.O.)"
                           name="ADL1"
                           onChange={InputAddressOneHandler}
+                          style={{borderRadius:"20px"}}
                         />
                      
                     </Col>
@@ -382,6 +399,7 @@ const AddressForm = () => {
                     placeholder="City"
                     name="City"
                     onChange={InputCityHandler}
+                    style={{borderRadius:"20px"}}
                   />
                     </Col> 
 
@@ -393,6 +411,7 @@ const AddressForm = () => {
                     placeholder="State"
                     name="State"
                     onChange={InputStateHandler}
+                    style={{borderRadius:"20px"}}
                   />
                  
                   </Col>  
@@ -408,6 +427,7 @@ const AddressForm = () => {
                     placeholder="Zip"
                     name="Zip"
                     onChange={InputZipHandler}
+                    style={{borderRadius:"20px"}}
                   />
                     </Col> 
 
@@ -419,6 +439,7 @@ const AddressForm = () => {
                     placeholder="Country"
                     name="Country"
                     onChange={InputCountryHandler}
+                    style={{borderRadius:"20px"}}
                   /> 
                  
                   </Col>  
@@ -426,13 +447,14 @@ const AddressForm = () => {
                   <br></br>
                   <br></br>
                   <Row>
-                    <Col md={6}>
+                    <Col md={10}>
                     
                     </Col>
-                    <Col md={6}>
-                    <Button style={{backgroundColor:"rgb(255,98,98)"}} class="form-field" type="submit" onClick={ProceedHandler}>
+                    <Col md={2} style={{alignItems:"left",alignContent:"right"}}>
+                    <Button style={{backgroundColor:"#C10000",border:"none"}} class="form-field" type="submit" onClick={ProceedHandler}>
                       Proceed
                     </Button>
+                    
                     </Col>
                   </Row>
                   
@@ -444,6 +466,8 @@ const AddressForm = () => {
             </Col>
             <Col md={1}></Col>
           </Row>
+          <br></br>
+          </>
         ) : (null)
       }
 

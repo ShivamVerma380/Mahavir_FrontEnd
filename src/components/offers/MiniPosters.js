@@ -63,6 +63,7 @@ const MiniPosters = ({MiniPosters}) => {
             }
             </div>             
         </div>
+        
 
         
         

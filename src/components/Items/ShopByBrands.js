@@ -16,7 +16,11 @@ const ShopByBrands = () => {
 
   const [brands, setBrands] = useState([]);
   const [isBrandsFetched, setIsBrandsFetched] = useState(false);
+
   // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+
+  
+
 
   // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
   var uri = "http://localhost:8080";
@@ -83,7 +87,7 @@ const ShopByBrands = () => {
   return (
     <div>
       <Container style={{ marginBottom: '70px', backgroundColor: "white" }}>
-        <h3 className="brand_title">Shop by brands</h3>
+        <h3 className="brand_title" style={{marginLeft:"30px"}}>Shop by brands</h3>
         {
           (isBrandsFetched) ? (
             <>

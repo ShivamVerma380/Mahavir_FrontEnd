@@ -219,7 +219,7 @@ function CategoryProductsSwiper({ cattitle }) {
 
             <MDBContainer className="categoryproductscontainer">
               <Row style={{paddingTop:"10px",marginBottom:"15px"}}>
-                <Col md={6} >
+                <Col md={9} >
                   <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
 
 
@@ -240,7 +240,7 @@ function CategoryProductsSwiper({ cattitle }) {
                     timing="ease"
                     iteration="1"
                     fillMode="none">
-                    <span className="categorytitle" filter-content="S">{cattitle}</span>
+                    <span className="categorytitle" style={{marginLeft:"20px"}} filter-content="S">{cattitle}</span>
                   </MovingComponent>
                     ) : (null)
                   }
@@ -248,7 +248,7 @@ function CategoryProductsSwiper({ cattitle }) {
 
 
                 </Col>
-                <Col cd={6}>
+                <Col cd={3} style={{marginLeft:"75px"}}>
                   <button onClick={() => CategoryProducts(cattitle)} class="explore">View More<span class="icon-right after"></span></button>
 
                 </Col>

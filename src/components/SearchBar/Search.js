@@ -11,8 +11,8 @@ function Search(){
 
     const navigate = useNavigate();
 
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    //var uri = "http://localhost:8080";
+    // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    var uri = "http://localhost:8080";
     
 
     useEffect(()=>{
@@ -110,8 +110,18 @@ function Search(){
     
       return (
         (isProductsFetched)?(
-            <div style={{ width: 400 }} className="search">
+            <div style={{ width: 600 ,marginRight:"70px"}} className="search">
               <ReactSearchAutocomplete 
+                styling={
+                  {
+                  backgroundColor: "black",
+                  // hoverBackgroundColor:"white",
+                  hoverBackgroundColor:"white",
+                  placeholderColor: "grey",
+                  iconColor: "grey",
+                  color: "white"
+                  }
+                }
                 items={products}
                 fuseOptions={{keys:["name","price","highlights","category","subSubCategory","subSubCategory"]}}
                 resultStringKeyName="name"
@@ -121,6 +131,7 @@ function Search(){
                 onFocus={handleOnFocus}
                 autoFocus
                 formatResult={formatResult}
+                placeholder="Search"
               />
         </div>
         ):(

@@ -175,7 +175,8 @@ function BrandDetails() {
         <div>
             <Header />
             <br></br>
-            <Row style={{marginTop:'100px'}}className="brandheading">
+            <Row className="brandheading">
+            {/* style={{marginTop:'100px'}} */}
                 <Container style={{width:"100%", backgroundColor: fullWhite}}>
                 <center>
                     <Image className="brandimg" src={localStorage.getItem("brandLogo")} />

@@ -11,6 +11,8 @@ import OTPInput, { ResendOTP } from "otp-input-react";
 import OtpTimer from "otp-timer";
 import Timer from "otp-timer";
 import OtpInput from "react-otp-input";
+import Footer from "../Footer/Footer";
+import {setCookie,getCookie} from '../Cookies'
 
 const axios = require('axios');
 
@@ -32,8 +34,9 @@ var newtoken="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxc2EiL
 localStorage.setItem("isUserLoggedIn", isUserLoggedIn);
 
 function Login() {
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    //var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    var cookietoken=getCookie("jwtToken");
+    // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+    var uri = "http://localhost:8080";
 
     const navigate = useNavigate();
 
@@ -44,6 +47,13 @@ function Login() {
     const [isNewOtpSent, setIsNewOtpSent] = useState(false);
     const [isNewOtpVerified, setIsNewOtpVerified] = useState(false);
     const [isForgotOtpSent,setIsForgotOtpSent] = useState(false);
+    const [active,setActive] = useState(false);
+    const [loginActive,setLoginActive] = useState(false);
+    const [otpForgotEmailActive,setOtpForgotEmailActive] = useState(false);
+    const [otpEmailActive,setOtpEmailActive] = useState(false);
+    const [registerActive,setRegisterActive]= useState(false);
+    const [forgotOtpActive,setForgotOtpActive]=useState(false);
+    const [passwordactive,setPasswordActive] = useState(true);
     let token = localStorage.getItem("jwtToken");
     console.log("token", token);
     const [code, setCode] = useState("");
@@ -88,6 +98,12 @@ function Login() {
         password = event.target.value;
         console.log("Password:", password);
     }
+
+    const handlepassword = () => {
+        setPasswordActive(true);
+    }
+
+    
     const inputConfirmPasswordEvent = (event) => {
         console.log("In input confirm password event");
         confirmPassword = event.target.value;
@@ -101,6 +117,7 @@ function Login() {
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
     const homepage = () => {
+        setLoginActive(true);
         let tokenn = localStorage.getItem("jwtToken");
 
         // alert("token", localStorage.getItem("jwtToken"));
@@ -183,6 +200,7 @@ function Login() {
     }
 
     const sendOTP = () => {
+        setOtpEmailActive(true);
         // alert(email);
 
         if (email === "") {
@@ -213,6 +231,7 @@ function Login() {
     }
 
     const sendForgotOTP = () => {
+        setOtpForgotEmailActive(true);
         // alert(email);
 
         if (email === "") {
@@ -244,6 +263,8 @@ function Login() {
 
     const verifyOTP = () => {
         //    alert(otp);
+        setActive(true);
+        setForgotOtpActive(true);
         if (otp === code) {
             alert('Correct input otp');
             setIsOTPNotVerified(false);
@@ -262,6 +283,7 @@ function Login() {
     }
 
     const registerUser = () => {
+        setRegisterActive(true);
         if (firstName === "") {
             alert("Please enter first name")
         } else if (lastName === "") {
@@ -326,7 +348,7 @@ function Login() {
 
 
             const headers = { 
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkYXNxc2F3YSIsImV4cCI6MTY1NzEwMTU1NSwiaWF0IjoxNjU3MDAxNTU1fQ._jesI7VfBoiXAqTQjlNVyJo0i5YDLh_XJUBL7LNDzc4'
+                'Authorization': 'Bearer '+cookietoken
                 
             };
             axios.put(uri+'/updatePassword/'+newpassword,{headers})
@@ -361,13 +383,13 @@ function Login() {
     const inputNewPasswordEvent = (event) => {
         console.log("In input password event");
         newpassword = event.target.value;
-        console.log("Password:", password);
+        console.log("Password:", newpassword);
     }
 
     const inputNewConfirmPasswordEvent = (event) => {
         console.log("In input password event");
         confirmnewpassword = event.target.value;
-        console.log("Password:", password);
+        console.log("Password:", confirmnewpassword);
     }
 
     const handleResendClick = () => {
@@ -400,8 +422,8 @@ function Login() {
                     {
                         (!isForgotPasswordClicked) ? (
                             <div className="form" id="sign-in-form">
-                                <center>
-                                 <h1 className="title">SignIn</h1>
+                                {/* <center style={{marginTop:"30px"}}> */}
+                                 <h1 className="title">Login</h1>
                                 <div className="fields">
                                     <FormGroup>
                                         <Label
@@ -414,7 +436,8 @@ function Login() {
                                             placeholder="Enter Email"
                                             type="email" className="input"
                                             onChange={inputEmailEvent}
-                                            style={{borderRadius:'2px'}}
+                                            
+                                            style={{justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}}
                                         />
                                     </FormGroup>
                                     <FormGroup >
@@ -429,49 +452,58 @@ function Login() {
                                             placeholder="Enter Password"
                                             type="password" className="input"
                                             onChange={inputPasswordEvent}
-                                            style={{borderRadius:'2px'}}
+                                            onClick={handlepassword}
+                                            style={{backgroundColor:"white",color:"black",borderBottom:"1px Solid #E2E2E2",width:"100%"}}  
                                         />
                                     </FormGroup>
-                                    <p className="forgotpass" style={{ color: "blue", textDecorationLine: "underline" ,cursor:'pointer'}} onClick={forgotPassword}>Forgot Password?</p>
+                                    
+                                    <p style={{ color: "red" ,cursor:'pointer',textAlign:"right"}} onClick={forgotPassword}>Forgot Password?</p>
+                                    {/* <p>By continuing,you agree to our <a href="http://www.google.com">Terms of use</a> and<a href="http://www.google.com"> Privacy Policy</a></p> */}
+                                    {/* className="forgotpass" */}
                                 </div>
                                 <div className="submit-container">
-                                    <Button className="login-button" onClick={homepage}>
+                                    <Button className="login-button" onClick={homepage} style={{background: loginActive ? '#DA0606':'#DA0606'}}>
                                         Login
                                     </Button>
-                                    <h6>
-                                        <p className="link" onClick={() => switchForm('register')}>New user? Sign up</p>
-                                    </h6>
+                                    <h5 style={{fontSize:"18px",color:"rgba(0,0,0,0.5)"}}>OR</h5>
+                                    <br></br>
+                                    <h5 style={{fontSize:"16px",color:"rgba(0,0,0,0.5)",fontWeight:"500",marginBottom:"20px",marginTop:"-10px"}}>New to Mahavir?</h5>
+                                        <button style={{marginTop:"-10px"}} className="New-account-button" onClick={() => switchForm('register')}>Create an Account</button>  
                                 </div>
-                                </center>
+                                {/* </center> */}
 
                             </div>
                         ) : (
                             (!isForgotOtpSent) ? (
                                 <div className="form" id="sign-in-form">
-                                    <center>
+                                    {/* <center> */}
                                     <h1 className="title">Forgot Password</h1>
                                     <div className="fields">
                                         <FormGroup>
                                             <Label id="email-input" for="email"></Label>
-                                            <Input style={{borderRadius:'2px'}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
+                                            <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
                                         </FormGroup>
 
                                     </div>
                                     <br></br>
+                                    <p>By continuing,you agree to our <a href="http://www.google.com">Terms of use</a> and<a href="http://www.google.com"> Privacy Policy</a></p>
+                                    <br></br>
                                     <div className="submit-container">
-                                        <Button className="login-button" onClick={() => sendForgotOTP()}>Send OTP on Email</Button>
+                                        <Button className="login-button" onClick={() => sendForgotOTP()} style={{background: otpForgotEmailActive?'#DA0606':'#DA0606'}}>Send OTP</Button>
                                        
 
                                     </div>
-                                    </center>
+                                    {/* </center> */}
                                 </div>
                             ) : (
 
                                 (!isNewOtpVerified) ? (
                                     <div className="form" id="sign-in-form">
                                         <h1 className="title">Verify your OTP</h1>
+                                        <br></br>
+                                        <br></br>
                                         <div className="fields">
-                                            <h1>Enter your OTP</h1>
+                                            {/* <h1>Enter your OTP</h1> */}
                                             <OtpInput
                                                     value={code}
                                                     onChange={handleChange}
@@ -510,7 +542,7 @@ function Login() {
                                        
 
                                         <div className="submit-container">
-                                            <Button className="login-button" onClick={() => verifyOTP()}>Verify OTP</Button>
+                                            <Button className="login-button" onClick={() => verifyOTP() } style={{background: forgotOtpActive? '#DA0606':'#DA0606'}}>Verify OTP</Button>
                                             <br></br><br></br>
 
 
@@ -519,6 +551,8 @@ function Login() {
                                 ) : (
                                     <div className="form" id="sign-in-form">
                                         <h1 className="title">Reset Password</h1>
+                                        <br></br>
+                                        <br></br>
                                         <div className="fields">
 
                                             <FormGroup>
@@ -529,7 +563,8 @@ function Login() {
                                                     placeholder="Enter New Password"
                                                     type="password" className="input"
                                                     onChange={inputNewPasswordEvent}
-                                                    style={{borderRadius:'2px'}}
+                                                    
+                                                    style={{borderRadius:'20px',color:"black",justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}}
                                                 />
                                             </FormGroup>
                                             
@@ -543,7 +578,8 @@ function Login() {
                                                     placeholder="Confirm New Password"
                                                     type="password" className="input"
                                                     onChange={inputNewConfirmPasswordEvent}
-                                                    style={{borderRadius:'2px'}}
+                                                    
+                                                    style={{borderRadius:'20px',color:"black",justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}}
                                                 />
                                             </FormGroup>
 
@@ -559,8 +595,10 @@ function Login() {
                                         </FormGroup> */}
 
                                         </div>
+                                        <br></br>
+                                        <br></br>
                                         <div className="submit-container">
-                                            <Button className="login-button" onClick={HandleResetPassword}>Reset Password</Button>
+                                            <Button className="login-button" onClick={HandleResetPassword} style={{background: active? '#DA0606':'#DA0606'}}>Reset Password</Button>
                                             <br></br><br></br><br></br>
 
                                         </div>
@@ -581,16 +619,20 @@ function Login() {
                                     <FormGroup>
                                         <Label id="email-input" for="email"></Label>
                                         <br></br>
-                                        <Input style={{borderRadius:'2px'}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
+                                        <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="email" name="email" placeholder="Enter Email" type="email" className="input" onChange={inputEmailEvent} />
                                     </FormGroup>
 
                                 </div>
+                                <p>By continuing,you agree to our <a href="http://www.google.com">Terms of use</a> and<a href="http://www.google.com"> Privacy Policy</a></p>
                                 <br></br>
                                 <div className="submit-container">
-                                    <Button className="login-button" onClick={() => sendOTP()}>Send OTP on Email</Button>
-                                    <br></br>
+                                    <Button className="login-button" onClick={() => sendOTP() } style={{background: otpEmailActive?'#DA0606':'#DA0606'}}>Send OTP on Email</Button>
                                     <h6>
-                                        <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
+                                    <h5 style={{fontSize:"18px",color:"rgba(0,0,0,0.5)"}}>OR</h5>
+                                    <br></br>
+                                    <h5 style={{fontSize:"16px",color:"rgba(0,0,0,0.5)",fontWeight:"500"}}>Already have an account?</h5>
+                                    <button className="New-account-button" onClick={() => switchForm('login')}>Login</button>
+                                        {/* <button className="link" onClick={() => switchForm('login')}> Sign in</button> */}
                                     </h6>
                                 </div>
                                 </center>
@@ -599,9 +641,10 @@ function Login() {
 
                             (isOTPNotVerified) ? (
                                 <div className="form" id="sign-up-form">
-                                    <h1 className="title">Verify your OTP</h1>
+                                    <h1 className="title">Verify OTP</h1>
+                                    <br></br>
                                     <div className="fields">
-                                        <h1>Enter your OTP</h1>
+                                        {/* <h1>Enter your OTP</h1> */}
                                         <OtpInput
                                                     value={code}
                                                     onChange={handleChange}
@@ -625,6 +668,8 @@ function Login() {
                                                     backgroundColor:'white',
                                                     }}
                                                 />
+                                                <br></br>
+                                                <p>By continuing,you agree to our <a href="http://www.google.com">Terms of use</a> and<a href="http://www.google.com"> Privacy Policy</a></p>
                                         {/* <FormGroup>
                                             <Label for="otp-input" id="Enter-otp-input">Enter OTP</Label>
                                             <br></br>
@@ -634,38 +679,45 @@ function Login() {
 
 
                                     </div>
-                                    <br></br><br></br>
+                                    <br></br>
                                     <div className="submit-container">
-                                        <Button className="login-button" onClick={() => verifyOTP()}>Verify OTP</Button>
-                                        
-
+                                        <Button className="verify-button" style={{background: active ? '#DA0606' : '#DA0606'}} onClick={() => verifyOTP()}>Verify OTP</Button>
                                         <h6>
+                                    <h5 style={{fontSize:"18px",color:"rgba(0,0,0,0.5)"}}>OR</h5>
+                                    <br></br>
+                                    <h5 style={{fontSize:"16px",color:"rgba(0,0,0,0.5)",fontWeight:"500"}}>Already have an account?</h5>
+                                    <button className="New-account-button" onClick={() => switchForm('login')}>Login</button>
+                                        {/* <button className="link" onClick={() => switchForm('login')}> Sign in</button> */}
+                                    </h6>
+
+                                        {/* <h6>
                                             <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
-                                        </h6>
+                                        </h6> */}
                                     </div>
                                 </div>
                             ) : (
                                 <div className="form" id="sign-up-form">
                                     <center>                                    
                                     <h1 className="title">User Registration</h1>
+                                    <br></br>
 
                                     <div className="fields">
                                         <FormGroup>
-                                            <Input style={{borderRadius:'2px'}} id="firstName" name="firstName" placeholder="First name" defaultValue="" type="name" className="input" onChange={inputFirstNameEvent} />
-                                            <Input style={{borderRadius:'2px'}} id="lastName" name="lastName" placeholder="Last name" defaultValue="" type="name" className="input" onChange={inputLastNameEvent} />
-                                            <Input style={{borderRadius:'2px'}} id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" defaultValue="" type="name" className="input" onChange={inputPhoneNumberEvent} />
-                                            <Input style={{borderRadius:'2px'}} id="password" name="password" placeholder="Password" defaultValue="" type="password" className="input" onChange={inputPasswordEvent} />
-                                            <Input style={{borderRadius:'2px'}} id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" defaultValue="" type="password" className="input" onChange={inputConfirmPasswordEvent} />
+                                            <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="firstName" name="firstName" placeholder="First name" defaultValue="" type="name" className="input" onChange={inputFirstNameEvent} />
+                                            <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="lastName" name="lastName" placeholder="Last name" defaultValue="" type="name" className="input" onChange={inputLastNameEvent} />
+                                            <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" defaultValue="" type="name" className="input" onChange={inputPhoneNumberEvent} />
+                                            <Input style={{borderRadius:'20px',color:"black",justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="password" name="password" placeholder="Password" defaultValue="" type="password" className="input" onChange={inputPasswordEvent} />
+                                            <Input style={{borderRadius:'20px',color:"black",justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" defaultValue="" type="password" className="input" onChange={inputConfirmPasswordEvent} />
                                         </FormGroup>
 
                                     </div>
                                     <br></br>
                                     <div className="submit-container">
-                                        <Button className="login-button" onClick={() => registerUser()}>Register User</Button>
+                                        <Button className="login-button" onClick={() => registerUser()} style={{background: registerActive? '#DA0606':'#DA0606'}}>Register User</Button>
                                        
-                                        <h6>
+                                        {/* <h6>
                                             <p className="link" onClick={() => switchForm('login')}>Already have an account? Sign in</p>
-                                        </h6>
+                                        </h6> */}
                                     </div>
                                     </center>
                                 </div>
@@ -679,6 +731,7 @@ function Login() {
                 </div>
             </div>
             </center>
+            <Footer/>
         </div>
 
 
