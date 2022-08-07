@@ -8,6 +8,7 @@ import { Card, CardHeader, CardText, CardBody,Row,
 import axios from 'axios';
 import CartItem from './CartItem';
 import {setCookie,getCookie} from '../Cookies';
+import Footer from '../Footer/Footer';
 import { Table } from 'reactstrap';
 import './Cart.css'
 import 'typeface-roboto'
@@ -78,139 +79,175 @@ function Cart() {
 
     function handleCheckout(){
         navigate("/checkout");
-    }
+    }   
+
+    const continueShoppingHandler=()=> {
+        navigate("/")
+      }
 
     return(
+        
       <div  className="cartpage">   
         <Header/> 
-        <div className="Cartbody" style={{boxSizing:"border-box"}}>
-        <Row>
-
-        <Col sm={7} className='cartTable'>
         {
-            (isCartItemsFetched)?(
-                <Table >
-                <thead className='cartTitle'>
-                    <tr >
-                    <th className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> My Cart ({cartItems.length} items)</th>
-                    </tr>
-                </thead>
-                </Table>
-            ):(
-                null
-            )
-        }
-        
-
-        {/* <CartItem/> */}
-        {
-            console.log("cartDetails",cartItems)
-        }
-        {
-            (isCartItemsFetched)?(
-                cartItems.map((index,pos)=>{
-                console.log("CartModel in map",cartModels)
-                console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
-                console.log("Model Number:",index.modelNumber)
-                return(
-                <CartItem item={index} quantity={cartModels.get(index.modelNumber)}/>
-                );
-            })
-            ):(null)
-        }
-        
-        </Col>
-        {
-            (isCartItemsFetched)?(
-                <Col sm={5} className="priceTable">
-                <Table style={{margin_top:"50px", color:'black',width:"450px"}} >
-                <thead>
-                    <tr>
-                    <th  className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Price Details</th>
-                    <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Price ({cartItems.length} Item)</td>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}}>
-                        {
-                            
-                            cartItems.map(index=>{
-                                {
-                                    (index.freeItem) ? (price+=(parseInt(index.productPrice)+parseInt(index.freeItem.price))*parseInt(cartModels.get(index.modelNumber))) : (price+=parseInt(index.productPrice)*parseInt(cartModels.get(index.modelNumber)))
-                                }
-                                
-                                
-                                
-                            })
-                        }
-                        ₹ {price}
-                        {/* ₹ 37,480 */}
-                    </td>
-                    
-                    </tr>
-                    <tr>
-                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Discount</td>
-                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}} >
+            (isCartItemsFetched) ? (
+                (cartItems.length>0) ? (
+                    <div className="Cartbody" style={{boxSizing:"border-box"}}>
+            <Row>
+    
+            <Col sm={7} className='cartTable'>
+            {
+                (isCartItemsFetched)?(
+                    <Table >
+                    <thead className='cartTitle'>
+                        <tr >
+                        <th className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"2px solid #E2E2E2"}}> My Cart ({cartItems.length} items)</th>
+                        </tr>
+                    </thead>
+                    </Table>
+                ):(
+                    null
+                )
+            }
+            
+    
+            {/* <CartItem/> */}
+            {
+                console.log("cartDetails",cartItems)
+            }
+            {
+                (isCartItemsFetched)?(
+                    cartItems.map((index,pos)=>{
+                    console.log("CartModel in map",cartModels)
+                    console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
+                    console.log("Model Number:",index.modelNumber)
+                    return(
+                    <CartItem item={index} quantity={cartModels.get(index.modelNumber)}/>
+                    );
+                })
+                ):(null)
+            }
+            
+            </Col>
+            {
+                (isCartItemsFetched)?(
+                    <Col sm={5} className="priceTable">
+                    <Table style={{margin_top:"50px", color:'black',width:"450px"}} >
+                    <thead>
+                        <tr>
+                        <th  className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Price Details</th>
+                        <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Price ({cartItems.length} Item)</td>
+                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}}>
                             {
+                                
                                 cartItems.map(index=>{
                                     {
-                                        (index.freeItem) ? (discount+=((parseInt(index.freeItem.price)+(parseInt(index.productPrice)-parseInt(index.offerPrice)))*parseInt(cartModels.get(index.modelNumber)))) : (discount+=((parseInt(index.productPrice)-parseInt(index.offerPrice))*parseInt(cartModels.get(index.modelNumber))))
+                                        (index.freeItem) ? (price+=(parseInt(index.productPrice)+parseInt(index.freeItem.price))*parseInt(cartModels.get(index.modelNumber))) : (price+=parseInt(index.productPrice)*parseInt(cartModels.get(index.modelNumber)))
                                     }
-                                      
+                                    
+                                    
+                                    
                                 })
                             }
-                            - ₹ {discount}
+                            ₹ {price}
+                            {/* ₹ 37,480 */}
                         </td>
-                    </tr>
-                    <tr>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Delivery Charges</td>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px",color:"rgba(52,184,58,1)"}}>Free</td>
-                    </tr>
-                    
-                    <tr>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Total Amount</td>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px"}}>
-                    ₹ {
+                        
+                        </tr>
+                        <tr>
+                            <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Discount</td>
+                            <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}} >
+                                {
+                                    cartItems.map(index=>{
+                                        {
+                                            (index.freeItem) ? (discount+=((parseInt(index.freeItem.price)+(parseInt(index.productPrice)-parseInt(index.offerPrice)))*parseInt(cartModels.get(index.modelNumber)))) : (discount+=((parseInt(index.productPrice)-parseInt(index.offerPrice))*parseInt(cartModels.get(index.modelNumber))))
+                                        }
+                                          
+                                    })
+                                }
+                                - ₹ {discount}
+                            </td>
+                        </tr>
+                        <tr>
+                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Delivery Charges</td>
+                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px",color:"rgba(52,184,58,1)"}}>Free</td>
+                        </tr>
+                        
+                        <tr>
+                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Total Amount</td>
+                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px"}}>
+                        ₹ {
+                                
+                                amount = parseInt(price)-parseInt(discount)
+    
+                            }
                             
-                            amount = parseInt(price)-parseInt(discount)
-
-                        }
-                        
-                        {/* ₹ 37,480 */}
-                    </td>
-                    </tr>
-                    <p style={{color:"rgba(52,184,58,1)",fontFamily:"typeface-roboto",fontSize:"20px",fontWeight:500,marginTop:"20px",marginLeft:"0.4rem"}}>
-                        You will save ₹{discount} on this order
-                    </p>
-                        
-                </tbody>
-                </Table>
-                <br></br>
-                <br></br>
-                <Row>
-                    <center>
-                    <Button style={{height:"50px",width:"250px",background:"#C10000", fontFamily:"typeface-roboto",letterSpacing:"1px"}} className="btn-flat" onClick={handleCheckout}>CHECK OUT</Button>
-                    </center>
-                </Row>
+                            {/* ₹ 37,480 */}
+                        </td>
+                        </tr>
+                        <p style={{color:"rgba(52,184,58,1)",fontFamily:"typeface-roboto",fontSize:"20px",fontWeight:500,marginTop:"20px",marginLeft:"0.4rem"}}>
+                            You will save ₹{discount} on this order
+                        </p>
+                            
+                    </tbody>
+                    </Table>
+                    <br></br>
+                    
+                    <Row>
+                        <center>
+                        <Button style={{height:"50px",width:"250px",background:"#C10000", fontFamily:"typeface-roboto",letterSpacing:"1px"}} className="btn-flat" onClick={handleCheckout}>CHECK OUT</Button>
+                        </center>
+                    </Row>
+                    </Col>
+                ):(
+                    null
+                )
+            }
+            
+            </Row>
+            {/* <Row>
+                <Col md={7}>
                 </Col>
-            ):(
-                null
-            )
+                <Col >
+                <Button style={{width:"300px"}}className="btn-flat">Place Order</Button>
+                </Col>
+            </Row> */}
+            </div>
+                ) : (
+                    <center>
+                    <img src="https://github.com/ShivamVerma380/MahavirImages/blob/main/VectorImg/emptywishlistvectorimg.png?raw=true" style={{height:"260px",width:"260px"}}/>
+                    <br></br>
+                    <h5 style={{fontWeight:600, fontSize:"20px", lineHeight:"23px", letterSpacing:"0.02em"}}>Oops! Your cart looks empty</h5>
+                    <Row>
+                      <Col md={3}></Col>
+                      <Col md={6}>
+                      <p style={{fontWeight:500, fontSize:"18px", lineHeight:"23px", letterSpacing:"0.02em", color:"rgba(0,0,0,0.5)"}}>Add items to it now.</p>
+                      </Col>
+                    </Row>
+                    <br></br>
+                    <Button onClick={()=>continueShoppingHandler()} style={{background:"#C10000",border:"none",padding:"16px",fontSize:"14px",lineHeight:"14px",borderRadius:"5px",marginBottom:"20px"}}>CONTINUE SHOPPING</Button>
+                    
+                    
+                    </center>
+                )
+            ) : (null)
+            
         }
         
-        </Row>
-        {/* <Row>
-            <Col md={7}>
-            </Col>
-            <Col >
-            <Button style={{width:"300px"}}className="btn-flat">Place Order</Button>
-            </Col>
-        </Row> */}
-        </div>
+        <br></br>
+        <br></br>
+        
+        <Footer/>
+        
 
   </div>
+  
+ 
     );
   }
   export default Cart;

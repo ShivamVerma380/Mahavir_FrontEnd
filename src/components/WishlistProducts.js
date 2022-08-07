@@ -5,9 +5,11 @@ import * as AiIcons from 'react-icons/ai';
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import {getCookie} from "./Cookies";
+import Footer from "./Footer/Footer";
 
 
 const WishlistProducts = () => {
+  var uri = "http://localhost:8080";
   var token=getCookie("jwtToken");
   var modelnums = [];
   var urls = [];
@@ -30,7 +32,7 @@ const WishlistProducts = () => {
     if (!isWishlistFetched && !isProductFetched) {
       axios({
         method: "get",
-        url: "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/wishlist",
+        url: uri+"/wishlist",
         headers: {
           "Authorization": "Bearer "+token
         }
@@ -89,6 +91,10 @@ const WishlistProducts = () => {
   })
   console.log("Wish ", wish);
 
+  const continueShoppingHandler=()=> {
+    navigate("/")
+  }
+
   const RemoveFromWishList = (modelnum) => {
     var arr= [];
     console.log("Wish ",wish)
@@ -115,7 +121,7 @@ const WishlistProducts = () => {
     //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
 
     // };
-    axios.delete("http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/wishlist/" + modelnum, {
+    axios.delete(uri+"/wishlist/" + modelnum, {
       headers: {
         "Authorization": "Bearer "+token
 
@@ -145,45 +151,91 @@ const WishlistProducts = () => {
 
 
   return (
-    <>
+    <div>
       <Header />
 
-      <Container style={{ width: '80%' , marginTop:"100px"}}>
-        <h1 style={{ color: "rgb(255,98,98)", margin: '2%', padding: '2%' }}><i>My WishList</i></h1>
+      <Container style={{ width: '80%'}}>
+        
+        
         {
           (isWishlistFetched) ? (
 
-
-            wish.map(index => {
-              return (
-                <Row style={{ margin: '2%', padding: '2%', border: "1px solid black", borderRadius: '5px', boxShadow: ' 0 2px 10px #bdbdbd' }}>
-                  <Col sm={3}>
-                    <img src={index.productImage1} style={{ width: '100%', height: '100%' }}></img>
-                  </Col>
-                  <Col style={{ marginTop: '2%' }} sm={6} >
-                    <h3 style={{ cursor: 'pointer' }} onClick={() => callProductDetails(index)}>{index.productName}</h3>
-                    <br></br>
-                    <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
-
-                  </Col>
-                  <Col style={{ padding: '3%' }} sm={3} >
+            (wish.length>0) ? (
+              <>
+              <h1 style={{ color: "black", marginTop:"30px", marginBottom:"30px", fontFamily:"typeface-roboto", fontSize:"26px", fontWeight:600 }}>My Wishlist</h1>
+              <Container style={{background:"white",paddingTop:"10px", paddingBottom:"10px",border: "2px solid #E2E2E2", borderRadius: '5px', marginBottom:"30px"}}>
+              {
+              wish.map(index => {
+                return (
+                  
+                    <Col md={12}>
+                  <Row style={{margin:"20px", border: "2px solid #E2E2E2", borderRadius: '5px'}}>
+                    {/* style={{ margin: '2%', padding: '2%' }} , boxShadow: ' 0 2px 10px #bdbdbd' */}
+                    
+                    <Col sm={2}>
+                      <img src={index.productImage1} style={{ width: '180px', height: '120px',marginTop:"25px" }}></img>
+                    </Col>
+                    <Col style={{ marginTop: '2%' }} sm={8} >
+                    <h5 style={{marginLeft:"15px",letterSpacing: "0.02em",lineHeight:"19px",fontWeight: 500,color: "#000000",fontSize:"20px",marginTop:"34px",fontFamily:"typeface-roboto"}}>{index.productName}</h5>
+                      {/* <br></br>
+                      <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5> */}
+                      <br></br>
                     <Row>
-                      <Button variant="flat" size="1" name={index.modelNumber} onClick={() => RemoveFromWishList(index.modelNumber)} style={{ marginBottom: '10px', width: 150, height: 50 }}>Remove</Button>
+                    {
+                                                  (index.productPrice === index.offerPrice) ? (<h4>₹ {index.productPrice}</h4>) : (
+                                                      <h4 style={{marginLeft:"15px",marginTop:"-15px"}}><b style={{ marginRight: "20px", color: "#C10000" , fontSize:"20px"}}>₹{index.offerPrice}</b><b style={{ color:"rgba(45, 45, 45, 0.8)",textDecorationLine: "line-through",fontSize:"16px", textDecorationStyle: "solid" }}>₹ {index.productPrice}</b> <b style={{color:"#C10000",fontSize:"15px",lineHeight:"15px",marginLeft:"8px"}}>{Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4>
+                                                  )
+                                              }
                     </Row>
-                    <Row>
-                      <Button variant="flat" size="1" style={{ width: 150, height: 50 }}>Add To Cart</Button>
-                    </Row>
+                    </Col>
+  
+                    <Col style={{ padding: '3%' }} sm={2} >
+                      <Row>
+                        <Button  size="1" name={index.modelNumber} onClick={() => RemoveFromWishList(index.modelNumber)} style={{ marginBottom: '10px', width: 150, height: 50, background:"#C10000", border:"none" }}>Remove</Button>
+                      </Row>
+                      <Row>
+                        <Button  size="1" style={{ width: 150, height: 50, background:"#C10000", border:"none" }}>Add To Cart</Button>
+                      </Row>
+  
+                    </Col>
+                  </Row>
+                  </Col>
+                  
+                );
+              })
+            }
+            </Container>
+            </>
+            ) : (
 
+                <center>
+                <img src="https://github.com/ShivamVerma380/MahavirImages/blob/main/VectorImg/emptywishlistvectorimg.png?raw=true" style={{height:"260px",width:"260px"}}/>
+                <br></br>
+                <h5 style={{fontWeight:600, fontSize:"20px", lineHeight:"23px", letterSpacing:"0.02em"}}>Oops! Your wishlist looks empty</h5>
+                <Row>
+                  <Col md={3}></Col>
+                  <Col md={6}>
+                  <p style={{fontWeight:500, fontSize:"18px", lineHeight:"23px", letterSpacing:"0.02em", color:"rgba(0,0,0,0.5)"}}>Create your own wishlist with your favourites & share with your friends and loved ones!</p>
                   </Col>
                 </Row>
-              );
-            })
-
+                <br></br>
+                <Button onClick={()=>continueShoppingHandler()} style={{background:"#C10000",border:"none",padding:"16px",fontSize:"14px",lineHeight:"14px",borderRadius:"5px",marginBottom:"20px"}}>CONTINUE SHOPPING</Button>
+                
+                
+                </center>
+                
+            )
+            
+            
           ) : (null)
 
         }
+        
       </Container>
-    </>
+    
+      <Footer/>
+    </div>
+
   )
 }
 export default WishlistProducts;

@@ -8,11 +8,12 @@ import {setCookie,getCookie} from '../Cookies';
 import { QuantityPicker } from 'react-qty-picker';
 import 'typeface-roboto';
 import {AiOutlineDelete} from "react-icons/ai";
+import Footer from "../Footer/Footer";
 
 
 const CartItem = ({item,quantity}) => {
     var cartmodelnums=new Array();
-
+    
     console.log("quantity",item.modelNumber,":",quantity)
     cartmodelnums=getCookie("CartModels").split(',');
 
@@ -53,6 +54,7 @@ const CartItem = ({item,quantity}) => {
 
    
     return (
+       
         <div>
             {
                 (!item.freeItem) ? (
@@ -60,9 +62,9 @@ const CartItem = ({item,quantity}) => {
                     <Container >
                         <Row>
                             <Col md={12}>
-                                <Row style={{border:"1px solid #E2E2E2"}}>
+                                <Row style={{border:"2px solid #E2E2E2"}}>
                                     <Col md={2}>
-                                        <img style={{ height: "100px", width: "100px" ,marginTop:"22px" }} src={item.productImage1} />
+                                        <img style={{ height: "100px", width: "140px" ,marginTop:"22px" }} src={item.productImage1} />
                                     </Col >
                                     <Col md={9}>
                                         <Row>
@@ -127,12 +129,13 @@ const CartItem = ({item,quantity}) => {
                             </Col >
                         </Row >
                     </Container>
+                    
                         
 
                     
                     
                 ) : (
-
+                    
                     <Container>
                         <Row>
                             <Col md={12}>
@@ -203,9 +206,12 @@ const CartItem = ({item,quantity}) => {
 
                     </Container >
                     
+                    
+                    
                 )
             }
         </div>
+        
 
 
         //     {

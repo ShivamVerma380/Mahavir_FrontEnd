@@ -10,6 +10,7 @@ import AddressForm from './AddressForm';
 import Invoice from './Invoice';
 import Payment from './Payment';
 import Summary from './Summary';
+import Footer from '../Footer/Footer';
 const steps = ['Add Address', 'Order Summary','Payment', 'Bill'];
 
 export default function Checkout() {
@@ -84,6 +85,7 @@ export default function Checkout() {
 
   };
   return (
+    <div>
     <Container>
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={activeStep}>
@@ -139,6 +141,9 @@ export default function Checkout() {
         </React.Fragment>
       )}
     </Box>
+    
     </Container>
+    <Footer/>
+    </div>
   );
 }

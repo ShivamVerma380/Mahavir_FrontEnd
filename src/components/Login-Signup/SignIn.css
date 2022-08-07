@@ -99,7 +99,6 @@
     color: black;
     margin-bottom: 10px;
     margin-top: 20px;
-    
     text-align: left;
     /* margin-left: 20px; */
     font-size: 30px;
@@ -113,7 +112,7 @@
     margin-bottom: 10px;
     /* padding:5px 10px; */
     border:none;
-    border-radius: 1px;
+    /* border-radius: 1px; */
     height: 50px;
     background: #3f3f3f;
     color: #fff;
@@ -124,7 +123,25 @@
 
 .login-button{
     color: #fff;
-    background: #DA0606;
+    /* background: #DA0606; */
+    border:none;
+    width: 322px;
+    height: 45px;
+    /* padding: 10px 40px; */
+    font-size:15px;
+    text-transform: capitalize;
+    display: block;
+    margin: auto;
+    color: white;
+    cursor:pointer;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    transition: 0.5s;
+}
+
+.verify-button{
+    color: #fff;
+    /* background: #DA0606; */
     border:none;
     width: 322px;
     height: 45px;
@@ -141,7 +158,7 @@
 }
 
 .login-button:hover,input:focus{
-    background: #000;
+    /* background: #000; */
     color: #fff;
     border: solid 1px white;
     
