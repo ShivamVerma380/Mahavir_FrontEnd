@@ -8,6 +8,9 @@ import axios from "axios";
 import {getCookie} from '../Cookies';
 import 'typeface-roboto';
 import url from "../../Uri";
+
+import {AiFillDelete} from 'react-icons/ai';
+
 var fullname = "";
 var addressone = "";
 var addresstwo = "";
@@ -180,6 +183,27 @@ const AddressForm = () => {
 
   }
 
+  function handleAddressDelete(index){
+    console.log("Index",index);
+    axios.post(url+"/delete-address",index, {
+      headers: {
+        "Authorization": "Bearer "+token,
+        "Content-Type": "application/json"
+      }
+    }).then(function(response){
+      if(response.status==200){
+        console.log("Address deleted successfully");
+        window.location.reload();
+      }else{
+        console.log("Error in deleting address");
+      }
+    }).catch(function(error){
+      console.log("Error",error);
+    }
+    )
+  
+  }
+
   return (
     
     <div style={{border:"2px solid #E2E2E2"}} >
@@ -218,9 +242,10 @@ const AddressForm = () => {
               <Card style={{ width: "65rem", height: "7rem" }}>
                 <Card.Body>
                   <Card.Text>
+
                     <input type="radio" value="Address1" name="add" id={index.name+""+i} onChange={()=>selectedaddress(index,index.name+""+i)} /> <b style={{marginRight:20,marginLeft:10}}>{index.name}</b> <b>{index.mobileNumber}</b> 
-                    <p>{index.address} {index.city} {index.state} <b>- {index.pincode}</b>, Alternate Mobile Number: <b>{index.alternateMobile}</b></p> 
-                    
+                    <p>{index.address} {index.city} {index.state} <b>- {index.pincode}</b>, Alternate Mobile Number: <b>{index.alternateMobile}</b></p>
+                    <AiFillDelete onClick={()=>handleAddressDelete(index)}/>                     
                   </Card.Text>
                 </Card.Body>
 
