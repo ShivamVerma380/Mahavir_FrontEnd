@@ -79,7 +79,7 @@ function FilterProduct() {
     useEffect(()=>{
         // console.log("category", category);
         if(!isSelectedProductsFetched && !isProductsFetched && !isFiltersFetched && !isValueSet){
-            axios.get("http://localhost:8080/get-products-by-category/"+category)
+            axios.get("http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/get-products-by-category/"+category)
                 .then(function(response){
                     SetProducts(response.data);
                     response.data.map(product=>{
@@ -118,7 +118,7 @@ function FilterProduct() {
                     console.log(error);
                 })
         
-            axios.get("http://localhost:8080/filtercriterias/"+category)
+            axios.get("http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/filtercriterias/"+category)
                 .then(function(response){
                     // console.log("response",response.data.filterCriterias)
                     SetFilters(response.data.filterCriterias);
@@ -153,7 +153,7 @@ function FilterProduct() {
   
         }
   
-        axios.post("http://localhost:8080/wishlist", formdata, {
+        axios.post("http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/wishlist", formdata, {
           headers: {
             "Authorization": "Bearer "+token,
             "Content-Type": "multipart/form-data"

@@ -4,6 +4,7 @@ import {Row,Col,Form,Button} from 'react-bootstrap';
 // import { Header } from "semantic-ui-react";
 import Header from "../Header";
 import {setCookie,getCookie} from '../Cookies';
+import url from "../../Uri";
 
 
 const productBoughtbyUser =[
@@ -77,12 +78,11 @@ const Orders=()=>{
 
     const[isOrdersFetched,SetIsOrdersFetched] = useState(false);
 
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    //var uri = "http://localhost:8080";
+   
 
     useEffect(()=>{
         if(!isOrdersFetched){
-            axios.get(uri+"/my-orders",{
+            axios.get(url+"/my-orders",{
                 headers:{
                     "Authorization":"Bearer "+getCookie("jwtToken")
                 }

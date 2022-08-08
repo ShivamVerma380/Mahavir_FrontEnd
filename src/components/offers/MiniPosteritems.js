@@ -8,6 +8,7 @@ import {Card,Button, Container, CardGroup} from "react-bootstrap";
 import { Row,Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../../App.css"
+import url from "../../Uri";
 
 function MiniPosterItems(){
 
@@ -28,7 +29,7 @@ function MiniPosterItems(){
 
             axios({
             method:"get",
-            url:"http://localhost:8080/get-products/"+modelNum,
+            url:url+"/get-products/"+modelNum,
             headers:{
                 "Authorization":"Bearer "+token,
             }

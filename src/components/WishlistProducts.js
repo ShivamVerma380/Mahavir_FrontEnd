@@ -6,10 +6,11 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import {getCookie} from "./Cookies";
 import Footer from "./Footer/Footer";
+import url from "../Uri";
 
 
 const WishlistProducts = () => {
-  var uri = "http://localhost:8080";
+  
   var token=getCookie("jwtToken");
   var modelnums = [];
   var urls = [];
@@ -32,7 +33,7 @@ const WishlistProducts = () => {
     if (!isWishlistFetched && !isProductFetched) {
       axios({
         method: "get",
-        url: uri+"/wishlist",
+        url: url+"/wishlist",
         headers: {
           "Authorization": "Bearer "+token
         }
@@ -121,7 +122,7 @@ const WishlistProducts = () => {
     //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
 
     // };
-    axios.delete(uri+"/wishlist/" + modelnum, {
+    axios.delete(url+"/wishlist/" + modelnum, {
       headers: {
         "Authorization": "Bearer "+token
 

@@ -5,6 +5,7 @@ import {
 } from 'reactstrap';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import url from "../Uri";
 
 const productBoughtbyUser =[
     {
@@ -45,7 +46,7 @@ const OrderSummary = () => {
         if (!isProductFetched) {
             axios({
                 method: "get",
-                url: "http://localhost:8080/get-products/" + localStorage.getItem("productSelected")
+                url: url+"/get-products/" + localStorage.getItem("productSelected")
             }).then(function (response) {
                 console.log(response);
                 if (response.status == 200) {

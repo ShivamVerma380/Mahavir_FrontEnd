@@ -13,6 +13,7 @@ import Timer from "otp-timer";
 import OtpInput from "react-otp-input";
 import Footer from "../Footer/Footer";
 import {setCookie,getCookie} from '../Cookies'
+import url from "../../Uri";
 
 const axios = require('axios');
 
@@ -35,8 +36,7 @@ localStorage.setItem("isUserLoggedIn", isUserLoggedIn);
 
 function Login() {
     var cookietoken=getCookie("jwtToken");
-    // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    var uri = "http://localhost:8080";
+    
 
     const navigate = useNavigate();
 
@@ -139,7 +139,7 @@ function Login() {
         var authorization = "Bearer "+{tokenn};
         console.log(authorization);
 
-        axios.post(uri+"/login-user", form_data_body, {
+        axios.post(url+"/login-user", form_data_body, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
@@ -210,7 +210,7 @@ function Login() {
             console.log("Email", email);
             axios({
                 method: "get",
-                url: uri+"/verify-email/" + email
+                url: url+"/verify-email/" + email
             }).then(function (response) {
                 console.log(response.data);
                 otp = response.data.otp;
@@ -241,7 +241,7 @@ function Login() {
             console.log("Email", email);
             axios({
                 method: "get",
-                url: uri+"/forgotPassword/" + email
+                url: url+"/forgotPassword/" + email
             }).then(function (response) {
                 console.log(response.data);
                 otp = response.data.otp;
@@ -308,7 +308,7 @@ function Login() {
                 "last_name": lastName,
                 "PhoneNo": phoneNo
             }
-            axios.post(uri+"/add-user", form_data_body, {
+            axios.post(url+"/add-user", form_data_body, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
@@ -351,7 +351,7 @@ function Login() {
                 'Authorization': 'Bearer '+cookietoken
                 
             };
-            axios.put(uri+'/updatePassword/'+newpassword,{headers})
+            axios.put(url+'/updatePassword/'+newpassword,{headers})
             .then(function (response) {
                     if (response.status == 200) {
                         console.log("Password Updated successfully");
@@ -396,7 +396,7 @@ function Login() {
         alert("Resend Clicked")
         axios({
             method: "get",
-            url: uri+"/resend-otp/" + email
+            url: url+"/resend-otp/" + email
         }).then(function (response) {
             console.log(response.data);
             otp = response.data.otp;

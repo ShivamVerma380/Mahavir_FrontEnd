@@ -23,7 +23,7 @@ function CompareProducts(){
 
                 }
                 else{
-                urls.push(axios.get("http://localhost:8080/get-products/" + modelNum));
+                urls.push(axios.get("http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/get-products/" + modelNum));
 
                 }
             })

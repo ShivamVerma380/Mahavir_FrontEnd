@@ -2,6 +2,7 @@ import react, { useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
 import {setCookie,getCookie} from '../Cookies';
 import axios from "axios";
+import url from '../../Uri';
 const Payment=()=>
 {
 
@@ -58,7 +59,7 @@ const Payment=()=>
 
     function PayAmount(){
         if(localStorage.getItem("price")!=null){
-            axios.post("http://localhost:8080/order",form_data_body,{
+            axios.post(url+"/order",form_data_body,{
             headers:{
                 "Authorization":"Bearer "+getCookie("jwtToken"),
                 "Content-Type":"application/json"

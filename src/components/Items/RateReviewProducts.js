@@ -4,6 +4,7 @@ import ReactStars from "react-rating-stars-component";
 import { Input } from "reactstrap";
 import './ProductDetails.css'
 import axios from "axios";
+import url from "../../Uri";
 
 const RateReviewProducts = () => {
 
@@ -38,7 +39,7 @@ const RateReviewProducts = () => {
             "Date":""+reviewdate     
         }
         console.log("FormData",form_data_body)
-        axios.post("http://localhost:8080/add-review/IPH12123", form_data_body, {
+        axios.post(url+"/add-review/IPH12123", form_data_body, {
             headers: {
                 "Content-Type": "multipart/form-data",
                 "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkIiwiZXhwIjoxNjU1MDI5MzI1LCJpYXQiOjE2NTQ5MjkzMjV9.14H8_CqBGuVS_mTwLRKrzqvSue0q1nCNxD0lKId-F7E"

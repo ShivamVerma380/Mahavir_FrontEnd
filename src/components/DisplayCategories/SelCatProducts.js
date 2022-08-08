@@ -15,7 +15,7 @@ import NavbarOffcanvas from "react-bootstrap/esm/NavbarOffcanvas";
 import FilterProduct from "../Filters/FilterProduct";
 import TestFilterProducts from "../Filters/TestFilterProducts";
 
-
+import url from "../../Uri";
 
 
 var modelNumsToCompare = new Set();
@@ -23,11 +23,7 @@ var flag = false;
 
 const SelCatProducts=()=>{
 
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-
-    //var uri = "http://localhost:8080";
-
-
+  
     const navigate = useNavigate();
 
     const [products,setProduct]= useState([]);

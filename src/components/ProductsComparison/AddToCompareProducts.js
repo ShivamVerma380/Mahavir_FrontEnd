@@ -9,6 +9,7 @@ import ComparisonProductInformation from "./ComparisonProductInformation";
 import { useNavigate } from "react-router-dom";
 import RatingandReview from "./RatingandReview";
 import {setCookie,getCookie} from '../Cookies';
+import url from "../../Uri";
 function AddToCompareProducts(){
 
     const navigate = useNavigate();
@@ -25,8 +26,7 @@ function AddToCompareProducts(){
         }
     }
 
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    //var uri = "http://localhost:8080"
+    
     useEffect(()=>{
         if(!isProductFetched){
             var modelNumbers = getCookie("addToCompare").split(",")
@@ -34,7 +34,7 @@ function AddToCompareProducts(){
             var urls = []
             modelNumbers.map(index=>{
                 if(index!=="")
-                    urls.push(axios.get(uri+"/get-products/"+index))
+                    urls.push(axios.get(url+"/get-products/"+index))
             })
             axios.all(urls).then(axios.spread((...response) => {
                 console.log("response",response)

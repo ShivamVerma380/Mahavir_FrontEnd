@@ -9,6 +9,7 @@ import './ShopByBrands.css';
 import { Pagination, Navigation } from "swiper";
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from "reactstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
+import url from "../../Uri";
 
 const ShopByBrands = () => {
 
@@ -17,17 +18,16 @@ const ShopByBrands = () => {
   const [brands, setBrands] = useState([]);
   const [isBrandsFetched, setIsBrandsFetched] = useState(false);
 
-  // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+  // var url = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
 
   
 
 
-  // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-  var uri = "http://localhost:8080";
+  
 
   useEffect(() => {
     if (!isBrandsFetched) {
-      axios.get(uri+"/excel/shopByBrands").then(
+      axios.get(url+"/excel/shopByBrands").then(
         function (response) {
           if (response.status == 200) {
             console.log(response.data);

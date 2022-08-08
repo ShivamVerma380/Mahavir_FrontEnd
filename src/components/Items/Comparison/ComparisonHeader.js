@@ -2,6 +2,7 @@ import { ComboBox } from "@progress/kendo-react-dropdowns";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Row,Col ,NavItem ,NavDropdown,Form} from "react-bootstrap";
+import url from "../../../Uri";
 
 
 function ComparisonHeader({product}){
@@ -33,11 +34,10 @@ function ComparisonHeader({product}){
     const [isProductArrUpdated,SetIsProductArrUpdated] = useState(true);
     
     
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    // var uri = "http://localhost:8080";
+    
     useEffect(()=>{
         if(length<4 && !isBrandsFetched){
-            axios.get(uri+"/get-add-to-compare-subcat/"+localStorage.getItem("Category")+"/Brand")
+            axios.get(url+"/get-add-to-compare-subcat/"+localStorage.getItem("Category")+"/Brand")
                 .then(function(response){
                     if(response.status==200){
                         console.log("Add To Compare SubCat",response.data);
@@ -71,7 +71,7 @@ function ComparisonHeader({product}){
     function handleModelClick(modelName,modelNumber){
 
         console.log("model number",modelNumber);
-        axios.get(uri+"/get-products/"+modelNumber)
+        axios.get(url+"/get-products/"+modelNumber)
             .then(function(response){
                 if(response.status==200){
                     // product.push(response.data);

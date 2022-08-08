@@ -8,6 +8,7 @@ import Header from "../Header";
 import {getCookie} from "../Cookies";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import url from "../../Uri";
 
 
 const ProductsByDeal = () => {
@@ -56,7 +57,7 @@ const ProductsByDeal = () => {
   
         }
   
-        axios.post("http://localhost:8080/wishlist", formdata, {
+        axios.post(url+"/wishlist", formdata, {
           headers: {
             "Authorization": "Bearer "+token,
             "Content-Type": "multipart/form-data"

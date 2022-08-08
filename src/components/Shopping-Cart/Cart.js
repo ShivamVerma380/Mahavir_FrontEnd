@@ -12,6 +12,7 @@ import Footer from '../Footer/Footer';
 import { Table } from 'reactstrap';
 import './Cart.css'
 import 'typeface-roboto'
+import url from '../../Uri';
 // var price=0;
 // var discount = 0;
 // var amount=0;
@@ -27,8 +28,7 @@ function Cart() {
     const[cartModels,SetCartModels] = useState(new Map());
     var qty=[];
     
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    //var uri = "http://localhost:8080";
+
     const [cartItems,SetCartItems] = useState([]);
     const [isCartItemsFetched,SetIsCartItemsFetched] = useState(false);
 
@@ -50,7 +50,7 @@ function Cart() {
         arr.map(item=>{
             if(item!=""){
                 console.log("item",item)
-                urls.push(axios.get(uri+"/get-products/"+item.split("=")[0]));
+                urls.push(axios.get(url+"/get-products/"+item.split("=")[0]));
             }
         })
             

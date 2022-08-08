@@ -13,6 +13,7 @@ import {useLocation} from 'react-router-dom';
 import Header from "../Header";
 import {setCookie,getCookie} from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
+import url from "../../Uri";
 
 function OfferItems() {
     var token=getCookie("jwtToken");
@@ -31,7 +32,7 @@ function OfferItems() {
             var urls = []
             modelNumbersArray.map(index => {
                 if (index !== "")
-                    urls.push(axios.get("http://localhost:8080/get-products/" + index));
+                    urls.push(axios.get(url+"/get-products/" + index));
             })
             axios.all(urls).then(axios.spread((...response) => {
                 console.log("response: ", response)
@@ -104,7 +105,7 @@ function OfferItems() {
     
           }
     
-          axios.post("http://localhost:8080/wishlist", formdata, {
+          axios.post(url+"/wishlist", formdata, {
             headers: {
               "Authorization": "Bearer "+token,
               "Content-Type": "multipart/form-data"

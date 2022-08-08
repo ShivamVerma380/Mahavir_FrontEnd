@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Col,Row,Button ,Form,Card, Container} from "react-bootstrap";
 import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 import Header from "../Header";
+import url from "../../Uri";
 
 const BrandOfferPosterProducts =()=>{
     console.log("Inside poster");
@@ -19,7 +20,7 @@ const BrandOfferPosterProducts =()=>{
 
             var urls = [];
             models.map(modelNum => {
-                urls.push(axios.get("http://localhost:8080/get-products/" + modelNum));
+                urls.push(axios.get(url+"/get-products/" + modelNum));
             })
             axios.all(urls).then(
                 axios.spread((...res) => {

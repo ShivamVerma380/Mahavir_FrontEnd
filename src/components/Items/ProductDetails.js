@@ -40,6 +40,7 @@ import ComparisonProductInformation from "../ProductsComparison/ComparisonProduc
 import ProductSpecification from "./ProductSpecification";
 import { setCookie, getCookie } from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
+import url from "../../Uri";
 // import './ProductDetails.css';
 // toast-configuration method,
 // it is compulsory method.
@@ -95,11 +96,6 @@ function ProductDetails() {
   var averagerate;
 
 
-
-  //var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-   var uri = "http://localhost:8080";
-
-
   useEffect(() => {
 
 
@@ -110,7 +106,7 @@ function ProductDetails() {
 
       axios({
         method: "get",
-        url: uri+"/pincodes"
+        url: url+"/pincodes"
       }).then(function (response) {
         console.log("Pincode response: ", response);
         if (response.status == 200) {
@@ -132,7 +128,7 @@ function ProductDetails() {
 
       axios({
         method: "get",
-        url: uri+"/get-products/" + localStorage.getItem("productSelected")
+        url: url+"/get-products/" + localStorage.getItem("productSelected")
       }).then(function (response) {
         console.log(response);
         if (response.status == 200) {
@@ -176,7 +172,7 @@ function ProductDetails() {
 
       axios({
         method: "get",
-        url: uri+"/get-reviews/" + localStorage.getItem("productSelected")
+        url: url+"/get-reviews/" + localStorage.getItem("productSelected")
       }).then(function (reviewresponse) {
         console.log(reviewresponse);
         if (reviewresponse.status == 200) {
@@ -193,8 +189,8 @@ function ProductDetails() {
         console.log("error", error);
       })
 
-      console.log("Url", uri+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category"));
-      axios.get(uri+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category")).then(
+      console.log("Url", url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category"));
+      axios.get(url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/" + localStorage.getItem("SubCategory") + "/" + localStorage.getItem("Category")).then(
         function (response) {
           if (response.status == 200) {
             console.log(response.data);
@@ -289,7 +285,7 @@ function ProductDetails() {
         modelNumber: product.modelNumber,
       }
 
-      axios.post(uri+"/add-to-cart", form_data_body, {
+      axios.post(url+"/add-to-cart", form_data_body, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Authorization": "Bearer " + localStorage.getItem("jwtToken")
@@ -572,9 +568,9 @@ function ProductDetails() {
       console.log("string", string);
       console.log("required", required);
       console.log("model No", product.modelNumber)
-      console.log("url", uri+"/variant" + product.modelNumber + "/" + string.trim() + "/" + required.trim());
+      console.log("url", url+"/variant" + product.modelNumber + "/" + string.trim() + "/" + required.trim());
 
-      axios.get(uri+"/variant/" + product.modelNumber + "/" + string.trim() + "/" + required.trim())
+      axios.get(url+"/variant/" + product.modelNumber + "/" + string.trim() + "/" + required.trim())
         .then(function (response) {
           if (response.status == 200) {
             console.log("product", response)

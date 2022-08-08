@@ -8,6 +8,7 @@ import Header from "../Header";
 import {FaArrowCircleUp} from 'react-icons/fa';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import url from "../../Uri";
 
 const BrandCatProducts = () => {
     var comparemodels=getCookie("addToCompare").split(',');
@@ -51,7 +52,7 @@ const BrandCatProducts = () => {
         if (!areProductsFetched && !isCategoriesFetched) {
 
 
-            axios.get("http://localhost:8080/excel/shopByBrands/"+ localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")).then(
+            axios.get(url+"/"+ localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")).then(
                 function (response) {
                     if (response.status == 200) {
                         console.log("Response",response.data);
@@ -80,7 +81,7 @@ const BrandCatProducts = () => {
             );
 
             if(!isCategoriesFetched){
-                axios.get("http://localhost:8080/get-categories")
+                axios.get(url+"/get-categories")
                 .then(function(response){
                     response.data.map(cat=>{
                         categories.push(cat.category);
@@ -92,7 +93,7 @@ const BrandCatProducts = () => {
             }
 
             
-            axios.get("http://localhost:8080/filtercriterias/"+localStorage.getItem("Category"))
+            axios.get(url+"/"+localStorage.getItem("Category"))
                 .then(function(response){
                     SetFilters(response.data.filterCriterias);
                     for(var key in response.data.filterCriterias){

@@ -12,6 +12,7 @@ import { Table } from 'reactstrap';
 import '../Shopping-Cart/Cart.css';
 import 'typeface-roboto'
 import './Summary.css'
+import url from '../../Uri';
 
 
 function Summary(){
@@ -47,7 +48,7 @@ function Summary(){
           arr.map(item=>{
               if(item!=""){
                   console.log("item",item)
-                  urls.push(axios.get("http://localhost:8080/get-products/"+item.split("=")[0]));
+                  urls.push(axios.get(url+"/get-products/"+item.split("=")[0]));
               }
           })
               

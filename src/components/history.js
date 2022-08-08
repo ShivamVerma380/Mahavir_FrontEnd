@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar";
+import url from "../Uri";
 // const searchResults = [];
 
   function GetSearchResults(searchTerm) {
@@ -15,7 +16,7 @@ import SearchBar from "./SearchBar";
         var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrZXRha2loQGdtYWlsLmNvbSIsImV4cCI6MTY1NDk0NzU2NiwiaWF0IjoxNjU0ODQ3NTY2fQ.C3pKuEQ9LmVTA0odzSJDUrrYJUX5iKUEnGEQ4vXNXPM"
     
         if(!isProductsFetched){
-          axios.get("http://localhost:8080/get-products").then(function(response){     
+          axios.get(url+"/get-products").then(function(response){     
           if(response.status==200){
             console.log("in history.js",response.data);
             setProducts(response.data);

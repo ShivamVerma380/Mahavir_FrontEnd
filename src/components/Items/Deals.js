@@ -10,6 +10,7 @@ import {getCookie} from "../Cookies";
 import { ToastContainer, toast } from 'react-toastify';
 import MovingComponent from 'react-moving-text'
 import { MDBCarousel,MDBCol,MDBCarouselInner,MDBCarouselItem,MDBCarouselElement,MDBCardHeader,MDBCardFooter,MDBBtn,MDBRow,MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardLink, MDBCardImage ,MDBContainer } from 'mdb-react-ui-kit';
+import url from "../../Uri";
 
 function Deals({deals}) {
     // var product = [];
@@ -33,9 +34,7 @@ function Deals({deals}) {
     var title = deals.title;
     console.log("Title: ",title);
 
-    // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    var uri = "http://localhost:8080";
-
+    
     var cards=<div>
         <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
     </div>
@@ -98,7 +97,7 @@ function Deals({deals}) {
   
         }
   
-        axios.post(uri+"/wishlist", formdata, {
+        axios.post(url+"/wishlist", formdata, {
           headers: {
             "Authorization": "Bearer "+token,
             "Content-Type": "multipart/form-data"

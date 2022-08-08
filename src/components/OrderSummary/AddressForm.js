@@ -7,6 +7,7 @@ import {  Input } from "reactstrap";
 import axios from "axios";
 import {getCookie} from '../Cookies';
 import 'typeface-roboto';
+import url from "../../Uri";
 var fullname = "";
 var addressone = "";
 var addresstwo = "";
@@ -22,8 +23,7 @@ const AddressForm = () => {
   const navigate = useNavigate();
   const [address, setAddress] = useState([]);
   const [isAddressFetched, setIsAddressFetched] = useState(false);
-  // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com"
-  var uri = "http://localhost:8080"
+ 
 
   var token = getCookie("jwtToken");
   console.log(token);
@@ -31,7 +31,7 @@ const AddressForm = () => {
     if (!isAddressFetched) {
       axios({
         method: "get",
-        url: uri+"/address",
+        url: url+"/address",
         headers: {
           "Authorization": "Bearer "+token
         }
@@ -76,7 +76,7 @@ const AddressForm = () => {
 
       }
 
-      axios.post(uri+"/address", formdata, {
+      axios.post(url+"/address", formdata, {
         headers: {
           "Authorization": "Bearer "+token,
           "Content-Type": "multipart/form-data"

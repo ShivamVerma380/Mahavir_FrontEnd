@@ -11,6 +11,7 @@ import {useLocation} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import Header from "../Header";
 import TestFilterProducts from "../Filters/TestFilterProducts";
+import url from "../../Uri";
 // import {getCookie,setCookie} from '../Cookies';
 
 
@@ -36,11 +37,10 @@ function CategoryProducts(){
   const [isProductFetched, setIsProductFetched] = useState(false);
     const [wish, setWish] = useState([]);
    
-    var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    // var uri = "http://localhost:8080";
+   
     useEffect(()=>{
         if(!isProductsFetched ){
-        axios.get(uri+"/get-products-by-category/"+location.state.name).then(function(response){
+        axios.get(url+"/get-products-by-category/"+location.state.name).then(function(response){
         console.log(response);
         if(response.status==200){
             setProducts(response.data);
@@ -58,7 +58,7 @@ function CategoryProducts(){
     if (!isWishlistFetched && !isProductFetched) {
       axios({
         method: "get",
-        url: uri+"/wishlist",
+        url: url+"/wishlist",
         headers: {
           "Authorization": "Bearer "+token
         }

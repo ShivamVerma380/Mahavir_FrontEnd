@@ -5,6 +5,7 @@ import * as AiIcons from 'react-icons/ai';
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import {getCookie} from './Cookies';
+import url from "../Uri";
 
 
 const WishList = () => {
@@ -121,7 +122,7 @@ const RemoveFromWishListviaIcon=(event)=>{
 
         axios({
           method: "get",
-          url: "http://localhost:8080/wishlist",
+          url: url+"/wishlist",
           headers: {
             "Authorization": "Bearer "+token
           }

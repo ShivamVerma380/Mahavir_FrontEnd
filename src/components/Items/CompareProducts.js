@@ -10,6 +10,7 @@ import { propTypes } from "react-bootstrap/esm/Image";
 import { SliderValueLabelUnstyled } from "@mui/base";
 import RowComponent from "./RowComponent";
 import CompareHeader from "./CompareHeader";
+import url from "../../Uri";
 
 
 
@@ -30,7 +31,7 @@ const CompareProducts = () => {
             var urls = [];
             modelNumbers.map(index=>{
                 if(index!=""){
-                    urls.push(axios.get("http://localhost:8080/get-products/"+index));
+                    urls.push(axios.get(url+"/get-products/"+index));
                 }
             })
             

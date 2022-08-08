@@ -24,8 +24,14 @@ import { RiCompassDiscoverLine } from 'react-icons/ri';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import HomeBottom from './components/Items/HomeBottom';
 
+// import Url from url
+import url from './Uri';
+
 var count = 0;
+
 function App() {
+
+  console.log("Url",url)
 
   localStorage.setItem("quantity",1);
 
@@ -94,8 +100,6 @@ function App() {
 
   //localStorage.setItem("product",JSON.stringify(products));
 
-  // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-  var uri = "http://localhost:8080";
   
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -125,7 +129,7 @@ function App() {
 
       axios({
         method:"get",
-        url:uri+"/get-offers"
+        url:url+"/get-offers"
       }).then(function(response){
         console.log(response);
         console.log("Poster response: ",response.data)
@@ -154,7 +158,7 @@ function App() {
         console.log("error",error);
       })
 
-      axios.get(uri+"/refresh-token",{
+      axios.get(url+"/refresh-token",{
         headers:{
           "Authorization":"Bearer "+getCookie("jwtToken"),
           "isRefreshToken":"true"
@@ -173,7 +177,7 @@ function App() {
       })
 
 
-      axios.get(uri+"/get-categories").then(function(response){
+      axios.get(url+"/get-categories").then(function(response){
         console.log(response);
         if(response.status==200){
             setcategoryDisplay(response.data);
@@ -185,7 +189,7 @@ function App() {
           console.log(error);
       })
 
-      axios.get(uri+"/deals").then(
+      axios.get(url+"/deals").then(
             function(response){
               if(response.status==200){
                 console.log(response.data);
@@ -198,7 +202,7 @@ function App() {
             }
           )
 
-      axios.get(uri+"/hybrid-posters").then(function(response){     
+      axios.get(url+"/hybrid-posters").then(function(response){     
       if(response.status==200){
         console.log("Products",response.data);
         setProducts(response.data);
@@ -210,7 +214,7 @@ function App() {
         console.log(error);
       })
 
-      axios.get(uri+"/get-posters").then(function(response){     
+      axios.get(url+"/get-posters").then(function(response){     
       if(response.status==200){
         console.log("Posters",response.data);
         setPosters(response.data);
@@ -224,7 +228,7 @@ function App() {
 
       var urls=[];
             categoryDisplay.map(index => {
-                urls.push(axios.get(uri+"/get-products-by-category/"+index.category));
+                urls.push(axios.get(url+"/get-products-by-category/"+index.category));
             })
             axios.all(urls).then(
                 axios.spread((...res)=>{
