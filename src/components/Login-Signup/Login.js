@@ -348,15 +348,21 @@ function Login() {
 
 
             const headers = { 
-                'Authorization': 'Bearer '+cookietoken
+                'Authorization': 'Bearer '+cookietoken,
+                "Content-Type": "multipart/form-data"
                 
             };
-            axios.put(url+'/updatePassword/'+newpassword,{headers})
+            var form_data_body={
+                "password": newpassword
+            }
+            axios.post(url+'/updatePassword',form_data_body,{headers})
             .then(function (response) {
                     if (response.status == 200) {
                         console.log("Password Updated successfully");
                         alert("Password Updated successfully")
-                        navigate("/login");
+                        window.location.reload();
+                        
+                        // navigate("/login");
                     }
                 }).catch(function (error) {
                     console.log("Error", error);
