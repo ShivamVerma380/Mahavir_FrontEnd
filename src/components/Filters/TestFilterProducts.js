@@ -112,32 +112,14 @@ function TestFilterProducts(){
                     SetProducts(response.data);
                 }
                 
-                // var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
-                // // var priceArr=[]
-                // response.data.map((index,pos)=>{
-                //     console.log("In selected products map...")
-                //     if(minPrice>parseInt(index.productPrice)){
-                //         minPrice = index.productPrice
-                //     }
-                //     if(maxPrice<parseInt(index.productPrice)){
-                //         maxPrice = index.productPrice
-                //     }
-                    
-                // })
-                // response.data.map(index=>{
-                //     console.log("price",index.productPrice)
-                //     priceArr.push(parseInt(index.productPrice))
-                // })
-                // priceArr.sort();
                 console.log("min ",minPrice,"  max",maxPrice);
                 SetMin(minPrice);
                 SetMax(maxPrice);
                 SetValue([minPrice,maxPrice]);
-                    // setValue([min,max])
                 
-                // SetSelectedProducts(response.data);
                 SetIsSelectedProductsFetched(true);
                 SetIsProductsFetched(true);
+                
             }).catch(function(error){
                 console.log("error",error);
             })
