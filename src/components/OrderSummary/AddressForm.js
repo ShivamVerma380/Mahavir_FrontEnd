@@ -401,14 +401,14 @@ const AddressForm = () => {
                     <Col>
                     
                         <Input
-                          style={{height:"100px"}}
+                          style={{height:"100px",  borderRadius:"20px"}}
                           id="last-name"
                           class="form-field"
                           type="textarea"
                           placeholder="Address Line 1 (Street Address, P.O.)"
                           name="ADL1"
                           onChange={InputAddressOneHandler}
-                          style={{borderRadius:"20px"}}
+                          
                         />
                      
                     </Col>

@@ -143,7 +143,12 @@ const Header = ({productList}) => {
     
     return(
       <>
-      <div className="top-header">
+        
+      
+      <div className="Header">
+          
+      <div className="top-header" >
+        
         <Row>
           <Col md={3} style={{marginLeft:"0px"}}>
             <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginTop:"4px"}}><MdOutlineLocalShipping style={{color:"white",height:"25px",width:"25px"}}/> FREE Express Shipping On All Orders</p>
@@ -169,11 +174,7 @@ const Header = ({productList}) => {
         </Row>
         
       </div>
-        
       
-      <div className="Header">
-          
-
   {['md'].map((expand) => (
     <Navbar className="header" key={expand} bg="light" expand={expand} >
        {/* fixed="top"  */}
