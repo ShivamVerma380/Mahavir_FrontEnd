@@ -30,22 +30,33 @@ const Header = ({productList}) => {
   const [categoryDisplay,setcategoryDisplay] = useState([]);
   const [isCategoryDisplayFetched,setIsCategoryDisplayFetched]=useState(false);
 
+  const [length,SetLength] = useState(0);
+
       
-      useEffect(()=>{
-        if(!isCategoryDisplayFetched){
-        axios.get(url+"/get-categories").then(function(response){
-          console.log(response);
-          if(response.status==200){
-              setcategoryDisplay(response.data);
-              setIsCategoryDisplayFetched(true);
-              console.log(response.data);
-          }
+  useEffect(()=>{
+    if(!isCategoryDisplayFetched){
+    axios.get(url+"/get-categories").then(function(response){
+      console.log(response);
+      if(response.status==200){
+          setcategoryDisplay(response.data);
+          setIsCategoryDisplayFetched(true);
           console.log(response.data);
-        }).catch(function(error){
-            console.log(error);
-        })
       }
-      });
+      console.log(response.data);
+    }).catch(function(error){
+        console.log(error);
+    })
+  }
+  });
+
+  var count = 0;
+  getCookie("CartModels").split(',').map(m=>{
+    
+    if(m!==""){
+      count++;
+    }
+    // SetLength(count);
+  })
     
 
       function getCookie(cname) {
@@ -140,6 +151,8 @@ const Header = ({productList}) => {
         alert("Wishlist clicked")
         navigate("/wishlistproducts")
     }
+
+    
     
     return(
       <>
@@ -236,7 +249,7 @@ const Header = ({productList}) => {
                     <Nav.Link style={{color:'#04001d'}} onClick={callLogin}><b style={{fontSize:"18px"}}><FaUserAlt size={30}/> Sign In/Register</b></Nav.Link>
                   )
                 }
-                <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg" style={{fontSize:"30px"}} onClick={Cart} ><b style={{verticalAlign: "super", color:"#C10000"}}>{getCookie("CartModels").split(',').length}</b></i></Nav.Link>
+                <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg" style={{fontSize:"30px"}} onClick={Cart} ><b style={{verticalAlign: "super", color:"#C10000"}}>{count}</b></i></Nav.Link>
                 {/* <NavDropdown className="location" renderMenuOnMount={false} title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
