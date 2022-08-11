@@ -41,6 +41,7 @@ function CategoryProductsSwiper({ cattitle }) {
   //   navigate("/productDetails")
   //   //console.log("Product selected ",index);
   // }
+  
   useEffect(() => {
     window.addEventListener('scroll', () => { if (window.scrollY > 700) { setAnimation(true); } else { setAnimation(false); } });
 

@@ -40,6 +40,7 @@
     "node-modules": "^1.0.1",
     "otp-input-react": "^0.3.0",
     "otp-timer": "^1.1.5",
+    "razorpay": "^2.8.3",
     "react": "^18.2.0",
     "react-360-product-viewer": "^0.1.0",
     "react-360-view": "^0.1.3",

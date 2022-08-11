@@ -74,7 +74,7 @@ function TestFilterProducts(){
         if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched){
             axios.get(url+"/get-products-by-category/"+localStorage.getItem("Category"))
             .then(function(response){
-                SetProducts(response.data);
+                
                 if(localStorage.getItem("SubCategory")==null || localStorage.getItem("SubSubCategory")==null){
                     SetSelectedProducts(response.data);
                     var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
@@ -89,6 +89,7 @@ function TestFilterProducts(){
                         }
                         
                     })
+                    SetProducts(response.data);
 
                 }else{
                     response.data.map(product=>{
@@ -108,6 +109,7 @@ function TestFilterProducts(){
                         }
                         
                     })
+                    SetProducts(response.data);
                 }
                 
                 // var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
@@ -146,10 +148,12 @@ function TestFilterProducts(){
                     response.data.map(cat=>{
                         categories.push(cat.category);
                     })
-                    SetIsCategoriesFetched(true);
+                    
                 }).catch(function(error){
                     console.log("error",error);
                 })
+
+                SetIsCategoriesFetched(true);
             }
             
             
