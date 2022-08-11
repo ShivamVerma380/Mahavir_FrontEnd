@@ -78,6 +78,7 @@ function Cart() {
 
 
     function handleCheckout(){
+        localStorage.setItem("type","checkout");
         navigate("/checkout");
     }   
 

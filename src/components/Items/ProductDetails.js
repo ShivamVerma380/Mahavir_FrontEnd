@@ -332,7 +332,8 @@ function ProductDetails() {
       alert("Quantity:" + quantity);
     }
     console.log("Product", product);
-    localStorage.setItem("buyProduct",JSON.stringify(product))
+    localStorage.setItem("buyProduct",JSON.stringify(product));
+    localStorage.setItem("type", "buyNow");
     navigate("/checkout")
   }
 
