@@ -170,6 +170,7 @@ function Login() {
             console.log(response.data.message);
         }).catch(function (error) {
             console.log(error);
+            alert(error.response.data.message);
         })
         isUserLoggedIn = true;
         // alert("login successful")
@@ -318,7 +319,8 @@ function Login() {
                     localStorage.setItem("isLoggedIn", true);
                     localStorage.setItem("Name", firstName + " " + lastName);
                     localStorage.setItem("jwtToken", response.data.token);
-                    navigate("/");
+                    window.location.reload();
+                    // navigate("/");
                 }
             }).catch(function (error) {
                 console.log("Error", error);
