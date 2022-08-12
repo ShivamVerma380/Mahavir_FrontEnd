@@ -40,7 +40,7 @@ function PaymentCart(){
     const PayAmount=(e)=>{
         e.preventDefault();
         
-        if(localStorage.getItem("price")===""){
+        if(localStorage.getItem("Amount")===""){
             alert("Please enter amount");
         }else{
             if(document.getElementById("cashOnDelivery").checked){
@@ -88,7 +88,7 @@ function PaymentCart(){
                     handler:function(response){
                         alert(response.razorpay_payment_id);
                         console.log("error in sending payment:",response);
-                        if(localStorage.getItem("price")!=null){
+                        if(localStorage.getItem("Amount")!=null){
                                 var form_data_body={
                                     products,
                                     "userAddress":{
