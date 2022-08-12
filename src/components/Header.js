@@ -164,19 +164,19 @@ const Header = ({productList}) => {
         
         <Row>
           <Col md={3} style={{marginLeft:"0px"}}>
-            <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginTop:"4px"}}><MdOutlineLocalShipping style={{color:"white",height:"25px",width:"25px"}}/> FREE Express Shipping On All Orders</p>
+            <p style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto",marginLeft:"20px"}}><MdOutlineLocalShipping style={{color:"white",height:"25px",width:"25px"}}/> FREE Express Shipping On All Orders</p>
           </Col>
           <Col md={4}></Col>
           <Col md={1} style={{marginLeft:"00px"}}>
-          <NavDropdown style={{color:'white',marginTop:"-6px"}} title={<p style={{color:"white",fontSize:"18px",fontFamily:'typeface-roboto'}}><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store<RiArrowDropDownLine style={{color:"white"}} size={25}/></p>} >
-                    <NavDropdown.Item style={{color:'black',fontSize:"18px",fontWeight:'bold'}} href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
-                    <NavDropdown.Item style={{color:'black',fontSize:"18px",fontWeight:'bold'}} href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
-                    <NavDropdown.Item style={{color:'black',fontSize:"18px",fontWeight:'bold'}} href="https://goo.gl/maps/eLmvYz7aLYgTuiSa7" target="_blank">Kothrud</NavDropdown.Item>
+          <NavDropdown style={{color:'white',marginTop:"-6px"}} title={<p style={{color:"white",fontSize:"13px",marginTop:"4px",fontWeight:500,fontFamily:"Roboto"}}><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store<RiArrowDropDownLine style={{color:"white"}} size={25}/></p>} >
+                    <NavDropdown.Item style={{color:'black',fontSize:"13px",fontWeight:500}} href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"13px",fontWeight:500}} href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"13px",fontWeight:500}} href="https://goo.gl/maps/eLmvYz7aLYgTuiSa7" target="_blank">Kothrud</NavDropdown.Item>
           </NavDropdown>
           {/* <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginLeft:"30px",marginTop:"3px"}} ><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store</p> */}
           </Col>
           <Col md={2} >
-            <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginTop:"3px"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
+            <p style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
           </Col>
           <Col md={1}>
           <AiOutlineInstagram style={{color:"white",height:"20px",width:"20px", marginTop:"7px",marginLeft:"100px"}}/>
@@ -236,8 +236,9 @@ const Header = ({productList}) => {
                         <Nav.Link  onClick={callLogin}>Hi, Sign In</Nav.Link>
                     )
                 } */}
-                {/* <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg"  onClick={Cart} ><b style={{verticalAlign: "super", color:"red"}}>{modelnums.length-1}</b></i></Nav.Link> */}
                 <Nav.Link className="Hamburgermenu" style={{color:'#04001d'}}><GiHamburgerMenu size={40}/></Nav.Link>
+                {/* <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg"  onClick={Cart} ><b style={{verticalAlign: "super", color:"red"}}>{modelnums.length-1}</b></i></Nav.Link> */}
+                
                 {
                   (isUserLoggedIn==="true")?(
                     // <Nav.Link style={{color:'#04001d'}} title={"Hi, "+(name)}><p><FaUserAlt size={30}/>Hi, {name}</p></Nav.Link>
@@ -246,7 +247,7 @@ const Header = ({productList}) => {
                       <NavDropdown.Item style={{color:'black'}} target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
                     </NavDropdown>
                   ):(
-                    <Nav.Link style={{color:'#04001d'}} onClick={callLogin}><b style={{fontSize:"18px"}}><FaUserAlt size={30}/> Sign In/Register</b></Nav.Link>
+                    <Nav.Link style={{color:'#04001d'}} onClick={callLogin}><b style={{color:"Black",fontSize:"18px",fontWeight:600,fontFamily:"Roboto"}}><FaUserAlt size={30}/> SignIn / Register</b></Nav.Link>
                   )
                 }
                 <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg" style={{fontSize:"30px"}} onClick={Cart} ><b style={{verticalAlign: "super", color:"#C10000"}}>{count}</b></i></Nav.Link>
