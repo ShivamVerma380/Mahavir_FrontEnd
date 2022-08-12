@@ -54,6 +54,9 @@ import Checkout from './components/OrderSummary/Checkout';
 import Invoice from './components/OrderSummary/Invoice';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import CompletedOrders from './components/Admin/Sidebar/CompletedOrders';
+import AddressCartSummary from './components/Checkout/AddToCartCheckout/AddressCartSummary';
+import CheckoutCartSummary from './components/Checkout/AddToCartCheckout/CheckoutCartSummary';
+import PaymentCart from './components/Checkout/AddToCartCheckout/PaymentCart';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -116,9 +119,12 @@ root.render(
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
       <Route path='/checkout' element={<Checkout/>}/>
       <Route path='/invoice' element={<Invoice/>}/>
-      <Route path='/payment' element={<Payment/>}/>
+      {/* <Route path='/payment' element={<Payment/>}/> */}
       <Route path='/compareProducts' element={<AddToCompareProducts/>}/>
       <Route path='/minibottom' element={<MiniPostersBottom/>}/>
+      <Route path='/cart-checkout' element={<AddressCartSummary/>}/>
+      <Route path='/cart-summary' element={<CheckoutCartSummary/>}/>
+      <Route path='/cart-payment' element={<PaymentCart/>}/>
       
     </Routes>
   </BrowserRouter>
