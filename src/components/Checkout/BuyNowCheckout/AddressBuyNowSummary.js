@@ -360,7 +360,6 @@ function AddressBuyNowSummary(){
                       <br></br>
                       <Row>
                         <Col>
-                        
                             <Input
                               style={{height:"100px"}}
                               id="last-name"

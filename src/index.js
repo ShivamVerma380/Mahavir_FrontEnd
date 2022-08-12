@@ -13,7 +13,7 @@ import CategoryDropdowns from './components/Admin/CategoryDropdowns';
 import PendingDelivery from './components/Admin/Sidebar/PendingDelivery'
 import UserComplaint from './components/Items/UserComplaint'
 import AddressForm from './components/OrderSummary/AddressForm';
-import Payment from './components/OrderSummary/Payment';
+import Payment from './components/Checkout/BuyNowCheckout/Payment';
 // import OrderSummary from './components/OrderSummary';
 import PaymentOption from './components/PaymentOption';
 import 'typeface-roboto';
@@ -129,6 +129,7 @@ root.render(
       <Route path='/cart-payment' element={<PaymentCart/>}/>
       <Route path="/checkout" element={<AddressBuyNowSummary/>}/>
       <Route path='/summary' element={<BuyNowSummary/>}/>
+      <Route path = "/payment" element = {<Payment/>}/>
     </Routes>
   </BrowserRouter>
 );

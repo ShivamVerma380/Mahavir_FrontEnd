@@ -32,34 +32,26 @@ function CheckoutCartSummary(){
     useEffect(()=>{
         
         if(!isCartItemsFetched){
-            if(localStorage.getItem("type")!=null &&  localStorage.getItem("type")==="buyNow"){
-                console.log("buyNow",localStorage.getItem("buyProduct"));
-                var product = JSON.parse(localStorage.getItem("buyProduct"));
-                console.log("product",product.modelNumber);
-                var arr = [];
-                arr.push(product.modelNumber+"=1");
-                console.log('arr',arr)
-                cartModels.set(product.modelNumber,1);
-            }else{
-                if(getCookie("CartModels")!=null){
-                    var arr = getCookie("CartModels").split(",");
-                    arr.map(item=>{
-                      if(item!=""){
-                          var pair = item.split("=")
-                          // if(pair[0])
-                          cartModels.set(pair[0].trim(),parseInt(pair[1]));
-                      }
-                    })
-                  }  
-            }
+            
+            if(getCookie("CartModels")!=null){
+                var arr = getCookie("CartModels").split(",");
+                arr.map(item=>{
+                    if(item!=""){
+                        var pair = item.split("=")
+                        // if(pair[0])
+                        cartModels.set(pair[0].trim(),parseInt(pair[1]));
+                    }
+                })
+                }  
+            
             console.log("Cart Models",cartModels)
-          var urls=[];
-          arr.map(item=>{
-              if(item!=""){
-                  console.log("item",item)
-                  urls.push(axios.get(url+"/get-products/"+item.split("=")[0]));
-              }
-          })
+            var urls=[];
+            arr.map(item=>{
+                if(item!=""){
+                    console.log("item",item)
+                    urls.push(axios.get(url+"/get-products/"+item.split("=")[0]));
+                }
+            })
               
           
           
