@@ -74,7 +74,7 @@ function TestFilterProducts(){
         if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched){
             axios.get(url+"/get-products-by-category/"+localStorage.getItem("Category"))
             .then(function(response){
-                SetProducts(response.data);
+                
                 if(localStorage.getItem("SubCategory")==null || localStorage.getItem("SubSubCategory")==null){
                     SetSelectedProducts(response.data);
                     var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
@@ -89,6 +89,7 @@ function TestFilterProducts(){
                         }
                         
                     })
+                    SetProducts(response.data);
 
                 }else{
                     response.data.map(product=>{
@@ -108,34 +109,17 @@ function TestFilterProducts(){
                         }
                         
                     })
+                    SetProducts(response.data);
                 }
                 
-                // var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
-                // // var priceArr=[]
-                // response.data.map((index,pos)=>{
-                //     console.log("In selected products map...")
-                //     if(minPrice>parseInt(index.productPrice)){
-                //         minPrice = index.productPrice
-                //     }
-                //     if(maxPrice<parseInt(index.productPrice)){
-                //         maxPrice = index.productPrice
-                //     }
-                    
-                // })
-                // response.data.map(index=>{
-                //     console.log("price",index.productPrice)
-                //     priceArr.push(parseInt(index.productPrice))
-                // })
-                // priceArr.sort();
                 console.log("min ",minPrice,"  max",maxPrice);
                 SetMin(minPrice);
                 SetMax(maxPrice);
                 SetValue([minPrice,maxPrice]);
-                    // setValue([min,max])
                 
-                // SetSelectedProducts(response.data);
                 SetIsSelectedProductsFetched(true);
                 SetIsProductsFetched(true);
+                
             }).catch(function(error){
                 console.log("error",error);
             })
@@ -146,10 +130,12 @@ function TestFilterProducts(){
                     response.data.map(cat=>{
                         categories.push(cat.category);
                     })
-                    SetIsCategoriesFetched(true);
+                    
                 }).catch(function(error){
                     console.log("error",error);
                 })
+
+                SetIsCategoriesFetched(true);
             }
             
             
@@ -314,6 +300,66 @@ function TestFilterProducts(){
             console.log(cat," is not checked")
         }
     }
+
+    function WishlistHandler(index) {
+        // alert("Item added successfully to wishlist");
+        // console.log(index.modelNumber)
+        // if (localStorage.getItem("wishlistproduct")==null) {
+        //   localStorage.setItem("wishlistproduct",index.modelNumber)
+        // }else {
+        //   var arr = localStorage.getItem("wishlistproduct").split(',')
+        //   var flag = true;
+        //   arr.map(i=>{
+           
+        //     console.log("i: ",i)
+        //     if( i=== index.modelNumber) {
+        //         arr.splice(arr.indexOf(i),1)
+        //         localStorage.setItem("wishlistproduct",arr)
+        //         console.log('del arr: ' + arr)
+        //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+        //        console.log("in if")
+        //       flag = false;
+        //     } 
+        //   }) 
+        //   if(flag)
+        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        //     navigate('/')
+          
+        // }
+  
+        console.log("Wishlist clicked")
+  
+        
+          var formdata = {
+            "modelNumber": index.modelNumber
+    
+          }
+    
+          axios.post(url+"/wishlist", formdata, {
+            headers: {
+              "Authorization": "Bearer "+token,
+              "Content-Type": "multipart/form-data"
+            }
+          }).then(function (response) {
+            if (response.status == 200) {
+              toast.success(<b>Added to wishlist successfully</b>)
+              // console.log("Added to wishlist successfully");
+              
+              console.log(response.data)
+              // navigate("/");
+            }
+          }).catch(function (error) {
+            if(error.response.status==406) {
+              toast.warn(<b>Item already present in Wishlist</b>)
+              // alert("Item already present in wishlist")
+            }
+            else {
+              console.log("Error", error);
+            }
+            
+          })
+        
+      }
 
     const handleFormCheck=(index,f)=>{
         console.log("index:",index,"    f:",f)
@@ -551,7 +597,7 @@ function TestFilterProducts(){
 
     return(
         <>
-
+            <ToastContainer position="top-center"/>
 
              
            <Row className="offcampusfilters" style={{marginTop:"200px"}}>
@@ -823,7 +869,7 @@ function TestFilterProducts(){
             </div>
             </div> */}
                                         <Col md={2} className="imagecol">
-                                            <Image thumbnail="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            <Image thumbnail="true" style={{cursor:"pointer"}} className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
                                             {/* <br></br>
                                             <p>{index.modelNumber}</p> */}
                                         </Col>
@@ -917,14 +963,14 @@ function TestFilterProducts(){
                                                 <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button>
                                             </Col>    */}
                                             <Col>
-                                                <Button className="filterproductBtn" >Add to wishlist</Button>
-                                                {/* variant="outline-primary" */}
+                                                <Button className="filterproductBtn" variant="outline-primary" onClick={() => WishlistHandler(index)}>Add to wishlist</Button>
+                                                
                                             </Col>                                                                                                                  
                                             </Row>
 
                                             <Row className="btnrow2">
                                             {/* <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button> */}
-                                            <Button className="filterproductBtn" >Add to wishlist</Button>
+                                            <Button className="filterproductBtn" variant="outline-primary" onClick={() => WishlistHandler(index)}>Add to wishlist</Button>
                                             {/* variant="outline-primary" */}
 
                                             </Row>

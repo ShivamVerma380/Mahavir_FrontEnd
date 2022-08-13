@@ -324,6 +324,10 @@ function ProductDetails() {
 
   const handleBuyNow = (product) => {
 
+    if(getCookie("isLoggedIn")==='true'){
+
+    
+
     if (flag == false) {
       alert("Buy Now ");
     } else if (quantity <= 0) {
@@ -332,8 +336,14 @@ function ProductDetails() {
       alert("Quantity:" + quantity);
     }
     console.log("Product", product);
-    localStorage.setItem("buyProduct",JSON.stringify(product))
+    localStorage.setItem("buyProduct",JSON.stringify(product));
+    localStorage.setItem("type", "buyNow");
     navigate("/checkout")
+  }
+  else
+  {
+    navigate("/login")
+  }
   }
 
   const InputPin = (e) => {
@@ -617,9 +627,9 @@ function ProductDetails() {
             <div className="productdetailrow">
               
               <Row className="row1">
-                <Col >
+                <Col md={6} style={{flex:'auto'}}>
                   <div className="innercol1">
-                  {/* <Row className="imageslider">
+                  <Row className="imageslider">
               <Carousel activeIndex={index} onSelect={handleSelect}>
                   <Carousel.Item>
                     {
@@ -639,7 +649,7 @@ function ProductDetails() {
                   {getproductimg5(product)}
                   </Carousel.Item>
                 </Carousel>
-              </Row> */}
+              </Row>
 
                     
                     <Row className="laptopimg" >
@@ -772,7 +782,7 @@ function ProductDetails() {
                   </div>
 
                 </Col>
-                <Col  className="innercol" style={{
+                <Col md={6} className="innercol" style={{
                   padding: '2%',
                   height: '800px',
                   overflowY: 'scroll'

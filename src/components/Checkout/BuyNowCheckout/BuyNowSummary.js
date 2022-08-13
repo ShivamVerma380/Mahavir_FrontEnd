@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import {React,useState,useEffect} from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
-import Header from "../Header";
+import Header from "../../Header";
 import { Card, CardHeader, CardText, CardBody,Row,
   CardTitle, CardFooter, Button, Col,Container ,Image} from 'react-bootstrap';
   import {FormControl,Form} from 'react-bootstrap';
   import { QuantityPicker } from 'react-qty-picker';
 import axios from 'axios';
-import CartItem from './CartItem';
-import {setCookie,getCookie} from '../Cookies';
-import Footer from '../Footer/Footer';
+import CartItem from '../../Shopping-Cart/CartItem';
+import {setCookie,getCookie} from '../../Cookies';
 import { Table } from 'reactstrap';
-import './Cart.css'
+import '../../Shopping-Cart/Cart.css';
 import 'typeface-roboto'
-import url from '../../Uri';
-// var price=0;
-// var discount = 0;
-// var amount=0;
+import '../../OrderSummary/Summary.css'
+import url from '../../../Uri';
 
-function Cart() {
+
+function BuyNowSummary(){
 
     var price=0;
     var discount=0;
@@ -33,76 +31,62 @@ function Cart() {
     const [isCartItemsFetched,SetIsCartItemsFetched] = useState(false);
 
     useEffect(()=>{
-      if(!isCartItemsFetched){
-        if(getCookie("CartModels")!=null){
-            var arr = getCookie("CartModels").split(",");
+        if(!isCartItemsFetched){
+            console.log("buyNow",localStorage.getItem("buyProduct"));
+            var product = JSON.parse(localStorage.getItem("buyProduct"));
+            console.log("product",product.modelNumber);
+            var arr = [];
+            arr.push(product.modelNumber+"=1");
+            console.log('arr',arr)
+            cartModels.set(product.modelNumber,1);
+            var urls=[];
             arr.map(item=>{
-              if(item!=""){
-                  var pair = item.split("=")
-                  // if(pair[0])
-                  cartModels.set(pair[0].trim(),parseInt(pair[1]));
-              }
+                if(item!=""){
+                    console.log("item",item)
+                    urls.push(axios.get(url+"/get-products/"+item.split("=")[0]));
+                }
             })
-          }
+
+            axios.all(urls).then(
+                axios.spread((...res) => {
+                    res.map(index => {
       
-        console.log("Cart Models",cartModels)
-        var urls=[];
-        arr.map(item=>{
-            if(item!=""){
-                console.log("item",item)
-                urls.push(axios.get(url+"/get-products/"+item.split("=")[0]));
-            }
-        })
-            
-        
-        
+                        cartItems.push(index.data);
+                        
+                        // filteredProducts.push(index.data);
+      
+      
+                    })
+                    console.log("Cart Items",cartItems)
+                    console.log("Cart models ...",cartModels)
+                    SetIsCartItemsFetched(true);
+      
+                })
+              )
+        }
     
-        axios.all(urls).then(
-          axios.spread((...res) => {
-              res.map(index => {
-
-                  cartItems.push(index.data);
-                  
-                  // filteredProducts.push(index.data);
-
-
-              })
-              console.log("Cart Items",cartItems)
-              console.log("Cart models ...",cartModels)
-              SetIsCartItemsFetched(true);
-
-          })
-        )
-      }
     })
 
+    function handleProceedToPaymentClick(){
+        console.log("Amount",amount);
+        localStorage.setItem("Amount",parseInt(amount));
+        navigate("/payment")
+    }
 
-    function handleCheckout(){
-        localStorage.setItem("type","checkout");
-        navigate("/cart-checkout");
-    }   
-
-    const continueShoppingHandler=()=> {
-        navigate("/")
-      }
 
     return(
-        
-      <div  className="cartpage">   
-        <Header/> 
-        {
-            (isCartItemsFetched) ? (
-                (cartItems.length>0) ? (
-                    <div className="Cartbody" style={{boxSizing:"border-box"}}>
+        <div  className="cartpage">   
+            {/* <Header/>  */}
+            <div className="Cart" style={{boxSizing:"border-box"}}>
             <Row>
     
-            <Col sm={7} className='cartTable'>
+            <Col sm={8} className='summaryTable'>
             {
                 (isCartItemsFetched)?(
                     <Table >
                     <thead className='cartTitle'>
                         <tr >
-                        <th className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"2px solid #E2E2E2"}}> My Cart ({cartItems.length} items)</th>
+                        <th className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>ORDER SUMMARY</th>
                         </tr>
                     </thead>
                     </Table>
@@ -132,8 +116,8 @@ function Cart() {
             </Col>
             {
                 (isCartItemsFetched)?(
-                    <Col sm={5} className="priceTable">
-                    <Table style={{margin_top:"50px", color:'black',width:"450px"}} >
+                    <Col sm={4} className="summarypriceTable">
+                    <Table style={{margin_top:"50px", color:'black',width:"470px"}} >
                     <thead>
                         <tr>
                         <th  className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Price Details</th>
@@ -198,13 +182,15 @@ function Cart() {
                     </tbody>
                     </Table>
                     <br></br>
-                    
-                    <Row>
+                    <br></br>
+                    <Button style={{backgroundColor:"#C10000",border:"none"}} onClick={handleProceedToPaymentClick}>Proceed To Payment</Button>
+                    {/* <Row>
                         <center>
                         <Button style={{height:"50px",width:"250px",background:"#C10000", fontFamily:"typeface-roboto",letterSpacing:"1px"}} className="btn-flat" onClick={handleCheckout}>CHECK OUT</Button>
                         </center>
-                    </Row>
+                    </Row> */}
                     </Col>
+
                 ):(
                     null
                 )
@@ -219,36 +205,11 @@ function Cart() {
                 </Col>
             </Row> */}
             </div>
-                ) : (
-                    <center>
-                    <img src="https://github.com/ShivamVerma380/MahavirImages/blob/main/VectorImg/emptywishlistvectorimg.png?raw=true" style={{height:"260px",width:"260px"}}/>
-                    <br></br>
-                    <h5 style={{fontWeight:600, fontSize:"20px", lineHeight:"23px", letterSpacing:"0.02em"}}>Oops! Your cart looks empty</h5>
-                    <Row>
-                      <Col md={3}></Col>
-                      <Col md={6}>
-                      <p style={{fontWeight:500, fontSize:"18px", lineHeight:"23px", letterSpacing:"0.02em", color:"rgba(0,0,0,0.5)"}}>Add items to it now.</p>
-                      </Col>
-                    </Row>
-                    <br></br>
-                    <Button onClick={()=>continueShoppingHandler()} style={{background:"#C10000",border:"none",padding:"16px",fontSize:"14px",lineHeight:"14px",borderRadius:"5px",marginBottom:"20px"}}>CONTINUE SHOPPING</Button>
-                    
-                    
-                    </center>
-                )
-            ) : (null)
-            
-        }
-        
-        <br></br>
-        <br></br>
-        
-        <Footer/>
-        
+    
+      </div>
+        );
 
-  </div>
-  
- 
-    );
-  }
-  export default Cart;
+
+}
+
+export default BuyNowSummary;

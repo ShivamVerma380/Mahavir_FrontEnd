@@ -13,7 +13,7 @@ import Summary from './Summary';
 import Footer from '../Footer/Footer';
 import { black } from 'material-ui/styles/colors';
 import { Navigate, useNavigate } from 'react-router-dom';
-const steps = ['Add Address', 'Order Summary','Payment', 'Bill'];
+const steps = ['Add Address', 'Order Summary','Payment'];
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -88,11 +88,7 @@ export default function Checkout() {
 
         )
     }
-    else if(activeStep===3){
-      return(
-        <Invoice/>
-      )
-    }
+    
 
   };
   return (

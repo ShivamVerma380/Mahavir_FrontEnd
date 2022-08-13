@@ -50,10 +50,12 @@ width: 100%;
     font-weight: bold;
     /* color: #0b4268;
     border-color: #0b4268; */
-    
+    color: white;
     border-color: #C10000;
     background: #C10000;
+    background-color: #C10000;
 }
+
 
 .filterproductBtn1{
     margin-left: 20px;
@@ -67,8 +69,8 @@ width: 100%;
 }
 
 .filterproductBtn:hover{
-    background-color: #C50000;
-    border-color: #C50000;
+    background-color: #fe0000;
+    border-color: #fe0000;
    
 }
 .filterproductBtn1:hover{
@@ -345,7 +347,7 @@ width: 100%;
 .mainpage {
     /* margin: 7% 2% 2% 2%; */
     margin-left: 1%;
-    margin-top: 1%;
+    margin-top: 130px;
 }
 
 .check{
@@ -429,8 +431,8 @@ h5{font-weight: 400}
         height: 50px;
         font-size: 14px;
         font-weight: bold;
-        color: #0b4268;
-        border-color: #0b4268;
+        color: #fe0000;
+        border-color: #fe0000;
     }
     #comparebtn{
         display: none;

@@ -13,7 +13,7 @@ import CategoryDropdowns from './components/Admin/CategoryDropdowns';
 import PendingDelivery from './components/Admin/Sidebar/PendingDelivery'
 import UserComplaint from './components/Items/UserComplaint'
 import AddressForm from './components/OrderSummary/AddressForm';
-import Payment from './components/OrderSummary/Payment';
+import Payment from './components/Checkout/BuyNowCheckout/Payment';
 // import OrderSummary from './components/OrderSummary';
 import PaymentOption from './components/PaymentOption';
 import 'typeface-roboto';
@@ -54,6 +54,11 @@ import Checkout from './components/OrderSummary/Checkout';
 import Invoice from './components/OrderSummary/Invoice';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import CompletedOrders from './components/Admin/Sidebar/CompletedOrders';
+import AddressCartSummary from './components/Checkout/AddToCartCheckout/AddressCartSummary';
+import CheckoutCartSummary from './components/Checkout/AddToCartCheckout/CheckoutCartSummary';
+import PaymentCart from './components/Checkout/AddToCartCheckout/PaymentCart';
+import AddressBuyNowSummary from './components/Checkout/BuyNowCheckout/AddressBuyNowSummary';
+import BuyNowSummary from './components/Checkout/BuyNowCheckout/BuyNowSummary';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -114,12 +119,17 @@ root.render(
       <Route path='/productsbydeal' element={<ProductsByDeal/>}/>
       <Route path='/filterproducts' element={<FilterProduct/>}/>
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
-      <Route path='/checkout' element={<Checkout/>}/>
+      {/* <Route path='/checkout' element={<Checkout/>}/> */}
       <Route path='/invoice' element={<Invoice/>}/>
-      <Route path='/payment' element={<Payment/>}/>
+      {/* <Route path='/payment' element={<Payment/>}/> */}
       <Route path='/compareProducts' element={<AddToCompareProducts/>}/>
       <Route path='/minibottom' element={<MiniPostersBottom/>}/>
-      
+      <Route path='/cart-checkout' element={<AddressCartSummary/>}/>
+      <Route path='/cart-summary' element={<CheckoutCartSummary/>}/>
+      <Route path='/cart-payment' element={<PaymentCart/>}/>
+      <Route path="/checkout" element={<AddressBuyNowSummary/>}/>
+      <Route path='/summary' element={<BuyNowSummary/>}/>
+      <Route path = "/payment" element = {<Payment/>}/>
     </Routes>
   </BrowserRouter>
 );

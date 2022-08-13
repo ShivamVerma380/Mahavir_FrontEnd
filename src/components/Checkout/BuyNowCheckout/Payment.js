@@ -1,36 +1,25 @@
-import react, { useEffect, useState } from 'react';
+import React,{useState,useEffect} from "react";
 import { Button } from 'reactstrap';
-import {setCookie,getCookie} from '../Cookies';
+import {setCookie,getCookie} from '../../Cookies';
 import axios from "axios";
-import url from '../../Uri';
+import url from '../../../Uri';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
-const Payment=()=>
-{
 
-    var arr = getCookie("CartModels").split(",");
+function Payment(){
+
+    var product = JSON.parse(localStorage.getItem("buyProduct"));
     const [cartModels,SetCartModels] = useState(new Map());
-    
+    var arr=[];
+    arr.push(product);
+
+    cartModels.set(product.modelNumber,1);
+
     const navigate = useNavigate();
 
-    // var price,discount,amount;
-    // const[price,SetPrice] = useState();
-
-    arr.map(item=>{
-        if(item!=""){
-            var pair = item.split("=")
-            // if(pair[0])
-            if(pair[0]!=""){
-                cartModels.set(pair[0].trim(),parseInt(pair[1]));
-            }
-        }
-    })
-
-    useEffect(()=>{
-
-    })
-
     console.log("CartModels",cartModels)
+
+    console.log("Buy Amount",localStorage.getItem("Amount"));
 
     var products = Object.fromEntries(cartModels);
 
@@ -47,7 +36,7 @@ const Payment=()=>
     const PayAmount=(e)=>{
         e.preventDefault();
         
-        if(localStorage.getItem("price")===""){
+        if(localStorage.getItem("Amount")===""){
             alert("Please enter amount");
         }else{
             if(document.getElementById("cashOnDelivery").checked){
@@ -65,7 +54,7 @@ const Payment=()=>
                     },
                     "buyDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear(),
                     "paymentMode":"Cash On Delivery",
-                    "paymentAmount":localStorage.getItem("price")
+                    "paymentAmount":localStorage.getItem("Amount")
                 }
                 console.log("Form Data Body",form_data_body)
                 axios.post(url+"/order",form_data_body,{
@@ -95,7 +84,7 @@ const Payment=()=>
                     handler:function(response){
                         alert(response.razorpay_payment_id);
                         console.log("error in sending payment:",response);
-                        if(localStorage.getItem("price")!=null){
+                        if(localStorage.getItem("Amount")!=null){
                                 var form_data_body={
                                     products,
                                     "userAddress":{
@@ -110,7 +99,7 @@ const Payment=()=>
                                     },
                                     "buyDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear(),
                                     "paymentMode":"razorpay",
-                                    "paymentAmount":localStorage.getItem("price"),
+                                    "paymentAmount":localStorage.getItem("Amount"),
                                     "paymentId":response.razorpay_payment_id
                                 }
                             console.log("Form Data Body",form_data_body)
@@ -153,24 +142,7 @@ const Payment=()=>
             // alert(localStorage.getItem("price"))
             
         }
-    }
-        // if(localStorage.getItem("price")!=null){
-        //     axios.post(url+"/order",form_data_body,{
-        //     headers:{
-        //         "Authorization":"Bearer "+getCookie("jwtToken"),
-        //         "Content-Type":"application/json"
-        //     }
-        //     }).then(res=>{
-        //         if(res.status==200){
-        //             console.log("response",res)
-        //             SetIsPaymentDone(true)
-        //             SetIsPaymentDone(true)
-        //         }
-        //     }).catch(err=>{
-        //         console.log("Error",err)
-        //     })
-            
-        // } 
+        }
            
     
 
@@ -195,6 +167,7 @@ const Payment=()=>
         </div>
         
     );
+
 }
 
 export default Payment;

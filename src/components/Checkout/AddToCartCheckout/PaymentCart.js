@@ -1,20 +1,17 @@
-import react, { useEffect, useState } from 'react';
+import React,{useState,useEffect} from "react";
 import { Button } from 'reactstrap';
-import {setCookie,getCookie} from '../Cookies';
+import {setCookie,getCookie} from '../../Cookies';
 import axios from "axios";
-import url from '../../Uri';
+import url from '../../../Uri';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
-const Payment=()=>
-{
+
+function PaymentCart(){
 
     var arr = getCookie("CartModels").split(",");
     const [cartModels,SetCartModels] = useState(new Map());
     
     const navigate = useNavigate();
-
-    // var price,discount,amount;
-    // const[price,SetPrice] = useState();
 
     arr.map(item=>{
         if(item!=""){
@@ -24,10 +21,6 @@ const Payment=()=>
                 cartModels.set(pair[0].trim(),parseInt(pair[1]));
             }
         }
-    })
-
-    useEffect(()=>{
-
     })
 
     console.log("CartModels",cartModels)
@@ -47,7 +40,7 @@ const Payment=()=>
     const PayAmount=(e)=>{
         e.preventDefault();
         
-        if(localStorage.getItem("price")===""){
+        if(localStorage.getItem("Amount")===""){
             alert("Please enter amount");
         }else{
             if(document.getElementById("cashOnDelivery").checked){
@@ -65,7 +58,7 @@ const Payment=()=>
                     },
                     "buyDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear(),
                     "paymentMode":"Cash On Delivery",
-                    "paymentAmount":localStorage.getItem("price")
+                    "paymentAmount":localStorage.getItem("Amount")
                 }
                 console.log("Form Data Body",form_data_body)
                 axios.post(url+"/order",form_data_body,{
@@ -95,7 +88,7 @@ const Payment=()=>
                     handler:function(response){
                         alert(response.razorpay_payment_id);
                         console.log("error in sending payment:",response);
-                        if(localStorage.getItem("price")!=null){
+                        if(localStorage.getItem("Amount")!=null){
                                 var form_data_body={
                                     products,
                                     "userAddress":{
@@ -110,7 +103,7 @@ const Payment=()=>
                                     },
                                     "buyDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear(),
                                     "paymentMode":"razorpay",
-                                    "paymentAmount":localStorage.getItem("price"),
+                                    "paymentAmount":localStorage.getItem("Amount"),
                                     "paymentId":response.razorpay_payment_id
                                 }
                             console.log("Form Data Body",form_data_body)
@@ -197,4 +190,4 @@ const Payment=()=>
     );
 }
 
-export default Payment;
+export default PaymentCart;
