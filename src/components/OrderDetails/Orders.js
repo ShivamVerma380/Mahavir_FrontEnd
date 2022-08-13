@@ -5,6 +5,7 @@ import {Row,Col,Form,Button} from 'react-bootstrap';
 import Header from "../Header";
 import {setCookie,getCookie} from '../Cookies';
 import url from "../../Uri";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -16,6 +17,8 @@ const Orders=()=>{
     const [isOrdersFetched,SetIsOrdersFetched] = useState(false);
 
     const [fitleredOrders,setFilteredOrders]=useState([]);
+
+    const navigate = useNavigate();
 
     // console.log("orders "+productBoughtbyUser[0]);
     // console.log("orders type"+typeof productBoughtbyUser);
@@ -108,6 +111,16 @@ const Orders=()=>{
         // console.log("Delivered",document.getElementById("delivered").checked)
     }
 
+    function rateProduct(order){
+        console.log("Rate rating",order);
+        localStorage.setItem("rateProduct",JSON.stringify(order));
+        navigate("/ratereview")
+    }
+
+    function editRating(order){
+        console.log("Edit Rating",order);
+    }
+
     return(
         <div>
             <Row>
@@ -142,7 +155,18 @@ const Orders=()=>{
                                         <p>Buy Date:{order.buyDate}</p>
                                         <p>Delivery Date:{order.deliveryDate}</p>
                                         <p>Payment Mode:{order.paymentMode}</p>
-                                        <Button>Rate & Review</Button>
+                                        {
+                                            (order.productRated==true)?(
+                                                
+                                                    <Button onClick={()=>editRating(order)}>Edit Review</Button>
+                                                
+                                            ):(
+                                                
+                                                    <Button onClick={()=>rateProduct(order)}>Rate & Review</Button>            
+                                                    
+                                            )
+                                        }
+                                        
                                         <Button  style={{marginLeft:"15px"}}>Invoice</Button>
                                     </Col>
                                 </Row>

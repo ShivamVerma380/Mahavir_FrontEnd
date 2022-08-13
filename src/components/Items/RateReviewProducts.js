@@ -5,8 +5,16 @@ import { Input } from "reactstrap";
 import './ProductDetails.css'
 import axios from "axios";
 import url from "../../Uri";
+import { getCookie } from "../Cookies";
+import { useNavigate } from "react-router-dom";
 
 const RateReviewProducts = () => {
+
+    const navigate = useNavigate();
+
+    console.log("Product Rate",localStorage.getItem("rateProduct"));
+
+    var product = JSON.parse(localStorage.getItem("rateProduct"));
 
     var userrating = "";
     var reviewdate = "";
@@ -33,26 +41,27 @@ const RateReviewProducts = () => {
     const HandleSubmit = () => {
         
         var form_data_body = {
-            "modelNumber": "IPH12123",
             "Review":""+userreview,
             "Rating":""+userrating,
             "Date":""+reviewdate     
         }
         console.log("FormData",form_data_body)
-        axios.post(url+"/add-review/IPH12123", form_data_body, {
+        axios.post(url+"/review/"+product.modelNumber+"/"+product.orderId, form_data_body, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMkJWY2RAZmRlZmVkczVyZGRkIiwiZXhwIjoxNjU1MDI5MzI1LCJpYXQiOjE2NTQ5MjkzMjV9.14H8_CqBGuVS_mTwLRKrzqvSue0q1nCNxD0lKId-F7E"
+                "Authorization": "Bearer "+getCookie("jwtToken")
             },
         }).then(function (response) {
             console.log(response);
             if (response.status == 200) {
                 console.log("response", response);
                 console.log("Review Added");
+                navigate("/my-orders");
                 
             }
             else {
                 console.log("In else");
+                alert(response.data.message);
                 console.log(response.data.message);
                 return;
             }
@@ -63,7 +72,7 @@ const RateReviewProducts = () => {
             // console.log(error);
             
                 console.log("Product Not Bought")
-            
+                alert("Product Not Bought")
             
             return;
         })
@@ -81,10 +90,10 @@ const RateReviewProducts = () => {
             
             <Row>
                 <Col md={1}>
-                    <img src="https://d2xamzlzrdbdbn.cloudfront.net/products/2eb1eeb0-470e-48a0-9bcf-7d6f610a449521170554.jpg" style={{ width: 100, height: 100 }}></img>
+                    <img src={product.productImage1} style={{ width: 100, height: 100 }}></img>
                 </Col>
                 <Col md={4}>
-                    <h6>Apple iPhone 13 Pro Max (256 GB Storage, Gold)</h6>
+                    <h6>{product.productName}</h6>
                 </Col>
 
             </Row>
