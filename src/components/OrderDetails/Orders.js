@@ -60,11 +60,50 @@ const Orders=()=>{
                 }
             })
         }
+
         if(document.getElementById("on-the-way").checked==false && document.getElementById("delivered").checked==false){
             arr = orders
         }
+
+        console.log(date.getFullYear(),document.getElementById(date.getFullYear()).checked);
+        console.log(date.getFullYear()-1,document.getElementById(date.getFullYear()-1).checked);
+        console.log("Older",document.getElementById("Older").checked);
+
+        var final_arr=[];
+
+        if(document.getElementById(date.getFullYear()).checked){
+            // console.log("orderDate",o.buyDate.substring(5));
+            arr.map(o=>{
+                if(o.buyDate.substring(5)==date.getFullYear()){
+                    final_arr.push(o);
+                }
+            })
+        }
+
+        if(document.getElementById(date.getFullYear()-1).checked){
+            // console.log("orderDate",o.buyDate.substring(5));
+            arr.map(o=>{
+                if(o.buyDate.substring(5)==(date.getFullYear()-1)){
+                    final_arr.push(o);
+                }
+            })
+        }
+
+        if(document.getElementById("Older").checked){
+            // console.log("orderDate",o.buyDate.substring(5));
+            arr.map(o=>{
+                if(o.buyDate.substring(5)<(date.getFullYear()-1)){
+                    final_arr.push(o);
+                }
+            })
+        }
+
+        if(document.getElementById(date.getFullYear()).checked==false && document.getElementById(date.getFullYear()-1).checked==false && document.getElementById("Older").checked==false){
+            final_arr = arr;
+        }
+
         setFilteredOrders([]);
-        setFilteredOrders([...arr]);
+        setFilteredOrders([...final_arr]);
         // console.log("On The way",document.getElementById("on-the-way").checked)
         // console.log("Delivered",document.getElementById("delivered").checked)
     }
@@ -82,9 +121,9 @@ const Orders=()=>{
                     <br></br>
                     <h6>Year</h6>
                     <Form>
-                        <Form.Check type="checkbox" id={date.getFullYear()} label= {date.getFullYear()} />
-                        <Form.Check type="checkbox" id={date.getFullYear()-1} label= {date.getFullYear()-1}/>
-                        <Form.Check type="checkbox" id="Older" label= "Older"/>
+                        <Form.Check type="checkbox" id={date.getFullYear()} label= {date.getFullYear()} onChange={handleFormCheck} />
+                        <Form.Check type="checkbox" id={date.getFullYear()-1} label= {date.getFullYear()-1} onChange={handleFormCheck}/>
+                        <Form.Check type="checkbox" id="Older" label= "Older" onChange={handleFormCheck}/>
                     </Form>
                 </Col>
                 <Col md={10}>
