@@ -2,11 +2,16 @@
   font-family: 'Verdana';
 }
 
-.productdetailrow{
+.productdetailrow {
   background-color: white;
+
+  margin: auto;
+  /* margin: 7% auto 1% auto; */
+
   margin-top: 128px;
   /* margin: auto; */
   /* margin: auto auto 1% auto; */
+
   /* display: flex; */
   width: 100%;
 }
@@ -566,8 +571,62 @@ margin-bottom: 0;
   .addtocart{
     font-size: 17px;
     width: 100%;
+
+  }
+  
+  .fa-3x {
+    font-size: 30px;
+  }
+  .list-inline{
+    /* padding: 0; */
+  }
+ 
+  .inerrow1{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+  
+  .innercol hr{
+    display: none;
+  }
+
+  
+
+  .innercol {
+    -ms-overflow-style: none;
+
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  .offerrow{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0px;
+  }
+  .offerbtn {
+    margin: 2px;
+    height: 50px;
+    width: 110px;
+    font-size: small; 
+  }
+  .producthigh{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .rowtitle{
+    margin-bottom: 0;
+  }
+  .variants{
+    margin: 0;
+  }
+  .infotitle{
+    font-size: 30px;
+
     height: 50px;
     margin-top: 30px;
+
   }
   .offercard {
     display: grid;

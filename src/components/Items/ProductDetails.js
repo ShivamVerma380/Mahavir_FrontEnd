@@ -816,7 +816,7 @@ function ProductDetails() {
                       (product.offerPrice == null) ? (
                         <h4 className="productprice">MRP: <b>₹{product.productPrice}</b></h4>
                       ) : (
-                        <h4 className="productprice">MSP: <b style={{ marginRight: "20px", color: "#ed1c24" }}>₹{product.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", marginRight:40 }}>₹{product.productPrice}</b> <b style={{color:"green"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h4>
+                        <h4 className="productprice"><b style={{fontSize:"22px"}}>MSP:</b> <b style={{ marginRight: "20px", color: "#ed1c24",fontSize:"22px"}}>₹{product.offerPrice}</b> <b style={{fontSize:"16px",color:"grey"}}>MRP:</b>  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b> <b style={{color:"green"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h4>
                       )
                     }
                   </Row>
@@ -1110,10 +1110,10 @@ function ProductDetails() {
 
                   <Row className="pincoderow">
                     <Col>
-                      <h4 className="rowtitle">Enter Pincode:</h4>
+                      <h4 className="rowtitle">DELIVERY TO</h4>
                     </Col>
                     <Col>
-                      <Input className="pininput" type="number" onChange={InputPin}></Input>
+                      <Input className="pininput" placeholder="Enter Pincode" type="number" onChange={InputPin}></Input>
                     </Col>
                     <Col>
                       <Button className="checkpinbtn" onClick={CheckPinHandler}>Check Pincode</Button>

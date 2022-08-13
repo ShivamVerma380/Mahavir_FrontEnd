@@ -505,7 +505,7 @@ function FilterProduct() {
                                                 {
                                                     index.productHighlights.split(';').map(highlight => {
                                                         return (
-                                                            <h6 style={{color:'GrayText'}}>•{highlight}<br></br></h6>
+                                                            <h6 style={{color:'GrayText',}}>•{highlight}<br></br></h6>
                                                         );
                                                     })
                                                 }

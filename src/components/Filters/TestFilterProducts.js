@@ -304,6 +304,7 @@ function TestFilterProducts(){
         }
     }
 
+<<<<<<< HEAD
     const handleFormCheck2=(index,f)=>{
         // alert("hi")
         
@@ -463,6 +464,67 @@ function TestFilterProducts(){
         }
     }
 
+=======
+    function WishlistHandler(index) {
+        // alert("Item added successfully to wishlist");
+        // console.log(index.modelNumber)
+        // if (localStorage.getItem("wishlistproduct")==null) {
+        //   localStorage.setItem("wishlistproduct",index.modelNumber)
+        // }else {
+        //   var arr = localStorage.getItem("wishlistproduct").split(',')
+        //   var flag = true;
+        //   arr.map(i=>{
+           
+        //     console.log("i: ",i)
+        //     if( i=== index.modelNumber) {
+        //         arr.splice(arr.indexOf(i),1)
+        //         localStorage.setItem("wishlistproduct",arr)
+        //         console.log('del arr: ' + arr)
+        //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+        //        console.log("in if")
+        //       flag = false;
+        //     } 
+        //   }) 
+        //   if(flag)
+        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        //     navigate('/')
+          
+        // }
+  
+        console.log("Wishlist clicked")
+  
+        
+          var formdata = {
+            "modelNumber": index.modelNumber
+    
+          }
+    
+          axios.post(url+"/wishlist", formdata, {
+            headers: {
+              "Authorization": "Bearer "+token,
+              "Content-Type": "multipart/form-data"
+            }
+          }).then(function (response) {
+            if (response.status == 200) {
+              toast.success(<b>Added to wishlist successfully</b>)
+              // console.log("Added to wishlist successfully");
+              
+              console.log(response.data)
+              // navigate("/");
+            }
+          }).catch(function (error) {
+            if(error.response.status==406) {
+              toast.warn(<b>Item already present in Wishlist</b>)
+              // alert("Item already present in wishlist")
+            }
+            else {
+              console.log("Error", error);
+            }
+            
+          })
+        
+      }
+>>>>>>> 17e2cabbdc8871c23b1961849cecb58887a79c9b
 
     const handleFormCheck=(index,f)=>{
         // alert("hi")
@@ -710,6 +772,7 @@ function TestFilterProducts(){
       const handleShow = () => setShow(true);
     return(
         <>
+<<<<<<< HEAD
 
              
            
@@ -728,6 +791,29 @@ function TestFilterProducts(){
         <Row className="mainpage">
             <Col md={2} className="filtercol">
                 <h5>Category</h5>
+=======
+            <ToastContainer position="top-center"/>
+
+             
+           <Row className="offcampusfilters" style={{marginTop:"200px"}}>
+         {[false].map((expand) => (
+        <Navbar key={expand} bg="light" expand={expand} className="mb-3"  >
+          <Container fluid>
+            <Navbar.Brand href="#">Filters</Navbar.Brand>
+            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+            <Navbar.Offcanvas
+              id={`offcanvasNavbar-expand-${expand}`}
+              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+              placement="end"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                Filters
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body >
+                
+>>>>>>> 17e2cabbdc8871c23b1961849cecb58887a79c9b
                 {
                     (isCategoriesFetched)?(
                         categories.map(cat=>{
@@ -839,14 +925,35 @@ function TestFilterProducts(){
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Filters<br></br><b>{selectedProducts.length}</b> Products Found</Offcanvas.Title>
           
+<<<<<<< HEAD
 
         </Offcanvas.Header>
         <Offcanvas.Body>
         {/* <Col md={2} className="filtercol"> */}
                 <h5>Category</h5>
+=======
+          }
+          {
+            (showTopBtn)?(
+                <Button className="scrolltopbtn" onClick={scrollToTop}>
+            <FaArrowCircleUp  />
+        </Button>
+            ):(null)
+          }
+        
+        <Row className="mainpage">
+        
+            <Col md={3} className="filtercol" style={{width:"300px",background:"white", border: "2px solid #D2D2D2",paddingTop:"16px",marginLeft:"1%"}}>
+                {/* <Container style={{background:"grey", width:"270px", paddingTop:"16px"}}> */}
+                <h4 style={{fontWeight:600, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Filters</h4>   
+                <hr style={{width:"270px", marginLeft:"-14px"}}></hr> 
+                <h4 style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Categories</h4>
+                
+>>>>>>> 17e2cabbdc8871c23b1961849cecb58887a79c9b
                 {
                     (isCategoriesFetched)?(
                         categories.map(cat=>{
+
                             return(
                                 <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
                             )
@@ -855,12 +962,13 @@ function TestFilterProducts(){
                         null
                     )
                 }
-                <hr></hr><br></br>
+                <hr style={{width:"270px", marginLeft:"-14px"}}></hr>
                 <React.Fragment>
                 {/* <Typography id="range-slider" gutterBottom>
                     Select Price Range:
                 </Typography> */}
-                
+                <h4 style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Price</h4>
+                <br></br>
                 <Slider
                     defaultValue={[parseInt(min),parseInt(max)]}
                     onChange={rangeSelector}
@@ -887,13 +995,14 @@ function TestFilterProducts(){
                 //     }}
                 //   />
                 }
-                <br></br><br></br>
+                <hr style={{width:"270px", marginLeft:"-14px"}}></hr>
+                
                 {/* <h4>Filters</h4> */}
                 {
                     (isFiltersFetched)?(
                         keySet.map((index,pos)=>{
                             return(
-                                <div >
+                                <>
                                     
                                     <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
                                     <Accordion.Item eventKey={pos}>
@@ -923,14 +1032,15 @@ function TestFilterProducts(){
                                     </Accordion.Body>
                                     </Accordion.Item>
                                     </Accordion>
-                                    <hr></hr>
-                                </div>
+                                    <hr style={{width:"270px", marginLeft:"-14px"}}></hr>
+                                </>
                             )
                         })
                     ):(
                         null
                     )
                 }
+<<<<<<< HEAD
             {/* </Col> */}
         </Offcanvas.Body>
       </Offcanvas>
@@ -938,6 +1048,35 @@ function TestFilterProducts(){
 
                     <p className="products"><b>{selectedProducts.length}</b> Products Found</p>
                     </Col> 
+=======
+                {/* </Container> */}
+            </Col>
+            
+            <Col md={9} style={{border: "2px solid black", marginLeft:"1%", marginTop:"2.5%"}}>
+                
+            {
+                // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
+                <Row className="filterproductsRow">
+                        <Col md={3}>
+                            <p className="selectedcat">{localStorage.getItem("Category")}</p>
+                        </Col>
+                        <Col md={3}>
+                        
+                        <p className="products">(Showing - <b>{selectedProducts.length}</b> Products Found)</p>
+                        </Col> 
+                    <Col md={4}></Col>
+                    <Col md={2}>
+                        <NavDropdown title="Sort By">
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
+                        </NavDropdown>
+                    </Col> 
+                    
+                    
+>>>>>>> 17e2cabbdc8871c23b1961849cecb58887a79c9b
                 
                     
                     
@@ -983,7 +1122,7 @@ function TestFilterProducts(){
             </div>
             </div> */}
                                         <Col md={2} className="imagecol">
-                                            <Image thumbnail="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            <Image thumbnail="true" style={{cursor:"pointer"}} className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
                                             {/* <br></br>
                                             <p>{index.modelNumber}</p> */}
                                         </Col>
@@ -991,7 +1130,7 @@ function TestFilterProducts(){
                                         <Col md={7} >
                                             <Row className="innerrow">
                                                 
-                                                    <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
+                                                    <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer', fontSize:"18px", fontWeight:500, fontFamily:"Roboto", lineHeight:"21px", letterSpacing:"0.01em" }}>{index.productName}</h4>
                                                 
                                                 {/* <Col md={1} >
                                                     {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
@@ -1023,7 +1162,7 @@ function TestFilterProducts(){
                                                         (index.productHighlights!=null)?(
                                                             index.productHighlights.split(';').map(highlight => {
                                                                 return (
-                                                                    <h6 style={{color:'GrayText'}}>• {highlight}<br></br></h6>
+                                                                    <h6 style={{color:'rgba(33, 33, 33, 0.7)', fontSize:"13px", fontWeight:400, fontFamily:"Roboto", lineHeight:"10px", letterSpacing:"0.02em"}}>• {highlight}<br></br></h6>
                                                                 );
                                                             })
                                                         ):(
@@ -1057,30 +1196,35 @@ function TestFilterProducts(){
                                                         (index.offerPrice==null) ? (
                                                             <h4>MRP: <b>₹{index.productPrice}</b></h4>
                                                         ) : (
-                                                            <><h5>MSP: <b style={{ color: "#ed1c24" }}>₹{index.offerPrice}</b> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5></>
+                                                            <>
+                                                            <h5 style={{fontSize:"22px", fontWeight:500, fontFamily:"Roboto", lineHeight:"26px"}}><b style={{color:"#C10000"}}>MSP:</b> <b style={{ color: "#ed1c24" }}>₹{index.offerPrice}</b> </h5>
+                                                            <p style={{color:"#565959"}}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></p>
+                                                            </>
                                                         )
                                                     }
                                                 </Col>
                                             </Row>
                                             <Row className="checkboxx">
                                                 <Form className="check">
-                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+                                                    <Form.Check style={{fontSize:"16px"}} defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
                                                 </Form>
                                             </Row>
                                             <br></br>
 
                                             <Row className="btnrow">
-                                            <Col>
+                                            {/* <Col>
                                                 <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button>
-                                            </Col>   
+                                            </Col>    */}
                                             <Col>
-                                                <Button className="filterproductBtn" variant="outline-primary">Add to wishlist</Button>
+                                                <Button className="filterproductBtn" variant="outline-primary" onClick={() => WishlistHandler(index)}>Add to wishlist</Button>
+                                                
                                             </Col>                                                                                                                  
                                             </Row>
 
                                             <Row className="btnrow2">
-                                            <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button>
-                                            <Button className="filterproductBtn" variant="outline-primary">Add to wishlist</Button>
+                                            {/* <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button> */}
+                                            <Button className="filterproductBtn" variant="outline-primary" onClick={() => WishlistHandler(index)}>Add to wishlist</Button>
+                                            {/* variant="outline-primary" */}
 
                                             </Row>
                                              
@@ -1104,6 +1248,7 @@ function TestFilterProducts(){
                 }
             </Col>
         </Row>
+        
         </>
 
         
