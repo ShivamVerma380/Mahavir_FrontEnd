@@ -137,13 +137,8 @@ const RateReviewProducts = () => {
             </Row>
 
             <Button style={{ marginTop: 20, backgroundColor:"rgb(255, 88, 88)" }} onClick={HandleSubmit}>SUBMIT</Button>
-
-
+            
         </Container>
-
-
-
-
 
     )
 

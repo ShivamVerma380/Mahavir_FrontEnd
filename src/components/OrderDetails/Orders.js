@@ -157,8 +157,9 @@ const Orders=()=>{
                                         <p>Payment Mode:{order.paymentMode}</p>
                                         {
                                             (order.productRated==true)?(
-                                                
-                                                    <Button onClick={()=>editRating(order)}>Edit Review</Button>
+                                                    
+                                                    // <p>Product is already rated</p>
+                                                    <Button onClick={()=>editRating(order)}>Already rated</Button>
                                                 
                                             ):(
                                                 
