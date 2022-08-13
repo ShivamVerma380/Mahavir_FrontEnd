@@ -2,12 +2,12 @@
   font-family: 'Verdana';
 }
 
-.productdetailrow{
+.productdetailrow {
   background-color: white;
   margin: auto;
-  margin: 7% auto 1% auto;
+  /* margin: 7% auto 1% auto; */
   /* display: flex; */
-  width: 80%;
+  width: 100%;
 }
 
 .row1{
@@ -575,6 +575,16 @@ margin-bottom: 0;
   .innercol hr{
     display: none;
   }
+
+  
+
+  .innercol {
+    -ms-overflow-style: none;
+
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
   .offerrow{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -584,7 +594,7 @@ margin-bottom: 0;
     margin: 2px;
     height: 50px;
     width: 110px;
-    font-size: small;
+    font-size: small; 
   }
   .producthigh{
     margin-top: 10px;

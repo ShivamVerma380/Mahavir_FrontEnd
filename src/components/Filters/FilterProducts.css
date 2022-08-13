@@ -33,6 +33,8 @@ width: 100%;
 .imagecol{
     display: grid;
     align-content: center;
+    height: 200px;
+    width: 180px;
 }
 
 .innerrow{
@@ -46,8 +48,11 @@ width: 100%;
     height:50px;
     font-size: 18px;
     font-weight: bold;
-    color: #0b4268;
-    border-color: #0b4268;
+    /* color: #0b4268;
+    border-color: #0b4268; */
+    
+    border-color: #C10000;
+    background: #C10000;
 }
 
 .filterproductBtn1{
@@ -62,8 +67,8 @@ width: 100%;
 }
 
 .filterproductBtn:hover{
-    background-color: #0b4268;
-    border-color: #0b4268;
+    background-color: #C50000;
+    border-color: #C50000;
    
 }
 .filterproductBtn1:hover{
@@ -77,31 +82,42 @@ width: 100%;
 }
 
 .lastcol{
-    padding: 1%;
-    border-left: solid 1px #0b4268;
+    /* padding: 1%; */
+    /* border-left: solid 1px #0b4268; */
 }
 
 .checkboxx .form-check-input[type=checkbox] {
     border-radius: 0;
-    border:solid 1px #0b4268;
+    border:solid 1px #C10000;
+    width: 18px;
+    height: 18px;
 }
+
+
 
 .form-check-input:checked[type=radio]{
     width: 17px;
     height: 17px;
-    background-color: #0b4268;
-    border-color: #0b4268;
+    background-color: #C10000;
+    border-color: #C10000;
     margin-top: 6px;
-    border-radius: 0;
+    border-radius: 10px;
 }
 
 .checkboxx .form-check-input:checked {
-    background-color: #0b4268;
+    background-color: #C10000;
     /* border-color: #0d6efd; */
 }
 
 .filtercol label{
-    font-size: 18px;
+    margin-left: 6px;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    font-weight: 400;
+    font-family: "Roboto";
+    color: rgba(0, 0, 0, 0.7);
+
 }
 .filterproductsRow .nav-link{
     color: black;
@@ -110,12 +126,27 @@ width: 100%;
 
 .products{
     margin-top: 14px;
-    font-size: large;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.6);
+    margin-left: -90px;
+
+}
+
+.selectedcat{
+    margin-top: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Roboto";
+    letter-spacing: 0.01em;
+    line-height: 18px;
+
 }
 
 .filtercol .accordion-flush .accordion-item .accordion-button {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
+
 }
 
 .filtercol .accordion-button:not(.collapsed) {
@@ -202,6 +233,16 @@ width: 100%;
 .offcampusfilters{
     display: none; 
 }
+
+.accordion-button {
+    padding: 0px;
+    border: none;
+}
+
+.accordion-body {
+    padding: 0px;
+}
+
 @media only screen and (max-width: 1024px){
     .filterproductsRow{
         width: 100%;
@@ -302,7 +343,9 @@ width: 100%;
 }
 
 .mainpage {
-    margin: 7% 2% 2% 2%;
+    /* margin: 7% 2% 2% 2%; */
+    margin-left: 1%;
+    margin-top: 1%;
 }
 
 .check{
