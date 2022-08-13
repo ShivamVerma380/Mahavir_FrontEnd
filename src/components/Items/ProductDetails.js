@@ -324,6 +324,10 @@ function ProductDetails() {
 
   const handleBuyNow = (product) => {
 
+    if(getCookie("isLoggedIn")==='true'){
+
+    
+
     if (flag == false) {
       alert("Buy Now ");
     } else if (quantity <= 0) {
@@ -335,6 +339,11 @@ function ProductDetails() {
     localStorage.setItem("buyProduct",JSON.stringify(product));
     localStorage.setItem("type", "buyNow");
     navigate("/checkout")
+  }
+  else
+  {
+    navigate("/login")
+  }
   }
 
   const InputPin = (e) => {
