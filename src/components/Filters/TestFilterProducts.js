@@ -69,6 +69,9 @@ function TestFilterProducts(){
     const [max,SetMax] = useState(100);
 
     const [value,SetValue] = useState([]);
+
+    const [vals,setVals]=useState([]);
+    // vals.push(localStorage.getItem("SubSubCategory"));
     useEffect(()=>{
         window.addEventListener('scroll', () => { if (window.scrollY > 400) { setShowTopBtn(true); } else { setShowTopBtn(false); } });
         if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched){
@@ -288,7 +291,7 @@ function TestFilterProducts(){
 
 
     function handleCategoryCheck(cat){
-        alert("hi")
+        // alert("hi")
         var element = document.getElementById(cat)
         if(element.checked ==true){
             console.log(cat," is checked")
@@ -301,11 +304,176 @@ function TestFilterProducts(){
         }
     }
 
+    const handleFormCheck2=(index,f)=>{
+        // alert("hi")
+        
+        console.log("index:"+index+"    f:"+f)
+
+        var element = document.getElementById(f+f);
+        
+        if(element.checked){
+            // alert("here")
+
+            var  arr= filterselected;
+            var flag = true;
+            arr.map((i,pos)=>{
+                var pair = i.split("-");
+                if(index===pair[0]){
+                    arr[pos]= index+"-"+pair[1]+";"+f;
+                    flag = false;
+                }
+            })
+            if(flag){
+                // console.log("----"+f.slice())
+                // var hl=f.length/2;
+                // alert("-----"+hl)
+                arr.push(index+"-"+ f);
+            }
+            SetFilterSelected(arr);
+            var productsArray = [];
+            // console.log("products",products)
+            console.log("filterSelected",filterselected);
+
+            filterselected.map(filter=>{
+                var v = filter.split("-");
+                var arr = v[1].split(";");
+                arr.map(val=>{
+                    if(vals.includes(val)){
+
+                    }
+                    else{
+                        vals.push(val);
+
+                    }
+                })
+                console.log("val "+vals);
+            })
+            products.map(index=>{
+                var flag = true;
+                filterselected.map(a=>{
+                    var pair = a.split("-");
+                    // console.log("pair",pair)
+                    var key = pair[0];
+                    var values = pair[1].split(";");
+                    var valueflag= false;
+                    values.map(v=>{
+                        console.log(index.filtercriterias[key])
+                        
+
+                        if(index.filtercriterias[key].includes(v)){
+                            valueflag=true;  
+                        }
+                    })
+                    if(!valueflag){
+                        flag = false;
+                    }
+                })
+
+                if(flag){
+                    productsArray.push(index);
+                }
+            })
+
+            
+            console.log("values",vals)
+
+            // console.log("Products Array",productsArray.length);
+            
+            SetSelectedProducts(productsArray);
+
+        }else{
+
+            console.log("Filter selected",filterselected)
+            var arr = filterselected;
+            arr.map((i,pos)=>{
+                var pair = i.split("-");
+                if(index===pair[0]){
+                    var values= pair[1].split(";");
+                    if(values.length==1){
+                        arr.splice(pos,1);
+                    }
+                    else{
+                        var str=index+"-";
+                        values.map(v=>{
+                            if(v!==f){
+                                str+=v+";";
+                            }
+                        })
+                        str= str.slice(0,str.length-1);
+                        arr[pos]=str;
+
+                    }
+                }
+            })
+
+            console.log("Array:",arr)
+
+            // if(arr.length==0){
+            //     console.log("In if")
+            //     // localStorage.removeItem("SubCategory");
+            //     // localStorage.removeItem("SubSubCategory");
+            //     // window.location.reload();
+            // }
+            SetFilterSelected(arr);
+            var productsArray = [];
+            console.log("products",products)
+            console.log("filterSelected",filterselected);
+            
+            products.map(index=>{
+                var flag = true;
+                filterselected.map(a=>{
+                    var pair = a.split("-");
+                    // console.log("pair",pair)
+                    var key = pair[0];
+                    var values = pair[1].split(";");
+                    // console.log("values",values)
+                    var valueflag= false;
+                    values.map(v=>{
+                        console.log(index.filtercriterias[key])
+                        if(index.filtercriterias[key]===v){
+                            valueflag=true;  
+                        }
+                    })
+                    if(!valueflag){
+                        flag = false;
+                    }
+                })
+                if(flag){
+                    productsArray.push(index);
+                }
+            })
+            vals.splice(0,vals.length);
+            filterselected.map(filter=>{
+                var v = filter.split("-");
+                var arr = v[1].split(";");
+                arr.map(val=>{
+                    if(vals.includes(val)){
+
+                    }
+                    else{
+                        vals.push(val);
+
+                    }
+                })
+                // alert("val "+vals);
+            })
+            console.log("Products Array",productsArray.length);
+            
+            SetSelectedProducts(productsArray);
+        }
+    }
+
+
     const handleFormCheck=(index,f)=>{
-        console.log("index:",index,"    f:",f)
+        // alert("hi")
+        
+        console.log("index:"+index+"    f:"+f)
 
         var element = document.getElementById(f);
+        
         if(element.checked){
+            // alert("here")
+
             var  arr= filterselected;
             var flag = true;
             arr.map((i,pos)=>{
@@ -350,6 +518,8 @@ function TestFilterProducts(){
             SetSelectedProducts(productsArray);
 
         }else{
+            // alert("here")
+
             console.log("Filter selected",filterselected)
             var arr = filterselected;
             arr.map((i,pos)=>{
@@ -534,100 +704,15 @@ function TestFilterProducts(){
       };
       
       window.addEventListener('scroll', toggleVisible);
+      const [show, setShow] = useState(false);
 
+      const handleClose = () => setShow(false);
+      const handleShow = () => setShow(true);
     return(
         <>
 
-
              
-           <Row className="offcampusfilters" style={{marginTop:"200px"}}>
-         {[false].map((expand) => (
-        <Navbar key={expand} bg="light" expand={expand} className="mb-3"  >
-          <Container fluid>
-            <Navbar.Brand href="#">Filters</Navbar.Brand>
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-            <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-${expand}`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-              placement="end"
-            >
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                Filters
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body >
-                {
-                    (isCategoriesFetched)?(
-                        categories.map(cat=>{
-                            return(
-                                <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
-                            )
-                        })
-                    ):(
-                        null
-                    )
-                }
-                <hr></hr><br></br>
-                <React.Fragment>
-               
-                
-                <Slider
-                    defaultValue={[parseInt(min),parseInt(max)]}
-                    onChange={rangeSelector}
-                    valueLabelDisplay="on"
-                    min={parseInt(min)}
-                    max={parseInt(max)}
-                />
-                </React.Fragment>
-
-                
-               
-                <br></br><br></br>
-                {
-                    (isFiltersFetched)?(
-                        keySet.map((index,pos)=>{
-                            return(
-                                <div >
-                                    
-                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
-                                    <Accordion.Item eventKey={pos}>
-                                                    <Accordion.Header>{index}</Accordion.Header>
-                                                    <Accordion.Body>
-                                                                
-                                    {
-                                        filters[index].map(f=>{
-                                            return(
-                                                <>
-                                                
-                                                    <Form>
-                                                        <Form.Check style={{fontSize:'18px',fontWeight:'600'}} type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
-                                                    </Form>
-                                                     
-                                                </>
-                                                
-                                                
-                                            )
-                                        
-                                            
-                                        })
-                                    }
-                                    </Accordion.Body>
-                                    </Accordion.Item>
-                                    </Accordion>
-                                </div>
-                            )
-                        })
-                    ):(
-                        null
-                    )
-                }
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
-          </Container>
-        </Navbar>
-      ))} 
-            </Row>
+           
             {
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
@@ -743,8 +828,114 @@ function TestFilterProducts(){
                         </NavDropdown>
                     </Col> 
                     
-                    <Col>
-                        
+                    <Col style={{display:'flex',justifyContent:'end'}}>
+                    <div className="offcavasfilters">
+                        <i class="fa fa-filter fa-3x" aria-hidden="true" onClick={handleShow}></i>
+      {/* <Button variant="primary" onClick={handleShow}>
+        Launch
+      </Button> */}
+
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Filters<br></br><b>{selectedProducts.length}</b> Products Found</Offcanvas.Title>
+          
+
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+        {/* <Col md={2} className="filtercol"> */}
+                <h5>Category</h5>
+                {
+                    (isCategoriesFetched)?(
+                        categories.map(cat=>{
+                            return(
+                                <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
+                            )
+                        })
+                    ):(
+                        null
+                    )
+                }
+                <hr></hr><br></br>
+                <React.Fragment>
+                {/* <Typography id="range-slider" gutterBottom>
+                    Select Price Range:
+                </Typography> */}
+                
+                <Slider
+                    defaultValue={[parseInt(min),parseInt(max)]}
+                    onChange={rangeSelector}
+                    valueLabelDisplay="on"
+                    min={parseInt(min)}
+                    max={parseInt(max)}
+                />
+                </React.Fragment>
+                {/* Your range of Price is between {value[0]} /- and {value[1]} /- */}
+
+                
+                {
+                //     <MultiRangeSlider
+                //     min={0}
+                //     max={100}
+                //     step={5}
+                //     ruler={true}
+                //     label={true}
+                //     preventWheel={false}
+                //     minValue={minValue}
+                //     maxValue={maxValue}
+                //     onInput={(e) => {
+                //       handleInput(e);
+                //     }}
+                //   />
+                }
+                <br></br><br></br>
+                {/* <h4>Filters</h4> */}
+                {
+                    (isFiltersFetched)?(
+                        keySet.map((index,pos)=>{
+                            return(
+                                <div >
+                                    
+                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
+                                    <Accordion.Item eventKey={pos}>
+                                                    <Accordion.Header>{index}</Accordion.Header>
+                                                    <Accordion.Body>
+                                                                    
+                                    {/* <h5>{index}</h5> */}
+                                    {
+                                        filters[index].map(f=>{
+                                            // console.log("i"+index+" f"+f)
+                                            
+                                            return(
+                                                <>
+                                                
+                                                    <Form>
+                                                        <Form.Check style={{fontSize:'18px',fontWeight:'600'}} type="checkbox" id={f+f} value={f}  label={f}     defaultChecked={(vals.includes(f))?(true):(false)} onChange={()=>handleFormCheck2(index,f)} />
+                                                    </Form>
+                                                     
+                                                </>
+                                                
+                                                
+                                            )
+                                        
+                                            
+                                        })
+                                    }
+                                    </Accordion.Body>
+                                    </Accordion.Item>
+                                    </Accordion>
+                                    <hr></hr>
+                                </div>
+                            )
+                        })
+                    ):(
+                        null
+                    )
+                }
+            {/* </Col> */}
+        </Offcanvas.Body>
+      </Offcanvas>
+    </div>
+
                     <p className="products"><b>{selectedProducts.length}</b> Products Found</p>
                     </Col> 
                 

@@ -199,7 +199,7 @@ width: 100%;
     transform: translateY(10px);
 }
 
-.offcampusfilters{
+.offcavasfilters{
     display: none; 
 }
 @media only screen and (max-width: 1024px){
@@ -393,8 +393,8 @@ h5{font-weight: 400}
         display: none;
     }
 
-    .offcampusfilters{
-        display: grid;
+    .offcavasfilters{
+        display: block;
     }
     .filternav {
         margin-top: 84px;
@@ -404,12 +404,20 @@ h5{font-weight: 400}
     }
    
     .mainpage {
-        margin: 40% 1% 1% 1%;
+        margin-top: 115px;
     }
     .btnrow{
         display: inline-flex;
     }
     .btnrow2{
+        display: none;
+    }
+
+    .top-header{
+        display: none;
+    }
+
+    .products{
         display: none;
     }
 
