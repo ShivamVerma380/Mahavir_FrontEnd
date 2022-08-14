@@ -1102,11 +1102,11 @@ function TestFilterProducts(){
                                             </Row>
                                             <Row className="checkboxx">
                                                 <Form className="check">
-<<<<<<< HEAD
+
                                                     <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
-=======
+
                                                     <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
->>>>>>> e5d13bbd9004715f571834934859e9fafbdb91c6
+
                                                 </Form>
                                             </Row>
                                             <br></br>
