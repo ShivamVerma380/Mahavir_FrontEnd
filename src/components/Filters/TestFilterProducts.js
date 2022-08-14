@@ -15,6 +15,7 @@ import "./FilterProducts.css"
 import {FaArrowCircleUp} from 'react-icons/fa';
 import { Dropdown } from "reactstrap";
 import url from "../../Uri";
+import e from "cors";
 
 
 function TestFilterProducts(){
@@ -279,8 +280,11 @@ function TestFilterProducts(){
       console.log("Get",localStorage.getItem("comparecount"))
 
     function WishlistHandler(index) {
-       
-
+        console.log("Logged in",getCookie("isLoggedIn"));
+        alert("Ki")
+        if(getCookie("isLoggedIn")!=='true'){
+            navigate("/login")
+        }
         console.log("Wishlist clicked")
 
       
@@ -702,36 +706,40 @@ function TestFilterProducts(){
         //     navigate('/')
     
         // }
-        console.log("Wishlist clicked")
-    
-    
-        var formdata = {
-          "modelNumber": index.modelNumber
-    
+        if(getCookie("isLoggedIn")!=='true'){
+            navigate("/login")
+        }else{  
+            console.log("Wishlist clicked")
+            var formdata = {
+            "modelNumber": index.modelNumber
+        
+            }
+        
+            axios.post(url+"/wishlist", formdata, {
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "multipart/form-data"
+            }
+            }).then(function (response) {
+            if (response.status == 200) {
+                // console.log("Added to wishlist successfully");
+                // toast.success(<b>Added to wishlist successfully</b>)
+                alert("Item added to wishlist successfully")
+                console.log(response.data)
+                // navigate("/");
+            }
+            else{
+                alert("Item already present in wishlist")
+                console.log(response.data)
+            }
+            }).catch(function (error) {
+                alert("Item already present in wishlist")
+                console.log("Error", error);
+            
+            })
+
         }
-    
-        axios.post(url+"/wishlist", formdata, {
-          headers: {
-            "Authorization": "Bearer " + token,
-            "Content-Type": "multipart/form-data"
-          }
-        }).then(function (response) {
-          if (response.status == 200) {
-            // console.log("Added to wishlist successfully");
-            // toast.success(<b>Added to wishlist successfully</b>)
-            alert("Item added to wishlist successfully")
-            console.log(response.data)
-            // navigate("/");
-          }
-          else{
-            alert("Item already present in wishlist")
-            console.log(response.data)
-          }
-        }).catch(function (error) {
-            alert("Item already present in wishlist")
-            console.log("Error", error);
-          
-        })
+        
     
       }
     

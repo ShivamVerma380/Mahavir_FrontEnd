@@ -17,7 +17,7 @@ function Slideshow({offerPosters}){
     
     const handleOfferPosterOnClick=(index)=>{
       // alert("Offer Poster clicked");
-
+      console.log("Index",index)
       // console.log(modelNumbers);
       localStorage.setItem("offerPostersModelNumber",index.modelNumbers)
       console.log(localStorage.getItem("offerPostersModelNumber"))
