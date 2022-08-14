@@ -4,7 +4,7 @@ import { Row, Col, Button, Container } from "react-bootstrap";
 import * as AiIcons from 'react-icons/ai';
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
-import {getCookie} from "./Cookies";
+import {getCookie, setCookie} from "./Cookies";
 import Footer from "./Footer/Footer";
 import url from "../Uri";
 
@@ -21,6 +21,36 @@ const WishlistProducts = () => {
   const [removeClicked,setRemoveClicked] = useState(false)
   var token=getCookie("jwtToken");
   const navigate = useNavigate();
+
+  var cart = [];
+  if(getCookie("CartModels")!=null){
+    cart = getCookie("CartModels").split(',');
+  }
+
+  const AddToCart = (index) => {
+    var flag = false;
+    cart.map(i=>{
+      if(i!=""){
+        if(i.split("=")[0]===index.modelNumber){
+          flag = true;
+          alert("Item is already present in cart")
+        }
+      }
+    })
+    // if (cart.has(model+"=1")) {
+    //   alert("Item is already present in cart")
+    // }
+    if(!flag){
+      console.log("adddd" + index);
+      cart.push(index.modelNumber+"=1");
+      setCookie("CartModels", cart, 20);
+      console.log("Cart Models",cart)
+      navigate("/cart")
+      // alert("Added to cart" + model);
+    }
+  }
+
+
   function callProductDetails(index) {
     //alert(index);
     console.log("Index", index);
@@ -155,6 +185,7 @@ const WishlistProducts = () => {
   }
 
 
+
   return (
     <div>
       <Header />
@@ -199,7 +230,7 @@ const WishlistProducts = () => {
                         <Button  size="1" name={index.modelNumber} onClick={() => RemoveFromWishList(index.modelNumber)} style={{ marginBottom: '10px', width: 150, height: 50, background:"#C10000", border:"none" }}>Remove</Button>
                       </Row>
                       <Row>
-                        <Button  size="1" style={{ width: 150, height: 50, background:"#C10000", border:"none" }}>Add To Cart</Button>
+                        <Button  size="1" style={{ width: 150, height: 50, background:"#C10000", border:"none" }} onClick={()=>AddToCart(index)}>Add To Cart</Button>
                       </Row>
   
                     </Col>
