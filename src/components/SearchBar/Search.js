@@ -75,9 +75,16 @@ function Search(){
           console.log("window.location.href",window.location.href);
           var str = window.location.href.slice(18);
           var arr = str.split("/");
-          
 
-          console.log("arr",arr);
+          // console.log("item......",item)
+          // localStorage.setItem("Category",item.category)
+          // localStorage.setItem("SubCategory",item.subCategory)
+          // localStorage.setItem("SubSubCategory",item.subSubCategory)
+          // // localStorage.setItem("SubSubCategory",item.)
+          // navigate("/"+item.category+"/"+"Brand"+"/"+item.subSubCategory);
+          // window.location.reload()
+
+          // console.log("arr",arr);
           if(arr.length==4){
             localStorage.setItem("Category",item.category)
             localStorage.setItem("SubCategory",item.subCategory)
@@ -89,6 +96,7 @@ function Search(){
             localStorage.setItem("SubCategory",item.subCategory)
             localStorage.setItem("SubSubCategory",item.subSubCategory)
             navigate("/"+item.category+"/"+item.subCategory+"/"+item.subSubCategory);  
+            // window.location.reload();
           } 
         }else{
           if(window.location.href.includes("productDetails"))
