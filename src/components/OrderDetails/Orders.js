@@ -121,6 +121,12 @@ const Orders=()=>{
         console.log("Edit Rating",order);
     }
 
+    function generateInvoice(order){
+        console.log("Generate Invoice",JSON.stringify(order));
+        localStorage.setItem("Generate Invoice",JSON.stringify(order));
+        navigate("/invoice")
+    }
+
     return(
         <div>
             <Row>
@@ -168,7 +174,7 @@ const Orders=()=>{
                                             )
                                         }
                                         
-                                        <Button  style={{marginLeft:"15px"}}>Invoice</Button>
+                                        <Button  style={{marginLeft:"15px"}} onClick={()=>generateInvoice(order)}>Invoice</Button>
                                     </Col>
                                 </Row>
                             )
