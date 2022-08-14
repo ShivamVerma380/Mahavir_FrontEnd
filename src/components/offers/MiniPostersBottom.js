@@ -3,6 +3,7 @@ import { Card, Row, Col, Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import MiniPosterHelper from "./MiniPosterHelper";
 import './MiniPoster.css';
+import ProductRating from "../Items/ProductRating";
 const MiniPostersBottom = ({MiniPosters}) => {
     console.log("MinPosters: ",MiniPosters)
     // const element = MiniPosters.map((product,index) =>
@@ -54,7 +55,7 @@ const MiniPostersBottom = ({MiniPosters}) => {
                 return(
                     <div class="image_p">
                     {/* <img src={'data:image/jpg;base64,' +product.image.data}/> */}
-                    <img src={'data:image/jpg;base64,' +product.image.data} onClick={()=>handleMiniPosteronClick(product)}/>
+                    <img src={product.imageUrl} onClick={()=>handleMiniPosteronClick(product)}/>
                   </div>
                 
                 )

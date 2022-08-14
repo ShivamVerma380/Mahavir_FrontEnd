@@ -214,7 +214,11 @@ function CategoryProductsSwiper({ cattitle }) {
 
     // }
     console.log("Wishlist clicked")
-
+    if(getCookie("isLoggedIn")!=='true'){
+      navigate("/login")
+    }else{
+      
+    
 
     var formdata = {
       "modelNumber": index.modelNumber
@@ -248,9 +252,7 @@ function CategoryProductsSwiper({ cattitle }) {
       
     })
   }
-  else{
-    navigate('/login')
-  }
+
 
   }
   const firstfourproducts = Products.slice(0, 4);

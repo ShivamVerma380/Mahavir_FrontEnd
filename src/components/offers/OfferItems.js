@@ -21,15 +21,20 @@ function OfferItems() {
     const navigate = useNavigate();
     const location = useLocation();
     const [products, setProduct] = useState([]);
+    const [filterProducts,setFilterProducts] = useState([]);
     const [isProductsFetched, setIsProductsFetched] = useState(false);
     const [isTimeout, setIsTimeOut] = useState(false);
+
+    const [categories,SetCategories] = useState([]);
+    const [isCategoriesFetched,SetIsCategoriesFetched] = useState(false);
     var productsArray = [];
     useEffect(() => {
-        if (!isProductsFetched) {
+        if (!isProductsFetched && !isCategoriesFetched) {
             var modelNumbers = localStorage.getItem("offerPostersModelNumber");
             var modelNumbersArray = modelNumbers.split(",");
             console.log("modelNumbersArray: ", modelNumbersArray)
             var urls = []
+            var arr= new Set();
             modelNumbersArray.map(index => {
                 if (index !== "")
                     urls.push(axios.get(url+"/get-products/" + index));
@@ -38,9 +43,14 @@ function OfferItems() {
                 console.log("response: ", response)
                 response.map(index => {
                     productsArray.push(index.data);
+                    arr.add(index.data.category);
                 }
                 )
+
+                setFilterProducts(productsArray);
                 setProduct(productsArray);
+                SetCategories([...arr]);
+                SetIsCategoriesFetched(true);
                 setIsProductsFetched(true);
             }
             )).catch(function (error) {
@@ -136,132 +146,58 @@ function OfferItems() {
         <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="God" />
     </div>
 
-    return (
-        <>
-       <Header/>
-       {
-    
-
-        (isProductsFetched) ? (
-            <>
-            <div>
-            <ToastContainer position="top-center"/>
-                
-                <div className="grid-container">
-                {
-                    (isTimeout)?
-                        cards = products.map(index=>{
-                            return(
-
-                                <Card  style={{ width: '25rem'}} onClick={()=>callProductDetails(index)}
-                                  className="mb-2">
-                                    <Card.Img  variant="top" style={{width:200,height:200,alignSelf:"center"}} src={index.productImage1}/>
-                                    <Card.Body>
-                                    <Card.Title as="h6">{index.productName}</Card.Title>
-                                    <Card.Text>
-                                    {index.productDescription}
-                                    <br></br>Rs {index.productPrice}
-                                    </Card.Text>
-                                    <Button variant="flat" size="1">Buy</Button>
-                                  </Card.Body>
-                              </Card>
-
-                            )
-                          }):(null)
+    function handleCategoryClick(c){
+        var arr=[]
+        if(document.getElementById(c).checked){
+            // console.log("Checked ",c)
+            products.map(index=>{
+                console.log(index)
+                if(index.category===c){
+                    arr.push(index)
                 }
-                </div>
-            </div>
+            })
+            console.log("arr",arr)
+            // setFilterProducts([])
+            setFilterProducts([...arr])
+        }
+        
+    }
 
-            <div style={{ fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif ' }}>
-
-
-
-
-                {/* <h1 style={{ color: "rgb(255,98,98", marginLeft: '2%', marginTop: '2%' }}><i>{location.state.name}</i></h1> */}
-
-
+    return (
+        <Row>
+            <Col md={2}>
+                <Form>
                 {
-                    cards = products.map(index => {
-                        return (
-
-
-                            <Row style={{
-                                padding: '2%', margin: '2%', backgroundColor: '#fff',
-                                borderRadius: '2px',
-                                boxShadow: '0 2px 4px 0 rgb(0 0 0 / 8%)'
-                            }}>
+                    (isCategoriesFetched) ?(
+                        categories.map(c=>{
+                            return(
+                                <Form.Check id={c} name="category"  type="radio" label={c} onClick={()=>handleCategoryClick(c)}/>
+                            )
+                        })
+                    ):(
+                        null
+                    )
+                }
+                </Form>
+            </Col>
+            <Col md={10}>
+            {
+                (isProductsFetched)?(
+                    filterProducts.map((index) => {
+                        return(
+                            <Row>
                                 <Col md={2}>
-                                    {/* <img  onClick={()=>callProductDetails(index)} style={{height:'80%',width:'100%',cursor:'pointer',justifySelf:'center'}} src={"data:image/png;base64," + index.productImage1.data} /> */}
-                                    <img onClick={() => callProductDetails(index)} style={{ height: '80%', width: '100%', cursor: 'pointer', justifySelf: 'center' }} src={index.productImage1} />
-
-
+                                    <img style={{height:"275px",width:"275px"}} className="logo_mahavir" src={index.productImage1} alt="God" />
                                 </Col>
-                                <Col md={10} style={{ padding: '2%' }}>
-                                    <Row style={{ marginBottom: '1%' }}>
-                                        <Col md={11}>
-                                            <h3 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h3>
-                                        </Col>
-                                        <Col md={1}>
-                                            {(localStorage.getItem("wishlistproduct") != null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
-                                                <AiFillHeart style={{ marginTop: "10px", marginLeft: "10px", fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> :
-                                                <AiOutlineHeart style={{ marginTop: "10px", marginLeft: "10px" }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
-                                            }
-                                        </Col>
-
-                                    </Row>
-                                    <Row style={{ marginBottom: '1%' }}>
-                                        <Col md={11}>
-                                            <h5 >{index.productHighlights}</h5>
-                                        </Col>
-
-                                    </Row>
-                                    <Row style={{ marginBottom: '1%' }}>
-                                        <Col md={10}>
-                                            <h4>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h4>
-
-                                        </Col>
-
-                                    </Row>
-
-                                    <Row style={{ marginBottom: '2%' }}>
-                                        <Form style={{
-                                            fontWeight: '700',
-                                            fontSize: '150%'
-                                        }}>
-                                            {/* <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} /> */}
-                                        </Form>
-
-                                    </Row>
-
-                                    <Row style={{ marginTop: '2%' }}>
-                                        <Button onClick={()=>addtocart(index.modelNumber)} style={{ width: '30%', height: '60px', marginLeft: '1%', fontSize: '140%' }} variant="flat" size="1" >Add To Cart</Button>
-                                        <Button style={{ width: '30%', height: '60px', marginLeft: '5%', fontSize: '140%' }} variant="flat" size="1"  >Buy Now</Button>
-
-                                    </Row>
-                                </Col>
-
-
                             </Row>
-
-
                         )
-                    })}
-
-
-
-
-
-
-
-            </div>
-            </>
-            
-           
-        ) : (
-            null
-        )}
-
-        </>    
+                    })
+                ):(
+                    null
+                )
+            }
+            </Col>
+        </Row> 
     );
 }
 

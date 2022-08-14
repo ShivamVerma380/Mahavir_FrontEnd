@@ -139,9 +139,11 @@ const Header = ({productList}) => {
 
     const handleLogout=()=>{
         console.log("logout clicked");
-        
+        localStorage.removeItem("Wishlist");
+        setCookie("jwtToken",false,20)
         setCookie("isLoggedIn",false,20)
         navigate('/')
+        window.location.reload();
 
         
         

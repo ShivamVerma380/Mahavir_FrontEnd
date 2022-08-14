@@ -54,7 +54,7 @@ const MiniPosters = ({MiniPosters}) => {
                 return(
                     <div class="image_p">
                     {/* <img src={'data:image/jpg;base64,' +product.image.data}/> */}
-                    <img src={'data:image/jpg;base64,' +product.image.data} onClick={()=>handleMiniPosteronClick(product)}/>
+                    <img src={product.imageUrl} onClick={()=>handleMiniPosteronClick(product)}/>
                   </div>
                 
                 )

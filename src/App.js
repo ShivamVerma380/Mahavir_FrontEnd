@@ -291,7 +291,9 @@ function App() {
         null
       );
     }else{
+      console.log("Mega Poster",MegaPoster)
       return( 
+        
         <Slideshow offerPosters={MegaPoster}/>
       );
     }
