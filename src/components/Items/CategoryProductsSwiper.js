@@ -85,11 +85,18 @@ function CategoryProductsSwiper({ cattitle }) {
 
   function callProductDetails(index) {
     //alert(index);
-    console.log("Index", index);
+    console.log("Index",index);
+    localStorage.setItem("productId",index.productId);
     localStorage.setItem("productSelected", index.modelNumber);
-    localStorage.setItem("productId", index.productId);
-    console.log("Product Id", localStorage.getItem("productId"));
-    console.log("Product Selected", localStorage.getItem("productSelected"))
+    localStorage.setItem("Category",index.category)
+    localStorage.setItem("SubCategory","Brand")
+    localStorage.setItem("SubSubCategory",index.subCategoryMap.Brand)
+    console.log("Cat",localStorage.getItem("Category"))
+    console.log("SubCat",localStorage.getItem("SubCategory"))
+    console.log("SubSubCat",localStorage.getItem("SubSubCategory"))
+    // localStorage.removeItem("SubCategory")
+    // localStorage.removeItem("SubSubCategory")
+    // console.log("Product Selected",localStorage.getItem("productSelected"))
     navigate("/productDetails")
   }
 

@@ -4,12 +4,14 @@ import {setCookie,getCookie} from '../../Cookies';
 import axios from "axios";
 import AdminHeader from "../../Admin/AdminHeader";
 import AdminNavbar from "./AdminNavbar";
+import { useNavigate } from "react-router-dom";
 const PendingDelivery = () => {
     
     const [orders,SetOrders] = useState([]);
     const [isOrdersFetched,SetIsOrdersFetched] = useState(false);
 
-
+    const navigate = useNavigate();
+    
     useEffect(()=>{
         if(!isOrdersFetched){
             axios.get("http://localhost:8080/pending-orders")
@@ -52,6 +54,13 @@ const PendingDelivery = () => {
             })
     }
 
+    function handleGenerateInvoice(order){
+        console.log("Invoice",order)
+        console.log("Generate Invoice",JSON.stringify(order));
+        localStorage.setItem("Generate Invoice",JSON.stringify(order));
+        navigate("/invoice")
+    }
+
     return (
         <div>
         <h4 style={{margin:"20px",textAlign:"center"}}>Pending Orders</h4>
@@ -83,7 +92,7 @@ const PendingDelivery = () => {
                                         <td>{order.userAddress.mobileNumber}</td>
                                         <td>{order.paymentAmount}</td>
                                         <td>{order.paymentMode}</td>
-                                        <td>👁️‍🗨️</td>
+                                        <td><Button onClick={()=>handleGenerateInvoice(order)}>👁️‍🗨️</Button></td>
                                         <td><Button onClick={()=>handleOrderClick(order)}>✅</Button></td>
                                     </tr>
                                 );

@@ -194,6 +194,7 @@ function ProductDetails() {
         function (response) {
           if (response.status == 200) {
             console.log(response.data);
+            console.log("In similar products",response.data)
             setProductList(response.data);
             SetIsProductListFetched(true);
           }

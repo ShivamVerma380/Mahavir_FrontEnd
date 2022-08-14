@@ -25,10 +25,11 @@ function CategoriesToDisplay({ categoryDetail }) {
     localStorage.setItem("Category", category);
     localStorage.setItem("SubCategory", subCategory);
     localStorage.setItem("SubSubCategory", subSubCategory);
+
     localStorage.setItem("Model Number", modelNumber);
-    console.log(localStorage.getItem("Category"));
-    console.log(localStorage.getItem("SubCategory"));
-    console.log(localStorage.getItem("SubSubCategory"));
+    console.log("Cat",localStorage.getItem("Category"));
+    console.log("SubCat",localStorage.getItem("SubCategory"));
+    console.log("SubSubCat",localStorage.getItem("SubSubCategory"));
     console.log(localStorage.getItem("Model Number"));
     navigate("/" + category + "/" + subCategory + "/" + subSubCategory);
   }
