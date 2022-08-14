@@ -201,7 +201,7 @@ const Header = ({productList}) => {
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>
-            <h1 className="mahavir" data-text="back in black">Mahavir</h1>
+            <h1 className="mahavir">Mahavir</h1>
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>

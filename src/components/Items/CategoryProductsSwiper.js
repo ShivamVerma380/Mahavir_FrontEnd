@@ -225,7 +225,7 @@ function CategoryProductsSwiper({ cattitle }) {
 
             <MDBContainer className="categoryproductscontainer">
               <Row style={{paddingTop:"10px",marginBottom:"15px"}}>
-                <Col md={9} >
+                <Col  >
                   <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
 
 
@@ -246,7 +246,7 @@ function CategoryProductsSwiper({ cattitle }) {
                     timing="ease"
                     iteration="1"
                     fillMode="none">
-                    <span className="categorytitle" style={{marginLeft:"20px"}} filter-content="S">{cattitle}</span>
+                    <span className="categorytitle"  filter-content="S">{cattitle}</span>
                   </MovingComponent>
                     ) : (null)
                   }
@@ -254,7 +254,7 @@ function CategoryProductsSwiper({ cattitle }) {
 
 
                 </Col>
-                <Col cd={3} style={{marginLeft:"75px"}}>
+                <Col style={{display:'flex',justifyContent:'end'}}>
                   <button onClick={() => CategoryProducts(cattitle)} class="explore">View More<span class="icon-right after"></span></button>
 
                 </Col>
@@ -263,7 +263,7 @@ function CategoryProductsSwiper({ cattitle }) {
 
               
 
-              <MDBRow style={{ justifyContent: 'left', padding: '10px' }} className='row-cols-1 row-cols-md-3 g-4'>
+              <MDBRow style={{ justifyContent: 'center', padding: '10px' }} className='row-cols-1 row-cols-md-3 g-4'>
                 {
                   firstfourproducts.map(index => {
                     const images = [

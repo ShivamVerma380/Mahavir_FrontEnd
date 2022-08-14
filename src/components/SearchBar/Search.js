@@ -109,7 +109,7 @@ function Search(){
     
       return (
         (isProductsFetched)?(
-            <div style={{ width: 600 ,marginRight:"70px"}} className="search">
+            <div  className="search">
               <ReactSearchAutocomplete 
                 styling={
                   {
