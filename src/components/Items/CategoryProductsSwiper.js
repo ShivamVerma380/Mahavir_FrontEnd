@@ -193,20 +193,19 @@ function CategoryProductsSwiper({ cattitle }) {
     }).then(function (response) {
       if (response.status == 200) {
         // console.log("Added to wishlist successfully");
-        toast.success(<b>Added to wishlist successfully</b>)
-
+        // toast.success(<b>Added to wishlist successfully</b>)
+        alert("Item added to wishlist successfully")
         console.log(response.data)
         // navigate("/");
       }
+      else{
+        alert("Item already present in wishlist")
+        console.log(response.data)
+      }
     }).catch(function (error) {
-      if (error.response.status == 406) {
-        toast.warn(<b>Item already present in Wishlist</b>)
-        // alert("Item already present in wishlist")
-      }
-      else {
+        alert("Item already present in wishlist")
         console.log("Error", error);
-      }
-
+      
     })
 
   }
