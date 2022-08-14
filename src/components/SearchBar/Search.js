@@ -53,15 +53,18 @@ function Search(){
         localStorage.setItem("SubSubCategory",item.subSubCategory);
         console.log("Sub: ",localStorage.getItem("SubCategory"))
         if(item.type==="category"){
+          localStorage.setItem("Category",item.name);
+          localStorage.removeItem("SubCategory")
+          localStorage.removeItem("SubSubCategory")
           var arr = window.location.href.split("/")
           console.log("Arr: ",arr)
           if(arr.length==4) {
-            navigate("/"+item.name);
+            navigate("/categoryProductsall");
             window.location.reload()
             
           }
           else {
-            navigate("/"+item.name);
+            navigate("/categoryProductsall");
           }
           
         }else if(item.type==="subSubCategory"){
