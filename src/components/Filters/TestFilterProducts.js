@@ -676,6 +676,64 @@ function TestFilterProducts(){
         })
         SetSelectedProducts([...arr])
     }
+
+    function WishlistHandler(index) {
+        // alert("Item added successfully to wishlist");
+        // console.log(index.modelNumber)
+        // if (localStorage.getItem("wishlistproduct")==null) {
+        //   localStorage.setItem("wishlistproduct",index.modelNumber)
+        // }else {
+        //   var arr = localStorage.getItem("wishlistproduct").split(',')
+        //   var flag = true;
+        //   arr.map(i=>{
+    
+        //     console.log("i: ",i)
+        //     if( i=== index.modelNumber) {
+        //         arr.splice(arr.indexOf(i),1)
+        //         localStorage.setItem("wishlistproduct",arr)
+        //         console.log('del arr: ' + arr)
+        //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+        //        console.log("in if")
+        //       flag = false;
+        //     } 
+        //   }) 
+        //   if(flag)
+        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        //     navigate('/')
+    
+        // }
+        console.log("Wishlist clicked")
+    
+    
+        var formdata = {
+          "modelNumber": index.modelNumber
+    
+        }
+    
+        axios.post(url+"/wishlist", formdata, {
+          headers: {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "multipart/form-data"
+          }
+        }).then(function (response) {
+          if (response.status == 200) {
+            // console.log("Added to wishlist successfully");
+            // toast.success(<b>Added to wishlist successfully</b>)
+            alert("Item added to wishlist successfully")
+            console.log(response.data)
+            // navigate("/");
+          }
+          else{
+            alert("Item already present in wishlist")
+            console.log(response.data)
+          }
+        }).catch(function (error) {
+            alert("Item already present in wishlist")
+            console.log("Error", error);
+          
+        })
+    
+      }
     
     function SortByHighPrice(){
         console.log("in sort function")
@@ -1128,7 +1186,7 @@ function TestFilterProducts(){
 
                                             <Row className="btnrow2">
                                             <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button>
-                                            <Button className="filterproductBtn" variant="outline-primary">Add to wishlist</Button>
+                                            <Button className="filterproductBtn" variant="outline-primary" onClick={()=>WishlistHandler(index)}>Add to wishlist</Button>
 
                                             </Row>
                                              
