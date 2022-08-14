@@ -27,7 +27,7 @@ function Slideshow({offerPosters}){
     return(
     
       <div >
-        <Carousel style={{ zIndex: '0' }}>
+        <Carousel >
         {
             offerPoster= offerPosters.map(index=>{
                 //let Base64string = Buffer.from(index.image.data,"base64").toString();

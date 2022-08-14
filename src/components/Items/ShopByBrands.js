@@ -111,6 +111,7 @@ const ShopByBrands = () => {
                 navigation={true}
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
+                style={{zIndex:0}}
               > 
                 {
                   brands.map(index => {

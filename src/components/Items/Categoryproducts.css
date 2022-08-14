@@ -41,7 +41,7 @@
     padding: 20px;
     margin-top: 20px;
     border-radius: 10px;
-    margin-top: 167px;
+    /* margin-top: 167px; */
   }
   .categoryproductscard{
     transition: transform 0.2s ease;
@@ -231,7 +231,7 @@
   font-weight: bold;
   /* position: relative; */
   /* font-family: "Roboto"; */
-  
+  margin-left: 20px;
   font-size: 26px;
   /* text-transform: uppercase; */
   /* font-style: italic; */
@@ -258,6 +258,8 @@
 .svgtitle {
   display: none;
 }
+
+
  /* title end */
 /* laplops and small screens */
   @media screen and (min-width: 769px) and (max-width:1024px)
@@ -281,7 +283,7 @@
        border: solid 0.5px rgb(197 252 245);
       margin-left: 5px;
       margin-right: 5px;
-      width: 11rem;
+      width: 9rem;
       text-align: left;
       padding: 0px;
       cursor: pointer;
@@ -289,7 +291,15 @@
 
     .explore{
       height: 40px;
-      width: 200px;
+      width: 118px;
+    }
+
+    .categorytitle{
+      margin-left: 0;
+    }
+
+    .search{
+      width: 100%;
     }
   }
   /* ipads and tablets */

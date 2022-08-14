@@ -33,8 +33,6 @@ width: 100%;
 .imagecol{
     display: grid;
     align-content: center;
-    height: 200px;
-    width: 180px;
 }
 
 .innerrow{
@@ -48,14 +46,9 @@ width: 100%;
     height:50px;
     font-size: 18px;
     font-weight: bold;
-    /* color: #0b4268;
-    border-color: #0b4268; */
-    color: white;
-    border-color: #C10000;
-    background: #C10000;
-    background-color: #C10000;
+    color: #0b4268;
+    border-color: #0b4268;
 }
-
 
 .filterproductBtn1{
     margin-left: 20px;
@@ -69,8 +62,8 @@ width: 100%;
 }
 
 .filterproductBtn:hover{
-    background-color: #fe0000;
-    border-color: #fe0000;
+    background-color: #0b4268;
+    border-color: #0b4268;
    
 }
 .filterproductBtn1:hover{
@@ -84,42 +77,31 @@ width: 100%;
 }
 
 .lastcol{
-    /* padding: 1%; */
-    /* border-left: solid 1px #0b4268; */
+    padding: 1%;
+    border-left: solid 1px #0b4268;
 }
 
 .checkboxx .form-check-input[type=checkbox] {
     border-radius: 0;
-    border:solid 1px #C10000;
-    width: 18px;
-    height: 18px;
+    border:solid 1px #0b4268;
 }
-
-
 
 .form-check-input:checked[type=radio]{
     width: 17px;
     height: 17px;
-    background-color: #C10000;
-    border-color: #C10000;
+    background-color: #0b4268;
+    border-color: #0b4268;
     margin-top: 6px;
-    border-radius: 10px;
+    border-radius: 0;
 }
 
 .checkboxx .form-check-input:checked {
-    background-color: #C10000;
+    background-color: #0b4268;
     /* border-color: #0d6efd; */
 }
 
 .filtercol label{
-    margin-left: 6px;
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 0.01em;
-    font-weight: 400;
-    font-family: "Roboto";
-    color: rgba(0, 0, 0, 0.7);
-
+    font-size: 18px;
 }
 .filterproductsRow .nav-link{
     color: black;
@@ -128,27 +110,12 @@ width: 100%;
 
 .products{
     margin-top: 14px;
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.6);
-    margin-left: -90px;
-
-}
-
-.selectedcat{
-    margin-top: 14px;
-    font-size: 18px;
-    font-weight: 600;
-    font-family: "Roboto";
-    letter-spacing: 0.01em;
-    line-height: 18px;
-
+    font-size: large;
 }
 
 .filtercol .accordion-flush .accordion-item .accordion-button {
-    font-size: 16px;
-    font-weight: 500;
-
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .filtercol .accordion-button:not(.collapsed) {
@@ -157,7 +124,8 @@ width: 100%;
     box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
 }
 
-.filtercol .form-check-input[type=checkbox] {
+
+ .form-check-input[type=checkbox] {
     border-radius: 0;
 }
 
@@ -235,16 +203,6 @@ width: 100%;
 .offcavasfilters{
     display: none; 
 }
-
-.accordion-button {
-    padding: 0px;
-    border: none;
-}
-
-.accordion-body {
-    padding: 0px;
-}
-
 @media only screen and (max-width: 1024px){
     .filterproductsRow{
         width: 100%;
@@ -345,9 +303,7 @@ width: 100%;
 }
 
 .mainpage {
-    /* margin: 7% 2% 2% 2%; */
-    margin-left: 1%;
-    margin-top: 130px;
+    margin: 7% 2% 2% 2%;
 }
 
 .check{
@@ -431,8 +387,8 @@ h5{font-weight: 400}
         height: 50px;
         font-size: 14px;
         font-weight: bold;
-        color: #fe0000;
-        border-color: #fe0000;
+        color: #0b4268;
+        border-color: #0b4268;
     }
     #comparebtn{
         display: none;
