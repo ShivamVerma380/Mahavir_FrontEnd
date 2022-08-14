@@ -97,16 +97,16 @@ const WishlistProducts = () => {
   }
 
   const RemoveFromWishList = (modelnum) => {
-    var arr= [];
-    console.log("Wish ",wish)
-        wish.map(pro=>{
-          if(pro.modelNumber!==modelnum) {
-            arr.push(pro);
-          }
-          console.log("i Modelnum ",pro.modelNumber, "Index Modelnum ",modelnum)
-        })
-        setWish(arr);
-        console.log("Arr ",arr)
+    // var arr= [];
+    // console.log("Wish ",wish)
+    //     wish.map(pro=>{
+    //       if(pro.modelNumber!==modelnum) {
+    //         arr.push(pro);
+    //       }
+    //       console.log("i Modelnum ",pro.modelNumber, "Index Modelnum ",modelnum)
+    //     })
+    //     setWish(arr);
+    //     console.log("Arr ",arr)
        
     // localStorage.setItem("RemoveIndex",index.modelNumber);
 
@@ -122,9 +122,13 @@ const WishlistProducts = () => {
     //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
 
     // };
-    axios.delete(url+"/wishlist/" + modelnum, {
+    var form_data_body={
+      "modelNumber": modelnum
+    }
+    axios.post(url+"/delete-wishlist",form_data_body, {
       headers: {
-        "Authorization": "Bearer "+token
+        "Authorization": "Bearer "+token,
+        "Content-Type": "multipart/form-data"
 
       }
     }
@@ -138,7 +142,7 @@ const WishlistProducts = () => {
         console.log(response.data)
         // setRemoveClicked(true)
         
-        // window.location.reload();
+        window.location.reload();
         
         // navigate("/");
       }
