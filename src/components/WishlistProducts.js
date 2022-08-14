@@ -4,7 +4,7 @@ import { Row, Col, Button, Container } from "react-bootstrap";
 import * as AiIcons from 'react-icons/ai';
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
-import {getCookie} from "./Cookies";
+import {getCookie, setCookie} from "./Cookies";
 import Footer from "./Footer/Footer";
 import url from "../Uri";
 
@@ -21,6 +21,36 @@ const WishlistProducts = () => {
   const [removeClicked,setRemoveClicked] = useState(false)
   var token=getCookie("jwtToken");
   const navigate = useNavigate();
+
+  var cart = [];
+  if(getCookie("CartModels")!=null){
+    cart = getCookie("CartModels").split(',');
+  }
+
+  const AddToCart = (index) => {
+    var flag = false;
+    cart.map(i=>{
+      if(i!=""){
+        if(i.split("=")[0]===index.modelNumber){
+          flag = true;
+          alert("Item is already present in cart")
+        }
+      }
+    })
+    // if (cart.has(model+"=1")) {
+    //   alert("Item is already present in cart")
+    // }
+    if(!flag){
+      console.log("adddd" + index);
+      cart.push(index.modelNumber+"=1");
+      setCookie("CartModels", cart, 20);
+      console.log("Cart Models",cart)
+      navigate("/cart")
+      // alert("Added to cart" + model);
+    }
+  }
+
+
   function callProductDetails(index) {
     //alert(index);
     console.log("Index", index);
@@ -97,16 +127,16 @@ const WishlistProducts = () => {
   }
 
   const RemoveFromWishList = (modelnum) => {
-    var arr= [];
-    console.log("Wish ",wish)
-        wish.map(pro=>{
-          if(pro.modelNumber!==modelnum) {
-            arr.push(pro);
-          }
-          console.log("i Modelnum ",pro.modelNumber, "Index Modelnum ",modelnum)
-        })
-        setWish(arr);
-        console.log("Arr ",arr)
+    // var arr= [];
+    // console.log("Wish ",wish)
+    //     wish.map(pro=>{
+    //       if(pro.modelNumber!==modelnum) {
+    //         arr.push(pro);
+    //       }
+    //       console.log("i Modelnum ",pro.modelNumber, "Index Modelnum ",modelnum)
+    //     })
+    //     setWish(arr);
+    //     console.log("Arr ",arr)
        
     // localStorage.setItem("RemoveIndex",index.modelNumber);
 
@@ -122,9 +152,13 @@ const WishlistProducts = () => {
     //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraGFyZW9ta2FyOTlAZ21haWwuY29tbW0iLCJleHAiOjE2NTc2MTc5MDgsImlhdCI6MTY1NzUxNzkwOH0.v_DeVJD4Cc77EZ_Kk0heR8tV0G4_vgFjZhvq87kOg3s"
 
     // };
-    axios.delete(url+"/wishlist/" + modelnum, {
+    var form_data_body={
+      "modelNumber": modelnum
+    }
+    axios.post(url+"/delete-wishlist",form_data_body, {
       headers: {
-        "Authorization": "Bearer "+token
+        "Authorization": "Bearer "+token,
+        "Content-Type": "multipart/form-data"
 
       }
     }
@@ -138,7 +172,7 @@ const WishlistProducts = () => {
         console.log(response.data)
         // setRemoveClicked(true)
         
-        // window.location.reload();
+        window.location.reload();
         
         // navigate("/");
       }
@@ -149,6 +183,7 @@ const WishlistProducts = () => {
     // setWish((products) => products.filter((i) => i !== index.modelNumber));
 
   }
+
 
 
   return (
@@ -195,7 +230,7 @@ const WishlistProducts = () => {
                         <Button  size="1" name={index.modelNumber} onClick={() => RemoveFromWishList(index.modelNumber)} style={{ marginBottom: '10px', width: 150, height: 50, background:"#C10000", border:"none" }}>Remove</Button>
                       </Row>
                       <Row>
-                        <Button  size="1" style={{ width: 150, height: 50, background:"#C10000", border:"none" }}>Add To Cart</Button>
+                        <Button  size="1" style={{ width: 150, height: 50, background:"#C10000", border:"none" }} onClick={()=>AddToCart(index)}>Add To Cart</Button>
                       </Row>
   
                     </Col>

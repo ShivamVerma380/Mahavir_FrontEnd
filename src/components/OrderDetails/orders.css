@@ -1,0 +1,14 @@
+.orders{
+    margin-top: 125px;
+    padding: 2%;
+}
+
+.buttonn{
+    color: #ED1C24;
+    background-color: #ffffff;
+    border: solid 2px #ED1C24;
+}
+.buttonn:hover {
+    background-color: #ED1C24;
+    border-color: #ED1C24;
+}

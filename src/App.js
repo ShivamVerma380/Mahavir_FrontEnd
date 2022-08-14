@@ -63,6 +63,8 @@ function App() {
     count = localStorage.getItem("comparecount")
   }
   const [countc,setCountc] = useState(count);
+
+  var arr=[];
   
   // while (true) {
   //   if (localStorage.getItem("comparecount")!=countc) {
@@ -187,6 +189,25 @@ function App() {
         console.log(response.data);
       }).catch(function(error){
           console.log(error);
+      })
+
+      axios.get(url+"/wishlist",{
+        headers:{
+          "Authorization":"Bearer "+getCookie("jwtToken")
+        }
+      }).then(
+        function(response){
+          if(response.status==200){
+            response.data.map(index=>{
+                arr.push(index.modelNumber)
+            })
+            console.log("Wishlist",arr)
+            localStorage.setItem("Wishlist",arr);
+            // console.log("Wishlist",response.data);
+          }
+        }
+      ).catch(function(error){
+        console.log("Error",error);
       })
 
       axios.get(url+"/deals").then(
@@ -356,7 +377,7 @@ function App() {
 
   return (
 
-    <div  >
+    <div>
       
       {/* <-------------------Header/> */}
       {

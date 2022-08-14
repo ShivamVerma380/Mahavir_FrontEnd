@@ -85,11 +85,18 @@ function CategoryProductsSwiper({ cattitle }) {
 
   function callProductDetails(index) {
     //alert(index);
-    console.log("Index", index);
+    console.log("Index",index);
+    localStorage.setItem("productId",index.productId);
     localStorage.setItem("productSelected", index.modelNumber);
-    localStorage.setItem("productId", index.productId);
-    console.log("Product Id", localStorage.getItem("productId"));
-    console.log("Product Selected", localStorage.getItem("productSelected"))
+    localStorage.setItem("Category",index.category)
+    localStorage.setItem("SubCategory","Brand")
+    localStorage.setItem("SubSubCategory",index.subCategoryMap.Brand)
+    console.log("Cat",localStorage.getItem("Category"))
+    console.log("SubCat",localStorage.getItem("SubCategory"))
+    console.log("SubSubCat",localStorage.getItem("SubSubCategory"))
+    // localStorage.removeItem("SubCategory")
+    // localStorage.removeItem("SubSubCategory")
+    // console.log("Product Selected",localStorage.getItem("productSelected"))
     navigate("/productDetails")
   }
 
@@ -102,7 +109,7 @@ function CategoryProductsSwiper({ cattitle }) {
     localStorage.setItem("Category", cattitle)
     localStorage.removeItem("SubCategory")
     localStorage.removeItem("SubSubCategory")
-    navigate("/categoryProductsall", { state: { id: 1, name: cattitle } })
+    navigate("/categoryProductsall")
   }
 
 
@@ -144,8 +151,44 @@ function CategoryProductsSwiper({ cattitle }) {
 
   console.log("Get", localStorage.getItem("comparecount"))
 
+  function RemoveWishlist(index){
+    console.log("Wishlist",localStorage.getItem("Wishlist"))
+    var formdata = {
+      "modelNumber": index.modelNumber
+
+    }
+    axios.post("http://localhost:8080/delete-wishlist", formdata, {
+      headers: {
+        "Authorization": "Bearer "+getCookie("jwtToken"),
+        "Content-Type": "multipart/form-data"
+      }
+    }).then(function (response) {
+      if (response.status == 200) {
+        console.log("Removed from wishlist successfully");
+        console.log(response.data)
+        // var arr = localStorage. 
+        var arr = localStorage.getItem("Wishlist").split(",")
+        var finalWishlist=[];
+        arr.map(a=>{
+          if( a!=="" && a!==index.modelNumber){
+            finalWishlist.push(a)
+          }
+        })
+        localStorage.setItem("Wishlist",finalWishlist)
+        window.location.reload();
+        // navigate("/");
+      }
+    }).catch(function (error) {
+      console.log("Error", error);
+    })
+  }
 
   function WishlistHandler(index) {
+
+    if(getCookie("isLoggedIn")==='true')
+    {
+
+    
     // alert("Item added successfully to wishlist");
     // console.log(index.modelNumber)
     // if (localStorage.getItem("wishlistproduct")==null) {
@@ -186,21 +229,28 @@ function CategoryProductsSwiper({ cattitle }) {
     }).then(function (response) {
       if (response.status == 200) {
         // console.log("Added to wishlist successfully");
-        toast.success(<b>Added to wishlist successfully</b>)
-
+        // toast.success(<b>Added to wishlist successfully</b>)
+        // alert("Item added to wishlist successfully")
+        var arr = localStorage.getItem("Wishlist").split(",")
+        arr.push(index.modelNumber)
+        localStorage.setItem("Wishlist", arr)
+        window.location.reload();
         console.log(response.data)
         // navigate("/");
       }
+      else{
+        alert("Item already present in wishlist")
+        console.log(response.data)
+      }
     }).catch(function (error) {
-      if (error.response.status == 406) {
-        toast.warn(<b>Item already present in Wishlist</b>)
-        // alert("Item already present in wishlist")
-      }
-      else {
+        alert("Item already present in wishlist")
         console.log("Error", error);
-      }
-
+      
     })
+  }
+  else{
+    navigate('/login')
+  }
 
   }
   const firstfourproducts = Products.slice(0, 4);
@@ -301,8 +351,8 @@ function CategoryProductsSwiper({ cattitle }) {
 
 
                         {
-                          (localStorage.getItem("wishlistproduct") != null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
-                            <AiFillHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> :
+                          (localStorage.getItem("Wishlist") != null && localStorage.getItem("Wishlist").includes(index.modelNumber)) ?
+                            <AiFillHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => RemoveWishlist(index)} /> :
                             <AiOutlineHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
                         }
                         <MDBCardBody className="categoryproductscardbody">

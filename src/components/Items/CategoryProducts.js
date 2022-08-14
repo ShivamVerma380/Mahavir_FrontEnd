@@ -40,7 +40,7 @@ function CategoryProducts(){
    
     useEffect(()=>{
         if(!isProductsFetched ){
-        axios.get(url+"/get-products-by-category/"+location.state.name).then(function(response){
+        axios.get(url+"/get-products-by-category/"+localStorage.getItem("Category")).then(function(response){
         console.log(response);
         if(response.status==200){
             setProducts(response.data);
@@ -277,7 +277,7 @@ function CategoryProducts(){
     function CategoryProducts(cattitle){
      
 
-        navigate("/categoryProductsall",{state:{id:1,name: cattitle}})
+        navigate("/categoryProductsall")
       }
       const addtocart=(model)=>{
         if(cart.includes(model)){
@@ -327,7 +327,7 @@ function CategoryProducts(){
   <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
 </filter>
 </svg>
-<span className="categorytitle" filter-content="S">{location.state.name}</span>
+<span className="categorytitle" filter-content="S">{localStorage.getItem("Category")}</span>
   </Row>
           
               
