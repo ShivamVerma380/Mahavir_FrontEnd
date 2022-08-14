@@ -193,18 +193,29 @@ function TestFilterProducts(){
         
         var element = document.getElementById(index.modelNumber);
         
+        
         var length=0;
+        
         comparemodels.map(index=>{
             if(index!==""){
                 length++;
             }
         })
+        // if(length==0){
+        //     console.log("Category...",index.category)
+        //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
+        // }
         // var length = comparemodels.length;
         console.log("Length...",length)
-        console.log("Category...",index.category)
+        
         
         if(element.checked){
             var flag = true;
+            if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
+                flag = false;
+                document.getElementById(index.modelNumber).checked = false;
+                alert("Please select products from same category");
+            }
             if(length==4){
                 flag = false;
                 document.getElementById(index.modelNumber).checked=false;
@@ -233,7 +244,20 @@ function TestFilterProducts(){
           console.log("unchecked "+index.modelNumber);
 
         }
-        
+
+        var final_length = 0;
+        comparemodels.map(index=>{
+            if(index!==""){
+                final_length++;
+            }
+        })
+        if(final_length==0){
+            localStorage.removeItem("AddToCompareCategory");
+        }
+        if(final_length==1){
+            localStorage.setItem("AddToCompareCategory",index.category);
+        }
+
 
         // if (event.target.checked) {
   
