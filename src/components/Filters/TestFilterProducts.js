@@ -189,27 +189,50 @@ function TestFilterProducts(){
     //     }
     //   }
 
-    function handleAddToCompare(modelNumber){
+    function handleAddToCompare(index){
         
-        var element = document.getElementById(modelNumber);
+        var element = document.getElementById(index.modelNumber);
+        
+        
+        var length=0;
+        
+        comparemodels.map(index=>{
+            if(index!==""){
+                length++;
+            }
+        })
+        // if(length==0){
+        //     console.log("Category...",index.category)
+        //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
+        // }
+        // var length = comparemodels.length;
+        console.log("Length...",length)
+        
         
         if(element.checked){
-          
-          
-            console.log("adddd"+modelNumber);
-            comparemodels.push(modelNumber);
-            setCookie("addToCompare",comparemodels,20);
-            setLen(getCookie("addToCompare").split(',').length)
-          console.log(comparemodels);
-          console.log("checked "+modelNumber);
-            
-            
-        
-          
+            var flag = true;
+            if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
+                flag = false;
+                document.getElementById(index.modelNumber).checked = false;
+                alert("Please select products from same category");
+            }
+            if(length==4){
+                flag = false;
+                document.getElementById(index.modelNumber).checked=false;
+                alert("You can compare only 4 products");
+            }
+            if(flag){
+                console.log("adddd"+index.modelNumber);
+                comparemodels.push(index.modelNumber);
+                setCookie("addToCompare",comparemodels,20);
+                setLen(getCookie("addToCompare").split(',').length)
+                console.log(comparemodels);
+                console.log("checked "+index.modelNumber);
+            }
         }
         else {
           for (var i = 0; i < comparemodels.length; i++) {
-            if (comparemodels[i] === modelNumber) {
+            if (comparemodels[i] === index.modelNumber) {
               comparemodels.splice(i, 1);
                 console.log(comparemodels);
                 setCookie("addToCompare",comparemodels,20);
@@ -218,9 +241,24 @@ function TestFilterProducts(){
                 break;
             }
         }
-          console.log("unchecked "+modelNumber);
+          console.log("unchecked "+index.modelNumber);
 
         }
+
+        var final_length = 0;
+        comparemodels.map(index=>{
+            if(index!==""){
+                final_length++;
+            }
+        })
+        if(final_length==0){
+            localStorage.removeItem("AddToCompareCategory");
+        }
+        if(final_length==1){
+            localStorage.setItem("AddToCompareCategory",index.category);
+        }
+
+
         // if (event.target.checked) {
   
         //   console.log('✅ Checkbox is checked');
@@ -1064,7 +1102,11 @@ function TestFilterProducts(){
                                             </Row>
                                             <Row className="checkboxx">
                                                 <Form className="check">
+<<<<<<< HEAD
                                                     <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+=======
+                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
+>>>>>>> e5d13bbd9004715f571834934859e9fafbdb91c6
                                                 </Form>
                                             </Row>
                                             <br></br>

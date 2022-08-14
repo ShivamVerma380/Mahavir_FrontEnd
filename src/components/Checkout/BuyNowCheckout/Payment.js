@@ -67,7 +67,9 @@ function Payment(){
                         console.log("response",res)
                         SetIsPaymentDone(true)
                         SetIsPaymentDone(true)
-                        navigate("/")
+                        navigate("/my-orders")
+                        // navigate("/invoice")
+                        // localStorage.setItem("BuyProductInvoice",cartModels);
                     }
                 }).catch(err=>{
                     console.log("Error",err)
@@ -113,7 +115,9 @@ function Payment(){
                                         console.log("response",res)
                                         SetIsPaymentDone(true)
                                         SetIsPaymentDone(true)
-                                        navigate("/")
+                                        navigate("/my-orders")
+                                        // navigate("/invoice")
+                                        // localStorage.setItem("BuyProductInvoice",cartModels);
                                     }
                                 }).catch(err=>{
                                     console.log("Error",err)
