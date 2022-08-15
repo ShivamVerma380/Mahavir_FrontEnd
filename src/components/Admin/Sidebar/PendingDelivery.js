@@ -5,6 +5,8 @@ import axios from "axios";
 import AdminHeader from "../../Admin/AdminHeader";
 import AdminNavbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
+import './Navbar.css';
+import Navbar from './Navbarrrr';
 const PendingDelivery = () => {
     
     const [orders,SetOrders] = useState([]);
@@ -32,6 +34,7 @@ const PendingDelivery = () => {
     function handleOrderClick(order){
         console.log("Order clicked",order);
         let date = new Date();
+        var token=getCookie("jwtToken");
         var form_data_body={
             "orderId":""+order.orderId,
             "deliveryDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()
@@ -39,7 +42,7 @@ const PendingDelivery = () => {
         console.log("form data body",form_data_body)
         axios.post("http://localhost:8080/order-status",form_data_body,{
             headers:{
-                "Authorization":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaGl2YW1AZ21haWwuY29tIiwiZXhwIjoxNjYwNDczOTc2LCJpYXQiOjE2NjAzNzM5NzZ9.DRadWZgy-kvadM5kXv9aeeKizU4ubCMB-v9vMaOf9ex9yFcSLQ5C7HwBfhXgYB-M_feFN4AvAsi1d3PDylGd9A",
+                "Authorization":"Bearer "+token,
                 "Content-Type": "multipart/form-data"
             }
         }).then(function(response){
@@ -63,8 +66,10 @@ const PendingDelivery = () => {
 
     return (
         <div>
-        <h4 style={{margin:"20px",textAlign:"center"}}>Pending Orders</h4>
-        <Container>
+            <AdminNavbar/>
+        <Container className="pendingdeliveries">
+            <h4 style={{margin:"20px",textAlign:"center"}}>Pending Orders</h4>
+
             <Table striped bordered hover >
                 <thead>
                     <tr>
@@ -80,30 +85,71 @@ const PendingDelivery = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {
+                {
+                (isOrdersFetched)?(
+                    orders.map((order,index)=>{
+                        return(
+                            <tr>
+                                <td>{order.orderId}</td>
+                                <td>{order.buyerEmail}</td>
+                                <td>{order.buyDate}</td>
+                                <td>{order.userAddress.address+","+order.userAddress.city+"-"+order.userAddress.pincode}</td>
+                                <td>{order.userAddress.mobileNumber}</td>
+                                <td>{order.paymentAmount}</td>
+                                <td>{order.paymentMode}</td>
+                                <td><Button onClick={()=>handleGenerateInvoice(order)}>👁️‍🗨️</Button></td>
+                                <td><Button onClick={()=>handleOrderClick(order)}>✅</Button></td>
+                            </tr>
+                        );
+                    })
+                ):(null)
+            }
+                </tbody>
+            </Table>
+
+            
+        </Container>
+        
+      
+          
+        
+      
+    
+        
+        <Accordion flush className="mobileviewpendingorders">
+             {
                         (isOrdersFetched)?(
                             orders.map((order,index)=>{
                                 return(
-                                    <tr>
-                                        <td>{order.orderId}</td>
-                                        <td>{order.buyerEmail}</td>
-                                        <td>{order.buyDate}</td>
-                                        <td>{order.userAddress.address+","+order.userAddress.city+"-"+order.userAddress.pincode}</td>
-                                        <td>{order.userAddress.mobileNumber}</td>
-                                        <td>{order.paymentAmount}</td>
-                                        <td>{order.paymentMode}</td>
-                                        <td><Button onClick={()=>handleGenerateInvoice(order)}>👁️‍🗨️</Button></td>
-                                        <td><Button onClick={()=>handleOrderClick(order)}>✅</Button></td>
-                                    </tr>
+                                    <>
+                                    <Accordion.Item eventKey={ index}>
+        <Accordion.Header>Order Id: {order.orderId}</Accordion.Header>
+        <Accordion.Body>
+        <Table>
+            <tbody>
+                                    <tr><td><b>Order Id: </b>{order.orderId}</td></tr>
+                                        
+                                       <tr><td><b>Email: </b>{order.buyerEmail}</td></tr>
+                                       <tr><td><b>Buy Date: </b>{order.buyDate}</td></tr>
+                                       <tr><td><b>Address: </b>{order.userAddress.address+","+order.userAddress.city+"-"+order.userAddress.pincode}</td></tr>
+                                       <tr><td><b>Contact: </b>{order.userAddress.mobileNumber}</td></tr>
+                                       <tr><td><b>Payment Amount: </b>{order.paymentAmount}</td></tr>
+                                       <tr><td><b>Payment Mode: </b>{order.paymentMode}</td></tr>
+                                       <tr><td><b>Invoice: </b><Button onClick={()=>handleGenerateInvoice(order)}>👁️‍🗨️</Button></td></tr>
+                                       <tr><td><b>#: </b><Button onClick={()=>handleOrderClick(order)}>✅</Button></td></tr>
+                                       </tbody>
+        </Table>
+                                       </Accordion.Body>
+      </Accordion.Item>
+                                       </>
                                 );
                             })
                         ):(
                             null
                         )
                     }
-                </tbody>
-            </Table>
-        </Container>
+                    </Accordion>
+           
         </div>
     )
 

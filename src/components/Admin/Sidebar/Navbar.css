@@ -3,3 +3,69 @@
     color: white;
     margin-left: 16px;
   }
+.mobileviewpendingorders{
+  display: none;
+}
+
+.uploadexcel .btn{
+  color: #ED1C24;
+  background-color: #ffffff;
+  border:solid 2px #ED1C24;
+  width: 40%;
+  font-size: 20px;
+} 
+
+.uploadexcel .btn:hover{
+ 
+  color:#ffffff;
+  background-color: #ED1C24;
+ 
+} 
+
+.additem2 .btn{
+  color: #ED1C24;
+  background-color: #ffffff;
+  border:solid 2px #ED1C24;
+  width: 40%;
+  font-size: 20px;
+} 
+
+.additem2 .btn:hover{
+ 
+  color:#ffffff;
+  background-color: #ED1C24;
+ 
+} 
+
+.uploadexcel .row{
+  padding: 1%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.additem .col{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+}
+
+.additem .accordion{
+  border: solid 1px gray;
+}
+
+.additem input{
+  border: solid 1px gray;
+  border-radius: 0;
+}
+
+.additem2 select{
+  height: 45px;
+  width: 100%;
+}
+  @media screen and (min-width:320px) and (max-width:480px)
+  {
+    .mobileviewpendingorders{
+      display: block;
+    }
+    .pendingdeliveries{
+      display:none;
+    }
+  }
