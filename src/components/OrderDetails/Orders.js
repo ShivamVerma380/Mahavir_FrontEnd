@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState }  from "react";
-import {Row,Col,Form,Button} from 'react-bootstrap';
+import {Row,Col,Form,Button,Image} from 'react-bootstrap';
 // import { Header } from "semantic-ui-react";
 import Header from "../Header";
 import {setCookie,getCookie} from '../Cookies';
 import url from "../../Uri";
 import { useNavigate } from "react-router-dom";
-
+import './orders.css';
 
 
 const Orders=()=>{
@@ -129,54 +129,103 @@ const Orders=()=>{
 
     return(
         <div>
-            <Row>
-                <Col md={2}>
-                    <h5>Order Filters</h5>
-                    <br></br>
-                    <Form>
+            <Header/>
+            <Row className="orders">
+            <Col style={{    backgroundColor: '#fff',
+                            borderRadius: '2px',
+                            boxShadow: '0 2px 4px 0 rgb(0 0 0 / 8%)'}} sm={2}>
+                        <h3 style={{margin: '10px'}}>Filter</h3>
+                        <div className="orderfilter">
+                            <div className="orderfiltertitle" >Order Status</div>
+                            <Form className="orderfiltercheck">
                         <Form.Check type="checkbox" label="On The Way" id="on-the-way" onChange={handleFormCheck}/>
                         <Form.Check type="checkbox" label="Delivered" id="delivered" onChange={handleFormCheck}/>
                     </Form>
-                    <br></br>
-                    <h6>Year</h6>
-                    <Form>
+                    </div>
+                        <div className="orderfilter">
+                            <div className="orderfiltertitle">Order Time</div>
+
+                            <Form className="orderfiltercheck">
                         <Form.Check type="checkbox" id={date.getFullYear()} label= {date.getFullYear()} onChange={handleFormCheck} />
                         <Form.Check type="checkbox" id={date.getFullYear()-1} label= {date.getFullYear()-1} onChange={handleFormCheck}/>
                         <Form.Check type="checkbox" id="Older" label= "Older" onChange={handleFormCheck}/>
                     </Form>
+                    </div>
                 </Col>
                 <Col md={10}>
                 {
                     (isOrdersFetched)?(
                         fitleredOrders.map(order=>{
                             return(
-                                <Row>
-                                    <Col md={2}>
-                                        <img style={{height:"275px" ,width:"275px"}} src={order.productImage1}></img>
-                                    </Col>
-                                    <Col md={9}>
-                                        <h5 style={{marginTop:"25px"}}>{order.productName}</h5>   
-                                        {/* <p>MRP:<s>{order.productPrice}</s> <b style={{marginLeft:"20px"}}>MSP:{order.offerPrice}</b></p> */}
-                                        <h6>Quantity:{order.quantity}</h6>
-                                        <p>Buy Date:{order.buyDate}</p>
-                                        <p>Delivery Date:{order.deliveryDate}</p>
-                                        <p>Payment Mode:{order.paymentMode}</p>
-                                        {
+
+
+                                    <Row className="ordersbox">
+                                        <Col md={2} style={{display:'flex',justifyContent:'center'}}>
+                                        <Image thumbnail="true" src={order.productImage1}/>
+                                        </Col>
+                                        <Col md={4}>
+                                            <h5><br></br>{order.productName}
+                                            
+                                            </h5>
+                                            <br></br>
+                                            {
                                             (order.productRated==true)?(
                                                     
                                                     // <p>Product is already rated</p>
-                                                    <Button onClick={()=>editRating(order)}>Already rated</Button>
+                                                    <Button className="buttonn" onClick={()=>editRating(order)}>Already rated</Button>
                                                 
                                             ):(
                                                 
-                                                    <Button onClick={()=>rateProduct(order)}>Rate & Review</Button>            
+                                                    <Button className="buttonn"  onClick={()=>rateProduct(order)}>Rate & Review</Button>            
                                                     
                                             )
                                         }
+                                        <Button className="buttonn" style={{marginLeft:"15px"}} onClick={()=>generateInvoice(order)}>Invoice</Button>
+
+                                        </Col>
+                                        <Col md={2}>
+                                            
+                                        <h5> <br></br>MSP: <b style={{marginRight:"20px",color:"rgb(255,98,98)"}}>₹{order.productPrice} </b> </h5> 
+                    
+                                        </Col>
+                                        <Col md={4}>
+
+                                        <h5><br></br>Quantity:{order.quantity}
+                                        <br></br>Ordered On: {order.buyDate}
+                                        <br></br>Delivery Date:{order.deliveryDate}
+                                        <br></br>Payment Mode:{order.paymentMode}</h5>
                                         
-                                        <Button  style={{marginLeft:"15px"}} onClick={()=>generateInvoice(order)}>Invoice</Button>
-                                    </Col>
-                                </Row>
+                                        
+                                        </Col>
+                                    </Row>
+
+                                // <Row>
+                                //     <Col md={2}>
+                                //         <img style={{height:"275px" ,width:"275px"}} src={order.productImage1}></img>
+                                //     </Col>
+                                //     <Col md={9}>
+                                //         <h5 style={{marginTop:"25px"}}>{order.productName}</h5>   
+                                //         {/* <p>MRP:<s>{order.productPrice}</s> <b style={{marginLeft:"20px"}}>MSP:{order.offerPrice}</b></p> */}
+                                //         <h6>Quantity:{order.quantity}</h6>
+                                //         <p>Buy Date:{order.buyDate}</p>
+                                //         <p>Delivery Date:{order.deliveryDate}</p>
+                                //         <p>Payment Mode:{order.paymentMode}</p>
+                                //         {
+                                //             (order.productRated==true)?(
+                                                    
+                                //                     // <p>Product is already rated</p>
+                                //                     <Button onClick={()=>editRating(order)}>Already rated</Button>
+                                                
+                                //             ):(
+                                                
+                                //                     <Button onClick={()=>rateProduct(order)}>Rate & Review</Button>            
+                                                    
+                                //             )
+                                //         }
+                                        
+                                //         <Button  style={{marginLeft:"15px"}} onClick={()=>generateInvoice(order)}>Invoice</Button>
+                                //     </Col>
+                                // </Row>
                             )
                         })
                     ):(
