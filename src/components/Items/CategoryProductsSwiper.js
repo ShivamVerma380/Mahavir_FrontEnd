@@ -384,5 +384,5 @@ function CategoryProductsSwiper({ cattitle }) {
 
   )
 }
-}
+
 export default CategoryProductsSwiper;
