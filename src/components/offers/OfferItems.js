@@ -27,7 +27,14 @@ function OfferItems() {
 
     const [categories,SetCategories] = useState([]);
     const [isCategoriesFetched,SetIsCategoriesFetched] = useState(false);
+
+    const [filters,setFilters] = useState([]);
+    const [isFiltersFetched,SetIsFiltersFetched] = useState(false);
+
+    const [keySet, setKeyState] = useState([]); //To Store filters name
+
     var productsArray = [];
+    var flag = false;
     useEffect(() => {
         if (!isProductsFetched && !isCategoriesFetched) {
             var modelNumbers = localStorage.getItem("offerPostersModelNumber");
@@ -41,13 +48,38 @@ function OfferItems() {
             })
             axios.all(urls).then(axios.spread((...response) => {
                 console.log("response: ", response)
+                var i=0;
                 response.map(index => {
                     productsArray.push(index.data);
                     arr.add(index.data.category);
+                    if(i==0){
+                        localStorage.setItem("CategoryOffers",index.data.category);
+                        flag = true;
+                    }
+                    i++;
                 }
                 )
+                var filterArr=[];
+                productsArray.map(index=>{
+                    if(index.category===localStorage.getItem("CategoryOffers")){
+                        filterArr.push(index);
+                    }
+                })
 
-                setFilterProducts(productsArray);
+                axios.get(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"))
+                    .then(function(response){   
+                        if(response.status==200){
+                            console.log("Filters fetched",response.data)
+                            for(var key in response.data.filterCriterias){
+                                keySet.push(key);
+                            }
+                            setFilters(response.data.filterCriterias);
+                            SetIsFiltersFetched(true);
+                        }
+                    }).catch(function(error){
+                        console.log(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"),error);
+                    })
+                setFilterProducts(filterArr);
                 setProduct(productsArray);
                 SetCategories([...arr]);
                 SetIsCategoriesFetched(true);
@@ -59,6 +91,13 @@ function OfferItems() {
             )
 
         }
+        // if(!isFiltersFetched){
+        //     console.log("inside axios");
+        //     if(flag){
+        //         console.log("In filter fetched");
+                
+        //     }
+        // }
 
     }, []);
 
@@ -149,16 +188,33 @@ function OfferItems() {
     function handleCategoryClick(c){
         var arr=[]
         if(document.getElementById(c).checked){
+            localStorage.setItem("CategoryOffers",c);
+            // window.location.reload();
+            axios.get(url+"/filtercriterias/"+c)
+                .then(function(response){   
+                    if(response.status==200){
+                        console.log("Filters fetched",response.data)
+                        var arr=[]
+                        for(var key in response.data.filterCriterias){
+                            arr.push(key);
+                        }
+                        setKeyState(arr)
+                        setFilters(response.data.filterCriterias);
+                        SetIsFiltersFetched(true);
+                    }
+                }).catch(function(error){
+                    console.log(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"),error);
+                })
             // console.log("Checked ",c)
-            products.map(index=>{
-                console.log(index)
-                if(index.category===c){
-                    arr.push(index)
-                }
-            })
-            console.log("arr",arr)
-            // setFilterProducts([])
-            setFilterProducts([...arr])
+            // products.map(index=>{
+            //     console.log(index)
+            //     if(index.category===c){
+            //         arr.push(index)
+            //     }
+            // })
+            // console.log("arr",arr)
+            // // setFilterProducts([])
+            // setFilterProducts([...arr])
         }
         
     }
@@ -171,7 +227,7 @@ function OfferItems() {
                     (isCategoriesFetched) ?(
                         categories.map(c=>{
                             return(
-                                <Form.Check id={c} name="category"  type="radio" label={c} onClick={()=>handleCategoryClick(c)}/>
+                                <Form.Check id={c} name="category" defaultChecked={(c===localStorage.getItem("CategoryOffers"))?(true):(false)}  type="radio" label={c} onClick={()=>handleCategoryClick(c)}/>
                             )
                         })
                     ):(
@@ -179,6 +235,29 @@ function OfferItems() {
                     )
                 }
                 </Form>
+                <br></br>
+                {
+                    (isFiltersFetched)?(
+                        keySet.map(key=>{
+                            return(
+                                <>
+                                <h4>{key}</h4>
+                                <Form>
+                                {
+                                    filters[key].map(f=>{
+                                        return(
+                                            <Form.Check type="checkbox" label={f}/>
+                                        )
+                                    })
+                                }
+                                </Form>
+                                </>
+                            )
+                        })
+                    ):(
+                        null
+                    )   
+                }
             </Col>
             <Col md={10}>
             {
