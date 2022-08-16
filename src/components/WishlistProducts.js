@@ -51,13 +51,24 @@ const WishlistProducts = () => {
   }
 
 
+  // function callProductDetails(index) {
+  //   //alert(index);
+  //   console.log("Index", index);
+  //   localStorage.setItem("productSelected", index.modelNumber);
+  //   console.log("Product Selected", localStorage.getItem("productSelected"))
+  //   navigate("/productDetails")
+  // }
+
   function callProductDetails(index) {
     //alert(index);
-    console.log("Index", index);
+    // console.log("Index",index);
+    localStorage.setItem("productId",index.productId);
     localStorage.setItem("productSelected", index.modelNumber);
-    console.log("Product Selected", localStorage.getItem("productSelected"))
+    localStorage.removeItem("SubCategory")
+    localStorage.removeItem("SubSubCategory")
+    // console.log("Product Selected",localStorage.getItem("productSelected"))
     navigate("/productDetails")
-  }
+}
 
   useEffect(() => {
     if (!isWishlistFetched && !isProductFetched) {
@@ -209,7 +220,7 @@ const WishlistProducts = () => {
                     {/* style={{ margin: '2%', padding: '2%' }} , boxShadow: ' 0 2px 10px #bdbdbd' */}
                     
                     <Col sm={2}>
-                      <img src={index.productImage1} style={{ width: '180px', height: '120px',marginTop:"25px" }}></img>
+                      <img onClick={() => callProductDetails(index)} src={index.productImage1} style={{ width: '180px', height: '120px',marginTop:"25px", cursor:"pointer" }}></img>
                     </Col>
                     <Col style={{ marginTop: '2%' }} sm={8} >
                     <h5 style={{marginLeft:"15px",letterSpacing: "0.02em",lineHeight:"19px",fontWeight: 500,color: "#000000",fontSize:"20px",marginTop:"34px",fontFamily:"typeface-roboto"}}>{index.productName}</h5>

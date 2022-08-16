@@ -15,7 +15,6 @@ import "./FilterProducts.css"
 import {FaArrowCircleUp} from 'react-icons/fa';
 import { Dropdown } from "reactstrap";
 import url from "../../Uri";
-import e from "cors";
 
 
 function TestFilterProducts(){
@@ -70,9 +69,6 @@ function TestFilterProducts(){
     const [max,SetMax] = useState(100);
 
     const [value,SetValue] = useState([]);
-
-    const [vals,setVals]=useState([]);
-    // vals.push(localStorage.getItem("SubSubCategory"));
     useEffect(()=>{
         window.addEventListener('scroll', () => { if (window.scrollY > 400) { setShowTopBtn(true); } else { setShowTopBtn(false); } });
         if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched){
@@ -190,50 +186,27 @@ function TestFilterProducts(){
     //     }
     //   }
 
-    function handleAddToCompare(index){
+    function handleAddToCompare(modelNumber){
         
-        var element = document.getElementById(index.modelNumber);
-        
-        
-        var length=0;
-        
-        comparemodels.map(index=>{
-            if(index!==""){
-                length++;
-            }
-        })
-        // if(length==0){
-        //     console.log("Category...",index.category)
-        //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
-        // }
-        // var length = comparemodels.length;
-        console.log("Length...",length)
-        
+        var element = document.getElementById(modelNumber);
         
         if(element.checked){
-            var flag = true;
-            if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
-                flag = false;
-                document.getElementById(index.modelNumber).checked = false;
-                alert("Please select products from same category");
-            }
-            if(length==4){
-                flag = false;
-                document.getElementById(index.modelNumber).checked=false;
-                alert("You can compare only 4 products");
-            }
-            if(flag){
-                console.log("adddd"+index.modelNumber);
-                comparemodels.push(index.modelNumber);
-                setCookie("addToCompare",comparemodels,20);
-                setLen(getCookie("addToCompare").split(',').length)
-                console.log(comparemodels);
-                console.log("checked "+index.modelNumber);
-            }
+          
+          
+            console.log("adddd"+modelNumber);
+            comparemodels.push(modelNumber);
+            setCookie("addToCompare",comparemodels,20);
+            setLen(getCookie("addToCompare").split(',').length)
+          console.log(comparemodels);
+          console.log("checked "+modelNumber);
+            
+            
+        
+          
         }
         else {
           for (var i = 0; i < comparemodels.length; i++) {
-            if (comparemodels[i] === index.modelNumber) {
+            if (comparemodels[i] === modelNumber) {
               comparemodels.splice(i, 1);
                 console.log(comparemodels);
                 setCookie("addToCompare",comparemodels,20);
@@ -242,24 +215,9 @@ function TestFilterProducts(){
                 break;
             }
         }
-          console.log("unchecked "+index.modelNumber);
+          console.log("unchecked "+modelNumber);
 
         }
-
-        var final_length = 0;
-        comparemodels.map(index=>{
-            if(index!==""){
-                final_length++;
-            }
-        })
-        if(final_length==0){
-            localStorage.removeItem("AddToCompareCategory");
-        }
-        if(final_length==1){
-            localStorage.setItem("AddToCompareCategory",index.category);
-        }
-
-
         // if (event.target.checked) {
   
         //   console.log('✅ Checkbox is checked');
@@ -280,11 +238,8 @@ function TestFilterProducts(){
       console.log("Get",localStorage.getItem("comparecount"))
 
     function WishlistHandler(index) {
-        console.log("Logged in",getCookie("isLoggedIn"));
-        alert("Ki")
-        if(getCookie("isLoggedIn")!=='true'){
-            navigate("/login")
-        }
+       
+
         console.log("Wishlist clicked")
 
       
@@ -322,24 +277,18 @@ function TestFilterProducts(){
 
     function callProductDetails(index) {
         //alert(index);
-        console.log("Index",index);
+        // console.log("Index",index);
         localStorage.setItem("productId",index.productId);
         localStorage.setItem("productSelected", index.modelNumber);
-        localStorage.setItem("Category",index.category)
-        localStorage.setItem("SubCategory","Brand")
-        localStorage.setItem("SubSubCategory",index.subCategoryMap.Brand)
-        console.log("Cat",localStorage.getItem("Category"))
-        console.log("SubCat",localStorage.getItem("SubCategory"))
-        console.log("SubSubCat",localStorage.getItem("SubSubCategory"))
-        // localStorage.removeItem("SubCategory")
-        // localStorage.removeItem("SubSubCategory")
+        localStorage.removeItem("SubCategory")
+        localStorage.removeItem("SubSubCategory")
         // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
     }
 
 
     function handleCategoryCheck(cat){
-        // alert("hi")
+        alert("hi")
         var element = document.getElementById(cat)
         if(element.checked ==true){
             console.log(cat," is checked")
@@ -352,176 +301,71 @@ function TestFilterProducts(){
         }
     }
 
-    const handleFormCheck2=(index,f)=>{
-        // alert("hi")
+    function WishlistHandler(index) {
+        // alert("Item added successfully to wishlist");
+        // console.log(index.modelNumber)
+        // if (localStorage.getItem("wishlistproduct")==null) {
+        //   localStorage.setItem("wishlistproduct",index.modelNumber)
+        // }else {
+        //   var arr = localStorage.getItem("wishlistproduct").split(',')
+        //   var flag = true;
+        //   arr.map(i=>{
+           
+        //     console.log("i: ",i)
+        //     if( i=== index.modelNumber) {
+        //         arr.splice(arr.indexOf(i),1)
+        //         localStorage.setItem("wishlistproduct",arr)
+        //         console.log('del arr: ' + arr)
+        //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+        //        console.log("in if")
+        //       flag = false;
+        //     } 
+        //   }) 
+        //   if(flag)
+        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        //     navigate('/')
+          
+        // }
+  
+        console.log("Wishlist clicked")
+  
         
-        console.log("index:"+index+"    f:"+f)
-
-        var element = document.getElementById(f+f);
-        
-        if(element.checked){
-            // alert("here")
-
-            var  arr= filterselected;
-            var flag = true;
-            arr.map((i,pos)=>{
-                var pair = i.split("-");
-                if(index===pair[0]){
-                    arr[pos]= index+"-"+pair[1]+";"+f;
-                    flag = false;
-                }
-            })
-            if(flag){
-                // console.log("----"+f.slice())
-                // var hl=f.length/2;
-                // alert("-----"+hl)
-                arr.push(index+"-"+ f);
+          var formdata = {
+            "modelNumber": index.modelNumber
+    
+          }
+    
+          axios.post(url+"/wishlist", formdata, {
+            headers: {
+              "Authorization": "Bearer "+token,
+              "Content-Type": "multipart/form-data"
             }
-            SetFilterSelected(arr);
-            var productsArray = [];
-            // console.log("products",products)
-            console.log("filterSelected",filterselected);
-
-            filterselected.map(filter=>{
-                var v = filter.split("-");
-                var arr = v[1].split(";");
-                arr.map(val=>{
-                    if(vals.includes(val)){
-
-                    }
-                    else{
-                        vals.push(val);
-
-                    }
-                })
-                console.log("val "+vals);
-            })
-            products.map(index=>{
-                var flag = true;
-                filterselected.map(a=>{
-                    var pair = a.split("-");
-                    // console.log("pair",pair)
-                    var key = pair[0];
-                    var values = pair[1].split(";");
-                    var valueflag= false;
-                    values.map(v=>{
-                        console.log(index.filtercriterias[key])
-                        
-
-                        if(index.filtercriterias[key].includes(v)){
-                            valueflag=true;  
-                        }
-                    })
-                    if(!valueflag){
-                        flag = false;
-                    }
-                })
-
-                if(flag){
-                    productsArray.push(index);
-                }
-            })
-
+          }).then(function (response) {
+            if (response.status == 200) {
+              toast.success(<b>Added to wishlist successfully</b>)
+              // console.log("Added to wishlist successfully");
+              
+              console.log(response.data)
+              // navigate("/");
+            }
+          }).catch(function (error) {
+            if(error.response.status==406) {
+              toast.warn(<b>Item already present in Wishlist</b>)
+              // alert("Item already present in wishlist")
+            }
+            else {
+              console.log("Error", error);
+            }
             
-            console.log("values",vals)
-
-            // console.log("Products Array",productsArray.length);
-            
-            SetSelectedProducts(productsArray);
-
-        }else{
-
-            console.log("Filter selected",filterselected)
-            var arr = filterselected;
-            arr.map((i,pos)=>{
-                var pair = i.split("-");
-                if(index===pair[0]){
-                    var values= pair[1].split(";");
-                    if(values.length==1){
-                        arr.splice(pos,1);
-                    }
-                    else{
-                        var str=index+"-";
-                        values.map(v=>{
-                            if(v!==f){
-                                str+=v+";";
-                            }
-                        })
-                        str= str.slice(0,str.length-1);
-                        arr[pos]=str;
-
-                    }
-                }
-            })
-
-            console.log("Array:",arr)
-
-            // if(arr.length==0){
-            //     console.log("In if")
-            //     // localStorage.removeItem("SubCategory");
-            //     // localStorage.removeItem("SubSubCategory");
-            //     // window.location.reload();
-            // }
-            SetFilterSelected(arr);
-            var productsArray = [];
-            console.log("products",products)
-            console.log("filterSelected",filterselected);
-            
-            products.map(index=>{
-                var flag = true;
-                filterselected.map(a=>{
-                    var pair = a.split("-");
-                    // console.log("pair",pair)
-                    var key = pair[0];
-                    var values = pair[1].split(";");
-                    // console.log("values",values)
-                    var valueflag= false;
-                    values.map(v=>{
-                        console.log(index.filtercriterias[key])
-                        if(index.filtercriterias[key]===v){
-                            valueflag=true;  
-                        }
-                    })
-                    if(!valueflag){
-                        flag = false;
-                    }
-                })
-                if(flag){
-                    productsArray.push(index);
-                }
-            })
-            vals.splice(0,vals.length);
-            filterselected.map(filter=>{
-                var v = filter.split("-");
-                var arr = v[1].split(";");
-                arr.map(val=>{
-                    if(vals.includes(val)){
-
-                    }
-                    else{
-                        vals.push(val);
-
-                    }
-                })
-                // alert("val "+vals);
-            })
-            console.log("Products Array",productsArray.length);
-            
-            SetSelectedProducts(productsArray);
-        }
-    }
-
+          })
+        
+      }
 
     const handleFormCheck=(index,f)=>{
-        // alert("hi")
-        
-        console.log("index:"+index+"    f:"+f)
+        console.log("index:",index,"    f:",f)
 
         var element = document.getElementById(f);
-        
         if(element.checked){
-            // alert("here")
-
             var  arr= filterselected;
             var flag = true;
             arr.map((i,pos)=>{
@@ -566,8 +410,6 @@ function TestFilterProducts(){
             SetSelectedProducts(productsArray);
 
         }else{
-            // alert("here")
-
             console.log("Filter selected",filterselected)
             var arr = filterselected;
             arr.map((i,pos)=>{
@@ -680,68 +522,6 @@ function TestFilterProducts(){
         })
         SetSelectedProducts([...arr])
     }
-
-    function WishlistHandler(index) {
-        // alert("Item added successfully to wishlist");
-        // console.log(index.modelNumber)
-        // if (localStorage.getItem("wishlistproduct")==null) {
-        //   localStorage.setItem("wishlistproduct",index.modelNumber)
-        // }else {
-        //   var arr = localStorage.getItem("wishlistproduct").split(',')
-        //   var flag = true;
-        //   arr.map(i=>{
-    
-        //     console.log("i: ",i)
-        //     if( i=== index.modelNumber) {
-        //         arr.splice(arr.indexOf(i),1)
-        //         localStorage.setItem("wishlistproduct",arr)
-        //         console.log('del arr: ' + arr)
-        //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
-        //        console.log("in if")
-        //       flag = false;
-        //     } 
-        //   }) 
-        //   if(flag)
-        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
-        //     navigate('/')
-    
-        // }
-        if(getCookie("isLoggedIn")!=='true'){
-            navigate("/login")
-        }else{  
-            console.log("Wishlist clicked")
-            var formdata = {
-            "modelNumber": index.modelNumber
-        
-            }
-        
-            axios.post(url+"/wishlist", formdata, {
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "multipart/form-data"
-            }
-            }).then(function (response) {
-            if (response.status == 200) {
-                // console.log("Added to wishlist successfully");
-                // toast.success(<b>Added to wishlist successfully</b>)
-                alert("Item added to wishlist successfully")
-                console.log(response.data)
-                // navigate("/");
-            }
-            else{
-                alert("Item already present in wishlist")
-                console.log(response.data)
-            }
-            }).catch(function (error) {
-                alert("Item already present in wishlist")
-                console.log("Error", error);
-            
-            })
-
-        }
-        
-    
-      }
     
     function SortByHighPrice(){
         console.log("in sort function")
@@ -814,30 +594,30 @@ function TestFilterProducts(){
       };
       
       window.addEventListener('scroll', toggleVisible);
-      const [show, setShow] = useState(false);
 
-      const handleClose = () => setShow(false);
-      const handleShow = () => setShow(true);
     return(
         <>
+            <ToastContainer position="top-center"/>
 
              
-           
-            {
-          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
-          
-          }
-          {
-            (showTopBtn)?(
-                <Button className="scrolltopbtn" onClick={scrollToTop}>
-            <FaArrowCircleUp  />
-        </Button>
-            ):(null)
-          }
-        
-        <Row className="mainpage">
-            <Col md={2} className="filtercol">
-                <h5>Category</h5>
+           <Row className="offcampusfilters" style={{marginTop:"200px"}}>
+         {[false].map((expand) => (
+        <Navbar key={expand} bg="light" expand={expand} className="mb-3"  >
+          <Container fluid>
+            <Navbar.Brand href="#">Filters</Navbar.Brand>
+            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+            <Navbar.Offcanvas
+              id={`offcanvasNavbar-expand-${expand}`}
+              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+              placement="end"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                Filters
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body >
+                
                 {
                     (isCategoriesFetched)?(
                         categories.map(cat=>{
@@ -851,10 +631,104 @@ function TestFilterProducts(){
                 }
                 <hr></hr><br></br>
                 <React.Fragment>
+               
+                
+                <Slider
+                    defaultValue={[parseInt(min),parseInt(max)]}
+                    onChange={rangeSelector}
+                    valueLabelDisplay="on"
+                    min={parseInt(min)}
+                    max={parseInt(max)}
+                />
+                </React.Fragment>
+
+                
+               
+                <br></br><br></br>
+                {
+                    (isFiltersFetched)?(
+                        keySet.map((index,pos)=>{
+                            return(
+                                <div >
+                                    
+                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
+                                    <Accordion.Item eventKey={pos}>
+                                                    <Accordion.Header>{index}</Accordion.Header>
+                                                    <Accordion.Body>
+                                                                
+                                    {
+                                        filters[index].map(f=>{
+                                            return(
+                                                <>
+                                                
+                                                    <Form>
+                                                        <Form.Check style={{fontSize:'18px',fontWeight:'600'}} type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
+                                                    </Form>
+                                                     
+                                                </>
+                                                
+                                                
+                                            )
+                                        
+                                            
+                                        })
+                                    }
+                                    </Accordion.Body>
+                                    </Accordion.Item>
+                                    </Accordion>
+                                </div>
+                            )
+                        })
+                    ):(
+                        null
+                    )
+                }
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Container>
+        </Navbar>
+      ))} 
+            </Row>
+            {
+          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
+          
+          }
+          {
+            (showTopBtn)?(
+                <Button className="scrolltopbtn" onClick={scrollToTop}>
+            <FaArrowCircleUp  />
+        </Button>
+            ):(null)
+          }
+        
+        <Row className="mainpage">
+        
+            <Col md={3} className="filtercol" style={{width:"300px",background:"white", border: "2px solid #D2D2D2",paddingTop:"16px",marginLeft:"1%"}}>
+                {/* <Container style={{background:"grey", width:"270px", paddingTop:"16px"}}> */}
+                <h4 style={{fontWeight:600, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Filters</h4>   
+                <hr style={{width:"270px", marginLeft:"-14px"}}></hr> 
+                <h4 style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Categories</h4>
+                
+                {
+                    (isCategoriesFetched)?(
+                        categories.map(cat=>{
+
+                            return(
+                                
+                                <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
+                            )
+                        })
+                    ):(
+                        null
+                    )
+                }
+                <hr style={{width:"270px", marginLeft:"-14px"}}></hr>
+                <React.Fragment>
                 {/* <Typography id="range-slider" gutterBottom>
                     Select Price Range:
                 </Typography> */}
-                
+                <h4 style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Price</h4>
+                <br></br>
                 <Slider
                     defaultValue={[parseInt(min),parseInt(max)]}
                     onChange={rangeSelector}
@@ -881,13 +755,14 @@ function TestFilterProducts(){
                 //     }}
                 //   />
                 }
-                <br></br><br></br>
+                <hr style={{width:"270px", marginLeft:"-14px"}}></hr>
+                
                 {/* <h4>Filters</h4> */}
                 {
                     (isFiltersFetched)?(
                         keySet.map((index,pos)=>{
                             return(
-                                <div >
+                                <>
                                     
                                     <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
                                     <Accordion.Item eventKey={pos}>
@@ -915,20 +790,31 @@ function TestFilterProducts(){
                                     </Accordion.Body>
                                     </Accordion.Item>
                                     </Accordion>
-                                    <hr></hr>
-                                </div>
+                                    <hr style={{width:"270px", marginLeft:"-14px"}}></hr>
+                                </>
                             )
                         })
                     ):(
                         null
                     )
                 }
+                {/* </Container> */}
             </Col>
-            <Col md={10}>
+            
+            <Col md={9} style={{border: "2px solid black", marginLeft:"1%", marginTop:"2.5%"}}>
+                
             {
                 // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
                 <Row className="filterproductsRow">
-                    <Col>
+                        <Col md={3}>
+                            <p className="selectedcat">{localStorage.getItem("Category")}</p>
+                        </Col>
+                        <Col md={3}>
+                        
+                        <p className="products">(Showing - <b>{selectedProducts.length}</b> Products Found)</p>
+                        </Col> 
+                    <Col md={4}></Col>
+                    <Col md={2}>
                         <NavDropdown title="Sort By">
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
@@ -938,116 +824,7 @@ function TestFilterProducts(){
                         </NavDropdown>
                     </Col> 
                     
-                    <Col style={{display:'flex',justifyContent:'end'}}>
-                    <div className="offcavasfilters">
-                        <i class="fa fa-filter fa-3x" aria-hidden="true" onClick={handleShow}></i>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch
-      </Button> */}
-
-      <Offcanvas show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Filters<br></br><b>{selectedProducts.length}</b> Products Found</Offcanvas.Title>
-          
-
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-        {/* <Col md={2} className="filtercol"> */}
-                <h5>Category</h5>
-                {
-                    (isCategoriesFetched)?(
-                        categories.map(cat=>{
-                            return(
-                                <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
-                            )
-                        })
-                    ):(
-                        null
-                    )
-                }
-                <hr></hr><br></br>
-                <React.Fragment>
-                {/* <Typography id="range-slider" gutterBottom>
-                    Select Price Range:
-                </Typography> */}
-                
-                <Slider
-                    defaultValue={[parseInt(min),parseInt(max)]}
-                    onChange={rangeSelector}
-                    valueLabelDisplay="on"
-                    min={parseInt(min)}
-                    max={parseInt(max)}
-                />
-                </React.Fragment>
-                {/* Your range of Price is between {value[0]} /- and {value[1]} /- */}
-
-                
-                {
-                //     <MultiRangeSlider
-                //     min={0}
-                //     max={100}
-                //     step={5}
-                //     ruler={true}
-                //     label={true}
-                //     preventWheel={false}
-                //     minValue={minValue}
-                //     maxValue={maxValue}
-                //     onInput={(e) => {
-                //       handleInput(e);
-                //     }}
-                //   />
-                }
-                <br></br><br></br>
-                {/* <h4>Filters</h4> */}
-                {
-                    (isFiltersFetched)?(
-                        keySet.map((index,pos)=>{
-                            return(
-                                <div >
-                                    
-                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
-                                    <Accordion.Item eventKey={pos}>
-                                                    <Accordion.Header>{index}</Accordion.Header>
-                                                    <Accordion.Body>
-                                                                    
-                                    {/* <h5>{index}</h5> */}
-                                    {
-                                        filters[index].map(f=>{
-                                            // console.log("i"+index+" f"+f)
-                                            
-                                            return(
-                                                <>
-                                                
-                                                    <Form>
-                                                        <Form.Check style={{fontSize:'18px',fontWeight:'600'}} type="checkbox" id={f+f} value={f}  label={f}     defaultChecked={(vals.includes(f))?(true):(false)} onChange={()=>handleFormCheck2(index,f)} />
-                                                    </Form>
-                                                     
-                                                </>
-                                                
-                                                
-                                            )
-                                        
-                                            
-                                        })
-                                    }
-                                    </Accordion.Body>
-                                    </Accordion.Item>
-                                    </Accordion>
-                                    <hr></hr>
-                                </div>
-                            )
-                        })
-                    ):(
-                        null
-                    )
-                }
-            {/* </Col> */}
-        </Offcanvas.Body>
-      </Offcanvas>
-    </div>
-
-                    <p className="products"><b>{selectedProducts.length}</b> Products Found</p>
-                    </Col> 
+                    
                 
                     
                     
@@ -1093,7 +870,7 @@ function TestFilterProducts(){
             </div>
             </div> */}
                                         <Col md={2} className="imagecol">
-                                            <Image thumbnail="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            <Image thumbnail="true" style={{cursor:"pointer"}} className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
                                             {/* <br></br>
                                             <p>{index.modelNumber}</p> */}
                                         </Col>
@@ -1101,7 +878,7 @@ function TestFilterProducts(){
                                         <Col md={7} >
                                             <Row className="innerrow">
                                                 
-                                                    <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
+                                                    <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer', fontSize:"18px", fontWeight:500, fontFamily:"Roboto", lineHeight:"21px", letterSpacing:"0.01em" }}>{index.productName}</h4>
                                                 
                                                 {/* <Col md={1} >
                                                     {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
@@ -1133,7 +910,7 @@ function TestFilterProducts(){
                                                         (index.productHighlights!=null)?(
                                                             index.productHighlights.split(';').map(highlight => {
                                                                 return (
-                                                                    <h6 style={{color:'GrayText'}}>• {highlight}<br></br></h6>
+                                                                    <h6 style={{color:'rgba(33, 33, 33, 0.7)', fontSize:"13px", fontWeight:400, fontFamily:"Roboto", lineHeight:"10px", letterSpacing:"0.02em"}}>• {highlight}<br></br></h6>
                                                                 );
                                                             })
                                                         ):(
@@ -1167,7 +944,10 @@ function TestFilterProducts(){
                                                         (index.offerPrice==null) ? (
                                                             <h4>MRP: <b>₹{index.productPrice}</b></h4>
                                                         ) : (
-                                                            <><h5>MSP: <b style={{ color: "#ed1c24" }}>₹{index.offerPrice}</b> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5></>
+                                                            <>
+                                                            <h5 style={{fontSize:"22px", fontWeight:500, fontFamily:"Roboto", lineHeight:"26px"}}><b style={{color:"#C10000"}}>MSP:</b> <b style={{ color: "#ed1c24" }}>₹{index.offerPrice}</b> </h5>
+                                                            <p style={{color:"#565959"}}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></p>
+                                                            </>
                                                         )
                                                     }
                                                 </Col>
@@ -1175,11 +955,15 @@ function TestFilterProducts(){
                                             <Row className="checkboxx">
                                                 <Form className="check">
 
-                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+                                                    <Form.Check style={{fontSize:"16px"}} defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+
+
+                                                    {/* <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/> */}
 
                                                     {/* <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/> */}
 
                                                     {/* <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/> */}
+
 
 
                                                 </Form>
@@ -1187,17 +971,19 @@ function TestFilterProducts(){
                                             <br></br>
 
                                             <Row className="btnrow">
-                                            <Col>
+                                            {/* <Col>
                                                 <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button>
-                                            </Col>   
+                                            </Col>    */}
                                             <Col>
-                                                <Button className="filterproductBtn" variant="outline-primary">Add to wishlist</Button>
+                                                <Button className="filterproductBtn" variant="outline-primary" onClick={() => WishlistHandler(index)}>Add to wishlist</Button>
+                                                
                                             </Col>                                                                                                                  
                                             </Row>
 
                                             <Row className="btnrow2">
-                                            <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button>
-                                            <Button className="filterproductBtn" variant="outline-primary" onClick={()=>WishlistHandler(index)}>Add to wishlist</Button>
+                                            {/* <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button> */}
+                                            <Button className="filterproductBtn" variant="outline-primary" onClick={() => WishlistHandler(index)}>Add to wishlist</Button>
+                                            {/* variant="outline-primary" */}
 
                                             </Row>
                                              
@@ -1221,6 +1007,7 @@ function TestFilterProducts(){
                 }
             </Col>
         </Row>
+        
         </>
 
         
