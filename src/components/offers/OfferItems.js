@@ -361,9 +361,44 @@ function OfferItems() {
             if(flag){
                 arr.push(index+"-"+f);
             }
-            SetFilterSelected(arr);
+
+
+
+            // SetFilterSelected(arr);
+
             console.log("arr",arr);
             SetFilterSelected([...arr]);
+
+            var productsArray = [];
+            // console.log("products",products)
+            console.log("filterSelected",filterselected);
+            products.map(index=>{
+                var flag = true;
+                filterselected.map(a=>{
+                    var pair = a.split("-");
+                    // console.log("pair",pair)
+                    var key = pair[0];
+                    var values = pair[1].split(";");
+                    console.log("values",values)
+                    var valueflag= false;
+                    values.map(v=>{
+                        console.log(index.filtercriterias[key])
+                        if(index.filtercriterias[key].includes(v) ){
+                            valueflag=true;  
+                        }
+                    })
+                    if(!valueflag){
+                        flag = false;
+                    }
+                })
+                if(flag && index.category===localStorage.getItem("CategoryOffers")){
+                    productsArray.push(index);
+                }
+            })
+            // console.log("Products Array",productsArray.length);
+            
+            setFilterProducts(productsArray);
+
         }else{
             console.log("Uncheck")
             // var arr = filterselected;
@@ -391,6 +426,35 @@ function OfferItems() {
             console.log("Arr",arr)
             SetFilterSelected([...arr])
             
+            var productsArray = [];
+            console.log("products",products)
+            console.log("filterSelected",filterselected);
+            products.map(index=>{
+                var flag = true;
+                filterselected.map(a=>{
+                    var pair = a.split("-");
+                    // console.log("pair",pair)
+                    var key = pair[0];
+                    var values = pair[1].split(";");
+                    // console.log("values",values)
+                    var valueflag= false;
+                    values.map(v=>{
+                        console.log(index.filtercriterias[key])
+                        if(index.filtercriterias[key]===v && index.category===localStorage.getItem("CategoryOffers")){
+                            valueflag=true;  
+                        }
+                    })
+                    if(!valueflag){
+                        flag = false;
+                    }
+                })
+                if(flag && index.category===localStorage.getItem("CategoryOffers")){
+                    productsArray.push(index);
+                }
+            })
+            console.log("Products Array",productsArray.length);
+            
+            setFilterProducts(productsArray);
         }
         
     }
