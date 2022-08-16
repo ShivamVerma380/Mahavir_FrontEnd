@@ -123,9 +123,9 @@ function CategoryComponent(props) {
       <Container>
 
 
-        <Row>
+        <Row className="additem">
 
-          <Col md={6}>
+          <Col md={{ span: 6, offset: 3 }}>
             {
               show ? <Form>
 
@@ -299,9 +299,9 @@ function AddItem() {
 
 
       <div>
-        <Container>
+        <Container className="additem2">
           <Row>
-            <Col md={6}>
+            <Col md={{ span: 6, offset: 3 }}>
               <select onChange={(e) => handleItemChange(e)}>
                 <option>Choose category...</option>
                 {
@@ -318,7 +318,7 @@ function AddItem() {
               </select>
               <br></br>
               <br></br>
-              <Button variant="flat" size="m" onClick={handleSaveButton}>Save</Button>
+              <center><Button variant="flat" size="m" onClick={handleSaveButton}>Save</Button></center>
             </Col>
           </Row>
         </Container>

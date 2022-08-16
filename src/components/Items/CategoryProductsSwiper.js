@@ -184,11 +184,6 @@ function CategoryProductsSwiper({ cattitle }) {
   }
 
   function WishlistHandler(index) {
-
-    if(getCookie("isLoggedIn")==='true')
-    {
-
-    
     // alert("Item added successfully to wishlist");
     // console.log(index.modelNumber)
     // if (localStorage.getItem("wishlistproduct")==null) {
@@ -252,7 +247,6 @@ function CategoryProductsSwiper({ cattitle }) {
       
     })
   }
-
 
   }
   const firstfourproducts = Products.slice(0, 4);

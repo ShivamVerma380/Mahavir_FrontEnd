@@ -21,7 +21,7 @@ const AllComplaints = () => {
         <div>
 
 
-        <AdminHeader/>
+        {/* <AdminHeader/> */}
         <AdminNavbar/>
         <Container>
         
