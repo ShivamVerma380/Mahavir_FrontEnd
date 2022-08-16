@@ -156,7 +156,7 @@ const UploadExcel = () => {
     <div>
       {/* <AdminHeader/> */}
         <AdminNavbar/>
-        <Container style={{padding:'50px'}}>
+        <Container className="uploadexcel" style={{padding:'50px'}}>
           <Row>
             <Col sm={6}>
             <h5 >Upload Your Products Excel Datasheet here</h5>
