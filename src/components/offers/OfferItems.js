@@ -14,6 +14,7 @@ import Header from "../Header";
 import {setCookie,getCookie} from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
 import url from "../../Uri";
+import { count } from "rsuite/esm/utils/ReactChildren";
 
 function OfferItems() {
     var token=getCookie("jwtToken");
@@ -229,11 +230,125 @@ function OfferItems() {
     }
 
 
+    // const handleFormCheck=(index,f)=>{
+    //     console.log("index:",index,"    f:",f)
+
+    //     var element = document.getElementById(f);
+    //     if(element.checked){
+    //         var  arr= filterselected;
+    //         var flag = true;
+    //         arr.map((i,pos)=>{
+    //             var pair = i.split("-");
+    //             if(index===pair[0]){
+    //                 arr[pos]= index+"-"+pair[1]+";"+f;
+    //                 flag = false;
+    //             }
+    //         })
+    //         if(flag){
+    //             arr.push(index+"-"+f);
+    //         }
+    //         SetFilterSelected(arr);
+    //         var productsArray = [];
+    //         // console.log("products",products)
+    //         console.log("filterSelected",filterselected);
+    //         products.map(index=>{
+    //             var flag = true;
+    //             filterselected.map(a=>{
+    //                 var pair = a.split("-");
+    //                 // console.log("pair",pair)
+    //                 var key = pair[0];
+    //                 var values = pair[1].split(";");
+    //                 console.log("values",values)
+    //                 var valueflag= false;
+    //                 values.map(v=>{
+    //                     console.log(index.filtercriterias[key])
+    //                     if(index.filtercriterias[key].includes(v)){
+    //                         valueflag=true;  
+    //                     }
+    //                 })
+    //                 if(!valueflag){
+    //                     flag = false;
+    //                 }
+    //             })
+    //             if(flag){
+    //                 productsArray.push(index);
+    //             }
+    //         })
+    //         // console.log("Products Array",productsArray.length);
+            
+    //         setFilterProducts(productsArray);
+
+    //     }else{
+    //         console.log("Filter selected",filterselected)
+    //         var arr = filterselected;
+    //         arr.map((i,pos)=>{
+    //             var pair = i.split("-");
+    //             if(index===pair[0]){
+    //                 var values= pair[1].split(";");
+    //                 if(values.length==1){
+    //                     arr.splice(pos,1);
+    //                 }
+    //                 else{
+    //                     var str=index+"-";
+    //                     values.map(v=>{
+    //                         if(v!==f){
+    //                             str+=v+";";
+    //                         }
+    //                     })
+    //                     str= str.slice(0,str.length-1);
+    //                     arr[pos]=str;
+
+    //                 }
+    //             }
+    //         })
+
+    //         console.log("Array:",arr)
+
+    //         // if(arr.length==0){
+    //         //     console.log("In if")
+    //         //     // localStorage.removeItem("SubCategory");
+    //         //     // localStorage.removeItem("SubSubCategory");
+    //         //     // window.location.reload();
+    //         // }
+    //         SetFilterSelected(arr);
+    //         var productsArray = [];
+    //         console.log("products",products)
+    //         console.log("filterSelected",filterselected);
+    //         products.map(index=>{
+    //             var flag = true;
+    //             filterselected.map(a=>{
+    //                 var pair = a.split("-");
+    //                 // console.log("pair",pair)
+    //                 var key = pair[0];
+    //                 var values = pair[1].split(";");
+    //                 // console.log("values",values)
+    //                 var valueflag= false;
+    //                 values.map(v=>{
+    //                     console.log(index.filtercriterias[key])
+    //                     if(index.filtercriterias[key]===v){
+    //                         valueflag=true;  
+    //                     }
+    //                 })
+    //                 if(!valueflag){
+    //                     flag = false;
+    //                 }
+    //             })
+    //             if(flag){
+    //                 productsArray.push(index);
+    //             }
+    //         })
+    //         console.log("Products Array",productsArray.length);
+            
+    //         setFilterProducts(productsArray);
+    //     }
+    // }
     const handleFormCheck=(index,f)=>{
         console.log("index:",index,"    f:",f)
 
         var element = document.getElementById(f);
+
         if(element.checked){
+            console.log("Check")
             var  arr= filterselected;
             var flag = true;
             arr.map((i,pos)=>{
@@ -247,38 +362,11 @@ function OfferItems() {
                 arr.push(index+"-"+f);
             }
             SetFilterSelected(arr);
-            var productsArray = [];
-            // console.log("products",products)
-            console.log("filterSelected",filterselected);
-            products.map(index=>{
-                var flag = true;
-                filterselected.map(a=>{
-                    var pair = a.split("-");
-                    // console.log("pair",pair)
-                    var key = pair[0];
-                    var values = pair[1].split(";");
-                    console.log("values",values)
-                    var valueflag= false;
-                    values.map(v=>{
-                        console.log(index.filtercriterias[key])
-                        if(index.filtercriterias[key].includes(v)){
-                            valueflag=true;  
-                        }
-                    })
-                    if(!valueflag){
-                        flag = false;
-                    }
-                })
-                if(flag){
-                    productsArray.push(index);
-                }
-            })
-            // console.log("Products Array",productsArray.length);
-            
-            setFilterProducts(productsArray);
-
+            console.log("arr",arr);
+            SetFilterSelected([...arr]);
         }else{
-            console.log("Filter selected",filterselected)
+            console.log("Uncheck")
+            // var arr = filterselected;
             var arr = filterselected;
             arr.map((i,pos)=>{
                 var pair = i.split("-");
@@ -299,47 +387,12 @@ function OfferItems() {
 
                     }
                 }
-            })
-
-            console.log("Array:",arr)
-
-            // if(arr.length==0){
-            //     console.log("In if")
-            //     // localStorage.removeItem("SubCategory");
-            //     // localStorage.removeItem("SubSubCategory");
-            //     // window.location.reload();
-            // }
-            SetFilterSelected(arr);
-            var productsArray = [];
-            console.log("products",products)
-            console.log("filterSelected",filterselected);
-            products.map(index=>{
-                var flag = true;
-                filterselected.map(a=>{
-                    var pair = a.split("-");
-                    // console.log("pair",pair)
-                    var key = pair[0];
-                    var values = pair[1].split(";");
-                    // console.log("values",values)
-                    var valueflag= false;
-                    values.map(v=>{
-                        console.log(index.filtercriterias[key])
-                        if(index.filtercriterias[key]===v){
-                            valueflag=true;  
-                        }
-                    })
-                    if(!valueflag){
-                        flag = false;
-                    }
                 })
-                if(flag){
-                    productsArray.push(index);
-                }
-            })
-            console.log("Products Array",productsArray.length);
+            console.log("Arr",arr)
+            SetFilterSelected([...arr])
             
-            setFilterProducts(productsArray);
         }
+        
     }
 
     return (
@@ -369,7 +422,7 @@ function OfferItems() {
                                 {
                                     filters[index].map(f=>{
                                         return(
-                                            <Form.Check type="checkbox" label={f} onChange={()=>handleFormCheck(index,f)}/>
+                                            <Form.Check type="checkbox" id={f} label={f} onChange={()=>handleFormCheck(index,f)}/>
                                         )
                                     })
                                 }
