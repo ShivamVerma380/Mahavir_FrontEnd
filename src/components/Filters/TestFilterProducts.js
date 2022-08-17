@@ -1087,7 +1087,8 @@ function TestFilterProducts(){
                                                         (index.offerPrice==null) ? (
                                                             <h4 style={{fontSize:'24px'}}>MRP: <b>₹{index.productPrice}</b></h4>
                                                         ) : (
-                                                            <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><p style={{fontSize:'24px',color:'#c10000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</p> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5></>
+                                                            <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><b style={{fontSize:'24px',color:'#FA0000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</b><br></br>
+                                                            <b style={{fontWeight:500,fontSize:"18px",color:"#565959" }}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",fontWeight:500,fontSize:"18px",color:"#565959"}}>₹{index.productPrice}  </b></b>  <b style={{color:"green",fontSize:"18px",marginLeft:"10px"}}>  {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h5></>
                                                         )
                                                     }
                                                 </Col>
@@ -1102,10 +1103,11 @@ function TestFilterProducts(){
                                             </Row>
                                             <br></br>
 
-                                            <Row className="btnrow">
+                                            <Row >
+                                                {/* className="btnrow" */}
                                             
                                             
-                                            <Button className="filterproductBtn" variant="outline-primary">Add to wishlist</Button>
+                                                 <Button className="filterproductBtn" variant="outline-primary" >Add to wishlist</Button>
 
                                             </Row>
                                              
