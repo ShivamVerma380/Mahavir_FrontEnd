@@ -308,7 +308,7 @@ function CategoryProducts(){
       (
         <>
 <Header/>
-        <div style={{marginLeft:'2%',marginRight:'2%'}} >
+        <div >
           
           {
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
