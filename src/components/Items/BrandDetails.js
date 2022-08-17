@@ -17,6 +17,7 @@ import {useRef} from 'react';
 import { white } from "material-ui/styles/colors";
 import { fullWhite } from "material-ui/styles/colors";
 import url from "../../Uri";
+import Footer from "../Footer/Footer";
 
 
 
@@ -286,7 +287,8 @@ function BrandDetails() {
 
                 </Swiper>
             </Row>
-
+                    <br></br>
+                    <br></br>
             {
                 parsedArr.map(index => {
                     return (
@@ -295,11 +297,11 @@ function BrandDetails() {
                                 <Row>
 
                                 
-                                    <Col md={3}>
+                                    <Col md={4}>
                                     <h3 className="brand_feature_product_cat_title" id={index.category} >{index.category}</h3>
                                     
                                     </Col>
-                                    <Col md={7}>
+                                    <Col md={6}>
                                     
                                     </Col>
                                     <Col md={2}>
@@ -478,11 +480,13 @@ function BrandDetails() {
 
 
 
-
+            <br></br>
+            
             <Row>
                 <center><h3 className="brand_feature_category" >Featured Videos</h3></center>
 
-
+                <br></br>
+                <br></br>
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={5}
@@ -521,7 +525,7 @@ function BrandDetails() {
                 </Swiper>
 
             </Row>
-
+            <Footer/>
 
         </div>
 

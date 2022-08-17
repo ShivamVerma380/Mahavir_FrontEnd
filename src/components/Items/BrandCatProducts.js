@@ -42,7 +42,7 @@ const BrandCatProducts = () => {
 
 
     const navigate = useNavigate();
-    var models = localStorage.getItem("models").split(',');
+    //var models = localStorage.getItem("models").split(',');
 
 
 
@@ -52,7 +52,7 @@ const BrandCatProducts = () => {
         if (!areProductsFetched && !isCategoriesFetched) {
 
 
-            axios.get(url+"/"+ localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")).then(
+            axios.get(url+"/excel/shopByBrands/"+ localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")).then(
                 function (response) {
                     if (response.status == 200) {
                         console.log("Response",response.data);
