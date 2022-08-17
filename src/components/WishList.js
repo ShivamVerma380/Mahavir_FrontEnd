@@ -183,8 +183,8 @@ const RemoveFromWishListviaIcon=(event)=>{
     <>
     <Header/>
     
-    <Container style={{width:'65%'}}>
-    <h1 style={{color:"rgb(255,98,98)",margin:'2%',padding:'2%'}}><i>My WishList</i></h1>
+    <Container >
+    <h1><i>My WishList</i></h1>
       {
         (isProductFetched) ? (
 

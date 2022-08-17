@@ -1,0 +1,165 @@
+.wishlist_container{
+    width:80%;
+    margin-top:145px;
+
+}
+
+.wishlist_heading{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 28px;
+
+color: #0F1111;
+
+}
+
+.wishlist_product_card{
+    border: 1px solid #E2E2E2;
+}
+
+.wishlist_product_title{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+letter-spacing: 0.02em;
+
+color: #000000;
+
+}
+
+.wishlist_offerprice{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+/* identical to box height */
+
+
+color: #FA0000;
+}
+
+.wishlist_productprice{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+
+color: rgba(45, 45, 45, 0.8);
+text-decoration: line-through;
+}
+
+.wishlist_discount{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+/* identical to box height */
+
+
+color: #FA0000;
+}
+.wishlist_lastcol .btn{
+    margin-bottom: 10px;
+    width: 135px;
+    height: 35px;
+    background: rgb(193, 0, 0);
+    border: none;
+    font-size: 14px;
+}
+@media screen and (min-width:320px) and (max-width:576px){
+    /* mobile  */
+
+    .wishlist_lastcol{
+        padding: 2%;
+        display: flex;
+        justify-content: center;
+    }
+    .wishlist_lastcol .btn{
+        margin-left: 20px;
+        margin-right: 20px;
+        width: auto;
+    }
+}
+
+/* ipads and tablets */
+@media screen and (min-width: 577px) and (max-width:768px)
+{
+   
+    .wishlist_lastcol .btn{
+        font-size: 10px;
+        height: 25px;
+    }
+    .wishlist_container{
+        width:90%;
+        margin-top:145px;
+    
+    }
+    
+    .wishlist_heading{
+    font-size: 22px;
+    
+    }
+    
+    
+    .wishlist_product_title{
+    font-size: 12px;
+    }
+    
+    .wishlist_offerprice{
+    font-size: 12px;
+    }
+    
+    .wishlist_productprice{
+    font-size: 10px;
+    }
+    
+    .wishlist_discount{
+    font-size: 12px;
+    }
+}
+
+/* laplops and small screens */
+@media screen and (min-width: 769px) and (max-width:1024px)
+{
+
+   
+    .wishlist_lastcol .btn{
+        font-size: 12px;
+        margin-right: 10px;
+        height: 30px;
+    }
+    .wishlist_container{
+        width:90%;
+        margin-top:145px;
+    
+    }
+    
+    .wishlist_heading{
+    font-size: 22px;
+    
+    }
+    
+    
+    .wishlist_product_title{
+    font-size: 16px;
+    }
+    
+    .wishlist_offerprice{
+    font-size: 14px;
+    }
+    
+    .wishlist_productprice{
+    font-size: 12px;
+    }
+    
+    .wishlist_discount{
+    font-size: 14px;
+    }
+}
+/* desktop and large screens */
+@media screen and (min-width: 1025px) and (max-width:1200px)
+{
+    
+}

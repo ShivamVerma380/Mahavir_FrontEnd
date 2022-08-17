@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Row, Col, Button, Container } from "react-bootstrap";
+import { Row, Col, Button, Container ,Image} from "react-bootstrap";
 import * as AiIcons from 'react-icons/ai';
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import {getCookie, setCookie} from "./Cookies";
 import Footer from "./Footer/Footer";
 import url from "../Uri";
-
+import './Wishlist.css';
 
 const WishlistProducts = () => {
   
@@ -201,7 +201,7 @@ const WishlistProducts = () => {
     <div>
       <Header />
 
-      <Container style={{ width: '80%'}}>
+      <Container className="wishlist_container">
         
         
         {
@@ -209,44 +209,42 @@ const WishlistProducts = () => {
 
             (wish.length>0) ? (
               <>
-              <h1 style={{ color: "black", marginTop:"30px", marginBottom:"30px", fontFamily:"typeface-roboto", fontSize:"26px", fontWeight:600 }}>My Wishlist</h1>
-              <Container style={{background:"white",paddingTop:"10px", paddingBottom:"10px",border: "2px solid #E2E2E2", borderRadius: '5px', marginBottom:"30px"}}>
+              <h1 className="wishlist_heading">My Wishlist</h1>
+              <Container >
               {
               wish.map(index => {
                 return (
-                  
-                    <Col md={12}>
-                  <Row style={{margin:"20px", border: "2px solid #E2E2E2", borderRadius: '5px'}}>
+                  <Row className="wishlist_product_card">
                     {/* style={{ margin: '2%', padding: '2%' }} , boxShadow: ' 0 2px 10px #bdbdbd' */}
                     
-                    <Col sm={2}>
-                      <img onClick={() => callProductDetails(index)} src={index.productImage1} style={{ width: '180px', height: '120px',marginTop:"25px", cursor:"pointer" }}></img>
+                    <Col sm={2} style={{padding:'1%'}}>
+                      <Image fluid='true' onClick={() => callProductDetails(index)} src={index.productImage1} style={{cursor:"pointer" }}></Image>
                     </Col>
-                    <Col style={{ marginTop: '2%' }} sm={8} >
-                    <h5 style={{marginLeft:"15px",letterSpacing: "0.02em",lineHeight:"19px",fontWeight: 500,color: "#000000",fontSize:"20px",marginTop:"34px",fontFamily:"typeface-roboto"}}>{index.productName}</h5>
+                    <Col style={{ display:'flex',alignItems:'center' }} sm={8} >
                       {/* <br></br>
                       <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5> */}
-                      <br></br>
+                   
                     <Row>
+                    <h5 className="wishlist_product_title">{index.productName}</h5>
+
                     {
                                                   (index.productPrice === index.offerPrice) ? (<h4>₹ {index.productPrice}</h4>) : (
-                                                      <h4 style={{marginLeft:"15px",marginTop:"-15px"}}><b style={{ marginRight: "20px", color: "#C10000" , fontSize:"20px"}}>₹{index.offerPrice}</b><b style={{ color:"rgba(45, 45, 45, 0.8)",textDecorationLine: "line-through",fontSize:"16px", textDecorationStyle: "solid" }}>₹ {index.productPrice}</b> <b style={{color:"#C10000",fontSize:"15px",lineHeight:"15px",marginLeft:"8px"}}>{Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4>
+                                                      <h4><b className="wishlist_offerprice" >₹{index.offerPrice} </b><b className="wishlist_productprice">₹ {index.productPrice}</b> <b className="wishlist_discount">{Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4>
                                                   )
                                               }
                     </Row>
                     </Col>
   
-                    <Col style={{ padding: '3%' }} sm={2} >
+                    <Col className="wishlist_lastcol" style={{ padding: '2%' }} sm={2} >
                       <Row>
-                        <Button  size="1" name={index.modelNumber} onClick={() => RemoveFromWishList(index.modelNumber)} style={{ marginBottom: '10px', width: 150, height: 50, background:"#C10000", border:"none" }}>Remove</Button>
+                        <Button  size="1" name={index.modelNumber} onClick={() => RemoveFromWishList(index.modelNumber)} >Remove</Button>
                       </Row>
                       <Row>
-                        <Button  size="1" style={{ width: 150, height: 50, background:"#C10000", border:"none" }} onClick={()=>AddToCart(index)}>Add To Cart</Button>
+                        <Button  size="1"  onClick={()=>AddToCart(index)}>Add To Cart</Button>
                       </Row>
   
                     </Col>
                   </Row>
-                  </Col>
                   
                 );
               })
