@@ -1,51 +1,74 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
-import { Col,Row,Button ,Form,Card, Container, Image, NavDropdown} from "react-bootstrap";
-import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart, AiFillStar } from "react-icons/ai";
+import { Col, Row, Button, Form, Card, Container ,Image, NavDropdown,Accordion,Offcanvas,Navbar } from "react-bootstrap";
+
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import {setCookie,getCookie} from '../Cookies';
-import Header from "../Header";
-import {FaArrowCircleUp} from 'react-icons/fa';
+import { ToastContainer, toast } from 'react-toastify';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import Box from '@mui/material/Box';
+import { sortBy } from "underscore";
+import { AiFillStar } from "react-icons/ai";
+import "../Filters/FilterProducts.css"
+import {FaArrowCircleUp} from 'react-icons/fa';
+import { Dropdown } from "reactstrap";
 import url from "../../Uri";
 
-const BrandCatProducts = () => {
+
+function BrandCatProducts(){
     var comparemodels=getCookie("addToCompare").split(',');
+    var category = localStorage.getItem("Category");
+    const navigate = useNavigate();
+    var token=getCookie("jwtToken");
+    // console.log("min",min,"  max",max);
+
     var cart=getCookie("CartModels").split(',');
+    //To save selected products
+    const[selectedProducts,SetSelectedProducts] = useState([]);
+    const[isSelectedProductsFetched,SetIsSelectedProductsFetched] = useState(false);
+
+    const[showTopBtn,setShowTopBtn] = useState(false);
 
     const [visible, setVisible] = useState(false)
 
-    const [min,SetMin] = useState(0);
-    const [max,SetMax] = useState(100);
+    const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
 
-    const [value,SetValue] = useState([]);
+    //To save all products
+    const[products,setProducts] = useState([]);
+    const[isProductsFetched,SetIsProductsFetched] = useState(false);
 
+    
+    
+
+    //For Add To Compare
+    const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
+    const [change, setChange] = useState(0);
+
+    const [categories,SetCategories] = useState([]);
+    const [isCategoriesFetched,SetIsCategoriesFetched] = useState(false); 
+
+
+    //For  filter criterias
     const [filters, SetFilters] = useState();
     const [isFiltersFetched, SetIsFiltersFetched] = useState(false);
 
     const [keySet, setKeyState] = useState([]); //To Store filters name
 
-    const [categories,SetCategories] = useState([]);
-    const [isCategoriesFetched,SetIsCategoriesFetched] = useState(false);
-
-    const [products, setProducts] = useState([]);
-    const [areProductsFetched, SetAreProductsFetched] = useState(false);
-    
-
-    const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
-    const [change, setChange] = useState(0);
-
-    const[showTopBtn,setShowTopBtn] = useState(false);
-
     const[filterselected,SetFilterSelected] = useState([])
 
+    const[areProductsFetched,SetAreProductsFetched]=useState(false);
+    
+    // if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
+    //     filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
+    // }
+    
 
-    const navigate = useNavigate();
-    //var models = localStorage.getItem("models").split(',');
+    const [min,SetMin] = useState(0);
+    const [max,SetMax] = useState(100);
 
-
-
+    const [value,SetValue] = useState([]);
 
     useEffect(() => {
         window.addEventListener('scroll', () => { if (window.scrollY > 400) { setShowTopBtn(true); } else { setShowTopBtn(false); } });
@@ -149,130 +172,132 @@ const BrandCatProducts = () => {
         }
     })
 
-    function WishlistHandler(index) {
-        // alert("Item added successfully to wishlist");
-        console.log(index.modelNumber)
-        if (localStorage.getItem("wishlistproduct")==null) {
-          localStorage.setItem("wishlistproduct",index.modelNumber)
-        }else {
-          var arr = localStorage.getItem("wishlistproduct").split(',')
-          var flag = true;
-          arr.map(i=>{
-           
-            console.log("i: ",i)
-            if( i=== index.modelNumber) {
-                arr.splice(arr.indexOf(i),1)
-                localStorage.setItem("wishlistproduct",arr)
-                console.log('del arr: ' + arr)
-                console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
-               console.log("in if")
-              flag = false;
-            } 
-          }) 
-        //   if(flag)
-        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
-        //     navigate('/')
+    // const addtocart = (model) => {
+    //     var flag = false;
+    //     cart.map(index=>{
+    //       if(index!=""){
+    //         if(index.split("=")[0]===model){
+    //           flag = true;
+    //           alert("Item is already present in cart")
+    //         }
+    //       }
+    //     })
+    //     // if (cart.has(model+"=1")) {
+    //     //   alert("Item is already present in cart")
+    //     // }
+    //     if(!flag){
+    //       console.log("adddd" + model);
+    //       cart.push(model+"=1");
+    //       setCookie("CartModels", cart, 20);
+    //       console.log("Cart Models",cart)
+    //       navigate("/cart")
+    //       // alert("Added to cart" + model);
+    //     }
+    //   }
+
+    function handleAddToCompare(modelNumber){
+        
+        var element = document.getElementById(modelNumber);
+        
+        if(element.checked){
+          
+          
+            console.log("adddd"+modelNumber);
+            comparemodels.push(modelNumber);
+            setCookie("addToCompare",comparemodels,20);
+            setLen(getCookie("addToCompare").split(',').length)
+          console.log(comparemodels);
+          console.log("checked "+modelNumber);
+            
+            
+        
           
         }
-        
-      }
+        else {
+          for (var i = 0; i < comparemodels.length; i++) {
+            if (comparemodels[i] === modelNumber) {
+              comparemodels.splice(i, 1);
+                console.log(comparemodels);
+                setCookie("addToCompare",comparemodels,20);
+                setLen(getCookie("addToCompare").split(',').length)
+                // window.location.reload();
+                break;
+            }
+        }
+          console.log("unchecked "+modelNumber);
 
-      function callProductDetails(index){
+        }
+        // if (event.target.checked) {
+  
+        //   console.log('✅ Checkbox is checked');
+        //   setChange(change+1)
+          
+          
+          
+        // } else {
+        //   console.log('⛔️ Checkbox is NOT checked');
+        //   setChange(change-1)
+        // }
+        // setisAddCompareClicked(current => !current);
+        // // alert("Added To Compare");
+        
+    }
+      
+      localStorage.setItem("comparecount",change)
+      console.log("Get",localStorage.getItem("comparecount"))
+
+    function WishlistHandler(index) {
+       
+
+        console.log("Wishlist clicked")
+
+      
+        var formdata = {
+          "modelNumber": index.modelNumber
+  
+        }
+  
+        axios.post(url+"/wishlist", formdata, {
+          headers: {
+            "Authorization": "Bearer "+token,
+            "Content-Type": "multipart/form-data"
+          }
+        }).then(function (response) {
+          if (response.status == 200) {
+            // console.log("Added to wishlist successfully");
+            toast.success(<b>Added to wishlist successfully</b>)
+            
+            console.log(response.data)
+            // navigate("/");
+          }
+        }).catch(function (error) {
+          if(error.response.status==406) {
+            // alert("Item already present in wishlist")
+            toast.warn(<b>Item already present in Wishlist</b>)
+          }
+          else {
+            console.log("Error", error);
+          }
+          
+        })
+
+    }
+
+
+    function callProductDetails(index) {
         //alert(index);
         // console.log("Index",index);
-        localStorage.setItem("productSelected",index.modelNumber);
+        localStorage.setItem("productId",index.productId);
+        localStorage.setItem("productSelected", index.modelNumber);
+        localStorage.removeItem("SubCategory")
+        localStorage.removeItem("SubSubCategory")
         // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
     }
 
-    const addtocart=(model)=>{
-        
-        // event.preventDefault();
-        
-        if(cart.includes(model)){
-            alert("Item is already present in cart")
-        }
-        else{
-            console.log("adddd"+model);
-            cart.push(model);
-            setCookie("CartModels",cart,20);
-            alert("Added to cart"+model);
-        }
-    
-        // Header.location.reload()
-        
-        
-    }
-
-    function SortByLowPrice(){
-        console.log("in sort function")
-        var arr=[]; 
-        setProducts([]);
-        arr = products;
-        console.log("Before sorting",products)
-        arr.map(index=>{
-            console.log("indexProductPrice",index.productPrice)
-        })
-        arr.sort((a,b)=>a.productPrice-b.productPrice);
-        console.log("After sorting",products)
-        arr.map(index=>{
-            console.log("indexProductPrice--",index.productPrice)
-        })
-        setProducts([...arr])
-    }
-    
-    function SortByHighPrice(){
-        console.log("in sort function")
-        var arr=[]; 
-        setProducts([]);
-        arr = products;
-        console.log("Before sorting",products)
-        arr.map(index=>{
-            console.log("indexProductPrice",index.productPrice)
-        })
-        arr.sort((a,b)=>b.productPrice-a.productPrice);
-        console.log("After sorting",products)
-        arr.map(index=>{
-            console.log("indexProductPrice--",index.productPrice)
-        })
-        setProducts([...arr])
-    }
-
-    function SortByTopRated(){
-        console.log("in sort function")
-        var arr=[]; 
-        setProducts([]);
-        arr = products;
-        console.log("Before sorting",products)
-        arr.map(index=>{
-            console.log("indexAverageRating",index.averageRating)
-        })
-        arr.sort((a,b)=>b.averageRating-a.averageRating);
-        console.log("After sorting",products)
-        arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
-        })
-        setProducts([...arr])
-    }
-
-    function SortByDiscount(){
-        console.log("in sort function")
-        var arr=[]; 
-        setProducts([]);
-        arr = products;
-        console.log("Before sorting",products)
-        arr.map(index=>{
-            console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
-        })
-        arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
-        console.log("After sorting",products)
-        arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
-        })
-        setProducts([...arr])
-    }
 
     function handleCategoryCheck(cat){
+        alert("hi")
         var element = document.getElementById(cat)
         if(element.checked ==true){
             console.log(cat," is checked")
@@ -285,36 +310,65 @@ const BrandCatProducts = () => {
         }
     }
 
-    const rangeSelector = (event, newValue) => {
-        SetValue([parseInt(newValue[0]), parseInt(newValue[1])]);
-        var arr=[];
-        products.map(index=>{
-            var flag = true;
-            filterselected.map(a=>{
-                var pair = a.split("-");
-                console.log("pair",pair)
-                var key = pair[0];
-                var values = pair[1].split(";");
-                console.log("values",values)
-                var valueflag= false;
-                values.map(v=>{
-                    console.log(index.filtercriterias[key])
-                    if(index.filtercriterias[key].includes(v)){
-                        valueflag=true;  
-                    }
-                })
-                if(!valueflag){
-                    flag = false;
-                }
-            })
-            if(flag && index.productPrice>=parseInt(newValue[0]) && index.productPrice<=parseInt(newValue[1])){
-                arr.push(index);
+    function WishlistHandler(index) {
+        // alert("Item added successfully to wishlist");
+        // console.log(index.modelNumber)
+        // if (localStorage.getItem("wishlistproduct")==null) {
+        //   localStorage.setItem("wishlistproduct",index.modelNumber)
+        // }else {
+        //   var arr = localStorage.getItem("wishlistproduct").split(',')
+        //   var flag = true;
+        //   arr.map(i=>{
+           
+        //     console.log("i: ",i)
+        //     if( i=== index.modelNumber) {
+        //         arr.splice(arr.indexOf(i),1)
+        //         localStorage.setItem("wishlistproduct",arr)
+        //         console.log('del arr: ' + arr)
+        //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+        //        console.log("in if")
+        //       flag = false;
+        //     } 
+        //   }) 
+        //   if(flag)
+        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        //     navigate('/')
+          
+        // }
+  
+        console.log("Wishlist clicked")
+  
+        
+          var formdata = {
+            "modelNumber": index.modelNumber
+    
+          }
+    
+          axios.post(url+"/wishlist", formdata, {
+            headers: {
+              "Authorization": "Bearer "+token,
+              "Content-Type": "multipart/form-data"
             }
-        })
-        setProducts(arr)
-
-        console.log(newValue)
-    };
+          }).then(function (response) {
+            if (response.status == 200) {
+              toast.success(<b>Added to wishlist successfully</b>)
+              // console.log("Added to wishlist successfully");
+              
+              console.log(response.data)
+              // navigate("/");
+            }
+          }).catch(function (error) {
+            if(error.response.status==406) {
+              toast.warn(<b>Item already present in Wishlist</b>)
+              // alert("Item already present in wishlist")
+            }
+            else {
+              console.log("Error", error);
+            }
+            
+          })
+        
+      }
 
     const handleFormCheck=(index,f)=>{
         console.log("index:",index,"    f:",f)
@@ -362,7 +416,7 @@ const BrandCatProducts = () => {
             })
             // console.log("Products Array",productsArray.length);
             
-            setProducts(productsArray);
+            SetSelectedProducts(productsArray);
 
         }else{
             console.log("Filter selected",filterselected)
@@ -425,62 +479,111 @@ const BrandCatProducts = () => {
             })
             console.log("Products Array",productsArray.length);
             
-            setProducts(productsArray);
+            SetSelectedProducts(productsArray);
         }
     }
 
-    function handleAddToCompare(modelNumber){
-        
-        var element = document.getElementById(modelNumber);
-        
-        if(element.checked){
-          
-          
-            console.log("adddd"+modelNumber);
-            comparemodels.push(modelNumber);
-            setCookie("addToCompare",comparemodels,20);
-            setLen(getCookie("addToCompare").split(',').length)
-          console.log(comparemodels);
-          console.log("checked "+modelNumber);
-            
-            
-        
-          
-        }
-        else {
-          for (var i = 0; i < comparemodels.length; i++) {
-            if (comparemodels[i] === modelNumber) {
-              comparemodels.splice(i, 1);
-                console.log(comparemodels);
-                setCookie("addToCompare",comparemodels,20);
-                setLen(getCookie("addToCompare").split(',').length)
-                // window.location.reload();
-                break;
+    const rangeSelector = (event, newValue) => {
+        SetValue([parseInt(newValue[0]), parseInt(newValue[1])]);
+        var arr=[];
+        products.map(index=>{
+            var flag = true;
+            filterselected.map(a=>{
+                var pair = a.split("-");
+                console.log("pair",pair)
+                var key = pair[0];
+                var values = pair[1].split(";");
+                console.log("values",values)
+                var valueflag= false;
+                values.map(v=>{
+                    console.log(index.filtercriterias[key])
+                    if(index.filtercriterias[key].includes(v)){
+                        valueflag=true;  
+                    }
+                })
+                if(!valueflag){
+                    flag = false;
+                }
+            })
+            if(flag && index.offerPrice>=parseInt(newValue[0]) && index.offerPrice<=parseInt(newValue[1])){
+                arr.push(index);
             }
-        }
-          console.log("unchecked "+modelNumber);
+        })
+        SetSelectedProducts(arr)
 
-        }
-        // if (event.target.checked) {
+        console.log(newValue)
+    };
+    
   
-        //   console.log('✅ Checkbox is checked');
-        //   setChange(change+1)
-          
-          
-          
-        // } else {
-        //   console.log('⛔️ Checkbox is NOT checked');
-        //   setChange(change-1)
-        // }
-        // setisAddCompareClicked(current => !current);
-        // // alert("Added To Compare");
-        
+    function SortByLowPrice(){
+        console.log("in sort function")
+        var arr=[]; 
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexOfferPrice",index.offerPrice)
+        })
+        arr.sort((a,b)=>a.offerPrice-b.offerPrice);
+        console.log("After sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexOfferPrice--",index.offerPrice)
+        })
+        SetSelectedProducts([...arr])
     }
-      
-      localStorage.setItem("comparecount",change)
-      console.log("Get",localStorage.getItem("comparecount"))
+    
+    function SortByHighPrice(){
+        console.log("in sort function")
+        var arr=[]; 
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexOfferPrice",index.offerPrice)
+        })
+        arr.sort((a,b)=>b.offerPrice-a.offerPrice);
+        console.log("After sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexOfferPrice--",index.offerPrice)
+        })
+        SetSelectedProducts([...arr])
+    }
 
-      const toggleVisible = () => {
+    function SortByTopRated(){
+        console.log("in sort function")
+        var arr=[]; 
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating",index.averageRating)
+        })
+        arr.sort((a,b)=>b.averageRating-a.averageRating);
+        console.log("After sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating--",index.averageRating)
+        })
+        SetSelectedProducts([...arr])
+    }
+
+    function SortByDiscount(){
+        console.log("in sort function")
+        var arr=[]; 
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
+        })
+        arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
+        console.log("After sorting",selectedProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating--",index.averageRating)
+        })
+        SetSelectedProducts([...arr])
+    }
+
+    const toggleVisible = () => {
         const scrolled = document.documentElement.scrollTop;
         if (scrolled > 300){
           setVisible(true)
@@ -490,7 +593,7 @@ const BrandCatProducts = () => {
         }
       };
 
-      const scrollToTop = () =>{
+    const scrollToTop = () =>{
         window.scrollTo({
           top: 0, 
           behavior: 'smooth'
@@ -501,70 +604,150 @@ const BrandCatProducts = () => {
       
       window.addEventListener('scroll', toggleVisible);
 
-    return (
-        <body style={{background:"whitesmoke"}}>
-        <div>
-            <Header/>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-             {
-          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
-          
-          }
-          {
-            (showTopBtn)?(
-                <Button className="scrolltopbtn">
-            <FaArrowCircleUp onClick={scrollToTop} 
-             />
-        </Button>
-            ):(null)
-          }
-        
-        <Row>
-           
-            
-            <Col md={3}>
-            <Container style={{background:"#FFFFFF",marginLeft:"5%",width:"270px",padding:"0px",paddingTop:"16px"}}>
-            <h4 style={{fontWeight:600, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Filters</h4>   
-                <hr style={{}}></hr> 
-                <h4 style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Categories</h4>
-                
+    return(
+        <>
+            <ToastContainer position="top-center"/>
+
+             
+           <Row className="offcampusfilters" style={{marginTop:"200px"}}>
+         {[false].map((expand) => (
+        <Navbar key={expand} bg="light" expand={expand} className="mb-3"  >
+          <Container fluid>
+            <Navbar.Brand href="#">Filters</Navbar.Brand>
+            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+            <Navbar.Offcanvas
+              id={`offcanvasNavbar-expand-${expand}`}
+              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+              placement="end"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                Filters
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body >
                 
                 {
                     (isCategoriesFetched)?(
                         categories.map(cat=>{
                             return(
-                                <Form.Check style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
+                                <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
                             )
                         })
                     ):(
                         null
                     )
                 }
-                <hr ></hr> 
-                {/* <br></br> */}
+                <hr></hr><br></br>
                 <React.Fragment>
-                <Typography id="range-slider" gutterBottom style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>
-                    Select Price Range
-                </Typography>
+               
                 
                 <Slider
                     defaultValue={[parseInt(min),parseInt(max)]}
                     onChange={rangeSelector}
-                    valueLabelDisplay="off"
+                    valueLabelDisplay="on"
                     min={parseInt(min)}
                     max={parseInt(max)}
-
-                    style={{width:"240px",marginLeft:"14px"}}
                 />
                 </React.Fragment>
-                <h6>Your range of Price is between {value[0]} /- and {value[1]} /-</h6>
-                <br></br>
+
                 
+               
+                <br></br><br></br>
+                {
+                    (isFiltersFetched)?(
+                        keySet.map((index,pos)=>{
+                            return(
+                                <div >
+                                    
+                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
+                                    <Accordion.Item eventKey={pos}>
+                                                    <Accordion.Header>{index}</Accordion.Header>
+                                                    <Accordion.Body>
+                                                                
+                                    {
+                                        filters[index].map(f=>{
+                                            return(
+                                                <>
+                                                
+                                                    <Form>
+                                                        <Form.Check style={{fontSize:'18px',fontWeight:'600'}} type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
+                                                    </Form>
+                                                     
+                                                </>
+                                                
+                                                
+                                            )
+                                        
+                                            
+                                        })
+                                    }
+                                    </Accordion.Body>
+                                    </Accordion.Item>
+                                    </Accordion>
+                                </div>
+                            )
+                        })
+                    ):(
+                        null
+                    )
+                }
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Container>
+        </Navbar>
+      ))} 
+            </Row>
+            {
+          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
+          
+          }
+          {
+            (showTopBtn)?(
+                <Button className="scrolltopbtn" onClick={scrollToTop}>
+            <FaArrowCircleUp  />
+        </Button>
+            ):(null)
+          }
+        
+        <Row className="mainpage">
+        
+            <Col md={3} className="filtercol" style={{width:"300px",background:"white", border: "2px solid #D2D2D2",paddingTop:"16px",marginLeft:"1%"}}>
+                {/* <Container style={{background:"grey", width:"270px", paddingTop:"16px"}}> */}
+                <h4 style={{fontWeight:600, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Filters</h4>   
+                <hr style={{width:"270px", marginLeft:"-14px"}}></hr> 
+                <h4 style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Categories</h4>
+                
+                {
+                    (isCategoriesFetched)?(
+                        categories.map(cat=>{
+
+                            return(
+                                
+                                <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
+                            )
+                        })
+                    ):(
+                        null
+                    )
+                }
+                <hr style={{width:"270px", marginLeft:"-14px"}}></hr>
+                <React.Fragment>
+                {/* <Typography id="range-slider" gutterBottom>
+                    Select Price Range:
+                </Typography> */}
+                <h4 style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Price</h4>
+                <br></br>
+                <Slider
+                    defaultValue={[parseInt(min),parseInt(max)]}
+                    onChange={rangeSelector}
+                    valueLabelDisplay="on"
+                    min={parseInt(min)}
+                    max={parseInt(max)}
+                />
+                </React.Fragment>
+                {/* Your range of Price is between {value[0]} /- and {value[1]} /- */}
+
                 
                 {
                 //     <MultiRangeSlider
@@ -581,42 +764,66 @@ const BrandCatProducts = () => {
                 //     }}
                 //   />
                 }
-                <hr></hr>
-                <h4 style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Filters</h4>
+                <hr style={{width:"270px", marginLeft:"-14px"}}></hr>
+                
+                {/* <h4>Filters</h4> */}
                 {
                     (isFiltersFetched)?(
-                        keySet.map(index=>{
+                        keySet.map((index,pos)=>{
                             return(
-                                <div>
+                                <>
                                     
-                                    
-                                    <h6 style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}}>{index}</h6>
+                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
+                                    <Accordion.Item eventKey={pos}>
+                                                    <Accordion.Header>{index}</Accordion.Header>
+                                                    <Accordion.Body>
+                                                                    
+                                    {/* <h5>{index}</h5> */}
                                     {
                                         filters[index].map(f=>{
                                             return(
-                                                <Form>
-                                                    <Form.Check style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
-                                                </Form>
+                                                <>
+                                                
+                                                    <Form>
+                                                        <Form.Check style={{fontSize:'18px',fontWeight:'600'}} type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
+                                                    </Form>
+                                                     
+                                                </>
+                                                
+                                                
                                             )
                                         
                                             
                                         })
                                     }
-                                </div>
+                                    </Accordion.Body>
+                                    </Accordion.Item>
+                                    </Accordion>
+                                    <hr style={{width:"270px", marginLeft:"-14px"}}></hr>
+                                </>
                             )
                         })
                     ):(
                         null
                     )
                 }
-                </Container>
+                {/* </Container> */}
             </Col>
             
-            <Col>
+            <Col md={9} style={{border: "2px solid black", marginLeft:"1%", marginTop:"2.5%"}}>
+                
             {
                 // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
-                <Row>
-                    <Col md={9}>
+                <Row className="filterproductsRow">
+                        <Col md={3}>
+                            <p className="selectedcat">{localStorage.getItem("Category")}</p>
+                        </Col>
+                        <Col md={3}>
+                        
+                        <p className="products">(Showing - <b>{selectedProducts.length}</b> Products Found)</p>
+                        </Col> 
+                    <Col md={4}></Col>
+                    <Col md={2}>
                         <NavDropdown title="Sort By">
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
@@ -626,65 +833,93 @@ const BrandCatProducts = () => {
                         </NavDropdown>
                     </Col> 
                     
-                    <Col md={3}>
-                        <br></br>
-                    <p>{products.length} products found</p>
-                    </Col> 
+                    
                 
                     
                     
                 </Row>
             }
-            <br></br>
-
+           
             
             {
                     
-                    (areProductsFetched)?(
-                        (products.length==0)?(
+                    (isSelectedProductsFetched)?(
+                        (selectedProducts.length==0)?(
                             <h6>No Products Found</h6>
                         ):(
                     
-                            products.map(index => {
+                            selectedProducts.map(index => {
                                 return (
                                 
 
 
                                     <Row className="filterproductsRow">
-                                        
-                                        <Col md={2}>
-                                            <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
-                                            <br></br>
-                                            <p>{index.modelNumber}</p>
+             
+             {/* <div className="d-flex justify-content-center row">
+        <div className="col-md-10">
+            <div className="row p-2 bg-white border rounded">
+                <div className="col-md-3 mt-1"><img className="img-fluid img-responsive rounded product-image" src="https://i.imgur.com/QpjAiHq.jpg"/></div>
+                <div className="col-md-6 mt-1">
+                    <h5>Quant olap shirts</h5>
+                    <div className="d-flex flex-row">
+                        <div className="ratings mr-2"><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></div><span>310</span>
+                    </div>
+                    <div className="mt-1 mb-1 spec-1"><span>100% cotton</span><span className="dot"></span><span>Light weight</span><span className="dot"></span><span>Best finish<br></br></span></div>
+                    <div className="mt-1 mb-1 spec-1"><span>Unique design</span><span className="dot"></span><span>For men</span><span className="dot"></span><span>Casual<br></br></span></div>
+                    <p className="text-justify text-truncate para mb-0">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.<br></br><br></br></p>
+                </div>
+                <div className="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <div className="d-flex flex-row align-items-center">
+                        <h4 className="mr-1">$13.99</h4><span className="strike-text">$20.99</span>
+                    </div>
+                    <h6 className="text-success">Free shipping</h6>
+                    <div className="d-flex flex-column mt-4"><button className="btn btn-primary btn-sm" type="button">Details</button><button className="btn btn-outline-primary btn-sm mt-2" type="button">Add to wishlist</button></div>
+                </div>
+            </div>
+            </div>
+            </div> */}
+                                        <Col md={2} className="imagecol">
+                                            <Image thumbnail="true" style={{cursor:"pointer"}} className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            {/* <br></br>
+                                            <p>{index.modelNumber}</p> */}
                                         </Col>
-                                        <Col md={10} >
+
+                                        <Col md={7} >
                                             <Row className="innerrow">
-                                                <Col md={11}>
-                                                    <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
-                                                </Col>
-                                                <Col md={1} >
+                                                
+                                                    <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer', fontSize:"18px", fontWeight:500, fontFamily:"Roboto", lineHeight:"21px", letterSpacing:"0.01em" }}>{index.productName}</h4>
+                                                
+                                                {/* <Col md={1} >
                                                     {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
                                                         <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
                                                         <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
                                                     }
-                                                </Col>
+                                                </Col> */}
 
                                             </Row>
                                             <Row>
-                                                <Col md={11} className="star">
-                                                {Math.round(index.averageRating * 10) / 10}<AiFillStar />
+                                                {/* <Col md={11} style={{    paddingBottom: '40px',width: '10%'}} className="star">
+                                                {Math.round(index.averageRating * 10) / 10} <span> </span><AiFillStar />
                                                 
-                                                </Col>
+                                                </Col> */}
+
+                                                    <ul className="list-inline small">
+                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
+                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
+                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
+                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
+                                                            <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-2x"></i></li>
+                                                            </ul>
                                                 
                                             </Row>
-                                            <br></br>
+                                            
                                             <Row className="innerrow">
-                                                <Col md={11}>
+                                                <Col>
                                                     {
                                                         (index.productHighlights!=null)?(
                                                             index.productHighlights.split(';').map(highlight => {
                                                                 return (
-                                                                    <h6 style={{color:'GrayText'}}>•{highlight}<br></br></h6>
+                                                                    <h6 style={{color:'rgba(33, 33, 33, 0.7)', fontSize:"13px", fontWeight:400, fontFamily:"Roboto", lineHeight:"10px", letterSpacing:"0.02em"}}>• {highlight}<br></br></h6>
                                                                 );
                                                             })
                                                         ):(
@@ -696,40 +931,75 @@ const BrandCatProducts = () => {
                                                 </Col>
 
                                             </Row>
-                                            <Row className="innerrow">
-                                                <Col md={10}>
-                                                    {
-                                                        (index.offerPrice==null) ? (
-                                                            <h5>MRP: <b>₹{index.productPrice}</b></h5>
-                                                        ) : (
-                                                            <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
-                                                        )
-                                                    }
-                                                    
-                                                    
+                                            
 
-                                                </Col>
-
-                                            </Row>
-
-                                            <Row className="innerrow">
-                                                <Form style={{
-                                                    fontWeight: '500',
-                                                    fontSize: '120%'
-                                                }}>
-                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
-                                                </Form>
-
-                                            </Row>
-
+                                            
+{/* 
                                             <Row className="innerrow">
                                                 <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
                                                 <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
                                             
 
-                                            </Row>
+                                            </Row> */}
                                         </Col>
 
+                                        <Col md={3} className="lastcol">
+
+                                            
+
+                                            <Row >
+                                                <Col >
+                                                    {
+                                                        (index.offerPrice==null) ? (
+                                                            <h4>MRP: <b>₹{index.productPrice}</b></h4>
+                                                        ) : (
+                                                            <>
+                                                            <h5 style={{fontSize:"22px", fontWeight:500, fontFamily:"Roboto", lineHeight:"26px"}}><b style={{color:"#C10000"}}>MSP:</b> <b style={{ color: "#ed1c24" }}>₹{index.offerPrice}</b> </h5>
+                                                            <p style={{color:"#565959"}}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></p>
+                                                            </>
+                                                        )
+                                                    }
+                                                </Col>
+                                            </Row>
+                                            <Row className="checkboxx">
+                                                <Form className="check">
+
+                                                    <Form.Check style={{fontSize:"16px"}} defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+
+
+                                                    {/* <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/> */}
+
+                                                    {/* <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/> */}
+
+                                                    {/* <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/> */}
+
+
+
+                                                </Form>
+                                            </Row>
+                                            <br></br>
+
+                                            <Row className="btnrow">
+                                            {/* <Col>
+                                                <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button>
+                                            </Col>    */}
+                                            <Col>
+                                                <Button className="filterproductBtn" variant="outline-primary" onClick={() => WishlistHandler(index)}>Add to wishlist</Button>
+                                                
+                                            </Col>                                                                                                                  
+                                            </Row>
+
+                                            <Row className="btnrow2">
+                                            {/* <Button onClick={() => callProductDetails(index)} className="filterproductBtn1"  variant="primary" size="1" >View Details</Button> */}
+                                            <Button className="filterproductBtn" variant="outline-primary" onClick={() => WishlistHandler(index)}>Add to wishlist</Button>
+                                            {/* variant="outline-primary" */}
+
+                                            </Row>
+                                             
+                                            
+
+                                        </Col>
+                                        
 
                                     </Row>
 
@@ -746,147 +1016,12 @@ const BrandCatProducts = () => {
                 }
             </Col>
         </Row>
-        </div>
-        </body>
-        // <div>
-        //     <Header/>
-        //     {
-        //         <Row>
-        //             <Col md={1}></Col>
-        //             <Col md={2}>
-                        
-        //             </Col>
-        //             <Col md={9}>
+        
+        </>
 
-                    
-                    
-        //             {
-        //             (areProductsFetched) ? (products.map(index => {
-        //             return (
-        //                 // <Col md={3}>
-        //                 //     <Card  style={{ width: '20rem'}} 
-        //                 // className="mb-2">
-        //                 //      <AiOutlineHeart style={{marginTop:"10px",marginLeft:"5px"}} className="wishlisticon" size={30} onClick={()=>WishlistHandler(index)}/>
-        //                 //     {/* <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={"data:image/png;base64," + index.productImage1.data} onClick={()=>callProductDetails(index)}/> */}
-        //                 //     <Card.Img  variant="top" style={{width:200,height:175,alignSelf:"center"}} src={index.productImage1} onClick={()=>callProductDetails(index)}/>
-                            
-        //                 //     <Card.Body>
-        //                 //     <Card.Title as="h6" onClick={()=>callProductDetails(index)}>{index.productName}</Card.Title>
-        //                 //     <Card.Text onClick={()=>callProductDetails(index)}>
-        //                 //     <s>₹{index.productPrice}</s>  
-        //                 //     <strong style={{marginLeft:20}}>₹{index.offerPrice}</strong>
-        //                 //     <br></br>
-        //                 //     {
-        //                 //         index.productHighlights.split(';').map(highlight=>{
-        //                 //             return(
-        //                 //                 <span>{highlight}<br></br></span>
-        //                 //             );  
-        //                 //         })
-        //                 //     }
-        //                 //     </Card.Text>
-                            
-        //                 //     <br></br>
-        //                 //     <Button variant="flat" size="1">Buy</Button>
-        //                 //     </Card.Body>
-                            
-        //                 // </Card>
-        //                 // </Col>
-
-        //                 <Row className="filterproductsRow">
-                                        
-        //                                 <Col md={2}>
-        //                                     <Image className="filterproductImage" fluid='true' onClick={() => callProductDetails(index)}  src={index.productImage1} />
-        //                                     <br></br>
-        //                                     <p>{index.modelNumber}</p>
-        //                                 </Col>
-        //                                 <Col md={10} >
-        //                                     <Row className="innerrow">
-        //                                         <Col md={11}>
-        //                                             <h4 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
-        //                                         </Col>
-        //                                         <Col md={1} >
-        //                                             {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
-        //                                                 <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
-        //                                                 <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
-        //                                             }
-        //                                         </Col>
-
-        //                                     </Row>
-        //                                     <Row>
-        //                                         <Col md={11} className="star">
-        //                                         {Math.round(index.averageRating * 10) / 10}<AiFillStar />
-                                                
-        //                                         </Col>
-                                                
-        //                                     </Row>
-        //                                     <br></br>
-        //                                     <Row className="innerrow">
-        //                                         <Col md={11}>
-        //                                             {
-        //                                                 (index.productHighlights!=null)?(
-        //                                                     index.productHighlights.split(';').map(highlight => {
-        //                                                         return (
-        //                                                             <h6 style={{color:'GrayText'}}>•{highlight}<br></br></h6>
-        //                                                         );
-        //                                                     })
-        //                                                 ):(
-        //                                                     null
-        //                                                 )
-                                                        
-        //                                             }
-        //                                             {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
-        //                                         </Col>
-
-        //                                     </Row>
-        //                                     <Row className="innerrow">
-        //                                         <Col md={10}>
-        //                                             {
-        //                                                 (index.offerPrice==null) ? (
-        //                                                     <h5>MRP: <b>₹{index.productPrice}</b></h5>
-        //                                                 ) : (
-        //                                                     <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5>
-        //                                                 )
-        //                                             }
-                                                    
-                                                    
-
-        //                                         </Col>
-
-        //                                     </Row>
-
-        //                                     <Row className="innerrow">
-        //                                         <Form style={{
-        //                                             fontWeight: '500',
-        //                                             fontSize: '120%'
-        //                                         }}>
-        //                                             <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
-        //                                         </Form>
-
-        //                                     </Row>
-
-        //                                     <Row className="innerrow">
-        //                                         <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
-        //                                         <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
-                                            
-
-        //                                     </Row>
-        //                                 </Col>
-
-
-        //                             </Row>
-
-                        
-        //             )
-        //         })) : (null)
-
-        //     }
-        //     </Col>
-        //         </Row>
-                
-
-        //     }
-        // </div>
-
+        
+        
     )
 }
+
 export default BrandCatProducts;
