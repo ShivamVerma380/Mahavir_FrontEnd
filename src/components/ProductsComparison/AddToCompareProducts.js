@@ -102,7 +102,7 @@ function AddToCompareProducts(){
                         product.map(index=>{
                             return(
                                 <Col md={2} className="colll">
-                                    <button style={{width:"180px"}} onClick={()=>buyNow(index)} class="explore">Buy Now<span class="icon-right after"></span></button>
+                                    <button className="buynow" onClick={()=>buyNow(index)}>Buy Now</button>
 
                                     {/* <Button  className="explore" onClick={()=>buyNow(index)}>Buy Now</Button> */}
                                     

@@ -16,8 +16,11 @@
 
 .cross{
     /* position: absolute; */
-    z-index: 2;
-    top: 0;
+    /* z-index: 2; */
+    /* top: 0; */
+    margin-top: 45px;
+    align-items: flex-end;
+    
     /* right: 15px; */
     /* height: 34px;
     width: 34px; */
@@ -26,34 +29,89 @@
     border: 1px solid rgba(0,0,0,.06);
     border-radius: 50%;
     /* font-size: 15px; */
-    line-height: 32px;
-    color: #878787;
+    line-height: 20px;
+    color: red;
     text-align: center;
     cursor: pointer;
 }
+.choosebrand{
+    height: fit-content;
+    width: fit-content;
+    
+}
 
 .choosebrand a{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 16px;
+    text-decoration: none;
     /* justify-content: center; */
     padding: 0;
-    border: solid 1px gray;
+    /* border: solid 1px gray; */
     color: black;
     height: 40px;
     /* align-content: center; */
-    padding-left: 10px;
+    /* padding-left: 10px; */
 }
 
 .choosebrand .dropdown-menu.show {
     width: -webkit-fill-available;
     display: block;
-    padding: 2%;
-    font-size: 20px;
-    border-bottom: solid 1px gray;
+    font-size: 16px;
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.choosebrand .dropdown-menu:hover{
+    background-color: white;
+    color: blue;
 }
 
 .choosebrand .nav-item{
+    cursor: pointer;
+
+}
+
+.choosesubcat a{
+    font-size: 16px;
+    text-decoration: none;
+    /* justify-content: center; */
+    padding: 0;
+    /* border: solid 1px gray; */
+    color: black;
+    height: 40px;
+    /* align-content: center; */
+    /* padding-left: 10px; */
+}
+
+.choosesubcat .dropdown-menu.show {
+    /* width: 300px;
+    height: 1000px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    display: block;
+    font-size: 16px;
+    border: solid 1px black;
+    box-shadow: 2px gray;
+    color: black; */
+
+    width: fit-content;
+    max-height: 1000px;
+    font-size: 16px;
+    border: solid 1px black;
+    box-shadow: 2px gray;
+    color: red;
+    margin: 0%;
+    padding-left: 10px;
+    overflow: auto;
+    
+}
+
+.choosesubcat:hover{
+    background-color: white;
+    color: darkblue;
+}
+
+.choosesubcat .nav-item{
     cursor: pointer;
 
 }
@@ -77,4 +135,14 @@
     padding: 1%;
     /* border-top: solid 1px grey; */
     border-right: solid 1px grey;
+}
+
+.buynow{
+    background-color: rgba(49, 19, 148, 0.764);
+    color: white;
+    border: none;
+    height: 60px;
+    width: 200px;
+    border-radius: 5%;
+    font-size: 20px;
 }

@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Row,Col,Button } from "react-bootstrap";
-import { AiFillStar } from "react-icons/ai";
+// import { AiFillStar } from "react-icons/ai";
 import url from "../../Uri";
-
-
+import ReactStars from 'react-stars';
+import { render } from 'react-dom';
 
 const RatingandReview = ({review}) => {
 
@@ -47,6 +47,7 @@ const RatingandReview = ({review}) => {
 function blankspace(){
     var dif=4-review.length;
     var d=[];
+    
     for (var index = 0; index < dif; index++) {
         // alert(index);
         d.push(0);    
@@ -75,11 +76,16 @@ function blankspace(){
                             return(
                                 <Col md={2} className="colll">
                                 <Row>
-                                    <h6 className="star" >{index.averageRatings} <AiFillStar /></h6>
-                                </Row>
-                                <br></br>
+                                    {/* <h6 className="star" >{index.averageRatings} <AiFillStar /></h6> */}
+                                    <ReactStars
+                                        count={5}
+                                        value={index.averageRatings}
+                                        size={28}
+                                        edit={false}
+                                        color2={'red'} />
+                                    </Row>
                                 <Row>  
-                                    <h5>{index.totalReviews} Reviews & {index.totalRatings} Ratings</h5>
+                                    <h5 style={{fontSize:"16px"}}>{index.totalReviews} Reviews & {index.totalRatings} Ratings</h5>
                                 </Row>
                                 
                                 </Col>
