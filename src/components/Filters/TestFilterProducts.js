@@ -600,7 +600,7 @@ function TestFilterProducts(){
             <ToastContainer position="top-center"/>
 
              
-           <Row className="offcampusfilters" style={{marginTop:"200px"}}>
+           {/* <Row className="offcampusfilters" style={{marginTop:"200px"}}>
          {[false].map((expand) => (
         <Navbar key={expand} bg="light" expand={expand} className="mb-3"  >
           <Container fluid>
@@ -688,7 +688,7 @@ function TestFilterProducts(){
           </Container>
         </Navbar>
       ))} 
-            </Row>
+            </Row> */}
             {
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
