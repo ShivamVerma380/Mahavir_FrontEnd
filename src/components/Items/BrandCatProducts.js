@@ -42,7 +42,7 @@ const BrandCatProducts = () => {
 
 
     const navigate = useNavigate();
-    var models = localStorage.getItem("models").split(',');
+    //var models = localStorage.getItem("models").split(',');
 
 
 
@@ -52,7 +52,7 @@ const BrandCatProducts = () => {
         if (!areProductsFetched && !isCategoriesFetched) {
 
 
-            axios.get(url+"/"+ localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")).then(
+            axios.get(url+"/excel/shopByBrands/"+ localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")).then(
                 function (response) {
                     if (response.status == 200) {
                         console.log("Response",response.data);
@@ -110,6 +110,8 @@ const BrandCatProducts = () => {
                 }).catch(function(error){
                     console.log("error",error)
                 })
+
+                
             // var urls = [];
             // models.map(modelNum => {
             //     urls.push(axios.get("http://localhost:8080/excel/shopByBrands/" + localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")));
@@ -129,6 +131,21 @@ const BrandCatProducts = () => {
 
             //     })
             // )
+
+            axios.get(url+"/filtercriterias/"+localStorage.getItem("Category"))
+                    .then(function(response){   
+                        if(response.status==200){
+                            console.log("Filters fetched",response.data)
+                            for(var key in response.data.filterCriterias){
+                                keySet.push(key);
+                            }
+                            SetFilters(response.data.filterCriterias);
+                            SetIsFiltersFetched(true);
+                        }
+                    }).catch(function(error){
+                        console.log(url+"/filtercriterias/"+localStorage.getItem("Category"),error);
+                    })
+                
         }
     })
 
@@ -485,8 +502,15 @@ const BrandCatProducts = () => {
       window.addEventListener('scroll', toggleVisible);
 
     return (
+        <body style={{background:"whitesmoke"}}>
         <div>
             <Header/>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
              {
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
@@ -502,36 +526,45 @@ const BrandCatProducts = () => {
         
         <Row>
            
-            <Col md={1}></Col>
-            <Col md={2}>
-                <h3>Category</h3>
+            
+            <Col md={3}>
+            <Container style={{background:"#FFFFFF",marginLeft:"5%",width:"270px",padding:"0px",paddingTop:"16px"}}>
+            <h4 style={{fontWeight:600, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Filters</h4>   
+                <hr style={{}}></hr> 
+                <h4 style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Categories</h4>
+                
+                
                 {
                     (isCategoriesFetched)?(
                         categories.map(cat=>{
                             return(
-                                <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
+                                <Form.Check style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
                             )
                         })
                     ):(
                         null
                     )
                 }
-                <br></br>
+                <hr ></hr> 
+                {/* <br></br> */}
                 <React.Fragment>
-                <Typography id="range-slider" gutterBottom>
-                    Select Price Range:
+                <Typography id="range-slider" gutterBottom style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>
+                    Select Price Range
                 </Typography>
                 
                 <Slider
                     defaultValue={[parseInt(min),parseInt(max)]}
                     onChange={rangeSelector}
-                    valueLabelDisplay="on"
+                    valueLabelDisplay="off"
                     min={parseInt(min)}
                     max={parseInt(max)}
+
+                    style={{width:"240px",marginLeft:"14px"}}
                 />
                 </React.Fragment>
-                Your range of Price is between {value[0]} /- and {value[1]} /-
-
+                <h6>Your range of Price is between {value[0]} /- and {value[1]} /-</h6>
+                <br></br>
+                
                 
                 {
                 //     <MultiRangeSlider
@@ -548,8 +581,8 @@ const BrandCatProducts = () => {
                 //     }}
                 //   />
                 }
-                <br></br>
-                <h4>Filters</h4>
+                <hr></hr>
+                <h4 style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Filters</h4>
                 {
                     (isFiltersFetched)?(
                         keySet.map(index=>{
@@ -557,12 +590,12 @@ const BrandCatProducts = () => {
                                 <div>
                                     
                                     
-                                    <h6>{index}</h6>
+                                    <h6 style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}}>{index}</h6>
                                     {
                                         filters[index].map(f=>{
                                             return(
                                                 <Form>
-                                                    <Form.Check type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
+                                                    <Form.Check style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
                                                 </Form>
                                             )
                                         
@@ -576,7 +609,9 @@ const BrandCatProducts = () => {
                         null
                     )
                 }
+                </Container>
             </Col>
+            
             <Col>
             {
                 // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
@@ -712,6 +747,7 @@ const BrandCatProducts = () => {
             </Col>
         </Row>
         </div>
+        </body>
         // <div>
         //     <Header/>
         //     {

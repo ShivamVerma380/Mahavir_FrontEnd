@@ -17,6 +17,7 @@ import {useRef} from 'react';
 import { white } from "material-ui/styles/colors";
 import { fullWhite } from "material-ui/styles/colors";
 import url from "../../Uri";
+import Footer from "../Footer/Footer";
 
 
 
@@ -169,8 +170,15 @@ function BrandDetails() {
     //   }
 
 
-
-
+    function fetchOfferAvailableBtn(offerPrice, productPrice) {
+        if (offerPrice !== productPrice) {
+          return <MDBCardText className="text">Offer Available</MDBCardText>
+        }
+        else {
+          return <MDBCardText className="text">No Offer Available</MDBCardText>
+        }
+    
+      }
     return (
         <div>
             <Header />
@@ -191,7 +199,7 @@ function BrandDetails() {
 
             <Row>
 
-                <Carousel>
+                <Carousel className="branddetails-slider" style={{margin:0 }}>
                     {
                         offerPoster = parsedArray.map(index => {
                             //let Base64string = Buffer.from(index.image.data,"base64").toString();
@@ -231,17 +239,17 @@ function BrandDetails() {
 
 
             <Row>
-                <h3 style={{ color: "rgb(255,98,98", margin: '2%' }}><i>FEATURED CATEGORIES</i></h3>
+                <h3 className="brand_feature_category">Featured Categories</h3>
+
+
 
                 <Swiper
-                    slidesPerView={1}
-                    spaceBetween={5}
-                    slidesPerGroup={3}
+                   
                     loop={false}
                     loopFillGroupWithBlank={true}
                     breakpoints={{
                         700: {
-                            slidesPerView: 5,
+                            slidesPerView: 6,
                         },
                         400: {
                             slidesPerView: 3,
@@ -252,8 +260,8 @@ function BrandDetails() {
                     }}
                     navigation={true}
                     modules={[Pagination, Navigation]}
-                    className="mySwiper"
-                    style={{ height: '180px' }}
+                    className="brand_category_swiper"
+                   
                 >
 
 
@@ -266,9 +274,9 @@ function BrandDetails() {
                                     <SwiperSlide>
                                         <Container onClick={() => handleScroll(index.category)}>
                                          <center>   
-                                        <Image src={index.catImage} style={{ width: 100, margin: 5, height: 100 }} />
+                                        <Image  src={index.catImage} style={{ width: 70,height: 70 }} />
 
-                                        <h3>{index.category}</h3>
+                                        <p className="brand_category_title">{index.category}</p>
                                         </center>
                                         </Container>
                                     </SwiperSlide>
@@ -279,11 +287,8 @@ function BrandDetails() {
 
                 </Swiper>
             </Row>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-
+                    <br></br>
+                    <br></br>
             {
                 parsedArr.map(index => {
                     return (
@@ -292,87 +297,124 @@ function BrandDetails() {
                                 <Row>
 
                                 
-                                    <Col md={3}>
-                                    <h3 id={index.category} style={{ color: "rgb(255,98,98", margin: '2%' }}><i>{index.category}</i></h3>
+                                    <Col md={4}>
+                                    <h3 className="brand_feature_product_cat_title" id={index.category} >{index.category}</h3>
                                     
                                     </Col>
-                                    <Col md={7}>
+                                    <Col md={6}>
                                     
                                     </Col>
                                     <Col md={2}>
-                                        <button onClick={() => handleClick(index.category)} class="explore">View More<span class="icon-right after"></span></button>
+                                        <button className="brand_feature_product_btn" onClick={() => handleClick(index.category)} >View More <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                                     </Col>
                                 </Row>
+                                <Container style={{width:'90%',height: '429px'}}>
                                 
                                 {
                                             // console.log("Cat Img: ", index.catImage)
                                             
-                                            
+                                            <MDBRow style={{ justifyContent: 'center', padding: '10px' }} className='row-cols-1 row-cols-md-3 g-4'>
+                {
+                  index.products.slice(0, 4).map(index => {
+                    const images = [
+                      {
+                        url: index.productImage1,
+                        url: index.productImage1,
+                        url: index.productImage1
+                      }
+                    ];
+                    return (
+                      <MDBCard style={{marginTop:'3%'}} className="categoryproductscard" >
+                        <center><MDBCardImage className="brand_category_product_cardimage" src={index.productImage1} alt='...' position='top' /></center>
+                       
+
+                        {
+                          (localStorage.getItem("Wishlist") != null && localStorage.getItem("Wishlist").includes(index.modelNumber)) ?
+                            <AiFillHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} /> :
+                            <AiOutlineHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end' }} className="wishlisticon" size={30} />
+                        }
+                        <MDBCardBody className="categoryproductscardbody">
+                          <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
+                          <MDBCardSubTitle style={{ marginTop: '5px', marginBottom: '5px', fontSize: '18px' }}>Rs. {index.offerPrice}</MDBCardSubTitle>
+
+                          {
+                            fetchOfferAvailableBtn(index.offerPrice, index.productPrice)
+                          }
+                        </MDBCardBody>
+                        <MDBCardBody className="categoryproductscardbodyonhover">
+                          <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
+                          <MDBCardSubTitle style={{ marginTop: '5px', marginBottom: '5px', fontSize: '18px' }}>Rs. {index.offerPrice}</MDBCardSubTitle>
+
+                          <MDBCardText className="text" onClick={() => callProductDetails(index)}>
+                            View Details
+                          </MDBCardText>
+
+                        </MDBCardBody>
+                      </MDBCard>
+                    )
+                  })
+                }
+
+
+              </MDBRow>
                                                 
                                                 
                                                     
-                                                    <Swiper
-                                                    slidesPerView={1}
-                                                    spaceBetween={5}
-                                                    slidesPerGroup={4}
-                                                    loop={false}
-                                                    loopFillGroupWithBlank={true}
-                                                    breakpoints={{
-                                                        700: {
-                                                            slidesPerView: 4,
-                                                        },
-                                                        400: {
-                                                            slidesPerView: 4,
-                                                        },
-                                                    }}
-                                                    pagination={{
-                                                        clickable: true,
-                                                    }}
-                                                    navigation={true}
-                                                    modules={[Pagination, Navigation]}
-                                                    className="mySwiper"
-                                                    style={{ height: '350px' }}
-                                                >
+                //                                     <div className="brand_category_products_swiper">
+                //                                     <Row style={{marginTop:'10px'}} className='row-cols-1 row-cols-md-3 g-4'>
                 
                 
-                                                    {
-                                                            index.products.map(i=>{
-                                                                console.log("inside products")
-                                                                console.log("in pro",i.productName)
-                                                                return(
+                //                                     {
+
+                //                                     index.products.slice(0, 4).map(i=>{
+                //                                                 console.log("inside products")
+                //                                                 console.log("in pro",i.productName)
+                //                                                 return(
                                                                 
-                                                                   
-                                                                    <SwiperSlide>
-                                                                        <Container onClick={()=>callProductDetails(i)}>
-                                                                        <center> 
-                                                                        <Image src={i.productImage1} style={{ width: 100, margin: 5, height:250, cursor:"pointer" }} />
-                                                                        </center>  
-                                                                        <h6>{i.productName}</h6>
-                                                                        </Container>
+                //                                                     <Card className="brand_category_product_card" >
+                //                                                     <Card.Img className="brand_category_product_img" variant="top" src={i.productImage1} />
+                //                                                     <Card.Body>
+                //                                                       <Card.Title>{i.productName}</Card.Title>
+                //                                                       <Card.Text>
+                //                                                     <b >₹{i.offerPrice}</b>
+
+                //                                                       <s style={{ marginLeft: 10 }}>₹{i.productPrice}</s>
+                //                                                       </Card.Text>
+                //                                                     </Card.Body>
+                //                                                   </Card>
+                                                                    
+                //                                                         // <Container onClick={()=>callProductDetails(i)}>
+                //                                                         // <center> 
+                //                                                         // <Image src={i.productImage1} style={{ width: 100, margin: 5, height:250, cursor:"pointer" }} />
+                //                                                         // </center>  
+                //                                                         // <h6>{i.productName}</h6>
+                //                                                         // </Container>
                                                                         
 
-                                                                    </SwiperSlide>
                                                                     
-                                                                )
-                                                            })
-                                                            // return (
-                                                            //     <div className="container">
+                                                                    
+                //                                                 )
+                //                                             })
+                //                                             // return (
+                //                                             //     <div className="container">
                 
-                                                            //         <SwiperSlide>
-                                                            //             <Image src={index.catImage} style={{ width: 100, margin: 5 }} />
-                                                            //             <Button onClick={() => handleClick(index.category)} variant="outline-primary" className="brandcategory">{index.category}</Button>
-                                                            //         </SwiperSlide>
-                                                            //     </div>
-                                                            // )
+                //                                             //         <SwiperSlide>
+                //                                             //             <Image src={index.catImage} style={{ width: 100, margin: 5 }} />
+                //                                             //             <Button onClick={() => handleClick(index.category)} variant="outline-primary" className="brandcategory">{index.category}</Button>
+                //                                             //         </SwiperSlide>
+                //                                             //     </div>
+                //                                             // )
                                                         
-                                                    }
-                
-                                                </Swiper>   
+                //                                     }
+                // </Row>
+                //                                 </div>   
                                                
                                             
                                             
                                         
                                     }
+
+</Container>
                                 {/* <Swiper
                                     slidesPerView={1}
                                     spaceBetween={5}
@@ -425,7 +467,6 @@ function BrandDetails() {
 
                                 </Swiper> */}
                             </Row>
-                            <br></br>
                             </>
                        
                     )
@@ -439,11 +480,13 @@ function BrandDetails() {
 
 
 
-
+            <br></br>
+            
             <Row>
-                <h3 style={{ color: "rgb(255,98,98", margin: '2%' }}><i>FEATURED VIDEOS</i></h3>
+                <center><h3 className="brand_feature_category" >Featured Videos</h3></center>
 
-
+                <br></br>
+                <br></br>
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={5}
@@ -463,7 +506,7 @@ function BrandDetails() {
                     }}
                     navigation={true}
                     modules={[Pagination, Navigation]}
-                    className="mySwiper"
+                    className="videoswiper"
                 >
 
 
@@ -474,7 +517,6 @@ function BrandDetails() {
                                     <SwiperSlide>
                                         <iframe width="70%" height="500px" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </SwiperSlide>
-                                    <br></br>
                                 </div>
                             )
                         })
@@ -483,7 +525,7 @@ function BrandDetails() {
                 </Swiper>
 
             </Row>
-
+            <Footer/>
 
         </div>
 

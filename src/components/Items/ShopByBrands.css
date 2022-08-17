@@ -1,4 +1,4 @@
-/* .shopbybrandsrow{
+.shopbybrandsrow{
     padding: 2%;
     margin: 2%;
     background-color: rgb(29, 29, 29);
@@ -19,22 +19,18 @@
     opacity: 1
 
     
-}*/
+}
 
-/*
+
 .brandheading{
-    border-radius: 2px;
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
-    background-color: white;
-    margin-left: 200px;
-    margin-right: 200px;
+    margin-top: 115px;
     
     
 }
 
 .brandimg{
-    height:100px;
-    width: 120px;
+  height: 45px;
+  width: 60px;
 }
 
 .brandcategory{
@@ -57,12 +53,9 @@
 }
 .shopbybrandsrow{
     margin-bottom: 40px;
-} */
+} 
 
-/* brand logos */
-
-
-:root {
+ brand logos:root {
     --src: url(https://imes.unsplash.com/photo-1554620121-59e7f3f6e3a4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy);
     --size: 60vmin;
     /* --space: 8vmin; */
@@ -185,4 +178,132 @@
     font-size: 26px; 
     font-family: Arial, Helvetica, sans-serif; 
     font-weight: bold;
+}
+
+.brand_category_swiper .swiper-slide{
+  /* margin-top: 0; */
+  width: 70px;
+}
+
+.brand_category_swiper .swiper-button-next {
+  background: transparent;
+  margin-left: 1%;
+  color: #000;
+  margin-right: 1%;
+}
+
+.brand_category_swiper .swiper-button-prev {
+  background: transparent;
+  margin-left: 1%;
+  color: #000;
+  margin-right: 1%;
+}
+
+.brand_category_swiper .swiper-pagination-clickable .swiper-pagination-bullet{
+  background-color: gray;
+}
+.brand_category_swiper {
+  /* background-color: #202020; */
+  padding-right: 2%;
+  padding-left: 2%;
+
+}
+
+.brand_feature_category{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 23px;
+letter-spacing: 0.01em;
+margin-left: 2%;
+margin-top: 2%;
+color: #000000;
+}
+
+.brand_category_swiper{
+  height: 157px;
+}
+
+.brand_category_title{
+  margin-top: 1%;
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 23px;
+letter-spacing: 0.01em;
+
+color: #000000;
+}
+
+.brand_feature_product_cat_title{
+  margin-left: 30%;
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 23px;
+letter-spacing: 0.01em;
+margin-top: 2%;
+color: #000000;
+}
+
+.brand_feature_product_btn{
+  background: transparent;
+  border: none;
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 23px;
+letter-spacing: 0.01em;
+
+color: #000000;
+}
+
+.brand_category_products_swiper{
+  /* width: 90%; */
+  background-color: gray;
+}
+
+.brand_category_product_card{
+width: 233px;
+height: 334px;
+
+
+box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.25);
+filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.brand_category_product_cardimage{
+  
+  /* position: absolute; */
+  width: 191px;
+  height: 202px;
+  /* left: 19px; */
+  margin-top: 5px;
+  
+
+}
+
+.brand_category_products_card{
+  margin-top: 3%;
+  
+}
+
+.videoswiper .swiper-button-next{
+
+  background: transparent;
+  margin-left: 1%;
+  color: #000;
+  margin-right: 1%;
+
+}
+
+.videoswiper .swiper-button-prev{
+  background: transparent;
+  margin-left: 1%;
+  color: #000;
+  margin-right: 1%;
 }
