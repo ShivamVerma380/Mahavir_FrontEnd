@@ -31,13 +31,13 @@ function ComparisonHeader({product}){
     const [Brands,SetBrands] = useState([]);
     const [isBrandsFetched,SetIsBrandsFetched] = useState(false);
 
-    const [brand,SetBrand] = useState("Choose Brand...")
+    const [brand,SetBrand] = useState("Choose Brand ▼")
 
 
     const [Models,SetModels] = useState();
     const [isBrandSelected,SetIsBrandSelected] = useState(false);
     
-    const [model,SetModel] = useState("Choose Model....")
+    const [model,SetModel] = useState("Choose Model ▼")
 
     const [productArr,SetProductArr] = useState(product);
     const [isProductArrUpdated,SetIsProductArrUpdated] = useState(true);
@@ -83,7 +83,7 @@ function ComparisonHeader({product}){
         Brands.map(brand=>{
             if(brand.subSubCategoryName===brandName){
                 SetBrand(brandName)
-                SetModel("Choose Model..")
+                SetModel("Choose Model ▼")
                 SetModels(brand.modelResponses);
                 SetIsBrandSelected(true);
             }
@@ -99,10 +99,17 @@ function ComparisonHeader({product}){
         
     }
 
+    function getDiscount(SP,CP){
+        var discount = (SP-CP)/CP*100;
+        return discount;
+    }
+
     function handleRemoveProduct(modelNumber){
         var modelNumbers = getCookie("addToCompare").split(",")
         var flag = true;
+
         var arr=[]
+
         modelNumbers.map(model=>{
             if(flag){
                 if(model===modelNumber){
@@ -128,15 +135,16 @@ function ComparisonHeader({product}){
         
             <Row className="CompareHeader">
             
-            <Col md={2} style={{justifyContent:'center'}} className="colll">
+            <Col md={2} style={{justifyContent:'center', marginTop:"50px"}} className="colll">
                 {
                     (product.length>0)?(
                         <>
                         <Row>
-                            <p>Compare</p>
+                            <p style={{fontSize:"18px"}}>Compare {product.length}</p>
+                            
                         </Row>
                         <Row>
-                        <h5>{product[0].productName}</h5>
+                        <h5 style={{fontSize:"18px"}}>{product[0].productName}</h5>
                         </Row>
                         <Row>
                             <p><i>VS</i></p>
@@ -166,14 +174,16 @@ function ComparisonHeader({product}){
                 
             </Col>
             {
+            
                 (isProductArrUpdated)?(
                 productArr.map((index,pos)=>{
                     return(
-                        <Col md={2} className="colll">
                         
+                        <Col md={2} className="colll">
+            
                             <Row>
                             
-                        <Image  style={{ height:'130px',width:'190px', alignContent: "center" }}  src={index.productImage1}/>
+                        <Image  style={{ height:'130px',width:'190px', alignContent: "center", marginTop:"50px" }}  src={index.productImage1}/>
                         <Button className="cross" style={{height:'40px', width:'40px'}} onClick={()=>handleRemoveProduct(index.modelNumber)}>X</Button>
                         
                                
@@ -182,8 +192,12 @@ function ComparisonHeader({product}){
                             </Row>
                             
                             
-                            <h5 style={{ marginTop: "20px" }}>{index.productName}</h5>
-                            <h5 style={{}}>₹{index.productPrice}</h5>
+                            <p style={{ marginTop: "20px", fontSize:"18px" }}>{index.productName}</p>
+                            <h6 style={{color:"red"}}>MSP ₹{index.offerPrice}</h6>
+                            <h6 style={{fontSize:"15px",textDecorationLine:"line-through"}}>MRP ₹{index.productPrice}</h6>
+                            <h6 style={{color:"red",fontSize:"15px"}}>
+                                {parseInt(((index.productPrice-index.offerPrice)*100)/index.productPrice)}% OFF  You save ₹{index.productPrice-index.offerPrice} 
+                            </h6>
                         </Col>
                     );
                 })
@@ -199,18 +213,20 @@ function ComparisonHeader({product}){
                     return(
                         <Col md={2} className="colll">
 
-                            <Image  thumbnail="true" height={130} width={190} />
+                            <Image  thumbnail="true" height={130} width={190} style={{marginTop:"50px"}} />
                             
-                            <h6 style={{ fontSize:'20px', marginTop: "20px" }} >Add a Product</h6>
+                            <h6 style={{ fontSize:'18px', marginTop: "20px", color: "red" }} >Add a Product</h6>
                             
                             {
                                 (isBrandsFetched)?(
                                     <div className="choosebrand">
-                                    <NavDropdown  title = {brand} id="brand">
+                                    <NavDropdown title = {brand} id="collasible-nav-dropdown" >
+                                        
                                         {
                                             Brands.map(index=>{
                                                 return(
-                                                    <NavItem onClick={()=>handleBrandClick(index.subSubCategoryName)}>{index.subSubCategoryName}</NavItem>
+                                                    
+                                                    <><NavDropdown.Item onClick={() => handleBrandClick(index.subSubCategoryName)}>{index.subSubCategoryName}</NavDropdown.Item><NavDropdown.Divider /></>
                                                 );
                                             })
                                         }
@@ -223,12 +239,12 @@ function ComparisonHeader({product}){
                             {
 
                                 (isBrandSelected)?(
-                                    <div className="choosebrand">
-                                    <NavDropdown  title={model} id = "Models">
+                                    <div className="choosesubcat">
+                                    <NavDropdown  title={model} id = "collasible-nav-dropdown">
                                         {   
                                             Models.map(model=>{
                                                 return(
-                                                    <NavItem onClick={()=>handleModelClick(model.modelName,model.modelNumber)}>{model.modelName}</NavItem>
+                                                    <><NavDropdown.Item onClick={() => handleModelClick(model.modelName, model.modelNumber)}>{model.modelName}</NavDropdown.Item><NavDropdown.Divider /></>
                                                 )
                                             })
                                         }
@@ -254,3 +270,4 @@ function ComparisonHeader({product}){
 }
 
 export default ComparisonHeader;
+
