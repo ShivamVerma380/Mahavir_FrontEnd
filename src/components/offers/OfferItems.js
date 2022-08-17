@@ -14,6 +14,7 @@ import Header from "../Header";
 import {setCookie,getCookie} from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
 import url from "../../Uri";
+import { count } from "rsuite/esm/utils/ReactChildren";
 
 function OfferItems() {
     var token=getCookie("jwtToken");
@@ -27,7 +28,16 @@ function OfferItems() {
 
     const [categories,SetCategories] = useState([]);
     const [isCategoriesFetched,SetIsCategoriesFetched] = useState(false);
+
+    const [filters,setFilters] = useState([]);
+    const [isFiltersFetched,SetIsFiltersFetched] = useState(false);
+
+    const [keySet, setKeyState] = useState([]); //To Store filters name
+
+    const[filterselected,SetFilterSelected] = useState([])
+
     var productsArray = [];
+    var flag = false;
     useEffect(() => {
         if (!isProductsFetched && !isCategoriesFetched) {
             var modelNumbers = localStorage.getItem("offerPostersModelNumber");
@@ -41,13 +51,38 @@ function OfferItems() {
             })
             axios.all(urls).then(axios.spread((...response) => {
                 console.log("response: ", response)
+                var i=0;
                 response.map(index => {
                     productsArray.push(index.data);
                     arr.add(index.data.category);
+                    if(i==0){
+                        localStorage.setItem("CategoryOffers",index.data.category);
+                        flag = true;
+                    }
+                    i++;
                 }
                 )
+                var filterArr=[];
+                productsArray.map(index=>{
+                    if(index.category===localStorage.getItem("CategoryOffers")){
+                        filterArr.push(index);
+                    }
+                })
 
-                setFilterProducts(productsArray);
+                axios.get(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"))
+                    .then(function(response){   
+                        if(response.status==200){
+                            console.log("Filters fetched",response.data)
+                            for(var key in response.data.filterCriterias){
+                                keySet.push(key);
+                            }
+                            setFilters(response.data.filterCriterias);
+                            SetIsFiltersFetched(true);
+                        }
+                    }).catch(function(error){
+                        console.log(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"),error);
+                    })
+                setFilterProducts(filterArr);
                 setProduct(productsArray);
                 SetCategories([...arr]);
                 SetIsCategoriesFetched(true);
@@ -59,6 +94,13 @@ function OfferItems() {
             )
 
         }
+        // if(!isFiltersFetched){
+        //     console.log("inside axios");
+        //     if(flag){
+        //         console.log("In filter fetched");
+                
+        //     }
+        // }
 
     }, []);
 
@@ -149,16 +191,270 @@ function OfferItems() {
     function handleCategoryClick(c){
         var arr=[]
         if(document.getElementById(c).checked){
+            localStorage.setItem("CategoryOffers",c);
+            // window.location.reload();
+            axios.get(url+"/filtercriterias/"+c)
+                .then(function(response){   
+                    if(response.status==200){
+                        console.log("Filters fetched",response.data)
+                        var arr=[]
+                        for(var key in response.data.filterCriterias){
+                            arr.push(key);
+                        }
+                        setKeyState(arr)
+                        var p=[]
+                        products.map(index=>{
+                            if(index.category===c){
+                                p.push(index);
+                            }
+                        })
+                        setFilterProducts(p);
+                        setFilters(response.data.filterCriterias);
+                        SetIsFiltersFetched(true);
+                    }
+                }).catch(function(error){
+                    console.log(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"),error);
+                })
             // console.log("Checked ",c)
-            products.map(index=>{
-                console.log(index)
-                if(index.category===c){
-                    arr.push(index)
+            // products.map(index=>{
+            //     console.log(index)
+            //     if(index.category===c){
+            //         arr.push(index)
+            //     }
+            // })
+            // console.log("arr",arr)
+            // // setFilterProducts([])
+            // setFilterProducts([...arr])
+        }
+        
+    }
+
+
+    // const handleFormCheck=(index,f)=>{
+    //     console.log("index:",index,"    f:",f)
+
+    //     var element = document.getElementById(f);
+    //     if(element.checked){
+    //         var  arr= filterselected;
+    //         var flag = true;
+    //         arr.map((i,pos)=>{
+    //             var pair = i.split("-");
+    //             if(index===pair[0]){
+    //                 arr[pos]= index+"-"+pair[1]+";"+f;
+    //                 flag = false;
+    //             }
+    //         })
+    //         if(flag){
+    //             arr.push(index+"-"+f);
+    //         }
+    //         SetFilterSelected(arr);
+    //         var productsArray = [];
+    //         // console.log("products",products)
+    //         console.log("filterSelected",filterselected);
+    //         products.map(index=>{
+    //             var flag = true;
+    //             filterselected.map(a=>{
+    //                 var pair = a.split("-");
+    //                 // console.log("pair",pair)
+    //                 var key = pair[0];
+    //                 var values = pair[1].split(";");
+    //                 console.log("values",values)
+    //                 var valueflag= false;
+    //                 values.map(v=>{
+    //                     console.log(index.filtercriterias[key])
+    //                     if(index.filtercriterias[key].includes(v)){
+    //                         valueflag=true;  
+    //                     }
+    //                 })
+    //                 if(!valueflag){
+    //                     flag = false;
+    //                 }
+    //             })
+    //             if(flag){
+    //                 productsArray.push(index);
+    //             }
+    //         })
+    //         // console.log("Products Array",productsArray.length);
+            
+    //         setFilterProducts(productsArray);
+
+    //     }else{
+    //         console.log("Filter selected",filterselected)
+    //         var arr = filterselected;
+    //         arr.map((i,pos)=>{
+    //             var pair = i.split("-");
+    //             if(index===pair[0]){
+    //                 var values= pair[1].split(";");
+    //                 if(values.length==1){
+    //                     arr.splice(pos,1);
+    //                 }
+    //                 else{
+    //                     var str=index+"-";
+    //                     values.map(v=>{
+    //                         if(v!==f){
+    //                             str+=v+";";
+    //                         }
+    //                     })
+    //                     str= str.slice(0,str.length-1);
+    //                     arr[pos]=str;
+
+    //                 }
+    //             }
+    //         })
+
+    //         console.log("Array:",arr)
+
+    //         // if(arr.length==0){
+    //         //     console.log("In if")
+    //         //     // localStorage.removeItem("SubCategory");
+    //         //     // localStorage.removeItem("SubSubCategory");
+    //         //     // window.location.reload();
+    //         // }
+    //         SetFilterSelected(arr);
+    //         var productsArray = [];
+    //         console.log("products",products)
+    //         console.log("filterSelected",filterselected);
+    //         products.map(index=>{
+    //             var flag = true;
+    //             filterselected.map(a=>{
+    //                 var pair = a.split("-");
+    //                 // console.log("pair",pair)
+    //                 var key = pair[0];
+    //                 var values = pair[1].split(";");
+    //                 // console.log("values",values)
+    //                 var valueflag= false;
+    //                 values.map(v=>{
+    //                     console.log(index.filtercriterias[key])
+    //                     if(index.filtercriterias[key]===v){
+    //                         valueflag=true;  
+    //                     }
+    //                 })
+    //                 if(!valueflag){
+    //                     flag = false;
+    //                 }
+    //             })
+    //             if(flag){
+    //                 productsArray.push(index);
+    //             }
+    //         })
+    //         console.log("Products Array",productsArray.length);
+            
+    //         setFilterProducts(productsArray);
+    //     }
+    // }
+    const handleFormCheck=(index,f)=>{
+        console.log("index:",index,"    f:",f)
+
+        var element = document.getElementById(f);
+
+        if(element.checked){
+            console.log("Check")
+            var  arr= filterselected;
+            var flag = true;
+            arr.map((i,pos)=>{
+                var pair = i.split("-");
+                if(index===pair[0]){
+                    arr[pos]= index+"-"+pair[1]+";"+f;
+                    flag = false;
                 }
             })
-            console.log("arr",arr)
-            // setFilterProducts([])
-            setFilterProducts([...arr])
+            if(flag){
+                arr.push(index+"-"+f);
+            }
+
+
+
+            // SetFilterSelected(arr);
+
+            console.log("arr",arr);
+            SetFilterSelected([...arr]);
+
+            var productsArray = [];
+            // console.log("products",products)
+            console.log("filterSelected",filterselected);
+            products.map(index=>{
+                var flag = true;
+                filterselected.map(a=>{
+                    var pair = a.split("-");
+                    // console.log("pair",pair)
+                    var key = pair[0];
+                    var values = pair[1].split(";");
+                    console.log("values",values)
+                    var valueflag= false;
+                    values.map(v=>{
+                        console.log(index.filtercriterias[key])
+                        if(index.filtercriterias[key].includes(v) ){
+                            valueflag=true;  
+                        }
+                    })
+                    if(!valueflag){
+                        flag = false;
+                    }
+                })
+                if(flag && index.category===localStorage.getItem("CategoryOffers")){
+                    productsArray.push(index);
+                }
+            })
+            // console.log("Products Array",productsArray.length);
+            
+            setFilterProducts(productsArray);
+
+        }else{
+            console.log("Uncheck")
+            // var arr = filterselected;
+            var arr = filterselected;
+            arr.map((i,pos)=>{
+                var pair = i.split("-");
+                if(index===pair[0]){
+                    var values= pair[1].split(";");
+                    if(values.length==1){
+                        arr.splice(pos,1);
+                    }
+                    else{
+                        var str=index+"-";
+                        values.map(v=>{
+                            if(v!==f){
+                                str+=v+";";
+                            }
+                        })
+                        str= str.slice(0,str.length-1);
+                        arr[pos]=str;
+
+                    }
+                }
+                })
+            console.log("Arr",arr)
+            SetFilterSelected([...arr])
+            
+            var productsArray = [];
+            console.log("products",products)
+            console.log("filterSelected",filterselected);
+            products.map(index=>{
+                var flag = true;
+                filterselected.map(a=>{
+                    var pair = a.split("-");
+                    // console.log("pair",pair)
+                    var key = pair[0];
+                    var values = pair[1].split(";");
+                    // console.log("values",values)
+                    var valueflag= false;
+                    values.map(v=>{
+                        console.log(index.filtercriterias[key])
+                        if(index.filtercriterias[key]===v && index.category===localStorage.getItem("CategoryOffers")){
+                            valueflag=true;  
+                        }
+                    })
+                    if(!valueflag){
+                        flag = false;
+                    }
+                })
+                if(flag && index.category===localStorage.getItem("CategoryOffers")){
+                    productsArray.push(index);
+                }
+            })
+            console.log("Products Array",productsArray.length);
+            
+            setFilterProducts(productsArray);
         }
         
     }
@@ -171,7 +467,7 @@ function OfferItems() {
                     (isCategoriesFetched) ?(
                         categories.map(c=>{
                             return(
-                                <Form.Check id={c} name="category"  type="radio" label={c} onClick={()=>handleCategoryClick(c)}/>
+                                <Form.Check id={c} name="category" defaultChecked={(c===localStorage.getItem("CategoryOffers"))?(true):(false)}  type="radio" label={c} onClick={()=>handleCategoryClick(c)}/>
                             )
                         })
                     ):(
@@ -179,6 +475,29 @@ function OfferItems() {
                     )
                 }
                 </Form>
+                <br></br>
+                {
+                    (isFiltersFetched)?(
+                        keySet.map(index=>{
+                            return(
+                                <>
+                                <h4>{index}</h4>
+                                <Form>
+                                {
+                                    filters[index].map(f=>{
+                                        return(
+                                            <Form.Check type="checkbox" id={f} label={f} onChange={()=>handleFormCheck(index,f)}/>
+                                        )
+                                    })
+                                }
+                                </Form>
+                                </>
+                            )
+                        })
+                    ):(
+                        null
+                    )   
+                }
             </Col>
             <Col md={10}>
             {

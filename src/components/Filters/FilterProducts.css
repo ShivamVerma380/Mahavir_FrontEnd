@@ -13,7 +13,7 @@
     width: 100%;
     padding: 1%;
     border-radius: 2px;
-    
+    margin: 0px 10px 0px 0px;
     background: rgb(255, 255, 255);
     /* margin: 20px; */
     border-bottom:solid 1px #0b4268;
@@ -73,12 +73,15 @@ width: 100%;
 
 .filtercol{
     background-color: white;
-    border-right: solid 1px #0b4268;
+    /* border-right: solid 1px #0b4268; */
+    /* width: 95%; */
+    /* margin-left: 10px; */
+    padding-top:16px;
 }
 
 .lastcol{
     padding: 1%;
-    border-left: solid 1px #0b4268;
+    /* border-left: solid 1px #0b4268; */
 }
 
 .checkboxx .form-check-input[type=checkbox] {
@@ -110,7 +113,11 @@ width: 100%;
 
 .products{
     margin-top: 14px;
-    font-size: large;
+    font-size: 16px;
+    font-family:'Roboto';
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    font-weight: 500;
 }
 
 .filtercol .accordion-flush .accordion-item .accordion-button {
@@ -202,6 +209,30 @@ width: 100%;
 
 .offcavasfilters{
     display: none; 
+}
+
+.multipleproduct_title{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 21px;
+/* identical to box height */
+
+letter-spacing: 0.01em;
+
+color: #212121;
+}
+
+.multipleproduct_highlights{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 14px;
+letter-spacing: 0.01em;
+
+color: rgba(33, 33, 33, 0.7);
 }
 @media only screen and (max-width: 1024px){
     .filterproductsRow{
@@ -303,7 +334,7 @@ width: 100%;
 }
 
 .mainpage {
-    margin: 7% 2% 2% 2%;
+    margin: 7% 0% 0% 0%;
 }
 
 .check{
