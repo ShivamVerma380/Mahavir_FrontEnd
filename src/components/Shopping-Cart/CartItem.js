@@ -1,8 +1,8 @@
 import React from "react";
 import {
     Card, CardHeader, CardText, CardBody, Row,
-    CardTitle, CardFooter, Button, Col, Container, Table
-} from 'reactstrap';
+    CardTitle, CardFooter, Button, Col, Container, Table,Image
+} from 'react-bootstrap';
 import { FormControl, Form } from 'react-bootstrap';
 import {setCookie,getCookie} from '../Cookies';
 import { QuantityPicker } from 'react-qty-picker';
@@ -63,18 +63,18 @@ const CartItem = ({item,quantity}) => {
                         <Row>
                             <Col md={12}>
                                 <Row style={{border:"2px solid #E2E2E2"}}>
-                                    <Col md={2}>
-                                        <img style={{ height: "100px", width: "140px" ,marginTop:"22px" }} src={item.productImage1} />
+                                    <Col md={2} style={{justifyContent:'center',display:'flex',flexDirection: 'column-reverse'}}>
+                                        <Image fluid="true" src={item.productImage1}></Image>
                                     </Col >
-                                    <Col md={9}>
+                                    <Col md={10} style={{padding:'2%'}}>
                                         <Row>
-                                            <h4 style={{marginLeft:"15px",letterSpacing: "0.02em",lineHeight:"19px",fontWeight: 500,color: "#000000",fontSize:"18px",marginTop:"34px",fontFamily:"typeface-roboto"}}>{item.productName}</h4>
+                                            <h4 style={{letterSpacing: "0.02em",fontWeight: 400,color: "#000000",fontSize:"18px",fontFamily:"Roboto",lineHeight:'26px'}}>{item.productName}</h4>
                                         </Row>
                                         <br></br>
                                         <Row>
                                             {
                                                 (item.productPrice === item.offerPrice) ? (<h4>₹ {item.productPrice}</h4>) : (
-                                                    <h4 style={{marginLeft:"15px",marginTop:"-15px"}}><b style={{ marginRight: "20px", color: "#C10000" , fontSize:"20px"}}>₹{item.offerPrice}</b><b style={{ color:"rgba(45, 45, 45, 0.8)",textDecorationLine: "line-through",fontSize:"16px", textDecorationStyle: "solid" }}>₹ {item.productPrice}</b> <b style={{color:"#C10000",fontSize:"15px",lineHeight:"15px",marginLeft:"8px"}}>{Math.round((item.productPrice-item.offerPrice)*100/item.productPrice)}% off</b></h4>
+                                                    <h4 ><b style={{ marginRight: "20px", color: "#C10000" , fontSize:"20px"}}>₹{item.offerPrice}</b><b style={{ color:"rgba(45, 45, 45, 0.8)",textDecorationLine: "line-through",fontSize:"16px", textDecorationStyle: "solid" }}>₹ {item.productPrice}</b> <b style={{color:"#C10000",fontSize:"15px",marginLeft:"8px"}}>{Math.round((item.productPrice-item.offerPrice)*100/item.productPrice)}% off</b></h4>
                                                 )
                                             }
 
@@ -85,7 +85,7 @@ const CartItem = ({item,quantity}) => {
 
                                             
                                             
-                                            <Col md={6} style={{marginLeft:"15px",marginTop:"-4px"}}>
+                                            <Col md={6} >
                                                 <QuantityPicker  width='10rem' value={quantity} min={1} smooth onChange={(value)=>{
                                                     console.log("value",value)
                                                     var arr=[]
@@ -111,18 +111,16 @@ const CartItem = ({item,quantity}) => {
                                                     window.location.reload()
                                                     }} />
                                             </Col>
-                                            <Col md={4} style={{marginTop:"5px"}}>
-                                                <Button style={{background:"white",color:"black",fontSize:"20px",fontFamily:'typeface-roboto',width:'fit-content'}} onClick={removefromcart}><AiOutlineDelete size={20} style={{marginBottom:"5px"}}/> Remove</Button>
+                                            <Col md={4} >
+                                                <Button style={{background:"white",color:"black",fontSize:"20px",fontFamily:'Roboto',width:'fit-content',border: 'solid 2px #c10000'}} onClick={removefromcart}><AiOutlineDelete size={20} style={{marginBottom:"5px"}}/> Remove</Button>
                                                 
                                                 {/* className="btn-flat" */}
                                             </Col>
                                         </Row>
-                                        <br></br>
 
                                     </Col>
                                     
                                 </Row >
-                                <br></br>
                                 
 
 

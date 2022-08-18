@@ -9,9 +9,9 @@ import axios from 'axios';
 import CartItem from './CartItem';
 import {setCookie,getCookie} from '../Cookies';
 import Footer from '../Footer/Footer';
-import { Table } from 'reactstrap';
-import './Cart.css'
-import 'typeface-roboto'
+import { Table } from 'react-bootstrap';
+import './Cart.css';
+import '../../components/Wishlist.css';
 import url from '../../Uri';
 // var price=0;
 // var discount = 0;
@@ -87,9 +87,11 @@ function Cart() {
       }
 
     return(
-        
-      <div  className="cartpage">   
+        <>
+
         <Header/> 
+      <div  className="cartpage">   
+        
         {
             (isCartItemsFetched) ? (
                 (cartItems.length>0) ? (
@@ -99,13 +101,9 @@ function Cart() {
             <Col sm={7} className='cartTable'>
             {
                 (isCartItemsFetched)?(
-                    <Table >
-                    <thead className='cartTitle'>
-                        <tr >
-                        <th className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"2px solid #E2E2E2"}}> My Cart ({cartItems.length} items)</th>
-                        </tr>
-                    </thead>
-                    </Table>
+                    <h1 className="cart_heading">Cart</h1>
+                    
+                    
                 ):(
                     null
                 )
@@ -133,17 +131,17 @@ function Cart() {
             {
                 (isCartItemsFetched)?(
                     <Col sm={5} className="priceTable">
-                    <Table style={{margin_top:"50px", color:'black',width:"450px"}} >
+                    <Table style={{ color:'black'}} >
                     <thead>
                         <tr>
-                        <th  className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Price Details</th>
+                        <th  className='cartTitle' style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}> Price Details</th>
                         <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Price ({cartItems.length} Item)</td>
-                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}}>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Price ({cartItems.length} Item)</td>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}}>
                             {
                                 
                                 cartItems.map(index=>{
@@ -161,8 +159,8 @@ function Cart() {
                         
                         </tr>
                         <tr>
-                            <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Discount</td>
-                            <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}} >
+                            <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Discount</td>
+                            <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}} >
                                 {
                                     cartItems.map(index=>{
                                         {
@@ -175,13 +173,13 @@ function Cart() {
                             </td>
                         </tr>
                         <tr>
-                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Delivery Charges</td>
-                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px",color:"rgba(52,184,58,1)"}}>Free</td>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Delivery Charges</td>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px",color:"rgba(52,184,58,1)"}}>Free</td>
                         </tr>
                         
                         <tr>
-                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Total Amount</td>
-                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px"}}>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}> Total Amount</td>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px"}}>
                         ₹ {
                                 
                                 amount = parseInt(price)-parseInt(discount)
@@ -191,7 +189,7 @@ function Cart() {
                             {/* ₹ 37,480 */}
                         </td>
                         </tr>
-                        <p style={{color:"rgba(52,184,58,1)",fontFamily:"typeface-roboto",fontSize:"20px",fontWeight:500,marginTop:"20px",marginLeft:"0.4rem"}}>
+                        <p style={{color:"rgba(52,184,58,1)",fontFamily:"Roboto",fontSize:"20px",fontWeight:500,marginTop:"20px",marginLeft:"0.4rem"}}>
                             You will save ₹{discount} on this order
                         </p>
                             
@@ -201,7 +199,7 @@ function Cart() {
                     
                     <Row>
                         <center>
-                        <Button style={{height:"50px",width:"250px",background:"#C10000", fontFamily:"typeface-roboto",letterSpacing:"1px"}} className="btn-flat" onClick={handleCheckout}>CHECK OUT</Button>
+                        <Button style={{height:"50px",width:"250px",background:"#C10000", fontFamily:"Roboto",letterSpacing:"1px"}} className="btn-flat" onClick={handleCheckout}>CHECK OUT</Button>
                         </center>
                     </Row>
                     </Col>
@@ -248,7 +246,7 @@ function Cart() {
 
   </div>
   
- 
+  </>
     );
   }
   export default Cart;
