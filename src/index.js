@@ -59,6 +59,7 @@ import PaymentCart from './components/Checkout/AddToCartCheckout/PaymentCart';
 import AddressBuyNowSummary from './components/Checkout/BuyNowCheckout/AddressBuyNowSummary';
 import BuyNowSummary from './components/Checkout/BuyNowCheckout/BuyNowSummary';
 import Invoice from './components/OrderDetails/Invoice';
+import OrderInvoices from './components/OrderDetails/OrderInvoices';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -131,6 +132,7 @@ root.render(
       <Route path = "/payment" element = {<Payment/>}/>
 
       <Route path='/invoice' element={<Invoice/>}/>
+      <Route path='/order-invoices' element = {<OrderInvoices/>}/>
     </Routes>
   </BrowserRouter>
 );
