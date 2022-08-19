@@ -8,6 +8,11 @@ import { Button, Card, Container, Row, Col } from "react-bootstrap";
 import {  Input } from "reactstrap";
 import 'typeface-roboto';
 import {AiFillDelete} from 'react-icons/ai';
+// import csc from "country-state-city";
+
+// import { useFormik } from "formik";
+
+// import Select from "react-select";
 
 var fullname = "";
 var addressone = "";
@@ -27,6 +32,10 @@ function AddressBuyNowSummary(){
  
     var token = getCookie("jwtToken");
     console.log(token);
+
+    
+
+
 
     useEffect(() => {
         if (!isAddressFetched) {
@@ -200,11 +209,41 @@ function AddressBuyNowSummary(){
         )
       
       }
+          
+      
+      // const addressFromik = useFormik({
+      //   initialValues: {
+      //     country: "India",
+      //     state: null,
+      //     city: null
+      //   },
+      //   onSubmit: (values) => console.log(JSON.stringify(values))
+      // });
+      // const countries = csc.getAllCountries();
 
+      // const updatedCountries = countries.map((country) => ({
+      //   label: country.name,
+      //   value: country.id,
+      //   ...country
+      // }));
+      // const updatedStates = (countryId) =>
+      //   csc
+      //     .getStatesOfCountry(countryId)
+      //     .map((state) => ({ label: state.name, value: state.id, ...state }));
+      // const updatedCities = (stateId) =>
+      //   csc
+      //     .getCitiesOfState(stateId)
+      //     .map((city) => ({ label: city.name, value: city.id, ...city }));
+      //     const { values, handleSubmit, setFieldValue, setValues } = addressFromik;
+
+      //     useEffect(() => {}, [values]);
 
       function handleProceedOnClick(){
         console.log("address length",address.length);
         var flag = true;
+
+
+  
         try{
             address.map((index,i)=>{
                 if(document.getElementById("add"+i).checked){
@@ -242,6 +281,9 @@ function AddressBuyNowSummary(){
         // } catch (error) {
         //     console.log("Error in add3",error);
         // }
+          
+
+        
       }
 
 
@@ -265,7 +307,7 @@ function AddressBuyNowSummary(){
             <Col md={1}></Col>
             <Col md={10}>
               <center>
-              <h1 style={{marginTop:"40px",color:"black",fontSize:"20px",fontWeight:"600",fontFamily:"typeface-roboto",marginLeft:"2px"}}>DELIVERY ADDRESS</h1>
+              <h1 style={{marginTop:"40px",color:"black",fontSize:"20px",fontWeight:"600",fontFamily:"typeface-roboto",marginLeft:"2px"}}>DELIVERY ADDRESS 📬</h1>
               </center>
               
             </Col>
@@ -277,10 +319,10 @@ function AddressBuyNowSummary(){
             address.map((index,i)=> {
               return (
                 <>
-                <Row>
-                <Col md={1}></Col>
-                <Col md={10}>
-                  <Card style={{ width: "65rem", height: "7rem" }}>
+                <Row style={{marginLeft:"2px"}}>
+                <Col md={2}></Col>
+                <Col md={8}>
+                  <Card>
                     <Card.Body>
                       <Card.Text>
     
@@ -292,7 +334,7 @@ function AddressBuyNowSummary(){
     
                   </Card>
                 </Col>
-                {/* <Col md={1}></Col> */}
+                <Col md={2}></Col>
               </Row>
               <br></br>
               </>
@@ -310,10 +352,18 @@ function AddressBuyNowSummary(){
               <center>
                 <Button style={{backgroundColor:"#C10000",border:"none"}} onClick={HandleButtonClick}>Add a New Address</Button>
               </center>
-              
+            
             </Col>
-            <Col md={1}><Button style={{backgroundColor:"#C10000",border:"none"}} onClick={handleProceedOnClick}>Proceed</Button></Col>
-    
+            <Col md={1}></Col>
+            </Row>
+            <Row>
+            <Col md={1}></Col>
+            <Col md={10}>
+              <center>
+              <Button style={{backgroundColor:"#C10000",border:"none", marginTop:"20px", position:"sticky", alignContent:"end" }} onClick={handleProceedOnClick}>Proceed to Buy</Button>
+              </center>
+              </Col>
+            <Col md={1}></Col>
           </Row>
           <br></br>
           
@@ -325,14 +375,15 @@ function AddressBuyNowSummary(){
           {
             (isButtonClicked) ? (
               <>
-              <Row>
-                <Col md={1}></Col>
-                <Col md={10}>
+              <Row >
+                <Col md={4}></Col>
+                <Col md={4} style={{marginLeft:"10px"}} >
                   <Card >
-                    <Card.Body style={{marginLeft:50}}>
-                      <Card.Title>Add New Address</Card.Title>
+                    <Card.Body>
+                      <Card.Title style={{fontSize:"18px", alignContent:"center"}}>Add New Address📌</Card.Title>
                       <Row style={{marginTop:40}}>
-                      <Col md={6}>
+                        
+                          <Col >
                           <Input
                             id="full_name"
                             type="text"
@@ -342,52 +393,53 @@ function AddressBuyNowSummary(){
                             style={{borderRadius:"20px"}}
                           />
                         </Col> 
-    
-                      <Col md={6}>
-                      <Input
-                        id="Phone"
-                        class="form-field"
-                        type="text"
-                        placeholder="Phone No."
-                        name="Phone"
-                        onChange={InputPhoneNoHandler}
-                        style={{borderRadius:"20px"}}
-                     />
-                     
-                      </Col>  
                       </Row>
-                      <br></br>
-                      <br></br>
-                      <Row>
+                      <Row style={{marginTop:20}}>
+    
+                        <Col >
+                        <Input
+                          id="Phone"
+                          class="form-field"
+                          type="text"
+                          placeholder="Phone No."
+                          name="Phone"
+                          maxLength={10}
+                          onChange={InputPhoneNoHandler}
+                          style={{borderRadius:"20px"}}
+                        />
+                      
+                        </Col>  
+                      </Row>
+                      <Row style={{marginTop:20}}>
                         <Col>
                             <Input
-                              style={{height:"100px"}}
+                              style={{height:"100px",borderRadius:"20px"}}
                               id="last-name"
                               class="form-field"
                               type="textarea"
+                              maxLength={50}
                               placeholder="Address Line 1 (Street Address, P.O.)"
                               name="ADL1"
                               onChange={InputAddressOneHandler}
-                              style={{borderRadius:"20px"}}
                             />
                          
                         </Col>
                         </Row>
-                        <br></br>
-                        <br></br>
-                        <Row>
+                        
+                      <Row style={{marginTop:20}}>
+                      
                       <Col md={6}>
                       <Input
-                        id="City"
+                        id="Country"
                         class="form-field"
                         type="text"
-                        placeholder="City"
-                        name="City"
-                        onChange={InputCityHandler}
+                        placeholder="Country"
+                        name="Country"
+                        onChange={InputCountryHandler}
                         style={{borderRadius:"20px"}}
-                      />
-                        </Col> 
-    
+                      /> 
+                     
+                      </Col> 
                       <Col md={6}>
                       <Input
                         id="State"
@@ -400,45 +452,46 @@ function AddressBuyNowSummary(){
                       />
                      
                       </Col>  
+
+
+
                       </Row>
-                      <br></br>
-                      <br></br>
-                      <Row>
+
+                      <Row style={{marginTop:20}}>
                       <Col md={6}>
+                      <Input
+                        id="City"
+                        class="form-field"
+                        type="text"
+                        placeholder="City"
+                        name="City"
+                        onChange={InputCityHandler}
+                        style={{borderRadius:"20px"}}
+                      />
+                        </Col> 
+    
+                        <Col md={6}>
                       <Input
                         id="Zip"
                         class="form-field"
                         type="text"
                         placeholder="Zip"
                         name="Zip"
+                        maxLength={6}
                         onChange={InputZipHandler}
                         style={{borderRadius:"20px"}}
                       />
                         </Col> 
-    
-                      <Col md={6}>
-                      <Input
-                        id="Country"
-                        class="form-field"
-                        type="text"
-                        placeholder="Country"
-                        name="Country"
-                        onChange={InputCountryHandler}
-                        style={{borderRadius:"20px"}}
-                      /> 
-                     
-                      </Col>  
                       </Row>
-                      <br></br>
-                      <br></br>
-                      <Row>
-                        <Col md={10}>
+
+                      <Row style={{marginTop:20}}>
                         
-                        </Col>
-                        <Col md={2} style={{alignItems:"left",alignContent:"right"}}>
+                        <Col>
+                        <center>
                         <Button style={{backgroundColor:"#C10000",border:"none"}} class="form-field" type="submit" onClick={ProceedHandler}>
-                          Proceed
+                          Add new Address
                         </Button>
+                        </center>
                         
                         </Col>
                       </Row>
@@ -449,7 +502,7 @@ function AddressBuyNowSummary(){
     
     
                 </Col>
-                <Col md={1}></Col>
+                <Col md={4}></Col>
                 
               </Row>
               <br></br>

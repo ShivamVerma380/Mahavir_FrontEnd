@@ -248,219 +248,223 @@ function AddressCartSummary() {
       return (
     
         <div style={{border:"2px solid #E2E2E2"}} >
-          {/* <Header/>  */}
-          {/* <div className="radio">
-              <label>
-                <input type="radio" value="option1"  />
-                  Address 1, ............
-              </label>
-          </div>
-          <div className="radio">
-              <label>
-                <input type="radio" value="option1"  />
-                  Address 2, ............
-              </label>
-          </div> */}
-          <Row >
-            <Col md={1}></Col>
-            <Col md={10}>
-              <center>
-              <h1 style={{marginTop:"40px",color:"black",fontSize:"20px",fontWeight:"600",fontFamily:"typeface-roboto",marginLeft:"2px"}}>DELIVERY ADDRESS</h1>
-              </center>
-              
-            </Col>
-            <Col md={1}></Col>
-          </Row>
-          <br></br>
-    
-          {
-            address.map((index,i)=> {
-              return (
-                <>
-                <Row>
-                <Col md={1}></Col>
-                <Col md={10}>
-                  <Card style={{ width: "65rem", height: "7rem" }}>
-                    <Card.Body>
-                      <Card.Text>
-    
-                        <input type="radio" value="Address1" name="add" id={"add"+i} onChange={()=>selectedaddress(index,index.name+""+i)} /> <b style={{marginRight:20,marginLeft:10}}>{index.name}</b> <b>{index.mobileNumber}</b> 
-                        <p>{index.address} {index.city} {index.state} <b>- {index.pincode}</b>, Alternate Mobile Number: <b>{index.alternateMobile}</b></p>
-                        <AiFillDelete onClick={()=>handleAddressDelete(index)}/>                     
-                      </Card.Text>
-                    </Card.Body>
-    
-                  </Card>
-                </Col>
-                {/* <Col md={1}></Col> */}
-              </Row>
-              <br></br>
-              </>
-              )
-              
-            })
-          }
-    
-          
-    
-    
-          <Row style={{ marginTop: 20 }}>
-            <Col md={1}></Col>
-            <Col md={10}>
-              <center>
-                <Button style={{backgroundColor:"#C10000",border:"none"}} onClick={HandleButtonClick}>Add a New Address</Button>
-              </center>
-              
-            </Col>
-            <Col md={1}><Button style={{backgroundColor:"#C10000",border:"none"}} onClick={handleProceedOnClick}>Proceed</Button></Col>
-    
-          </Row>
-          <br></br>
-          
-    
-    
-    
-    
-    
-          {
-            (isButtonClicked) ? (
+        {/* <Header/>  */}
+        {/* <div className="radio">
+            <label>
+              <input type="radio" value="option1"  />
+                Address 1, ............
+            </label>
+        </div>
+        <div className="radio">
+            <label>
+              <input type="radio" value="option1"  />
+                Address 2, ............
+            </label>
+        </div> */}
+        <Row >
+          <Col md={1}></Col>
+          <Col md={10}>
+            <center>
+            <h1 style={{marginTop:"40px",color:"black",fontSize:"20px",fontWeight:"600",fontFamily:"typeface-roboto",marginLeft:"2px"}}>DELIVERY ADDRESS 📬</h1>
+            </center>
+            
+          </Col>
+          <Col md={1}></Col>
+        </Row>
+        <br></br>
+  
+        {
+          address.map((index,i)=> {
+            return (
               <>
-              <Row>
-                <Col md={1}></Col>
-                <Col md={10}>
-                  <Card >
-                    <Card.Body style={{marginLeft:50}}>
-                      <Card.Title>Add New Address</Card.Title>
-                      <Row style={{marginTop:40}}>
-                      <Col md={6}>
-                          <Input
-                            id="full_name"
-                            type="text"
-                            placeholder="Full Name"
-                            name="fullname"
-                            onChange={InputFullNameHandler}
-                            style={{borderRadius:"20px"}}
-                          />
-                        </Col> 
-    
-                      <Col md={6}>
+              <Row style={{marginLeft:"2px"}}>
+              <Col md={2}></Col>
+              <Col md={8}>
+                <Card>
+                  <Card.Body>
+                    <Card.Text>
+  
+                      <input type="radio" value="Address1" name="add" id={"add"+i} onChange={()=>selectedaddress(index,index.name+""+i)} /> <b style={{marginRight:20,marginLeft:10}}>{index.name}</b> <b>{index.mobileNumber}</b> 
+                      <p>{index.address} {index.city} {index.state} <b>- {index.pincode}</b>, Alternate Mobile Number: <b>{index.alternateMobile}</b></p>
+                      <AiFillDelete onClick={()=>handleAddressDelete(index)}/>                     
+                    </Card.Text>
+                  </Card.Body>
+  
+                </Card>
+              </Col>
+              <Col md={2}></Col>
+            </Row>
+            <br></br>
+            </>
+            )
+            
+          })
+        }
+  
+        
+  
+  
+        <Row style={{ marginTop: 20 }}>
+          <Col md={1}></Col>
+          <Col md={10}>
+            <center>
+              <Button style={{backgroundColor:"#C10000",border:"none"}} onClick={HandleButtonClick}>Add a New Address</Button>
+            </center>
+          
+          </Col>
+          <Col md={1}></Col>
+          </Row>
+          <Row>
+          <Col md={1}></Col>
+          <Col md={10}>
+            <center>
+            <Button style={{backgroundColor:"#C10000",border:"none", marginTop:"20px", position:"sticky", alignContent:"end" }} onClick={handleProceedOnClick}>Proceed to Buy</Button>
+            </center>
+            </Col>
+          <Col md={1}></Col>
+        </Row>
+        <br></br>
+        
+  
+  
+  
+  
+  
+        {
+          (isButtonClicked) ? (
+            <>
+            <Row >
+              <Col md={4}></Col>
+              <Col md={4} style={{marginLeft:"10px"}} >
+                <Card >
+                  <Card.Body>
+                    <Card.Title style={{fontSize:"18px", alignContent:"center"}}>Add New Address📌</Card.Title>
+                    <Row style={{marginTop:40}}>
+                      
+                        <Col >
+                        <Input
+                          id="full_name"
+                          type="text"
+                          placeholder="Full Name"
+                          name="fullname"
+                          onChange={InputFullNameHandler}
+                          style={{borderRadius:"20px"}}
+                        />
+                      </Col> 
+                    </Row>
+                    <Row style={{marginTop:20}}>
+  
+                      <Col >
                       <Input
                         id="Phone"
                         class="form-field"
                         type="text"
                         placeholder="Phone No."
                         name="Phone"
+                        maxLength={10}
                         onChange={InputPhoneNoHandler}
                         style={{borderRadius:"20px"}}
-                     />
-                     
-                      </Col>  
-                      </Row>
-                      <br></br>
-                      <br></br>
-                      <Row>
-                        <Col>
-                        
-                            <Input
-                              style={{height:"100px"}}
-                              id="last-name"
-                              class="form-field"
-                              type="textarea"
-                              placeholder="Address Line 1 (Street Address, P.O.)"
-                              name="ADL1"
-                              onChange={InputAddressOneHandler}
-                              style={{borderRadius:"20px"}}
-                            />
-                         
-                        </Col>
-                        </Row>
-                        <br></br>
-                        <br></br>
-                        <Row>
-                      <Col md={6}>
-                      <Input
-                        id="City"
-                        class="form-field"
-                        type="text"
-                        placeholder="City"
-                        name="City"
-                        onChange={InputCityHandler}
-                        style={{borderRadius:"20px"}}
                       />
-                        </Col> 
-    
-                      <Col md={6}>
-                      <Input
-                        id="State"
-                        class="form-field"
-                        type="text"
-                        placeholder="State"
-                        name="State"
-                        onChange={InputStateHandler}
-                        style={{borderRadius:"20px"}}
-                      />
-                     
+                    
                       </Col>  
+                    </Row>
+                    <Row style={{marginTop:20}}>
+                      <Col>
+                          <Input
+                            style={{height:"100px",borderRadius:"20px"}}
+                            id="last-name"
+                            class="form-field"
+                            type="textarea"
+                            maxLength={50}
+                            placeholder="Address Line 1 (Street Address, P.O.)"
+                            name="ADL1"
+                            onChange={InputAddressOneHandler}
+                          />
+                       
+                      </Col>
                       </Row>
-                      <br></br>
-                      <br></br>
-                      <Row>
-                      <Col md={6}>
-                      <Input
-                        id="Zip"
-                        class="form-field"
-                        type="text"
-                        placeholder="Zip"
-                        name="Zip"
-                        onChange={InputZipHandler}
-                        style={{borderRadius:"20px"}}
-                      />
-                        </Col> 
-    
-                      <Col md={6}>
-                      <Input
-                        id="Country"
-                        class="form-field"
-                        type="text"
-                        placeholder="Country"
-                        name="Country"
-                        onChange={InputCountryHandler}
-                        style={{borderRadius:"20px"}}
-                      /> 
-                     
-                      </Col>  
-                      </Row>
-                      <br></br>
-                      <br></br>
-                      <Row>
-                        <Col md={10}>
-                        
-                        </Col>
-                        <Col md={2} style={{alignItems:"left",alignContent:"right"}}>
-                        <Button style={{backgroundColor:"#C10000",border:"none"}} class="form-field" type="submit" onClick={ProceedHandler}>
-                          Proceed
-                        </Button>
-                        
-                        </Col>
-                      </Row>
+                      <Row style={{marginTop:20}}>
+                    <Col md={6}>
+                    <Input
+                      id="City"
+                      class="form-field"
+                      type="text"
+                      placeholder="City"
+                      name="City"
+                      onChange={InputCityHandler}
+                      style={{borderRadius:"20px"}}
+                    />
+                      </Col> 
+  
+                    <Col md={6}>
+                    <Input
+                      id="State"
+                      class="form-field"
+                      type="text"
+                      placeholder="State"
+                      name="State"
+                      onChange={InputStateHandler}
+                      style={{borderRadius:"20px"}}
+                    />
+                   
+                    </Col>  
+                    </Row>
+                    <Row style={{marginTop:20}}>
+                    <Col md={6}>
+                    <Input
+                      id="Zip"
+                      class="form-field"
+                      type="text"
+                      placeholder="Zip"
+                      name="Zip"
+                      maxLength={6}
+                      onChange={InputZipHandler}
+                      style={{borderRadius:"20px"}}
+                    />
+                      </Col> 
+  
+                    <Col md={6}>
+                    <Input
+                      id="Country"
+                      class="form-field"
+                      type="text"
+                      placeholder="Country"
+                      name="Country"
+                      onChange={InputCountryHandler}
+                      style={{borderRadius:"20px"}}
+                    /> 
+                   
+                    </Col>  
+                    </Row>
+                    <Row style={{marginTop:20}}>
                       
-    
-                    </Card.Body>
-                  </Card>
-    
-    
-                </Col>
-                <Col md={1}></Col>
-                
-              </Row>
-              <br></br>
+                      <Col>
+                      <center>
+                      <Button style={{backgroundColor:"#C10000",border:"none"}} class="form-field" type="submit" onClick={ProceedHandler}>
+                        Add new Address
+                      </Button>
+                      </center>
+                      
+                      </Col>
+                    </Row>
+                    
+  
+                  </Card.Body>
+                </Card>
+  
+  
+              </Col>
+              <Col md={4}></Col>
               
-              </>
-            ) : (null)
-          }
-    
-    
-        </div>
+            </Row>
+            <br></br>
+            
+            </>
+          ) : (null)
+        }
+  
+  
+      </div>
     
       );
 }
