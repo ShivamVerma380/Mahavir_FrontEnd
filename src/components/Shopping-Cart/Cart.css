@@ -12,29 +12,33 @@
 }
 
 .cartTable{
-    margin-left: 107px;
-    width: 800px;
-    
+    /* margin-left: 107px; */
+    /* width: 800px; */
     box-sizing: border-box;
     border: 2px solid #E2E2E2;
     margin-top: 38px;
+    width: 58%;
 }
 
 .priceTable {
-    width: 475px;
+    width: 40%;
     box-sizing: border-box;
     border: 2px solid #E2E2E2;
-    margin-left: 40px;
+    margin-left: 10px;
     margin-top: 38px;
-    height:300px;
+    /* height:300px; */
+
     
 }
-
+.priceTable .table{
+}
 .cartpage{
     height: 100%;
+    width: 90%;
     min-height : '100vh';
     background: rgba(255, 255, 255, 0.95);
-
+    margin: auto;
+    padding: 1%;
 }
 
 .btn-flat{

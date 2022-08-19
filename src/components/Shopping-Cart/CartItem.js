@@ -70,7 +70,6 @@ const CartItem = ({item,quantity}) => {
                                         <Row>
                                             <h4 style={{letterSpacing: "0.02em",fontWeight: 400,color: "#000000",fontSize:"18px",fontFamily:"Roboto",lineHeight:'26px'}}>{item.productName}</h4>
                                         </Row>
-                                        <br></br>
                                         <Row>
                                             {
                                                 (item.productPrice === item.offerPrice) ? (<h4>₹ {item.productPrice}</h4>) : (
@@ -81,12 +80,11 @@ const CartItem = ({item,quantity}) => {
                                         </Row>
                                         {/* <br></br>
                                         <br></br> */}
-                                        <Row>
+                                        <Row style={{marginLeft: '0%'}}>
 
+                                            <>
                                             
-                                            
-                                            <Col md={6} >
-                                                <QuantityPicker  width='10rem' value={quantity} min={1} smooth onChange={(value)=>{
+                                                <QuantityPicker width='10rem' value={quantity} min={1} smooth onChange={(value)=>{
                                                     console.log("value",value)
                                                     var arr=[]
                                                     // if(localStorage.getItem("CartModels")!=null){
@@ -110,12 +108,11 @@ const CartItem = ({item,quantity}) => {
                                                     console.log("CartModels",arr1)
                                                     window.location.reload()
                                                     }} />
-                                            </Col>
-                                            <Col md={4} >
-                                                <Button style={{background:"white",color:"black",fontSize:"20px",fontFamily:'Roboto',width:'fit-content',border: 'solid 2px #c10000'}} onClick={removefromcart}><AiOutlineDelete size={20} style={{marginBottom:"5px"}}/> Remove</Button>
+                                            
+                                                <Button style={{background:"white",color:"black",fontSize:"20px",fontFamily:'Roboto',width:'fit-content',border: '0',marginLeft:'20px'}} onClick={removefromcart}><i class="fa fa-trash-o" aria-hidden="true"></i></Button>
                                                 
                                                 {/* className="btn-flat" */}
-                                            </Col>
+                                                </>
                                         </Row>
 
                                     </Col>
