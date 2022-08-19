@@ -68,7 +68,7 @@ const CartItem = ({item,quantity}) => {
                                     </Col >
                                     <Col md={10} style={{padding:'2%'}}>
                                         <Row>
-                                            <h4 style={{letterSpacing: "0.02em",fontWeight: 400,color: "#000000",fontSize:"18px",fontFamily:"Roboto",lineHeight:'26px'}}>{item.productName}</h4>
+                                            <h4 className="cart_product_title">{item.productName}</h4>
                                         </Row>
                                         <Row>
                                             {
@@ -109,7 +109,7 @@ const CartItem = ({item,quantity}) => {
                                                     window.location.reload()
                                                     }} />
                                             
-                                                <Button style={{background:"white",color:"black",fontSize:"20px",fontFamily:'Roboto',width:'fit-content',border: '0',marginLeft:'20px'}} onClick={removefromcart}><i class="fa fa-trash-o" aria-hidden="true"></i></Button>
+                                                <Button style={{background:"white",color:"black",fontSize:"20px",fontFamily:'Roboto',width:'fit-content',border: '0',marginLeft:'20px'}} onClick={removefromcart}><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></Button>
                                                 
                                                 {/* className="btn-flat" */}
                                                 </>

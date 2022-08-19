@@ -185,10 +185,10 @@ const Header = ({productList}) => {
             <p style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
           </Col>
           <Col md={1}>
-          <AiOutlineInstagram style={{color:"white",height:"20px",width:"20px", marginTop:"7px",marginLeft:"100px"}}/>
+          <AiOutlineInstagram className="instagram"/>
           </Col>
           <Col md={1}>
-            <AiOutlineFacebook style={{color:"white",height:"20px",width:"20px", marginTop:"7px",marginRight:"80px"}}/>
+            <AiOutlineFacebook className="facebook"/>
           </Col>
         </Row>
         

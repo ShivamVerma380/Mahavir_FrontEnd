@@ -142,7 +142,7 @@ function Cart() {
                     <tbody>
                         <tr>
                         <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Price ({cartItems.length} Item)</td>
-                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}}>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end"}}>
                             {
                                 
                                 cartItems.map(index=>{
@@ -161,7 +161,7 @@ function Cart() {
                         </tr>
                         <tr>
                             <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Discount</td>
-                            <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}} >
+                            <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end"}} >
                                 {
                                     cartItems.map(index=>{
                                         {
@@ -175,12 +175,12 @@ function Cart() {
                         </tr>
                         <tr>
                         <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Delivery Charges</td>
-                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px",color:"rgba(52,184,58,1)"}}>Free</td>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",color:"rgba(52,184,58,1)"}}>Free</td>
                         </tr>
                         
                         <tr>
                         <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}> Total Amount</td>
-                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px"}}>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end"}}>
                         ₹ {
                                 
                                 amount = parseInt(price)-parseInt(discount)
