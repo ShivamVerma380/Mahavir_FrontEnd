@@ -427,6 +427,10 @@ h5{font-weight: 400}
 
     .offcavasfilters{
         display: block;
+        margin-top: 10px;
+    }
+    .multipleproducts_cat_name{
+        display: none;
     }
     .filternav {
         margin-top: 84px;
@@ -436,7 +440,7 @@ h5{font-weight: 400}
     }
    
     .mainpage {
-        margin-top: 115px;
+        margin-top: 70px;
     }
     .btnrow{
         display: inline-flex;

@@ -60,7 +60,7 @@ const PendingDelivery = () => {
     function handleGenerateInvoice(order){
         console.log("Invoice",order)
         console.log("Generate Invoice",JSON.stringify(order));
-        localStorage.setItem("Generate Invoice",JSON.stringify(order));
+        localStorage.setItem("Invoice",JSON.stringify(order));
         navigate("/invoice")
     }
 

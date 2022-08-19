@@ -722,6 +722,10 @@ function TestFilterProducts(){
         SetSelectedProducts([...arr])
     }
 
+    
+
+   
+
     const toggleVisible = () => {
         const scrolled = document.documentElement.scrollTop;
         if (scrolled > 300){
@@ -746,6 +750,8 @@ function TestFilterProducts(){
 
       const handleClose = () => setShow(false);
       const handleShow = () => setShow(true);
+      var rating=new Array();
+      rating=[1,1,1,1,1];
     return(
         <>
 <body style={{background:"whitesmoke"}}>
@@ -849,7 +855,7 @@ function TestFilterProducts(){
                     
                     
                     <Col >
-                    <h4 style={{fontWeight:600, fontSize:"24px", lineHeight:"21px",fontFamily:"Roboto"}}>{localStorage.getItem("Category")}</h4>
+                    <h4 className="multipleproducts_cat_name" style={{fontWeight:600, fontSize:"24px", lineHeight:"21px",fontFamily:"Roboto"}}>{localStorage.getItem("Category")}</h4>
 
                     <div className="offcavasfilters">
                         <i class="fa fa-filter fa-3x" aria-hidden="true" onClick={handleShow}></i>
@@ -1036,6 +1042,7 @@ function TestFilterProducts(){
                                                 {Math.round(index.averageRating * 10) / 10} <span> </span><AiFillStar />
                                                 
                                                 </Col> */}
+                                               
 
                                                     <ul className="list-inline small">
                                                             <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg" ></i></li>
