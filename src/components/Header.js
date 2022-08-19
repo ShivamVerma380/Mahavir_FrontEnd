@@ -137,6 +137,10 @@ const Header = ({productList}) => {
         navigate("/my-orders")
     }
 
+    const handleInvoice=()=>{
+        navigate("/order-invoices")
+    }
+
     const handleLogout=()=>{
         console.log("logout clicked");
         localStorage.removeItem("Wishlist");
@@ -246,6 +250,7 @@ const Header = ({productList}) => {
                     // <Nav.Link style={{color:'#04001d'}} title={"Hi, "+(name)}><p><FaUserAlt size={30}/>Hi, {name}</p></Nav.Link>
                     <NavDropdown style={{color:'#04001d'}} title={<><b style={{color:"#04001d",fontSize:"18px"}}><FaUserAlt style={{color:"#04001d"}} size={30}/> Hi, {name}<RiArrowDropDownLine style={{color:"#04001d"}} size={25} /></b></>} id="collasible-nav-dropdown">
                       <NavDropdown.Item style={{color:'black'}} onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
+                      <NavDropdown.Item style={{color:'black'}} onClick={()=>handleInvoice()}>Invoice</NavDropdown.Item>
                       <NavDropdown.Item style={{color:'black'}} target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
                     </NavDropdown>
                   ):(

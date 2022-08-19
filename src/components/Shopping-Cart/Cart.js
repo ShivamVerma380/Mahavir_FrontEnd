@@ -67,6 +67,7 @@ function Cart() {
 
 
               })
+              cartItems.reverse();
               console.log("Cart Items",cartItems)
               console.log("Cart models ...",cartModels)
               SetIsCartItemsFetched(true);
