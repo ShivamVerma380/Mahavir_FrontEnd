@@ -112,7 +112,7 @@ const CartItem = ({item,quantity}) => {
                                                     }} />
                                             </Col>
                                             <Col md={4} >
-                                                <Button style={{background:"white",color:"black",fontSize:"20px",fontFamily:'Roboto',width:'fit-content',border: 'solid 2px #c10000'}} onClick={removefromcart}><AiOutlineDelete size={20} style={{marginBottom:"5px"}}/> Remove</Button>
+                                                <Button style={{marginTop:"10px",background:"white",color:"black",fontSize:"20px",fontFamily:'Roboto',width:'fit-content',border: 'solid 2px #c10000'}} onClick={removefromcart}><AiOutlineDelete size={20} style={{marginBottom:"5px"}}/> Remove</Button>
                                                 
                                                 {/* className="btn-flat" */}
                                             </Col>
