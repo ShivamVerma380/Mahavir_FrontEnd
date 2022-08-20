@@ -12,29 +12,33 @@
 }
 
 .cartTable{
-    margin-left: 107px;
-    width: 800px;
-    
+    /* margin-left: 107px; */
+    /* width: 800px; */
     box-sizing: border-box;
     border: 2px solid #E2E2E2;
     margin-top: 38px;
+    width: 58%;
 }
 
 .priceTable {
-    width: 475px;
+    width: 40%;
     box-sizing: border-box;
     border: 2px solid #E2E2E2;
-    margin-left: 40px;
+    margin-left: 10px;
     margin-top: 38px;
-    height:300px;
+    /* height:300px; */
+
     
 }
-
+.priceTable .table{
+}
 .cartpage{
     height: 100%;
+    width: 90%;
     min-height : '100vh';
     background: rgba(255, 255, 255, 0.95);
-
+    margin: auto;
+    padding: 1%;
 }
 
 .btn-flat{
@@ -57,7 +61,39 @@
     
 }
 
+.cart_product_title{
+    letter-spacing: 0.02em;
+    font-weight: 400;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    font-family: Roboto;
+    line-height: 26px;
+}
 @media screen and (min-width:320px) and (max-width:480px)
+{
+    .cartTable{
+        width: 100%;
+        margin-left: 0;
+        border: 0;
+        margin-top: 0;
+    }
+    .priceTable{
+        width: 100%;
+        margin-left: 0;
+        border: 0;
+        
+    }
+
+    .priceTable .table{
+        border: 2px solid rgb(226, 226, 226);
+    }
+    .cartpage{
+        width: 100%;
+    }
+}
+
+/* ipads and tablets */
+@media screen and (min-width: 481px) and (max-width:768px)
 {
     .cartTable{
         width: 100%;
@@ -67,6 +103,57 @@
     .priceTable{
         width: 100%;
         margin-left: 0;
+        border: 0;
         
     }
+    .priceTable .table{
+        border: 2px solid rgb(226, 226, 226);
+    }
+
+    .cartTable .img-fluid {
+        margin-left: 25%;
+        max-width: 50%;
+        height: auto;
+    }
+
+    .cart_product_title{
+        letter-spacing: 0;
+        font-weight: 400;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        font-family: 'Roboto';
+        line-height: 26px;
+    }
+}
+
+/* laplops and small screens */
+@media screen and (min-width: 769px) and (max-width:1024px)
+{
+    .cartTable .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .cartTable .col-md-2 {
+        padding: 0;
+        width: 35%;
+    }
+
+    .cartTable .col-md-10 {
+        width: 65%;
+    }
+
+    .search {
+        z-index: 9999;
+        width: 300px;
+        margin-right: 0px;
+        margin-top: 5px;
+    }
+
+
+    .Header .navbar-light .navbar-nav .nav-link {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 }

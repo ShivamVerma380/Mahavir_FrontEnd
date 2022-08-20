@@ -67,6 +67,7 @@ function Cart() {
 
 
               })
+              cartItems.reverse();
               console.log("Cart Items",cartItems)
               console.log("Cart models ...",cartModels)
               SetIsCartItemsFetched(true);
@@ -98,7 +99,7 @@ function Cart() {
                     <div className="Cartbody" style={{boxSizing:"border-box"}}>
             <Row>
     
-            <Col sm={7} className='cartTable'>
+            <Col md={7} className='cartTable'>
             {
                 (isCartItemsFetched)?(
                     <h1 className="cart_heading">Cart</h1>
@@ -130,7 +131,7 @@ function Cart() {
             </Col>
             {
                 (isCartItemsFetched)?(
-                    <Col sm={5} className="priceTable">
+                    <Col md={5} className="priceTable">
                     <Table style={{ color:'black'}} >
                     <thead>
                         <tr>
@@ -141,7 +142,7 @@ function Cart() {
                     <tbody>
                         <tr>
                         <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Price ({cartItems.length} Item)</td>
-                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}}>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end"}}>
                             {
                                 
                                 cartItems.map(index=>{
@@ -160,7 +161,7 @@ function Cart() {
                         </tr>
                         <tr>
                             <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Discount</td>
-                            <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}} >
+                            <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end"}} >
                                 {
                                     cartItems.map(index=>{
                                         {
@@ -174,12 +175,12 @@ function Cart() {
                         </tr>
                         <tr>
                         <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Delivery Charges</td>
-                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px",color:"rgba(52,184,58,1)"}}>Free</td>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",color:"rgba(52,184,58,1)"}}>Free</td>
                         </tr>
                         
                         <tr>
                         <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}> Total Amount</td>
-                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px"}}>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end"}}>
                         ₹ {
                                 
                                 amount = parseInt(price)-parseInt(discount)
@@ -195,11 +196,10 @@ function Cart() {
                             
                     </tbody>
                     </Table>
-                    <br></br>
                     
                     <Row>
                         <center>
-                        <Button style={{height:"50px",width:"250px",background:"#C10000", fontFamily:"Roboto",letterSpacing:"1px"}} className="btn-flat" onClick={handleCheckout}>CHECK OUT</Button>
+                        <Button style={{height:"50px",width:"250px",background:"#C10000", fontFamily:"Roboto",letterSpacing:"1px",marginBottom:'2%'}} className="btn-flat" onClick={handleCheckout}>CHECK OUT</Button>
                         </center>
                     </Row>
                     </Col>
@@ -241,11 +241,11 @@ function Cart() {
         <br></br>
         <br></br>
         
-        <Footer/>
+        
         
 
   </div>
-  
+  <Footer/>
   </>
     );
   }
