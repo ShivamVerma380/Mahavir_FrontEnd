@@ -201,7 +201,8 @@ const SelCatProducts=()=>{
     return(
         <>
         <Header className="header" style={{position:"sticky"}} productList={products}/>
-
+        <br></br>
+        <br></br>
                 <div>
                     
                     

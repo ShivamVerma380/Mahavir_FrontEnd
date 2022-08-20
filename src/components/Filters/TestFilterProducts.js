@@ -15,6 +15,7 @@ import "./FilterProducts.css"
 import {FaArrowCircleUp} from 'react-icons/fa';
 import { Dropdown } from "reactstrap";
 import url from "../../Uri";
+import {RiArrowDropDownLine} from 'react-icons/ri'
 
 
 function TestFilterProducts(){
@@ -622,6 +623,8 @@ function TestFilterProducts(){
         }
     }
 
+    
+
     const rangeSelector = (event, newValue) => {
         SetValue([parseInt(newValue[0]), parseInt(newValue[1])]);
         var arr=[];
@@ -770,7 +773,7 @@ function TestFilterProducts(){
           }
         
         <Row className="mainpage">
-            <Col md={2} className="filtercol" >
+            <Col md={2} className="filtercol" style={{paddingLeft:"0px",paddingRight:"0px"}} >
             <h4 style={{fontWeight:600, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Filters</h4>   
                 <hr style={{}}></hr> 
                 <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Categories</h4>
@@ -797,10 +800,10 @@ function TestFilterProducts(){
                     valueLabelDisplay="off"
                     min={parseInt(min)}
                     max={parseInt(max)}
-                    style={{width:"240px",marginLeft:"14px"}}
+                    style={{width:"230px",marginLeft:"14px"}}
                 />
                 </React.Fragment>
-                <h6>Your range of Price is between {value[0]} /- and {value[1]} /-</h6>
+                <h6 style={{marginLeft:"14px",marginRight:"14px"}}>Your range of Price is between {value[0]} /- and {value[1]} /-</h6>
               
                 
                 
@@ -815,7 +818,7 @@ function TestFilterProducts(){
                                     
                                     <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
                                     <Accordion.Item eventKey={pos}>
-                                                    <Accordion.Header style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>{index}</Accordion.Header>
+                                                    <Accordion.Header style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",marginRight:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>{index}</Accordion.Header>
                                                     <Accordion.Body>
                                                                     
                                     {/* <h5>{index}</h5> */}
@@ -968,7 +971,7 @@ function TestFilterProducts(){
                     </Col> 
                 
                     <Col  style={{display:'flex',justifyContent:'end'}}>
-                        <NavDropdown title="Sort By">
+                        <NavDropdown title={<b>Sort By<RiArrowDropDownLine style={{color:"black"}} size={25}/></b>}>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
