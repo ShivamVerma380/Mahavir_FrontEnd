@@ -122,7 +122,7 @@ function Footer(){
                                 <li><a href="/aboutcompany">About Us</a></li>
                                 <li><a href="/contactus">Contact Us</a></li>
                                 <li><a href="/storelocator">Store Locator</a></li>
-                                <li><a href="#">Hear it from the Owners</a></li>
+                                {/* <li><a href="#">Hear it from the Owners</a></li> */}
                             </ul>
                         </div>
                         <div class="col-sm-4 col-md-3 item">
@@ -137,7 +137,6 @@ function Footer(){
                             <h3 style={{color:"white"}}>Help</h3>
                             <ul>
                                 <li><a href="/faq">FAQ</a></li>
-                                <li><a href="#">Career</a></li>
                                 <li><a href="/shippingoptions">Shipping Areas</a></li>
                             </ul>
                         </div>
@@ -145,7 +144,6 @@ function Footer(){
                             <a href="https://www.facebook.com/pages/category/Electronics/Mahavir-Electronics-Pune-106562364449114/"><Icon className="social" icon="bi:facebook" /></a>
                             <a href="https://www.instagram.com/mahavir.electronics.pune/?hl=en"><Icon icon="bi:instagram"/></a>
                             <a href="https://www.linkedin.com/company/mahavir-electronics-&-furniture/about/"><Icon icon="bi:linkedin"/></a>
-                            <a href="#"><Icon icon="bi:plus-square-dotted" /></a>
                             <p class="copyright" onClick={handleDevelopersPage}>APOS © 2021</p>
                         </div>
                     </div>
