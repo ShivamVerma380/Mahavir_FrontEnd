@@ -1,9 +1,17 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import Header from "../Header";
 
 function ShippingOptions(){
     return(
         <div>
+            <Header/>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <Container>
                 <h3 style={{marginTop:"20px"}}><b>Shipping Options</b></h3>
                 <p>MahavirElectronics.net thanks you for your patronage and values your purchases with us. Given below are the details for shipping/delivery of the products sold on www.mahavirelectronics.net for your kind reference.</p>

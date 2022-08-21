@@ -3,12 +3,18 @@ import map from "../../assets/Map.png"
 import { Card, Row, Col, Container } from "react-bootstrap";
 
 import iframe from 'react-iframe';
+import Header from '../Header';
 
 const StoreLocator = () => {
     return (
         <div>
-        
-        
+        <Header/>
+        <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         
         
         <Row style={{marginTop:40}}>
