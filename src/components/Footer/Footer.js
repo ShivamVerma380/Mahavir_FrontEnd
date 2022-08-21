@@ -121,15 +121,15 @@ function Footer(){
                             <ul >
                                 <li><a href="/aboutcompany">About Us</a></li>
                                 <li><a href="/contactus">Contact Us</a></li>
-                                <li><a href="#">Store Locator</a></li>
+                                <li><a href="/storelocator">Store Locator</a></li>
                                 <li><a href="#">Hear it from the Owners</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-4 col-md-3 item">
                             <h3 style={{color:"white"}}>Policy</h3>
                             <ul>
-                                <li><a href="#">Return Policy</a></li>
-                                <li><a href="#">Terms of Use</a></li>
+                                <li><a href="/paymentreturns">Payments & Returns</a></li>
+                                <li><a href="/terms-of-use">Terms of Use</a></li>
                                 <li><p onClick={handlePrivacyPolicy}>Privacy Policy</p></li>
                             </ul>
                         </div>
@@ -138,7 +138,7 @@ function Footer(){
                             <ul>
                                 <li><a href="/faq">FAQ</a></li>
                                 <li><a href="#">Career</a></li>
-                                <li><a href="#">Shipping Areas</a></li>
+                                <li><a href="/shippingoptions">Shipping Areas</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-3 item social">
