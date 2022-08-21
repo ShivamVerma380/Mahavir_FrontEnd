@@ -105,6 +105,10 @@ function Footer(){
     function handleDevelopersPage(){
         navigate("/developerpage")
     }
+
+    function handlePrivacyPolicy(){
+        navigate("/privacypolicy")
+    }
     
     return(
         <div class="footer-clean">
@@ -126,7 +130,7 @@ function Footer(){
                             <ul>
                                 <li><a href="#">Return Policy</a></li>
                                 <li><a href="#">Terms of Use</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                <li><p onClick={handlePrivacyPolicy}>Privacy Policy</p></li>
                             </ul>
                         </div>
                         <div class="col-sm-4 col-md-3 item">

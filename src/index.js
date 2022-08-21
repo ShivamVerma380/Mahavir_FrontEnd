@@ -60,6 +60,7 @@ import AddressBuyNowSummary from './components/Checkout/BuyNowCheckout/AddressBu
 import BuyNowSummary from './components/Checkout/BuyNowCheckout/BuyNowSummary';
 import Invoice from './components/OrderDetails/Invoice';
 import OrderInvoices from './components/OrderDetails/OrderInvoices';
+import PrivacyPolicy from './components/Footer/PrivacyPolicy';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -102,6 +103,7 @@ root.render(
       <Route path='/wishlist' element = {<WishList/>}/>
       <Route path='/developerpage' element = {<DeveloperPage/>}/>
       <Route path='/aboutcompany' element = {<AboutCompany/>}/>
+      <Route path="/privacypolicy" element={<PrivacyPolicy/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/contactus' element = {<ContactUs/>}/>
       {/* <Route path='/:Category'element={<ProductsByCategory/>}/> */}
