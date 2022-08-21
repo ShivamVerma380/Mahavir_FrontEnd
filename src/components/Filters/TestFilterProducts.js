@@ -1019,7 +1019,7 @@ function TestFilterProducts(){
             </div>
             </div> */}
                                         <Col md={2} className="imagecol">
-                                            <Image fluid="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            <Image style={{width:"250px",height:"350px"}} fluid="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
                                             {/* <br></br>
                                             <p>{index.modelNumber}</p> */}
                                         </Col>

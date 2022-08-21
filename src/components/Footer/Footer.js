@@ -97,7 +97,14 @@
 import React from "react"
 import {Row,Col} from "react-bootstrap"
 import { Icon } from '@iconify/react';
+import { useNavigate } from "react-router-dom";
 function Footer(){
+
+    const navigate = useNavigate();
+
+    function handleDevelopersPage(){
+        navigate("/developerpage")
+    }
     
     return(
         <div class="footer-clean">
@@ -131,11 +138,11 @@ function Footer(){
                             </ul>
                         </div>
                         <div class="col-lg-3 item social">
-                            <a href="#"><Icon className="social" icon="bi:facebook" /></a>
-                            <a href="#"><Icon icon="bi:twitter" /></a>
-                            <a href="#"><Icon icon="bi:instagram" /></a>
+                            <a href="https://www.facebook.com/pages/category/Electronics/Mahavir-Electronics-Pune-106562364449114/"><Icon className="social" icon="bi:facebook" /></a>
+                            <a href="https://www.instagram.com/mahavir.electronics.pune/?hl=en"><Icon icon="bi:instagram"/></a>
+                            <a href="https://www.linkedin.com/company/mahavir-electronics-&-furniture/about/"><Icon icon="bi:linkedin"/></a>
                             <a href="#"><Icon icon="bi:plus-square-dotted" /></a>
-                            <p class="copyright">Company Name © 2018</p>
+                            <p class="copyright" onClick={handleDevelopersPage}>APOS © 2021</p>
                         </div>
                     </div>
                 </div>

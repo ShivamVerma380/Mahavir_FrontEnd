@@ -120,9 +120,18 @@
     
     /* box-shadow: inset 0 0 10px 20px rgba(0,0,0,0.6); */
   }
+  .card-img-top {
+    /* width: 150px; */
+    /* height: 250px; */
+    object-fit: cover;
+}
 
   .cardimage2{
     display:none;
+  }
+
+  .cardimage2 carousel slide carousel-dark{
+    margin-top: 0;
   }
 
   /*  view more button */
