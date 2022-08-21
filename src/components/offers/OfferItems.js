@@ -3,7 +3,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Card, Button, Container,Image, NavDropdown,CardGroup, Form } from "react-bootstrap";
+import { Card, Button, Container,Image,Accordion, NavDropdown,CardGroup, Form } from "react-bootstrap";
 
 import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -704,19 +704,24 @@ function OfferItems() {
                 
                 {
                     (isFiltersFetched)?(
-                        keySet.map(index=>{
+                        
+                        keySet.map((index,pos)=>{
                             return(
                                 <>
-                                <h4>{index}</h4>
+                                <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>{index}</h4>
                                 <Form>
+                                
                                 {
                                     filters[index].map(f=>{
                                         return(
-                                            <Form.Check type="checkbox" id={f} label={f} onChange={()=>handleFormCheck(index,f)}/>
+                                            <Form.Check type="checkbox" id={f} style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} label={f} onChange={()=>handleFormCheck(index,f)}/>
                                         )
                                     })
                                 }
                                 </Form>
+                                
+                                    <hr></hr>
+                                
                                 </>
                             )
                         })
