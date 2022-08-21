@@ -50,6 +50,22 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.instagram{
+    color: white;
+    height: 20px;
+    width: 20px;
+    margin-top: 7px;
+    margin-left: 100px;
+}
+
+.facebook{
+    color: white;
+    height: 20px;
+    width: 20px;
+    margin-top: 7px;
+    margin-right: 80px;
+}
 @media screen and (min-width:320px) and (max-width:480px) {
     .offcanvas-body {
         /* background-image: linear-gradient(225deg, #101214, transparent); */
@@ -78,8 +94,32 @@
     }
 
     .Header .navbar {
-        top:0;
+        top: 35px;
     }
+
+    .top-header .col-md-3{
+        /* width: 49%; */
+        display: none;
+  }
+
+  .top-header .col-md-1{
+      width: fit-content;
+}
+  .top-header .col-md-4{
+      display: none;
+  }
+
+  .top-header .col-md-2{
+      width: fit-content;
+}
+.instagram{
+  margin-left: 0px;
+}
+
+.facebook{
+  margin-right: 0px;
+}
+
     
     
 }
