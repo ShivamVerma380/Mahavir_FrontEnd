@@ -1,9 +1,17 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import Header from "../Header";
 
 function PaymentReturns(){
     return(
         <div>
+            <Header/>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <Container>
                 <h3 style={{marginTop:"20px"}}>Payment & Returns</h3>
                 <p>MahavirElectronics.net thanks you and values your purchase with us. This section describes MahavirElectronics.net’s policies on payments received from customers and returns to customers for products or services ordered.</p>

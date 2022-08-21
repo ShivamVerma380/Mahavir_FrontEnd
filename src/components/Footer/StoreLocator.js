@@ -3,21 +3,23 @@ import map from "../../assets/Map.png"
 import { Card, Row, Col, Container } from "react-bootstrap";
 
 import iframe from 'react-iframe';
+
 import Footer from './Footer';
 import Header from '../../components/Header'
 
 const StoreLocator = () => {
     return (
-        <>
+        
+        <div>
         <Header/>
         <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
 
         {/* <Header/> */}
-        
         
         
         
@@ -79,7 +81,6 @@ const StoreLocator = () => {
         <Footer/>
         
         </div>
-        </>
     )
     
 }

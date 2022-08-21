@@ -1,9 +1,18 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
+import Header from "../Header";
 
 const FAQ = () => {
     return (
         <div>
+            
+        <Header/>
+        <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         <center>
             <h1 style={{marginTop:40, color:"rgb(255,98,98"}}><b><i>Frequently Asked Questions</i></b></h1>
         </center>

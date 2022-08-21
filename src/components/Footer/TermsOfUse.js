@@ -1,9 +1,17 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import Header from "../Header";
 
 function TermsOfUse(){
     return(
         <div>
+            <Header/>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <Container>
                 <h3 style={{marginTop:"20px"}}><b>Terms Of Use</b></h3>
                 <p>MahavirElectronics.net provides its services to you subject to the notices, terms, and conditions set forth in this agreement (the "Agreement"). In addition, when you use any MahavirElectronics.net service (e.g., Customer Reviews), you will be subject to the rules, guidelines, policies, terms, and conditions applicable to such service, and they are incorporated into this Agreement by this reference. MahavirElectronics.net reserves the right to change this Site and these terms and conditions at any time.MahavirElectronics.net retains the right to deny access to anyone who we believe has violated any of these Terms of Use. If you are under 18, you may use MahavirElectronics.net only with involvement of a parent or guardian.

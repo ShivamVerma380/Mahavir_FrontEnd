@@ -2,10 +2,19 @@ import React from "react";
 import {Panel, Container } from "react-bootstrap";
 import "./PrivacyPolicy.css";
 import Dropdown from 'react-bootstrap/Dropdown';
+import Header from "../Header";
 
 
 function PrivacyPolicy(){
     return(
+        <div>
+            <Header/>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         <Container>
             <h2 style={{marginTop:"20px"}}>Mahavir Electronics Privacy & Policy</h2>
             <p>
@@ -54,6 +63,7 @@ function PrivacyPolicy(){
                 <p>You (B2B, Dealers) agree not to reproduce, duplicate, copy, sell, resell or exploit for any commercial purposes, any portion of the Service, use of the Service, or access to the Service.Mahavir Electronics (India) Pvt. Ltd. reserves the right to cancel bulk orders without prior notice and refund the balance amount after the deduction of processing fees (up to 4% on Invoice value, depending on the card use for this transaction) either done together or done through multiple orders.Refund of bookings by customers for individual use or gifting purposes will not be impacted by Mahavir Electronics.</p>
             </Container>
             </Container>
+            </div>
     )
 }
 
