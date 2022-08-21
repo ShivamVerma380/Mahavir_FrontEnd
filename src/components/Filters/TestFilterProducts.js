@@ -774,7 +774,7 @@ function TestFilterProducts(){
         
         <Row className="mainpage">
             <Col md={2} className="filtercol" style={{paddingLeft:"0px",paddingRight:"0px"}} >
-            <h4 style={{fontWeight:600, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Filters</h4>   
+            <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto"}}>Filters</h4>   
                 <hr style={{}}></hr> 
                 <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Categories</h4>
               
@@ -803,7 +803,7 @@ function TestFilterProducts(){
                     style={{width:"230px",marginLeft:"14px"}}
                 />
                 </React.Fragment>
-                <h6 style={{marginLeft:"14px",marginRight:"14px"}}>Your range of Price is between {value[0]} /- and {value[1]} /-</h6>
+                <h4 style={{marginLeft:"14px",marginRight:"14px"}}>Your range of Price is between {value[0]} /- and {value[1]} /-</h4>
               
                 
                 

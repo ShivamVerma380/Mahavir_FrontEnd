@@ -41,8 +41,8 @@ width: 100%;
 }
 
 .filterproductBtn{
-    margin-left: 20px;
-    width: 80%;
+    /* margin-left: 20px; */
+    width: 90%;
     height:50px;
     font-size: 18px;
     font-weight: bold;
@@ -421,9 +421,9 @@ h5{font-weight: 400}
         color: #0b4268;
         border-color: #0b4268;
     }
-    #comparebtn{
+    /* #comparebtn{
         display: none;
-    }
+    } */
 
     .offcavasfilters{
         display: block;
