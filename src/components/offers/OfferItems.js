@@ -18,6 +18,7 @@ import { count } from "rsuite/esm/utils/ReactChildren";
 
 import Footer from "../Footer/Footer";
 import {RiArrowDropDownLine} from 'react-icons/ri'
+import {FaArrowCircleUp} from 'react-icons/fa'
 
 function OfferItems() {
     var token=getCookie("jwtToken");
@@ -43,9 +44,14 @@ function OfferItems() {
 
     const[filterselected,SetFilterSelected] = useState([])
 
+    const[showTopBtn,setShowTopBtn] = useState(false);
+
+    const [visible, setVisible] = useState(false)
+
     var productsArray = [];
     var flag = false;
     useEffect(() => {
+        window.addEventListener('scroll', () => { if (window.scrollY > 400) { setShowTopBtn(true); } else { setShowTopBtn(false); } });
         if (!isProductsFetched && !isCategoriesFetched) {
             var modelNumbers = localStorage.getItem("offerPostersModelNumber");
             var modelNumbersArray = modelNumbers.split(",");
@@ -631,26 +637,62 @@ function OfferItems() {
         setFilterProducts([...arr])
     }
 
+    const toggleVisible = () => {
+        const scrolled = document.documentElement.scrollTop;
+        if (scrolled > 300){
+          setVisible(true)
+        } 
+        else if (scrolled <= 300){
+          setVisible(false)
+        }
+      };
+
+    const scrollToTop = () =>{
+        window.scrollTo({
+          top: 0, 
+          behavior: 'smooth'
+          /* you can also use 'auto' behaviour
+             in place of 'smooth' */
+        });
+      };
+      
+      window.addEventListener('scroll', toggleVisible);
+      const [show, setShow] = useState(false);
+
+      const handleClose = () => setShow(false);
+      const handleShow = () => setShow(true);
+
     return (
         <>
-        
+        <body style={{background:"whitesmoke"}}>
         <Header/>
-        {/* <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br> */}
+        
+             
+           
+            {
+          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
+          
+          }
+          {
+            (showTopBtn)?(
+                <Button className="scrolltopbtn" onClick={scrollToTop}>
+            <FaArrowCircleUp  />
+        </Button>
+            ):(null)
+          }
+        
         
         <Row style={{marginTop:"130px"}}>
-            <Col md={2}>
+            <Col md={2} className="filtercol" style={{paddingLeft:"0px",paddingRight:"0px"}}>
+            <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto"}}>Filters</h4>   
+                <hr style={{}}></hr> 
+                <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Categories</h4>
                 <Form>
                 {
                     (isCategoriesFetched) ?(
                         categories.map(c=>{
                             return(
-                                <Form.Check id={c} name="category" defaultChecked={(c===localStorage.getItem("CategoryOffers"))?(true):(false)}  type="radio" label={c} onClick={()=>handleCategoryClick(c)}/>
+                                <Form.Check id={c} style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} name="category" defaultChecked={(c===localStorage.getItem("CategoryOffers"))?(true):(false)}  type="radio" label={c} onClick={()=>handleCategoryClick(c)}/>
                             )
                         })
                     ):(
@@ -658,7 +700,8 @@ function OfferItems() {
                     )
                 }
                 </Form>
-                <br></br>
+                <hr></hr>
+                
                 {
                     (isFiltersFetched)?(
                         keySet.map(index=>{
@@ -856,6 +899,7 @@ function OfferItems() {
             </Col>
         </Row> 
         <Footer/>
+        </body>
         </>
     );
 }
