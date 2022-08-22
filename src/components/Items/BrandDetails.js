@@ -185,7 +185,7 @@ function BrandDetails() {
             <br></br>
             <Row className="brandheading">
             {/* style={{marginTop:'100px'}} */}
-                <Container style={{width:"100%", backgroundColor: fullWhite}}>
+                <Container style={{width:"100%",backgroundColor: fullWhite}}>
                 <center>
                     <Image className="brandimg" src={localStorage.getItem("brandLogo")} />
                 </center>
@@ -485,8 +485,10 @@ function BrandDetails() {
             <Row>
                 <center><h3 className="brand_feature_category" >Featured Videos</h3></center>
 
-                <br></br>
-                <br></br>
+                
+            </Row>
+            <br></br>
+            <Row>
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={5}

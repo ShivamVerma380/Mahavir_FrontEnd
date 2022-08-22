@@ -1,10 +1,18 @@
 import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
+import Header from "../Header";
 
 
 const ContactUs = () => {
     return (
         <div>
+            <Header/>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <center>
 
                 <img style={{ marginTop: 40 }} src="https://d2xamzlzrdbdbn.cloudfront.net/imagesrewamp/Faqs/CUSTOMER-CARE.png"></img>

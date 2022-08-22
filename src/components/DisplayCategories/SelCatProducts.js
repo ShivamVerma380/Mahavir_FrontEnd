@@ -199,14 +199,17 @@ const SelCatProducts=()=>{
 
     var modelNums;
     return(
+        <>
+        <Header className="header" style={{position:"sticky"}} productList={products}/>
+        <br></br>
+        <br></br>
                 <div>
-                    <Header className="header" style={{position:"sticky"}} productList={products}/>
                     
                     
                         {/* <Header/> */}
                         
                         
-                        
+{/*                         
                         <Carousel>
                         {
                             
@@ -235,7 +238,7 @@ const SelCatProducts=()=>{
                                 
                             )
                         }
-                        </Carousel>
+                        </Carousel> */}
                         {/* <FilterProduct/> */}
                         <TestFilterProducts/>
                         {/* {
@@ -299,6 +302,7 @@ const SelCatProducts=()=>{
                         </Col>
                     </Row> */}
                     </div>
+                    </>
     );
 
 }

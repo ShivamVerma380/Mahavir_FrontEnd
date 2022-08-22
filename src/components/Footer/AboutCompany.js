@@ -1,10 +1,18 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
+import Header from "../Header";
 
 const AboutCompany = () => {
     return (
         <div> 
+            <Header/>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         <center>
             <div> 
             <img style={{marginTop:40}} src="https://d2xamzlzrdbdbn.cloudfront.net/imagesrewamp/Faqs/About-us.png"></img>

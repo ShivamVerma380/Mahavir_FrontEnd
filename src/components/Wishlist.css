@@ -16,6 +16,7 @@ color: #0F1111;
 
 .wishlist_product_card{
     border: 1px solid #E2E2E2;
+    margin-bottom: 20px;
 }
 
 .wishlist_product_title{
@@ -74,7 +75,7 @@ color: #FA0000;
     .wishlist_lastcol{
         padding: 2%;
         display: flex;
-        justify-content: center;
+        justify-content: start;
     }
     .wishlist_lastcol .btn{
         margin-left: 20px;

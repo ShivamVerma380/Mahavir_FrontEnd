@@ -59,6 +59,12 @@ import PaymentCart from './components/Checkout/AddToCartCheckout/PaymentCart';
 import AddressBuyNowSummary from './components/Checkout/BuyNowCheckout/AddressBuyNowSummary';
 import BuyNowSummary from './components/Checkout/BuyNowCheckout/BuyNowSummary';
 import Invoice from './components/OrderDetails/Invoice';
+import OrderInvoices from './components/OrderDetails/OrderInvoices';
+import PrivacyPolicy from './components/Footer/PrivacyPolicy';
+import ShippingOptions from './components/Footer/ShippingOptions';
+import PaymentReturns from './components/Footer/PaymentReturns';
+import TermsOfUse from './components/Footer/TermsOfUse';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
 var SubCategory = localStorage.getItem("SubCategory");
@@ -101,11 +107,12 @@ root.render(
       <Route path='/wishlist' element = {<WishList/>}/>
       <Route path='/developerpage' element = {<DeveloperPage/>}/>
       <Route path='/aboutcompany' element = {<AboutCompany/>}/>
+      <Route path="/privacypolicy" element={<PrivacyPolicy/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/contactus' element = {<ContactUs/>}/>
       {/* <Route path='/:Category'element={<ProductsByCategory/>}/> */}
       <Route path='/completedorders' element={<CompletedOrders/>}/>    
-
+      <Route path='/terms-of-use' element={<TermsOfUse/>}/>
       {/* <Route path='/AddNew' element={<AddNew/>}/> */}
       <Route path='/storelocator' element={<StoreLocator/>}/>
       <Route path='/addSubCategories/:ModelNos' element = {<AddSubCategories/>}/>
@@ -119,6 +126,8 @@ root.render(
       <Route path='/productsbydeal' element={<ProductsByDeal/>}/>
       <Route path='/filterproducts' element={<FilterProduct/>}/>
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
+      <Route path='/shippingoptions' element={<ShippingOptions/>}/>
+      <Route path='/paymentreturns' element={<PaymentReturns/>}/>
       {/* <Route path='/checkout' element={<Checkout/>}/> */}
       {/* <Route path='/payment' element={<Payment/>}/> */}
       <Route path='/compareProducts' element={<AddToCompareProducts/>}/>
@@ -131,6 +140,7 @@ root.render(
       <Route path = "/payment" element = {<Payment/>}/>
 
       <Route path='/invoice' element={<Invoice/>}/>
+      <Route path='/order-invoices' element = {<OrderInvoices/>}/>
     </Routes>
   </BrowserRouter>
 );

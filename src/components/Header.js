@@ -137,6 +137,10 @@ const Header = ({productList}) => {
         navigate("/my-orders")
     }
 
+    const handleInvoice=()=>{
+        navigate("/order-invoices")
+    }
+
     const handleLogout=()=>{
         console.log("logout clicked");
         localStorage.removeItem("Wishlist");
@@ -181,10 +185,10 @@ const Header = ({productList}) => {
             <p style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
           </Col>
           <Col md={1}>
-          <AiOutlineInstagram style={{color:"white",height:"20px",width:"20px", marginTop:"7px",marginLeft:"100px"}}/>
+          <AiOutlineInstagram className="instagram"/>
           </Col>
           <Col md={1}>
-            <AiOutlineFacebook style={{color:"white",height:"20px",width:"20px", marginTop:"7px",marginRight:"80px"}}/>
+            <AiOutlineFacebook className="facebook"/>
           </Col>
         </Row>
         
@@ -246,6 +250,7 @@ const Header = ({productList}) => {
                     // <Nav.Link style={{color:'#04001d'}} title={"Hi, "+(name)}><p><FaUserAlt size={30}/>Hi, {name}</p></Nav.Link>
                     <NavDropdown style={{color:'#04001d'}} title={<><b style={{color:"#04001d",fontSize:"18px"}}><FaUserAlt style={{color:"#04001d"}} size={30}/> Hi, {name}<RiArrowDropDownLine style={{color:"#04001d"}} size={25} /></b></>} id="collasible-nav-dropdown">
                       <NavDropdown.Item style={{color:'black'}} onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
+                      <NavDropdown.Item style={{color:'black'}} onClick={()=>handleInvoice()}>Invoice</NavDropdown.Item>
                       <NavDropdown.Item style={{color:'black'}} target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
                     </NavDropdown>
                   ):(

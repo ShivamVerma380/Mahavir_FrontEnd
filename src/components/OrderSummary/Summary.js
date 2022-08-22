@@ -222,8 +222,8 @@ function Summary(){
         {/* <Header/>  */}
         <div className="Cart" style={{boxSizing:"border-box"}}>
         <Row>
-
-        <Col sm={8} className='summaryTable'>
+        <Col sm={2}></Col>
+        <Col sm={6} className='summaryTable'>
         {
             (isCartItemsFetched)?(
                 <Table >
@@ -250,7 +250,7 @@ function Summary(){
                 console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
                 console.log("Model Number:",index.modelNumber)
                 return(
-                <CartItem item={index} quantity={cartModels.get(index.modelNumber)}/>
+                <CartItem className="cartItems" item={index} quantity={cartModels.get(index.modelNumber)}/>
                 );
             })
             ):(null)
@@ -259,79 +259,70 @@ function Summary(){
         </Col>
         {
             (isCartItemsFetched)?(
-                <Col sm={4} className="summarypriceTable">
-                <Table style={{margin_top:"50px", color:'black',width:"470px"}} >
-                <thead>
-                    <tr>
-                    <th  className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Price Details</th>
-                    <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Price ({cartItems.length} Item)</td>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}}>
-                        {
-                            
-                            cartItems.map(index=>{
-                                {
-                                    (index.freeItem) ? (price+=(parseInt(index.productPrice)+parseInt(index.freeItem.price))*parseInt(cartModels.get(index.modelNumber))) : (price+=parseInt(index.productPrice)*parseInt(cartModels.get(index.modelNumber)))
-                                }
-                                
-                                
-                                
-                            })
-                        }
-                        ₹ {price}
-                        {/* ₹ 37,480 */}
-                    </td>
-                    
-                    </tr>
-                    <tr>
-                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Discount</td>
-                        <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end",paddingRight:"50px"}} >
-                            {
-                                cartItems.map(index=>{
-                                    {
-                                        (index.freeItem) ? (discount+=((parseInt(index.freeItem.price)+(parseInt(index.productPrice)-parseInt(index.offerPrice)))*parseInt(cartModels.get(index.modelNumber)))) : (discount+=((parseInt(index.productPrice)-parseInt(index.offerPrice))*parseInt(cartModels.get(index.modelNumber))))
-                                    }
-                                      
-                                })
-                            }
-                            - ₹ {discount}
-                        </td>
-                    </tr>
-                    <tr>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}>Delivery Charges</td>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px",color:"rgba(52,184,58,1)"}}>Free</td>
-                    </tr>
-                    
-                    <tr>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Total Amount</td>
-                    <td  style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2" ,textAlign:"end",paddingRight:"50px"}}>
-                    ₹ {
-                            
-                            amount = parseInt(price)-parseInt(discount)
+               <Col sm={4} className="summarypriceTable">
+                                  <Table >
+                                      <thead>
+                                          <tr>
+                                              <th style={{ fontFamily: "typeface-roboto"}}> Price Details</th>
+                                              
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr>
+                                              <td style={{ fontFamily: "typeface-roboto"}}>Price ({cartItems.length} Item)</td>
+                                              <td className='priceItems' >
+                                                  {cartItems.map(index => {
+                                                      {
+                                                          (index.freeItem) ? (price += (parseInt(index.productPrice) + parseInt(index.freeItem.price)) * parseInt(cartModels.get(index.modelNumber))) : (price += parseInt(index.productPrice) * parseInt(cartModels.get(index.modelNumber)));
+                                                      }
 
-                        }
-                        
-                        {/* ₹ 37,480 */}
-                    </td>
-                    </tr>
-                    <p style={{color:"rgba(52,184,58,1)",fontFamily:"typeface-roboto",fontSize:"20px",fontWeight:500,marginTop:"20px",marginLeft:"0.4rem"}}>
-                        You will save ₹{discount} on this order
-                    </p>
-                        
-                </tbody>
-                </Table>
-                <br></br>
-                <br></br>
-                {/* <Row>
-                    <center>
-                    <Button style={{height:"50px",width:"250px",background:"#C10000", fontFamily:"typeface-roboto",letterSpacing:"1px"}} className="btn-flat" onClick={handleCheckout}>CHECK OUT</Button>
-                    </center>
-                </Row> */}
-                </Col>
+
+
+                                                  })}
+                                                  ₹{price}
+                                                  {/* ₹ 37,480 */}
+                                              </td>
+
+                                          </tr>
+                                          <tr>
+                                              <td style={{ fontFamily: "typeface-roboto", borderBottom: "1px solid #E2E2E2" }}>Discount</td>
+                                              <td className='priceItems' >
+                                                  {cartItems.map(index => {
+                                                      {
+                                                          (index.freeItem) ? (discount += ((parseInt(index.freeItem.price)) + (parseInt(index.productPrice)) - parseInt(index.offerPrice)) * parseInt(cartModels.get(index.modelNumber))) : (discount += ((parseInt(index.productPrice) - parseInt(index.offerPrice)))* parseInt(cartModels.get(index.modelNumber)));
+                                                      }
+
+                                                  })}
+                                                  ₹{discount}
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td style={{ fontFamily: "typeface-roboto", borderBottom: "1px solid #E2E2E2" }}>Delivery Charges</td>
+                                              <td className='priceItems' >Free</td>
+                                          </tr>
+
+                                          <tr>
+                                              <td style={{ fontFamily: "typeface-roboto", borderBottom: "1px solid #E2E2E2" }}>Total Amount</td>
+                                              <td className='priceItems' >
+                                                  ₹{amount = parseInt(price) - parseInt(discount)}
+
+                                                  {/* ₹ 37,480 */}
+                                              </td>
+                                          </tr>
+                                          <p style={{ color: "rgba(52,184,58,1)", fontFamily: "typeface-roboto", fontSize: "20px", fontWeight: 500, marginTop: "20px", marginLeft: "0.4rem" }}>
+                                              You will save ₹{discount} on this order
+                                          </p>
+
+                                      </tbody>
+                                  </Table>
+                                  <br></br>
+                                  <br></br>
+                                  {/* <Row>
+        <center>
+        <Button style={{height:"50px",width:"250px",background:"#C10000", fontFamily:"typeface-roboto",letterSpacing:"1px"}} className="btn-flat" onClick={handleCheckout}>CHECK OUT</Button>
+        </center>
+    </Row> */}
+                              </Col>
             ):(
                 null
             )

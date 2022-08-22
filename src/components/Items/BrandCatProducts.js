@@ -15,6 +15,9 @@ import "../Filters/FilterProducts.css"
 import {FaArrowCircleUp} from 'react-icons/fa';
 import { Dropdown } from "reactstrap";
 import url from "../../Uri";
+import Header from '../Header'
+import Footer from '../Footer/Footer'
+import {RiArrowDropDownLine} from 'react-icons/ri'
 
 
 function BrandCatProducts(){
@@ -168,6 +171,8 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
     //   }
 
     function handleAddToCompare(index){
+
+        console.log("inside add to compare");
         
         var element = document.getElementById(index.modelNumber);
         
@@ -256,42 +261,72 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
       localStorage.setItem("comparecount",change)
       console.log("Get",localStorage.getItem("comparecount"))
 
-    function WishlistHandler(index) {
-       
-
+      function WishlistHandler(index) {
+        // alert("Item added successfully to wishlist");
+        // console.log(index.modelNumber)
+        // if (localStorage.getItem("wishlistproduct")==null) {
+        //   localStorage.setItem("wishlistproduct",index.modelNumber)
+        // }else {
+        //   var arr = localStorage.getItem("wishlistproduct").split(',')
+        //   var flag = true;
+        //   arr.map(i=>{
+    
+        //     console.log("i: ",i)
+        //     if( i=== index.modelNumber) {
+        //         arr.splice(arr.indexOf(i),1)
+        //         localStorage.setItem("wishlistproduct",arr)
+        //         console.log('del arr: ' + arr)
+        //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+        //        console.log("in if")
+        //       flag = false;
+        //     } 
+        //   }) 
+        //   if(flag)
+        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+        //     navigate('/')
+    
+        // }
         console.log("Wishlist clicked")
-
-      
+        if(getCookie("isLoggedIn")!=='true'){
+          navigate("/login")
+        }else{
+          
+        
+    
         var formdata = {
           "modelNumber": index.modelNumber
-  
+    
         }
-  
+    
         axios.post(url+"/wishlist", formdata, {
           headers: {
-            "Authorization": "Bearer "+token,
+            "Authorization": "Bearer " + token,
             "Content-Type": "multipart/form-data"
           }
         }).then(function (response) {
           if (response.status == 200) {
             // console.log("Added to wishlist successfully");
-            toast.success(<b>Added to wishlist successfully</b>)
-            
+            // toast.success(<b>Added to wishlist successfully</b>)
+            // alert("Item added to wishlist successfully")
+            var arr = localStorage.getItem("Wishlist").split(",")
+            arr.push(index.modelNumber)
+            localStorage.setItem("Wishlist", arr)
+            window.location.reload();
             console.log(response.data)
             // navigate("/");
           }
+          else{
+            alert("Item already present in wishlist")
+            console.log(response.data)
+          }
         }).catch(function (error) {
-          if(error.response.status==406) {
-            // alert("Item already present in wishlist")
-            toast.warn(<b>Item already present in Wishlist</b>)
-          }
-          else {
+            alert("Item already present in wishlist")
             console.log("Error", error);
-          }
           
         })
-
-    }
+      }
+    
+      }
 
 
     function callProductDetails(index) {
@@ -726,6 +761,7 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
       const handleShow = () => setShow(true);
     return(
         <>
+        <Header/>
 <body style={{background:"whitesmoke"}}>
              
            
@@ -740,86 +776,9 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
         </Button>
             ):(null)
           }
-        
+        <br></br>
         <Row className="mainpage">
-            <Col md={2} className="filtercol" >
-            <h4 style={{fontWeight:600, fontSize:"18px", lineHeight:"21px", marginLeft:"14px"}}>Filters</h4>   
-                <hr style={{}}></hr> 
-                <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Categories</h4>
-              
-                {
-                    (isCategoriesFetched)?(
-                        categories.map(cat=>{
-                            return(
-                                <Form.Check style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
-                            )
-                        })
-                    ):(
-                        null
-                    )
-                }
-                <hr></hr>
-                <React.Fragment>
-                <Typography id="range-slider" gutterBottom style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>
-                    Select Price Range
-                </Typography>
-                <Slider
-                    defaultValue={[parseInt(min),parseInt(max)]}
-                    onChange={rangeSelector}
-                    valueLabelDisplay="off"
-                    min={parseInt(min)}
-                    max={parseInt(max)}
-                    style={{width:"240px",marginLeft:"14px"}}
-                />
-                </React.Fragment>
-                <h6>Your range of Price is between {value[0]} /- and {value[1]} /-</h6>
-              
-                
-                
-                <br></br>
-                <hr></hr>
-                
-                {
-                    (isFiltersFetched)?(
-                        keySet.map((index,pos)=>{
-                            return(
-                                <div >
-                                    
-                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
-                                    <Accordion.Item eventKey={pos}>
-                                                    <Accordion.Header style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>{index}</Accordion.Header>
-                                                    <Accordion.Body>
-                                                                    
-                                    {/* <h5>{index}</h5> */}
-                                    {
-                                        filters[index].map(f=>{
-                                            return(
-                                                <>
-                                                
-                                                    <Form>
-                                                        <Form.Check style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} type="checkbox" id={f} value={f}  label={f}     defaultChecked={(f===localStorage.getItem("SubSubCategory") && index===localStorage.getItem("SubCategory"))?(true):(false)} onChange={()=>handleFormCheck(index,f)} />
-                                                    </Form>
-                                                     
-                                                </>
-                                                
-                                                
-                                            )
-                                        
-                                            
-                                        })
-                                    }
-                                    </Accordion.Body>
-                                    </Accordion.Item>
-                                    </Accordion>
-                                    <hr></hr>
-                                </div>
-                            )
-                        })
-                    ):(
-                        null
-                    )
-                }
-            </Col>
+            <Col md={1}></Col>
             <Col md={10} >
             {
                 // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
@@ -940,7 +899,7 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
                     </Col> 
                 
                     <Col  style={{display:'flex',justifyContent:'end'}}>
-                        <NavDropdown title="Sort By">
+                        <NavDropdown title={<b>Sort By<RiArrowDropDownLine style={{color:"black"}} size={25}/></b>}>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
                         <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
@@ -1065,7 +1024,9 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
                                                         (index.offerPrice==null) ? (
                                                             <h4 style={{fontSize:'24px'}}>MRP: <b>₹{index.productPrice}</b></h4>
                                                         ) : (
-                                                            <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><p style={{fontSize:'24px',color:'#c10000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</p> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5></>
+                                                            // <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><p style={{fontSize:'24px',color:'#c10000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</p> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5></>
+                                                            <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><b style={{fontSize:'24px',color:'#FA0000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</b><br></br>
+                                                            <b style={{fontWeight:500,fontSize:"18px",color:"#565959" }}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",fontWeight:500,fontSize:"18px",color:"#565959"}}>₹{index.productPrice}  </b></b>  <b style={{color:"green",fontSize:"18px",marginLeft:"10px"}}>  {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h5></>  
                                                         )
                                                     }
                                                 </Col>
@@ -1073,7 +1034,7 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
                                             <Row className="checkboxx">
                                                 <Form className="check">
 
-                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  style={{fontSize:"18px"}} label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
 
 
                                                 </Form>
@@ -1083,7 +1044,7 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
                                             <Row>
                                             
                                             
-                                            <Button className="filterproductBtn" variant="outline-primary">Add to wishlist</Button>
+                                            <Button className="filterproductBtn" variant="outline-primary" onClick={()=>WishlistHandler(index)}>Add to wishlist</Button>
 
                                             </Row>
                                              
@@ -1108,6 +1069,7 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
             </Col>
         </Row>
         </body>
+        <Footer/>
         </>
 
         

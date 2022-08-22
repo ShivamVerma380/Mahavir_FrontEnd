@@ -1,6 +1,5 @@
 .summaryTable{
-    margin-left: 25px;
-    margin-top: -50px;
+    margin-left: 100px;
     width: 800px;
 
     
@@ -14,6 +13,39 @@
     box-sizing: border-box;
     border: 1px solid #E2E2E2;
     margin-left: 40px;
-    margin-top: -50px;
+    margin-top: 50px;
     height:300px;
+    color: black;
+}
+
+.summarypriceTable.priceItems{
+    font-family: typeface-roboto;
+    text-align: end;
+    padding-right: 50px;
+    }
+@media only screen and (max-width: 450px) {
+    .summaryTable{
+        width: 350px;
+        margin-left: 50px;
+    }
+    .summarypriceTable{
+        width: 350px;
+        font-size: 16px;
+    }
+    tbody tr { 
+        margin-right: 0%;
+		width: 300px; 
+        display: block;
+        text-align: end;
+	}
+    tbody tr td { 
+        width: 150px; 
+        text-align: start;
+    }
+    thead, table{
+        width: 300px;
+        display: block;
+        text-align: end;
+        padding-left: 20px;
+    }
 }

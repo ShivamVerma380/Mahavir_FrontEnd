@@ -82,8 +82,9 @@ const WishlistProducts = () => {
         console.log("Response", response);
         if (response.status == 200) {
           console.log("Wishlist response", response.data);
-          setWish(response.data);
+          setWish([...response.data].reverse()); 
           setIsWishlistFetched(true);
+
           
           // setAddress(response.data);
           // console.log("Address: ", address)

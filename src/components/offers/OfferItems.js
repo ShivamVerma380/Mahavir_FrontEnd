@@ -3,7 +3,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Card, Button, Container, CardGroup, Form } from "react-bootstrap";
+import { Card, Button, Container,Image,Accordion, NavDropdown,CardGroup, Form } from "react-bootstrap";
 
 import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -16,8 +16,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import url from "../../Uri";
 import { count } from "rsuite/esm/utils/ReactChildren";
 
+import Footer from "../Footer/Footer";
+import {RiArrowDropDownLine} from 'react-icons/ri'
+import {FaArrowCircleUp} from 'react-icons/fa'
+
 function OfferItems() {
     var token=getCookie("jwtToken");
+    var comparemodels=getCookie("addToCompare").split(',');
     var cart=getCookie("CartModels").split(',');
     const navigate = useNavigate();
     const location = useLocation();
@@ -25,6 +30,9 @@ function OfferItems() {
     const [filterProducts,setFilterProducts] = useState([]);
     const [isProductsFetched, setIsProductsFetched] = useState(false);
     const [isTimeout, setIsTimeOut] = useState(false);
+
+    const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
+    const [change, setChange] = useState(0);
 
     const [categories,SetCategories] = useState([]);
     const [isCategoriesFetched,SetIsCategoriesFetched] = useState(false);
@@ -36,9 +44,14 @@ function OfferItems() {
 
     const[filterselected,SetFilterSelected] = useState([])
 
+    const[showTopBtn,setShowTopBtn] = useState(false);
+
+    const [visible, setVisible] = useState(false)
+
     var productsArray = [];
     var flag = false;
     useEffect(() => {
+        window.addEventListener('scroll', () => { if (window.scrollY > 400) { setShowTopBtn(true); } else { setShowTopBtn(false); } });
         if (!isProductsFetched && !isCategoriesFetched) {
             var modelNumbers = localStorage.getItem("offerPostersModelNumber");
             var modelNumbersArray = modelNumbers.split(",");
@@ -116,6 +129,95 @@ function OfferItems() {
         }  
     }  
 
+    function handleAddToCompare(index){
+        
+        var element = document.getElementById(index.modelNumber);
+        
+        
+        var length=0;
+        
+        comparemodels.map(index=>{
+            if(index!==""){
+                length++;
+            }
+        })
+        // if(length==0){
+        //     console.log("Category...",index.category)
+        //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
+        // }
+        // var length = comparemodels.length;
+        console.log("Length...",length)
+        
+        
+        if(element.checked){
+            var flag = true;
+            if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
+                flag = false;
+                document.getElementById(index.modelNumber).checked = false;
+                alert("Please select products from same category");
+            }
+            if(length==4){
+                flag = false;
+                document.getElementById(index.modelNumber).checked=false;
+                alert("You can compare only 4 products");
+            }
+            if(flag){
+                console.log("adddd"+index.modelNumber);
+                comparemodels.push(index.modelNumber);
+                setCookie("addToCompare",comparemodels,20);
+                setLen(getCookie("addToCompare").split(',').length)
+                console.log(comparemodels);
+                console.log("checked "+index.modelNumber);
+            }
+        }
+        else {
+          for (var i = 0; i < comparemodels.length; i++) {
+            if (comparemodels[i] === index.modelNumber) {
+              comparemodels.splice(i, 1);
+                console.log(comparemodels);
+                setCookie("addToCompare",comparemodels,20);
+                setLen(getCookie("addToCompare").split(',').length)
+                // window.location.reload();
+                break;
+            }
+        }
+          console.log("unchecked "+index.modelNumber);
+
+        }
+
+        var final_length = 0;
+        comparemodels.map(index=>{
+            if(index!==""){
+                final_length++;
+            }
+        })
+        if(final_length==0){
+            localStorage.removeItem("AddToCompareCategory");
+        }
+        if(final_length==1){
+            localStorage.setItem("AddToCompareCategory",index.category);
+        }
+
+
+        // if (event.target.checked) {
+  
+        //   console.log('✅ Checkbox is checked');
+        //   setChange(change+1)
+          
+          
+          
+        // } else {
+        //   console.log('⛔️ Checkbox is NOT checked');
+        //   setChange(change-1)
+        // }
+        // setisAddCompareClicked(current => !current);
+        // // alert("Added To Compare");
+        
+    }
+      
+      localStorage.setItem("comparecount",change)
+      console.log("Get",localStorage.getItem("comparecount"))
+
     function callProductDetails(index) {
         //alert(index);
         console.log("Index", index);
@@ -133,7 +235,7 @@ function OfferItems() {
         //   var arr = localStorage.getItem("wishlistproduct").split(',')
         //   var flag = true;
         //   arr.map(i=>{
-           
+    
         //     console.log("i: ",i)
         //     if( i=== index.modelNumber) {
         //         arr.splice(arr.indexOf(i),1)
@@ -147,40 +249,48 @@ function OfferItems() {
         //   if(flag)
         //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
         //     navigate('/')
-          
+    
         // }
         console.log("Wishlist clicked")
-  
+        if(getCookie("isLoggedIn")!=='true'){
+          navigate("/login")
+        }else{
+          
         
-          var formdata = {
-            "modelNumber": index.modelNumber
     
+        var formdata = {
+          "modelNumber": index.modelNumber
+    
+        }
+    
+        axios.post(url+"/wishlist", formdata, {
+          headers: {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "multipart/form-data"
           }
+        }).then(function (response) {
+          if (response.status == 200) {
+            // console.log("Added to wishlist successfully");
+            // toast.success(<b>Added to wishlist successfully</b>)
+            // alert("Item added to wishlist successfully")
+            var arr = localStorage.getItem("Wishlist").split(",")
+            arr.push(index.modelNumber)
+            localStorage.setItem("Wishlist", arr)
+            window.location.reload();
+            console.log(response.data)
+            // navigate("/");
+          }
+          else{
+            alert("Item already present in wishlist")
+            console.log(response.data)
+          }
+        }).catch(function (error) {
+            alert("Item already present in wishlist")
+            console.log("Error", error);
+          
+        })
+      }
     
-          axios.post(url+"/wishlist", formdata, {
-            headers: {
-              "Authorization": "Bearer "+token,
-              "Content-Type": "multipart/form-data"
-            }
-          }).then(function (response) {
-            if (response.status == 200) {
-              toast.success(<b>Added to wishlist successfully</b>)  
-            //   console.log("Added to wishlist successfully");
-              
-              console.log(response.data)
-              // navigate("/");
-            }
-          }).catch(function (error) {
-            if(error.response.status==406) {
-                toast.warn(<b>Item already present in Wishlist</b>)
-            //   alert("Item already present in wishlist")
-            }
-            else {
-              console.log("Error", error);
-            }
-            
-          })
-     
       }
 
 
@@ -459,15 +569,130 @@ function OfferItems() {
         
     }
 
+    function SortByLowPrice(){
+        console.log("in sort function")
+        var arr=[]; 
+        setFilterProducts([]);
+        arr = filterProducts;
+        console.log("Before sorting",filterProducts)
+        arr.map(index=>{
+            console.log("indexOfferPrice",index.offerPrice)
+        })
+        arr.sort((a,b)=>a.offerPrice-b.offerPrice);
+        console.log("After sorting",filterProducts)
+        arr.map(index=>{
+            console.log("indexOfferPrice--",index.offerPrice)
+        })
+        setFilterProducts([...arr])
+    }
+    
+    function SortByHighPrice(){
+        console.log("in sort function")
+        var arr=[]; 
+        setFilterProducts([]);
+        arr = filterProducts;
+        console.log("Before sorting",filterProducts)
+        arr.map(index=>{
+            console.log("indexOfferPrice",index.offerPrice)
+        })
+        arr.sort((a,b)=>b.offerPrice-a.offerPrice);
+        console.log("After sorting",filterProducts)
+        arr.map(index=>{
+            console.log("indexOfferPrice--",index.offerPrice)
+        })
+        setFilterProducts([...arr])
+    }
+
+    function SortByTopRated(){
+        console.log("in sort function")
+        var arr=[]; 
+        setFilterProducts([]);
+        arr = filterProducts;
+        console.log("Before sorting",filterProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating",index.averageRating)
+        })
+        arr.sort((a,b)=>b.averageRating-a.averageRating);
+        console.log("After sorting",filterProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating--",index.averageRating)
+        })
+        setFilterProducts([...arr])
+    }
+
+    function SortByDiscount(){
+        console.log("in sort function")
+        var arr=[]; 
+        setFilterProducts([]);
+        arr = filterProducts;
+        console.log("Before sorting",filterProducts)
+        arr.map(index=>{
+            console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
+        })
+        arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
+        console.log("After sorting",filterProducts)
+        arr.map(index=>{
+            console.log("indexAverageRating--",index.averageRating)
+        })
+        setFilterProducts([...arr])
+    }
+
+    const toggleVisible = () => {
+        const scrolled = document.documentElement.scrollTop;
+        if (scrolled > 300){
+          setVisible(true)
+        } 
+        else if (scrolled <= 300){
+          setVisible(false)
+        }
+      };
+
+    const scrollToTop = () =>{
+        window.scrollTo({
+          top: 0, 
+          behavior: 'smooth'
+          /* you can also use 'auto' behaviour
+             in place of 'smooth' */
+        });
+      };
+      
+      window.addEventListener('scroll', toggleVisible);
+      const [show, setShow] = useState(false);
+
+      const handleClose = () => setShow(false);
+      const handleShow = () => setShow(true);
+
     return (
-        <Row>
-            <Col md={2}>
+        <>
+        <body style={{background:"whitesmoke"}}>
+        <Header/>
+        
+             
+           
+            {
+          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
+          
+          }
+          {
+            (showTopBtn)?(
+                <Button className="scrolltopbtn" onClick={scrollToTop}>
+            <FaArrowCircleUp  />
+        </Button>
+            ):(null)
+          }
+        
+        
+        <Row style={{marginTop:"130px"}}>
+            <Col md={2} className="filtercol" style={{paddingLeft:"0px",paddingRight:"0px"}}>
+            <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto"}}>Filters</h4>   
+                <hr style={{}}></hr> 
+                <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Categories</h4>
                 <Form>
                 {
                     (isCategoriesFetched) ?(
                         categories.map(c=>{
                             return(
-                                <Form.Check id={c} name="category" defaultChecked={(c===localStorage.getItem("CategoryOffers"))?(true):(false)}  type="radio" label={c} onClick={()=>handleCategoryClick(c)}/>
+                                <Form.Check id={c} style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} name="category" defaultChecked={(c===localStorage.getItem("CategoryOffers"))?(true):(false)}  type="radio" label={c} onClick={()=>handleCategoryClick(c)}/>
                             )
                         })
                     ):(
@@ -475,22 +700,37 @@ function OfferItems() {
                     )
                 }
                 </Form>
-                <br></br>
+                <hr></hr>
+                
                 {
                     (isFiltersFetched)?(
-                        keySet.map(index=>{
+                        
+                        keySet.map((index,pos)=>{
                             return(
                                 <>
-                                <h4>{index}</h4>
-                                <Form>
+                              
+                                <div >
+                                    
+                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
+                                    <Accordion.Item eventKey={pos}>
+                                                    <Accordion.Header>{index}</Accordion.Header>
+                                                    <Accordion.Body>
                                 {
                                     filters[index].map(f=>{
                                         return(
-                                            <Form.Check type="checkbox" id={f} label={f} onChange={()=>handleFormCheck(index,f)}/>
+                                            <Form>
+                                            <Form.Check type="checkbox" id={f} style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} label={f} onChange={()=>handleFormCheck(index,f)}/>
+                                            </Form>
                                         )
                                     })
                                 }
-                                </Form>
+                                 </Accordion.Body>
+                                    </Accordion.Item>
+                                    </Accordion>
+                                    <hr></hr>
+                                </div>
+                               
+                                
                                 </>
                             )
                         })
@@ -501,14 +741,169 @@ function OfferItems() {
             </Col>
             <Col md={10}>
             {
+                <Row className="filterproductsRow">
+                    
+                    
+                <Col >
+                <h4 className="multipleproducts_cat_name" style={{fontWeight:600, fontSize:"24px", lineHeight:"21px",fontFamily:"Roboto"}}>{localStorage.getItem("Category")}</h4>
+
+                
+
+                <p className="products">(<b>{filterProducts.length}</b> Products Found )</p>
+                </Col> 
+            
+                <Col  style={{display:'flex',justifyContent:'end'}}>
+                    <NavDropdown title={<b>Sort By<RiArrowDropDownLine style={{color:"black"}} size={25}/></b>}>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
+                    <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
+                    </NavDropdown>
+                </Col>
+                
+            </Row>
+            }
+            {
                 (isProductsFetched)?(
                     filterProducts.map((index) => {
                         return(
-                            <Row>
-                                <Col md={2}>
-                                    <img style={{height:"275px",width:"275px"}} className="logo_mahavir" src={index.productImage1} alt="God" />
-                                </Col>
-                            </Row>
+                            // <Row>
+                            //     <Col md={2}>
+                            //         <img style={{height:"275px",width:"275px"}} className="logo_mahavir" src={index.productImage1} alt="God" />
+                            //     </Col>
+                            // </Row>
+                            <Row className="filterproductsRow">
+             
+             {/* <div className="d-flex justify-content-center row">
+        <div className="col-md-10">
+            <div className="row p-2 bg-white border rounded">
+                <div className="col-md-3 mt-1"><img className="img-fluid img-responsive rounded product-image" src="https://i.imgur.com/QpjAiHq.jpg"/></div>
+                <div className="col-md-6 mt-1">
+                    <h5>Quant olap shirts</h5>
+                    <div className="d-flex flex-row">
+                        <div className="ratings mr-2"><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></div><span>310</span>
+                    </div>
+                    <div className="mt-1 mb-1 spec-1"><span>100% cotton</span><span className="dot"></span><span>Light weight</span><span className="dot"></span><span>Best finish<br></br></span></div>
+                    <div className="mt-1 mb-1 spec-1"><span>Unique design</span><span className="dot"></span><span>For men</span><span className="dot"></span><span>Casual<br></br></span></div>
+                    <p className="text-justify text-truncate para mb-0">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.<br></br><br></br></p>
+                </div>
+                <div className="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <div className="d-flex flex-row align-items-center">
+                        <h4 className="mr-1">$13.99</h4><span className="strike-text">$20.99</span>
+                    </div>
+                    <h6 className="text-success">Free shipping</h6>
+                    <div className="d-flex flex-column mt-4"><button className="btn btn-primary btn-sm" type="button">Details</button><button className="btn btn-outline-primary btn-sm mt-2" type="button">Add to wishlist</button></div>
+                </div>
+            </div>
+            </div>
+            </div> */}
+                                        <Col md={2} className="imagecol">
+                                            <Image style={{width:"250px",height:"250px"}} fluid="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            {/* <br></br>
+                                            <p>{index.modelNumber}</p> */}
+                                        </Col>
+
+                                        <Col md={7} >
+                                            <Row className="innerrow" onClick={() => callProductDetails(index)} >
+                                                
+                                                    <h4 className="multipleproduct_title" onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
+                                                
+                                                {/* <Col md={1} >
+                                                    {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
+                                                        <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
+                                                        <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
+                                                    }
+                                                </Col> */}
+
+                                            </Row>
+                                            <Row>
+                                                {/* <Col md={11} style={{    paddingBottom: '40px',width: '10%'}} className="star">
+                                                {Math.round(index.averageRating * 10) / 10} <span> </span><AiFillStar />
+                                                
+                                                </Col> */}
+                                               
+
+                                                    <ul className="list-inline small">
+                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg" ></i></li>
+                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
+                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
+                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
+                                                            <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-lg"></i></li>
+                                                            </ul>
+                                                
+                                            </Row>
+                                            
+                                            <Row className="innerrow">
+                                                <Col>
+                                                    {
+                                                        (index.productHighlights!=null)?(
+                                                            index.productHighlights.split(';').map(highlight => {
+                                                                return (
+                                                                    <h6 className="multipleproduct_highlights">• {highlight}<br></br></h6>
+                                                                );
+                                                            })
+                                                        ):(
+                                                            null
+                                                        )
+                                                        
+                                                    }
+                                                    {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
+                                                </Col>
+
+                                            </Row>
+                                            
+
+                                            
+{/* 
+                                            <Row className="innerrow">
+                                                <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
+                                                <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
+                                            
+
+                                            </Row> */}
+                                        </Col>
+
+                                        <Col md={3} className="lastcol">
+
+                                            
+
+                                            <Row >
+                                                <Col >
+                                                    {
+                                                        (index.offerPrice==null) ? (
+                                                            <h4 style={{fontSize:'24px'}}>MRP: <b>₹{index.productPrice}</b></h4>
+                                                        ) : (
+                                                            <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><b style={{fontSize:'24px',color:'#FA0000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</b><br></br>
+                                                            <b style={{fontWeight:500,fontSize:"18px",color:"#565959" }}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",fontWeight:500,fontSize:"18px",color:"#565959"}}>₹{index.productPrice}  </b></b>  <b style={{color:"green",fontSize:"18px",marginLeft:"10px"}}>  {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h5></>
+                                                        )
+                                                    }
+                                                </Col>
+                                            </Row>
+                                            <Row className="checkboxx">
+                                                <Form className="check">
+
+                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" style={{fontSize:"18px"}} id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+
+
+                                                </Form>
+                                            </Row>
+                                            <br></br>
+
+                                            <Row >
+                                                {/* className="btnrow" */}
+                                            
+                                            
+                                                 <Button className="filterproductBtn" variant="outline-primary" onClick={()=>WishlistHandler(index)}>Add to wishlist</Button>
+
+                                            </Row>
+                                             
+                                            
+
+                                        </Col>
+                                        
+
+                                    </Row>
                         )
                     })
                 ):(
@@ -517,6 +912,9 @@ function OfferItems() {
             }
             </Col>
         </Row> 
+        <Footer/>
+        </body>
+        </>
     );
 }
 
