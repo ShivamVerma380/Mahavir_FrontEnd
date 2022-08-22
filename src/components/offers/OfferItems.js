@@ -708,19 +708,28 @@ function OfferItems() {
                         keySet.map((index,pos)=>{
                             return(
                                 <>
-                                <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>{index}</h4>
-                                <Form>
-                                
+                              
+                                <div >
+                                    
+                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
+                                    <Accordion.Item eventKey={pos}>
+                                                    <Accordion.Header>{index}</Accordion.Header>
+                                                    <Accordion.Body>
                                 {
                                     filters[index].map(f=>{
                                         return(
+                                            <Form>
                                             <Form.Check type="checkbox" id={f} style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} label={f} onChange={()=>handleFormCheck(index,f)}/>
+                                            </Form>
                                         )
                                     })
                                 }
-                                </Form>
-                                
+                                 </Accordion.Body>
+                                    </Accordion.Item>
+                                    </Accordion>
                                     <hr></hr>
+                                </div>
+                               
                                 
                                 </>
                             )
