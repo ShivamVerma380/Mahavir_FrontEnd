@@ -53,6 +53,12 @@
   /* .image-container:hover .image_p:hover {
     filter: grayscale(0) brightness(100%);
   } */
-
-
+  .minipostercard{
+    width:25%;
+  }
+  @media screen and (min-width:320px) and (max-width:480px) {
+    .minipostercard{
+      width:50%;
+    }
+  }
  
