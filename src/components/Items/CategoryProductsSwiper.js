@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie, setCookie } from "../Cookies";
 import { ToastContainer, toast } from 'react-toastify';
-import { MDBCarousel, MDBCol, MDBCarouselInner, MDBCarouselItem, MDBCarouselElement, MDBCardHeader, MDBCardFooter, MDBBtn, MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardLink, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
+import { MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
 //import SimpleImageSlider from "react-simple-image-slider";
 import MovingComponent from 'react-moving-text'
 
@@ -263,8 +263,8 @@ function CategoryProductsSwiper({ cattitle }) {
 
 
             <MDBContainer className="categoryproductscontainer">
-              <Row style={{paddingTop:"10px",marginBottom:"15px"}}>
-                <Col  >
+              <Row className="categoryproductsrow">
+                <Col md={8} >
                   <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
 
 
@@ -293,7 +293,7 @@ function CategoryProductsSwiper({ cattitle }) {
 
 
                 </Col>
-                <Col style={{display:'flex',justifyContent:'end'}}>
+                <Col md={4} style={{display:'flex',justifyContent:'end'}}>
                   <button onClick={() => CategoryProducts(cattitle)} class="explore">View More<span class="icon-right after"></span></button>
 
                 </Col>
