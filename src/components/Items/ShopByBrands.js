@@ -92,25 +92,22 @@ const ShopByBrands = () => {
           (isBrandsFetched) ? (
             <>
               <Swiper
-                slidesPerView={1}
-                spaceBetween={5}
-                slidesPerGroup={3}
                 loop={false}
                 loopFillGroupWithBlank={true}
                 breakpoints={{
-                  700: {
-                    slidesPerView: 5,
-                  },
-                  400: {
-                    slidesPerView: 1,
-                  },
+                    700: {
+                        slidesPerView: 6,
+                    },
+                    400: {
+                        slidesPerView: 3,
+                    },
                 }}
                 pagination={{
-                  clickable: true,
+                    clickable: true,
                 }}
                 navigation={true}
                 modules={[Pagination, Navigation]}
-                className="mySwiper"
+                className="brand_category_swiper"
                 style={{zIndex:0}}
               > 
                 {
