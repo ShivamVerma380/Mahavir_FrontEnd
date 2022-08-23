@@ -115,7 +115,7 @@ const ShopByBrands = () => {
 
                     return (
                       <SwiperSlide>                     
-                            <img onClick={() => BrandClickHandler(index)} style={{ height: "126px", width: "126px" }} src={index.brandLogo} />                       
+                            <img className="brandlogo" onClick={() => BrandClickHandler(index)} src={index.brandLogo} />                       
                       </SwiperSlide>
                     )
                   })

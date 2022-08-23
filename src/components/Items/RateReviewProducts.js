@@ -7,6 +7,7 @@ import axios from "axios";
 import url from "../../Uri";
 import { getCookie } from "../Cookies";
 import { useNavigate } from "react-router-dom";
+import "./RateReview.css"
 
 const RateReviewProducts = () => {
 
@@ -99,7 +100,7 @@ const RateReviewProducts = () => {
                 <Col md={1}>
                     <img src={product.productImage1} style={{ width: 100, height: 100 }}></img>
                 </Col>
-                <Col md={4}>
+                <Col md={4} className="productname">
                     <h6>{product.productName}</h6>
                 </Col>
 

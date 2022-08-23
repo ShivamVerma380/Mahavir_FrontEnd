@@ -219,7 +219,7 @@ function Deals({deals}) {
             </Row>
           
           
-          <MDBRow style={{justifyContent: 'left',padding: '10px'}} className='row-cols-1 row-cols-md-3 g-4'>
+          <MDBRow style={{justifyContent: 'center',padding: '10px'}} className='row-cols-1 row-cols-md-3 g-4'>
             {
               firstfourproducts.map(index=>{
                 const images = [

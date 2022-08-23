@@ -8,6 +8,7 @@ import { Pagination, Navigation } from "swiper";
 import { Button } from "react-bootstrap";
 
 import './ShopByBrands.css';
+
 import { Carousel, CarouselItem } from "react-bootstrap";
 import Header from "../Header";
 import { Col, Row, Form, Card, Container, Image } from "react-bootstrap";
@@ -294,7 +295,7 @@ function BrandDetails() {
                     return (
                             <>
                             <Row>
-                                <Row>
+                                <Row className="brand_feature">
 
                                 
                                     <Col md={4}>

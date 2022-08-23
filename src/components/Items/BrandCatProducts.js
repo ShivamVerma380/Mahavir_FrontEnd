@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Button, Form, Card, Container ,Image, NavDropdown,Accordion,Offcanvas,Navbar } from "react-bootstrap";
+import { Col, Row, Button, Form, Card, Container, Image, NavDropdown, Accordion, Offcanvas, Navbar } from "react-bootstrap";
 
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
-import {setCookie,getCookie} from '../Cookies';
+import { setCookie, getCookie } from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -12,44 +12,44 @@ import Box from '@mui/material/Box';
 import { sortBy } from "underscore";
 import { AiFillStar } from "react-icons/ai";
 import "../Filters/FilterProducts.css"
-import {FaArrowCircleUp} from 'react-icons/fa';
+import { FaArrowCircleUp } from 'react-icons/fa';
 import { Dropdown } from "reactstrap";
 import url from "../../Uri";
 import Header from '../Header'
 import Footer from '../Footer/Footer'
-import {RiArrowDropDownLine} from 'react-icons/ri'
+import { RiArrowDropDownLine } from 'react-icons/ri'
 
 
-function BrandCatProducts(){
-    var comparemodels=getCookie("addToCompare").split(',');
+function BrandCatProducts() {
+    var comparemodels = getCookie("addToCompare").split(',');
     var category = localStorage.getItem("Category");
     const navigate = useNavigate();
-    var token=getCookie("jwtToken");
+    var token = getCookie("jwtToken");
     // console.log("min",min,"  max",max);
 
-    var cart=getCookie("CartModels").split(',');
+    var cart = getCookie("CartModels").split(',');
     //To save selected products
-    const[selectedProducts,SetSelectedProducts] = useState([]);
-    const[isSelectedProductsFetched,SetIsSelectedProductsFetched] = useState(false);
+    const [selectedProducts, SetSelectedProducts] = useState([]);
+    const [isSelectedProductsFetched, SetIsSelectedProductsFetched] = useState(false);
 
-    const[showTopBtn,setShowTopBtn] = useState(false);
+    const [showTopBtn, setShowTopBtn] = useState(false);
 
     const [visible, setVisible] = useState(false)
 
-    const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
+    const [len, setLen] = useState(getCookie("addToCompare").split(',').length);
 
     //To save all products
-    const[products,setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
 
-    
-    
+
+
 
     //For Add To Compare
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
 
-    const [categories,SetCategories] = useState([]);
-    const [isCategoriesFetched,SetIsCategoriesFetched] = useState(false); 
+    const [categories, SetCategories] = useState([]);
+    const [isCategoriesFetched, SetIsCategoriesFetched] = useState(false);
 
 
     //For  filter criterias
@@ -58,94 +58,94 @@ function BrandCatProducts(){
 
     const [keySet, setKeyState] = useState([]); //To Store filters name
 
-    const[filterselected,SetFilterSelected] = useState([])
+    const [filterselected, SetFilterSelected] = useState([])
 
 
-    
+
     // if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
     //     filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
     // }
-    
-const [areProductsFetched,SetAreProductsFetched]=useState(false);
-    const [min,SetMin] = useState(0);
-    const [max,SetMax] = useState(100);
 
-    const [value,SetValue] = useState([]);
+    const [areProductsFetched, SetAreProductsFetched] = useState(false);
+    const [min, SetMin] = useState(0);
+    const [max, SetMax] = useState(100);
 
-    const [vals,setVals]=useState([]);
+    const [value, SetValue] = useState([]);
+
+    const [vals, setVals] = useState([]);
     // vals.push(localStorage.getItem("SubSubCategory"));
-    useEffect(()=>{
+    useEffect(() => {
         window.addEventListener('scroll', () => { if (window.scrollY > 400) { setShowTopBtn(true); } else { setShowTopBtn(false); } });
         if (!areProductsFetched && !isCategoriesFetched) {
 
 
-            axios.get(url+"/excel/shopByBrands/"+ localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")).then(
+            axios.get(url + "/excel/shopByBrands/" + localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")).then(
                 function (response) {
                     if (response.status == 200) {
-                        console.log("Response",response.data);
+                        console.log("Response", response.data);
                         setProducts(response.data);
                         SetSelectedProducts(response.data);
                         SetAreProductsFetched(true);
-                        var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
-                    // var priceArr=[]
-                    response.data.map((index,pos)=>{
-                        console.log("In selected products map...")
-                        if(minPrice>parseInt(index.productPrice)){
-                            minPrice = index.productPrice
-                        }
-                        if(maxPrice<parseInt(index.productPrice)){
-                            maxPrice = index.productPrice
-                        }
-                    })
-                    console.log("min",minPrice,"max",maxPrice)
-                    SetMin(minPrice);
-                    SetMax(maxPrice);
-                    SetValue([minPrice,maxPrice]);
+                        var minPrice = Number.MAX_VALUE, maxPrice = Number.MIN_VALUE;
+                        // var priceArr=[]
+                        response.data.map((index, pos) => {
+                            console.log("In selected products map...")
+                            if (minPrice > parseInt(index.productPrice)) {
+                                minPrice = index.productPrice
+                            }
+                            if (maxPrice < parseInt(index.productPrice)) {
+                                maxPrice = index.productPrice
+                            }
+                        })
+                        console.log("min", minPrice, "max", maxPrice)
+                        SetMin(minPrice);
+                        SetMax(maxPrice);
+                        SetValue([minPrice, maxPrice]);
 
                     }
                 }).catch(function (error) {
                     console.log("error", error);
                 }
-            );
+                );
 
-            if(!isCategoriesFetched){
-                axios.get(url+"/get-categories")
-                .then(function(response){
-                    response.data.map(cat=>{
-                        categories.push(cat.category);
+            if (!isCategoriesFetched) {
+                axios.get(url + "/get-categories")
+                    .then(function (response) {
+                        response.data.map(cat => {
+                            categories.push(cat.category);
+                        })
+
+                    }).catch(function (error) {
+                        console.log("error", error);
                     })
-                    
-                }).catch(function(error){
-                    console.log("error",error);
-                })
 
                 SetIsCategoriesFetched(true);
             }
-            
-            
-            
-            axios.get(url+"/filtercriterias/"+localStorage.getItem("shopbrandcat"))
-                .then(function(response){
+
+
+
+            axios.get(url + "/filtercriterias/" + localStorage.getItem("shopbrandcat"))
+                .then(function (response) {
                     SetFilters(response.data.filterCriterias);
-                    for(var key in response.data.filterCriterias){
+                    for (var key in response.data.filterCriterias) {
                         keySet.push(key);
                     }
-                    console.log("keySet",keySet)
-                    if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
+                    console.log("keySet", keySet)
+                    if (localStorage.getItem("SubCategory") != null && localStorage.getItem("SubSubCategory") != null) {
                         // filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
-                        SetFilterSelected([localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory")])
+                        SetFilterSelected([localStorage.getItem("SubCategory") + "-" + localStorage.getItem("SubSubCategory")])
                     }
                     SetIsFiltersFetched(true)
                     // SetFilters(response.data.filterCriterias)
                     // SetIsFiltersFetched(true)
-                }).catch(function(error){
-                    console.log("error",error)
+                }).catch(function (error) {
+                    console.log("error", error)
                 })
         }
-        
+
     })
 
-    
+
 
     // const addtocart = (model) => {
     //     var flag = false;
@@ -170,17 +170,17 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
     //     }
     //   }
 
-    function handleAddToCompare(index){
+    function handleAddToCompare(index) {
 
         console.log("inside add to compare");
-        
+
         var element = document.getElementById(index.modelNumber);
-        
-        
-        var length=0;
-        
-        comparemodels.map(index=>{
-            if(index!==""){
+
+
+        var length = 0;
+
+        comparemodels.map(index => {
+            if (index !== "") {
                 length++;
             }
         })
@@ -189,79 +189,79 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
         //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
         // }
         // var length = comparemodels.length;
-        console.log("Length...",length)
-        
-        
-        if(element.checked){
+        console.log("Length...", length)
+
+
+        if (element.checked) {
             var flag = true;
-            if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
+            if (index.category !== localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory") !== null) {
                 flag = false;
                 document.getElementById(index.modelNumber).checked = false;
                 alert("Please select products from same category");
             }
-            if(length==4){
+            if (length == 4) {
                 flag = false;
-                document.getElementById(index.modelNumber).checked=false;
+                document.getElementById(index.modelNumber).checked = false;
                 alert("You can compare only 4 products");
             }
-            if(flag){
-                console.log("adddd"+index.modelNumber);
+            if (flag) {
+                console.log("adddd" + index.modelNumber);
                 comparemodels.push(index.modelNumber);
-                setCookie("addToCompare",comparemodels,20);
+                setCookie("addToCompare", comparemodels, 20);
                 setLen(getCookie("addToCompare").split(',').length)
                 console.log(comparemodels);
-                console.log("checked "+index.modelNumber);
+                console.log("checked " + index.modelNumber);
             }
         }
         else {
-          for (var i = 0; i < comparemodels.length; i++) {
-            if (comparemodels[i] === index.modelNumber) {
-              comparemodels.splice(i, 1);
-                console.log(comparemodels);
-                setCookie("addToCompare",comparemodels,20);
-                setLen(getCookie("addToCompare").split(',').length)
-                // window.location.reload();
-                break;
+            for (var i = 0; i < comparemodels.length; i++) {
+                if (comparemodels[i] === index.modelNumber) {
+                    comparemodels.splice(i, 1);
+                    console.log(comparemodels);
+                    setCookie("addToCompare", comparemodels, 20);
+                    setLen(getCookie("addToCompare").split(',').length)
+                    // window.location.reload();
+                    break;
+                }
             }
-        }
-          console.log("unchecked "+index.modelNumber);
+            console.log("unchecked " + index.modelNumber);
 
         }
 
         var final_length = 0;
-        comparemodels.map(index=>{
-            if(index!==""){
+        comparemodels.map(index => {
+            if (index !== "") {
                 final_length++;
             }
         })
-        if(final_length==0){
+        if (final_length == 0) {
             localStorage.removeItem("AddToCompareCategory");
         }
-        if(final_length==1){
-            localStorage.setItem("AddToCompareCategory",index.category);
+        if (final_length == 1) {
+            localStorage.setItem("AddToCompareCategory", index.category);
         }
 
 
         // if (event.target.checked) {
-  
+
         //   console.log('✅ Checkbox is checked');
         //   setChange(change+1)
-          
-          
-          
+
+
+
         // } else {
         //   console.log('⛔️ Checkbox is NOT checked');
         //   setChange(change-1)
         // }
         // setisAddCompareClicked(current => !current);
         // // alert("Added To Compare");
-        
-    }
-      
-      localStorage.setItem("comparecount",change)
-      console.log("Get",localStorage.getItem("comparecount"))
 
-      function WishlistHandler(index) {
+    }
+
+    localStorage.setItem("comparecount", change)
+    console.log("Get", localStorage.getItem("comparecount"))
+
+    function WishlistHandler(index) {
         // alert("Item added successfully to wishlist");
         // console.log(index.modelNumber)
         // if (localStorage.getItem("wishlistproduct")==null) {
@@ -270,7 +270,7 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
         //   var arr = localStorage.getItem("wishlistproduct").split(',')
         //   var flag = true;
         //   arr.map(i=>{
-    
+
         //     console.log("i: ",i)
         //     if( i=== index.modelNumber) {
         //         arr.splice(arr.indexOf(i),1)
@@ -284,55 +284,55 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
         //   if(flag)
         //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
         //     navigate('/')
-    
+
         // }
         console.log("Wishlist clicked")
-        if(getCookie("isLoggedIn")!=='true'){
-          navigate("/login")
-        }else{
-          
-        
-    
-        var formdata = {
-          "modelNumber": index.modelNumber
-    
+        if (getCookie("isLoggedIn") !== 'true') {
+            navigate("/login")
+        } else {
+
+
+
+            var formdata = {
+                "modelNumber": index.modelNumber
+
+            }
+
+            axios.post(url + "/wishlist", formdata, {
+                headers: {
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "multipart/form-data"
+                }
+            }).then(function (response) {
+                if (response.status == 200) {
+                    // console.log("Added to wishlist successfully");
+                    // toast.success(<b>Added to wishlist successfully</b>)
+                    // alert("Item added to wishlist successfully")
+                    var arr = localStorage.getItem("Wishlist").split(",")
+                    arr.push(index.modelNumber)
+                    localStorage.setItem("Wishlist", arr)
+                    window.location.reload();
+                    console.log(response.data)
+                    // navigate("/");
+                }
+                else {
+                    alert("Item already present in wishlist")
+                    console.log(response.data)
+                }
+            }).catch(function (error) {
+                alert("Item already present in wishlist")
+                console.log("Error", error);
+
+            })
         }
-    
-        axios.post(url+"/wishlist", formdata, {
-          headers: {
-            "Authorization": "Bearer " + token,
-            "Content-Type": "multipart/form-data"
-          }
-        }).then(function (response) {
-          if (response.status == 200) {
-            // console.log("Added to wishlist successfully");
-            // toast.success(<b>Added to wishlist successfully</b>)
-            // alert("Item added to wishlist successfully")
-            var arr = localStorage.getItem("Wishlist").split(",")
-            arr.push(index.modelNumber)
-            localStorage.setItem("Wishlist", arr)
-            window.location.reload();
-            console.log(response.data)
-            // navigate("/");
-          }
-          else{
-            alert("Item already present in wishlist")
-            console.log(response.data)
-          }
-        }).catch(function (error) {
-            alert("Item already present in wishlist")
-            console.log("Error", error);
-          
-        })
-      }
-    
-      }
+
+    }
 
 
     function callProductDetails(index) {
         //alert(index);
         // console.log("Index",index);
-        localStorage.setItem("productId",index.productId);
+        localStorage.setItem("productId", index.productId);
         localStorage.setItem("productSelected", index.modelNumber);
         localStorage.removeItem("SubCategory")
         localStorage.removeItem("SubSubCategory")
@@ -341,123 +341,123 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
     }
 
 
-    function handleCategoryCheck(cat){
+    function handleCategoryCheck(cat) {
         // alert("hi")
         var element = document.getElementById(cat)
-        if(element.checked ==true){
-            console.log(cat," is checked")
-            localStorage.setItem("Category",cat);
+        if (element.checked == true) {
+            console.log(cat, " is checked")
+            localStorage.setItem("Category", cat);
             localStorage.removeItem("SubCategory")
             localStorage.removeItem("SubSubCategory")
             window.location.reload()
-        }else{
-            console.log(cat," is not checked")
+        } else {
+            console.log(cat, " is not checked")
         }
     }
 
-    const handleFormCheck2=(index,f)=>{
+    const handleFormCheck2 = (index, f) => {
         // alert("hi")
-        
-        console.log("index:"+index+"    f:"+f)
 
-        var element = document.getElementById(f+f);
-        
-        if(element.checked){
+        console.log("index:" + index + "    f:" + f)
+
+        var element = document.getElementById(f + f);
+
+        if (element.checked) {
             // alert("here")
 
-            var  arr= filterselected;
+            var arr = filterselected;
             var flag = true;
-            arr.map((i,pos)=>{
+            arr.map((i, pos) => {
                 var pair = i.split("-");
-                if(index===pair[0]){
-                    arr[pos]= index+"-"+pair[1]+";"+f;
+                if (index === pair[0]) {
+                    arr[pos] = index + "-" + pair[1] + ";" + f;
                     flag = false;
                 }
             })
-            if(flag){
+            if (flag) {
                 // console.log("----"+f.slice())
                 // var hl=f.length/2;
                 // alert("-----"+hl)
-                arr.push(index+"-"+ f);
+                arr.push(index + "-" + f);
             }
             SetFilterSelected(arr);
             var productsArray = [];
             // console.log("products",products)
-            console.log("filterSelected",filterselected);
+            console.log("filterSelected", filterselected);
 
-            filterselected.map(filter=>{
+            filterselected.map(filter => {
                 var v = filter.split("-");
                 var arr = v[1].split(";");
-                arr.map(val=>{
-                    if(vals.includes(val)){
+                arr.map(val => {
+                    if (vals.includes(val)) {
 
                     }
-                    else{
+                    else {
                         vals.push(val);
 
                     }
                 })
-                console.log("val "+vals);
+                console.log("val " + vals);
             })
-            products.map(index=>{
+            products.map(index => {
                 var flag = true;
-                filterselected.map(a=>{
+                filterselected.map(a => {
                     var pair = a.split("-");
                     // console.log("pair",pair)
                     var key = pair[0];
                     var values = pair[1].split(";");
-                    var valueflag= false;
-                    values.map(v=>{
+                    var valueflag = false;
+                    values.map(v => {
                         console.log(index.filtercriterias[key])
-                        
 
-                        if(index.filtercriterias[key].includes(v)){
-                            valueflag=true;  
+
+                        if (index.filtercriterias[key].includes(v)) {
+                            valueflag = true;
                         }
                     })
-                    if(!valueflag){
+                    if (!valueflag) {
                         flag = false;
                     }
                 })
 
-                if(flag){
+                if (flag) {
                     productsArray.push(index);
                 }
             })
 
-            
-            console.log("values",vals)
+
+            console.log("values", vals)
 
             // console.log("Products Array",productsArray.length);
-            
+
             SetSelectedProducts(productsArray);
 
-        }else{
+        } else {
 
-            console.log("Filter selected",filterselected)
+            console.log("Filter selected", filterselected)
             var arr = filterselected;
-            arr.map((i,pos)=>{
+            arr.map((i, pos) => {
                 var pair = i.split("-");
-                if(index===pair[0]){
-                    var values= pair[1].split(";");
-                    if(values.length==1){
-                        arr.splice(pos,1);
+                if (index === pair[0]) {
+                    var values = pair[1].split(";");
+                    if (values.length == 1) {
+                        arr.splice(pos, 1);
                     }
-                    else{
-                        var str=index+"-";
-                        values.map(v=>{
-                            if(v!==f){
-                                str+=v+";";
+                    else {
+                        var str = index + "-";
+                        values.map(v => {
+                            if (v !== f) {
+                                str += v + ";";
                             }
                         })
-                        str= str.slice(0,str.length-1);
-                        arr[pos]=str;
+                        str = str.slice(0, str.length - 1);
+                        arr[pos] = str;
 
                     }
                 }
             })
 
-            console.log("Array:",arr)
+            console.log("Array:", arr)
 
             // if(arr.length==0){
             //     console.log("In if")
@@ -467,134 +467,134 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
             // }
             SetFilterSelected(arr);
             var productsArray = [];
-            console.log("products",products)
-            console.log("filterSelected",filterselected);
-            
-            products.map(index=>{
+            console.log("products", products)
+            console.log("filterSelected", filterselected);
+
+            products.map(index => {
                 var flag = true;
-                filterselected.map(a=>{
+                filterselected.map(a => {
                     var pair = a.split("-");
                     // console.log("pair",pair)
                     var key = pair[0];
                     var values = pair[1].split(";");
                     // console.log("values",values)
-                    var valueflag= false;
-                    values.map(v=>{
+                    var valueflag = false;
+                    values.map(v => {
                         console.log(index.filtercriterias[key])
-                        if(index.filtercriterias[key]===v){
-                            valueflag=true;  
+                        if (index.filtercriterias[key] === v) {
+                            valueflag = true;
                         }
                     })
-                    if(!valueflag){
+                    if (!valueflag) {
                         flag = false;
                     }
                 })
-                if(flag){
+                if (flag) {
                     productsArray.push(index);
                 }
             })
-            vals.splice(0,vals.length);
-            filterselected.map(filter=>{
+            vals.splice(0, vals.length);
+            filterselected.map(filter => {
                 var v = filter.split("-");
                 var arr = v[1].split(";");
-                arr.map(val=>{
-                    if(vals.includes(val)){
+                arr.map(val => {
+                    if (vals.includes(val)) {
 
                     }
-                    else{
+                    else {
                         vals.push(val);
 
                     }
                 })
                 // alert("val "+vals);
             })
-            console.log("Products Array",productsArray.length);
-            
+            console.log("Products Array", productsArray.length);
+
             SetSelectedProducts(productsArray);
         }
     }
 
 
-    const handleFormCheck=(index,f)=>{
+    const handleFormCheck = (index, f) => {
         // alert("hi")
-        
-        console.log("index:"+index+"    f:"+f)
+
+        console.log("index:" + index + "    f:" + f)
 
         var element = document.getElementById(f);
-        
-        if(element.checked){
+
+        if (element.checked) {
             // alert("here")
 
-            var  arr= filterselected;
+            var arr = filterselected;
             var flag = true;
-            arr.map((i,pos)=>{
+            arr.map((i, pos) => {
                 var pair = i.split("-");
-                if(index===pair[0]){
-                    arr[pos]= index+"-"+pair[1]+";"+f;
+                if (index === pair[0]) {
+                    arr[pos] = index + "-" + pair[1] + ";" + f;
                     flag = false;
                 }
             })
-            if(flag){
-                arr.push(index+"-"+f);
+            if (flag) {
+                arr.push(index + "-" + f);
             }
             SetFilterSelected(arr);
             var productsArray = [];
             // console.log("products",products)
-            console.log("filterSelected",filterselected);
-            products.map(index=>{
+            console.log("filterSelected", filterselected);
+            products.map(index => {
                 var flag = true;
-                filterselected.map(a=>{
+                filterselected.map(a => {
                     var pair = a.split("-");
                     // console.log("pair",pair)
                     var key = pair[0];
                     var values = pair[1].split(";");
-                    console.log("values",values)
-                    var valueflag= false;
-                    values.map(v=>{
+                    console.log("values", values)
+                    var valueflag = false;
+                    values.map(v => {
                         console.log(index.filtercriterias[key])
-                        if(index.filtercriterias[key].includes(v)){
-                            valueflag=true;  
+                        if (index.filtercriterias[key].includes(v)) {
+                            valueflag = true;
                         }
                     })
-                    if(!valueflag){
+                    if (!valueflag) {
                         flag = false;
                     }
                 })
-                if(flag){
+                if (flag) {
                     productsArray.push(index);
                 }
             })
             // console.log("Products Array",productsArray.length);
-            
+
             SetSelectedProducts(productsArray);
 
-        }else{
+        } else {
             // alert("here")
 
-            console.log("Filter selected",filterselected)
+            console.log("Filter selected", filterselected)
             var arr = filterselected;
-            arr.map((i,pos)=>{
+            arr.map((i, pos) => {
                 var pair = i.split("-");
-                if(index===pair[0]){
-                    var values= pair[1].split(";");
-                    if(values.length==1){
-                        arr.splice(pos,1);
+                if (index === pair[0]) {
+                    var values = pair[1].split(";");
+                    if (values.length == 1) {
+                        arr.splice(pos, 1);
                     }
-                    else{
-                        var str=index+"-";
-                        values.map(v=>{
-                            if(v!==f){
-                                str+=v+";";
+                    else {
+                        var str = index + "-";
+                        values.map(v => {
+                            if (v !== f) {
+                                str += v + ";";
                             }
                         })
-                        str= str.slice(0,str.length-1);
-                        arr[pos]=str;
+                        str = str.slice(0, str.length - 1);
+                        arr[pos] = str;
 
                     }
                 }
             })
 
-            console.log("Array:",arr)
+            console.log("Array:", arr)
 
             // if(arr.length==0){
             //     console.log("In if")
@@ -604,60 +604,60 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
             // }
             SetFilterSelected(arr);
             var productsArray = [];
-            console.log("products",products)
-            console.log("filterSelected",filterselected);
-            products.map(index=>{
+            console.log("products", products)
+            console.log("filterSelected", filterselected);
+            products.map(index => {
                 var flag = true;
-                filterselected.map(a=>{
+                filterselected.map(a => {
                     var pair = a.split("-");
                     // console.log("pair",pair)
                     var key = pair[0];
                     var values = pair[1].split(";");
                     // console.log("values",values)
-                    var valueflag= false;
-                    values.map(v=>{
+                    var valueflag = false;
+                    values.map(v => {
                         console.log(index.filtercriterias[key])
-                        if(index.filtercriterias[key]===v){
-                            valueflag=true;  
+                        if (index.filtercriterias[key] === v) {
+                            valueflag = true;
                         }
                     })
-                    if(!valueflag){
+                    if (!valueflag) {
                         flag = false;
                     }
                 })
-                if(flag){
+                if (flag) {
                     productsArray.push(index);
                 }
             })
-            console.log("Products Array",productsArray.length);
-            
+            console.log("Products Array", productsArray.length);
+
             SetSelectedProducts(productsArray);
         }
     }
 
     const rangeSelector = (event, newValue) => {
         SetValue([parseInt(newValue[0]), parseInt(newValue[1])]);
-        var arr=[];
-        products.map(index=>{
+        var arr = [];
+        products.map(index => {
             var flag = true;
-            filterselected.map(a=>{
+            filterselected.map(a => {
                 var pair = a.split("-");
-                console.log("pair",pair)
+                console.log("pair", pair)
                 var key = pair[0];
                 var values = pair[1].split(";");
-                console.log("values",values)
-                var valueflag= false;
-                values.map(v=>{
+                console.log("values", values)
+                var valueflag = false;
+                values.map(v => {
                     console.log(index.filtercriterias[key])
-                    if(index.filtercriterias[key].includes(v)){
-                        valueflag=true;  
+                    if (index.filtercriterias[key].includes(v)) {
+                        valueflag = true;
                     }
                 })
-                if(!valueflag){
+                if (!valueflag) {
                     flag = false;
                 }
             })
-            if(flag && index.offerPrice>=parseInt(newValue[0]) && index.offerPrice<=parseInt(newValue[1])){
+            if (flag && index.offerPrice >= parseInt(newValue[0]) && index.offerPrice <= parseInt(newValue[1])) {
                 arr.push(index);
             }
         })
@@ -665,268 +665,268 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
 
         console.log(newValue)
     };
-    
-  
-    function SortByLowPrice(){
+
+
+    function SortByLowPrice() {
         console.log("in sort function")
-        var arr=[]; 
+        var arr = [];
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting",selectedProducts)
-        arr.map(index=>{
-            console.log("indexOfferPrice",index.offerPrice)
+        console.log("Before sorting", selectedProducts)
+        arr.map(index => {
+            console.log("indexOfferPrice", index.offerPrice)
         })
-        arr.sort((a,b)=>a.offerPrice-b.offerPrice);
-        console.log("After sorting",selectedProducts)
-        arr.map(index=>{
-            console.log("indexOfferPrice--",index.offerPrice)
-        })
-        SetSelectedProducts([...arr])
-    }
-    
-    function SortByHighPrice(){
-        console.log("in sort function")
-        var arr=[]; 
-        SetSelectedProducts([]);
-        arr = selectedProducts;
-        console.log("Before sorting",selectedProducts)
-        arr.map(index=>{
-            console.log("indexOfferPrice",index.offerPrice)
-        })
-        arr.sort((a,b)=>b.offerPrice-a.offerPrice);
-        console.log("After sorting",selectedProducts)
-        arr.map(index=>{
-            console.log("indexOfferPrice--",index.offerPrice)
+        arr.sort((a, b) => a.offerPrice - b.offerPrice);
+        console.log("After sorting", selectedProducts)
+        arr.map(index => {
+            console.log("indexOfferPrice--", index.offerPrice)
         })
         SetSelectedProducts([...arr])
     }
 
-    function SortByTopRated(){
+    function SortByHighPrice() {
         console.log("in sort function")
-        var arr=[]; 
+        var arr = [];
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting",selectedProducts)
-        arr.map(index=>{
-            console.log("indexAverageRating",index.averageRating)
+        console.log("Before sorting", selectedProducts)
+        arr.map(index => {
+            console.log("indexOfferPrice", index.offerPrice)
         })
-        arr.sort((a,b)=>b.averageRating-a.averageRating);
-        console.log("After sorting",selectedProducts)
-        arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
+        arr.sort((a, b) => b.offerPrice - a.offerPrice);
+        console.log("After sorting", selectedProducts)
+        arr.map(index => {
+            console.log("indexOfferPrice--", index.offerPrice)
         })
         SetSelectedProducts([...arr])
     }
 
-    function SortByDiscount(){
+    function SortByTopRated() {
         console.log("in sort function")
-        var arr=[]; 
+        var arr = [];
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting",selectedProducts)
-        arr.map(index=>{
-            console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
+        console.log("Before sorting", selectedProducts)
+        arr.map(index => {
+            console.log("indexAverageRating", index.averageRating)
         })
-        arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
-        console.log("After sorting",selectedProducts)
-        arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
+        arr.sort((a, b) => b.averageRating - a.averageRating);
+        console.log("After sorting", selectedProducts)
+        arr.map(index => {
+            console.log("indexAverageRating--", index.averageRating)
+        })
+        SetSelectedProducts([...arr])
+    }
+
+    function SortByDiscount() {
+        console.log("in sort function")
+        var arr = [];
+        SetSelectedProducts([]);
+        arr = selectedProducts;
+        console.log("Before sorting", selectedProducts)
+        arr.map(index => {
+            console.log("difference", ((index.productPrice - index.offerPrice) * 100 / index.productPrice))
+        })
+        arr.sort((a, b) => ((b.productPrice - b.offerPrice) * 100 / b.productPrice) - ((a.productPrice - a.offerPrice) * 100 / a.productPrice));
+        console.log("After sorting", selectedProducts)
+        arr.map(index => {
+            console.log("indexAverageRating--", index.averageRating)
         })
         SetSelectedProducts([...arr])
     }
 
     const toggleVisible = () => {
         const scrolled = document.documentElement.scrollTop;
-        if (scrolled > 300){
-          setVisible(true)
-        } 
-        else if (scrolled <= 300){
-          setVisible(false)
+        if (scrolled > 300) {
+            setVisible(true)
         }
-      };
+        else if (scrolled <= 300) {
+            setVisible(false)
+        }
+    };
 
-    const scrollToTop = () =>{
+    const scrollToTop = () => {
         window.scrollTo({
-          top: 0, 
-          behavior: 'smooth'
-          /* you can also use 'auto' behaviour
-             in place of 'smooth' */
+            top: 0,
+            behavior: 'smooth'
+            /* you can also use 'auto' behaviour
+               in place of 'smooth' */
         });
-      };
-      
-      window.addEventListener('scroll', toggleVisible);
-      const [show, setShow] = useState(false);
+    };
 
-      const handleClose = () => setShow(false);
-      const handleShow = () => setShow(true);
-    return(
+    window.addEventListener('scroll', toggleVisible);
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    return (
         <>
-        <Header/>
-<body style={{background:"whitesmoke"}}>
-             
-           
-            {
-          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
-          
-          }
-          {
-            (showTopBtn)?(
-                <Button className="scrolltopbtn" onClick={scrollToTop}>
-            <FaArrowCircleUp  />
-        </Button>
-            ):(null)
-          }
-        <br></br>
-        <Row className="mainpage">
-            <Col md={1}></Col>
-            <Col md={10} >
-            {
-                // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
-                <Row className="filterproductsRow">
-                    
-                    
-                    <Col >
-                    <h4 style={{fontWeight:600, fontSize:"24px", lineHeight:"21px",fontFamily:"Roboto"}}>{localStorage.getItem("Category")}</h4>
+            <Header />
+            <body style={{ background: "whitesmoke" }}>
 
-                    <div className="offcavasfilters">
-                        <i class="fa fa-filter fa-3x" aria-hidden="true" onClick={handleShow}></i>
-      {/* <Button variant="primary" onClick={handleShow}>
+
+                {
+                    (((len - 1) > 0) ? <Button id="comparebtn" style={{ position: 'fixed' }} onClick={() => navigate('/compareProducts')}>Compare: {len - 1}</Button> : (null))
+
+                }
+                {
+                    (showTopBtn) ? (
+                        <Button className="scrolltopbtn" onClick={scrollToTop}>
+                            <FaArrowCircleUp />
+                        </Button>
+                    ) : (null)
+                }
+                <br></br>
+                <Row className="mainpage">
+                    <Col md={1}></Col>
+                    <Col md={10} >
+                        {
+                            // <h5 style={{textAlign:"end",marginRight:"25px"}}>God</h5>
+                            <Row className="filterproductsRow">
+
+
+                                <Col >
+                                    <h4 style={{ fontWeight: 600, fontSize: "24px", lineHeight: "21px", fontFamily: "Roboto" }}>{localStorage.getItem("Category")}</h4>
+
+                                    <div className="offcavasfilters">
+                                        <i class="fa fa-filter fa-3x" aria-hidden="true" onClick={handleShow}></i>
+                                        {/* <Button variant="primary" onClick={handleShow}>
         Launch
       </Button> */}
 
-      <Offcanvas show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Filters<br></br><b>{selectedProducts.length}</b> Products Found</Offcanvas.Title>
-          
+                                        <Offcanvas show={show} onHide={handleClose}>
+                                            <Offcanvas.Header closeButton>
+                                                <Offcanvas.Title>Filters<br></br><b>{selectedProducts.length}</b> Products Found</Offcanvas.Title>
 
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-        {/* <Col md={2} className="filtercol"> */}
-                <h5>Category</h5>
-                {
-                    (isCategoriesFetched)?(
-                        categories.map(cat=>{
-                            return(
-                                <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
-                            )
-                        })
-                    ):(
-                        null
-                    )
-                }
-                <hr></hr><br></br>
-                <React.Fragment>
-                {/* <Typography id="range-slider" gutterBottom>
+
+                                            </Offcanvas.Header>
+                                            <Offcanvas.Body>
+                                                {/* <Col md={2} className="filtercol"> */}
+                                                <h5>Category</h5>
+                                                {
+                                                    (isCategoriesFetched) ? (
+                                                        categories.map(cat => {
+                                                            return (
+                                                                <Form.Check type="radio" id={cat} value={cat} label={cat} name="cat" defaultChecked={(cat === localStorage.getItem("Category")) ? (true) : (false)} onChange={() => handleCategoryCheck(cat)} />
+                                                            )
+                                                        })
+                                                    ) : (
+                                                        null
+                                                    )
+                                                }
+                                                <hr></hr><br></br>
+                                                <React.Fragment>
+                                                    {/* <Typography id="range-slider" gutterBottom>
                     Select Price Range:
                 </Typography> */}
-                
-                <Slider
-                    defaultValue={[parseInt(min),parseInt(max)]}
-                    onChange={rangeSelector}
-                    valueLabelDisplay="on"
-                    min={parseInt(min)}
-                    max={parseInt(max)}
-                />
-                </React.Fragment>
-                {/* Your range of Price is between {value[0]} /- and {value[1]} /- */}
 
-                
-                {
-                //     <MultiRangeSlider
-                //     min={0}
-                //     max={100}
-                //     step={5}
-                //     ruler={true}
-                //     label={true}
-                //     preventWheel={false}
-                //     minValue={minValue}
-                //     maxValue={maxValue}
-                //     onInput={(e) => {
-                //       handleInput(e);
-                //     }}
-                //   />
-                }
-                <br></br><br></br>
-                {/* <h4>Filters</h4> */}
-                {
-                    (isFiltersFetched)?(
-                        keySet.map((index,pos)=>{
-                            return(
-                                <div >
-                                    
-                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
-                                    <Accordion.Item eventKey={pos}>
-                                                    <Accordion.Header>{index}</Accordion.Header>
-                                                    <Accordion.Body>
-                                                                    
-                                    {/* <h5>{index}</h5> */}
-                                    {
-                                        filters[index].map(f=>{
-                                            // console.log("i"+index+" f"+f)
-                                            
-                                            return(
-                                                <>
-                                                
-                                                    <Form>
-                                                        <Form.Check style={{fontSize:'18px',fontWeight:'600'}} type="checkbox" id={f+f} value={f}  label={f}     defaultChecked={(vals.includes(f))?(true):(false)} onChange={()=>handleFormCheck2(index,f)} />
-                                                    </Form>
-                                                     
-                                                </>
-                                                
-                                                
-                                            )
-                                        
-                                            
-                                        })
-                                    }
-                                    </Accordion.Body>
-                                    </Accordion.Item>
-                                    </Accordion>
-                                    <hr></hr>
-                                </div>
-                            )
-                        })
-                    ):(
-                        null
-                    )
-                }
-            {/* </Col> */}
-        </Offcanvas.Body>
-      </Offcanvas>
-    </div>
-
-                    <p className="products">(<b>{selectedProducts.length}</b> Products Found )</p>
-                    </Col> 
-                
-                    <Col  style={{display:'flex',justifyContent:'end'}}>
-                        <NavDropdown title={<b>Sort By<RiArrowDropDownLine style={{color:"black"}} size={25}/></b>}>
-                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
-                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
-                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
-                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
-                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
-                        </NavDropdown>
-                    </Col>
-                    
-                </Row>
-            }
-           
-            
-            {
-                    
-                    (areProductsFetched)?(
-                        (selectedProducts.length==0)?(
-                            <h6>No Products Found</h6>
-                        ):(
-                    
-                            selectedProducts.map(index => {
-                                return (
-                                
+                                                    <Slider
+                                                        defaultValue={[parseInt(min), parseInt(max)]}
+                                                        onChange={rangeSelector}
+                                                        valueLabelDisplay="on"
+                                                        min={parseInt(min)}
+                                                        max={parseInt(max)}
+                                                    />
+                                                </React.Fragment>
+                                                {/* Your range of Price is between {value[0]} /- and {value[1]} /- */}
 
 
-                                    <Row className="filterproductsRow">
-             
-             {/* <div className="d-flex justify-content-center row">
+                                                {
+                                                    //     <MultiRangeSlider
+                                                    //     min={0}
+                                                    //     max={100}
+                                                    //     step={5}
+                                                    //     ruler={true}
+                                                    //     label={true}
+                                                    //     preventWheel={false}
+                                                    //     minValue={minValue}
+                                                    //     maxValue={maxValue}
+                                                    //     onInput={(e) => {
+                                                    //       handleInput(e);
+                                                    //     }}
+                                                    //   />
+                                                }
+                                                <br></br><br></br>
+                                                {/* <h4>Filters</h4> */}
+                                                {
+                                                    (isFiltersFetched) ? (
+                                                        keySet.map((index, pos) => {
+                                                            return (
+                                                                <div >
+
+                                                                    <Accordion defaultActiveKey="0" flush style={{ width: '100%' }}>
+                                                                        <Accordion.Item eventKey={pos}>
+                                                                            <Accordion.Header>{index}</Accordion.Header>
+                                                                            <Accordion.Body>
+
+                                                                                {/* <h5>{index}</h5> */}
+                                                                                {
+                                                                                    filters[index].map(f => {
+                                                                                        // console.log("i"+index+" f"+f)
+
+                                                                                        return (
+                                                                                            <>
+
+                                                                                                <Form>
+                                                                                                    <Form.Check style={{ fontSize: '18px', fontWeight: '600' }} type="checkbox" id={f + f} value={f} label={f} defaultChecked={(vals.includes(f)) ? (true) : (false)} onChange={() => handleFormCheck2(index, f)} />
+                                                                                                </Form>
+
+                                                                                            </>
+
+
+                                                                                        )
+
+
+                                                                                    })
+                                                                                }
+                                                                            </Accordion.Body>
+                                                                        </Accordion.Item>
+                                                                    </Accordion>
+                                                                    <hr></hr>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    ) : (
+                                                        null
+                                                    )
+                                                }
+                                                {/* </Col> */}
+                                            </Offcanvas.Body>
+                                        </Offcanvas>
+                                    </div>
+
+                                    <p className="products">(<b>{selectedProducts.length}</b> Products Found )</p>
+                                </Col>
+
+                                <Col style={{ display: 'flex', justifyContent: 'end' }}>
+                                    <NavDropdown title={<b>Sort By<RiArrowDropDownLine style={{ color: "black" }} size={25} /></b>}>
+                                        <NavDropdown.Item style={{ color: 'black', fontSize: "20px", fontWeight: 'bold' }} target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
+                                        <NavDropdown.Item style={{ color: 'black', fontSize: "20px", fontWeight: 'bold' }} target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
+                                        <NavDropdown.Item style={{ color: 'black', fontSize: "20px", fontWeight: 'bold' }} target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
+                                        <NavDropdown.Item style={{ color: 'black', fontSize: "20px", fontWeight: 'bold' }} target="_blank">Latest Arrival</NavDropdown.Item>
+                                        <NavDropdown.Item style={{ color: 'black', fontSize: "20px", fontWeight: 'bold' }} target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
+                                    </NavDropdown>
+                                </Col>
+
+                            </Row>
+                        }
+
+
+                        {
+
+                            (areProductsFetched) ? (
+                                (selectedProducts.length == 0) ? (
+                                    <h6>No Products Found</h6>
+                                ) : (
+
+                                    selectedProducts.map(index => {
+                                        return (
+
+
+
+                                            <Row className="filterproductsRow">
+
+                                                {/* <div className="d-flex justify-content-center row">
         <div className="col-md-10">
             <div className="row p-2 bg-white border rounded">
                 <div className="col-md-3 mt-1"><img className="img-fluid img-responsive rounded product-image" src="https://i.imgur.com/QpjAiHq.jpg"/></div>
@@ -949,131 +949,131 @@ const [areProductsFetched,SetAreProductsFetched]=useState(false);
             </div>
             </div>
             </div> */}
-                                        <Col md={2} className="imagecol">
-                                            <Image fluid="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
-                                            {/* <br></br>
+                                                <Col md={2} className="imagecol">
+                                                    <Image fluid="true" className="filterproductImage" onClick={() => callProductDetails(index)} src={index.productImage1} />
+                                                    {/* <br></br>
                                             <p>{index.modelNumber}</p> */}
-                                        </Col>
+                                                </Col>
 
-                                        <Col md={7} >
-                                            <Row className="innerrow" onClick={() => callProductDetails(index)} >
-                                                
-                                                    <h4 className="multipleproduct_title" onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
-                                                
-                                                {/* <Col md={1} >
+                                                <Col md={7} >
+                                                    <Row className="innerrow" onClick={() => callProductDetails(index)} >
+
+                                                        <h4 className="multipleproduct_title" onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
+
+                                                        {/* <Col md={1} >
                                                     {(localStorage.getItem("wishlistproduct")!=null) && (localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
                                                         <AiFillHeart className="innerrow_wishlist" style={{  fill: 'rgb(255, 88, 88)' }}  size={30} onClick={() => WishlistHandler(index)} /> :
                                                         <AiOutlineHeart className="innerrow_wishlist" style={{  }}  size={30} onClick={() => WishlistHandler(index)} />
                                                     }
                                                 </Col> */}
 
-                                            </Row>
-                                            <Row>
-                                                {/* <Col md={11} style={{    paddingBottom: '40px',width: '10%'}} className="star">
+                                                    </Row>
+                                                    <Row>
+                                                        {/* <Col md={11} style={{    paddingBottom: '40px',width: '10%'}} className="star">
                                                 {Math.round(index.averageRating * 10) / 10} <span> </span><AiFillStar />
                                                 
                                                 </Col> */}
 
-                                                    <ul className="list-inline small">
+                                                        <ul className="list-inline small">
                                                             <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg" ></i></li>
                                                             <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
                                                             <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
                                                             <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
                                                             <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-lg"></i></li>
-                                                            </ul>
-                                                
-                                            </Row>
-                                            
-                                            <Row className="innerrow">
-                                                <Col>
-                                                    {
-                                                        (index.productHighlights!=null)?(
-                                                            index.productHighlights.split(';').map(highlight => {
-                                                                return (
-                                                                    <h6 className="multipleproduct_highlights">• {highlight}<br></br></h6>
-                                                                );
-                                                            })
-                                                        ):(
-                                                            null
-                                                        )
-                                                        
-                                                    }
-                                                    {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
-                                                </Col>
+                                                        </ul>
 
-                                            </Row>
-                                            
+                                                    </Row>
 
-                                            
-{/* 
+                                                    <Row className="innerrow">
+                                                        <Col>
+                                                            {
+                                                                (index.productHighlights != null) ? (
+                                                                    index.productHighlights.split(';').map(highlight => {
+                                                                        return (
+                                                                            <h6 className="multipleproduct_highlights">• {highlight}<br></br></h6>
+                                                                        );
+                                                                    })
+                                                                ) : (
+                                                                    null
+                                                                )
+
+                                                            }
+                                                            {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
+                                                        </Col>
+
+                                                    </Row>
+
+
+
+                                                    {/* 
                                             <Row className="innerrow">
                                                 <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
                                                 <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
                                             
 
                                             </Row> */}
-                                        </Col>
-
-                                        <Col md={3} className="lastcol">
-
-                                            
-
-                                            <Row >
-                                                <Col >
-                                                    {
-                                                        (index.offerPrice==null) ? (
-                                                            <h4 style={{fontSize:'24px'}}>MRP: <b>₹{index.productPrice}</b></h4>
-                                                        ) : (
-                                                            // <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><p style={{fontSize:'24px',color:'#c10000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</p> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5></>
-                                                            <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><b style={{fontSize:'24px',color:'#FA0000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</b><br></br>
-                                                            <b style={{fontWeight:500,fontSize:"18px",color:"#565959" }}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",fontWeight:500,fontSize:"18px",color:"#565959"}}>₹{index.productPrice}  </b></b>  <b style={{color:"green",fontSize:"18px",marginLeft:"10px"}}>  {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h5></>  
-                                                        )
-                                                    }
                                                 </Col>
+
+                                                <Col md={3} className="lastcol">
+
+
+
+                                                    <Row >
+                                                        <Col >
+                                                            {
+                                                                (index.offerPrice == null) ? (
+                                                                    <h4 style={{ fontSize: '24px' }}>MRP: <b>₹{index.productPrice}</b></h4>
+                                                                ) : (
+                                                                    // <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><p style={{fontSize:'24px',color:'#c10000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</p> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5></>
+                                                                    <><h5 style={{ fontSize: '24px', fontWeight: '600', fontFamily: 'Roboto', lineHeight: '26px', letterSpacing: '0.01em' }}><b style={{ fontSize: '24px', color: '#FA0000', fontWeight: '600', fontFamily: 'Roboto', lineHeight: '26px', letterSpacing: '0.01em' }}>MSP: ₹{index.offerPrice}</b><br></br>
+                                                                        <b style={{ fontWeight: 500, fontSize: "18px", color: "#565959" }}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", fontWeight: 500, fontSize: "18px", color: "#565959" }}>₹{index.productPrice}  </b></b>  <b style={{ color: "green", fontSize: "18px", marginLeft: "10px" }}>  {Math.round((index.productPrice - index.offerPrice) * 100 / index.productPrice)}% off</b></h5></>
+                                                                )
+                                                            }
+                                                        </Col>
+                                                    </Row>
+                                                    <Row className="checkboxx">
+                                                        <Form className="check">
+
+                                                            <Form.Check defaultChecked={(comparemodels.includes(index.modelNumber)) ? (true) : (false)} type="checkbox" id={index.modelNumber} style={{ fontSize: "18px" }} label="Add To Compare" onChange={() => handleAddToCompare(index.modelNumber)} />
+
+
+                                                        </Form>
+                                                    </Row>
+                                                    <br></br>
+
+                                                    <Row>
+
+
+                                                        <Button className="filterproductBtn" variant="outline-primary" onClick={() => WishlistHandler(index)}>Add to wishlist</Button>
+
+                                                    </Row>
+
+
+
+                                                </Col>
+
+
                                             </Row>
-                                            <Row className="checkboxx">
-                                                <Form className="check">
-
-                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  style={{fontSize:"18px"}} label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
-
-
-                                                </Form>
-                                            </Row>
-                                            <br></br>
-
-                                            <Row>
-                                            
-                                            
-                                            <Button className="filterproductBtn" variant="outline-primary" onClick={()=>WishlistHandler(index)}>Add to wishlist</Button>
-
-                                            </Row>
-                                             
-                                            
-
-                                        </Col>
-                                        
-
-                                    </Row>
 
 
 
+                                        )
+
+                                    })
                                 )
-                            
-                            })
-                        )
-                        
-                    ):(
-                        null
-                    )
-                }
-            </Col>
-        </Row>
-        </body>
-        <Footer/>
+
+                            ) : (
+                                null
+                            )
+                        }
+                    </Col>
+                </Row>
+            </body>
+            <Footer />
         </>
 
-        
-        
+
+
     )
 }
 

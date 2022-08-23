@@ -8,6 +8,7 @@ import { Button, Card, Container, Row, Col } from "react-bootstrap";
 import {  Input } from "reactstrap";
 import 'typeface-roboto';
 import {AiFillDelete} from 'react-icons/ai';
+import { ToastContainer, toast } from "react-toastify";
 // import csc from "country-state-city";
 
 // import { useFormik } from "formik";
@@ -69,7 +70,7 @@ function AddressBuyNowSummary(){
 
 
         if (fullname === "" || addressone === "" || incity === "" || instate === "" || zip === "" || incountry === "" || phoneNo === "") {
-          alert("Please enter all details")
+          toast.error("Please enter all details")
         }
         else {
           var formdata = {
@@ -114,7 +115,7 @@ function AddressBuyNowSummary(){
           setIsButtonClicked(true);
         }
         else {
-          alert("You can save only 3 addresses")
+          toast.error("You can save only 3 addresses")
         }
       }
 
@@ -123,7 +124,7 @@ function AddressBuyNowSummary(){
         console.log("Full Name: ", fullname)
         localStorage.setItem("full-name", fullname)
         if (fullname === "") {
-          alert("Enter full name")
+          toast.warn("Enter full name")
         }
     
     
@@ -254,7 +255,7 @@ function AddressBuyNowSummary(){
                 }
             })
             if(flag)
-                alert("Please select an address");
+                toast.error("Please select an address");
             // for(int i=0;i<address.length;i++){
             //     if(document.getElementById("add"+i).checked){
 
@@ -290,6 +291,7 @@ function AddressBuyNowSummary(){
       return (
     
         <div style={{border:"2px solid #E2E2E2"}} >
+          <ToastContainer position="top-center"/>
           {/* <Header/>  */}
           {/* <div className="radio">
               <label>
