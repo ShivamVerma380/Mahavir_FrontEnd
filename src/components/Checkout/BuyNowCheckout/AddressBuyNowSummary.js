@@ -308,6 +308,7 @@ function AddressBuyNowSummary(){
         console.log("Country: ", incountry)
         localStorage.setItem("country", "India")
         setCities(arr);
+        setCity("Select City ▼");
         setState(index.name);
         localStorage.setItem("state", index.name);
         instate = index.name;
