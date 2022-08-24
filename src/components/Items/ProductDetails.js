@@ -817,7 +817,7 @@ function ProductDetails() {
                       (product.offerPrice == null) ? (
                         <h4 className="productprice">MRP: <b>₹{product.productPrice}</b></h4>
                       ) : (
-                        <h4 className="productprice"><b style={{fontSize:"22px"}}>MSP:</b> <b style={{ marginRight: "20px", color: "#ed1c24",fontSize:"22px"}}>₹{product.offerPrice}</b> <b style={{fontSize:"16px",color:"grey"}}>MRP:</b>  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b> <b style={{color:"green"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h4>
+                        <h4 className="productprice"><b style={{fontSize:"22px"}}>MSP:</b> <b style={{ marginRight: "20px", color: "#ed1c24",fontSize:"22px"}}>₹{product.offerPrice}</b> <b style={{fontSize:"16px",color:"grey"}}>MRP:</b>  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b> <b style={{color:"green",marginLeft:"-30px"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h4>
                       )
                     }
                   </Row>
@@ -852,7 +852,8 @@ function ProductDetails() {
                 
                         <SwiperSlide>
                           <div className="offercard">
-                            <p>EMI</p>
+                            <p style={{marginBottom:"2%"}}>EMI</p>
+                            
                             <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
                             <h5 onClick={handleShow} className="offerbtn" >View More</h5>
 
@@ -1068,7 +1069,7 @@ function ProductDetails() {
                         return (
                           <Row style={{display:'flex'}} className="variants">
                             <Col md={2}>
-                            <h5 className="infotitle">{key.substring(1)}</h5>
+                            <h4 className="infotitle">{key.substring(1)}</h4>
 
                             </Col>
                             <Col md={10} className="infovalues">

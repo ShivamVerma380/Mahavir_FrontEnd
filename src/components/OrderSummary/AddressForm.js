@@ -10,6 +10,7 @@ import 'typeface-roboto';
 import url from "../../Uri";
 
 import {AiFillDelete} from 'react-icons/ai';
+import { ToastContainer, toast } from "react-toastify";
 
 var fullname = "";
 var addressone = "";
@@ -63,7 +64,7 @@ const AddressForm = () => {
 
 
     if (fullname === "" || addressone === "" || incity === "" || instate === "" || zip === "" || incountry === "" || phoneNo === "") {
-      alert("Please enter all details")
+      toast.warn("Please enter all details")
     }
     else {
       var formdata = {
@@ -108,7 +109,7 @@ const AddressForm = () => {
       setIsButtonClicked(true);
     }
     else {
-      alert("You can save only 3 addresses")
+      toast.warn("You can save only 3 addresses")
     }
   }
 
@@ -206,7 +207,9 @@ const AddressForm = () => {
 
   return (
     
+    
     <div style={{border:"2px solid #E2E2E2"}} >
+      <ToastContainer position="top-center"/>
       {/* <Header/>  */}
       {/* <div className="radio">
           <label>

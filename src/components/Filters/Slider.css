@@ -37,15 +37,25 @@
     cursor: pointer; /* Cursor on hover */
   }
 
-  .carousel {
+  .offerslide {
     z-index: 0;
-    margin-top: 187px;
+    margin-top: 171px;
 }
 
 @media screen and (min-width:320px) and (max-width:480px) {
 
-.carousel {
-  margin-top: 153px;
+.offerslide {
+  margin-top: 171px;
 }
+
+.offerslide .carousel-item {
+  height: 200px;
+}
+.offerslide .carousel-item img{
+  height: 200px;
+}
+
+
+
 
 }

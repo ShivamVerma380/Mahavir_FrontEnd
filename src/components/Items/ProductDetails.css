@@ -429,18 +429,17 @@ color: #FA0000;
 margin-top: 10px;  
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 18px;
   line-height: 23px;
   letter-spacing: 0.02em;
-  
   color: #212121;
-    
 }
 
 .checkpinbtn{
   width: 119px;
   height: 43px;
+  margin-left: 2%;
   font-size: 12px;
   background: #FA0000;
   border-radius: 0px 5px 5px 0px;
@@ -561,6 +560,37 @@ margin-bottom: 0;
     display: contents;
 
   }
+
+  .checkpinbtn {
+    width: 102px;
+  }
+
+  .rowtitlespec {
+    font-size: 18px;
+  }
+
+  .productname{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    /* or 133% */
+    /* position: absolute; */
+    letter-spacing: 0em;
+  
+    
+  }
+
+  .innercol {
+    padding-top: 0;
+
+  }
+
+  .addtocart {
+    height: 50px;
+  }
+
   .productdetailimg{
     width: 100%;
     height: 100%;
@@ -579,6 +609,7 @@ margin-bottom: 0;
   }
   .list-inline{
     /* padding: 0; */
+    margin-top: -35px;
   }
  
   .inerrow1{
@@ -606,9 +637,9 @@ margin-bottom: 0;
     padding: 0px;
   }
   .offerbtn {
-    margin: 2px;
+    margin: 4px;
     height: 50px;
-    width: 110px;
+    /* width: 110px; */
     font-size: small; 
   }
   .producthigh{
@@ -616,15 +647,15 @@ margin-bottom: 0;
     margin-bottom: 10px;
   }
   .rowtitle{
-    margin-bottom: 0;
+    margin-bottom: 5%;
+    font-size: 18px;
   }
   .variants{
     margin: 0;
   }
   .infotitle{
-    font-size: 30px;
-
-    height: 50px;
+    font-size: 18px;
+    font-variant-caps: all-petite-caps;
     margin-top: 30px;
 
   }
@@ -645,11 +676,11 @@ margin-bottom: 0;
   }
   .pincoderow {
     margin-top: 20px;
-    width: 400px;
-   
-}
+    width: 350px;   
+  }
 .pininput {
   width: 120px;
+  margin-left: -7%;
 }
 .specifications {
 width: 100%;

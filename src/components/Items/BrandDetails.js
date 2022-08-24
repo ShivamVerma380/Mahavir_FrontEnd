@@ -8,6 +8,7 @@ import { Pagination, Navigation } from "swiper";
 import { Button } from "react-bootstrap";
 
 import './ShopByBrands.css';
+
 import { Carousel, CarouselItem } from "react-bootstrap";
 import Header from "../Header";
 import { Col, Row, Form, Card, Container, Image } from "react-bootstrap";
@@ -185,7 +186,7 @@ function BrandDetails() {
             <br></br>
             <Row className="brandheading">
             {/* style={{marginTop:'100px'}} */}
-                <Container style={{width:"100%", backgroundColor: fullWhite}}>
+                <Container style={{width:"100%",backgroundColor: fullWhite}}>
                 <center>
                     <Image className="brandimg" src={localStorage.getItem("brandLogo")} />
                 </center>
@@ -294,7 +295,7 @@ function BrandDetails() {
                     return (
                             <>
                             <Row>
-                                <Row>
+                                <Row className="brand_feature">
 
                                 
                                     <Col md={4}>
@@ -485,8 +486,10 @@ function BrandDetails() {
             <Row>
                 <center><h3 className="brand_feature_category" >Featured Videos</h3></center>
 
-                <br></br>
-                <br></br>
+                
+            </Row>
+            <br></br>
+            <Row>
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={5}

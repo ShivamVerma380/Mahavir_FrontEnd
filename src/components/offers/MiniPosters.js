@@ -3,6 +3,7 @@ import { Card, Row, Col, Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import MiniPosterHelper from "./MiniPosterHelper";
 import './MiniPoster.css';
+import { MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
 const MiniPosters = ({MiniPosters}) => {
     console.log("MinPosters: ",MiniPosters)
     // const element = MiniPosters.map((product,index) =>
@@ -43,25 +44,40 @@ const MiniPosters = ({MiniPosters}) => {
      
     return (
         
-        <div style={{marginLeft:'10px'}}>
-          
-          <div class="image-container" style={{gridTemplateColumns: 'repeat(+5, 1fr)',}}>
+        <div>
+<MDBRow style={{padding:'1%', display:'flex',justifyContent: 'center'}} className='row-cols-1 row-cols-md-3 g-4'>
+                {
+                  MiniPosters.map((product,index) => {
+                    
+                    return (
+                      <MDBCard className="minipostercard" >
+                        <MDBCardImage style={{border: 'solid 1px gray'}} src={product.imageUrl} onClick={()=>handleMiniPosteronClick(product)} alt='...' position='top' />
+                        
+                      </MDBCard>
+                    )
+                  })
+                }
 
-            {
-              
-              MiniPosters.slice(0,5).map((product,index) => {
-                
-                return(
-                    <div class="image_p">
-                    {/* <img src={'data:image/jpg;base64,' +product.image.data}/> */}
-                    <img src={product.imageUrl} onClick={()=>handleMiniPosteronClick(product)}/>
-                  </div>
-                
-                )
-                
-              })
-            }
-            </div>             
+
+              </MDBRow>
+
+          
+                    {/* <div class="image-container" style={{gridTemplateColumns: 'repeat(+5, 1fr)',}}>
+
+                      {
+                        
+                        MiniPosters.slice(0,5).map((product,index) => {
+                          
+                          return(
+                              <div class="image_p">
+                              <img src={product.imageUrl} onClick={()=>handleMiniPosteronClick(product)}/>
+                            </div>
+                          
+                          )
+                          
+                        })
+                      }
+                      </div>              */}
         </div>
         
 
