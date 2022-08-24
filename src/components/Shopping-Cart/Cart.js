@@ -13,6 +13,7 @@ import { Table } from 'react-bootstrap';
 import './Cart.css';
 import '../../components/Wishlist.css';
 import url from '../../Uri';
+import { toast } from 'react-toastify';
 // var price=0;
 // var discount = 0;
 // var amount=0;
@@ -79,8 +80,15 @@ function Cart() {
 
 
     function handleCheckout(){
-        localStorage.setItem("type","checkout");
-        navigate("/cart-checkout");
+        if(getCookie("isLoggedIn")==='true'){
+            localStorage.setItem("type","checkout");
+            navigate("/cart-checkout");
+        }
+        else{
+            
+            navigate("/login")
+        }
+        
     }   
 
     const continueShoppingHandler=()=> {
