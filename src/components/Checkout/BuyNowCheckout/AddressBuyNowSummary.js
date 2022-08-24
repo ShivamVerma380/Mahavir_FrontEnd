@@ -11,6 +11,8 @@ import {AiFillDelete} from 'react-icons/ai';
 import { Country, State, City }  from 'country-state-city';
 import { DropDownMenu } from "material-ui";
 
+import { ToastContainer, toast } from "react-toastify";
+
 // import { useFormik } from "formik";
 
 // import Select from "react-select";
@@ -80,7 +82,7 @@ function AddressBuyNowSummary(){
 
 
         if (fullname === "" || addressone === "" || incity === "" || instate === "" || zip === "" || incountry === "" || phoneNo === "") {
-          alert("Please enter all details")
+          toast.error("Please enter all details")
         }
         else {
           var formdata = {
@@ -125,7 +127,7 @@ function AddressBuyNowSummary(){
           setIsButtonClicked(true);
         }
         else {
-          alert("You can save only 3 addresses")
+          toast.error("You can save only 3 addresses")
         }
       }
 
@@ -134,7 +136,7 @@ function AddressBuyNowSummary(){
         console.log("Full Name: ", fullname)
         localStorage.setItem("full-name", fullname)
         if (fullname === "") {
-          alert("Enter full name")
+          toast.warn("Enter full name")
         }
     
     
@@ -263,7 +265,7 @@ function AddressBuyNowSummary(){
                 }
             })
             if(flag)
-                alert("Please select an address");
+            toast.error("Please select an address");
             // for(int i=0;i<address.length;i++){
             //     if(document.getElementById("add"+i).checked){
 
@@ -321,6 +323,7 @@ function AddressBuyNowSummary(){
       return (
     
         <div style={{border:"2px solid #E2E2E2"}} >
+          <ToastContainer position="top-center"/>
           {/* <Header/>  */}
           {/* <div className="radio">
               <label>
@@ -512,7 +515,7 @@ function AddressBuyNowSummary(){
                       </Row>
 
                       <Row style={{marginTop:20}}>
-                      <Col md={6}>
+                      <Col md={6} style={{marginBottom:20}}>
                       <Dropdown
                         id="City"
                         class="form-field"
