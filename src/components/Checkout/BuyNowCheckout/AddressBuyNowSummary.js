@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import url from "../../../Uri";
 import { getCookie } from '../../Cookies';
 import "../../OrderSummary/AddressForm.css";
-import { Button, Card, Container, Row, Col } from "react-bootstrap";
+import { Button, Card, Container, Row, Col, Dropdown } from "react-bootstrap";
 import {  Input } from "reactstrap";
 import 'typeface-roboto';
 import {AiFillDelete} from 'react-icons/ai';
-// import csc from "country-state-city";
+import { Country, State, City }  from 'country-state-city';
+import { DropDownMenu } from "material-ui";
 
 // import { useFormik } from "formik";
 
@@ -29,7 +30,12 @@ function AddressBuyNowSummary(){
     const navigate = useNavigate();
     const [address, setAddress] = useState([]);
     const [isAddressFetched, setIsAddressFetched] = useState(false);
- 
+    const [states, setStates] = useState([]);
+    const [isStateSelected, setIsStateSelected] = useState(false);
+    const [cities, setCities] = useState([]);
+    const [state, setState] = useState("Select State ▼");
+    const [city, setCity] = useState("Select City ▼");
+    const [isCitySelected, setIsCitySelected] = useState(false);
     var token = getCookie("jwtToken");
     console.log(token);
 
@@ -38,7 +44,7 @@ function AddressBuyNowSummary(){
 
 
     useEffect(() => {
-        if (!isAddressFetched) {
+        if (!isAddressFetched && !isStateSelected ) {
           axios({
             method: "get",
             url: url+"/address",
@@ -59,6 +65,11 @@ function AddressBuyNowSummary(){
           }).catch(function (error) {
             console.log(error);
           })
+          // console.log("state",State.getStatesOfCountry('IN'))
+          // 
+          setStates(State.getStatesOfCountry('IN'));
+          setIsStateSelected(true);
+
     
         }
       }, [])
@@ -143,19 +154,19 @@ function AddressBuyNowSummary(){
     
       }
     
-      const InputCityHandler = (e) => {
-        incity = e.target.value;
-        console.log("City: ", incity)
-        localStorage.setItem("city", incity)
+      // const InputCityHandler = (e) => {
+      //   incity = e.target.value;
+      //   console.log("City: ", incity)
+      //   localStorage.setItem("city", incity)
     
-      }
+      // }
     
-      const InputStateHandler = (e) => {
-        instate = e.target.value;
-        console.log("State: ", instate)
-        localStorage.setItem("state", instate)
+      // const InputStateHandler = (e) => {
+      //   instate = e.target.value;
+      //   console.log("State: ", instate)
+      //   localStorage.setItem("state", instate)
     
-      }
+      // }
     
       const InputZipHandler = (e) => {
         zip = e.target.value;
@@ -165,9 +176,7 @@ function AddressBuyNowSummary(){
       }
     
       const InputCountryHandler = (e) => {
-        incountry = e.target.value;
-        console.log("Country: ", incountry)
-        localStorage.setItem("country", incountry)
+        
     
       }
     
@@ -282,11 +291,33 @@ function AddressBuyNowSummary(){
         //     console.log("Error in add3",error);
         // }
           
-
+        
         
       }
 
+      function selectState(index){
+        var arr = [];
+        console.log("Index",index);
+        console.log("cities",City.getCitiesOfState("IN",index.isoCode));
+        City.getCitiesOfState("IN",index.isoCode).map((city) => {
+          arr.push(city.name);
+        });
+        incountry = "India";
+        console.log("Country: ", incountry)
+        localStorage.setItem("country", "India")
+        setCities(arr);
+        setState(index.name);
+        localStorage.setItem("state", index.name);
+        instate = index.name;
+        console.log("Cities",arr);
+      }
 
+      function selectCity(index){
+        setCity(index);
+        incity = index;
+        localStorage.setItem("city", index);
+        console.log("City",index);
+      }
       return (
     
         <div style={{border:"2px solid #E2E2E2"}} >
@@ -318,26 +349,27 @@ function AddressBuyNowSummary(){
           {
             address.map((index,i)=> {
               return (
+
                 <>
-                <Row style={{marginLeft:"2px"}}>
-                <Col md={2}></Col>
-                <Col md={8}>
+                <Row>
+                <Col md={4}></Col>
+                <Col md={4}>
                   <Card>
                     <Card.Body>
-                      <Card.Text>
-    
-                        <input type="radio" value="Address1" name="add" id={"add"+i} onChange={()=>selectedaddress(index,index.name+""+i)} /> <b style={{marginRight:20,marginLeft:10}}>{index.name}</b> <b>{index.mobileNumber}</b> 
+                      <Card.Text style={{width:"fitContent", paddingRight:"0"}}>
+
+                        <input type="radio" value="Address1" name="add" id={"add" + i} onChange={() => selectedaddress(index, index.name + "" + i)} /> <b style={{ marginRight: 20, marginLeft: 10 }}>{index.name}</b> <b>{index.mobileNumber}</b>
                         <p>{index.address} {index.city} {index.state} <b>- {index.pincode}</b>, Alternate Mobile Number: <b>{index.alternateMobile}</b></p>
-                        <AiFillDelete onClick={()=>handleAddressDelete(index)}/>                     
+                        <AiFillDelete onClick={() => handleAddressDelete(index)} />
                       </Card.Text>
                     </Card.Body>
-    
+
                   </Card>
-                </Col>
-                <Col md={2}></Col>
-              </Row>
-              <br></br>
-              </>
+                </Col><Col md={4}></Col>
+                </Row>
+                <br></br>
+                </>
+  
               )
               
             })
@@ -376,8 +408,8 @@ function AddressBuyNowSummary(){
             (isButtonClicked) ? (
               <>
               <Row >
-                <Col md={4}></Col>
-                <Col md={4} style={{marginLeft:"10px"}} >
+                <Col md={2}></Col>
+                <Col md={8} style={{marginLeft:"10px"}} >
                   <Card >
                     <Card.Body>
                       <Card.Title style={{fontSize:"18px", alignContent:"center"}}>Add New Address📌</Card.Title>
@@ -427,31 +459,53 @@ function AddressBuyNowSummary(){
                         </Row>
                         
                       <Row style={{marginTop:20}}>
-                      
                       <Col md={6}>
                       <Input
-                        id="Country"
+                        id="Counrty"
                         class="form-field"
                         type="text"
-                        placeholder="Country"
-                        name="Country"
-                        onChange={InputCountryHandler}
+                        placeholder="India"
+                        value="India"
+                        defaultValue="India"
+                        readonly
                         style={{borderRadius:"20px"}}
-                      /> 
+                      ></Input>
                      
                       </Col> 
                       <Col md={6}>
-                      <Input
-                        id="State"
+                      <Dropdown
+                        id="state"
                         class="form-field"
                         type="text"
-                        placeholder="State"
-                        name="State"
-                        onChange={InputStateHandler}
+                        placeholder="state"
+                        name="state"
+                        value={state}
+                        // onSelect={(e) => {
+                        //   setState(e.target.value);
+                        //   console.log("state", e.target.value);
+                        //   localStorage.setItem("state", e.target.value);
+                        // }
+                      // }
                         style={{borderRadius:"20px"}}
-                      />
+                      >
+                        <Dropdown.Toggle style={{background:"white", color:"black"}} id="dropdown-basic">
+                        {state}
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        {/* <Dropdown.Item ></Dropdown.Item> */}
+                        {
+                          states.map((index)=>{
+                            return (
+                              <Dropdown.Item  onClick={()=>selectState(index)}>{index.name}</Dropdown.Item>
+                            )
+                          })
+                        }
+                        </Dropdown.Menu>
+                      </Dropdown>
                      
-                      </Col>  
+                      </Col> 
+                       
 
 
 
@@ -459,15 +513,28 @@ function AddressBuyNowSummary(){
 
                       <Row style={{marginTop:20}}>
                       <Col md={6}>
-                      <Input
+                      <Dropdown
                         id="City"
                         class="form-field"
                         type="text"
                         placeholder="City"
                         name="City"
-                        onChange={InputCityHandler}
                         style={{borderRadius:"20px"}}
-                      />
+                      >
+                        <Dropdown.Toggle style={{background:"white", color:"black"}} id="dropdown-basic">
+                        {city}
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        {
+                          cities.map((index)=>{
+                            return (
+                              <Dropdown.Item onClick={()=>selectCity(index)}>{index}</Dropdown.Item>
+                            )
+                          })
+                        }
+                        </Dropdown.Menu>
+                      </Dropdown>
                         </Col> 
     
                         <Col md={6}>
@@ -502,7 +569,7 @@ function AddressBuyNowSummary(){
     
     
                 </Col>
-                <Col md={4}></Col>
+                <Col md={2}></Col>
                 
               </Row>
               <br></br>
