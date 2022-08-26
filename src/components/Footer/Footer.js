@@ -144,7 +144,7 @@ function Footer(){
                             <a href="https://www.facebook.com/pages/category/Electronics/Mahavir-Electronics-Pune-106562364449114/"><Icon className="social" icon="bi:facebook" /></a>
                             <a href="https://www.instagram.com/mahavir.electronics.pune/?hl=en"><Icon icon="bi:instagram"/></a>
                             <a href="https://www.linkedin.com/company/mahavir-electronics-&-furniture/about/"><Icon icon="bi:linkedin"/></a>
-                            <p class="copyright" onClick={handleDevelopersPage}>APOS © 2021</p>
+                            <p class="copyright" onClick={handleDevelopersPage}>Developed by APOS © 2021</p>
                         </div>
                     </div>
                 </div>

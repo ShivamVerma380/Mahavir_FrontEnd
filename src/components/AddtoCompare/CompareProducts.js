@@ -4,6 +4,8 @@ import {Button} from 'react-bootstrap';
 import { MDBCard, MDBListGroup, MDBListGroupItem ,MDBContainer,MDBRow,MDBCol} from 'mdb-react-ui-kit';
 import { getCookie,setCookie } from "../Cookies";
 import axios from 'axios';
+import url from "../../Uri";
+
 
 function CompareProducts(){
 
@@ -23,7 +25,7 @@ function CompareProducts(){
 
                 }
                 else{
-                urls.push(axios.get("http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/get-products/" + modelNum));
+                urls.push(axios.get(url+"/get-products/" + modelNum));
 
                 }
             })

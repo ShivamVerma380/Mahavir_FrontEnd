@@ -47,6 +47,7 @@ import url from "../../Uri";
 //  toast.configure()
 
 var pin = "";
+var i =0;
 
 function ProductDetails() {
   // let name = localStorage.getItem("Name")
@@ -1122,6 +1123,57 @@ function ProductDetails() {
 
                     </Col>
                   </Row>
+                  <br></br>
+                   <Row >
+                    <h4 className="rowtitle">PRODUCT DESCRIPTION</h4>
+
+                    {
+                     
+                      product.productDescriptions.map((index,pos) => {
+                        return (
+                          <>
+                            {
+                              (pos%2=="0")?(
+                                <>
+                                <Col md={3}>
+
+<img src={index.image} style={{ width: "130px" }}></img>
+
+</Col>
+                            <Col md={9}>
+                              <br></br>
+                              
+                              <h5>{index.title}</h5>
+
+                              <p style={{fontFamily:"Roboto",letterSpacing:"0.01em",fontWeight:300,color:"#212121",fontSize:"13px",lineHeight:"17px"}}>{index.description}</p>
+                            </Col>
+                            
+                          </>
+                              ):(
+                                <>
+                                
+                            <Col md={9}>
+                              <br></br>
+                              
+                              <h5>{index.title}</h5>
+
+                              <p style={{fontFamily:"Roboto",letterSpacing:"0.01em",fontWeight:300,color:"#212121",fontSize:"13px",lineHeight:"17px"}}>{index.description}</p>
+                            </Col>
+                            <Col md={3}>
+
+                              <img src={index.image} style={{ width: "130px" }}></img>
+
+                            </Col>
+                            </>
+                              )
+                            }
+                            
+                          </>
+                        )
+
+                      })
+                    }
+                  </Row>
                   
                   
                   {/* <Row >
@@ -1373,22 +1425,44 @@ function ProductDetails() {
                     {
                       cards = productList.map(index => {
 
+                      
+
                         return (
                           <SwiperSlide >
-                            <Card style={{ width: '13rem' }} className="mb-2">
+                            <Card style={{ width: '25rem' }} className="mb-2">
                               <AiOutlineHeart style={{ marginTop: "10px", marginLeft: "5px" }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
                               <CardImg className="this.props.img" onClick={() => callProductDetails(index)}
                                 src={index.productImage1} />
                               <CardBody>
                                 <CardTitle className="this.props.h6 change" onClick={() => callProductDetails(index)}>
-                                  <h6  ><b>{index.productName}</b></h6>
+                                  <h6 className="similarproductname"><b>{index.productName}</b></h6>
                                 </CardTitle>
                                 <CardSubtitle onClick={() => callProductDetails(index)}>
                                   <s>₹{index.productPrice}</s>
-                                  <b style={{ marginLeft: 10 }}>₹{index.offerPrice}</b>
+                                  <b style={{ marginLeft: 10 }}>₹{index.offerPrice}</b> 
                                 </CardSubtitle>
                                 <CardText className="this.props.p change" onClick={() => callProductDetails(index)}>
-                                  <p>{index.productHighlights}</p>
+                                  {/* {
+                                    
+                                    
+                                    (i<3) ? (
+                                      
+                                        <p style={{fontSize:"10px"}}>{index.productHighlights.split(";").splice[0,2]}</p>
+                                        
+                                        // i++
+                                      
+                                      
+                                    ) : (null)
+                                  } */}
+                                  {/* <p style={{fontSize:"10px"}}>{index.productHighlights.split(";")}</p> */}
+                                  {
+                                    index.productHighlights.split(';').splice(0,2).map((h,pos)=>{
+                                      return(
+                                        <p style={{fontSize:"10px"}}>{h}</p>
+                                        
+                                      )
+                                    })
+                                  }
                                 </CardText>
                                 <Form>
                                   <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} />
