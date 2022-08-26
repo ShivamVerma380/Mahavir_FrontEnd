@@ -13,6 +13,7 @@ import '../../Shopping-Cart/Cart.css';
 import 'typeface-roboto'
 import '../../OrderSummary/Summary.css'
 import url from '../../../Uri';
+import Footer from '../../Footer/Footer';
 
 function CheckoutCartSummary(){
 
@@ -83,6 +84,9 @@ function CheckoutCartSummary(){
     // console.log("Address",localStorage.getItem("selectedaddress"))
 
     return(
+        <>
+        <Header/>
+        
         <div  className="cartpage">   
             {/* <Header/>  */}
             <div className="Cart" style={{boxSizing:"border-box"}}>
@@ -215,6 +219,8 @@ function CheckoutCartSummary(){
             </div>
     
       </div>
+      <Footer/>
+      </>
         );
 }
 

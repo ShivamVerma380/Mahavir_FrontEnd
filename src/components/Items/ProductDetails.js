@@ -1123,6 +1123,57 @@ function ProductDetails() {
 
                     </Col>
                   </Row>
+                  <br></br>
+                   <Row >
+                    <h4 className="rowtitle">PRODUCT DESCRIPTION</h4>
+
+                    {
+                     
+                      product.productDescriptions.map((index,pos) => {
+                        return (
+                          <>
+                            {
+                              (pos%2=="0")?(
+                                <>
+                                <Col md={3}>
+
+<img src={index.image} style={{ width: "130px" }}></img>
+
+</Col>
+                            <Col md={9}>
+                              <br></br>
+                              
+                              <h5>{index.title}</h5>
+
+                              <p style={{fontFamily:"Roboto",letterSpacing:"0.01em",fontWeight:300,color:"#212121",fontSize:"13px",lineHeight:"17px"}}>{index.description}</p>
+                            </Col>
+                            
+                          </>
+                              ):(
+                                <>
+                                
+                            <Col md={9}>
+                              <br></br>
+                              
+                              <h5>{index.title}</h5>
+
+                              <p style={{fontFamily:"Roboto",letterSpacing:"0.01em",fontWeight:300,color:"#212121",fontSize:"13px",lineHeight:"17px"}}>{index.description}</p>
+                            </Col>
+                            <Col md={3}>
+
+                              <img src={index.image} style={{ width: "130px" }}></img>
+
+                            </Col>
+                            </>
+                              )
+                            }
+                            
+                          </>
+                        )
+
+                      })
+                    }
+                  </Row>
                   
                   
                   {/* <Row >
