@@ -1,15 +1,19 @@
 import React,{useState,useEffect} from "react";
-import { Button } from 'reactstrap';
+import { Button, Col } from 'reactstrap';
 import {setCookie,getCookie} from '../../Cookies';
 import axios from "axios";
 import url from '../../../Uri';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Form } from 'react-bootstrap';
-
+import { Form, Row } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import './Payment.css';
 function Payment(){
 
     var product = JSON.parse(localStorage.getItem("buyProduct"));
     const [cartModels,SetCartModels] = useState(new Map());
+    // const [paymentType, SetPaymentType] = useState("");
+    var paymentType = "";
     var arr=[];
     arr.push(product);
 
@@ -35,12 +39,12 @@ function Payment(){
 
     const PayAmount=(e)=>{
         e.preventDefault();
-        
+        console.log("Payment Type",paymentType);
         if(localStorage.getItem("Amount")===""){
             alert("Please enter amount");
         }else{
-            if(document.getElementById("cashOnDelivery").checked){
-                var form_data_body={
+            if(paymentType==="cashOnDelivery"){
+                const form_data_body={
                     products,
                     "userAddress":{
                     "name":address.name,
@@ -75,7 +79,7 @@ function Payment(){
                     console.log("Error",err)
                 })
             }else{
-                var options={
+                const options={
                     key:"rzp_test_EDuD7FGqkmNkHy",
                     key_secret:"m5T0MuDnYZJeZKvdTSHZjyBK",
                     amount:1*100,
@@ -87,7 +91,7 @@ function Payment(){
                         alert(response.razorpay_payment_id);
                         console.log("error in sending payment:",response);
                         if(localStorage.getItem("Amount")!=null){
-                                var form_data_body={
+                                const form_data_body={
                                     products,
                                     "userAddress":{
                                     "name":address.name,
@@ -147,7 +151,8 @@ function Payment(){
             
         }
         }
-           
+        
+        
     
 
     return(
@@ -156,15 +161,38 @@ function Payment(){
                 (isPaymentDone)?(
                     <h1>Payment Done</h1>
                 ):(
-                    <div>
-                        <h2>Payment</h2>
-                        <Form>
-                            <Form.Check type="radio" id="cashOnDelivery" name="paymentoption" value="Cash On Delivery" label="Cash On Delivery"/>
-                            <Form.Check type="radio" id="razorPay" name="paymentoption" value="Pay Online" label="Pay Online"/>
-                        </Form>
+                    <Row style={{height:"100%", width:"100%"}}>
+                        <Col md={2}></Col>
+                        <Col md={8} className="payment">
+                                <h5>Payment</h5>
+                                <p style={{fontSize:"14px", marginTop:"20px"}}>Choose payment method below</p>
+                                <Row>
+                                    <Col md={6}>
+                                        <Card style={{width:"140px",height:"100px", border:"1px solid black",  margin:"10px"}}>
+                                            <Card.Img id="razorPay" onClick={()=>{paymentType = "razorPay"}} style={{padding:"10px",width:"140px",height:"100px"}} variant="top" src="https://upload.wikimedia.org/wikipedia/en/8/89/Razorpay_logo.svg" />
+                                            {/*  */}
+                                        </Card>
+                                    </Col>
+                                    <Col md={6}>
+                                        <Card style={{width:"140px",height:"100px", border:"1px solid black",margin:"10px"}}>
+                                            <Card.Img id="cashOnDelivery" onClick={()=>{paymentType = 'cashOnDelivery'}} style={{padding:"10px",width:"100px",height:"100px", marginLeft:"20px"}} variant="top" src="https://cdn-icons-png.flaticon.com/512/1019/1019607.png" />
+                                            {/* onClick={SetPaymentType("cashOnDelivery")} */}
+                                        </Card>
+                                    </Col>
+                                </Row>
+                                
+                                {/* <Form >
+                                    <Form.Check type="radio" id="cashOnDelivery" name="paymentoption" value="Cash On Delivery" label="Cash On Delivery"/>
+                                    <Form.Check type="radio" id="razorPay" name="paymentoption" value="Pay Online" label="Pay Online"/>
+                                </Form>
+                                <Button onClick={PayAmount}>Next</Button> */}
                         <Button onClick={PayAmount}>Next</Button>
-                        {/* <Button onClick={Pay Amount}>Next</Button> */}
-                    </div>
+                    
+                        </Col>
+                        <Col md={2}></Col>
+                    </Row>
+                    
+                    
                 )
             }
             

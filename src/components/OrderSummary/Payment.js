@@ -51,7 +51,7 @@ const Payment=()=>
             alert("Please enter amount");
         }else{
             if(document.getElementById("cashOnDelivery").checked){
-                var form_data_body={
+                const form_data_body={
                     products,
                     "userAddress":{
                     "name":address.name,
@@ -84,7 +84,7 @@ const Payment=()=>
                     console.log("Error",err)
                 })
             }else{
-                var options={
+                const options={
                     key:"rzp_test_EDuD7FGqkmNkHy",
                     key_secret:"m5T0MuDnYZJeZKvdTSHZjyBK",
                     amount:1*100,
@@ -96,7 +96,7 @@ const Payment=()=>
                         alert(response.razorpay_payment_id);
                         console.log("error in sending payment:",response);
                         if(localStorage.getItem("price")!=null){
-                                var form_data_body={
+                                const form_data_body={
                                     products,
                                     "userAddress":{
                                     "name":address.name,
@@ -147,7 +147,7 @@ const Payment=()=>
                         color: "#F37254"
                     }
                 };
-                var rzp1 = new window.Razorpay(options);
+                const rzp1 = new window.Razorpay(options);
                 rzp1.open();
             }
             // alert(localStorage.getItem("price"))
