@@ -1,8 +1,8 @@
 import React from "react";
 import { render } from "react-dom";
 import {Col,Row,Container,Card,Button} from 'react-bootstrap';
-import { Divider, Table } from 'antd';
-import 'antd/dist/antd.css';
+// import { Divider, Table } from 'antd';
+// import 'antd/dist/antd.css';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Preview, print } from 'react-html2pdf';
@@ -192,12 +192,12 @@ const Invoice = () => {
                 </Table> */}
 
                 
-                {
+                {/* {
                   (dataSource.length>4) ? (
                     <Table dataSource={dataSource} columns={columns} pagination={true}/>
                     
                   ) : (<Table dataSource={dataSource} columns={columns} pagination={false}/>)
-                }
+                } */}
 
                 <h5>Total: {buyproducts.offerPrice*parseInt(localStorage.getItem("quantity"))}</h5>
             </Preview>

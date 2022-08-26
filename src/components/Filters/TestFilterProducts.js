@@ -193,6 +193,7 @@ function TestFilterProducts(){
     function handleAddToCompare(index){
         
         var element = document.getElementById(index.modelNumber);
+        console.log("element",element);
         
         
         var length=0;
@@ -223,11 +224,13 @@ function TestFilterProducts(){
                 alert("You can compare only 4 products");
             }
             if(flag){
+                console.log("in flag");
                 console.log("adddd"+index.modelNumber);
                 comparemodels.push(index.modelNumber);
                 setCookie("addToCompare",comparemodels,20);
                 setLen(getCookie("addToCompare").split(',').length)
                 console.log(comparemodels);
+                console.log("cookie",getCookie("addToCompare").split(',').length)
                 console.log("checked "+index.modelNumber);
             }
         }
@@ -322,8 +325,8 @@ function TestFilterProducts(){
         // console.log("Index",index);
         localStorage.setItem("productId",index.productId);
         localStorage.setItem("productSelected", index.modelNumber);
-        localStorage.removeItem("SubCategory")
-        localStorage.removeItem("SubSubCategory")
+        // localStorage.removeItem("SubCategory")
+        // localStorage.removeItem("SubSubCategory")
         // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
     }
@@ -1106,7 +1109,7 @@ function TestFilterProducts(){
                                             <Row className="checkboxx">
                                                 <Form className="check">
 
-                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber} style={{fontSize:"18px"}} label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber} style={{fontSize:"18px"}} label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
 
 
                                                 </Form>
