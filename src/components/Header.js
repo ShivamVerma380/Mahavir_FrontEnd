@@ -22,6 +22,7 @@ import {BiMap} from "react-icons/bi"
 import {MdOutlineLocalShipping} from "react-icons/md"
 import 'typeface-roboto';
 import {RiArrowDropDownLine} from "react-icons/ri"
+import {HiOutlineShoppingCart} from "react-icons/hi"
 import url from "../Uri";
 
 
@@ -257,7 +258,9 @@ const Header = ({productList}) => {
                     <Nav.Link style={{color:'#04001d'}} onClick={callLogin}><b style={{color:"Black",fontSize:"18px",fontWeight:600,fontFamily:"Roboto"}}><FaUserAlt size={30}/> SignIn / Register</b></Nav.Link>
                   )
                 }
-                <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg" style={{fontSize:"30px"}} onClick={Cart} ><b style={{verticalAlign: "super", color:"#C10000"}}>{count}</b></i></Nav.Link>
+                {/* <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg" style={{fontSize:"30px"}} onClick={Cart} ><b style={{verticalAlign: "super", color:"#C10000"}}>{count}</b></i></Nav.Link> */}
+                <Nav.Link style={{color:'#04001d'}}><HiOutlineShoppingCart style={{fontSize:"30px"}} onClick={Cart} /><b style={{verticalAlign: "super", color:"#C10000"}}>{count}</b></Nav.Link>
+                
                 {/* <NavDropdown className="location" renderMenuOnMount={false} title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>

@@ -41,6 +41,7 @@ import ProductSpecification from "./ProductSpecification";
 import { setCookie, getCookie } from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
 import url from "../../Uri";
+import {HiOutlineShoppingCart} from "react-icons/hi";
 // import './ProductDetails.css';
 // toast-configuration method,
 // it is compulsory method.
@@ -765,7 +766,7 @@ function ProductDetails() {
                             <Col md={10}>
                               <Row>
                             <Col className="addtocartcol">
-                            <Button className="addtocart"  onClick={() => addtocart(product.modelNumber)}>Add To Cart<span> </span><i class="fa fa-shopping-cart" aria-hidden="true"></i></Button>
+                            <Button className="addtocart"  onClick={() => addtocart(product.modelNumber)}>Add To Cart<span> </span><HiOutlineShoppingCart/></Button>
                             
                             </Col>
                             <Col className="buynowcol">
