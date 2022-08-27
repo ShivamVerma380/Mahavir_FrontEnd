@@ -123,6 +123,7 @@ width: 100%;
 .filtercol .accordion-flush .accordion-item .accordion-button {
     font-size: 20px;
     font-weight: 600;
+    margin: 0%;
 }
 
 .filtercol .accordion-button:not(.collapsed) {
