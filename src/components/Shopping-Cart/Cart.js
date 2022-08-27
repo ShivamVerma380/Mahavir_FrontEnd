@@ -82,6 +82,7 @@ function Cart() {
     function handleCheckout(){
         if(getCookie("isLoggedIn")==='true'){
             localStorage.setItem("type","checkout");
+            setCookie("models",getCookie("CartModels"));
             navigate("/cart-checkout");
         }
         else{

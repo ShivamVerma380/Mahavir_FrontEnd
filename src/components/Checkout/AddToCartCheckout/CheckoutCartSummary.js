@@ -34,8 +34,8 @@ function CheckoutCartSummary(){
         
         if(!isCartItemsFetched){
             
-            if(getCookie("CartModels")!=null){
-                var arr = getCookie("CartModels").split(",");
+            if(getCookie("models")!=null){
+                var arr = getCookie("models").split(",");
                 arr.map(item=>{
                     if(item!=""){
                         var pair = item.split("=")

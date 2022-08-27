@@ -31,14 +31,21 @@ function BuyNowSummary(){
     const [isCartItemsFetched,SetIsCartItemsFetched] = useState(false);
 
     useEffect(()=>{
+        
         if(!isCartItemsFetched){
-            console.log("buyNow",localStorage.getItem("buyProduct"));
-            var product = JSON.parse(localStorage.getItem("buyProduct"));
-            console.log("product",product.modelNumber);
-            var arr = [];
-            arr.push(product.modelNumber+"=1");
-            console.log('arr',arr)
-            cartModels.set(product.modelNumber,1);
+            
+            if(getCookie("models")!=null){
+                var arr = getCookie("models").split(",");
+                arr.map(item=>{
+                    if(item!=""){
+                        var pair = item.split("=")
+                        // if(pair[0])
+                        cartModels.set(pair[0].trim(),parseInt(pair[1]));
+                    }
+                })
+                }  
+            
+            console.log("Cart Models",cartModels)
             var urls=[];
             arr.map(item=>{
                 if(item!=""){
@@ -46,35 +53,40 @@ function BuyNowSummary(){
                     urls.push(axios.get(url+"/get-products/"+item.split("=")[0]));
                 }
             })
-
-            axios.all(urls).then(
-                axios.spread((...res) => {
-                    res.map(index => {
+              
+          
+          
       
-                        cartItems.push(index.data);
-                        
-                        // filteredProducts.push(index.data);
-      
-      
-                    })
-                    console.log("Cart Items",cartItems)
-                    console.log("Cart models ...",cartModels)
-                    SetIsCartItemsFetched(true);
-      
+          axios.all(urls).then(
+            axios.spread((...res) => {
+                res.map(index => {
+  
+                    cartItems.push(index.data);
+                    
+                    // filteredProducts.push(index.data);
+  
+  
                 })
-              )
+                console.log("Cart Items",cartItems)
+                console.log("Cart models ...",cartModels)
+                SetIsCartItemsFetched(true);
+  
+            })
+          )
         }
-    
-    })
+      })
 
-    function handleProceedToPaymentClick(){
-        console.log("Amount",amount);
+      function handleProceedToPaymentClick(){
         localStorage.setItem("Amount",parseInt(amount));
-        navigate("/payment")
-    }
+        navigate("/cart-payment")
+      }
 
+    // console.log("Address",localStorage.getItem("selectedaddress"))
 
     return(
+        <>
+        <Header/>
+        
         <div  className="cartpage">   
             {/* <Header/>  */}
             <div className="Cart" style={{boxSizing:"border-box"}}>
@@ -117,7 +129,7 @@ function BuyNowSummary(){
             {
                 (isCartItemsFetched)?(
                     <Col sm={4} className="summarypriceTable">
-                    <Table style={{marginTop:"50px", color:'black',width:"470px"}} >
+                    <Table style={{margin_top:"50px", color:'black',width:"470px"}} >
                     <thead>
                         <tr>
                         <th  className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Price Details</th>
@@ -207,8 +219,9 @@ function BuyNowSummary(){
             </div>
     
       </div>
+      {/* <Footer/> */}
+      </>
         );
-
 
 }
 
