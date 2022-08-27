@@ -1,0 +1,116 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+
+
+.form-container {
+  width: 500px;
+  
+  font-size: 10px;
+  background-color: white;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  padding: 10px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 5px;
+}
+
+.success-message {
+  background-color: #3f89f8;
+  padding: 15px;
+  color: white;
+}
+
+.form-field {
+  margin: 8px 0 8px 0;
+  padding: 10px;
+  font-size: 15px;
+  border: solid 1px black;
+  border-radius: 5px;
+}
+.form-field:focus{
+  
+  border: 1;
+  border-color: rgb(255, 88, 88);
+}
+span {
+  font-size: 10px;
+  color:red;
+  margin-bottom: 15px;
+}
+
+input {
+  background: #f2f2f2;
+}
+
+.error {
+  border-style: solid;
+  border: 2px solid #ffa4a4;
+}
+
+button {
+  background: rgb(255, 88, 88);
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+.summaryTable{
+    margin-left: 100px;
+    width: 800px;
+
+    
+    box-sizing: border-box;
+    border: 1px solid #E2E2E2;
+    /* margin-top: px; */
+}
+
+.summarypriceTable{
+    width: 500px;
+    box-sizing: border-box;
+    border: 1px solid #E2E2E2;
+    margin-left: 40px;
+    margin-top: 50px;
+    height:300px;
+    color: black;
+}
+
+.summarypriceTable.priceItems{
+    font-family: typeface-roboto;
+    text-align: end;
+    padding-right: 50px;
+    }
+@media only screen and (max-width: 450px) {
+    .summaryTable{
+        width: 350px;
+        margin-left: 50px;
+    }
+    .summarypriceTable{
+        width: 350px;
+        font-size: 16px;
+    }
+    tbody tr { 
+        margin-right: 0%;
+		width: 300px; 
+        display: block;
+        text-align: end;
+	}
+    tbody tr td { 
+        width: 150px; 
+        text-align: start;
+    }
+    thead, table{
+        width: 300px;
+        display: block;
+        text-align: end;
+        padding-left: 20px;
+    }
+}

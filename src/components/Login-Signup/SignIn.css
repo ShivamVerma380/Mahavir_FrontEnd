@@ -167,14 +167,16 @@
 .New-account-button{
    
     background: #DA0606;
-    width: 322px;
-    height: 45px;
+    width: 330px;
+    height: auto;
     /* padding: 10px 40px; */
-    font-size:15px;;
+    font-size:15px;
     color: white;
     cursor:pointer;
     transition: 0.5s;
     border: none;
+    align-content: center;
+    justify-content: center;
 }
 
 .New-account-button:hover{
