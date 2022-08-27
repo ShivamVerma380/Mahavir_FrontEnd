@@ -53,9 +53,6 @@ import CompareProducts from './components/AddtoCompare/CompareProducts';
 import Checkout from './components/OrderSummary/Checkout';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import CompletedOrders from './components/Admin/Sidebar/CompletedOrders';
-import AddressCartSummary from './components/Checkout/AddToCartCheckout/AddressCartSummary';
-import CheckoutCartSummary from './components/Checkout/AddToCartCheckout/CheckoutCartSummary';
-import PaymentCart from './components/Checkout/AddToCartCheckout/PaymentCart';
 import AddressBuyNowSummary from './components/Checkout/BuyNowCheckout/AddressBuyNowSummary';
 import BuyNowSummary from './components/Checkout/BuyNowCheckout/BuyNowSummary';
 import Invoice from './components/OrderDetails/Invoice';
@@ -132,9 +129,6 @@ root.render(
       {/* <Route path='/payment' element={<Payment/>}/> */}
       <Route path='/compareProducts' element={<AddToCompareProducts/>}/>
       <Route path='/minibottom' element={<MiniPostersBottom/>}/>
-      <Route path='/cart-checkout' element={<AddressCartSummary/>}/>
-      <Route path='/cart-summary' element={<CheckoutCartSummary/>}/>
-      <Route path='/cart-payment' element={<PaymentCart/>}/>
       <Route path="/checkout" element={<AddressBuyNowSummary/>}/>
       <Route path='/summary' element={<BuyNowSummary/>}/>
       <Route path = "/payment" element = {<Payment/>}/>
