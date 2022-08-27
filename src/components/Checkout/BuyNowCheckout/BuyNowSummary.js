@@ -117,7 +117,7 @@ function BuyNowSummary(){
             {
                 (isCartItemsFetched)?(
                     <Col sm={4} className="summarypriceTable">
-                    <Table style={{margin_top:"50px", color:'black',width:"470px"}} >
+                    <Table style={{marginTop:"50px", color:'black',width:"470px"}} >
                     <thead>
                         <tr>
                         <th  className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Price Details</th>

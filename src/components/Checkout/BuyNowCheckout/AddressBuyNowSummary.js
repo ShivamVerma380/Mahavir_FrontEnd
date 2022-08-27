@@ -3,7 +3,7 @@ import {React,useState,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import url from "../../../Uri";
 import { getCookie } from '../../Cookies';
-import "../../OrderSummary/AddressForm.css";
+import "./BuyNowCheckout.css";
 import { Button, Card, Container, Row, Col, Dropdown } from "react-bootstrap";
 import {  Input } from "reactstrap";
 import 'typeface-roboto';
@@ -386,7 +386,7 @@ function AddressBuyNowSummary(){
             <Col md={1}></Col>
             <Col md={10}>
               <center>
-                <Button style={{backgroundColor:"#C10000",border:"none"}} onClick={HandleButtonClick}>Add a New Address</Button>
+                <Button style={{backgroundColor:"#C10000",border:"none"}} className="form-field" onClick={HandleButtonClick}>Add a New Address</Button>
               </center>
             
             </Col>
@@ -396,7 +396,7 @@ function AddressBuyNowSummary(){
             <Col md={1}></Col>
             <Col md={10}>
               <center>
-              <Button style={{backgroundColor:"#C10000",border:"none", marginTop:"20px", position:"sticky", alignContent:"end" }} onClick={handleProceedOnClick}>Proceed to Buy</Button>
+              <Button style={{backgroundColor:"#C10000",border:"none", marginTop:"20px", position:"sticky", alignContent:"end" }} className="form-field" onClick={handleProceedOnClick}>Proceed to Buy</Button>
               </center>
               </Col>
             <Col md={1}></Col>
@@ -412,8 +412,8 @@ function AddressBuyNowSummary(){
             (isButtonClicked) ? (
               <>
               <Row >
-                <Col md={2}></Col>
-                <Col md={8} style={{marginLeft:"10px"}} >
+                <Col md={3}></Col>
+                <Col md={6} style={{marginLeft:"10px"}} >
                   <Card >
                     <Card.Body>
                       <Card.Title style={{fontSize:"18px", alignContent:"center"}}>Add New Address📌</Card.Title>
@@ -423,6 +423,7 @@ function AddressBuyNowSummary(){
                           <Input
                             id="full_name"
                             type="text"
+                            className="form-field"
                             placeholder="Full Name"
                             name="fullname"
                             onChange={InputFullNameHandler}
@@ -435,7 +436,7 @@ function AddressBuyNowSummary(){
                         <Col >
                         <Input
                           id="Phone"
-                          class="form-field"
+                          className="form-field"
                           type="text"
                           placeholder="Phone No."
                           name="Phone"
@@ -451,7 +452,7 @@ function AddressBuyNowSummary(){
                             <Input
                               style={{height:"100px",borderRadius:"20px"}}
                               id="last-name"
-                              class="form-field"
+                              className="form-field"
                               type="textarea"
                               maxLength={50}
                               placeholder="Address Line 1 (Street Address, P.O.)"
@@ -466,7 +467,7 @@ function AddressBuyNowSummary(){
                       <Col md={6}>
                       <Input
                         id="Counrty"
-                        class="form-field"
+                        className="form-field"
                         type="text"
                         placeholder="India"
                         value="India"
@@ -479,7 +480,6 @@ function AddressBuyNowSummary(){
                       <Col md={6}>
                       <Dropdown
                         id="state"
-                        class="form-field"
                         type="text"
                         placeholder="state"
                         name="state"
@@ -492,7 +492,7 @@ function AddressBuyNowSummary(){
                       // }
                         style={{borderRadius:"20px"}}
                       >
-                        <Dropdown.Toggle style={{background:"white", color:"black"}} id="dropdown-basic">
+                        <Dropdown.Toggle style={{background:"white", color:"black"}} className="form-field" id="dropdown-basic">
                         {state}
                       </Dropdown.Toggle>
 
@@ -501,7 +501,7 @@ function AddressBuyNowSummary(){
                         {
                           states.map((index)=>{
                             return (
-                              <Dropdown.Item  onClick={()=>selectState(index)}>{index.name}</Dropdown.Item>
+                              <Dropdown.Item style={{fontSize:"14px"}} onClick={()=>selectState(index)}>{index.name}</Dropdown.Item>
                             )
                           })
                         }
@@ -519,13 +519,12 @@ function AddressBuyNowSummary(){
                       <Col md={6} style={{marginBottom:20}}>
                       <Dropdown
                         id="City"
-                        class="form-field"
                         type="text"
                         placeholder="City"
                         name="City"
                         style={{borderRadius:"20px"}}
                       >
-                        <Dropdown.Toggle style={{background:"white", color:"black"}} id="dropdown-basic">
+                        <Dropdown.Toggle style={{background:"white", color:"black"}}className="form-field" id="dropdown-basic">
                         {city}
                       </Dropdown.Toggle>
 
@@ -533,7 +532,7 @@ function AddressBuyNowSummary(){
                         {
                           cities.map((index)=>{
                             return (
-                              <Dropdown.Item onClick={()=>selectCity(index)}>{index}</Dropdown.Item>
+                              <Dropdown.Item style={{fontSize:"14px"}} onClick={()=>selectCity(index)}>{index}</Dropdown.Item>
                             )
                           })
                         }
@@ -544,7 +543,7 @@ function AddressBuyNowSummary(){
                         <Col md={6}>
                       <Input
                         id="Zip"
-                        class="form-field"
+                        className="form-field"
                         type="text"
                         placeholder="Zip"
                         name="Zip"
@@ -559,7 +558,7 @@ function AddressBuyNowSummary(){
                         
                         <Col>
                         <center>
-                        <Button style={{backgroundColor:"#C10000",border:"none"}} class="form-field" type="submit" onClick={ProceedHandler}>
+                        <Button style={{backgroundColor:"#C10000",border:"none"}} className="form-field" type="submit" onClick={ProceedHandler}>
                           Add new Address
                         </Button>
                         </center>
@@ -573,7 +572,7 @@ function AddressBuyNowSummary(){
     
     
                 </Col>
-                <Col md={2}></Col>
+                <Col md={3}></Col>
                 
               </Row>
               <br></br>
