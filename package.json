@@ -77,6 +77,7 @@
     "react-select": "^5.3.2",
     "react-simple-image-slider": "^2.4.1",
     "react-simple-star-rating": "^4.0.5",
+    "react-star-rating": "^1.4.2",
     "react-star-rating-lite": "^0.0.11",
     "react-star-ratings": "^2.3.0",
     "react-stars": "^2.2.5",

@@ -33,6 +33,8 @@ import { Toast, ToastBody, ToastHeader } from "reactstrap";
 
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 
+import StarRating from 'react-star-rating'
+
 
 import ProductRating from "./ProductRating";
 import UserReviewRating from "./UserReviewRating";
@@ -42,6 +44,7 @@ import { setCookie, getCookie } from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
 import url from "../../Uri";
 import {HiOutlineShoppingCart} from "react-icons/hi";
+import StarRatings from "react-star-ratings";
 // import './ProductDetails.css';
 // toast-configuration method,
 // it is compulsory method.
@@ -95,8 +98,9 @@ function ProductDetails() {
   }
 
   var productInformation;
-  var averagerate;
+  // var averagerate = 4;
 
+  const[averagerate,SetAverageRate]= useState(0);
 
   useEffect(() => {
 
@@ -184,7 +188,8 @@ function ProductDetails() {
 
 
           console.log("Average rating: ", reviewresponse.data.averageRatings);
-          averagerate = reviewresponse.data.averageRatings;
+          // averagerate = parseInt(reviewresponse.data.averageRatings);
+          SetAverageRate(parseInt(reviewresponse.data.averageRatings));
           console.log("Average ", averagerate);
         }
       }).catch(function (error) {
@@ -797,13 +802,7 @@ function ProductDetails() {
 
                   <Row className="inerrow1">
                     <h2 className="productname">{product.productName}</h2>
-                    {/* <Col className="star" md={2} style={{ textAlign: "right" }} >
-                      {Math.round(review.averageRatings * 10) / 10}<AiFillStar />
-                    </Col> */}
-                    {/* <Col md={10}>
-                      <h6>{review.totalRatings} Ratings & {review.totalReviews} Reviews</h6>
-                    </Col> */}
-                    <ul className="list-inline small">
+                    {/* <ul className="list-inline small">
                       <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
                       <span style={{marginRight:'5px'}}></span>
                       <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
@@ -814,7 +813,18 @@ function ProductDetails() {
                       <span style={{marginRight:'5px'}}></span>
                       <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-2x"></i></li>
                       <span style={{marginRight:'5px'}}></span>
-                      </ul>
+                      </ul> */}
+                      {
+                        (isReviewFetched)?(
+                          <StarRatings name="small-rating"  size={20} totalStars={5} rating={averagerate}/>
+                        ):(
+                          null
+                        )
+                      }
+                      
+                      {/* <StarRating name="small-rating" caption="Small!" size={30} totalStars={5} rating={3} /> */}
+
+
 
                       {
                       (product.offerPrice == null) ? (
@@ -824,198 +834,11 @@ function ProductDetails() {
                       )
                     }
                   </Row>
-                  <hr></hr>
-                  <Row className="offerrow" >
-
-
-                    <h4 className="rowtitle">Offers</h4>
-
-                    
-              <Swiper
-                slidesPerView={1}
-                spaceBetween={5}
-                slidesPerGroup={3}
-                loop={false}
-                loopFillGroupWithBlank={true}
-                breakpoints={{
-                  700: {
-                    slidesPerView: 5,
-                  },
-                  400: {
-                    slidesPerView: 1,
-                  },
-                }}
-                pagination={{
-                  clickable: true,
-                }}
-                navigation={true}
-                modules={[Pagination, Navigation]}
-                className="mySwiper"
-              > 
-                
-                        <SwiperSlide>
-                          <div className="offercard">
-                            <p style={{marginBottom:"2%"}}>EMI</p>
-                            
-                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
-                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
-
-                          </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                          <div className="offercard">
-                            <p>EMI</p>
-                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
-                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
-
-                          </div>
-                        </SwiperSlide><SwiperSlide>
-                          <div className="offercard">
-                            <p>EMI</p>
-                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
-                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
-
-                          </div>
-                        </SwiperSlide><SwiperSlide>
-                          <div className="offercard">
-                            <p>EMI</p>
-                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
-                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
-
-                          </div>
-                        </SwiperSlide><SwiperSlide>
-                          <div className="offercard">
-                            <p>EMI</p>
-                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
-                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
-
-                          </div>
-                        </SwiperSlide><SwiperSlide>
-                          <div className="offercard">
-                            <p>EMI</p>
-                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
-                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
-
-                          </div>
-                        </SwiperSlide><SwiperSlide>
-                          <div className="offercard">
-                            <p>EMI</p>
-                            <h4>Split your bill in 3 for free with the No-cost EMI on Tata Neu.</h4>
-                            <h5 onClick={handleShow} className="offerbtn" >View More</h5>
-
-                          </div>
-                        </SwiperSlide>
-                    
-              </Swiper>
-                    
-                    <Modal show={show} onHide={handleClose}>
-                      <Modal.Header closeButton>
-                        <Modal.Title style={{fontWeight:600}}>IDBI BANK</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>Flat Cashback upto Rs. 2,500 on ICICI Credit card
-                              EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.</Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button>
-                       
-                      </Modal.Footer>
-                    </Modal>
-                  </Row>
+                  
+                  
                   <Row>
                     {/* <h4><b><i>Available Offers</i></b></h4> */}
-                    {/* <Swiper
-                      slidesPerView={1}
-                      spaceBetween={5}
-                      slidesPerGroup={3}
-                      loop={false}
-                      loopFillGroupWithBlank={true}
-                      breakpoints={{
-                        700: {
-                          slidesPerView: 3,
-                        },
-                        400: {
-                          slidesPerView: 3,
-                        },
-                      }}
-                      pagination={{
-                        clickable: true,
-                      }}
-                      navigation={true}
-                      modules={[Pagination, Navigation]}
-                      className="mySwiper"
-                    >
-
-                      <SwiperSlide>
-                        <Card style={{ width: '25rem' }} className="mb-2">
-                          <Card.Body>
-                            <Card.Title>
-                              "IDBI BANK"
-                            </Card.Title>
-                            <Card.Text>   
-                              Flat Cashback upto Rs. 2,500 on ICICI Credit card
-                              EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
-                            </Card.Text>
-                            <Card.Text style={{ textAlign: "left" }}>
-                              View More
-                            </Card.Text>
-                          </Card.Body>
-                        </Card>
-                      </SwiperSlide>
-
-                      <SwiperSlide>
-                        <Card style={{ width: '25rem' }} className="mb-2">
-                          <Card.Body>
-                            <Card.Title>
-                              "ICICI BANK"
-                            </Card.Title>
-                            <Card.Text>
-                              Flat Cashback upto Rs. 2,500 on ICICI Credit card
-                              EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
-                            </Card.Text>
-                            <Card.Text style={{ textAlign: "left" }}>
-                              View More
-                            </Card.Text>
-                          </Card.Body>
-                        </Card>
-                      </SwiperSlide>
-
-                      <SwiperSlide>
-                        <Card style={{ width: '25rem' }} className="mb-2">
-                          <Card.Body>
-                            <Card.Title>
-                              "AXIS BANK"
-                            </Card.Title>
-                            <Card.Text>
-                              Flat Cashback upto Rs. 2,500 on ICICI Credit card
-                              EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
-                            </Card.Text>
-                            <Card.Text style={{ textAlign: "left" }}>
-                              View More
-                            </Card.Text>
-                          </Card.Body>
-                        </Card>
-                      </SwiperSlide>
-
-                      <SwiperSlide>
-                        <Card style={{ width: '25rem' }} className="mb-2">
-                          <Card.Body>
-                            <Card.Title>
-                              "SBI"
-                            </Card.Title>
-                            <Card.Text>
-                              Flat Cashback upto Rs. 2,500 on ICICI Credit card
-                              EMI for cart value above Rs.50,000. Select the offer from “View all offers ”on payment page T&C Apply.
-                            </Card.Text>
-                            <Card.Text style={{ textAlign: "left" }}>
-                              View More
-                            </Card.Text>
-                          </Card.Body>
-                        </Card>
-                      </SwiperSlide>
-
-                    </Swiper> */}
+                    
                   </Row>
                   <Row className="producthigh">
                     <h4 className="rowtitle">Product Highlights</h4>
@@ -1178,57 +1001,7 @@ function ProductDetails() {
                   </Row>
                   
                   
-                  {/* <Row >
-                    <h4>Product Description</h4>
-
-                    {
-                     
-                      product.productDescriptions.map(index => {
-                        return (
-                          <>
-                            <Col md={3}>
-
-                              <img src={index.image} style={{ width: "130px" }}></img>
-
-                            </Col>
-                            <Col md={9}>
-                              <br></br>
-                              
-                              <h5>{index.title}</h5>
-
-                              <p>{index.description}</p>
-                            </Col>
-                          </>
-                        )
-
-                      })
-                    }
-                  </Row>
-                  <Row>
-                  <Col md={2}>
-
-                      <Image thumbnail="true" src={product.productImage1}/>
-
-                    </Col>
-                    <Col md={10}>
-                      <br></br>
-                      <h5>{product.modelNumber}</h5>
-
-                      <p>{product.productHighlights}</p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={9}>
-                      <br></br>
-                      <h4>Take Your Photos </h4>
-                      <p>The iPhone 11 features dual 12 MP Ultra Wide (13mm) and Wide (26mm) cameras with 4K video recording up to 60 fps. The Ultra Wide camera provides 120° field of view, letting you capture four times more scene, and the Wide camera provides 100% Focus Pixels for up to three times faster autofocus in low light.</p>
-                    </Col>
-                    <Col md={3}>
-                    <br></br>
-                      <Image src={product.productImage1} thumbnail="true"/>
-                    </Col>
-                  </Row> */}
-
+                 
                   <Row className="specifications">
                   {/* <h4 className="rowtitle">Model Number: <b>{product.modelNumber}</b> </h4> */}
 <Row style={{borderBottom:'1px solid #E2E2E2'}}>
@@ -1265,82 +1038,39 @@ function ProductDetails() {
 
                   </Col>
                       
-                      {/* <center>
-                      <ul className="list-inline small">
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
-                      <span style={{marginRight:'10px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
-                      <span style={{marginRight:'10px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
-                      <span style={{marginRight:'10px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-3x"></i></li>
-                      <span style={{marginRight:'10px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-3x"></i></li>
-                      <span style={{marginRight:'10px'}}></span>
-                      </ul>
-                      </center> */}
 
                     <Col md={10} style={{padding:'2%'}}>
                     <table className="ratings">
                       <tr>
                         <td>5⭐<span> </span></td>
-                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={40} /></td>
+                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={review.nosOfFiveStars*100/(review.nosOfOneStars+review.nosOfTwoStars+review.nosOfThreeStars+review.nosOfFourStars+review.nosOfFiveStars)} /></td>
                         <td><span style={{marginLeft:'10px'}}> </span>{review.nosOfFiveStars}</td>
                       </tr>
                       <tr>
                         <td>4⭐<span> </span></td>
-                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={40} /></td>
+                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={review.nosOfFourStars*100/(review.nosOfOneStars+review.nosOfTwoStars+review.nosOfThreeStars+review.nosOfFourStars+review.nosOfFiveStars)} /></td>
                         <td><span style={{marginLeft:'10px'}}> </span>{review.nosOfFourStars}</td>
                       </tr>
                       <tr>
                         <td>3⭐<span> </span></td>
-                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={40} /></td>
+                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={review.nosOfThreeStars*100/(review.nosOfOneStars+review.nosOfTwoStars+review.nosOfThreeStars+review.nosOfFourStars+review.nosOfFiveStars)} /></td>
                         <td><span style={{marginLeft:'10px'}}> </span>{review.nosOfThreeStars}</td>
                       </tr>
                       <tr>
                         <td>2⭐<span> </span></td>
-                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={40} /></td>
+                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={review.nosOfTwoStars*100/(review.nosOfOneStars+review.nosOfTwoStars+review.nosOfThreeStars+review.nosOfFourStars+review.nosOfFiveStars)} /></td>
                         <td><span style={{marginLeft:'10px'}}> </span>{review.nosOfTwoStars}</td>
                       </tr>
                       <tr>
                         <td>1⭐<span> </span></td>
-                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={40} /></td>
+                        <td><ProgressBar style={{width:'180px',marginLeft:'10px'}} striped variant="success" now={review.nosOfOneStars*100/(review.nosOfOneStars+review.nosOfTwoStars+review.nosOfThreeStars+review.nosOfFourStars+review.nosOfFiveStars)} /></td>
                         <td><span style={{marginLeft:'10px'}}> </span>{review.nosOfOneStars}</td>
                       </tr>
                     
                     </table>
                     </Col>
                     
-                    {/* <Col style={{display:'inline-grid',justifyContent:'end'}}>
-                      <p >5⭐</p>
-                      <p >4⭐</p>
-                      <p >3⭐</p>
-                      <p >2⭐</p>
-                      <p>1⭐</p>
-                    </Col> */}
-
-
-                    {/* <Col >
-
-                      <div>
-                        <ProgressBar style={{ marginBottom: "2px" }} animated striped variant={variantcolorfive} now={(review.nosOfFiveStars / review.totalReviews) * 100} />
-                        <br></br>
-                        <ProgressBar style={{ marginBottom: "2px" }} animated striped variant={variantcolorfour} now={(review.nosOfFourStars / review.totalReviews) * 100} />
-                        <br></br>
-                        <ProgressBar style={{ marginBottom: "2px" }} animated striped variant={variantcolorthree} now={(review.nosOfThreeStars / review.totalReviews) * 100} />
-                        <br></br>
-                        <ProgressBar style={{ marginBottom: "2px" }} animated striped variant={variantcolortwo} now={(review.nosOfTwoStars / review.totalReviews) * 100} />
-                        <br></br>
-                        <ProgressBar style={{ marginBottom: "2px" }} animated striped variant={variantcolorone} now={(review.nosOfOneStars / review.totalReviews) * 100} />
-                      </div>
-                    </Col> */}
-                    {/* <Col>
-                      <p >{review.nosOfFiveStars}</p>
-                      <p >{review.nosOfFourStars}</p>
-                      <p >{review.nosOfThreeStars}</p>
-                      <p >{review.nosOfTwoStars}</p>
-                      <p>{review.nosOfOneStars}</p>
-                    </Col> */}
+                  
                   </Row>
                   <Row>
                     <br></br>
