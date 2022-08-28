@@ -1163,7 +1163,7 @@ function ProductDetails() {
                           <SwiperSlide >
                             <Card style={{ width: '25rem' }} className="mb-2">
                               {/* <AiOutlineHeart style={{ marginTop: "10px", marginLeft: "5px" }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> */}
-                              <CardImg className="this.props.img" onClick={() => callProductDetails(index)}
+                              <CardImg className="this.props.img" style={{height:"190px" , width:"160px"}} onClick={() => callProductDetails(index)}
                                 src={index.productImage1} />
                               <CardBody>
                                 <CardTitle className="this.props.h6 change" onClick={() => callProductDetails(index)}>
