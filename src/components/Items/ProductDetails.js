@@ -1432,7 +1432,7 @@ function ProductDetails() {
                         return (
                           <SwiperSlide >
                             <Card style={{ width: '25rem' }} className="mb-2">
-                              <AiOutlineHeart style={{ marginTop: "10px", marginLeft: "5px" }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
+                              {/* <AiOutlineHeart style={{ marginTop: "10px", marginLeft: "5px" }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> */}
                               <CardImg className="this.props.img" onClick={() => callProductDetails(index)}
                                 src={index.productImage1} />
                               <CardBody>
@@ -1440,7 +1440,8 @@ function ProductDetails() {
                                   <h6 className="similarproductname"><b>{index.productName}</b></h6>
                                 </CardTitle>
                                 <CardSubtitle onClick={() => callProductDetails(index)}>
-                                  <s>₹{index.productPrice}</s>
+                                  {/* <s>₹{index.productPrice}</s> */}
+                                  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b>
                                   <b style={{ marginLeft: 10 }}>₹{index.offerPrice}</b> 
                                 </CardSubtitle>
                                 <CardText className="this.props.p change" onClick={() => callProductDetails(index)}>
@@ -1461,18 +1462,17 @@ function ProductDetails() {
                                     index.productHighlights.split(';').splice(0,2).map((h,pos)=>{
                                       return(
                                         <p style={{fontSize:"10px"}}>{h}</p>
-                                        
                                       )
                                     })
                                   }
                                 </CardText>
-                                <Form>
+                                {/* <Form>
                                   <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} />
-                                </Form>
-                                <br></br>
-                                {
+                                </Form> */}
+                                {/* <br></br> */}
+                                {/* {
                                   fetchOfferAvailableBtn(index.offerPrice, index.productPrice)
-                                }
+                                } */}
                               </CardBody>
                             </Card>
                           </SwiperSlide>
