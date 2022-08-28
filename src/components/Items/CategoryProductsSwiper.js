@@ -286,8 +286,10 @@ function CategoryProductsSwiper({ cattitle }) {
                     iteration="1"
                     fillMode="none">
                     <span className="categorytitle"  filter-content="S">{cattitle}</span>
+                    
                   </MovingComponent>
-                    ) : (null)
+                   
+                   ) : (null)
                   }
                   
 
@@ -297,6 +299,7 @@ function CategoryProductsSwiper({ cattitle }) {
                   <button onClick={() => CategoryProducts(cattitle)} class="explore">View More<span class="icon-right after"></span></button>
 
                 </Col>
+
               </Row>
 
 
