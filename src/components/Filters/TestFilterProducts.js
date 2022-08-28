@@ -16,6 +16,7 @@ import {FaArrowCircleUp} from 'react-icons/fa';
 import { Dropdown } from "reactstrap";
 import url from "../../Uri";
 import {RiArrowDropDownLine} from 'react-icons/ri'
+import {FcFilledFilter} from "react-icons/fc"
 
 
 function TestFilterProducts(){
@@ -777,7 +778,7 @@ function TestFilterProducts(){
         
         <Row className="mainpage">
             <Col md={2} className="filtercol" style={{paddingLeft:"0px",paddingRight:"0px"}} >
-            <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto"}}>Filters</h4>   
+            <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto"}}><FcFilledFilter/>Filters</h4>   
                 <hr style={{}}></hr> 
                 <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Categories</h4>
               
