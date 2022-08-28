@@ -94,7 +94,7 @@ root.render(
       <Route path='/offers' element={<OfferItems/>}/>
       {/* <Route path='/compareproducts' element={<AddToCompareProducts/>}/> */}
       {/* <Route path="/SearchBar" element={<SearchBar/>}/> */}
-      <Route path='/my-orders' element={<Orders/>}/>
+      <Route path='/my-orders' element={<OrderInvoices/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>
       <Route path='/onlyreviews' element = {<OnlyReviews/>}/>
       <Route path='/ratereview' element = {<RateReviewProducts/>}/>
@@ -133,7 +133,7 @@ root.render(
       <Route path = "/payment" element = {<Payment/>}/>
 
       <Route path='/invoice' element={<Invoice/>}/>
-      <Route path='/order-invoices' element = {<OrderInvoices/>}/>
+      <Route path='/rate-products' element = {<Orders/>}/>
     </Routes>
   </BrowserRouter>
 );

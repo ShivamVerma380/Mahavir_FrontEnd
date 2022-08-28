@@ -135,12 +135,13 @@ const Header = ({productList}) => {
     }
 
     const handleMyOrders=()=>{
-        navigate("/my-orders")
+        navigate("/rate-products")
     }
 
     const handleInvoice=()=>{
-        navigate("/order-invoices")
-    }
+        // navigate("/order-invoices")
+        navigate("/my-orders")
+      }
 
     const handleLogout=()=>{
         console.log("logout clicked");
@@ -243,15 +244,15 @@ const Header = ({productList}) => {
                         <Nav.Link  onClick={callLogin}>Hi, Sign In</Nav.Link>
                     )
                 } */}
-                <Nav.Link className="Hamburgermenu" style={{color:'#04001d'}}><GiHamburgerMenu size={40}/></Nav.Link>
+                {/* <Nav.Link className="Hamburgermenu" style={{color:'#04001d'}}><GiHamburgerMenu size={40}/></Nav.Link> */}
                 {/* <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg"  onClick={Cart} ><b style={{verticalAlign: "super", color:"red"}}>{modelnums.length-1}</b></i></Nav.Link> */}
                 
                 {
                   (isUserLoggedIn==="true")?(
                     // <Nav.Link style={{color:'#04001d'}} title={"Hi, "+(name)}><p><FaUserAlt size={30}/>Hi, {name}</p></Nav.Link>
                     <NavDropdown style={{color:'#04001d'}} title={<><b style={{color:"#04001d",fontSize:"18px"}}><FaUserAlt style={{color:"#04001d"}} size={30}/> Hi, {name}<RiArrowDropDownLine style={{color:"#04001d"}} size={25} /></b></>} id="collasible-nav-dropdown">
-                      <NavDropdown.Item style={{color:'black'}} onClick={()=>handleMyOrders()}>My Orders</NavDropdown.Item>
-                      <NavDropdown.Item style={{color:'black'}} onClick={()=>handleInvoice()}>Invoice</NavDropdown.Item>
+                      <NavDropdown.Item style={{color:'black'}} onClick={()=>handleMyOrders()}>Rate & Review</NavDropdown.Item>
+                      <NavDropdown.Item style={{color:'black'}} onClick={()=>handleInvoice()}>My Orders</NavDropdown.Item>
                       <NavDropdown.Item style={{color:'black'}} target="_blank" onClick={()=>handleLogout()}>Logout</NavDropdown.Item>
                     </NavDropdown>
                   ):(

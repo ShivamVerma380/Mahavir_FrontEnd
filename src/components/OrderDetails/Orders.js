@@ -35,8 +35,8 @@ const Orders=()=>{
             }).then(function(response){
                 if(response.status==200){
                     console.log("Success",response.data);
-                    setOrders(response.data);
-                    setFilteredOrders(response.data);
+                    setOrders([...response.data].reverse());
+                    setFilteredOrders([...response.data].reverse());
                     SetIsOrdersFetched(true);
                 }
             }).catch(function(error){
@@ -180,7 +180,7 @@ const Orders=()=>{
                                                     
                                             )
                                         }
-                                        <Button className="buttonn" style={{marginLeft:"15px"}} onClick={()=>generateInvoice(order)}>Invoice</Button>
+                                        {/* <Button className="buttonn" style={{marginLeft:"15px"}} onClick={()=>generateInvoice(order)}>Invoice</Button> */}
 
                                         </Col>
                                         <Col md={2}>
