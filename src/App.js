@@ -9,7 +9,7 @@ import axios from "axios";
 import AdminHeader from './components/Admin/AdminHeader';
 import ShowSearchResults from './components/ShowSearchResults';
 import Test from './components/Test';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import Footer from './components/Footer/Footer'
 import FeatureBrands from './components/Items/FeatureBrands';
 import MiniPosters from './components/offers/MiniPosters';
@@ -404,8 +404,8 @@ function App() {
   return (
 
     <div>
-      <button onclick={topFunction} id="myBtn" title="Go to top">Top</button>
-
+      {/* <button onclick={topFunction} id="myBtn" title="Go to top">Top</button> */}
+      <Button  id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
       
       {/* <-------------------Header/> */}
       {

@@ -317,7 +317,7 @@ function CategoryProductsSwiper({ cattitle }) {
                     ];
                     return (
                       <MDBCard className="categoryproductscard" >
-                        <MDBCardImage className="cardimage" src={index.productImage1} alt='...' position='top' />
+                        <MDBCardImage className="cardimage" src={index.productImage1}  alt='...' position='top' />
                         {
                           (index.productImage1 !== null && index.productImage2 !== null && index.productImage3 !== null) ?
                             <Carousel interval={1000} className="cardimage2" indicators='' variant="dark">
@@ -325,6 +325,7 @@ function CategoryProductsSwiper({ cattitle }) {
                                 <img
                                   className="d-block w-100"
                                   src={index.productImage1}
+                                  style={{height:"150px",width:"125px"}}
                                   alt="First slide"
                                 />
                               </Carousel.Item>
@@ -332,6 +333,7 @@ function CategoryProductsSwiper({ cattitle }) {
                                 <img
                                   className="d-block w-100"
                                   src={index.productImage2}
+                                  style={{height:"150px",width:"125px"}}
                                   alt="Second slide"
                                 />
                               </Carousel.Item>
@@ -339,6 +341,7 @@ function CategoryProductsSwiper({ cattitle }) {
                                 <img
                                   className="d-block w-100"
                                   src={index.productImage3}
+                                  style={{height:"150px",width:"125px"}}
                                   alt="Third slide"
                                 />
                               </Carousel.Item>

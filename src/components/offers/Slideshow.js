@@ -50,7 +50,7 @@ function Slideshow({offerPosters}){
     return(
     
       <div >
-        <button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp/></button>
+        <button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></button>
         <Carousel className="offerslide">
         {
             offerPoster= offerPosters.map(index=>{

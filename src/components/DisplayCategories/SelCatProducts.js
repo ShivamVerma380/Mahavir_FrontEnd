@@ -274,7 +274,7 @@ const SelCatProducts=()=>{
                 null
             )
         }
-        <Button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp/></Button>
+        <Button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
         
                 <div>
                     
