@@ -45,6 +45,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import url from "../../Uri";
 import {HiOutlineShoppingCart} from "react-icons/hi";
 import StarRatings from "react-star-ratings";
+import Footer from "../Footer/Footer";
 // import './ProductDetails.css';
 // toast-configuration method,
 // it is compulsory method.
@@ -1219,6 +1220,7 @@ function ProductDetails() {
 
 
             </div>
+            <Footer/>
           </>
         ) : (null)
       }
