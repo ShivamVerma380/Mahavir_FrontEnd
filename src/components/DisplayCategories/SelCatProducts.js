@@ -18,6 +18,10 @@ import TestFilterProducts from "../Filters/TestFilterProducts";
 import url from "../../Uri";
 import Slideshow from "../offers/Slideshow";
 
+import "../../App.css";
+
+import {BsArrowUp} from "react-icons/bs";
+
 
 var modelNumsToCompare = new Set();
 var flag = false;
@@ -132,6 +136,26 @@ const SelCatProducts=()=>{
         }
     }
 
+    var mybutton = document.getElementById("myBtn");
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        console.log("In top Function")
+        // document.body.scrollIntoView();
+        // window.location.reload();
+    }
 
 
     function getCompareBtn(){
@@ -250,6 +274,7 @@ const SelCatProducts=()=>{
                 null
             )
         }
+        <Button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp/></Button>
         
                 <div>
                     
