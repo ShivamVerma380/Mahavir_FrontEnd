@@ -17,6 +17,7 @@ import { Dropdown } from "reactstrap";
 import url from "../../Uri";
 import {RiArrowDropDownLine} from 'react-icons/ri'
 import {FcFilledFilter} from "react-icons/fc"
+import StarRatings from "react-star-ratings";
 
 
 function TestFilterProducts(){
@@ -1056,13 +1057,8 @@ function TestFilterProducts(){
                                                 </Col> */}
                                                
 
-                                                    <ul className="list-inline small">
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg" ></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-lg"></i></li>
-                                                            </ul>
+                                                   
+                                                    {/* <StarRatings name="small-rating"  size={20} totalStars={5} rating={index.averageRating}/> */}
                                                 
                                             </Row>
                                             
