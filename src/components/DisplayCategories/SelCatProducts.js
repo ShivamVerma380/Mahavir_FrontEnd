@@ -16,6 +16,7 @@ import FilterProduct from "../Filters/FilterProduct";
 import TestFilterProducts from "../Filters/TestFilterProducts";
 
 import url from "../../Uri";
+import Slideshow from "../offers/Slideshow";
 
 
 var modelNumsToCompare = new Set();
@@ -54,6 +55,14 @@ const SelCatProducts=()=>{
     const [isAddToCompareProductsFetched,SetIsAddToCompareProductsFetched] =  useState(false);
     const [addToCompareProducts,SetAddToCompareProducts] = useState([]);
 
+    // const [Posters, setPosters] = useState([]);
+    // const [isPostersFetched, setIsPostersFetched] = useState(false);
+
+    const [MegaPoster,setMegaPoster] = useState([]);
+    const [isMegaPosterFetched,setIsMegaPosterFetched] = useState(false);
+
+    // const [MiniPoster,setMiniPoster] = useState([]);
+
     if(localStorage.getItem("CompareModels")===null){
         var str="";
     }else{
@@ -65,6 +74,35 @@ const SelCatProducts=()=>{
         
     }
     
+    useEffect(()=>{
+        if( !isMegaPosterFetched ){
+            axios({
+                method:"get",
+                url:url+"/get-offers"
+              }).then(function(response){
+                console.log(response);
+                console.log("Poster response: ",response.data)
+                if(response.status==200){
+                  response.data.map(index=>{
+                        if(index.isMegaPoster==="YES"&& index.category==localStorage.getItem("Category")) {
+                            console.log("in if ")
+                            MegaPoster.push(index)
+                        }
+                  })
+                  
+                //   setOfferPosters(response.data);
+                  
+                //   console.log("OfferPosters",offerPosters);
+                //   console.log("Mini Posters: ",MiniPoster)
+                //   setIsOfferPostersFetched(true);
+                  setIsMegaPosterFetched(true);
+                }
+                
+            }).catch(function(error){
+            console.log("error",error);
+            })
+        }
+    })
 
     
    
@@ -203,6 +241,16 @@ const SelCatProducts=()=>{
         <Header className="header" style={{position:"sticky"}} productList={products}/>
         <br></br>
         <br></br>
+        {
+            (isMegaPosterFetched)?(
+                
+                <Slideshow offerPosters={MegaPoster}/>
+                
+            ):(
+                null
+            )
+        }
+        
                 <div>
                     
                     

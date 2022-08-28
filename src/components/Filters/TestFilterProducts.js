@@ -74,9 +74,12 @@ function TestFilterProducts(){
 
     const [vals,setVals]=useState([]);
     // vals.push(localStorage.getItem("SubSubCategory"));
+
+    
+
     useEffect(()=>{
         window.addEventListener('scroll', () => { if (window.scrollY > 400) { setShowTopBtn(true); } else { setShowTopBtn(false); } });
-        if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched){
+        if(!isProductsFetched && !isSelectedProductsFetched && !isCategoriesFetched  ){
             axios.get(url+"/get-products-by-category/"+localStorage.getItem("Category"))
             .then(function(response){
                 
@@ -162,6 +165,8 @@ function TestFilterProducts(){
                 }).catch(function(error){
                     console.log("error",error)
                 })
+
+                
         }
         
     })
