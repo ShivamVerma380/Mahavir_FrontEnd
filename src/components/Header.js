@@ -24,6 +24,7 @@ import 'typeface-roboto';
 import {RiArrowDropDownLine} from "react-icons/ri"
 import {HiOutlineShoppingCart} from "react-icons/hi"
 import url from "../Uri";
+import {AiOutlineTeam} from "react-icons/ai"
 
 
 const Header = ({productList}) => {
@@ -160,7 +161,9 @@ const Header = ({productList}) => {
         navigate("/wishlistproducts")
     }
 
-    
+    function handleDevelopersPage(){
+        navigate("/developerpage")
+    }
     
     return(
       <>
@@ -183,8 +186,12 @@ const Header = ({productList}) => {
           </NavDropdown>
           {/* <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginLeft:"30px",marginTop:"3px"}} ><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store</p> */}
           </Col>
-          <Col md={2} >
+          <Col md={1} >
             <p style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
+          </Col>
+          <Col md={1}>
+            {/* <Button class="copyright" onClick={handleDevelopersPage}>Developer Team</Button> */}
+            <p style={{color:"white",marginTop:"6px",cursor:"pointer"}}>Developer Team</p>
           </Col>
           <Col md={1}>
           <AiOutlineInstagram className="instagram"/>
