@@ -77,8 +77,12 @@ function BuyNowSummary(){
       })
 
       function handleProceedToPaymentClick(){
-        localStorage.setItem("Amount",parseInt(amount));
-        navigate("/cart-payment")
+        if(parseInt(amount)==0){
+            alert("Please add items to purchase");
+        }else{
+            localStorage.setItem("Amount",parseInt(amount));
+            navigate("/payment")
+        }
       }
 
     // console.log("Address",localStorage.getItem("selectedaddress"))

@@ -49,7 +49,6 @@ import FilterProduct from './components/Filters/FilterProduct';
 import WishlistProducts from './components/WishlistProducts';
 import AdminLogin from './components/Admin/AdminLogin';
 import Orders from './components/OrderDetails/Orders';
-import CompareProducts from './components/AddtoCompare/CompareProducts';
 import Checkout from './components/OrderSummary/Checkout';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import CompletedOrders from './components/Admin/Sidebar/CompletedOrders';
