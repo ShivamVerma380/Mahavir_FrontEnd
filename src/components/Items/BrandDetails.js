@@ -20,7 +20,7 @@ import { fullWhite } from "material-ui/styles/colors";
 import url from "../../Uri";
 import Footer from "../Footer/Footer";
 
-
+import {AiOutlineCaretRight} from "react-icons/ai"
 
 function BrandDetails() {
     
@@ -306,7 +306,7 @@ function BrandDetails() {
                                     
                                     </Col>
                                     <Col md={2}>
-                                        <button className="brand_feature_product_btn" onClick={() => handleClick(index.category)} >View More <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                                        <button className="brand_feature_product_btn" onClick={() => handleClick(index.category)} >View More <AiOutlineCaretRight/></button>
                                     </Col>
                                 </Row>
                                 <Container style={{width:'90%',height: '429px'}}>
