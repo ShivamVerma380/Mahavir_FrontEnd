@@ -968,21 +968,6 @@ function BrandCatProducts() {
                                                 </Col> */}
 
                                                     </Row>
-                                                    <Row>
-                                                        {/* <Col md={11} style={{    paddingBottom: '40px',width: '10%'}} className="star">
-                                                {Math.round(index.averageRating * 10) / 10} <span> </span><AiFillStar />
-                                                
-                                                </Col> */}
-
-                                                        <ul className="list-inline small">
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg" ></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-lg"></i></li>
-                                                        </ul>
-
-                                                    </Row>
 
                                                     <Row className="innerrow">
                                                         <Col>
@@ -1031,7 +1016,7 @@ function BrandCatProducts() {
                                                             }
                                                         </Col>
                                                     </Row>
-                                                    <Row className="checkboxx">
+                                                    {/* <Row className="checkboxx">
                                                         <Form className="check">
 
                                                             <Form.Check defaultChecked={(comparemodels.includes(index.modelNumber)) ? (true) : (false)} type="checkbox" id={index.modelNumber} style={{ fontSize: "18px" }} label="Add To Compare" onChange={() => handleAddToCompare(index.modelNumber)} />
@@ -1039,7 +1024,7 @@ function BrandCatProducts() {
 
                                                         </Form>
                                                     </Row>
-                                                    <br></br>
+                                                    <br></br> */}
 
                                                     <Row>
 
