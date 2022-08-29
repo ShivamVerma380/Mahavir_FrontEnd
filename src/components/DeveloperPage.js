@@ -11,18 +11,18 @@ import {BsGithub} from "react-icons/bs";
 const DeveloperPage = () => {
     return(
        <html lang="en">
-        <h4 style={{marginTop:"30px", fontSize:"20px", textAlign:"center",fontFamily: "Copperplate,Papyrus,fantasy"}}>Brewing Java Team</h4>
+        <h4 style={{marginTop:"30px", fontSize:"20px", textAlign:"center",fontFamily: "Open Sans"}}>Brewing Java Team</h4>
         <body>
         <section>
         <div  class="container">
             
-            <div style={{backgroundImage:"linear-gradient(#e61d8c,#c7e9fb)"}} class = "card">
+            <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
                         <img style={{height:"300px",width:"300px"}} src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
-                        <h3 style={{color:"black"}}>Omkar Khare</h3>
+                        <h3 style={{fontSize:"16px",color:"black"}}>Omkar Khare</h3>
                     </div>
                 </div>
                 <ul class="sci">
@@ -37,13 +37,13 @@ const DeveloperPage = () => {
                     </li>
                 </ul>
             </div>
-            <div style={{backgroundImage:"linear-gradient(#e61d8c,#c7e9fb)"}}  class = "card">
+            <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
                         <img src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
-                    <h3 style={{color:"black"}}>Aditi Nikam</h3>
+                    <h3 style={{fontSize:"16px",color:"black"}}>Aditi Nikam</h3>
                     </div>
                 </div>
                 <ul class="sci">
@@ -59,13 +59,13 @@ const DeveloperPage = () => {
                 </ul>
             </div>
             
-            <div style={{backgroundImage:"linear-gradient(#e61d8c,#c7e9fb)"}} class = "card">
+            <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
                         <img style={{height:"300px",width:"300px"}} src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
-                        <h3 style={{color:"black"}}>Shivam Verma</h3>
+                        <h3 style={{fontSize:"16px",color:"black"}}>Shivam Verma</h3>
                     </div>
                 </div>
                 <ul class="sci">
@@ -80,13 +80,13 @@ const DeveloperPage = () => {
                     </li>
                 </ul>
             </div>
-            <div style={{backgroundImage:"linear-gradient(#e61d8c,#c7e9fb)"}} class = "card">
+            <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
                         <img style={{height:"300px",width:"300px"}} src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
-                    <h3 style={{color:"black"}}>Ketaki Hadnurkar</h3>
+                    <h3 style={{fontSize:"16px",color:"black"}}>Ketaki Hadnurkar</h3>
                     </div>
                 </div>
                 <ul class="sci">
@@ -102,13 +102,13 @@ const DeveloperPage = () => {
                 </ul>
             </div>
             
-            <div style={{backgroundImage:"linear-gradient(#e61d8c,#c7e9fb)"}}  class = "card">
+            <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
                         <img style={{height:"300px",width:"300px"}} src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
-                        <h3 style={{color:"black"}}>Siddhant Jain</h3>
+                        <h3 style={{fontSize:"16px",color:"black"}}>Siddhant Jain</h3>
                     </div>
                 </div>
                 <ul class="sci">
@@ -123,13 +123,13 @@ const DeveloperPage = () => {
                     </li>
                 </ul>
             </div>
-            <div style={{backgroundImage:"linear-gradient(#e61d8c,#c7e9fb)"}} class = "card">
+            <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
                         <img style={{height:"300px",width:"300px"}} src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
-                        <h3 style={{color:"black"}}>Shraddha Mulay</h3>
+                        <h3 style={{fontSize:"16px",color:"black"}}>Shraddha Mulay</h3>
                     </div>
                 </div>
                 <ul class="sci">
