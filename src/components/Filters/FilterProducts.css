@@ -83,7 +83,21 @@ width: 100%;
     padding: 1%;
     /* border-left: solid 1px #0b4268; */
 }
+.productprice{
+    font-size: 24px;
+    color: rgb(250, 0, 0);
+    font-weight: 600;
+    font-family: Roboto;
+    line-height: 26px;
+    letter-spacing: 0.01em;
+    
+}
 
+.offerprice{
+    font-weight: 500;
+    font-size: 18px;
+    color: rgb(86, 89, 89);
+}
 .checkboxx .form-check-input[type=checkbox] {
     border-radius: 0;
     border:solid 1px #0b4268;
@@ -335,7 +349,7 @@ color: rgba(33, 33, 33, 0.7);
 }
 
 .mainpage {
-    margin: 7% 0% 0% 0%;
+    margin: auto;
 }
 
 .check{
@@ -362,12 +376,27 @@ h5{font-weight: 400}
 /* .accordion-flush .accordion-collapse{
     display: block;
 } */
+
+.filtercol h4 {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 21px;
+    margin-left: 14px;
+    font-family: Roboto;
+}
+.filterproducts_poster .offerslide {
+    margin-top: 111px;
+}
+.mainpage {
+    margin: 1% auto;
+}
 @media screen and (min-width:320px) and (max-width:480px){
 /* mobile  */
     .filtercol{
         display: none;
     }
     .filterproductsRow{
+        padding: 3%;
         width: 100%;
         margin: 0;
         margin-bottom: 20px;
@@ -380,14 +409,27 @@ h5{font-weight: 400}
         padding-left: 0%;
     }
     
-    .filterproductImage {
-        height: 90%;
-        width: 70%;
+
+    .multipleproduct_title {
+        font-size: 22px;
+        line-height: normal;
+        letter-spacing: 0;
+        margin-bottom: 20px;
+    }
+
+    .multipleproduct_highlights {
+        line-height: normal;
+        letter-spacing: 0;
     }
     .lastcol{
-        display: inline-grid;
-        justify-content: center;
+        padding: 2%;
+        display: inline-flex;
+        justify-content: left;
         border-left: none;
+    }
+
+    .lastcol .h5{
+        margin-right: 50px;
     }
     .innerrow{
         margin-top: 0;
@@ -404,26 +446,19 @@ h5{font-weight: 400}
         display: flex;
         justify-content: center;
         align-items: center;
+        padding:5%;
     }
 
     .filterproductBtn1{
-        margin-left: 0;
-    width: 100%;
-    height: 50px;
-    font-size: 14px;
-    font-weight: bold;
-    background-color: #0b4268;
-    border-color: #0b4268;
-    margin-bottom: 0px;
+        margin-left: 40px;
+        background-color: #0b4268;
+        border-color: #0b4268;
+        font-size: 14px;
     }
     .filterproductBtn {
-        margin-left: 0px;
-        width: 100%;
-        height: 50px;
+
+        margin-left: 40px;
         font-size: 14px;
-        font-weight: bold;
-        color: #0b4268;
-        border-color: #0b4268;
     }
     /* #comparebtn{
         display: none;
@@ -444,7 +479,8 @@ h5{font-weight: 400}
     }
    
     .mainpage {
-        margin-top: 70px;
+    margin: 1% auto;
+
     }
     .btnrow{
         display: inline-flex;
@@ -458,4 +494,242 @@ h5{font-weight: 400}
         display: none;
     }
 
+    .accordion-button {
+        font-weight: bold;
+        color: black;
+        font-size: 20px;
+        border-radius: 0;
+    }
+
+     label{
+        margin-bottom: 5px;
+    font-family: Roboto;
+    margin-top: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.7);
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #000000;
+        background-color: #ffffff;
+    }
+
+}
+
+/* ipads and tablets */
+@media screen and (min-width: 481px) and (max-width:768px)
+{
+    .mainpage {
+        margin: 1% auto;
+    }
+ .filtercol{
+    display: none;
+ }
+
+.filterproductsRow {
+    width: 100%;
+    margin-top: 0%;
+    margin-bottom: 1%;
+    margin-left: 0;
+    margin-right: 0;
+    
+}
+
+.mainpage .col-md-10 {
+    width: 100%;
+}
+.offcavasfilters{
+    display: block;
+    margin-top: 10px;
+}
+.multipleproducts_cat_name{
+    display: none;
+}
+.filternav {
+    margin-top: 84px;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+}
+
+.btnrow{
+    display: inline-flex;
+}
+.btnrow2{
+    display: none;
+}
+
+
+.products{
+    display: none;
+}
+
+.accordion-button {
+    font-weight: bold;
+    color: black;
+    font-size: 20px;
+    border-radius: 0;
+}
+
+ label{
+    margin-bottom: 5px;
+font-family: Roboto;
+margin-top: 4px;
+font-weight: 600;
+font-size: 14px;
+color: rgba(0, 0, 0, 0.7);
+}
+
+.accordion-button:not(.collapsed) {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.multipleproduct_title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: normal;
+    letter-spacing: 0;
+    color: #212121;
+}
+
+.productprice{
+    font-size: 20px;
+    line-height: normal;
+    letter-spacing: 0;
+    
+}
+
+.offerprice{
+    font-weight: 500;
+    font-size: 12px;
+    color: rgb(86, 89, 89);
+}
+.filterproductBtn {
+   
+    height: 40px;
+    font-size: 14px;
+    
+}
+
+.filterproductsRow .col-md-2{
+    width:20%;
+}
+.filterproductsRow .col-md-7{
+    width:60%;
+}
+.filterproductsRow .col-md-3{
+    width:20%;
+}
+}
+/* laplops and small screens */
+@media screen and (min-width: 769px) and (max-width:1024px)
+{
+    .mainpage {
+        margin: 1% auto;
+    }
+ .filtercol{
+    display: none;
+ }
+
+.filterproductsRow {
+    width: 100%;
+    margin-top: 0%;
+    margin-bottom: 1%;
+    margin-left: 0;
+    margin-right: 0;
+    
+}
+
+.mainpage .col-md-10 {
+    width: 100%;
+}
+.offcavasfilters{
+    display: block;
+    margin-top: 10px;
+}
+.multipleproducts_cat_name{
+    display: none;
+}
+.filternav {
+    margin-top: 84px;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+}
+
+.btnrow{
+    display: inline-flex;
+}
+.btnrow2{
+    display: none;
+}
+
+
+.products{
+    display: none;
+}
+
+.accordion-button {
+    font-weight: bold;
+    color: black;
+    font-size: 20px;
+    border-radius: 0;
+}
+
+ label{
+    margin-bottom: 5px;
+font-family: Roboto;
+margin-top: 4px;
+font-weight: 600;
+font-size: 14px;
+color: rgba(0, 0, 0, 0.7);
+}
+
+.accordion-button:not(.collapsed) {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.multipleproduct_title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: normal;
+    letter-spacing: 0;
+    color: #212121;
+}
+
+.productprice{
+    font-size: 20px;
+    line-height: normal;
+    letter-spacing: 0;
+    
+}
+
+.offerprice{
+    font-weight: 500;
+    font-size: 12px;
+    color: rgb(86, 89, 89);
+}
+.filterproductBtn {
+   
+    height: 40px;
+    font-size: 14px;
+    
+}
+
+.filterproductsRow .col-md-2{
+    width:20%;
+}
+.filterproductsRow .col-md-7{
+    width:60%;
+}
+.filterproductsRow .col-md-3{
+    width:20%;
+}
 }

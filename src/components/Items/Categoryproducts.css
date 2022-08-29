@@ -84,7 +84,7 @@
   }
 
   .categoryproductscard:hover .cardimage{
-    box-shadow: 0 2px 2px 0 #d5d8da;
+    /* box-shadow: 0 2px 2px 0 #d5d8da; */
     display: none;
     /* box-shadow: inset 0 0 10px 20px rgba(0,0,0,0.6); */
     
@@ -96,7 +96,7 @@
     
   }
   .categoryproductscard:hover .cardimage2{
-    box-shadow: 0 2px 2px 0 #d5d8da;
+    /* box-shadow: 0 2px 2px 0 #d5d8da; */
     
     display: block; 
     
@@ -109,14 +109,20 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     font-size: 13px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto';
     font-weight: 600;
     color: #2D2D2D;
     
   }
 
-  .cardimage{
+  .cardimg{
     box-shadow: 0 2px 2px 0 #d5d8da;
+height:250px;
+display: flex;
+align-items: center;
+justify-content: center;
+  }
+  .cardimage{
     
     /* box-shadow: inset 0 0 10px 20px rgba(0,0,0,0.6); */
   }
@@ -222,7 +228,7 @@
   .icon-right.after:before {
     content: "Explore";
     position: absolute;
-    left: 50%;
+    left: 100%;
     top: 14px;
     opacity: 0;
     transition: 0.2s ease-in all;
@@ -289,6 +295,9 @@
   /* mobiles */
   @media screen and (min-width: 320px) and (max-width:480px)
   {
+    .cardimg{
+      height: 160px;
+    }
     .categoryproductscard{
       transition: transform 0.2s ease;
       border-radius: 0;
@@ -304,7 +313,7 @@
     .explore{
       height: 35px;
     width: 100px;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     letter-spacing: 1px;
     }
 
@@ -325,19 +334,49 @@
     .categoryproductsrow{
       padding-top: 0px;
         margin-bottom: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .categoryproductsrow .col-md-8{
-      width: 70%;
+      width: 60%;
     }
     .categoryproductsrow .col-md-4{
-      width: 30%;
+      width: 40%;
+    }
+
+    .icon-right{
+      display: none;
     }
   }
   /* ipads and tablets */
   @media screen and (min-width: 481px) and (max-width:768px)
   {
 
+    .categoryproductscard{
+      margin-left: 8px;
+    margin-right: 8px;
+    width: 15rem;
+    }
+    .cardimg {
+      height: 160px;
+     }
+     .categoryproductsrow {
+      padding-top: 0px;
+      margin-bottom: 0px;
+  }
+    .explore:hover .icon-right.after:after {
+        left: -60px;
+        top: 18px;
+    }
+    .explore {
+        
+        height: 35px;
+        width: 150px;
+    }
+    .categorytitle{
+      font-size: 22px;
+    }
   }
 
   /* extra large screens */

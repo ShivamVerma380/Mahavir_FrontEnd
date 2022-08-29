@@ -176,7 +176,7 @@
     color: #202020;
     text-transform: uppercase;
     font-size: 26px; 
-    font-family: Arial, Helvetica, sans-serif; 
+    font-family: 'Roboto'; 
     font-weight: bold;
 }
 
@@ -319,7 +319,16 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 /* laplops and small screens */
 @media screen and (min-width: 769px) and (max-width:1024px)
 {
-  
+  .brand_title {
+    margin-bottom: 0px;
+    
+    font-size: 20px;
+}
+
+.brandlogo {
+  width: fit-content;
+  height: 90px;
+}
 }
 
 /* desktop and large screens */
@@ -331,7 +340,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 /* mobiles */
 @media screen and (min-width: 320px) and (max-width:480px)
 {
-  .categoryproductscard{
+  /* .categoryproductscard{
     transition: transform 0.2s ease;
     
     border-radius: 0;
@@ -343,7 +352,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     padding: 0px;
     cursor: pointer;
    
-  }
+  } */
 
   .brandlogo {
     height: 100px;
@@ -359,11 +368,11 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   
 
 
-
+/* 
   .explore{
     height: 40px;
     width: 118px;
-  }
+  } */
 
   .categorytitle{
     margin-left: 0;
@@ -376,7 +385,16 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 /* ipads and tablets */
 @media screen and (min-width: 481px) and (max-width:768px)
 {
+  .brand_title {
+    margin-bottom: 0px;
+    
+    font-size: 20px;
+}
 
+.brandlogo {
+  width: fit-content;
+  height: 90px;
+}
 }
 
 /* extra large screens */

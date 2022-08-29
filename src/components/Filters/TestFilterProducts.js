@@ -784,9 +784,9 @@ function TestFilterProducts(){
         
         <Row className="mainpage">
             <Col md={2} className="filtercol" style={{paddingLeft:"0px",paddingRight:"0px"}} >
-            <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto"}}><FcFilledFilter/>Filters</h4>   
+            <h4><FcFilledFilter/>Filters</h4>   
                 <hr style={{}}></hr> 
-                <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Categories</h4>
+                <h4 style={{marginBottom:"15px"}}>Categories</h4>
               
                 {
                     (isCategoriesFetched)?(
@@ -878,18 +878,18 @@ function TestFilterProducts(){
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Filters<br></br><b>{selectedProducts.length}</b> Products Found</Offcanvas.Title>
+          <Offcanvas.Title style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto"}}>Filters<br></br><br></br><b>{selectedProducts.length}</b> Products Found</Offcanvas.Title>
           
 
         </Offcanvas.Header>
         <Offcanvas.Body>
         {/* <Col md={2} className="filtercol"> */}
-                <h5>Category</h5>
+                <h5 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Category</h5>
                 {
                     (isCategoriesFetched)?(
                         categories.map(cat=>{
                             return(
-                                <Form.Check type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
+                                <Form.Check style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} type="radio" id={cat} value={cat}  label={cat} name="cat" defaultChecked={(cat===localStorage.getItem("Category"))?(true):(false)} onChange={()=>handleCategoryCheck(cat)}/>
                             )
                         })
                     ):(
@@ -905,29 +905,16 @@ function TestFilterProducts(){
                 <Slider
                     defaultValue={[parseInt(min),parseInt(max)]}
                     onChange={rangeSelector}
-                    valueLabelDisplay="on"
+                    valueLabelDisplay="off"
                     min={parseInt(min)}
                     max={parseInt(max)}
+                    style={{width:"230px",marginLeft:"14px"}}
                 />
                 </React.Fragment>
-                {/* Your range of Price is between {value[0]} /- and {value[1]} /- */}
+                <h4 style={{marginLeft:"14px",marginRight:"14px"}}>Your range of Price is between {value[0]} /- and {value[1]} /-</h4>
 
-                
-                {
-                //     <MultiRangeSlider
-                //     min={0}
-                //     max={100}
-                //     step={5}
-                //     ruler={true}
-                //     label={true}
-                //     preventWheel={false}
-                //     minValue={minValue}
-                //     maxValue={maxValue}
-                //     onInput={(e) => {
-                //       handleInput(e);
-                //     }}
-                //   />
-                }
+
+        
                 <br></br><br></br>
                 {/* <h4>Filters</h4> */}
                 {
@@ -937,8 +924,8 @@ function TestFilterProducts(){
                                 <div >
                                     
                                     <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
-                                    <Accordion.Item eventKey={pos}>
-                                                    <Accordion.Header>{index}</Accordion.Header>
+                                    <Accordion.Item style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",marginRight:"14px",fontFamily:"Roboto",marginBottom:"15px"}} eventKey={pos}>
+                                                    <Accordion.Header style={{fontWeight:500, fontSize:"18px", lineHeight:"21px", marginLeft:"14px",marginRight:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>{index}</Accordion.Header>
                                                     <Accordion.Body>
                                                                     
                                     {/* <h5>{index}</h5> */}
@@ -1100,10 +1087,10 @@ function TestFilterProducts(){
                                                 <Col >
                                                     {
                                                         (index.offerPrice==null) ? (
-                                                            <h4 style={{fontSize:'24px'}}>MRP: <b>₹{index.productPrice}</b></h4>
+                                                            <h5 className="productprice">MRP: <b>₹{index.productPrice}</b></h5>
                                                         ) : (
-                                                            <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><b style={{fontSize:'24px',color:'#FA0000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</b><br></br>
-                                                            <b style={{fontWeight:500,fontSize:"18px",color:"#565959" }}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",fontWeight:500,fontSize:"18px",color:"#565959"}}>₹{index.productPrice}  </b></b>  <b style={{color:"green",fontSize:"18px",marginLeft:"10px"}}>  {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h5></>
+                                                            <><h5 className="productprice"><b >MSP: ₹{index.offerPrice}</b></h5><br></br>
+                                                            <h4 className="offerprice"><b >MRP: <b style={{ textDecorationLine: "line-through"}}>₹{index.productPrice}  </b></b>  <b style={{color:'green'}}>  {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4></>
                                                         )
                                                     }
                                                 </Col>

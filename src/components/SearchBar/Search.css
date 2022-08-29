@@ -4,3 +4,26 @@
           margin-right: 70px;
       
 }
+@media screen and (min-width: 769px) and (max-width:1024px)
+{
+
+.search {
+  z-index: 9999;
+  width: 300px;
+  margin-right: 0px;
+  margin-top: 5px;
+}
+}
+
+/* ipads and tablets */
+@media screen and (min-width: 481px) and (max-width:768px)
+{
+  
+
+  .search {
+    margin-left: 0px;
+    z-index: 9999;
+    width: 300px;
+    margin-right: 20px;
+}
+}

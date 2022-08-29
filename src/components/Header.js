@@ -187,11 +187,11 @@ const Header = ({productList}) => {
           {/* <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginLeft:"30px",marginTop:"3px"}} ><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store</p> */}
           </Col>
           <Col md={1} >
-            <p style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
+            <p className="wishlist_" style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
           </Col>
           <Col md={1}>
             {/* <Button class="copyright" onClick={handleDevelopersPage}>Developer Team</Button> */}
-            <p style={{color:"white",marginTop:"6px",cursor:"pointer"}}>Developer Team</p>
+            <p  style={{color:"white",marginTop:"6px",cursor:"pointer"}}>Developer Team</p>
           </Col>
           <Col md={1}>
           <AiOutlineInstagram className="instagram"/>
@@ -207,7 +207,7 @@ const Header = ({productList}) => {
     <Navbar className="header" key={expand} bg="light" expand={expand} >
        {/* fixed="top"  */}
       <Container fluid>
-        <Navbar.Brand href="/" style={{fontFamily:"PublicaSans-Bold", fontSize:'42px',color:' #ED1C24'}}><img className="logo_mahavir" src = {require ('../assets/mahavirlogo.jpg')}/><span style={{marginLeft:'10px'}}></span>Mahavir</Navbar.Brand>
+        <Navbar.Brand href="/" style={{color:'rgb(237, 28, 36)'}} className="mahavirtitle"><img className="logo_mahavir" src = {require ('../assets/mahavirlogo.jpg')}/><span style={{marginLeft:'10px'}}></span>Mahavir</Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${expand}`}
@@ -267,7 +267,7 @@ const Header = ({productList}) => {
                   )
                 }
                 {/* <Nav.Link style={{color:'#04001d'}}><i  class="fa fa-shopping-cart fa-lg" style={{fontSize:"30px"}} onClick={Cart} ><b style={{verticalAlign: "super", color:"#C10000"}}>{count}</b></i></Nav.Link> */}
-                <Nav.Link style={{color:'#04001d'}}><HiOutlineShoppingCart style={{fontSize:"30px"}} onClick={Cart} /><b style={{verticalAlign: "super", color:"#C10000"}}>{count}</b></Nav.Link>
+                <Nav.Link style={{color:'#04001d', marginTop:'-10px'}}><HiOutlineShoppingCart style={{fontSize:"30px"}} onClick={Cart} /><b style={{verticalAlign: "super", color:"#C10000"}}>{count}</b></Nav.Link>
                 
                 {/* <NavDropdown className="location" renderMenuOnMount={false} title="Our Location" id={`offcanvasNavbarDropdown-expand-${expand}`} >
                     <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}} href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>

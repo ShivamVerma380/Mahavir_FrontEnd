@@ -69,13 +69,13 @@ function CategoriesToDisplay({ categoryDetail }) {
                         <Nav.Link >
                           {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
                           {/* {<img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>} */}
-                          <Image thumbnail='true'  src={index.category_image}className="categorymage" style={{height:50,borderRadius:50,filter: 'invert(1)'}}></Image>
+                          <Image thumbnail='true'  src={index.category_image} className="categoryImage" ></Image>
                           
-                          <NavDropdown className="catdropdown" style={{ color: "white",fontSize:'15px' }} title={index.category} renderMenuOnMount={true}>
+                          <NavDropdown className="catdropdown"  title={index.category} renderMenuOnMount={true}>
                             {
                               index.subCategories.map(subCat => {
                                 return (
-                                  <div style={{ display: 'block', padding: 10 ,width:'200px'}}>
+                                  <div style={{ display: 'block', padding: 10 ,width:'max-content'}}>
                                     <h5>{subCat.subCategoryName}</h5>
                                     <ListGroup>
                                       {/*  <NavDropdown id="drop" style={{ color: "#00000" }} title={subCat.subCategoryName}>*/}

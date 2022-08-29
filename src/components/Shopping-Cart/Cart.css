@@ -143,17 +143,8 @@
         width: 65%;
     }
 
-    .search {
-        z-index: 9999;
-        width: 300px;
-        margin-right: 0px;
-        margin-top: 5px;
-    }
+  
 
 
-    .Header .navbar-light .navbar-nav .nav-link {
-    margin-left: 0px;
-    margin-right: 0px;
-}
 
 }
