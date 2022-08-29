@@ -191,7 +191,7 @@ const Header = ({productList}) => {
           </Col>
           <Col md={1}>
             {/* <Button class="copyright" onClick={handleDevelopersPage}>Developer Team</Button> */}
-            <p style={{color:"white",marginTop:"6px",cursor:"pointer"}}>Developer Team</p>
+            <p style={{color:"white",marginTop:"6px",cursor:"pointer"}} onClick={handleDevelopersPage}>Developer Team</p>
           </Col>
           <Col md={1}>
           <AiOutlineInstagram className="instagram"/>
