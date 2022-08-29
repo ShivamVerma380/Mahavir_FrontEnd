@@ -132,7 +132,7 @@ function ComparisonHeader({product}){
     console.log("length",length);
     console.log("isBrandsFetched",isBrandsFetched);
     return(
-        
+            <>
             <Row className="CompareHeader">
             
             <Col md={2} style={{justifyContent:'center', marginTop:"50px"}} className="colll">
@@ -266,6 +266,8 @@ function ComparisonHeader({product}){
                 })
             }
         </Row>
+        
+        </>
     );
 }
 

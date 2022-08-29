@@ -67,11 +67,13 @@ function AddToCompareProducts(){
         }
     return(
         <>
+        <body style={{background:"whitesmoke"}}>
         <Row>
         <Header/>
         </Row>
-       
+        <Container style={{background:"white",paddingLeft:"0px",paddingRight:"0px"}}>
         <Row>
+        
             {
                 (isProductFetched)?(
                     <div>
@@ -142,8 +144,10 @@ function AddToCompareProducts(){
                 )
                 
             }
-            
+        
         </Row>
+        </Container>
+        </body>
         </>
     )
 }
