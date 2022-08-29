@@ -10,6 +10,8 @@ import 'typeface-roboto';
 import {AiFillDelete} from 'react-icons/ai';
 import { Country, State, City }  from 'country-state-city';
 import { DropDownMenu } from "material-ui";
+import Header from "../../Header";
+
 
 import { ToastContainer, toast } from "react-toastify";
 
@@ -322,104 +324,101 @@ function AddressBuyNowSummary(){
         console.log("City",index);
       }
       return (
-    
-        <div style={{border:"2px solid #E2E2E2"}} >
-          <ToastContainer position="top-center"/>
+        <><Header/>
+        <div style={{ border: "2px solid #E2E2E2" ,marginTop:"100px"}}>
+          <ToastContainer position="top-center" />
           {/* <Header/>  */}
           {/* <div className="radio">
-              <label>
-                <input type="radio" value="option1"  />
-                  Address 1, ............
-              </label>
-          </div>
-          <div className="radio">
-              <label>
-                <input type="radio" value="option1"  />
-                  Address 2, ............
-              </label>
-          </div> */}
-          <Row >
+        <label>
+          <input type="radio" value="option1"  />
+            Address 1, ............
+        </label>
+    </div>
+    <div className="radio">
+        <label>
+          <input type="radio" value="option1"  />
+            Address 2, ............
+        </label>
+    </div> */}
+          <Row>
             <Col md={1}></Col>
             <Col md={10}>
               <center>
-              <h1 style={{marginTop:"40px",color:"black",fontSize:"20px",fontWeight:"600",fontFamily:"typeface-roboto",marginLeft:"2px"}}>DELIVERY ADDRESS 📬</h1>
+                <h1 style={{ marginTop: "40px", color: "black", fontSize: "20px", fontWeight: "600", fontFamily: "typeface-roboto", marginLeft: "2px" }}>DELIVERY ADDRESS 📬</h1>
               </center>
-              
+
             </Col>
             <Col md={1}></Col>
           </Row>
           <br></br>
-    
-          {
-            address.map((index,i)=> {
-              return (
 
-                <>
+          {address.map((index, i) => {
+            return (
+
+              <>
                 <Row>
-                <Col md={4}></Col>
-                <Col md={4}>
-                  <Card>
-                    <Card.Body>
-                      <Card.Text style={{width:"fitContent", paddingRight:"0"}}>
+                  <Col md={4}></Col>
+                  <Col md={4}>
+                    <Card>
+                      <Card.Body>
+                        <Card.Text style={{ width: "fitContent", paddingRight: "0" }}>
 
-                        <input type="radio" value="Address1" name="add" id={"add" + i} onChange={() => selectedaddress(index, index.name + "" + i)} /> <b style={{ marginRight: 20, marginLeft: 10 }}>{index.name}</b> <b>{index.mobileNumber}</b>
-                        <p>{index.address} {index.city} {index.state} <b>- {index.pincode}</b>, Alternate Mobile Number: <b>{index.alternateMobile}</b></p>
-                        <AiFillDelete onClick={() => handleAddressDelete(index)} />
-                      </Card.Text>
-                    </Card.Body>
+                          <input type="radio" value="Address1" name="add" id={"add" + i} onChange={() => selectedaddress(index, index.name + "" + i)} /> <b style={{ marginRight: 20, marginLeft: 10 }}>{index.name}</b> <b>{index.mobileNumber}</b>
+                          <p>{index.address} {index.city} {index.state} <b>- {index.pincode}</b>, Alternate Mobile Number: <b>{index.alternateMobile}</b></p>
+                          <AiFillDelete onClick={() => handleAddressDelete(index)} />
+                        </Card.Text>
+                      </Card.Body>
 
-                  </Card>
-                </Col><Col md={4}></Col>
+                    </Card>
+                  </Col><Col md={4}></Col>
                 </Row>
                 <br></br>
-                </>
-  
-              )
-              
-            })
-          }
-    
-          
-    
-    
+              </>
+
+            );
+
+          })}
+
+
+
+
           <Row style={{ marginTop: 20 }}>
             <Col md={1}></Col>
             <Col md={10}>
               <center>
-                <Button style={{backgroundColor:"#C10000",border:"none"}} className="form-field" onClick={HandleButtonClick}>Add a New Address</Button>
+                <Button style={{ backgroundColor: "#C10000", border: "none" }} className="form-field" onClick={HandleButtonClick}>Add a New Address</Button>
               </center>
-            
+
             </Col>
             <Col md={1}></Col>
-            </Row>
-            <Row>
+          </Row>
+          <Row>
             <Col md={1}></Col>
             <Col md={10}>
               <center>
-              <Button style={{backgroundColor:"#C10000",border:"none", marginTop:"20px", position:"sticky", alignContent:"end" }} className="form-field" onClick={handleProceedOnClick}>Proceed to Buy</Button>
+                <Button style={{ backgroundColor: "#C10000", border: "none", marginTop: "20px", position: "sticky", alignContent: "end" }} className="form-field" onClick={handleProceedOnClick}>Proceed to Buy</Button>
               </center>
-              </Col>
+            </Col>
             <Col md={1}></Col>
           </Row>
           <br></br>
-          
-    
-    
-    
-    
-    
-          {
-            (isButtonClicked) ? (
-              <>
-              <Row >
+
+
+
+
+
+
+          {(isButtonClicked) ? (
+            <>
+              <Row>
                 <Col md={3}></Col>
-                <Col md={6} style={{marginLeft:"10px"}} >
-                  <Card >
+                <Col md={6} style={{ marginLeft: "10px" }}>
+                  <Card>
                     <Card.Body>
-                      <Card.Title style={{fontSize:"18px", alignContent:"center"}}>Add New Address📌</Card.Title>
-                      <Row style={{marginTop:40}}>
-                        
-                          <Col >
+                      <Card.Title style={{ fontSize: "18px", alignContent: "center" }}>Add New Address📌</Card.Title>
+                      <Row style={{ marginTop: 40 }}>
+
+                        <Col>
                           <Input
                             id="full_name"
                             type="text"
@@ -427,162 +426,153 @@ function AddressBuyNowSummary(){
                             placeholder="Full Name"
                             name="fullname"
                             onChange={InputFullNameHandler}
-                            style={{borderRadius:"20px"}}
-                          />
-                        </Col> 
-                      </Row>
-                      <Row style={{marginTop:20}}>
-    
-                        <Col >
-                        <Input
-                          id="Phone"
-                          className="form-field"
-                          type="text"
-                          placeholder="Phone No."
-                          name="Phone"
-                          maxLength={10}
-                          onChange={InputPhoneNoHandler}
-                          style={{borderRadius:"20px"}}
-                        />
-                      
-                        </Col>  
-                      </Row>
-                      <Row style={{marginTop:20}}>
-                        <Col>
-                            <Input
-                              style={{height:"100px",borderRadius:"20px"}}
-                              id="last-name"
-                              className="form-field"
-                              type="textarea"
-                              maxLength={50}
-                              placeholder="Address Line 1 (Street Address, P.O.)"
-                              name="ADL1"
-                              onChange={InputAddressOneHandler}
-                            />
-                         
+                            style={{ borderRadius: "20px" }} />
                         </Col>
-                        </Row>
-                        
-                      <Row style={{marginTop:20}}>
-                      <Col md={6}>
-                      <Input
-                        id="Counrty"
-                        className="form-field"
-                        type="text"
-                        placeholder="India"
-                        value="India"
-                        defaultValue="India"
-                        readonly
-                        style={{borderRadius:"20px"}}
-                      ></Input>
-                     
-                      </Col> 
-                      <Col md={6}>
-                      <Dropdown
-                        id="state"
-                        type="text"
-                        placeholder="state"
-                        name="state"
-                        value={state}
-                        // onSelect={(e) => {
-                        //   setState(e.target.value);
-                        //   console.log("state", e.target.value);
-                        //   localStorage.setItem("state", e.target.value);
-                        // }
-                      // }
-                        style={{borderRadius:"20px"}}
-                      >
-                        <Dropdown.Toggle style={{background:"white", color:"black"}} className="form-field" id="dropdown-basic">
-                        {state}
-                      </Dropdown.Toggle>
+                      </Row>
+                      <Row style={{ marginTop: 20 }}>
 
-                      <Dropdown.Menu>
-                        {/* <Dropdown.Item ></Dropdown.Item> */}
-                        {
-                          states.map((index)=>{
-                            return (
-                              <Dropdown.Item style={{fontSize:"14px"}} onClick={()=>selectState(index)}>{index.name}</Dropdown.Item>
-                            )
-                          })
-                        }
-                        </Dropdown.Menu>
-                      </Dropdown>
-                     
-                      </Col> 
-                       
+                        <Col>
+                          <Input
+                            id="Phone"
+                            className="form-field"
+                            type="text"
+                            placeholder="Phone No."
+                            name="Phone"
+                            maxLength={10}
+                            onChange={InputPhoneNoHandler}
+                            style={{ borderRadius: "20px" }} />
 
+                        </Col>
+                      </Row>
+                      <Row style={{ marginTop: 20 }}>
+                        <Col>
+                          <Input
+                            style={{ height: "100px", borderRadius: "20px" }}
+                            id="last-name"
+                            className="form-field"
+                            type="textarea"
+                            maxLength={50}
+                            placeholder="Address Line 1 (Street Address, P.O.)"
+                            name="ADL1"
+                            onChange={InputAddressOneHandler} />
 
-
+                        </Col>
                       </Row>
 
-                      <Row style={{marginTop:20}}>
-                      <Col md={6} style={{marginBottom:20}}>
-                      <Dropdown
-                        id="City"
-                        type="text"
-                        placeholder="City"
-                        name="City"
-                        style={{borderRadius:"20px"}}
-                      >
-                        <Dropdown.Toggle style={{background:"white", color:"black"}}className="form-field" id="dropdown-basic">
-                        {city}
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        {
-                          cities.map((index)=>{
-                            return (
-                              <Dropdown.Item style={{fontSize:"14px"}} onClick={()=>selectCity(index)}>{index}</Dropdown.Item>
-                            )
-                          })
-                        }
-                        </Dropdown.Menu>
-                      </Dropdown>
-                        </Col> 
-    
+                      <Row style={{ marginTop: 20 }}>
                         <Col md={6}>
-                      <Input
-                        id="Zip"
-                        className="form-field"
-                        type="text"
-                        placeholder="Zip"
-                        name="Zip"
-                        maxLength={6}
-                        onChange={InputZipHandler}
-                        style={{borderRadius:"20px"}}
-                      />
-                        </Col> 
+                          <Input
+                            id="Counrty"
+                            className="form-field"
+                            type="text"
+                            placeholder="India"
+                            value="India"
+                            defaultValue="India"
+                            readonly
+                            style={{ borderRadius: "20px" }}
+                          ></Input>
+
+                        </Col>
+                        <Col md={6}>
+                          <Dropdown
+                            id="state"
+                            type="text"
+                            placeholder="state"
+                            name="state"
+                            value={state}
+                            // onSelect={(e) => {
+                            //   setState(e.target.value);
+                            //   console.log("state", e.target.value);
+                            //   localStorage.setItem("state", e.target.value);
+                            // }
+                            // }
+                            style={{ borderRadius: "20px" }}
+                          >
+                            <Dropdown.Toggle style={{ background: "white", color: "black" }} className="form-field" id="dropdown-basic">
+                              {state}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu style={{height:"200px", overflow:"auto"}}>
+                              {/* <Dropdown.Item ></Dropdown.Item> */}
+                              {states.map((index) => {
+                                return (
+                                  <Dropdown.Item style={{ fontSize: "14px" }} onClick={() => selectState(index)}>{index.name}</Dropdown.Item>
+                                );
+                              })}
+                            </Dropdown.Menu>
+                          </Dropdown>
+
+                        </Col>
+
+
+
+
                       </Row>
 
-                      <Row style={{marginTop:20}}>
-                        
-                        <Col>
-                        <center>
-                        <Button style={{backgroundColor:"#C10000",border:"none"}} className="form-field" type="submit" onClick={ProceedHandler}>
-                          Add new Address
-                        </Button>
-                        </center>
-                        
+                      <Row style={{ marginTop: 20 }}>
+                        <Col md={6} style={{ marginBottom: 20 }}>
+                          <Dropdown
+                            id="City"
+                            type="text"
+                            placeholder="City"
+                            name="City"
+                            style={{ borderRadius: "20px" }}
+                          >
+                            <Dropdown.Toggle style={{ background: "white", color: "black" }} className="form-field" id="dropdown-basic">
+                              {city}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu style={{height:"200px", overflow:"auto"}}>
+                              {cities.map((index) => {
+                                return (
+                                  <Dropdown.Item style={{ fontSize: "14px" }} onClick={() => selectCity(index)}>{index}</Dropdown.Item>
+                                );
+                              })}
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </Col>
+
+                        <Col md={6}>
+                          <Input
+                            id="Zip"
+                            className="form-field"
+                            type="text"
+                            placeholder="Zip"
+                            name="Zip"
+                            maxLength={6}
+                            onChange={InputZipHandler}
+                            style={{ borderRadius: "20px" }} />
                         </Col>
                       </Row>
-                      
-    
+
+                      <Row style={{ marginTop: 20 }}>
+
+                        <Col>
+                          <center>
+                            <Button style={{ backgroundColor: "#C10000", border: "none" }} className="form-field" type="submit" onClick={ProceedHandler}>
+                              Add new Address
+                            </Button>
+                          </center>
+
+                        </Col>
+                      </Row>
+
+
                     </Card.Body>
                   </Card>
-    
-    
+
+
                 </Col>
                 <Col md={3}></Col>
-                
+
               </Row>
               <br></br>
-              
-              </>
-            ) : (null)
-          }
-    
-    
-        </div>
+
+            </>
+          ) : (null)}
+
+
+        </div></>
     
       );
 }
