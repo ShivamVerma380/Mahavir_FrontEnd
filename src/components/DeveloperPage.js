@@ -15,7 +15,7 @@ const DeveloperPage = () => {
         <body>
         <section>
         <div  class="container1">
-            
+            <Row>
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
@@ -27,7 +27,7 @@ const DeveloperPage = () => {
                 </div>
                 <ul class="sci">
                     <li>
-                        <a style={{color:"black"}} href="omkar.22010490@viit.ac.in"><HiOutlineMail/></a>
+                        <a style={{color:"black"}} href="mailto:omkar.22010490@viit.ac.in"><HiOutlineMail /></a>
                     </li>
                     <li>
                         <a style={{color:"black"}} href="https://www.linkedin.com/in/omkar-khare-6a012b206/"><FaLinkedinIn/></a>
@@ -48,7 +48,7 @@ const DeveloperPage = () => {
                 </div>
                 <ul class="sci">
                     <li >
-                        <a style={{color:"black"}} href="aditi.21910513@viit.ac.in"><HiOutlineMail/></a>
+                        <a style={{color:"black"}} href="mailto:aditi.21910513@viit.ac.in"><HiOutlineMail/></a>
                     </li>
                     <li >
                         <a style={{color:"black"}} href="https://www.linkedin.com/in/aditi-nikam21/"><FaLinkedinIn/></a>
@@ -70,7 +70,7 @@ const DeveloperPage = () => {
                 </div>
                 <ul class="sci">
                     <li>
-                        <a style={{color:"black"}} href="shivam.21910478@viit.ac.in"><HiOutlineMail/></a>
+                        <a style={{color:"black"}} href="mailto:shivam.21910478@viit.ac.in"><HiOutlineMail/></a>
                     </li>
                     <li>
                         <a style={{color:"black"}} href="https://www.linkedin.com/in/shivam-verma-4859111a8/"><FaLinkedinIn/></a>
@@ -80,6 +80,9 @@ const DeveloperPage = () => {
                     </li>
                 </ul>
             </div>
+            </Row>
+
+            <Row>
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
@@ -91,7 +94,7 @@ const DeveloperPage = () => {
                 </div>
                 <ul class="sci">
                     <li>
-                        <a style={{color:"black"}} href="ketaki.21910480@viit.ac.in"><HiOutlineMail/></a>
+                        <a style={{color:"black"}} href="mailto:ketaki.21910480@viit.ac.in"><HiOutlineMail/></a>
                     </li>
                     <li>
                         <a style={{color:"black"}} href="https://www.linkedin.com/in/ketaki-hadnurkar/"><FaLinkedinIn/></a>
@@ -113,7 +116,7 @@ const DeveloperPage = () => {
                 </div>
                 <ul class="sci">
                     <li>
-                        <a style={{color:"black"}} href="siddhant.21910811@viit.ac.in"><HiOutlineMail/></a>
+                        <a style={{color:"black"}} href="mailto:siddhant.21910811@viit.ac.in"><HiOutlineMail/></a>
                     </li>
                     <li>
                         <a style={{color:"black"}} href="https://www.linkedin.com/in/siddhant-jain-8a3b3a198/"><FaLinkedinIn/></a>
@@ -134,7 +137,7 @@ const DeveloperPage = () => {
                 </div>
                 <ul class="sci">
                     <li>
-                        <a style={{color:"black"}} href="shraddha.22020260@viit.ac.in"><HiOutlineMail/></a>
+                        <a style={{color:"black"}} href="mailto:shraddha.22020260@viit.ac.in"><HiOutlineMail/></a>
                     </li>
                     <li>
                         <a style={{color:"black"}} href="https://www.linkedin.com/in/shraddha-mulay-0708b9171/"><FaLinkedinIn/></a>
@@ -144,6 +147,7 @@ const DeveloperPage = () => {
                     </li>
                 </ul>
             </div>
+            </Row>
        </div>
        </section>
        </body>
