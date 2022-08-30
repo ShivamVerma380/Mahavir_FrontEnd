@@ -21,6 +21,8 @@ import url from "../../Uri";
 import Footer from "../Footer/Footer";
 import MovingComponent from 'react-moving-text';
 import {AiOutlineCaretRight} from "react-icons/ai"
+import {FaAngleRight} from "react-icons/fa"
+import { flexbox } from "@mui/system";
 
 function BrandDetails() {
     
@@ -56,9 +58,10 @@ function BrandDetails() {
     // console.log("categories", categories);
 
     useEffect(() => {
-    window.addEventListener('scroll', () => { if (window.scrollY > 700) { setAnimation(true); } else { setAnimation(false); } });
+        window.scrollTo(0,0)
+    // window.addEventListener('scroll', () => { if (window.scrollY > 700) { setAnimation(true); } else { setAnimation(false); } });
 
-        window.scrollTo(0, 0)
+        // window.scrollTo(0, 0)
         if (!isBrandsFetched) {
             axios.get(url+"/excel/shopByBrands").then(
                 function (response) {
@@ -246,7 +249,7 @@ function BrandDetails() {
                 <h3 className="brand_feature_category">Featured Categories</h3>
 
 
-
+                
                 <Swiper
                    
                     loop={false}
@@ -265,6 +268,7 @@ function BrandDetails() {
                     navigation={true}
                     modules={[Pagination, Navigation]}
                     className="brand_category_swiper"
+                    
                    
                 >
 
@@ -290,6 +294,7 @@ function BrandDetails() {
                     }
 
                 </Swiper>
+                
             </Row>
                     <br></br>
                     <br></br>
@@ -299,7 +304,7 @@ function BrandDetails() {
                             <>
                             <Row>
                                 <Row className="brand_feature">
-                                    <Col md={8}>
+                                    {/* <Col md={8}>
                   <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
 
 
@@ -331,13 +336,20 @@ function BrandDetails() {
 
 
                 </Col>
-                                    {/* <h3 className="brand_feature_product_cat_title" id={index.category} >{index.category}</h3> */}
-                                    {/* <Col md={4} style={{display:'flex',justifyContent:'end'}}>
-                  <button onClick={() => handleClick(index.category)} class="explore">View More<span class="icon-right after"></span></button>
-
-                </Col> */}
                                     <Col md={4}>
                                         <button className="brand_feature_product_btn" onClick={() => handleClick(index.category)} >View More <AiOutlineCaretRight/></button>
+                                    </Col>
+                                </Row> */}
+                                <Col md={4}>
+                                    <h3 className="brand_feature_product_cat_title" id={index.category} >{index.category}</h3>
+                                    
+                                    </Col>
+                                    <Col md={6}>
+                                    
+                                    </Col>
+                                    <Col md={2}>
+                                        <button className="brand_feature_product_btn" onClick={() => handleClick(index.category)} >View More <FaAngleRight/></button>
+                                        {/* <i class="fa fa-angle-right" aria-hidden="true"></i> */}
                                     </Col>
                                 </Row>
                                 <Container style={{width:'90%',height: '429px'}}>
@@ -559,6 +571,7 @@ function BrandDetails() {
                 </Swiper>
 
             </Row>
+            <br></br>
             <Footer/>
 
         </div>
