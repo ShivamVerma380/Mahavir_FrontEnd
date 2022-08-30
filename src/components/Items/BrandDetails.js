@@ -321,7 +321,7 @@ function BrandDetails() {
                     timing="ease"
                     iteration="1"
                     fillMode="none">
-                    <span className="categorytitle"  filter-content="S">{index.category}</span>
+                    <span className="brand_feature_product_cat_title"  filter-content="S">{index.category}</span>
                     
                   </MovingComponent>
                    
@@ -332,13 +332,13 @@ function BrandDetails() {
 
                 </Col>
                                     {/* <h3 className="brand_feature_product_cat_title" id={index.category} >{index.category}</h3> */}
-                                    <Col md={4} style={{display:'flex',justifyContent:'end'}}>
+                                    {/* <Col md={4} style={{display:'flex',justifyContent:'end'}}>
                   <button onClick={() => handleClick(index.category)} class="explore">View More<span class="icon-right after"></span></button>
 
-                </Col>
-                                    {/* <Col md={2}>
+                </Col> */}
+                                    <Col md={4}>
                                         <button className="brand_feature_product_btn" onClick={() => handleClick(index.category)} >View More <AiOutlineCaretRight/></button>
-                                    </Col> */}
+                                    </Col>
                                 </Row>
                                 <Container style={{width:'90%',height: '429px'}}>
                                 
