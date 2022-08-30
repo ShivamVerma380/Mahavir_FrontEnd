@@ -445,7 +445,7 @@ function Login() {
                                             type="email" className="input"
                                             onChange={inputEmailEvent}
                                             
-                                            style={{justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%",fontSize:"14px"}}
+                                            style={{justifyContent:"left",backgroundColor:"white",color:"black",borderBottom:"1px Solid #E2E2E2",width:"100%",fontSize:"14px"}}
                                         />
                                     </FormGroup>
                                     <FormGroup >
