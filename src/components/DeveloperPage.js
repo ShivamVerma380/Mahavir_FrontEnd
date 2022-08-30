@@ -14,7 +14,7 @@ const DeveloperPage = () => {
         <h4 style={{marginTop:"30px", fontSize:"20px", textAlign:"center",fontFamily: "Open Sans"}}>Brewing Java Team</h4>
         <body>
         <section>
-        <div  class="container">
+        <div  class="container1">
             
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
