@@ -302,7 +302,7 @@ justify-content: center;
       /* border: solid 0.5px rgb(197 252 245); */
       margin-left: 5px;
       margin-right: 5px;
-      width: 16rem;
+      width: 9rem;
       text-align: left;
       padding: 0px;
       cursor: pointer;
@@ -327,19 +327,20 @@ justify-content: center;
     }
     .categoryproductscontainer{
       padding: 0;
+      border-radius: 0;
     }
 
     .categoryproductsrow{
-      padding-top: 0px;
+      padding-top: 10px;
         margin-bottom: 0px;
-        padding-left: 10px;
-        padding-right: 10px;
     }
 
     .categoryproductsrow .col-md-8{
+      padding-left: 20px;
       width: 60%;
     }
     .categoryproductsrow .col-md-4{
+      padding-right: 20px;
       width: 40%;
     }
 
@@ -354,7 +355,7 @@ justify-content: center;
     .categoryproductscard{
       margin-left: 8px;
     margin-right: 8px;
-    width: 15rem;
+    width: 10rem;
     }
     .cardimg {
       height: 160px;
