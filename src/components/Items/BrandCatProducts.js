@@ -777,7 +777,7 @@ function BrandCatProducts() {
                     ) : (null)
                 }
                 <br></br>
-                <Row className="mainpage">
+                <Row className="mainpage" style={{marginTop:"100px"}}>
                     <Col md={1}></Col>
                     <Col md={10} >
                         {

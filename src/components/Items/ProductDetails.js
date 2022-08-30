@@ -817,16 +817,23 @@ function ProductDetails() {
                       </ul> */}
                       {
                         (isReviewFetched)?(
-                          <StarRatings name="small-rating"  size={20} totalStars={5} rating={averagerate}/>
+                          <>
+                          <StarRatings name="small-rating" size={20} totalStars={5} rating={averagerate}/>
+                          
+                         
+                          </>
                         ):(
                           null
                         )
                       }
                       
+                      
                       {/* <StarRating name="small-rating" caption="Small!" size={30} totalStars={5} rating={3} /> */}
 
 
-
+                      </Row>
+                      <br></br>
+                      <Row className="innerrow1">
                       {
                       (product.offerPrice == null) ? (
                         <h4 className="productprice">MRP: <b>₹{product.productPrice}</b></h4>
@@ -835,6 +842,7 @@ function ProductDetails() {
                       )
                     }
                   </Row>
+                  <br></br>
                   
                   
                   <Row>
@@ -969,7 +977,7 @@ function ProductDetails() {
                             <Col md={9}>
                               <br></br>
                               
-                              <h5>{index.title}</h5>
+                              <h5 style={{fontWeight:600}}>{index.title}</h5>
 
                               <p style={{fontFamily:"Roboto",letterSpacing:"0.01em",fontWeight:300,color:"#212121",fontSize:"13px",lineHeight:"17px"}}>{index.description}</p>
                             </Col>
@@ -981,7 +989,7 @@ function ProductDetails() {
                             <Col md={9}>
                               <br></br>
                               
-                              <h5>{index.title}</h5>
+                              <h5 style={{fontWeight:600}}>{index.title}</h5>
 
                               <p style={{fontFamily:"Roboto",letterSpacing:"0.01em",fontWeight:300,color:"#212121",fontSize:"13px",lineHeight:"17px"}}>{index.description}</p>
                             </Col>
@@ -1127,11 +1135,12 @@ function ProductDetails() {
             }}>
               {
                 (isProductListFetched && productList.length != 0) ? (
-                  <h4 className="textsimilar" style={{ marginLeft: "20px" }}>Similar Products</h4>
+                  <h3 className="textsimilar" style={{ marginLeft: "20px" ,fontSize:"25px"}}>Similar Products</h3>
                 ) : (
                   null
                 )
               }
+              <br></br>
               {
                 (isProductListFetched) ? (
                   <Swiper
@@ -1164,31 +1173,21 @@ function ProductDetails() {
                           <SwiperSlide >
                             <Card style={{ width: '25rem' }} className="mb-2">
                               {/* <AiOutlineHeart style={{ marginTop: "10px", marginLeft: "5px" }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> */}
-                              <CardImg className="this.props.img" style={{height:"190px" , width:"160px"}} onClick={() => callProductDetails(index)}
+                              <center>
+                              <CardImg className="this.props.img" style={{height:"180px" , width:"160px"}} onClick={() => callProductDetails(index)}
                                 src={index.productImage1} />
+                              </center>
                               <CardBody>
                                 <CardTitle className="this.props.h6 change" onClick={() => callProductDetails(index)}>
                                   <h6 className="similarproductname"><b>{index.productName}</b></h6>
                                 </CardTitle>
                                 <CardSubtitle onClick={() => callProductDetails(index)}>
                                   {/* <s>₹{index.productPrice}</s> */}
-                                  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b>
-                                  <b style={{ marginLeft: 10 }}>₹{index.offerPrice}</b> 
+                                  <b style={{color:"#C10000"}} >₹{index.offerPrice}</b> 
+                                  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginLeft:"10px",fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b>
+                                  <br></br>
                                 </CardSubtitle>
-                                <CardText className="this.props.p change" onClick={() => callProductDetails(index)}>
-                                  {/* {
-                                    
-                                    
-                                    (i<3) ? (
-                                      
-                                        <p style={{fontSize:"10px"}}>{index.productHighlights.split(";").splice[0,2]}</p>
-                                        
-                                        // i++
-                                      
-                                      
-                                    ) : (null)
-                                  } */}
-                                  {/* <p style={{fontSize:"10px"}}>{index.productHighlights.split(";")}</p> */}
+                                {/* <CardText className="this.props.p change" onClick={() => callProductDetails(index)}>
                                   {
                                     index.productHighlights.split(';').splice(0,2).map((h,pos)=>{
                                       return(
@@ -1196,7 +1195,7 @@ function ProductDetails() {
                                       )
                                     })
                                   }
-                                </CardText>
+                                </CardText> */}
                                 {/* <Form>
                                   <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} />
                                 </Form> */}
@@ -1205,6 +1204,7 @@ function ProductDetails() {
                                   fetchOfferAvailableBtn(index.offerPrice, index.productPrice)
                                 } */}
                               </CardBody>
+                              <br></br>
                             </Card>
                           </SwiperSlide>
                         )
