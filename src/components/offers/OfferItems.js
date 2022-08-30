@@ -19,7 +19,7 @@ import { count } from "rsuite/esm/utils/ReactChildren";
 import Footer from "../Footer/Footer";
 import {RiArrowDropDownLine} from 'react-icons/ri'
 import {FaArrowCircleUp} from 'react-icons/fa'
-
+import './MiniPoster.css';
 function OfferItems() {
     var token=getCookie("jwtToken");
     var comparemodels=getCookie("addToCompare").split(',');
@@ -682,74 +682,19 @@ function OfferItems() {
           }
         
         
-        <Row style={{marginTop:"130px"}}>
-            <Col md={2} className="filtercol" style={{paddingLeft:"0px",paddingRight:"0px"}}>
-            <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto"}}>Filters</h4>   
-                <hr style={{}}></hr> 
-                <h4 style={{fontWeight:600, fontSize:"22px", lineHeight:"21px", marginLeft:"14px",fontFamily:"Roboto",marginBottom:"15px"}}>Categories</h4>
-                <Form>
-                {
-                    (isCategoriesFetched) ?(
-                        categories.map(c=>{
-                            return(
-                                <Form.Check id={c} style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} name="category" defaultChecked={(c===localStorage.getItem("CategoryOffers"))?(true):(false)}  type="radio" label={c} onClick={()=>handleCategoryClick(c)}/>
-                            )
-                        })
-                    ):(
-                        null
-                    )
-                }
-                </Form>
-                <hr></hr>
-                
-                {
-                    (isFiltersFetched)?(
-                        
-                        keySet.map((index,pos)=>{
-                            return(
-                                <>
-                              
-                                <div >
-                                    
-                                    <Accordion defaultActiveKey="0" flush style={{width:'100%'}}>
-                                    <Accordion.Item eventKey={pos}>
-                                                    <Accordion.Header>{index}</Accordion.Header>
-                                                    <Accordion.Body>
-                                {
-                                    filters[index].map(f=>{
-                                        return(
-                                            <Form>
-                                            <Form.Check type="checkbox" id={f} style={{marginLeft:"25px",fontFamily:"Roboto",marginTop:"5px",fontWeight:400,fontHeight:"16px",fontSize:"14px",color:"rgba(0,0,0,0.7)"}} label={f} onChange={()=>handleFormCheck(index,f)}/>
-                                            </Form>
-                                        )
-                                    })
-                                }
-                                 </Accordion.Body>
-                                    </Accordion.Item>
-                                    </Accordion>
-                                    <hr></hr>
-                                </div>
-                               
-                                
-                                </>
-                            )
-                        })
-                    ):(
-                        null
-                    )   
-                }
-            </Col>
-            <Col md={10}>
+        <Row className="offerproductpage">
+            
+            <Col >
             {
-                <Row className="filterproductsRow">
+                <Row  style={{width:'90%',margin:'auto',marginBottom:'5px'}}>
                     
                     
                 <Col >
-                <h4 className="multipleproducts_cat_name" style={{fontWeight:600, fontSize:"24px", lineHeight:"21px",fontFamily:"Roboto"}}>{localStorage.getItem("Category")}</h4>
+                <h4  style={{fontWeight:600, fontSize:"24px", lineHeight:"21px",fontFamily:"Roboto"}}>{localStorage.getItem("Category")}</h4>
 
                 
 
-                <p className="products">(<b>{filterProducts.length}</b> Products Found )</p>
+                <p className="offer_products">(<b>{filterProducts.length}</b> Products Found )</p>
                 </Col> 
             
                 <Col  style={{display:'flex',justifyContent:'end'}}>
@@ -773,7 +718,7 @@ function OfferItems() {
                             //         <img style={{height:"275px",width:"275px"}} className="logo_mahavir" src={index.productImage1} alt="God" />
                             //     </Col>
                             // </Row>
-                            <Row className="filterproductsRow">
+                            <Row style={{width:'90%',margin:'auto ',marginBottom:'5px'}} className="filterproductsRow">
              
              {/* <div className="d-flex justify-content-center row">
         <div className="col-md-10">
@@ -799,7 +744,7 @@ function OfferItems() {
             </div>
             </div> */}
                                         <Col md={2} className="imagecol">
-                                            <Image style={{width:"250px",height:"250px"}} fluid="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            <Image fluid="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
                                             {/* <br></br>
                                             <p>{index.modelNumber}</p> */}
                                         </Col>
@@ -824,13 +769,7 @@ function OfferItems() {
                                                 </Col> */}
                                                
 
-                                                    <ul className="list-inline small">
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg" ></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-lg"></i></li>
-                                                            </ul>
+                                                 
                                                 
                                             </Row>
                                             
@@ -870,12 +809,12 @@ function OfferItems() {
 
                                             <Row >
                                                 <Col >
-                                                    {
+                                                {
                                                         (index.offerPrice==null) ? (
-                                                            <h4 style={{fontSize:'24px'}}>MRP: <b>₹{index.productPrice}</b></h4>
+                                                            <h5 className="productprice">MRP: <b>₹{index.productPrice}</b></h5>
                                                         ) : (
-                                                            <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><b style={{fontSize:'24px',color:'#FA0000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</b><br></br>
-                                                            <b style={{fontWeight:500,fontSize:"18px",color:"#565959" }}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",fontWeight:500,fontSize:"18px",color:"#565959"}}>₹{index.productPrice}  </b></b>  <b style={{color:"green",fontSize:"18px",marginLeft:"10px"}}>  {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h5></>
+                                                            <><h5 className="productprice"><b >MSP: ₹{index.offerPrice}</b></h5><br></br>
+                                                            <h4 className="offerprice"><b >MRP: <b style={{ textDecorationLine: "line-through"}}>₹{index.productPrice}  </b></b>  <b style={{color:'green'}}>  {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4></>
                                                         )
                                                     }
                                                 </Col>

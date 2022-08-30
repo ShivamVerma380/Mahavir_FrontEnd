@@ -56,9 +56,47 @@
   .minipostercard{
     width:25%;
   }
+  .offerproductpage .nav-link{
+    color: black;
+    font-size: 18px;
+  }
+
+  .offerproductpage{
+    margin-top: 125px;
+  }
   @media screen and (min-width:320px) and (max-width:480px) {
     .minipostercard{
       width:50%;
     }
+    .offerproductpage{
+      margin-top: 35%;
+    }
+    .offerproductpage .nav-link{
+      color: black;
+    }
   }
  
+/* ipads and tablets */
+@media screen and (min-width: 481px) and (max-width:768px)
+{
+    .offerproductpage{
+      margin-top: 115px;
+    }
+
+    .offerproductpage .nav-link{
+      color: black;
+    }
+
+}
+
+
+/* laplops and small screens */
+@media screen and (min-width: 769px) and (max-width:1024px)
+{
+  .offerproductpage{
+    margin-top: 115px;
+  }
+  .offerproductpage .nav-link{
+    color: black;
+  }
+}
