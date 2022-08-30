@@ -8,6 +8,9 @@ import { Form, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import './Payment.css';
+import Header from "../../Header";
+
+
 function Payment(){
 
     var product = JSON.parse(localStorage.getItem("buyProduct"));
@@ -31,7 +34,8 @@ function Payment(){
     console.log("Address",address)
 
     const[isPaymentDone,SetIsPaymentDone] = useState(false);
-
+    const [isActive, setIsActive] = useState(false);
+    const [isActive1, setIsActive1] = useState(false);
 
     let date = new Date()
 
@@ -80,9 +84,9 @@ function Payment(){
                 })
             }else{
                 const options={
-                    key:"rzp_test_EDuD7FGqkmNkHy",
-                    key_secret:"m5T0MuDnYZJeZKvdTSHZjyBK",
-                    amount:1*100,
+                    key:"rzp_live_HD5qU0zoy9Ntd2",
+                    key_secret:"GXZHI3xZnA6BFaCZHEYQt2De",
+                    amount:localStorage.getItem("Amount"),
                     // amount:parseInt(localStorage.getItem("price"))*100,
                     currency:"INR",
                     name:"Mahavir Electronics",
@@ -161,36 +165,41 @@ function Payment(){
                 (isPaymentDone)?(
                     <h1>Payment Done</h1>
                 ):(
-                    <Row style={{height:"100%", width:"100%"}}>
-                        <Col md={2}></Col>
-                        <Col md={8} className="payment">
-                                <h5>Payment</h5>
-                                <p style={{fontSize:"14px", marginTop:"20px"}}>Choose payment method below</p>
+                    <><Header />
+                    <Row style={{ height: "100%", width: "100%",marginTop:"50px" }}>
+                            <Col md={4}></Col>
+                            <Col md={8} className="payment">
+                                <h3>Payment</h3>
+                                <p style={{ fontSize: "16px", marginTop: "20px" }}>Choose payment method below</p>
                                 <Row>
-                                    <Col md={6}>
-                                        <Card style={{width:"140px",height:"100px", border:"1px solid black",  margin:"10px"}}>
-                                            <Card.Img id="razorPay" onClick={()=>{paymentType = "razorPay"}} style={{padding:"10px",width:"140px",height:"100px"}} variant="top" src="https://upload.wikimedia.org/wikipedia/en/8/89/Razorpay_logo.svg" />
+                                    <Col md={8}>
+                                        <Card style={{ width: "200px", height: "100px", border: "1px solid black", margin: "10px", backgroundColor: isActive ? 'lightblue' : '' }}>
+                                            <Card.Img id="razorpay" onClick={() => { paymentType = 'razorpay'; setIsActive(true); setIsActive1(false); } } style={{ padding: "35px", width: "200px", height: "100px" }} variant="top" src="https://upload.wikimedia.org/wikipedia/en/8/89/Razorpay_logo.svg" />
                                             {/*  */}
                                         </Card>
                                     </Col>
-                                    <Col md={6}>
-                                        <Card style={{width:"140px",height:"100px", border:"1px solid black",margin:"10px"}}>
-                                            <Card.Img id="cashOnDelivery" onClick={()=>{paymentType = 'cashOnDelivery'}} style={{padding:"10px",width:"100px",height:"100px", marginLeft:"20px"}} variant="top" src="https://cdn-icons-png.flaticon.com/512/1019/1019607.png" />
+                                    <Col md={4}>
+                                        <Card style={{ width: "140px", height: "100px", border: "1px solid black", margin: "10px", backgroundColor: isActive1 ? 'lightblue' : '' }}>
+                                            <Card.Img id="cashOnDelivery" onClick={() => { paymentType = 'cashOnDelivery'; setIsActive1(true); setIsActive(false); } } style={{ padding: "10px", width: "100px", height: "100px", marginLeft: "20px" }} variant="top" src="https://cdn-icons-png.flaticon.com/512/1019/1019607.png" />
                                             {/* onClick={SetPaymentType("cashOnDelivery")} */}
                                         </Card>
                                     </Col>
                                 </Row>
-                                
+
                                 {/* <Form >
-                                    <Form.Check type="radio" id="cashOnDelivery" name="paymentoption" value="Cash On Delivery" label="Cash On Delivery"/>
-                                    <Form.Check type="radio" id="razorPay" name="paymentoption" value="Pay Online" label="Pay Online"/>
-                                </Form>
-                                <Button onClick={PayAmount}>Next</Button> */}
-                        <Button className="payment_nextbtn" onClick={PayAmount}>Next</Button>
-                    
-                        </Col>
-                        <Col md={2}></Col>
-                    </Row>
+        <Form.Check type="radio" id="cashOnDelivery" name="paymentoption" value="Cash On Delivery" label="Cash On Delivery"/>
+        <Form.Check type="radio" id="razorpay" name="paymentoption" value="Pay Online" label="Pay Online"/>
+    </Form>
+    <Button onClick={PayAmount}>Next</Button> */}
+                                <Row>
+                                    <Col md={3}></Col>
+                                    <Col md={6}>
+                                <Button className="payment_nextbtn" onClick={PayAmount}>Next</Button>
+                                </Col>
+                                </Row>
+                            </Col>
+                            <Col md={2}></Col>
+                        </Row></>
                     
                     
                 )

@@ -9,6 +9,12 @@
 
 .payment_nextbtn{
     margin-top: 100px;
-    width: fit-content;
+    width: 80px;
+    height: 50px;
+    font-size: 18px;
     padding: 10px;
+    background:rgba(196, 24, 8, 0.979);
+    color: white;
+    cursor: pointer;
 }
+
