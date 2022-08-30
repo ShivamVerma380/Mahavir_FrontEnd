@@ -419,11 +419,8 @@ const ProductsByDeal = () => {
                                 <Row className="innerrow" onClick={() => callProductDetails(index)}>
                                 <h4 className="multipleproduct_title" onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
                                 </Row>
-                                <Row>
-                                                {/* <Col md={11} style={{    paddingBottom: '40px',width: '10%'}} className="star">
-                                                {Math.round(index.averageRating * 10) / 10} <span> </span><AiFillStar />
+                                {/* <Row>
                                                 
-                                                </Col> */}
 
                                                     <ul className="list-inline small">
                                                             <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg" ></i></li>
@@ -433,7 +430,7 @@ const ProductsByDeal = () => {
                                                             <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-lg"></i></li>
                                                             </ul>
                                                 
-                                            </Row>
+                                            </Row> */}
                                             <Row className="innerrow">
                                                 <Col>
                                                     {
