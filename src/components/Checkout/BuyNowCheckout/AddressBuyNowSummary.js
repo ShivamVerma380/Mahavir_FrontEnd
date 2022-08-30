@@ -324,8 +324,10 @@ function AddressBuyNowSummary(){
         console.log("City",index);
       }
       return (
-        <><Header/>
-        <div style={{ border: "2px solid #E2E2E2" ,marginTop:"100px"}}>
+        <>
+        <Header/>
+        <div className="deliveryAdd">
+          
           <ToastContainer position="top-center" />
           {/* <Header/>  */}
           {/* <div className="radio">
@@ -340,7 +342,7 @@ function AddressBuyNowSummary(){
             Address 2, ............
         </label>
     </div> */}
-          <Row>
+          <Row style={{marginTop:"100px"}}>
             <Col md={1}></Col>
             <Col md={10}>
               <center>

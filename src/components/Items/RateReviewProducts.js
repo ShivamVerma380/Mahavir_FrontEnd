@@ -8,6 +8,7 @@ import url from "../../Uri";
 import { getCookie } from "../Cookies";
 import { useNavigate } from "react-router-dom";
 import "./RateReview.css"
+import Header from "../Header";
 
 const RateReviewProducts = () => {
 
@@ -27,11 +28,6 @@ const RateReviewProducts = () => {
         console.log(userrating)
     };
 
-    const DateHandler = (event) => {
-        console.log(event.target.value);
-        reviewdate = event.target.value;
-        console.log(reviewdate)
-    }
 
     const ReviewHandler = (event) => {
         console.log(event.target.value)
@@ -40,7 +36,13 @@ const RateReviewProducts = () => {
     }
 
     const HandleSubmit = () => {
+        let today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
 
+        reviewdate = mm + '/' + dd + '/' + yyyy;
+        console.log("Review Date",reviewdate.toString());
         if (userrating === "" || reviewdate === "" || userreview === "") {
             alert("Please enter all details");
         }
@@ -87,59 +89,52 @@ const RateReviewProducts = () => {
     }
 
     return (
-
+        <><Header/>
+        <div style={{marginTop:"150px"}}>
         <Container style={{ marginTop: 50 }}>
 
-            <h1>Rate this Product</h1>
-            <Col md={1}></Col>
-            <Col md={8}>
-            <hr></hr>
-            </Col>
+            
+            
             
             <Row>
-                <Col md={1}>
-                    <img src={product.productImage1} style={{ width: 100, height: 100 }}></img>
-                </Col>
-                <Col md={4} className="productname">
-                    <h6>{product.productName}</h6>
-                </Col>
+            
+                <Col md={4}></Col>
+                <Col md={4}>
+                <h1>Rate this Product</h1>
+                <br></br>
+                    <img src={product.productImage1} style={{ width: "150px", height: "150px" }}></img>
+                    <h4>{product.productName}</h4>
 
-            </Row>
-
-            <Row>
-                <Col md={12}>
+                    <br></br>
+                    <h4>Rate the product</h4>
                     <ReactStars
                         count={5}
                         onChange={ratingChanged}
                         size={30}
-                        isHalf={true}
+                        isHalf={false}
                         emptyIcon={<i className="far fa-star"></i>}
                         halfIcon={<i className="fa fa-star-half-alt"></i>}
                         fullIcon={<i className="fa fa-star"></i>}
-                        activeColor="#ffd700"
+                        activeColor="red"
 
                     />
+                    <h3>Add your review</h3>
+                <Input placeholder="Review of product here " type="textarea" style={{ height: 100 ,fontSize:"16px"}} onChange={ReviewHandler}></Input>
+                <Button style={{ marginTop: 20, backgroundColor:"rgb(255, 88, 88)" ,fontSize:"16px", alignContent:"center"}} onClick={HandleSubmit}>SUBMIT</Button>
+                </Col>
+                <Col md={4} className="productname">
+                    
                 </Col>
 
-                
-            <Col md={8}>
-            <hr></hr>
-            </Col>
             </Row>
 
-            <Row>
-                <h5>Date</h5>
-                <Input type="date" style={{ width: 150 }} onChange={DateHandler}></Input>
-            </Row>
+            
 
-            <Row style={{ marginTop: 20 }}>
-                <h5>Description</h5>
-                <Input placeholder="Description of product here....." type="textarea" style={{ width: 600, height: 100 }} onChange={ReviewHandler}></Input>
-            </Row>
-
-            <Button style={{ marginTop: 20, backgroundColor:"rgb(255, 88, 88)" }} onClick={HandleSubmit}>SUBMIT</Button>
+           
             
         </Container>
+        </div>
+        </>
 
     )
 

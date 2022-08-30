@@ -19,7 +19,7 @@ import { white } from "material-ui/styles/colors";
 import { fullWhite } from "material-ui/styles/colors";
 import url from "../../Uri";
 import Footer from "../Footer/Footer";
-
+import MovingComponent from 'react-moving-text';
 import {AiOutlineCaretRight} from "react-icons/ai"
 
 function BrandDetails() {
@@ -37,6 +37,7 @@ function BrandDetails() {
     </div>
     const [brands, setBrands] = useState([]);
     const [isBrandsFetched, setIsBrandsFetched] = useState(false);
+    const[animation,setAnimation] = useState(false);
 
     var videoLinks = localStorage.getItem("brandVideoLinks").split(',');
     // var categories = localStorage.getItem("finalBrandCategories").split(',');
@@ -55,6 +56,8 @@ function BrandDetails() {
     // console.log("categories", categories);
 
     useEffect(() => {
+    window.addEventListener('scroll', () => { if (window.scrollY > 700) { setAnimation(true); } else { setAnimation(false); } });
+
         window.scrollTo(0, 0)
         if (!isBrandsFetched) {
             axios.get(url+"/excel/shopByBrands").then(
@@ -296,16 +299,44 @@ function BrandDetails() {
                             <>
                             <Row>
                                 <Row className="brand_feature">
+                                    <Col md={8}>
+                  <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
 
-                                
+
+                    <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
+
+
+                      <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
+                    </filter>
+                  </svg>
+                  
+                  {
+                    (animation) ? (
+                      <MovingComponent
+                      id={index.category}
+                    type="fadeInFromLeft"
+                    duration="1000ms"
+                    delay="0s"
+                    direction="normal"
+                    timing="ease"
+                    iteration="1"
+                    fillMode="none">
+                    <span className="brand_feature_product_cat_title"  filter-content="S">{index.category}</span>
+                    
+                  </MovingComponent>
+                   
+                   ) : (null)
+                  }
+                  
+
+
+                </Col>
+                                    {/* <h3 className="brand_feature_product_cat_title" id={index.category} >{index.category}</h3> */}
+                                    {/* <Col md={4} style={{display:'flex',justifyContent:'end'}}>
+                  <button onClick={() => handleClick(index.category)} class="explore">View More<span class="icon-right after"></span></button>
+
+                </Col> */}
                                     <Col md={4}>
-                                    <h3 className="brand_feature_product_cat_title" id={index.category} >{index.category}</h3>
-                                    
-                                    </Col>
-                                    <Col md={6}>
-                                    
-                                    </Col>
-                                    <Col md={2}>
                                         <button className="brand_feature_product_btn" onClick={() => handleClick(index.category)} >View More <AiOutlineCaretRight/></button>
                                     </Col>
                                 </Row>
