@@ -9,13 +9,17 @@
 font-style: normal;
 font-weight: 500;
 font-size: 28px;
+margin-left: 10px;
+padding-top: 10px;
+
+
 
 color: #0F1111;
 
 }
 
 .wishlist_product_card{
-    border: 1px solid #E2E2E2;
+    /* border: 1px solid #E2E2E2; */
     margin-bottom: 20px;
 }
 
@@ -46,6 +50,7 @@ color: #FA0000;
 font-style: normal;
 font-weight: 600;
 font-size: 16px;
+margin-left: 10px;
 
 color: rgba(45, 45, 45, 0.8);
 text-decoration: line-through;
@@ -56,10 +61,11 @@ text-decoration: line-through;
 font-style: normal;
 font-weight: 600;
 font-size: 18px;
+margin-left: 10px;
 /* identical to box height */
 
 
-color: #FA0000;
+color: green;
 }
 .wishlist_lastcol .btn{
     margin-bottom: 10px;

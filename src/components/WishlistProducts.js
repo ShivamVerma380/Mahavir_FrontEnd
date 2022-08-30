@@ -71,6 +71,7 @@ const WishlistProducts = () => {
 }
 
   useEffect(() => {
+    window.scrollTo(0,0)
     if (!isWishlistFetched && !isProductFetched) {
       axios({
         method: "get",
@@ -200,9 +201,10 @@ const WishlistProducts = () => {
 
   return (
     <div>
+      <body style={{background:"whitesmoke"}}>
       <Header />
 
-      <Container className="wishlist_container">
+      <Container className="wishlist_container" style={{background:"white"}}>
         
         
         {
@@ -210,11 +212,14 @@ const WishlistProducts = () => {
 
             (wish.length>0) ? (
               <>
+              
               <h1 className="wishlist_heading">My Wishlist</h1>
+              <hr></hr>
               <Container >
               {
               wish.map(index => {
                 return (
+                  <>
                   <Row className="wishlist_product_card">
                     {/* style={{ margin: '2%', padding: '2%' }} , boxShadow: ' 0 2px 10px #bdbdbd' */}
                     
@@ -230,13 +235,14 @@ const WishlistProducts = () => {
 
                     {
                                                   (index.productPrice === index.offerPrice) ? (<h4>₹ {index.productPrice}</h4>) : (
-                                                      <h4><b className="wishlist_offerprice" >₹{index.offerPrice} </b><b className="wishlist_productprice">₹ {index.productPrice}</b> <b className="wishlist_discount">{Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4>
+                                                      <h4><b className="wishlist_offerprice" >₹{index.offerPrice} </b> <b className="wishlist_productprice"> ₹ {index.productPrice}</b> <b className="wishlist_discount"> {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4>
                                                   )
                                               }
                     </Row>
                     </Col>
   
                     <Col className="wishlist_lastcol" style={{ padding: '2%' }} sm={2} >
+                      
                       <Row>
                         <Button  size="1" name={index.modelNumber} onClick={() => RemoveFromWishList(index.modelNumber)} >Remove</Button>
                       </Row>
@@ -246,6 +252,8 @@ const WishlistProducts = () => {
   
                     </Col>
                   </Row>
+                  <hr></hr>
+                  </>
                   
                 );
               })
@@ -280,6 +288,7 @@ const WishlistProducts = () => {
       </Container>
     
       <Footer/>
+      </body>
     </div>
 
   )
