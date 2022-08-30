@@ -208,6 +208,10 @@
   padding-left: 2%;
 
 }
+.brand_feature{
+  width: 75%;
+  margin: auto;
+}
 
 .brand_feature_category{
   font-family: 'Roboto';
