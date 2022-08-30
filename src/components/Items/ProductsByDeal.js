@@ -482,7 +482,7 @@ const ProductsByDeal = () => {
                                                     <Form.Check style={{
                                                         '@media screen and(min-width: 480px)': {
                                                             display: 'none'
-                                                    }}} defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  style={{fontSize:"18px"}} label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
+                                                    },fontSize:"18px"}} defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber} label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
 
 
                                                 </Form>
