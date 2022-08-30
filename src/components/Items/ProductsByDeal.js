@@ -372,7 +372,7 @@ const ProductsByDeal = () => {
             <Header/>
             
             {
-        //   (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
+          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
           }
             <Row className="mainpage" style={{marginTop:"120px"}}>
