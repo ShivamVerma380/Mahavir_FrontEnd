@@ -460,21 +460,7 @@ const BrandOfferPosterProducts =()=>{
                                                 </Col> */}
 
                                             </Row>
-                                            <Row>
-                                                {/* <Col md={11} style={{    paddingBottom: '40px',width: '10%'}} className="star">
-                                                {Math.round(index.averageRating * 10) / 10} <span> </span><AiFillStar />
-                                                
-                                                </Col> */}
-
-                                                    <ul className="list-inline small">
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg" ></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-lg"></i></li>
-                                                            <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-lg"></i></li>
-                                                            </ul>
-                                                
-                                            </Row>
+                                            <br></br>
                                             
                                             <Row className="innerrow">
                                                 <Col>
