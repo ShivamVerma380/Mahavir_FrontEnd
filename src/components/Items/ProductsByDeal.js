@@ -263,6 +263,7 @@ const ProductsByDeal = () => {
     function callProductDetails(index) {
         //alert(index);
         console.log("Index", index);
+        localStorage.setItem("productId",index.productId);
         localStorage.setItem("productSelected", index.modelNumber);
         console.log("Product Selected", localStorage.getItem("productSelected"))
         navigate("/productDetails")
