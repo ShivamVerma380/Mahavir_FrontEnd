@@ -67,12 +67,17 @@
   @media screen and (min-width:320px) and (max-width:480px) {
     .minipostercard{
       width:50%;
+      display: none;
+
     }
     .offerproductpage{
       margin-top: 35%;
     }
     .offerproductpage .nav-link{
       color: black;
+    }
+    .image-container{
+      display: none;
     }
   }
  

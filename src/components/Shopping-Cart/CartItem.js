@@ -15,7 +15,7 @@ const CartItem = ({item,quantity}) => {
     var cartmodelnums=new Array();
     
     console.log("quantity",item.modelNumber,":",quantity)
-    cartmodelnums=getCookie("models").split(',');
+    cartmodelnums=getCookie("CartModels").split(',');
 
     function removefromcart(){
         console.log("Remove clicked")
@@ -26,9 +26,10 @@ const CartItem = ({item,quantity}) => {
         //         arr.push(k+"="+cartmodelnums[k]);
         //     }
         // }
+        // console.log("Before....",cartmodelnums)
         cartmodelnums.map(index=>{
             if(index!=""){
-                if(index.split("=")[0]!=item.modelNumber){
+                if(index.split("=")[0]!==item.modelNumber){
                     arr.push(index);
                 }
             }
