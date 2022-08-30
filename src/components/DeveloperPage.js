@@ -19,7 +19,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img style={{height:"300px",width:"300px"}} src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Omkar Khare</h3>
@@ -62,7 +62,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img style={{height:"300px",width:"300px"}} src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Shivam Verma</h3>
@@ -86,7 +86,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img style={{height:"300px",width:"300px"}} src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
                     <h3 style={{fontSize:"16px",color:"black"}}>Ketaki Hadnurkar</h3>
@@ -108,7 +108,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img style={{height:"300px",width:"300px"}} src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Siddhant Jain</h3>
@@ -129,7 +129,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img style={{height:"300px",width:"300px"}} src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Shraddha Mulay</h3>

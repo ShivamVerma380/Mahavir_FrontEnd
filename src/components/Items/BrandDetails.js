@@ -352,7 +352,7 @@ function BrandDetails() {
                                         {/* <i class="fa fa-angle-right" aria-hidden="true"></i> */}
                                     </Col>
                                 </Row>
-                                <Container style={{width:'90%',height: '429px'}}>
+                                <Container style={{width:'90%',marginBottom:'20px'}}>
                                 
                                 {
                                             // console.log("Cat Img: ", index.catImage)
@@ -369,8 +369,43 @@ function BrandDetails() {
                     ];
                     return (
                       <MDBCard style={{marginTop:'3%'}} className="categoryproductscard" >
-                        <center><MDBCardImage className="brand_category_product_cardimage" src={index.productImage1} alt='...' position='top' /></center>
-                       
+                        {/* <center><MDBCardImage className="brand_category_product_cardimage" src={index.productImage1} alt='...' position='top' /></center> */}
+                        <div className="cardimg">
+                        <MDBCardImage className="cardimage" src={index.productImage1}  alt='...' position='top' />
+                        {
+                          (index.productImage1 !== null && index.productImage2 !== null && index.productImage3 !== null) ?
+                            <Carousel interval={1000} className="cardimage2" indicators='' variant="dark">
+                              <Carousel.Item>
+                                <img
+                                  className="d-block w-100"
+                                  src={index.productImage1}
+                                  
+                                  alt="First slide"
+                                />
+                              </Carousel.Item>
+                              <Carousel.Item>
+                                <img
+                                  className="d-block w-100"
+                                  src={index.productImage2}
+                                  
+                                  alt="Second slide"
+                                />
+                              </Carousel.Item>
+                              <Carousel.Item>
+                                <img
+                                  className="d-block w-100"
+                                  src={index.productImage3}
+                                  
+                                  alt="Third slide"
+                                />
+                              </Carousel.Item>
+                            </Carousel>
+                            : <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
+
+
+                        }
+
+</div>
 
                         {
                           (localStorage.getItem("Wishlist") != null && localStorage.getItem("Wishlist").includes(index.modelNumber)) ?
