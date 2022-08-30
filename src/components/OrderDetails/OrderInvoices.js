@@ -1,9 +1,10 @@
 import axios from "axios";
 import React,{useState,useEffect} from "react";
-import { Table } from "react-bootstrap";
+import { Table, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import url from "../../Uri";
 import { getCookie } from "../Cookies";
+import Header from "../Header";
 
 function OrderInvoices(){
 
@@ -39,58 +40,58 @@ function OrderInvoices(){
     }
 
     return(
-        <div>
-            {
-                (isOrdersFetched)?(
-                    <Table striped hover border>
-                        <thead>
-                            <tr>
-                                <th>Order Id</th>
-                                <th>Buy Date</th>
-                                <th>Delivery Date</th>
-                                <th>Payment Amount</th>
-                                <th>Transaction Id</th>
-                                <th>Address</th>
-                                <th>Invoice</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                orders.map(order=>{
-                                    return(
+        <><Header/>
+        <div style={{marginTop:"150px"}}>
+            {(isOrdersFetched) ? (
+                <Row>
+                    <Col md={2}></Col>
+                    <Col md={8}>
+                        <h3>Your Order Invoices:</h3>
+                        <Table striped hover border>
+                            <thead>
+                                <tr>
+                                    <th>Order Id</th>
+                                    <th>Buy Date</th>
+                                    <th>Delivery Date</th>
+                                    <th>Payment Amount</th>
+                                    <th>Transaction Id</th>
+                                    <th>Address</th>
+                                    <th>Invoice</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders.map(order => {
+                                    return (
                                         <tr>
                                             <td>#MAV{order.orderId}</td>
                                             <td>{order.buyDate}</td>
-                                            {
-                                                (order.deliveryDate!=null)?(
-                                                    <td>{order.deliveryDate}</td>
-                                                ):(
-                                                    <td>-</td>
-                                                )   
-                                            }
-                                            
+                                            {(order.deliveryDate != null) ? (
+                                                <td>{order.deliveryDate}</td>
+                                            ) : (
+                                                <td>-</td>
+                                            )}
+
                                             <td>{order.paymentAmount}</td>
-                                            {
-                                                (order.paymentId!=null)?(
-                                                    <td>{order.paymentId}</td>
-                                                ):(
-                                                    <td>Cash On Delivery</td>
-                                                )
-                                            }
-                                            
-                                            <td>{order.userAddress.address+","+order.userAddress.city+","+order.userAddress.state+"-"+order.userAddress.pincode}</td>
-                                            <td onClick={()=>handleInvoiceClick(order)}>📅</td>
+                                            {(order.paymentId != null) ? (
+                                                <td>{order.paymentId}</td>
+                                            ) : (
+                                                <td>Cash On Delivery</td>
+                                            )}
+
+                                            <td>{order.userAddress.address + "," + order.userAddress.city + "," + order.userAddress.state + "-" + order.userAddress.pincode}</td>
+                                            <td onClick={() => handleInvoiceClick(order)}>📅</td>
                                         </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </Table>
-                ):(
-                    null
-                )
-            }
-        </div>
+                                    );
+                                })}
+                            </tbody>
+                        </Table>
+                        </Col>
+                        <Col md={2}></Col>
+                </Row>
+            ) : (
+                null
+            )}
+        </div></>
     );
 }
 
