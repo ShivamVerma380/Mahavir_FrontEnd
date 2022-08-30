@@ -901,7 +901,8 @@ function TestFilterProducts(){
                     <h4 className="multipleproducts_cat_name" style={{fontWeight:600, fontSize:"24px", lineHeight:"21px",fontFamily:"Roboto"}}>{localStorage.getItem("Category")}</h4>
 
                     <div className="offcavasfilters">
-                        <i class="fa fa-filter fa-3x" aria-hidden="true" onClick={handleShow}></i>
+                        {/* <i class="fa fa-filter fa-3x" aria-hidden="true" onClick={handleShow}></i> */}
+                        <FcFilledFilter onClick={handleShow}/>
       {/* <Button variant="primary" onClick={handleShow}>
         Launch
       </Button> */}
