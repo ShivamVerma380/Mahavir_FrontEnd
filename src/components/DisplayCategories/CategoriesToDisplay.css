@@ -56,13 +56,15 @@
   border-top-color: #d90429;
   border-top: 5px solid #d90429;
   display: flex;
+  transform: translateX(-50%);
+    left: 50%;
 }
 
 
 
 .Category .list-group-item{
   border: 0px;
-    font-size: larger;
+    /* font-size: larger; */
     position: relative;
     display: flex;
     padding: 1px;

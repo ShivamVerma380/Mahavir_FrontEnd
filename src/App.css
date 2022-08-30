@@ -206,9 +206,7 @@
 }
 
 @media (min-width:320px) and (max-width: 480px) {
-  .card {
-    width: 400px;
-  }
+ 
   .wishlisticon{
     margin-top: 3%;
     margin-left: -70%;
