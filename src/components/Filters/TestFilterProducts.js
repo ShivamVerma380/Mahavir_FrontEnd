@@ -220,7 +220,7 @@ function TestFilterProducts(){
         
         if(element.checked){
             var flag = true;
-            if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
+            if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory") !=null){
                 flag = false;
                 document.getElementById(index.modelNumber).checked = false;
                 alert("Please select products from same category");
