@@ -360,21 +360,22 @@ const ProductsByDeal = () => {
 
 
     return (
+        <>
+        <body style={{background:"whitesmoke"}}>
 
 
 
         <div style={{ fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif ' }}>
             <ToastContainer position="top-center"/>
             <Header/>
-            <br></br>
-            <br></br>
+            
             {
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
           }
-            <Row className="mainpage">
+            <Row className="mainpage" style={{marginTop:"120px"}}>
                 <Col md={1}></Col>
-                <Col md={10}>
+                <Col md={10} style={{background:"white"}}>
                     {
                         <Row className="filterproductsRow">
                     
@@ -504,6 +505,7 @@ const ProductsByDeal = () => {
 
 
                         </Row>
+                        <hr></hr>
                         <br></br>
                         </>
 
@@ -525,6 +527,8 @@ const ProductsByDeal = () => {
 
 
         </div>
+        </body>
+        </>
     )
 }
 export default ProductsByDeal;
