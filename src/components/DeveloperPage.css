@@ -1,20 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 *
-{
- margin: 0;
- padding: 0;
- font-family: 'Poppins',sans-serif;
-}
-body
-{
-    display: flex;
-    justify-content: center;
-    align-items: cent er;
-    flex-wrap: wrap;
-    background: #161623;
-    min-height: 100vh;
 
-}
 /* section::before
 {
     content: '';
@@ -46,7 +32,8 @@ section::after
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin: 40px 0;
+    margin: 40px auto;
+    width: 80%;
 }
 
 .container1 .card
