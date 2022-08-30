@@ -34,7 +34,7 @@ const CartItem = ({item,quantity}) => {
             }
         })
         console.log("arr remove item",arr)
-        setCookie("models",arr,20);
+        setCookie("CartModels",arr,20);
         window.location.reload();
 
        
@@ -90,8 +90,9 @@ const CartItem = ({item,quantity}) => {
                                                     // if(localStorage.getItem("CartModels")!=null){
                                                     //     arr = localStorage.getItem("CartProducts").split(',');
                                                     // }
-                                                    arr = getCookie("models").split(',');
-                                                    // console.log("arr",arr)
+                                                    arr = getCookie("CartModels").split(',');
+
+                                                    console.log("arr",arr)
                                                     var arr1=[]
                                                     arr.map((index,pos)=>{
                                                         if(index!=""){
@@ -103,7 +104,7 @@ const CartItem = ({item,quantity}) => {
                                                         }
                                                         
                                                     })
-                                                    setCookie("models",arr1,20);
+                                                    setCookie("CartModels",arr1,20);
                                                     // localStorage.setItem("CartProducts",arr)
                                                     console.log("CartModels",arr1)
                                                     window.location.reload()
