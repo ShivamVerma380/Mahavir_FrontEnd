@@ -7,7 +7,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-button{
+.payment_nextbtn{
     margin-top: 100px;
     width: fit-content;
     padding: 10px;

@@ -4,6 +4,7 @@ import { Button, Container, Form, FormGroup, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import Admin from './Admin';
+import url from "../../Uri";
 
 var email = "";
 var adminotp = "";
@@ -44,7 +45,7 @@ const AdminLogin = () => {
             console.log("Email", email);
             axios({
                 method: "get",
-                url: "http://localhost:8080/verify-email/" + email
+                url: url+"/verify-email/" + email
             }).then(function (response) {
                 console.log(response.data);
                 adminotp = response.data.otp;
@@ -77,7 +78,7 @@ const AdminLogin = () => {
             //    setIsEmailVerified(false);
         }
         else {
-            alert('incorrect')
+            alert('incorrect otp')
         }
 
 

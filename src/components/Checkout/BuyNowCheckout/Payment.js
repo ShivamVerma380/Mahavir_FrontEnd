@@ -186,7 +186,7 @@ function Payment(){
                                     <Form.Check type="radio" id="razorPay" name="paymentoption" value="Pay Online" label="Pay Online"/>
                                 </Form>
                                 <Button onClick={PayAmount}>Next</Button> */}
-                        <Button onClick={PayAmount}>Next</Button>
+                        <Button className="payment_nextbtn" onClick={PayAmount}>Next</Button>
                     
                         </Col>
                         <Col md={2}></Col>

@@ -10,6 +10,7 @@ import { Pagination, Navigation } from "swiper";
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from "reactstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import url from "../../Uri";
+import '../Items/Categoryproducts.css';
 
 const ShopByBrands = () => {
 
@@ -19,12 +20,6 @@ const ShopByBrands = () => {
   const [isBrandsFetched, setIsBrandsFetched] = useState(false);
 
   // var url = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-
-  
-
-
-  
-
   useEffect(() => {
     if (!isBrandsFetched) {
       axios.get(url+"/excel/shopByBrands").then(

@@ -316,7 +316,8 @@ function CategoryProductsSwiper({ cattitle }) {
                       }
                     ];
                     return (
-                      <MDBCard className="categoryproductscard" >
+                      <MDBCard className="categoryproductscard">
+                        <div className="cardimg">
                         <MDBCardImage className="cardimage" src={index.productImage1}  alt='...' position='top' />
                         {
                           (index.productImage1 !== null && index.productImage2 !== null && index.productImage3 !== null) ?
@@ -325,7 +326,7 @@ function CategoryProductsSwiper({ cattitle }) {
                                 <img
                                   className="d-block w-100"
                                   src={index.productImage1}
-                                  style={{height:"150px",width:"125px"}}
+                                  
                                   alt="First slide"
                                 />
                               </Carousel.Item>
@@ -333,7 +334,7 @@ function CategoryProductsSwiper({ cattitle }) {
                                 <img
                                   className="d-block w-100"
                                   src={index.productImage2}
-                                  style={{height:"150px",width:"125px"}}
+                                  
                                   alt="Second slide"
                                 />
                               </Carousel.Item>
@@ -341,7 +342,7 @@ function CategoryProductsSwiper({ cattitle }) {
                                 <img
                                   className="d-block w-100"
                                   src={index.productImage3}
-                                  style={{height:"150px",width:"125px"}}
+                                  
                                   alt="Third slide"
                                 />
                               </Carousel.Item>
@@ -351,7 +352,7 @@ function CategoryProductsSwiper({ cattitle }) {
 
                         }
 
-
+</div>
                         {
                           (localStorage.getItem("Wishlist") != null && localStorage.getItem("Wishlist").includes(index.modelNumber)) ?
                             <AiFillHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => RemoveWishlist(index)} /> :

@@ -263,10 +263,10 @@ const SelCatProducts=()=>{
     return(
         <>
         <Header className="header" style={{position:"sticky"}} productList={products}/>
-        <br></br>
-        <br></br>
+        <div className="filterproducts_poster">
         {
             (isMegaPosterFetched)?(
+                
                 
                 <Slideshow offerPosters={MegaPoster}/>
                 
@@ -274,7 +274,8 @@ const SelCatProducts=()=>{
                 null
             )
         }
-        <Button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
+        </div>
+        {/* <Button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button> */}
         
                 <div>
                     

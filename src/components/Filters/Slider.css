@@ -59,3 +59,32 @@
 
 
 }
+
+/* ipads and tablets */
+@media screen and (min-width: 481px) and (max-width:768px)
+{
+ 
+  .offerslide {
+    margin-top: 154px;
+}
+}
+/* laplops and small screens */
+@media screen and (min-width: 769px) and (max-width:1024px)
+{
+  .offerslide {
+    margin-top: 154px;
+}
+
+}
+
+/* desktop and large screens */
+@media screen and (min-width: 1025px) and (max-width:1200px)
+{
+
+}
+
+ /* extra large screens */
+ @media screen and (min-width: 1201px) 
+ {
+
+ }

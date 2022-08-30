@@ -80,8 +80,8 @@ root.render(
       <Route path='/' element={<App/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/productDetails' element = {<ProductDetails/>}/>
-      {/* <Route path='/admin' element = {<AdminLogin/>}/> */}
-      <Route path='/admin' element = {<Admin/>}/>
+      <Route path='/admin' element = {<AdminLogin/>}/>
+      {/* <Route path='/admin' element = {<Admin/>}/> */}
       {/* <Route path='/admindetail' element = {<Admin/>}/> */}
       <Route path='/cart' element = {<Cart/>}/>
       <Route path='/categorydrop' element = {<CategoryDropdowns/>}/>

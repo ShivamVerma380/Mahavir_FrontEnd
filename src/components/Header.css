@@ -47,8 +47,10 @@
 }
 
 .Header .navbar-nav{
+    display: flex;
     font-size: 20px;
     font-weight: bold;
+    align-items: center;
 }
 
 .instagram{
@@ -66,67 +68,15 @@
     margin-top: 7px;
     margin-right: 80px;
 }
-@media screen and (min-width:320px) and (max-width:480px) {
-    .offcanvas-body {
-        /* background-image: linear-gradient(225deg, #101214, transparent); */
-        
-    }
-    
-    .offcanvas{
-        width: 80%;
-    }
-    
-    .Header .navbar-toggler-icon {
-        display: inline-block;
-        width: 2.5em;
-        height: 2.5em;
-        vertical-align: middle;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-        margin-top: 10px;
-    }
-    
-    .Header .navbar-light .navbar-toggler {
-        width: 60px;
-        color: rgb(255 255 255);
-        border-color: rgb(255 255 255);
-    }
 
-    .Header .navbar {
-        top: 35px;
-    }
-
-    .top-header .col-md-3{
-        /* width: 49%; */
-        display: none;
-  }
-
-  .top-header .col-md-1{
-      width: fit-content;
-}
-  .top-header .col-md-4{
-      display: none;
-  }
-
-  .top-header .col-md-2{
-      width: fit-content;
-      margin-left: 90px;
-}
-.instagram{
-  margin-left: 0px;
-}
-
-.facebook{
-  margin-right: 0px;
-}
-
-    
-    
-}
 
 /* mahavir title */
 
+.mahavirtitle{
+    font-family: PublicaSans-Bold;
+    font-size: 42px;
+    color: rgb(237, 28, 36);
+}
 .mahavir {
     margin-bottom: 0.5em;
     font-size: 2rem;
@@ -168,3 +118,171 @@
     top:0;
     z-index: 4;
 }
+
+@media screen and (min-width:320px) and (max-width:480px) {
+
+    .wishlist_{
+        margin-left: -20px;
+    }
+    .offcanvas-body {
+        /* background-image: linear-gradient(225deg, #101214, transparent); */
+        
+    }
+    
+    .offcanvas{
+        width: 80%;
+    }
+    
+    .Header .navbar-toggler-icon {
+        display: inline-block;
+        width: 2.5em;
+        height: 2.5em;
+        vertical-align: middle;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        margin-top: 0%;
+    }
+    
+    .Header .navbar-light .navbar-toggler {
+        width: 60px;
+        color: rgb(255 255 255);
+        border-color: rgb(255 255 255);
+        margin-top: 0%;
+    }
+
+    .Header .navbar {
+        top: 35px;
+    }
+
+    .top-header .col-md-3{
+        /* width: 49%; */
+        display: none;
+  }
+
+  .top-header .col-md-1{
+      width: fit-content;
+}
+  .top-header .col-md-4{
+      display: none;
+  }
+
+  .top-header .col-md-2{
+      width: fit-content;
+      margin-left: 90px;
+}
+.instagram{
+  margin-left: 0px;
+}
+
+.facebook{
+  margin-right: 0px;
+}
+
+    
+    
+}
+
+
+/* laplops and small screens */
+@media screen and (min-width: 769px) and (max-width:1024px)
+{
+    .top-header .col-md-3 {
+        width: 36%;
+    }
+
+    .top-header .col-md-4 {
+        display: none;
+    }
+
+    .top-header .col-md-1 {
+        width: fit-content;
+    }
+     .facebook {
+        margin-right: 0;
+    }
+
+    .instagram{
+        margin-left: 60px;
+    }
+
+    .mahavirtitle{
+        font-size: 30px;
+        font-family: PublicaSans-Bold;
+    }
+
+    .logo_mahavir {
+        height: 40px;
+        width: 40px;
+    }
+
+    .header svg{
+        height: 20px;
+        width: 20px;
+      }
+
+      .Header .navbar-light .navbar-nav .nav-link {
+        font-size: 14px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+
+}
+
+/* desktop and large screens */
+@media screen and (min-width: 1025px) and (max-width:1200px)
+{
+
+}
+
+  /* ipads and tablets */
+  @media screen and (min-width: 481px) and (max-width:768px)
+  {
+    .top-header .col-md-3 {
+        width: 36%;
+    }
+
+    .top-header .col-md-4 {
+        display: none;
+    }
+
+    .top-header .col-md-1 {
+        width: fit-content;
+    }
+     .facebook {
+        margin-right: 0;
+    }
+
+    .instagram{
+        margin-left: 60px;
+    }
+
+    .mahavirtitle{
+        font-size: 30px;
+        font-family: PublicaSans-Bold;
+    }
+
+    .logo_mahavir {
+        height: 40px;
+        width: 40px;
+    }
+
+    .header svg{
+        height: 20px;
+        width: 20px;
+      }
+
+      .Header .navbar-light .navbar-nav .nav-link {
+        font-size: 14px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+  }
+
+  /* extra large screens */
+  @media screen and (min-width: 1201px) 
+  {
+
+  }
