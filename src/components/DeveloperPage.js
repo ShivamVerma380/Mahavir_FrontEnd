@@ -15,7 +15,7 @@ const DeveloperPage = () => {
         <body>
         <section>
         <div  class="container1">
-            
+            <Row>
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
@@ -80,6 +80,9 @@ const DeveloperPage = () => {
                     </li>
                 </ul>
             </div>
+            </Row>
+
+            <Row>
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
@@ -144,6 +147,7 @@ const DeveloperPage = () => {
                     </li>
                 </ul>
             </div>
+            </Row>
        </div>
        </section>
        </body>
