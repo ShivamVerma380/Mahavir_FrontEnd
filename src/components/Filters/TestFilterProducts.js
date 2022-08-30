@@ -18,7 +18,7 @@ import url from "../../Uri";
 import {RiArrowDropDownLine} from 'react-icons/ri'
 import {FcFilledFilter} from "react-icons/fc"
 import StarRatings from "react-star-ratings";
-
+import {BsArrowUp} from "react-icons/bs"
 
 function TestFilterProducts(){
     var comparemodels=getCookie("addToCompare").split(',');
@@ -777,7 +777,7 @@ function TestFilterProducts(){
           {
             (showTopBtn)?(
                 <Button className="scrolltopbtn" onClick={scrollToTop}>
-            <FaArrowCircleUp  />
+            <BsArrowUp  />
         </Button>
             ):(null)
           }

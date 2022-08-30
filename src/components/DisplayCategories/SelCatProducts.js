@@ -267,6 +267,7 @@ const SelCatProducts=()=>{
         {
             (isMegaPosterFetched)?(
                 
+                
                 <Slideshow offerPosters={MegaPoster}/>
                 
             ):(
@@ -274,7 +275,7 @@ const SelCatProducts=()=>{
             )
         }
         </div>
-        <Button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
+        {/* <Button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button> */}
         
                 <div>
                     
