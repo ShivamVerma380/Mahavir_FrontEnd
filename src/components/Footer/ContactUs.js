@@ -5,25 +5,21 @@ import Header from "../Header";
 
 const ContactUs = () => {
     return (
-        <div>
-            <Header/>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <center>
+        <>
+        <Header/>
+        <div className="footer_section">
+            
+           
+            <Row >
 
-                <img style={{ marginTop: 40 }} src="https://d2xamzlzrdbdbn.cloudfront.net/imagesrewamp/Faqs/CUSTOMER-CARE.png"></img>
-                <h3>CUSTOMER CARE</h3>
+                <Col style={{padding:'5% 5% 2% 5%'}}>
+                    <Row >
+                    <center>
 
-            </center>
-            <Row style={{ marginTop: 40 }}>
-                <Col md={2}></Col>
+<img style={{ marginTop: 40 }} src="https://d2xamzlzrdbdbn.cloudfront.net/imagesrewamp/Faqs/CUSTOMER-CARE.png"></img>
+<h3>CUSTOMER CARE</h3>
 
-                <Col md={8}>
-                    <Row>
+</center>
                         <Col md={3}>
                             <Card>
                                 <Card.Body>
@@ -95,8 +91,7 @@ const ContactUs = () => {
             </Row>
 
             <Row>
-                <Col md={2}></Col>
-                <Col md={8}>
+                <Col style={{padding:' 0 5% 5% 5%'}}>
                 <center>
                 <img style={{ marginTop: 40 }} src="https://d2xamzlzrdbdbn.cloudfront.net/imagesrewamp/Faqs/Corporate-queries.png"></img>
                 <h3>ADDRESS</h3>
@@ -166,7 +161,7 @@ const ContactUs = () => {
             </Row>
             
         </div>
-
+        </>
     )
 }
 export default ContactUs;

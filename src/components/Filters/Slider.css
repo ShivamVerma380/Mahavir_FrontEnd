@@ -39,13 +39,13 @@
 
   .offerslide {
     z-index: 0;
-    margin-top: 171px;
+    margin-top: 184px;
 }
 
 @media screen and (min-width:320px) and (max-width:480px) {
 
 .offerslide {
-  margin-top: 171px;
+  margin-top: 184px;
 }
 
 .offerslide .carousel-item {
@@ -65,14 +65,14 @@
 {
  
   .offerslide {
-    margin-top: 154px;
+    margin-top: 167px;
 }
 }
 /* laplops and small screens */
 @media screen and (min-width: 769px) and (max-width:1024px)
 {
   .offerslide {
-    margin-top: 154px;
+    margin-top: 167px;
 }
 
 }

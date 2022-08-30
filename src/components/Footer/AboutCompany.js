@@ -2,37 +2,26 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 import Header from "../Header";
-
+import './Footer.css';
 const AboutCompany = () => {
     return (
         <div> 
             <Header/>
+          
+        <Row className="footer_section">
+            <Col style={{padding:'5%'}}>
+            <center><img style={{marginTop:40}} src="https://d2xamzlzrdbdbn.cloudfront.net/imagesrewamp/Faqs/About-us.png"></img>
+            <h1 style={{color:"rgb(255,98,98)"}}><b><i>About Company</i></b></h1></center>
             <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-        <center>
-            <div> 
-            <img style={{marginTop:40}} src="https://d2xamzlzrdbdbn.cloudfront.net/imagesrewamp/Faqs/About-us.png"></img>
-            <h1 style={{color:"rgb(255,98,98)"}}><b><i>About Company</i></b></h1>
+            <h3 style={{fontSize:'20px',fontFamily:'Roboto'}}>Mahavir Electronics And Furniture in Bibvewadi, Pune</h3>
             
-            </div>
-        </center>
-        <br></br>
-        <Row>
-            <Col md={2}></Col>
-            <Col md={8}>
-            <h3>Mahavir Electronics And Furniture in Bibvewadi, Pune</h3>
-            
-            <p style={{fontSize:20}}>Mahavir Electronics And Furniture in Pune is one of the leading businesses in the Electronic Goods 
+            <p style={{fontSize:16,marginLeft:'20px',fontFamily:'Roboto'}}>Mahavir Electronics And Furniture in Pune is one of the leading businesses in the Electronic Goods 
             Showrooms. Also known for Electronic Goods Showrooms, Car Accessory Dealers, Cable Dealers, Flour Mill Dealers, TV Dealers-LG, 
             Wire Dealers, Car Audio System Dealers, Domestic Flour Mill Dealers and much more.</p>
             <br></br>
 
-            <h3>Location and Overview</h3>
-            <p style={{fontSize:20}}>Established in the year 1982, Mahavir Electronics And Furniture in Bibvewadi, Pune is a top player in 
+            <h3 style={{fontSize:'20px',fontFamily:'Roboto'}}>Location and Overview</h3>
+            <p style={{fontSize:16,marginLeft:'20px',fontFamily:'Roboto'}}>Established in the year 1982, Mahavir Electronics And Furniture in Bibvewadi, Pune is a top player in 
             the category Electronic Goods Showrooms in the Pune. This well-known establishment acts as a one-stop destination servicing 
             customers both local and from other parts of Pune. Over the course of its journey, this business has established a firm foothold 
             in it’s industry. The belief that customer satisfaction is as important as their products and services, have helped this 
