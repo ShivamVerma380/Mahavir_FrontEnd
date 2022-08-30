@@ -958,7 +958,7 @@ function ProductDetails() {
                     </Col>
                   </Row>
                   <br></br>
-                   <Row >
+                   {/* <Row >
                     <h4 className="rowtitle">PRODUCT DESCRIPTION</h4>
 
                     {
@@ -1007,7 +1007,7 @@ function ProductDetails() {
 
                       })
                     }
-                  </Row>
+                  </Row> */}
                   
                   
                  
