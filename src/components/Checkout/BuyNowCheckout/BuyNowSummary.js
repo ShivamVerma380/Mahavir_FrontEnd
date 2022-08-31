@@ -113,8 +113,17 @@ function BuyNowSummary(){
                                            
                 ):(
                     <>
-                    <h2 tstyle={{ fontSize: "18px"}}>Please add Items to Buy!</h2>
-                    <Button style={{marginTop:"60px", marginLeft:"50px",background:"rgb(193,0,0)",color:"white",cursor:"pointer", height:"50px",width:"150px", fontSize:"16px"}} onClick={handleAddNow}>Add Now</Button></>
+                    <Container>
+                    <center>
+                    <br></br>
+                    <h2 tstyle={{ fontSize: "18px"}}>You don't have any items to buy</h2>
+                    <h3 tstyle={{ fontSize: "16px"}}>Please add Items to Buy!</h3>
+                    <Button style={{marginTop:"60px", marginLeft:"50px",background:"rgb(193,0,0)",color:"white",cursor:"pointer", height:"50px",width:"150px", fontSize:"16px"}} onClick={handleAddNow}>Add Now</Button>
+                    <br></br>
+                    </center>
+                    </Container>
+                    <br></br>
+                    </>
                 )
             }
             

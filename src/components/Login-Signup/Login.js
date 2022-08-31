@@ -490,7 +490,7 @@ function Login() {
                                     <div className="fields">
                                         <FormGroup>
                                             <Label id="email-input" for="email"></Label>
-                                            <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
+                                            <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",color:"black",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
                                         </FormGroup>
 
                                     </div>
@@ -628,7 +628,7 @@ function Login() {
                                     <FormGroup>
                                         <Label id="email-input" for="email"></Label>
                                         <br></br>
-                                        <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%", fontSize:"14px"}} id="email" name="email" placeholder="Enter Email" type="email" className="input" onChange={inputEmailEvent} />
+                                        <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",color:"black",borderBottom:"1px Solid #E2E2E2",width:"100%", fontSize:"14px"}} id="email" name="email" placeholder="Enter Email" type="email" className="input" onChange={inputEmailEvent} />
                                     </FormGroup>
 
                                 </div>

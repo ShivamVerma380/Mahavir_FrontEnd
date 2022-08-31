@@ -7,6 +7,10 @@ import { Icon } from '@iconify/react';
 import {HiOutlineMail} from "react-icons/hi";
 import {FaLinkedinIn} from "react-icons/fa";
 import {BsGithub} from "react-icons/bs";
+import shraddhaImg from "../assets/developers/Shraddha.jpg";
+import omkarImg from "../assets/developers/Omkar.jfif";
+// import omkarImg from "../assets/developers/Omkar.j";
+
 
 const DeveloperPage = () => {
     return(
@@ -19,7 +23,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src={omkarImg}/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Omkar Khare</h3>
@@ -129,7 +133,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src={shraddhaImg}/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Shraddha Mulay</h3>
