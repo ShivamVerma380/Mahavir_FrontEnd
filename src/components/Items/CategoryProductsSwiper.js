@@ -153,11 +153,12 @@ function CategoryProductsSwiper({ cattitle }) {
 
   function RemoveWishlist(index){
     console.log("Wishlist",localStorage.getItem("Wishlist"))
+    console.log("in remove")
     var formdata = {
       "modelNumber": index.modelNumber
 
     }
-    axios.post("http://localhost:8080/delete-wishlist", formdata, {
+    axios.post(url+"/delete-wishlist", formdata, {
       headers: {
         "Authorization": "Bearer "+getCookie("jwtToken"),
         "Content-Type": "multipart/form-data"

@@ -72,7 +72,7 @@ function Deals({deals}) {
       //   var arr = localStorage.getItem("wishlistproduct").split(',')
       //   var flag = true;
       //   arr.map(i=>{
-         
+  
       //     console.log("i: ",i)
       //     if( i=== index.modelNumber) {
       //         arr.splice(arr.indexOf(i),1)
@@ -86,41 +86,48 @@ function Deals({deals}) {
       //   if(flag)
       //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
       //     navigate('/')
-        
+  
       // }
-
       console.log("Wishlist clicked")
-
+      if(getCookie("isLoggedIn")!=='true'){
+        navigate("/login")
+      }else{
+        
       
-        var formdata = {
-          "modelNumber": index.modelNumber
   
+      var formdata = {
+        "modelNumber": index.modelNumber
+  
+      }
+  
+      axios.post(url+"/wishlist", formdata, {
+        headers: {
+          "Authorization": "Bearer " + token,
+          "Content-Type": "multipart/form-data"
         }
+      }).then(function (response) {
+        if (response.status == 200) {
+          // console.log("Added to wishlist successfully");
+          // toast.success(<b>Added to wishlist successfully</b>)
+          // alert("Item added to wishlist successfully")
+          var arr = localStorage.getItem("Wishlist").split(",")
+          arr.push(index.modelNumber)
+          localStorage.setItem("Wishlist", arr)
+          window.location.reload();
+          console.log(response.data)
+          // navigate("/");
+        }
+        else{
+          alert("Item already present in wishlist")
+          console.log(response.data)
+        }
+      }).catch(function (error) {
+          alert("Item already present in wishlist")
+          console.log("Error", error);
+        
+      })
+    }
   
-        axios.post(url+"/wishlist", formdata, {
-          headers: {
-            "Authorization": "Bearer "+token,
-            "Content-Type": "multipart/form-data"
-          }
-        }).then(function (response) {
-          if (response.status == 200) {
-            toast.success(<b>Added to wishlist successfully</b>)
-            // console.log("Added to wishlist successfully");
-            
-            console.log(response.data)
-            // navigate("/");
-          }
-        }).catch(function (error) {
-          if(error.response.status==406) {
-            toast.warn(<b>Item already present in Wishlist</b>)
-            // alert("Item already present in wishlist")
-          }
-          else {
-            console.log("Error", error);
-          }
-          
-        })
-      
     }
 
     function callProductDetails(index){
@@ -129,6 +136,38 @@ function Deals({deals}) {
       localStorage.setItem("productSelected",index.modelNumber);
       console.log("Product Selected",localStorage.getItem("productSelected"))
       navigate("/productDetails")
+    }
+
+    function RemoveWishlist(index){
+      console.log("Wishlist",localStorage.getItem("Wishlist"))
+      var formdata = {
+        "modelNumber": index.modelNumber
+  
+      }
+      axios.post("http://localhost:8080/delete-wishlist", formdata, {
+        headers: {
+          "Authorization": "Bearer "+getCookie("jwtToken"),
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(function (response) {
+        if (response.status == 200) {
+          console.log("Removed from wishlist successfully");
+          console.log(response.data)
+          // var arr = localStorage. 
+          var arr = localStorage.getItem("Wishlist").split(",")
+          var finalWishlist=[];
+          arr.map(a=>{
+            if( a!=="" && a!==index.modelNumber){
+              finalWishlist.push(a)
+            }
+          })
+          localStorage.setItem("Wishlist",finalWishlist)
+          window.location.reload();
+          // navigate("/");
+        }
+      }).catch(function (error) {
+        console.log("Error", error);
+      })
     }
 
     
@@ -261,16 +300,22 @@ function Deals({deals}) {
                             </Carousel>
                             : <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
 
-
                         } */}
                             <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
 
 </div>                 
+
                   {
+                          (localStorage.getItem("Wishlist") != null && localStorage.getItem("Wishlist").includes(index.modelNumber)) ?
+                            <AiFillHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => RemoveWishlist(index)} /> :
+                            <AiOutlineHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
+                        }
+                  
+                  {/* {
                     (localStorage.getItem("wishlistproduct") != null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
                             <AiFillHeart style={{ marginLeft:'0px',marginTop:'10px',marginRight:'10px',alignSelf:'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> :
                             <AiOutlineHeart style={{  marginLeft:'0px',marginTop:'10px',marginRight:'10px',alignSelf:'end'}} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
-                    }
+                    } */}
                   <MDBCardBody className="categoryproductscardbody">
                     <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
                     
