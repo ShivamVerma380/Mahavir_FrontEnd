@@ -13,7 +13,7 @@ import { Table } from 'react-bootstrap';
 import './Cart.css';
 import '../../components/Wishlist.css';
 import url from '../../Uri';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 // var price=0;
 // var discount = 0;
 // var amount=0;
@@ -46,11 +46,11 @@ function Cart() {
             })
           }
       
-        console.log("Cart Models",cartModels)
+        // console.log("Cart Models",cartModels)
         var urls=[];
         arr.map(item=>{
             if(item!=""){
-                console.log("item",item)
+                // console.log("item",item)
                 urls.push(axios.get(url+"/get-products/"+item.split("=")[0]));
             }
         })
@@ -69,8 +69,8 @@ function Cart() {
 
               })
               cartItems.reverse();
-              console.log("Cart Items",cartItems)
-              console.log("Cart models ...",cartModels)
+            //   console.log("Cart Items",cartItems)
+            //   console.log("Cart models ...",cartModels)
               SetIsCartItemsFetched(true);
 
           })
@@ -92,7 +92,7 @@ function Cart() {
                 }
             })
             setCookie("models",arr,20);
-            console.log("Models",getCookie("models"));
+            // console.log("Models",getCookie("models"));
             navigate("/checkout");
         }
         else{
@@ -108,7 +108,7 @@ function Cart() {
 
     return(
         <>
-
+        <ToastContainer position="top-center" />
         <Header/> 
       <div  className="cartpage">   
         
@@ -132,14 +132,14 @@ function Cart() {
     
             {/* <CartItem/> */}
             {
-                console.log("cartDetails",cartItems)
+                // console.log("cartDetails",cartItems)
             }
             {
                 (isCartItemsFetched)?(
                     cartItems.map((index,pos)=>{
-                    console.log("CartModel in map",cartModels)
-                    console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
-                    console.log("Model Number:",index.modelNumber)
+                    // console.log("CartModel in map",cartModels)
+                    // console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
+                    // console.log("Model Number:",index.modelNumber)
                     return(
                     <CartItem item={index} quantity={cartModels.get(index.modelNumber)}/>
                     );
