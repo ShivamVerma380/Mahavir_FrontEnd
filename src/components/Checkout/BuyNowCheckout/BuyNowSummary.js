@@ -14,6 +14,7 @@ import 'typeface-roboto';
 import "./BuyNowCheckout.css";
 import url from '../../../Uri';
 import Footer from '../../Footer/Footer';
+import CheckoutItem from '../CheckoutItem';
 
 
 function BuyNowSummary(){
@@ -130,7 +131,7 @@ function BuyNowSummary(){
                     console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
                     console.log("Model Number:",index.modelNumber)
                     return(
-                    <CartItem item={index} quantity={cartModels.get(index.modelNumber)}/>
+                    <CheckoutItem item={index} quantity={cartModels.get(index.modelNumber)}/>
                     );
                 })
                 ):(null)
