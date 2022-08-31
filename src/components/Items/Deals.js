@@ -229,39 +229,43 @@ function Deals({deals}) {
                 ];
                 return(
                 <MDBCard className="categoryproductscard" >
-                  <div className="cardimg">
-                  <MDBCardImage className="cardimage" src={index.productImage1} alt='...' position='top' />
-                  {
-                    (index.productImage1!==null && index.productImage2!==null && index.productImage3!==null)?
-                    <Carousel interval={1000} className="cardimage2" indicators=''   variant="dark">
-                      <Carousel.Item>
-                        <img
-                          className="d-block w-100"
-                          src={index.productImage1}
-                          alt="First slide"
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item>
-                        <img
-                          className="d-block w-100"
-                          src={index.productImage2}
-                          alt="Second slide"
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item>
-                        <img
-                          className="d-block w-100"
-                          src={index.productImage3}
-                          alt="Third slide"
-                        />
-                      </Carousel.Item>
-                    </Carousel>
-                     : <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
+                                   <div className="cardimg">
+                        <MDBCardImage className="cardimage" src={index.productImage1}  alt='...' position='top' />
+                        {/* {
+                          ( index.productImage2 !== null && index.productImage3 !== null) ? 
+                            <Carousel interval={1000} className="cardimage2" indicators='' variant="dark">
+                              <Carousel.Item>
+                                <img
+                                  className="d-block w-100"
+                                  src={index.productImage1}
+                                  
+                                  alt="First slide"
+                                />
+                              </Carousel.Item>
+                              <Carousel.Item>
+                                <img
+                                  className="d-block w-100"
+                                  src={index.productImage2}
+                                  
+                                  alt="Second slide"
+                                />
+                              </Carousel.Item>
+                              <Carousel.Item>
+                                <img
+                                  className="d-block w-100"
+                                  src={index.productImage3}
+                                  
+                                  alt="Third slide"
+                                />
+                              </Carousel.Item>
+                            </Carousel>
+                            : <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
 
 
-                  }
-                  </div>
-                  
+                        } */}
+                            <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
+
+</div>                 
                   {
                     (localStorage.getItem("wishlistproduct") != null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
                             <AiFillHeart style={{ marginLeft:'0px',marginTop:'10px',marginRight:'10px',alignSelf:'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> :

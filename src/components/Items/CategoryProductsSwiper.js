@@ -319,8 +319,8 @@ function CategoryProductsSwiper({ cattitle }) {
                       <MDBCard className="categoryproductscard">
                         <div className="cardimg">
                         <MDBCardImage className="cardimage" src={index.productImage1}  alt='...' position='top' />
-                        {
-                          (index.productImage1 !== null && index.productImage2 !== null && index.productImage3 !== null) ?
+                        {/* {
+                          ( index.productImage2 !== null && index.productImage3 !== null) ? 
                             <Carousel interval={1000} className="cardimage2" indicators='' variant="dark">
                               <Carousel.Item>
                                 <img
@@ -350,7 +350,8 @@ function CategoryProductsSwiper({ cattitle }) {
                             : <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
 
 
-                        }
+                        } */}
+                            <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
 
 </div>
                         {
