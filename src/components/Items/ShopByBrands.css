@@ -271,8 +271,8 @@ color: #000000;
 }
 
 .brand_category_product_card{
-width: 233px;
-height: 334px;
+/* width: 233px;
+height: 334px; */
 
 
 box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.25);
@@ -281,10 +281,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
 .brand_category_product_cardimage{
   
-  /* position: absolute; */
-  width: 191px;
-  height: 202px;
-  /* left: 19px; */
+  box-shadow: 0 2px 2px 0 #d5d8da;
   margin-top: 5px;
   
 
@@ -312,7 +309,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .brandlogo {
-  width: 126px;
+  width: fit-content;
   height: 126px;
 }
 
@@ -328,7 +325,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .brandlogo {
-  width: fit-content;
+  
   height: 90px;
 }
 }

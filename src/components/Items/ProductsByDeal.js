@@ -16,13 +16,13 @@ import Footer from "../Footer/Footer";
 
 const ProductsByDeal = () => {
     var token=getCookie("jwtToken");
-    // var comparemodels=getCookie("addToCompare").split(',');
+    var comparemodels=getCookie("addToCompare").split(',');
     const location = useLocation();
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
     const navigate = useNavigate();
     const [products,setProducts]=useState([])
-    // const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
+    const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
     var cards = <div>
         <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="God" />
     </div>
@@ -170,96 +170,96 @@ const ProductsByDeal = () => {
     
       }
 
-    //   function handleAddToCompare(index){
+      function handleAddToCompare(index){
 
-    //     console.log("inside add to compare");
+        console.log("inside add to compare");
         
-    //     var element = document.getElementById(index.modelNumber);
-        
-        
-    //     var length=0;
-        
-    //     comparemodels.map(index=>{
-    //         if(index!==""){
-    //             length++;
-    //         }
-    //     })
-    //     // if(length==0){
-    //     //     console.log("Category...",index.category)
-    //     //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
-    //     // }
-    //     // var length = comparemodels.length;
-    //     console.log("Length...",length)
+        var element = document.getElementById(index.modelNumber);
         
         
-    //     if(element.checked){
-    //         var flag = true;
-    //         if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
-    //             flag = false;
-    //             document.getElementById(index.modelNumber).checked = false;
-    //             alert("Please select products from same category");
-    //         }
-    //         if(length==4){
-    //             flag = false;
-    //             document.getElementById(index.modelNumber).checked=false;
-    //             alert("You can compare only 4 products");
-    //         }
-    //         if(flag){
-    //             console.log("adddd"+index.modelNumber);
-    //             comparemodels.push(index.modelNumber);
-    //             setCookie("addToCompare",comparemodels,20);
-    //             setLen(getCookie("addToCompare").split(',').length)
-    //             console.log(comparemodels);
-    //             console.log("checked "+index.modelNumber);
-    //         }
-    //     }
-    //     else {
-    //       for (var i = 0; i < comparemodels.length; i++) {
-    //         if (comparemodels[i] === index.modelNumber) {
-    //           comparemodels.splice(i, 1);
-    //             console.log(comparemodels);
-    //             setCookie("addToCompare",comparemodels,20);
-    //             setLen(getCookie("addToCompare").split(',').length)
-    //             // window.location.reload();
-    //             break;
-    //         }
-    //     }
-    //       console.log("unchecked "+index.modelNumber);
+        var length=0;
+        
+        comparemodels.map(index=>{
+            if(index!==""){
+                length++;
+            }
+        })
+        // if(length==0){
+        //     console.log("Category...",index.category)
+        //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
+        // }
+        // var length = comparemodels.length;
+        console.log("Length...",length)
+        
+        
+        if(element.checked){
+            var flag = true;
+            if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
+                flag = false;
+                document.getElementById(index.modelNumber).checked = false;
+                alert("Please select products from same category");
+            }
+            if(length==4){
+                flag = false;
+                document.getElementById(index.modelNumber).checked=false;
+                alert("You can compare only 4 products");
+            }
+            if(flag){
+                console.log("adddd"+index.modelNumber);
+                comparemodels.push(index.modelNumber);
+                setCookie("addToCompare",comparemodels,20);
+                setLen(getCookie("addToCompare").split(',').length)
+                console.log(comparemodels);
+                console.log("checked "+index.modelNumber);
+            }
+        }
+        else {
+          for (var i = 0; i < comparemodels.length; i++) {
+            if (comparemodels[i] === index.modelNumber) {
+              comparemodels.splice(i, 1);
+                console.log(comparemodels);
+                setCookie("addToCompare",comparemodels,20);
+                setLen(getCookie("addToCompare").split(',').length)
+                // window.location.reload();
+                break;
+            }
+        }
+          console.log("unchecked "+index.modelNumber);
 
-    //     }
+        }
 
-    //     var final_length = 0;
-    //     comparemodels.map(index=>{
-    //         if(index!==""){
-    //             final_length++;
-    //         }
-    //     })
-    //     if(final_length==0){
-    //         localStorage.removeItem("AddToCompareCategory");
-    //     }
-    //     if(final_length==1){
-    //         localStorage.setItem("AddToCompareCategory",index.category);
-    //     }
+        var final_length = 0;
+        comparemodels.map(index=>{
+            if(index!==""){
+                final_length++;
+            }
+        })
+        if(final_length==0){
+            localStorage.removeItem("AddToCompareCategory");
+        }
+        if(final_length==1){
+            localStorage.setItem("AddToCompareCategory",index.category);
+        }
 
 
-    //     // if (event.target.checked) {
+        // if (event.target.checked) {
   
-    //     //   console.log('✅ Checkbox is checked');
-    //     //   setChange(change+1)
+        //   console.log('✅ Checkbox is checked');
+        //   setChange(change+1)
           
           
           
-    //     // } else {
-    //     //   console.log('⛔️ Checkbox is NOT checked');
-    //     //   setChange(change-1)
-    //     // }
-    //     // setisAddCompareClicked(current => !current);
-    //     // // alert("Added To Compare");
+        // } else {
+        //   console.log('⛔️ Checkbox is NOT checked');
+        //   setChange(change-1)
+        // }
+        // setisAddCompareClicked(current => !current);
+        // // alert("Added To Compare");
         
-    // }
+    }
       
-    //   localStorage.setItem("comparecount",change)
-    //   console.log("Get",localStorage.getItem("comparecount"))
+      localStorage.setItem("comparecount",change)
+      console.log("Get",localStorage.getItem("comparecount"))
 
     function callProductDetails(index) {
         //alert(index);
@@ -372,7 +372,7 @@ const ProductsByDeal = () => {
             <Header/>
             
             {
-        //   (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
+          (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
           }
             <Row className="mainpage" style={{marginTop:"120px"}}>
@@ -384,7 +384,7 @@ const ProductsByDeal = () => {
                     
 
                         <Col >
-                        <h4 style={{fontWeight:600, fontSize:"24px", lineHeight:"21px",fontFamily:"Roboto", textAlign:"center"}}>{location.state.name}</h4>
+                        <h3 style={{fontWeight:600,  lineHeight:"21px",fontFamily:"Roboto", textAlign:"center"}}>{location.state.name}</h3>
     
                         
     
@@ -422,7 +422,7 @@ const ProductsByDeal = () => {
                             <Col md={4}>
                                 <Row className="innerrow" onClick={() => callProductDetails(index)}>
                                     <Col md={1}></Col>
-                                    <Col md={8}>
+                                    <Col md={12}>
                                     <h4 className="multipleproduct_title" onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
                                     </Col>
                                 </Row>
@@ -476,14 +476,17 @@ const ProductsByDeal = () => {
                                                     }
                                                 </Col>
                                             </Row>
-                                            {/* <Row className="checkboxx">
+                                            <Row className="checkboxx">
                                                 <Form className="check">
 
-                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber}  style={{fontSize:"18px"}} label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
+                                                    <Form.Check style={{
+                                                        '@media screen and(min-width: 480px)': {
+                                                            display: 'none'
+                                                    },fontSize:"18px"}} defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber} label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
 
 
                                                 </Form>
-                                            </Row> */}
+                                            </Row>
                                             <br></br>
 
                                             <Row>

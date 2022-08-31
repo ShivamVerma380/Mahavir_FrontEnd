@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import Header from "../Header";
-
+import './Footer.css';
 function PaymentReturns(){
     return(
         <div>
@@ -12,8 +12,8 @@ function PaymentReturns(){
             <br></br>
             <br></br>
             <br></br>
-            <Container>
-                <h3 style={{marginTop:"20px"}}>Payment & Returns</h3>
+            <Container className="payments">
+                <h4 style={{marginTop:"20px"}}>Payment & Returns</h4>
                 <p>MahavirElectronics.net thanks you and values your purchase with us. This section describes MahavirElectronics.net’s policies on payments received from customers and returns to customers for products or services ordered.</p>
                 <h4><b>1.Acceptable Methods Of Payment</b></h4>
                 <p>Presently payment methods available with MahavirElectronics.net are through Credit Cards, Debit Cards and Net banking only. As and when other methods will be incorporated, the same would be updated here as well. Your Credit/Debit card information remains private and confidential. MahavirElectronics.net and our secure online payment gateways use Secure Sockets Layer security technology to protect your Card information. We accept all VISA & MasterCards– only Indian cards, as International cards would not be supported. You will have to enter your 16 digit Credit/Debit card number and the 3 digit CVV (Card Verification Value) code which is at the back of your card and complete the payment.</p>

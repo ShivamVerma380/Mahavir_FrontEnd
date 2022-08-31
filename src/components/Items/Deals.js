@@ -182,8 +182,8 @@ function Deals({deals}) {
           
               
               <MDBContainer className="categoryproductscontainer">
-            <Row style={{paddingTop:"10px",marginBottom:"15px"}}>
-              <Col >
+            <Row className="categoryproductsrow">
+              <Col md={8}>
               <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
 
 
@@ -211,7 +211,7 @@ function Deals({deals}) {
               
               
               </Col>
-              <Col style={{display:'flex',justifyContent:'end'}}>
+              <Col md={4} style={{display:'flex',justifyContent:'end'}}>
               <button class="explore" onClick={()=>CategoryProducts(title,deals)}>View More<span class="icon-right after"></span></button>
 
               </Col>
@@ -229,6 +229,7 @@ function Deals({deals}) {
                 ];
                 return(
                 <MDBCard className="categoryproductscard" >
+                  <div className="cardimg">
                   <MDBCardImage className="cardimage" src={index.productImage1} alt='...' position='top' />
                   {
                     (index.productImage1!==null && index.productImage2!==null && index.productImage3!==null)?
@@ -259,7 +260,7 @@ function Deals({deals}) {
 
 
                   }
-                  
+                  </div>
                   
                   {
                     (localStorage.getItem("wishlistproduct") != null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
