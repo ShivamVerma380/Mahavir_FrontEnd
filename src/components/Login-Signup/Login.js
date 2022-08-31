@@ -14,6 +14,7 @@ import OtpInput from "react-otp-input";
 import Footer from "../Footer/Footer";
 import {setCookie,getCookie} from '../Cookies'
 import url from "../../Uri";
+import { toast } from "react-toastify";
 
 const axios = require('axios');
 
@@ -117,6 +118,7 @@ function Login() {
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
     const homepage = () => {
+        
         setLoginActive(true);
         let tokenn = localStorage.getItem("jwtToken");
 
@@ -354,10 +356,7 @@ function Login() {
                 "Content-Type": "multipart/form-data"
                 
             };
-            var form_data_body={
-                "password": newpassword
-            }
-            axios.post(url+'/updatePassword',form_data_body,{headers})
+            axios.post(url+'/updatePassword/'+newpassword,{headers})
             .then(function (response) {
                     if (response.status == 200) {
                         console.log("Password Updated successfully");
