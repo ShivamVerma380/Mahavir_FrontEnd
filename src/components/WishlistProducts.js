@@ -8,6 +8,7 @@ import {getCookie, setCookie} from "./Cookies";
 import Footer from "./Footer/Footer";
 import url from "../Uri";
 import './Wishlist.css';
+import { toast, ToastContainer } from "react-toastify";
 
 const WishlistProducts = () => {
   
@@ -33,7 +34,7 @@ const WishlistProducts = () => {
       if(i!=""){
         if(i.split("=")[0]===index.modelNumber){
           flag = true;
-          alert("Item is already present in cart")
+          toast.warn("Item is already present in cart")
         }
       }
     })
@@ -41,10 +42,10 @@ const WishlistProducts = () => {
     //   alert("Item is already present in cart")
     // }
     if(!flag){
-      console.log("adddd" + index);
+      // console.log("adddd" + index);
       cart.push(index.modelNumber+"=1");
       setCookie("CartModels", cart, 20);
-      console.log("Cart Models",cart)
+      // console.log("Cart Models",cart)
       navigate("/cart")
       // alert("Added to cart" + model);
     }
@@ -80,9 +81,9 @@ const WishlistProducts = () => {
           "Authorization": "Bearer "+token
         }
       }).then(function (response) {
-        console.log("Response", response);
+        // console.log("Response", response);
         if (response.status == 200) {
-          console.log("Wishlist response", response.data);
+          // console.log("Wishlist response", response.data);
           setWish([...response.data].reverse()); 
           setIsWishlistFetched(true);
 
@@ -133,7 +134,7 @@ const WishlistProducts = () => {
     
 
   })
-  console.log("Wish ", wish);
+  // console.log("Wish ", wish);
 
   const continueShoppingHandler=()=> {
     navigate("/")
@@ -181,8 +182,8 @@ const WishlistProducts = () => {
       // }
     ).then(function (response) {
       if (response.status == 200) {
-        console.log("Deleted successfully");
-        console.log(response.data)
+        // console.log("Deleted successfully");
+        // console.log(response.data)
         // setRemoveClicked(true)
         
         window.location.reload();
@@ -201,6 +202,7 @@ const WishlistProducts = () => {
 
   return (
     <div>
+      <ToastContainer position="top-center" />
       <body style={{background:"whitesmoke"}}>
       <Header />
 
