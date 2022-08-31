@@ -13,6 +13,7 @@ import '../../Shopping-Cart/Cart.css';
 import 'typeface-roboto';
 import "./BuyNowCheckout.css";
 import url from '../../../Uri';
+import Footer from '../../Footer/Footer';
 
 
 function BuyNowSummary(){
@@ -234,7 +235,9 @@ function BuyNowSummary(){
             
             </div>
       </div>
-      {/* <Footer/> */}
+      
+      <Footer />
+      
       </>
         );
 
