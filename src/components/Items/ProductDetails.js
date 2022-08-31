@@ -347,7 +347,9 @@ function ProductDetails() {
     console.log("Product", product);
     localStorage.setItem("buyProduct",JSON.stringify(product));
     localStorage.setItem("type", "buyNow");
-    setCookie("models",product.modelNumber+"=1");
+    var arr = [];
+    arr.push(product.modelNumber+"=1");
+    setCookie("models",arr,20);
     navigate("/checkout")
   }
   else

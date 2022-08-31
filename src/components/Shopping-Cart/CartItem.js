@@ -15,7 +15,7 @@ const CartItem = ({item,quantity}) => {
     var cartmodelnums=new Array();
     
     console.log("quantity",item.modelNumber,":",quantity)
-    cartmodelnums=getCookie("CartModels").split(',');
+    cartmodelnums=getCookie("models").split(',');
 
     function removefromcart(){
         console.log("Remove clicked")
@@ -35,7 +35,7 @@ const CartItem = ({item,quantity}) => {
             }
         })
         console.log("arr remove item",arr)
-        setCookie("CartModels",arr,20);
+        setCookie("models",arr,20);
         window.location.reload();
 
        
@@ -91,7 +91,7 @@ const CartItem = ({item,quantity}) => {
                                                     // if(localStorage.getItem("CartModels")!=null){
                                                     //     arr = localStorage.getItem("CartProducts").split(',');
                                                     // }
-                                                    arr = getCookie("CartModels").split(',');
+                                                    arr = getCookie("models").split(',');
 
                                                     console.log("arr",arr)
                                                     var arr1=[]
@@ -105,7 +105,7 @@ const CartItem = ({item,quantity}) => {
                                                         }
                                                         
                                                     })
-                                                    setCookie("CartModels",arr1,20);
+                                                    setCookie("models",arr1,20);
                                                     // localStorage.setItem("CartProducts",arr)
                                                     console.log("CartModels",arr1)
                                                     window.location.reload()
