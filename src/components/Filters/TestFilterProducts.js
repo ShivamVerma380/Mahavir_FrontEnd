@@ -89,7 +89,7 @@ function TestFilterProducts(){
                     var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
                     // var priceArr=[]
                     response.data.map((index,pos)=>{
-                        console.log("In selected products map...")
+                        // console.log("In selected products map...")
                         if(minPrice>parseInt(index.offerPrice)){
                             minPrice = index.offerPrice
                         }
@@ -109,7 +109,7 @@ function TestFilterProducts(){
                     var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
                     // var priceArr=[]
                     selectedProducts.map((index,pos)=>{
-                        console.log("In selected products map...")
+                        // console.log("In selected products map...")
                         if(minPrice>parseInt(index.offerPrice)){
                             minPrice = index.offerPrice
                         }
@@ -121,7 +121,7 @@ function TestFilterProducts(){
                     SetProducts(response.data);
                 }
                 
-                console.log("min ",minPrice,"  max",maxPrice);
+                // console.log("min ",minPrice,"  max",maxPrice);
                 SetMin(minPrice);
                 SetMax(maxPrice);
                 SetValue([minPrice,maxPrice]);
@@ -155,7 +155,7 @@ function TestFilterProducts(){
                     for(var key in response.data.filterCriterias){
                         keySet.push(key);
                     }
-                    console.log("keySet",keySet)
+                    // console.log("keySet",keySet)
                     if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
                         // filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
                         SetFilterSelected([localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory")])
@@ -200,7 +200,7 @@ function TestFilterProducts(){
     function handleAddToCompare(index){
         
         var element = document.getElementById(index.modelNumber);
-        console.log("element",element);
+        // console.log("element",element);
         
         
         var length=0;
@@ -215,7 +215,7 @@ function TestFilterProducts(){
         //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
         // }
         // var length = comparemodels.length;
-        console.log("Length...",length)
+        // console.log("Length...",length)
         
         
         if(element.checked){
@@ -223,36 +223,36 @@ function TestFilterProducts(){
             if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory") !=null){
                 flag = false;
                 document.getElementById(index.modelNumber).checked = false;
-                alert("Please select products from same category");
+                toast.warn(<b>Please select products from same category</b>);
             }
             if(length==4){
                 flag = false;
                 document.getElementById(index.modelNumber).checked=false;
-                alert("You can compare only 4 products");
+                toast.warn(<b>You can compare only 4 products</b>);
             }
             if(flag){
-                console.log("in flag");
-                console.log("adddd"+index.modelNumber);
+                // console.log("in flag");
+                // console.log("adddd"+index.modelNumber);
                 comparemodels.push(index.modelNumber);
                 setCookie("addToCompare",comparemodels,20);
                 setLen(getCookie("addToCompare").split(',').length)
-                console.log(comparemodels);
-                console.log("cookie",getCookie("addToCompare").split(',').length)
-                console.log("checked "+index.modelNumber);
+                // console.log(comparemodels);
+                // console.log("cookie",getCookie("addToCompare").split(',').length)
+                // console.log("checked "+index.modelNumber);
             }
         }
         else {
           for (var i = 0; i < comparemodels.length; i++) {
             if (comparemodels[i] === index.modelNumber) {
               comparemodels.splice(i, 1);
-                console.log(comparemodels);
+                // console.log(comparemodels);
                 setCookie("addToCompare",comparemodels,20);
                 setLen(getCookie("addToCompare").split(',').length)
                 // window.location.reload();
                 break;
             }
         }
-          console.log("unchecked "+index.modelNumber);
+        //   console.log("unchecked "+index.modelNumber);
 
         }
 
@@ -287,7 +287,7 @@ function TestFilterProducts(){
     }
       
       localStorage.setItem("comparecount",change)
-      console.log("Get",localStorage.getItem("comparecount"))
+    //   console.log("Get",localStorage.getItem("comparecount"))
 
       function WishlistHandler(index) {
         // alert("Item added successfully to wishlist");
@@ -314,7 +314,7 @@ function TestFilterProducts(){
         //     navigate('/')
     
         // }
-        console.log("Wishlist clicked")
+        // console.log("Wishlist clicked")
         if(getCookie("isLoggedIn")!=='true'){
           navigate("/login")
         }else{
@@ -339,16 +339,18 @@ function TestFilterProducts(){
             var arr = localStorage.getItem("Wishlist").split(",")
             arr.push(index.modelNumber)
             localStorage.setItem("Wishlist", arr)
+            
             window.location.reload();
-            console.log(response.data)
+            toast.success(<b>Item Added to Wishlist successfully</b>)
+            // console.log(response.data)
             // navigate("/");
           }
           else{
-            alert("Item already present in wishlist")
-            console.log(response.data)
+            toast.warn(<b>Item already present in wishlist</b>)
+            // console.log(response.data)
           }
         }).catch(function (error) {
-            alert("Item already present in wishlist")
+            toast.warn(<b>Item already present in wishlist</b>)
             console.log("Error", error);
           
         })
@@ -373,20 +375,20 @@ function TestFilterProducts(){
         // alert("hi")
         var element = document.getElementById(cat)
         if(element.checked ==true){
-            console.log(cat," is checked")
+            // console.log(cat," is checked")
             localStorage.setItem("Category",cat);
             localStorage.removeItem("SubCategory")
             localStorage.removeItem("SubSubCategory")
             window.location.reload()
         }else{
-            console.log(cat," is not checked")
+            // console.log(cat," is not checked")
         }
     }
 
     const handleFormCheck2=(index,f)=>{
         // alert("hi")
         
-        console.log("index:"+index+"    f:"+f)
+        // console.log("index:"+index+"    f:"+f)
 
         var element = document.getElementById(f+f);
         
@@ -411,7 +413,7 @@ function TestFilterProducts(){
             SetFilterSelected(arr);
             var productsArray = [];
             // console.log("products",products)
-            console.log("filterSelected",filterselected);
+            // console.log("filterSelected",filterselected);
 
             filterselected.map(filter=>{
                 var v = filter.split("-");
@@ -425,7 +427,7 @@ function TestFilterProducts(){
 
                     }
                 })
-                console.log("val "+vals);
+                // console.log("val "+vals);
             })
             products.map(index=>{
                 var flag = true;
@@ -454,7 +456,7 @@ function TestFilterProducts(){
             })
 
             
-            console.log("values",vals)
+            // console.log("values",vals)
 
             // console.log("Products Array",productsArray.length);
             
@@ -485,7 +487,7 @@ function TestFilterProducts(){
                 }
             })
 
-            console.log("Array:",arr)
+            // console.log("Array:",arr)
 
             // if(arr.length==0){
             //     console.log("In if")
@@ -495,8 +497,8 @@ function TestFilterProducts(){
             // }
             SetFilterSelected(arr);
             var productsArray = [];
-            console.log("products",products)
-            console.log("filterSelected",filterselected);
+            // console.log("products",products)
+            // console.log("filterSelected",filterselected);
             
             products.map(index=>{
                 var flag = true;
@@ -536,7 +538,7 @@ function TestFilterProducts(){
                 })
                 // alert("val "+vals);
             })
-            console.log("Products Array",productsArray.length);
+            // console.log("Products Array",productsArray.length);
             
             SetSelectedProducts(productsArray);
         }
@@ -546,7 +548,7 @@ function TestFilterProducts(){
     const handleFormCheck=(index,f)=>{
         // alert("hi")
         
-        console.log("index:"+index+"    f:"+f)
+        // console.log("index:"+index+"    f:"+f)
 
         var element = document.getElementById(f);
         
@@ -568,7 +570,7 @@ function TestFilterProducts(){
             SetFilterSelected(arr);
             var productsArray = [];
             // console.log("products",products)
-            console.log("filterSelected",filterselected);
+            // console.log("filterSelected",filterselected);
             products.map(index=>{
                 var flag = true;
                 filterselected.map(a=>{
@@ -599,7 +601,7 @@ function TestFilterProducts(){
         }else{
             // alert("here")
 
-            console.log("Filter selected",filterselected)
+            // console.log("Filter selected",filterselected)
             var arr = filterselected;
             arr.map((i,pos)=>{
                 var pair = i.split("-");
@@ -632,8 +634,8 @@ function TestFilterProducts(){
             // }
             SetFilterSelected(arr);
             var productsArray = [];
-            console.log("products",products)
-            console.log("filterSelected",filterselected);
+            // console.log("products",products)
+            // console.log("filterSelected",filterselected);
             products.map(index=>{
                 var flag = true;
                 filterselected.map(a=>{
@@ -657,7 +659,7 @@ function TestFilterProducts(){
                     productsArray.push(index);
                 }
             })
-            console.log("Products Array",productsArray.length);
+            // console.log("Products Array",productsArray.length);
             
             SetSelectedProducts(productsArray);
         }
@@ -672,10 +674,10 @@ function TestFilterProducts(){
             var flag = true;
             filterselected.map(a=>{
                 var pair = a.split("-");
-                console.log("pair",pair)
+                // console.log("pair",pair)
                 var key = pair[0];
                 var values = pair[1].split(";");
-                console.log("values",values)
+                // console.log("values",values)
                 var valueflag= false;
                 values.map(v=>{
                     console.log(index.filtercriterias[key])
@@ -693,74 +695,74 @@ function TestFilterProducts(){
         })
         SetSelectedProducts(arr)
 
-        console.log(newValue)
+        // console.log(newValue)
     };
     
   
     function SortByLowPrice(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         SetSelectedProducts([]);
         arr = selectedProducts;
         console.log("Before sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexOfferPrice",index.offerPrice)
+            // console.log("indexOfferPrice",index.offerPrice)
         })
         arr.sort((a,b)=>a.offerPrice-b.offerPrice);
         console.log("After sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexOfferPrice--",index.offerPrice)
+            // console.log("indexOfferPrice--",index.offerPrice)
         })
         SetSelectedProducts([...arr])
     }
     
     function SortByHighPrice(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting",selectedProducts)
+        // console.log("Before sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexOfferPrice",index.offerPrice)
+            // console.log("indexOfferPrice",index.offerPrice)
         })
         arr.sort((a,b)=>b.offerPrice-a.offerPrice);
-        console.log("After sorting",selectedProducts)
+        // console.log("After sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexOfferPrice--",index.offerPrice)
+            // console.log("indexOfferPrice--",index.offerPrice)
         })
         SetSelectedProducts([...arr])
     }
 
     function SortByTopRated(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting",selectedProducts)
+        // console.log("Before sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexAverageRating",index.averageRating)
+            // console.log("indexAverageRating",index.averageRating)
         })
         arr.sort((a,b)=>b.averageRating-a.averageRating);
-        console.log("After sorting",selectedProducts)
+        // console.log("After sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
+            // console.log("indexAverageRating--",index.averageRating)
         })
         SetSelectedProducts([...arr])
     }
 
     function SortByDiscount(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting",selectedProducts)
+        // console.log("Before sorting",selectedProducts)
         arr.map(index=>{
-            console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
+            // console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
         })
         arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
-        console.log("After sorting",selectedProducts)
+        // console.log("After sorting",selectedProducts)
         arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
+            // console.log("indexAverageRating--",index.averageRating)
         })
         SetSelectedProducts([...arr])
     }
@@ -1050,7 +1052,7 @@ function TestFilterProducts(){
             </div>
             </div> */}
                                         <Col md={2} className="imagecol">
-                                            <Image style={{border:'0'}} thumbnail="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            <Image style={{border:'0', cursor:"pointer"}} thumbnail="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
                                             {/* <br></br>
                                             <p>{index.modelNumber}</p> */}
                                         </Col>

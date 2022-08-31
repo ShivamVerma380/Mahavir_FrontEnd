@@ -49,10 +49,10 @@ function CategoryProductsSwiper({ cattitle }) {
     
     if (!isProductsFetched) {
       axios.get(url+"/get-products-by-category/" + cattitle).then(function (response) { 
-        console.log(response);
+        // console.log(response);
         if (response.status == 200) {
           setProducts(response.data);
-          console.log("Products By Cat: ", response.data);
+          // console.log("Products By Cat: ", response.data);
           setIsProductsFetched(true);
         }
 
@@ -85,15 +85,15 @@ function CategoryProductsSwiper({ cattitle }) {
 
   function callProductDetails(index) {
     //alert(index);
-    console.log("Index",index);
+    // console.log("Index",index);
     localStorage.setItem("productId",index.productId);
     localStorage.setItem("productSelected", index.modelNumber);
     localStorage.setItem("Category",index.category)
     localStorage.setItem("SubCategory","Brand")
     localStorage.setItem("SubSubCategory",index.subCategoryMap.Brand)
-    console.log("Cat",localStorage.getItem("Category"))
-    console.log("SubCat",localStorage.getItem("SubCategory"))
-    console.log("SubSubCat",localStorage.getItem("SubSubCategory"))
+    // console.log("Cat",localStorage.getItem("Category"))
+    // console.log("SubCat",localStorage.getItem("SubCategory"))
+    // console.log("SubSubCat",localStorage.getItem("SubSubCategory"))
     // localStorage.removeItem("SubCategory")
     // localStorage.removeItem("SubSubCategory")
     // console.log("Product Selected",localStorage.getItem("productSelected"))
@@ -125,34 +125,34 @@ function CategoryProductsSwiper({ cattitle }) {
 
   function handleAddToCompare(index) {
     var element = document.getElementById(index.modelNumber);
-    console.log("Element: ", element)
+    // console.log("Element: ", element)
     if (element.checked) {
 
-      console.log('✅ Checkbox is checked');
+      // console.log('✅ Checkbox is checked');
       setChange(change + 1)
 
 
 
     } else {
-      console.log('⛔️ Checkbox is NOT checked');
+      // console.log('⛔️ Checkbox is NOT checked');
       setChange(change - 1)
     }
     setisAddCompareClicked(current => !current);
-    console.log("Current: ", isAddCompareClicked)
+    // console.log("Current: ", isAddCompareClicked)
 
     // alert("Added To Compare");
     localStorage.setItem("modeltocompare", index.modelNumber);
 
   }
-  console.log("Model: ", localStorage.getItem("modeltocompare"))
+  // console.log("Model: ", localStorage.getItem("modeltocompare"))
 
   localStorage.setItem("comparecount", change)
   setCookie("countcompare", change, 20);
 
-  console.log("Get", localStorage.getItem("comparecount"))
+  // console.log("Get", localStorage.getItem("comparecount"))
 
   function RemoveWishlist(index){
-    console.log("Wishlist",localStorage.getItem("Wishlist"))
+    // console.log("Wishlist",localStorage.getItem("Wishlist"))
     var formdata = {
       "modelNumber": index.modelNumber
 
@@ -164,8 +164,8 @@ function CategoryProductsSwiper({ cattitle }) {
       }
     }).then(function (response) {
       if (response.status == 200) {
-        console.log("Removed from wishlist successfully");
-        console.log(response.data)
+        // console.log("Removed from wishlist successfully");
+        // console.log(response.data)
         // var arr = localStorage. 
         var arr = localStorage.getItem("Wishlist").split(",")
         var finalWishlist=[];
@@ -234,15 +234,16 @@ function CategoryProductsSwiper({ cattitle }) {
         arr.push(index.modelNumber)
         localStorage.setItem("Wishlist", arr)
         window.location.reload();
-        console.log(response.data)
+        toast.success(<b>Item Added to Wishlist successfully</b>)
+        // console.log(response.data)
         // navigate("/");
       }
       else{
-        alert("Item already present in wishlist")
+        toast.warn(<b>Item already present in wishlist</b>)
         console.log(response.data)
       }
     }).catch(function (error) {
-        alert("Item already present in wishlist")
+        toast.warn(<b>Item already present in wishlist</b>)
         console.log("Error", error);
       
     })
@@ -258,6 +259,7 @@ function CategoryProductsSwiper({ cattitle }) {
     (isProductsFetched) ?
       (
         <>
+        <ToastContainer position="top-center"/>
           <div className="categoryproductswiper">
 
 

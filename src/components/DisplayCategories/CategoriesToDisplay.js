@@ -21,16 +21,18 @@ function CategoriesToDisplay({ categoryDetail }) {
   </div>
 
   function handleSubSubCategoriesClick(category, subCategory, subSubCategory, modelNumber) {
-    alert(modelNumber);
+    // alert(modelNumber);
     localStorage.setItem("Category", category);
     localStorage.setItem("SubCategory", subCategory);
     localStorage.setItem("SubSubCategory", subSubCategory);
 
     localStorage.setItem("Model Number", modelNumber);
-    console.log("Cat",localStorage.getItem("Category"));
-    console.log("SubCat",localStorage.getItem("SubCategory"));
-    console.log("SubSubCat",localStorage.getItem("SubSubCategory"));
-    console.log(localStorage.getItem("Model Number"));
+    //.
+    // console.log("Cat",localStorage.getItem("Category"));
+    // console.log("SubCat",localStorage.getItem("SubCategory"));
+    // console.log("SubSubCat",localStorage.getItem("SubSubCategory"));
+    // console.log(localStorage.getItem("Model Number"));
+    //.
     navigate("/" + category + "/" + subCategory + "/" + subSubCategory);
   }
 

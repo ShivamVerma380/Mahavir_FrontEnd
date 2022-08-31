@@ -6,7 +6,7 @@ import { AiFillWindows } from "react-icons/ai";
 import "./Search.css";
 import url from "../../Uri";
 function Search(){
-    console.log("inside search");
+    // console.log("inside search");
     const[products,SetProducts] = useState([]);
     const[isProductsFetched,setIsProductsFetched] = useState(false);
 
@@ -35,29 +35,29 @@ function Search(){
     
       const handleOnSearch = (string, results) => {
 
-        console.log(string, results)
+        // console.log(string, results)
       }
     
       const handleOnHover = (result) => {
         // the item hovered
-        console.log(result.name)
+        // console.log(result.name)
 
       }
     
       const handleOnSelect = (item) => {
         // the item selected
-        console.log(item.name)
+        // console.log(item.name)
         localStorage.setItem("productSelected",item.id);
         localStorage.setItem("Category",item.category);
         localStorage.setItem("SubCategory",item.subCategory);
         localStorage.setItem("SubSubCategory",item.subSubCategory);
-        console.log("Sub: ",localStorage.getItem("SubCategory"))
+        // console.log("Sub: ",localStorage.getItem("SubCategory"))
         if(item.type==="category"){
           localStorage.setItem("Category",item.name);
           localStorage.removeItem("SubCategory")
           localStorage.removeItem("SubSubCategory")
           var arr = window.location.href.split("/")
-          console.log("Arr: ",arr)
+          // console.log("Arr: ",arr)
           if(arr.length==4) {
             navigate("/categoryProductsall");
             window.location.reload()
@@ -72,7 +72,7 @@ function Search(){
           // alert(item.name);
           //navigate to Select Category Products
           // navigate("")
-          console.log("window.location.href",window.location.href);
+          // console.log("window.location.href",window.location.href);
           var str = window.location.href.slice(18);
           var arr = str.split("/");
 
@@ -107,7 +107,7 @@ function Search(){
       }
     
       const handleOnFocus = () => {
-        console.log('Focused')
+        // console.log('Focused')
       }
     
       const formatResult = (item) => {

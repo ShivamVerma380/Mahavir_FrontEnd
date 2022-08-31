@@ -19,10 +19,10 @@ function Slideshow({offerPosters}){
     
     const handleOfferPosterOnClick=(index)=>{
       // alert("Offer Poster clicked");
-      console.log("Index",index)
+      // console.log("Index",index)
       // console.log(modelNumbers);
       localStorage.setItem("offerPostersModelNumber",index.modelNumbers)
-      console.log(localStorage.getItem("offerPostersModelNumber"))
+      // console.log(localStorage.getItem("offerPostersModelNumber"))
       navigate("/offers")
     }
 
@@ -42,7 +42,7 @@ function Slideshow({offerPosters}){
     function topFunction() {
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        console.log("In top Function")
+        // console.log("In top Function")
         // document.body.scrollIntoView();
         // window.location.reload();
     }
@@ -51,7 +51,7 @@ function Slideshow({offerPosters}){
     
       <div >
         <button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></button>
-        <Carousel className="offerslide">
+        <Carousel style={{cursor:"pointer"}} className="offerslide">
         {
             offerPoster= offerPosters.map(index=>{
                 //let Base64string = Buffer.from(index.image.data,"base64").toString();

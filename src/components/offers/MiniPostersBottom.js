@@ -5,7 +5,7 @@ import MiniPosterHelper from "./MiniPosterHelper";
 import './MiniPoster.css';
 import ProductRating from "../Items/ProductRating";
 const MiniPostersBottom = ({MiniPosters}) => {
-    console.log("MinPosters: ",MiniPosters)
+    // console.log("MinPosters: ",MiniPosters)
     // const element = MiniPosters.map((product,index) =>
     // <div key={index}> {/*refer you key in within a div*/}
     //   <Col md={3}>
@@ -27,7 +27,7 @@ const MiniPostersBottom = ({MiniPosters}) => {
 
       // console.log(modelNumbers);
       localStorage.setItem("offerPostersModelNumber",product.modelNumbers)
-      console.log(localStorage.getItem("offerPostersModelNumber"))
+      // console.log(localStorage.getItem("offerPostersModelNumber"))
       navigate("/offers")
     }
     

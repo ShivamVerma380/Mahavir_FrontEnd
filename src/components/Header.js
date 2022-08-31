@@ -38,13 +38,13 @@ const Header = ({productList}) => {
   useEffect(()=>{
     if(!isCategoryDisplayFetched){
     axios.get(url+"/get-categories").then(function(response){
-      console.log(response);
+      // console.log(response);
       if(response.status==200){
           setcategoryDisplay(response.data);
           setIsCategoryDisplayFetched(true);
-          console.log(response.data);
+          // console.log(response.data);
       }
-      console.log(response.data);
+      // console.log(response.data);
     }).catch(function(error){
         console.log(error);
     })
@@ -89,8 +89,8 @@ const Header = ({productList}) => {
 
     var modelnums=new Array();
     modelnums=getCookie("CartModels").split(',');
-    console.log("Model Nums Cookie: ",modelnums)
-    console.log("Length",modelnums.length)
+    // console.log("Model Nums Cookie: ",modelnums)
+    // console.log("Length",modelnums.length)
     // var loginStatus = localStorage.getItem("isLoggedIn");
     // var flag= false;
     // if(localStorage.getItem("isLoggedIn")==="true"){
@@ -107,7 +107,7 @@ const Header = ({productList}) => {
     //const [isLogoutClicked,setIsLogoutClicked] = React.useState(true);
     const EmailVerification = () => {
         navigate("/email-verification");
-        console.log("In email verification");
+        // console.log("In email verification");
 
         
           
@@ -145,7 +145,7 @@ const Header = ({productList}) => {
       }
 
     const handleLogout=()=>{
-        console.log("logout clicked");
+        // console.log("logout clicked");
         localStorage.removeItem("Wishlist");
         setCookie("jwtToken",false,20)
         setCookie("isLoggedIn",false,20)
@@ -157,7 +157,7 @@ const Header = ({productList}) => {
     }
 
     const handleWishlist=()=>{
-        alert("Wishlist clicked")
+        // alert("Wishlist clicked")
         navigate("/wishlistproducts")
     }
 
@@ -187,7 +187,7 @@ const Header = ({productList}) => {
           {/* <p style={{color:"white",fontSize:"16px",fontFamily:'typeface-roboto',marginLeft:"30px",marginTop:"3px"}} ><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store</p> */}
           </Col>
           <Col md={1} >
-            <p className="wishlist_" style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
+            <p className="wishlist_" style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto",cursor:"pointer"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
           </Col>
           <Col md={1}>
             {/* <Button class="copyright" onClick={handleDevelopersPage}>Developer Team</Button> */}

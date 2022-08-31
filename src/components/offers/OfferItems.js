@@ -55,7 +55,7 @@ function OfferItems() {
         if (!isProductsFetched && !isCategoriesFetched) {
             var modelNumbers = localStorage.getItem("offerPostersModelNumber");
             var modelNumbersArray = modelNumbers.split(",");
-            console.log("modelNumbersArray: ", modelNumbersArray)
+            // console.log("modelNumbersArray: ", modelNumbersArray)
             var urls = []
             var arr= new Set();
             modelNumbersArray.map(index => {
@@ -63,7 +63,7 @@ function OfferItems() {
                     urls.push(axios.get(url+"/get-products/" + index));
             })
             axios.all(urls).then(axios.spread((...response) => {
-                console.log("response: ", response)
+                // console.log("response: ", response)
                 var i=0;
                 response.map(index => {
                     productsArray.push(index.data);
@@ -85,7 +85,7 @@ function OfferItems() {
                 axios.get(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"))
                     .then(function(response){   
                         if(response.status==200){
-                            console.log("Filters fetched",response.data)
+                            // console.log("Filters fetched",response.data)
                             for(var key in response.data.filterCriterias){
                                 keySet.push(key);
                             }
@@ -93,7 +93,7 @@ function OfferItems() {
                             SetIsFiltersFetched(true);
                         }
                     }).catch(function(error){
-                        console.log(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"),error);
+                        // console.log(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"),error);
                     })
                 setFilterProducts(filterArr);
                 setProduct(productsArray);
@@ -102,7 +102,7 @@ function OfferItems() {
                 setIsProductsFetched(true);
             }
             )).catch(function (error) {
-                console.log("error", error);
+                // console.log("error", error);
             }
             )
 
@@ -119,13 +119,13 @@ function OfferItems() {
 
     const addtocart=(model)=>{
         if(cart.includes(model)){
-            alert("Item is already present in cart")
+            toast.warn("Item is already present in cart")
         }
         else{
             console.log("adddd"+model);
             cart.push(model);
             setCookie("CartModels",cart,20);
-            alert("Added to cart"+model);
+            toast.success("Added to cart"+model);
         }  
     }  
 
@@ -146,7 +146,7 @@ function OfferItems() {
         //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
         // }
         // var length = comparemodels.length;
-        console.log("Length...",length)
+        // console.log("Length...",length)
         
         
         if(element.checked){
@@ -154,34 +154,34 @@ function OfferItems() {
             if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
                 flag = false;
                 document.getElementById(index.modelNumber).checked = false;
-                alert("Please select products from same category");
+                toast.warn(<b>Please select products from same category</b>);
             }
             if(length==4){
                 flag = false;
                 document.getElementById(index.modelNumber).checked=false;
-                alert("You can compare only 4 products");
+                toast.warn(<b>You can compare only 4 products</b>);
             }
             if(flag){
-                console.log("adddd"+index.modelNumber);
+                // console.log("adddd"+index.modelNumber);
                 comparemodels.push(index.modelNumber);
                 setCookie("addToCompare",comparemodels,20);
                 setLen(getCookie("addToCompare").split(',').length)
-                console.log(comparemodels);
-                console.log("checked "+index.modelNumber);
+                // console.log(comparemodels);
+                // console.log("checked "+index.modelNumber);
             }
         }
         else {
           for (var i = 0; i < comparemodels.length; i++) {
             if (comparemodels[i] === index.modelNumber) {
               comparemodels.splice(i, 1);
-                console.log(comparemodels);
+                // console.log(comparemodels);
                 setCookie("addToCompare",comparemodels,20);
                 setLen(getCookie("addToCompare").split(',').length)
                 // window.location.reload();
                 break;
             }
         }
-          console.log("unchecked "+index.modelNumber);
+        //   console.log("unchecked "+index.modelNumber);
 
         }
 
@@ -216,13 +216,13 @@ function OfferItems() {
     }
       
       localStorage.setItem("comparecount",change)
-      console.log("Get",localStorage.getItem("comparecount"))
+    //   console.log("Get",localStorage.getItem("comparecount"))
 
     function callProductDetails(index) {
         //alert(index);
-        console.log("Index", index);
+        // console.log("Index", index);
         localStorage.setItem("productSelected", index.modelNumber);
-        console.log("Product Selected", localStorage.getItem("productSelected"))
+        // console.log("Product Selected", localStorage.getItem("productSelected"))
         navigate("/productDetails")
     }
 
@@ -251,7 +251,7 @@ function OfferItems() {
         //     navigate('/')
     
         // }
-        console.log("Wishlist clicked")
+        // console.log("Wishlist clicked")
         if(getCookie("isLoggedIn")!=='true'){
           navigate("/login")
         }else{
@@ -277,15 +277,16 @@ function OfferItems() {
             arr.push(index.modelNumber)
             localStorage.setItem("Wishlist", arr)
             window.location.reload();
-            console.log(response.data)
+            toast.success(<b>Item Added to Wishlist successfully</b>)
+            // console.log(response.data)
             // navigate("/");
           }
           else{
-            alert("Item already present in wishlist")
-            console.log(response.data)
+            toast.warn(<b>Item already present in wishlist</b>)
+            // console.log(response.data)
           }
         }).catch(function (error) {
-            alert("Item already present in wishlist")
+            toast.warn(<b>Item already present in wishlist</b>)
             console.log("Error", error);
           
         })
@@ -306,7 +307,7 @@ function OfferItems() {
             axios.get(url+"/filtercriterias/"+c)
                 .then(function(response){   
                     if(response.status==200){
-                        console.log("Filters fetched",response.data)
+                        // console.log("Filters fetched",response.data)
                         var arr=[]
                         for(var key in response.data.filterCriterias){
                             arr.push(key);
@@ -323,7 +324,7 @@ function OfferItems() {
                         SetIsFiltersFetched(true);
                     }
                 }).catch(function(error){
-                    console.log(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"),error);
+                    // console.log(url+"/filtercriterias/"+localStorage.getItem("CategoryOffers"),error);
                 })
             // console.log("Checked ",c)
             // products.map(index=>{
@@ -453,12 +454,12 @@ function OfferItems() {
     //     }
     // }
     const handleFormCheck=(index,f)=>{
-        console.log("index:",index,"    f:",f)
+        // console.log("index:",index,"    f:",f)
 
         var element = document.getElementById(f);
 
         if(element.checked){
-            console.log("Check")
+            // console.log("Check")
             var  arr= filterselected;
             var flag = true;
             arr.map((i,pos)=>{
@@ -476,12 +477,12 @@ function OfferItems() {
 
             // SetFilterSelected(arr);
 
-            console.log("arr",arr);
+            // console.log("arr",arr);
             SetFilterSelected([...arr]);
 
             var productsArray = [];
             // console.log("products",products)
-            console.log("filterSelected",filterselected);
+            // console.log("filterSelected",filterselected);
             products.map(index=>{
                 var flag = true;
                 filterselected.map(a=>{
@@ -489,10 +490,10 @@ function OfferItems() {
                     // console.log("pair",pair)
                     var key = pair[0];
                     var values = pair[1].split(";");
-                    console.log("values",values)
+                    // console.log("values",values)
                     var valueflag= false;
                     values.map(v=>{
-                        console.log(index.filtercriterias[key])
+                        // console.log(index.filtercriterias[key])
                         if(index.filtercriterias[key].includes(v) ){
                             valueflag=true;  
                         }
@@ -510,7 +511,7 @@ function OfferItems() {
             setFilterProducts(productsArray);
 
         }else{
-            console.log("Uncheck")
+            // console.log("Uncheck")
             // var arr = filterselected;
             var arr = filterselected;
             arr.map((i,pos)=>{
@@ -533,12 +534,12 @@ function OfferItems() {
                     }
                 }
                 })
-            console.log("Arr",arr)
+            // console.log("Arr",arr)
             SetFilterSelected([...arr])
             
             var productsArray = [];
-            console.log("products",products)
-            console.log("filterSelected",filterselected);
+            // console.log("products",products)
+            // console.log("filterSelected",filterselected);
             products.map(index=>{
                 var flag = true;
                 filterselected.map(a=>{
@@ -549,7 +550,7 @@ function OfferItems() {
                     // console.log("values",values)
                     var valueflag= false;
                     values.map(v=>{
-                        console.log(index.filtercriterias[key])
+                        // console.log(index.filtercriterias[key])
                         if(index.filtercriterias[key]===v && index.category===localStorage.getItem("CategoryOffers")){
                             valueflag=true;  
                         }
@@ -562,7 +563,7 @@ function OfferItems() {
                     productsArray.push(index);
                 }
             })
-            console.log("Products Array",productsArray.length);
+            // console.log("Products Array",productsArray.length);
             
             setFilterProducts(productsArray);
         }
@@ -570,69 +571,69 @@ function OfferItems() {
     }
 
     function SortByLowPrice(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setFilterProducts([]);
         arr = filterProducts;
-        console.log("Before sorting",filterProducts)
+        // console.log("Before sorting",filterProducts)
         arr.map(index=>{
-            console.log("indexOfferPrice",index.offerPrice)
+            // console.log("indexOfferPrice",index.offerPrice)
         })
         arr.sort((a,b)=>a.offerPrice-b.offerPrice);
-        console.log("After sorting",filterProducts)
+        // console.log("After sorting",filterProducts)
         arr.map(index=>{
-            console.log("indexOfferPrice--",index.offerPrice)
+            // console.log("indexOfferPrice--",index.offerPrice)
         })
         setFilterProducts([...arr])
     }
     
     function SortByHighPrice(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setFilterProducts([]);
         arr = filterProducts;
-        console.log("Before sorting",filterProducts)
+        // console.log("Before sorting",filterProducts)
         arr.map(index=>{
-            console.log("indexOfferPrice",index.offerPrice)
+            // console.log("indexOfferPrice",index.offerPrice)
         })
         arr.sort((a,b)=>b.offerPrice-a.offerPrice);
-        console.log("After sorting",filterProducts)
+        // console.log("After sorting",filterProducts)
         arr.map(index=>{
-            console.log("indexOfferPrice--",index.offerPrice)
+            // console.log("indexOfferPrice--",index.offerPrice)
         })
         setFilterProducts([...arr])
     }
 
     function SortByTopRated(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setFilterProducts([]);
         arr = filterProducts;
-        console.log("Before sorting",filterProducts)
+        // console.log("Before sorting",filterProducts)
         arr.map(index=>{
-            console.log("indexAverageRating",index.averageRating)
+            // console.log("indexAverageRating",index.averageRating)
         })
         arr.sort((a,b)=>b.averageRating-a.averageRating);
-        console.log("After sorting",filterProducts)
+        // console.log("After sorting",filterProducts)
         arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
+            // console.log("indexAverageRating--",index.averageRating)
         })
         setFilterProducts([...arr])
     }
 
     function SortByDiscount(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setFilterProducts([]);
         arr = filterProducts;
-        console.log("Before sorting",filterProducts)
+        // console.log("Before sorting",filterProducts)
         arr.map(index=>{
-            console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
+            // console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
         })
         arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
-        console.log("After sorting",filterProducts)
+        // console.log("After sorting",filterProducts)
         arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
+            // console.log("indexAverageRating--",index.averageRating)
         })
         setFilterProducts([...arr])
     }
@@ -664,6 +665,7 @@ function OfferItems() {
 
     return (
         <>
+        <ToastContainer position="top-center"/>
         <body style={{background:"whitesmoke"}}>
         <Header/>
         
@@ -744,7 +746,7 @@ function OfferItems() {
             </div>
             </div> */}
                                         <Col md={2} className="imagecol">
-                                            <Image fluid="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                            <Image style={{cursor:"pointer"}} fluid="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
                                             {/* <br></br>
                                             <p>{index.modelNumber}</p> */}
                                         </Col>

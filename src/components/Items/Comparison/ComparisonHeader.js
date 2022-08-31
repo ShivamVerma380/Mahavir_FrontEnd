@@ -44,10 +44,10 @@ function ComparisonHeader({product}){
                         SetBrands(response.data);
                     }
                     SetIsBrandsFetched(true);
+                    console.log("Brands",Brands);
                 }).catch(function(error){
                     console.log("error");
                 })
-
         }
     })
    
@@ -128,12 +128,13 @@ function ComparisonHeader({product}){
                             <br></br>
                             {
                                 (isBrandsFetched)?(
+                                    
                                     <div>
                                     <NavDropdown title = {brand} id="brand">
                                         {
                                             Brands.map(index=>{
                                                 return(
-                                                    <NavItem onClick={()=>handleBrandClick(index.subSubCategoryName)}>{index.subSubCategoryName}</NavItem>
+                                                    <NavDropdown.Item onClick={()=>handleBrandClick(index.subSubCategoryName)}>{index.subSubCategoryName}</NavDropdown.Item>
                                                 );
                                             })
                                         }

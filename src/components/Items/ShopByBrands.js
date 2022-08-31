@@ -25,7 +25,7 @@ const ShopByBrands = () => {
       axios.get(url+"/excel/shopByBrands").then(
         function (response) {
           if (response.status == 200) {
-            console.log(response.data);
+            // console.log(response.data);
             setBrands(response.data);
             setIsBrandsFetched(true);
           }
@@ -68,13 +68,13 @@ const ShopByBrands = () => {
 
 
 
-    console.log("BrandName: ", localStorage.getItem("brandName"))
-    console.log("Brandlogo: ", localStorage.getItem("brandLogo"))
-    console.log("BrandCategories: ", localStorage.getItem("brandCategories"))
-    console.log("BrandOfferPosters: ", localStorage.getItem("brandOfferPosters"))
-    console.log("BrandVideoLink: ", localStorage.getItem("brandVideoLinks"))
+    // console.log("BrandName: ", localStorage.getItem("brandName"))
+    // console.log("Brandlogo: ", localStorage.getItem("brandLogo"))
+    // console.log("BrandCategories: ", localStorage.getItem("brandCategories"))
+    // console.log("BrandOfferPosters: ", localStorage.getItem("brandOfferPosters"))
+    // console.log("BrandVideoLink: ", localStorage.getItem("brandVideoLinks"))
 
-    console.log("On click")
+    // console.log("On click")
     navigate("/branddetails")
 
   }
@@ -110,7 +110,7 @@ const ShopByBrands = () => {
 
                     return (
                       <SwiperSlide>                     
-                            <img className="brandlogo" onClick={() => BrandClickHandler(index)} src={index.brandLogo} />                       
+                            <img className="brandlogo" style={{cursor:"pointer"}} onClick={() => BrandClickHandler(index)} src={index.brandLogo} />                       
                       </SwiperSlide>
                     )
                   })
