@@ -152,12 +152,17 @@ function CategoryProductsSwiper({ cattitle }) {
   // console.log("Get", localStorage.getItem("comparecount"))
 
   function RemoveWishlist(index){
+
     // console.log("Wishlist",localStorage.getItem("Wishlist"))
+
+    console.log("Wishlist",localStorage.getItem("Wishlist"))
+    console.log("in remove")
+
     var formdata = {
       "modelNumber": index.modelNumber
 
     }
-    axios.post("http://localhost:8080/delete-wishlist", formdata, {
+    axios.post(url+"/delete-wishlist", formdata, {
       headers: {
         "Authorization": "Bearer "+getCookie("jwtToken"),
         "Content-Type": "multipart/form-data"
@@ -321,8 +326,8 @@ function CategoryProductsSwiper({ cattitle }) {
                       <MDBCard className="categoryproductscard">
                         <div className="cardimg">
                         <MDBCardImage className="cardimage" src={index.productImage1}  alt='...' position='top' />
-                        {
-                          (index.productImage1 !== null && index.productImage2 !== null && index.productImage3 !== null) ?
+                        {/* {
+                          ( index.productImage2 !== null && index.productImage3 !== null) ? 
                             <Carousel interval={1000} className="cardimage2" indicators='' variant="dark">
                               <Carousel.Item>
                                 <img
@@ -352,7 +357,8 @@ function CategoryProductsSwiper({ cattitle }) {
                             : <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
 
 
-                        }
+                        } */}
+                            <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
 
 </div>
                         {

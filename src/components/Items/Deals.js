@@ -64,6 +64,7 @@ function Deals({deals}) {
     })
 
     function WishlistHandler(index) {
+
       // // alert("Item added successfully to wishlist");
       // // console.log(index.modelNumber)
       // // if (localStorage.getItem("wishlistproduct")==null) {
@@ -163,6 +164,72 @@ function Deals({deals}) {
     })
   }
       
+
+      // alert("Item added successfully to wishlist");
+      // console.log(index.modelNumber)
+      // if (localStorage.getItem("wishlistproduct")==null) {
+      //   localStorage.setItem("wishlistproduct",index.modelNumber)
+      // }else {
+      //   var arr = localStorage.getItem("wishlistproduct").split(',')
+      //   var flag = true;
+      //   arr.map(i=>{
+  
+      //     console.log("i: ",i)
+      //     if( i=== index.modelNumber) {
+      //         arr.splice(arr.indexOf(i),1)
+      //         localStorage.setItem("wishlistproduct",arr)
+      //         console.log('del arr: ' + arr)
+      //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+      //        console.log("in if")
+      //       flag = false;
+      //     } 
+      //   }) 
+      //   if(flag)
+      //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+      //     navigate('/')
+  
+      // }
+      console.log("Wishlist clicked")
+      if(getCookie("isLoggedIn")!=='true'){
+        navigate("/login")
+      }else{
+        
+      
+  
+      var formdata = {
+        "modelNumber": index.modelNumber
+  
+      }
+  
+      axios.post(url+"/wishlist", formdata, {
+        headers: {
+          "Authorization": "Bearer " + token,
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(function (response) {
+        if (response.status == 200) {
+          // console.log("Added to wishlist successfully");
+          // toast.success(<b>Added to wishlist successfully</b>)
+          // alert("Item added to wishlist successfully")
+          var arr = localStorage.getItem("Wishlist").split(",")
+          arr.push(index.modelNumber)
+          localStorage.setItem("Wishlist", arr)
+          window.location.reload();
+          console.log(response.data)
+          // navigate("/");
+        }
+        else{
+          alert("Item already present in wishlist")
+          console.log(response.data)
+        }
+      }).catch(function (error) {
+          alert("Item already present in wishlist")
+          console.log("Error", error);
+        
+      })
+    }
+  
+
     }
 
     function callProductDetails(index){
@@ -171,6 +238,38 @@ function Deals({deals}) {
       localStorage.setItem("productSelected",index.modelNumber);
       // console.log("Product Selected",localStorage.getItem("productSelected"))
       navigate("/productDetails")
+    }
+
+    function RemoveWishlist(index){
+      console.log("Wishlist",localStorage.getItem("Wishlist"))
+      var formdata = {
+        "modelNumber": index.modelNumber
+  
+      }
+      axios.post(url+"/delete-wishlist", formdata, {
+        headers: {
+          "Authorization": "Bearer "+getCookie("jwtToken"),
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(function (response) {
+        if (response.status == 200) {
+          console.log("Removed from wishlist successfully");
+          console.log(response.data)
+          // var arr = localStorage. 
+          var arr = localStorage.getItem("Wishlist").split(",")
+          var finalWishlist=[];
+          arr.map(a=>{
+            if( a!=="" && a!==index.modelNumber){
+              finalWishlist.push(a)
+            }
+          })
+          localStorage.setItem("Wishlist",finalWishlist)
+          window.location.reload();
+          // navigate("/");
+        }
+      }).catch(function (error) {
+        console.log("Error", error);
+      })
     }
 
     
@@ -271,44 +370,54 @@ function Deals({deals}) {
                 ];
                 return(
                 <MDBCard className="categoryproductscard" >
-                  <div className="cardimg">
-                  <MDBCardImage className="cardimage" src={index.productImage1} alt='...' position='top' />
+                                   <div className="cardimg">
+                        <MDBCardImage className="cardimage" src={index.productImage1}  alt='...' position='top' />
+                        {/* {
+                          ( index.productImage2 !== null && index.productImage3 !== null) ? 
+                            <Carousel interval={1000} className="cardimage2" indicators='' variant="dark">
+                              <Carousel.Item>
+                                <img
+                                  className="d-block w-100"
+                                  src={index.productImage1}
+                                  
+                                  alt="First slide"
+                                />
+                              </Carousel.Item>
+                              <Carousel.Item>
+                                <img
+                                  className="d-block w-100"
+                                  src={index.productImage2}
+                                  
+                                  alt="Second slide"
+                                />
+                              </Carousel.Item>
+                              <Carousel.Item>
+                                <img
+                                  className="d-block w-100"
+                                  src={index.productImage3}
+                                  
+                                  alt="Third slide"
+                                />
+                              </Carousel.Item>
+                            </Carousel>
+                            : <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
+
+                        } */}
+                            <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
+
+</div>                 
+
                   {
-                    (index.productImage1!==null && index.productImage2!==null && index.productImage3!==null)?
-                    <Carousel interval={1000} className="cardimage2" indicators=''   variant="dark">
-                      <Carousel.Item>
-                        <img
-                          className="d-block w-100"
-                          src={index.productImage1}
-                          alt="First slide"
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item>
-                        <img
-                          className="d-block w-100"
-                          src={index.productImage2}
-                          alt="Second slide"
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item>
-                        <img
-                          className="d-block w-100"
-                          src={index.productImage3}
-                          alt="Third slide"
-                        />
-                      </Carousel.Item>
-                    </Carousel>
-                     : <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
-
-
-                  }
-                  </div>
+                          (localStorage.getItem("Wishlist") != null && localStorage.getItem("Wishlist").includes(index.modelNumber)) ?
+                            <AiFillHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => RemoveWishlist(index)} /> :
+                            <AiOutlineHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
+                        }
                   
-                  {
+                  {/* {
                     (localStorage.getItem("wishlistproduct") != null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
                             <AiFillHeart style={{ marginLeft:'0px',marginTop:'10px',marginRight:'10px',alignSelf:'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> :
                             <AiOutlineHeart style={{  marginLeft:'0px',marginTop:'10px',marginRight:'10px',alignSelf:'end'}} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
-                    }
+                    } */}
                   <MDBCardBody className="categoryproductscardbody">
                     <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
                     
