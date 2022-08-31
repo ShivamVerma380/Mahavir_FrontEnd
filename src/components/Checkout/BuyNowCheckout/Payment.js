@@ -90,7 +90,7 @@ function Payment(){
                 const options={
                     key:"rzp_live_HD5qU0zoy9Ntd2",
                     key_secret:"GXZHI3xZnA6BFaCZHEYQt2De",
-                    amount:localStorage.getItem("Amount"),
+                    amount:localStorage.getItem("Amount")*100,
                     // amount:parseInt(localStorage.getItem("price"))*100,
                     currency:"INR",
                     name:"Mahavir Electronics",
