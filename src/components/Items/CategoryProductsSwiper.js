@@ -213,7 +213,7 @@ function CategoryProductsSwiper({ cattitle }) {
     //     navigate('/')
 
     // }
-    console.log("Wishlist clicked")
+    // console.log("Wishlist clicked")
     if(getCookie("isLoggedIn")!=='true'){
       navigate("/login")
     }else{
@@ -245,7 +245,7 @@ function CategoryProductsSwiper({ cattitle }) {
       }
       else{
         toast.warn(<b>Item already present in wishlist</b>)
-        console.log(response.data)
+        // console.log(response.data)
       }
     }).catch(function (error) {
         toast.warn(<b>Item already present in wishlist</b>)

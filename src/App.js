@@ -189,9 +189,9 @@ function App() {
         if(response.status==200){
             setcategoryDisplay(response.data);
             setIsCategoryDisplayFetched(true);
-            console.log(response.data);
+            // console.log(response.data);
         }
-        console.log(response.data);
+        // console.log(response.data);
       }).catch(function(error){
           console.log(error);
       })
@@ -206,7 +206,7 @@ function App() {
             response.data.map(index=>{
                 arr.push(index.modelNumber)
             })
-            console.log("Wishlist",arr)
+            // console.log("Wishlist",arr)
             localStorage.setItem("Wishlist",arr);
             // console.log("Wishlist",response.data);
           }
@@ -218,7 +218,7 @@ function App() {
       axios.get(url+"/deals").then(
             function(response){
               if(response.status==200){
-                console.log(response.data);
+                // console.log(response.data);
                 setDeals(response.data);
                 SetIsDealsFetched(true);
                 // console.log("Deals: ",deals);
@@ -433,11 +433,11 @@ function App() {
       {
         (isDealsFetched)?(
           deals.map(index=>{
-            console.log("Index ",index);
+            // console.log("Index ",index);
             localStorage.setItem("dealindex",index)
             const dealproducts = JSON.stringify(index.products);
             localStorage.setItem("dealproduct", dealproducts);
-            console.log("Deal products: ",dealproducts)
+            // console.log("Deal products: ",dealproducts)
             // localStorage.setItem("dealproduct",index.products)
             return(
               <Deals deals={index}/>
