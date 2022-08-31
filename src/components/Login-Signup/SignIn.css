@@ -43,14 +43,14 @@
     position: absolute;
     width:50% ;
     height: 100%; 
-    background: url("https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/xtuojj8cglc44prkimmk/Pune%20Night%20Walking%20Tour.jpg");
-    background-size: cover;
+    background: url("../../assets/loginsignup.png");
+    background-size: 100% 100%;
 }
 
 .sign-in-img{
     left:50%;
-    background: url("https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/xtuojj8cglc44prkimmk/Pune%20Night%20Walking%20Tour.jpg");
-    background-size: cover;
+    background: url("../../assets/loginsignup.png");
+    background-size: 100% 100%;
     
 }
 
@@ -168,7 +168,7 @@
    
     background: #DA0606;
     width: 330px;
-    height: auto;
+    height: 40px;
     /* padding: 10px 40px; */
     font-size:15px;
     color: white;
