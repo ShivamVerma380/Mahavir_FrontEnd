@@ -113,18 +113,33 @@ function BuyNowSummary(){
                     
                                            
                 ):(
-                    <>
-                    <Container>
+                    // <>
+                    // <Container>
+                    // <center>
+                    // <br></br>
+                    // <h2 tstyle={{ fontSize: "18px"}}>You don't have any items to buy</h2>
+                    // <h3 tstyle={{ fontSize: "16px"}}>Please add Items to Buy!</h3>
+                    // <Button style={{marginTop:"60px", marginLeft:"50px",background:"rgb(193,0,0)",color:"white",cursor:"pointer", height:"50px",width:"150px", fontSize:"16px"}} onClick={handleAddNow}>Add Now</Button>
+                    // <br></br>
+                    // </center>
+                    // </Container>
+                    // <br></br>
+                    // </>
                     <center>
+                    <img src="https://github.com/ShivamVerma380/MahavirImages/blob/main/VectorImg/emptywishlistvectorimg.png?raw=true" style={{height:"260px",width:"260px",marginTop:'100px'}}/>
                     <br></br>
-                    <h2 tstyle={{ fontSize: "18px"}}>You don't have any items to buy</h2>
-                    <h3 tstyle={{ fontSize: "16px"}}>Please add Items to Buy!</h3>
-                    <Button style={{marginTop:"60px", marginLeft:"50px",background:"rgb(193,0,0)",color:"white",cursor:"pointer", height:"50px",width:"150px", fontSize:"16px"}} onClick={handleAddNow}>Add Now</Button>
+                    <h5 style={{fontWeight:600, fontSize:"20px", lineHeight:"23px", letterSpacing:"0.02em"}}>Oops! You don't have any items to buy</h5>
+                    <Row>
+                      <Col md={3}></Col>
+                      <Col md={6}>
+                      <p style={{fontWeight:500, fontSize:"18px", lineHeight:"23px", letterSpacing:"0.02em", color:"rgba(0,0,0,0.5)"}}>Please add Items to Buy!</p>
+                      </Col>
+                    </Row>
                     <br></br>
+                    <Button onClick={()=>handleAddNow()} style={{background:"#C10000",border:"none",padding:"16px",fontSize:"14px",lineHeight:"14px",borderRadius:"5px",marginBottom:"20px"}}>ADD NOW</Button>
+                    
+                    
                     </center>
-                    </Container>
-                    <br></br>
-                    </>
                 )
             }
             
