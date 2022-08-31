@@ -218,11 +218,9 @@ function BrandDetails() {
 
                                 <CarouselItem interval={1000} onClick={() => handleOfferPosterOnClick(index.modelNumbers)}>
 
-                                    <Image id="classname"
-                                        className="d-block w-100"
+                                    <Image className="brandsliderimage"
                                         src={index.offerPoster}
                                         alt={index.alt}
-                                        height={500}
 
 
 
@@ -340,11 +338,8 @@ function BrandDetails() {
                                         <button className="brand_feature_product_btn" onClick={() => handleClick(index.category)} >View More <AiOutlineCaretRight/></button>
                                     </Col>
                                 </Row> */}
-                                <Col md={4}>
+                                <Col md={10}>
                                     <h3 className="brand_feature_product_cat_title" id={index.category} >{index.category}</h3>
-                                    
-                                    </Col>
-                                    <Col md={6}>
                                     
                                     </Col>
                                     <Col md={2}>
@@ -595,8 +590,8 @@ function BrandDetails() {
                         cards = videoLinks.map(index => {
                             return (
                                 <div>
-                                    <SwiperSlide>
-                                        <iframe width="70%" height="500px" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <SwiperSlide className="brandvideo">
+                                        <iframe className="videoframe" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </SwiperSlide>
                                 </div>
                             )
