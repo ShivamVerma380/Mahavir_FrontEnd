@@ -27,12 +27,12 @@ const ProductsByDeal = () => {
         <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="God" />
     </div>
     products.push(location.state.index.products)
-    console.log("products",products);
+    // console.log("products",products);
     products.map(i=>{
-        console.log("index",i);
-        console.log("model",i.modelNumber)
+        // console.log("index",i);
+        // console.log("model",i.modelNumber)
         i.map(index=>{
-            console.log("models",index.modelNumber)
+            // console.log("models",index.modelNumber)
         })
 
     })

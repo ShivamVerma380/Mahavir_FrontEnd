@@ -14,7 +14,7 @@ import OtpInput from "react-otp-input";
 import Footer from "../Footer/Footer";
 import {setCookie,getCookie} from '../Cookies'
 import url from "../../Uri";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const axios = require('axios');
 
@@ -56,7 +56,7 @@ function Login() {
     const [forgotOtpActive,setForgotOtpActive]=useState(false);
     const [passwordactive,setPasswordActive] = useState(true);
     let token = localStorage.getItem("jwtToken");
-    console.log("token", token);
+    // console.log("token", token);
     const [code, setCode] = useState("");
 
     const handleChange = (code) => setCode(code);
@@ -79,25 +79,25 @@ function Login() {
     }
 
     const inputFirstNameEvent = (event) => {
-        console.log("In input first name event");
+        // console.log("In input first name event");
         firstName = event.target.value;
-        console.log("First Name:", firstName);
+        // console.log("First Name:", firstName);
     }
 
     const inputLastNameEvent = (event) => {
-        console.log("In input last name event");
+        // console.log("In input last name event");
         lastName = event.target.value;
-        console.log("Last Name:", lastName);
+        // console.log("Last Name:", lastName);
     }
     const inputPhoneNumberEvent = (event) => {
-        console.log("In input phone Number event");
+        // console.log("In input phone Number event");
         phoneNo = event.target.value;
-        console.log("Phone Number:", phoneNo);
+        // console.log("Phone Number:", phoneNo);
     }
     const inputPasswordEvent = (event) => {
-        console.log("In input password event");
+        // console.log("In input password event");
         password = event.target.value;
-        console.log("Password:", password);
+        // console.log("Password:", password);
     }
 
     const handlepassword = () => {
@@ -106,9 +106,9 @@ function Login() {
 
     
     const inputConfirmPasswordEvent = (event) => {
-        console.log("In input confirm password event");
+        // console.log("In input confirm password event");
         confirmPassword = event.target.value;
-        console.log("Confirm Password:", confirmPassword);
+        // console.log("Confirm Password:", confirmPassword);
     }
 
     function setCookie(cname, cvalue, exdays) {
@@ -124,13 +124,13 @@ function Login() {
 
         // alert("token", localStorage.getItem("jwtToken"));
         if (email === "") {
-            console.log("Email is empty");
-            alert("enter email")
+            // console.log("Email is empty");
+            toast.error(<b>Please enter email</b>)
             return;
         }
         if (password === "") {
-            console.log("Password is empty");
-            alert("enter password")
+            // console.log("Password is empty");
+            toast.error(<b>Please enter password</b>)
             return;
         }
 
@@ -139,7 +139,7 @@ function Login() {
             Password: password
         }
         var authorization = "Bearer "+{tokenn};
-        console.log(authorization);
+        // console.log(authorization);
 
         axios.post(url+"/login-user", form_data_body, {
             headers: {
@@ -147,14 +147,14 @@ function Login() {
             },
             mode: "no-cors"
         }).then(function (response) {
-            console.log(response);
+            // console.log(response);
             if (response.status == 200) {
                 // localStorage.setItem("isLoggedIn", "true");
                 // localStorage.setItem("Name", response.data.message);
                 // localStorage.setItem("jwtToken", response.data.token);
                 // var token = localStorage.getItem("jwtToken");
                 //alert("token "+localStorage.getItem("jwtToken"));
-                console.log(response.data.message);
+                // console.log(response.data.message);
                 // var cookiedata=[];
                 // cookiedata.add(localStorage.getItem("isLoggedIn"))
                 // alert('cookie data'+cookiedata);
@@ -166,10 +166,11 @@ function Login() {
                 setCookie("jwtToken",response.data.token,20);
                 setCookie("Name",response.data.message,20);
                 setCookie("isLoggedIn",true,20);
-                alert("loginh11");
+                // alert("loginh11");
+                toast.success(<b>Login successful</b>)
                 navigate("/");
             }
-            console.log(response.data.message);
+            // console.log(response.data.message);
         }).catch(function (error) {
             console.log(error);
             alert(error.response.data.message);
@@ -185,7 +186,7 @@ function Login() {
         const formContainer = document.querySelector(".form-body");
         const loginForm = document.querySelector("#sign-in-form");
         const registerForm = document.querySelector("#sign-up-form");
-        console.log(form);
+        // console.log(form);
         if (form === 'register') {
             if (window.innerWidth > 800) {
                 formContainer.style.left = '50%';
@@ -207,19 +208,19 @@ function Login() {
         // alert(email);
 
         if (email === "") {
-            console.log("Email is empty")
-            alert("Please Enter Email")
+            // console.log("Email is empty")
+            toast.error(<b>Please Enter Email</b>)
         } else {
-            console.log("Email", email);
+            // console.log("Email", email);
             axios({
                 method: "get",
                 url: url+"/verify-email/" + email
             }).then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
                 otp = response.data.otp;
-                console.log("otp:", otp);
+                // console.log("otp:", otp);
             }).catch(function (response) {
-                console.log(response);
+                // console.log(response);
                 return;
             })
 
@@ -227,8 +228,8 @@ function Login() {
             setIsOTPSent(false);
             setIsNewOtpSent(true);
             //setIsOTPVerified(true);
-            console.log("isOTPSent", isOTPSent);
-            console.log("isOTPVerified", isOTPNotVerified);
+            // console.log("isOTPSent", isOTPSent);
+            // console.log("isOTPVerified", isOTPNotVerified);
         }
 
     }
@@ -238,19 +239,19 @@ function Login() {
         // alert(email);
 
         if (email === "") {
-            console.log("Email is empty")
-            alert("Please Enter Email")
+            // console.log("Email is empty")
+            toast.error(<b>Please Enter Email</b>)
         } else {
-            console.log("Email", email);
+            // console.log("Email", email);
             axios({
                 method: "get",
                 url: url+"/forgotPassword/" + email
             }).then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
                 otp = response.data.otp;
-                console.log("otp:", otp);
+                // console.log("otp:", otp);
             }).catch(function (response) {
-                console.log(response);
+                // console.log(response);
                 return;
             })
 
@@ -258,8 +259,8 @@ function Login() {
             // setIsOTPSent(false);
             setIsForgotOtpSent(true);
             //setIsOTPVerified(true);
-            console.log("isOTPSent", isOTPSent);
-            console.log("isOTPVerified", isOTPNotVerified);
+            // console.log("isOTPSent", isOTPSent);
+            // console.log("isOTPVerified", isOTPNotVerified);
         }
 
     }
@@ -269,7 +270,7 @@ function Login() {
         setActive(true);
         setForgotOtpActive(true);
         if (otp === code) {
-            alert('Correct input otp');
+            // alert('Correct input otp');
             setIsOTPNotVerified(false);
             //    navigate('/email-auth');
             //    setIsOTPSent(false);
@@ -278,7 +279,7 @@ function Login() {
             //    setIsEmailVerified(false);
         }
         else {
-            alert('incorrect')
+            toast.error(<b>Incorrect otp</b>)
         }
 
 
@@ -288,20 +289,20 @@ function Login() {
     const registerUser = () => {
         setRegisterActive(true);
         if (firstName === "") {
-            alert("Please enter first name")
+            toast.error(<b>Please enter first name</b>)
         } else if (lastName === "") {
-            alert("Please enter last name")
+            toast.error(<b>Please enter last name</b>)
         } else if (phoneNo.length != 10) {
-            alert("Please enter correct mobile number")
+            toast.error(<b>Please enter correct mobile number</b>)
         }
         else if (password.length < 6) {
-            alert("Password must be of minimum 6 characters")
+            toast.warn(<b>Password must be of minimum 6 characters</b>)
         }
         else if (confirmPassword.length < 6) {
-            alert("Confirm Password must be of minimum 6 characters")
+            toast.warn("Confirm Password must be of minimum 6 characters")
         }
         else if (password !== confirmPassword) {
-            alert("Passwords do not match")
+            toast.error("Passwords do not match")
         }
         else {
             var form_data_body = {
@@ -317,7 +318,7 @@ function Login() {
                 }
             }).then(function (response) {
                 if (response.status == 200) {
-                    console.log("User Registered successfully");
+                    // console.log("User Registered successfully");
                     localStorage.setItem("isLoggedIn", true);
                     localStorage.setItem("Name", firstName + " " + lastName);
                     localStorage.setItem("jwtToken", response.data.token);
@@ -331,7 +332,7 @@ function Login() {
     }
 
     const forgotPassword = () => {
-        console.log("Forgot pass")
+        // console.log("Forgot pass")
         setIsForgotPasswordClicked(true);
 
 
@@ -340,13 +341,13 @@ function Login() {
     const HandleResetPassword = () => {
         // alert("Reset Pass clicked")
         if (newpassword.length<6) {
-            alert("Password length must be greater than 6");
+            toast.warn(<b>Password length must be greater than 6</b>);
         }
         else if (confirmnewpassword.length < 6) {
-            alert("Confirm Password must be of minimum 6 characters")
+            toast.warn(<b>Confirm Password must be of minimum 6 characters</b>)
         }
         else if (newpassword !== confirmnewpassword) {
-            alert("Passwords do not match")
+            toast.error(<b>Passwords do not match</b>)
         }
         else {
 
@@ -359,8 +360,8 @@ function Login() {
             axios.post(url+'/updatePassword/'+newpassword,{headers})
             .then(function (response) {
                     if (response.status == 200) {
-                        console.log("Password Updated successfully");
-                        alert("Password Updated successfully")
+                        // console.log("Password Updated successfully");
+                        toast.success(<b>Password Updated successfully</b>)
                         window.location.reload();
                         
                         // navigate("/login");
@@ -388,28 +389,28 @@ function Login() {
     }
 
     const inputNewPasswordEvent = (event) => {
-        console.log("In input password event");
+        // console.log("In input password event");
         newpassword = event.target.value;
-        console.log("Password:", newpassword);
+        // console.log("Password:", newpassword);
     }
 
     const inputNewConfirmPasswordEvent = (event) => {
-        console.log("In input password event");
+        // console.log("In input password event");
         confirmnewpassword = event.target.value;
-        console.log("Password:", confirmnewpassword);
+        // console.log("Password:", confirmnewpassword);
     }
 
     const handleResendClick = () => {
-        alert("Resend Clicked")
+        toast.success(<b>Resend otp Clicked</b>)
         axios({
             method: "get",
             url: url+"/resend-otp/" + email
         }).then(function (response) {
-            console.log(response.data);
+            // console.log(response.data);
             otp = response.data.otp;
-            console.log("otp:", otp);
+            // console.log("otp:", otp);
         }).catch(function (response) {
-            console.log(response);
+            // console.log(response);
             return;
         })
 
@@ -417,6 +418,7 @@ function Login() {
 
     return (
         <div>
+            <ToastContainer position="top-center"/>
 
             <Header />
             <center>
@@ -488,7 +490,7 @@ function Login() {
                                     <div className="fields">
                                         <FormGroup>
                                             <Label id="email-input" for="email"></Label>
-                                            <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
+                                            <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",color:"black",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
                                         </FormGroup>
 
                                     </div>
@@ -626,7 +628,7 @@ function Login() {
                                     <FormGroup>
                                         <Label id="email-input" for="email"></Label>
                                         <br></br>
-                                        <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",borderBottom:"1px Solid #E2E2E2",width:"100%", fontSize:"14px"}} id="email" name="email" placeholder="Enter Email" type="email" className="input" onChange={inputEmailEvent} />
+                                        <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",color:"black",borderBottom:"1px Solid #E2E2E2",width:"100%", fontSize:"14px"}} id="email" name="email" placeholder="Enter Email" type="email" className="input" onChange={inputEmailEvent} />
                                     </FormGroup>
 
                                 </div>

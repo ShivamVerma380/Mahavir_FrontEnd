@@ -15,7 +15,7 @@ import url from "../../Uri";
 function Deals({deals}) {
     // var product = [];
     var token=getCookie("jwtToken");
-    console.log("inside deals");
+    // console.log("inside deals");
     const navigate = useNavigate();
     const [deal,setDeal]=useState([]);
     const [isDealFetched,SetIsDealFetched] = useState(false);
@@ -29,10 +29,10 @@ function Deals({deals}) {
     const str = localStorage.getItem("dealproduct");
     const product = JSON.parse(str);
     
-    console.log("Products: ", product);
+    // console.log("Products: ", product);
 
     var title = deals.title;
-    console.log("Title: ",title);
+    // console.log("Title: ",title);
 
     
     var cards=<div>
@@ -64,6 +64,107 @@ function Deals({deals}) {
     })
 
     function WishlistHandler(index) {
+
+      // // alert("Item added successfully to wishlist");
+      // // console.log(index.modelNumber)
+      // // if (localStorage.getItem("wishlistproduct")==null) {
+      // //   localStorage.setItem("wishlistproduct",index.modelNumber)
+      // // }else {
+      // //   var arr = localStorage.getItem("wishlistproduct").split(',')
+      // //   var flag = true;
+      // //   arr.map(i=>{
+         
+      // //     console.log("i: ",i)
+      // //     if( i=== index.modelNumber) {
+      // //         arr.splice(arr.indexOf(i),1)
+      // //         localStorage.setItem("wishlistproduct",arr)
+      // //         console.log('del arr: ' + arr)
+      // //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+      // //        console.log("in if")
+      // //       flag = false;
+      // //     } 
+      // //   }) 
+      // //   if(flag)
+      // //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+      // //     navigate('/')
+        
+      // // }
+
+      // // console.log("Wishlist clicked")
+
+      
+      //   var formdata = {
+      //     "modelNumber": index.modelNumber
+  
+      //   }
+  
+      //   axios.post(url+"/wishlist", formdata, {
+      //     headers: {
+      //       "Authorization": "Bearer "+token,
+      //       "Content-Type": "multipart/form-data"
+      //     }
+      //   }).then(function (response) {
+      //     if (response.status == 200) {
+      //       toast.success(<b>Added to wishlist successfully</b>)
+      //       // console.log("Added to wishlist successfully");
+            
+      //       // console.log(response.data)
+      //       // navigate("/");
+      //     }
+      //   }).catch(function (error) {
+      //     if(error.response.status==406) {
+      //       toast.warn(<b>Item already present in Wishlist</b>)
+      //       // alert("Item already present in wishlist")
+      //     }
+      //     else {
+      //       toast.error(<b>SignIn First</b>)
+      //       console.log("Error", error);
+      //     }
+          
+      //   })
+
+      // console.log("Wishlist clicked")
+    if(getCookie("isLoggedIn")!=='true'){
+      navigate("/login")
+    }else{
+      
+    
+
+    var formdata = {
+      "modelNumber": index.modelNumber
+
+    }
+
+    axios.post(url+"/wishlist", formdata, {
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Content-Type": "multipart/form-data"
+      }
+    }).then(function (response) {
+      if (response.status == 200) {
+        // console.log("Added to wishlist successfully");
+        // toast.success(<b>Added to wishlist successfully</b>)
+        // alert("Item added to wishlist successfully")
+        var arr = localStorage.getItem("Wishlist").split(",")
+        arr.push(index.modelNumber)
+        localStorage.setItem("Wishlist", arr)
+        window.location.reload();
+        toast.success(<b>Item Added to Wishlist successfully</b>)
+        // console.log(response.data)
+        // navigate("/");
+      }
+      else{
+        toast.warn("Item already present in wishlist")
+        // console.log(response.data)
+      }
+    }).catch(function (error) {
+        toast.warn("Item already present in wishlist")
+        // console.log("Error", error);
+      
+    })
+  }
+      
+
       // alert("Item added successfully to wishlist");
       // console.log(index.modelNumber)
       // if (localStorage.getItem("wishlistproduct")==null) {
@@ -128,13 +229,14 @@ function Deals({deals}) {
       })
     }
   
+
     }
 
     function callProductDetails(index){
       //alert(index);
-      console.log("Index",index);
+      // console.log("Index",index);
       localStorage.setItem("productSelected",index.modelNumber);
-      console.log("Product Selected",localStorage.getItem("productSelected"))
+      // console.log("Product Selected",localStorage.getItem("productSelected"))
       navigate("/productDetails")
     }
 
@@ -175,13 +277,13 @@ function Deals({deals}) {
     const handleAddToCompare = event => {
       if (event.target.checked) {
 
-        console.log('✅ Checkbox is checked');
+        // console.log('✅ Checkbox is checked');
         setChange(change+1)
         
         
         
       } else {
-        console.log('⛔️ Checkbox is NOT checked');
+        // console.log('⛔️ Checkbox is NOT checked');
         setChange(change-1)
       }
       setisAddCompareClicked(current => !current);
@@ -190,7 +292,7 @@ function Deals({deals}) {
     }
     
     localStorage.setItem("comparecount",change)
-    console.log("Get",localStorage.getItem("comparecount"))
+    // console.log("Get",localStorage.getItem("comparecount"))
 
     function CategoryProducts(title,deals){
      

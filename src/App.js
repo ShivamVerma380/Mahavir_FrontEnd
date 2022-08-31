@@ -86,10 +86,13 @@ function App() {
 
   //const[cookies,SetCookie] = useCookies(["modelNumsToCompare"])
 
-  console.log("CompareModels",localStorage.getItem("CompareModels"))
-  console.log(localStorage.getItem("dealproduct"))
-  console.log("Index",localStorage.getItem("dealindex"))
-  console.log("Count C: ",countc)
+  // .
+  // console.log("CompareModels",localStorage.getItem("CompareModels"))
+  // console.log(localStorage.getItem("dealproduct"))
+  // console.log("Index",localStorage.getItem("dealindex"))
+  // console.log("Count C: ",countc)
+  // .
+
   // console.log("Cookies size",cookies.CompareModelsLength)
 
   //SetCookie("CompareModels","IPH287373");
@@ -115,7 +118,7 @@ function App() {
     // var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
     if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched && !isDealsFetched){
       
-      console.log("InventoryToken is null")
+      // console.log("InventoryToken is null")
       var form_data_body={
         "UserName":"MahaStock",
         "password":"abcd@123"
@@ -124,7 +127,7 @@ function App() {
         axios.post("http://116.72.253.118:9896/Login/chkUserLogin",form_data_body)
         .then(function(response){
           localStorage.setItem("InventoryToken",response.data.status);
-          console.log("InventoryToken",localStorage.getItem("InventoryToken"));
+          // console.log("InventoryToken",localStorage.getItem("InventoryToken"));
         }).catch(function(error){
           console.log("error",error);
         })
@@ -135,16 +138,16 @@ function App() {
         method:"get",
         url:url+"/get-offers"
       }).then(function(response){
-        console.log(response);
-        console.log("Poster response: ",response.data)
+        // console.log(response);
+        // console.log("Poster response: ",response.data)
         if(response.status==200){
           response.data.map(index=>{
             if(index.isMegaPoster==="YES") {
-              console.log("in if ")
+              // console.log("in if ")
               MegaPoster.push(index)
             }
             else {
-              console.log("in else ")
+              // console.log("in else ")
               MiniPoster.push(index);
 
             }
@@ -153,8 +156,8 @@ function App() {
           
           setOfferPosters(response.data);
           
-          console.log("OfferPosters",offerPosters);
-          console.log("Mini Posters: ",MiniPoster)
+          // console.log("OfferPosters",offerPosters);
+          // console.log("Mini Posters: ",MiniPoster)
           setIsOfferPostersFetched(true);
         }
         
@@ -169,10 +172,10 @@ function App() {
         }
       }).then(function(response){
         if(response.status==200){
-          console.log("In refresh token")
+          // console.log("In refresh token")
           setCookie("jwtToken",response.data.token,20);
           // setIsCategoryDisplayFetched(true);
-          console.log("Token",response.data.token);
+          // console.log("Token",response.data.token);
       }
       
     }).catch(function(error){
@@ -182,13 +185,13 @@ function App() {
 
 
       axios.get(url+"/get-categories").then(function(response){
-        console.log(response);
+        // console.log(response);
         if(response.status==200){
             setcategoryDisplay(response.data);
             setIsCategoryDisplayFetched(true);
-            console.log(response.data);
+            // console.log(response.data);
         }
-        console.log(response.data);
+        // console.log(response.data);
       }).catch(function(error){
           console.log(error);
       })
@@ -203,7 +206,7 @@ function App() {
             response.data.map(index=>{
                 arr.push(index.modelNumber)
             })
-            console.log("Wishlist",arr)
+            // console.log("Wishlist",arr)
             localStorage.setItem("Wishlist",arr);
             // console.log("Wishlist",response.data);
           }
@@ -215,10 +218,10 @@ function App() {
       axios.get(url+"/deals").then(
             function(response){
               if(response.status==200){
-                console.log(response.data);
+                // console.log(response.data);
                 setDeals(response.data);
                 SetIsDealsFetched(true);
-                console.log("Deals: ",deals);
+                // console.log("Deals: ",deals);
               }
             }).catch(function(error){
               console.log("error",error);
@@ -227,10 +230,10 @@ function App() {
 
       axios.get(url+"/hybrid-posters").then(function(response){     
       if(response.status==200){
-        console.log("Products",response.data);
+        // console.log("Products",response.data);
         setProducts(response.data);
         setIsProductsFetched(true);
-        console.log("Products set",Products)
+        // console.log("Products set",Products)
       }
       
       }).catch(function(error){
@@ -239,10 +242,10 @@ function App() {
 
       axios.get(url+"/get-posters").then(function(response){     
       if(response.status==200){
-        console.log("Posters",response.data);
+        // console.log("Posters",response.data);
         setPosters(response.data);
         setIsPostersFetched(true);
-        console.log("Posters set",Posters)
+        // console.log("Posters set",Posters)
       }
       
       }).catch(function(error){
@@ -263,7 +266,7 @@ function App() {
 
                     })
 
-                    console.log("products",catProducts);
+                    // console.log("products",catProducts);
                     setIsCatProductFetched(true);
 
                 })
@@ -285,7 +288,7 @@ function App() {
     
         
   },[]);
-  console.log("deals..",deals);
+  // console.log("deals..",deals);
 
   function fetchSlideshow(){
     if(MegaPoster.length===0){
@@ -293,7 +296,7 @@ function App() {
         null
       );
     }else{
-      console.log("Mega Poster",MegaPoster)
+      // console.log("Mega Poster",MegaPoster)
       return( 
         
         <Slideshow offerPosters={MegaPoster}/>
@@ -318,7 +321,7 @@ function App() {
     function topFunction() {
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        console.log("In top Function")
+        // console.log("In top Function")
         // document.body.scrollIntoView();
         // window.location.reload();
     }
@@ -399,7 +402,7 @@ function App() {
     
   }
 
-  console.log("Compare count: ",localStorage.getItem("comparecount"))
+  // console.log("Compare count: ",localStorage.getItem("comparecount"))
 
   return (
 
@@ -430,11 +433,11 @@ function App() {
       {
         (isDealsFetched)?(
           deals.map(index=>{
-            console.log("Index ",index);
+            // console.log("Index ",index);
             localStorage.setItem("dealindex",index)
             const dealproducts = JSON.stringify(index.products);
             localStorage.setItem("dealproduct", dealproducts);
-            console.log("Deal products: ",dealproducts)
+            // console.log("Deal products: ",dealproducts)
             // localStorage.setItem("dealproduct",index.products)
             return(
               <Deals deals={index}/>
@@ -496,7 +499,7 @@ function App() {
         getCompareBtn()
      } */}
 
-     <HomeBottom/>
+     {/* <HomeBottom/> */}
 
     
      <Footer/>

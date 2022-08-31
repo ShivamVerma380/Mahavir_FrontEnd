@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import './Payment.css';
 import Header from "../../Header";
+import Footer from "../../Footer/Footer";
 
 
 function Payment(){
@@ -18,9 +19,14 @@ function Payment(){
     // const [paymentType, SetPaymentType] = useState("");
     var paymentType = "";
     var arr=[];
+    console.log("product",product)
     arr.push(product);
-
-    cartModels.set(product.modelNumber,1);
+    console.log("arr",arr)
+    
+    if(product!=null){
+        cartModels.set(product.modelNumber,1);
+    }
+    
 
     const navigate = useNavigate();
 
@@ -43,11 +49,13 @@ function Payment(){
 
     const PayAmount=(e)=>{
         e.preventDefault();
-        console.log("Payment Type",paymentType);
+        console.log("Payment Type",localStorage.getItem("paymentType"));
         if(localStorage.getItem("Amount")===""){
             alert("Please enter amount");
+        }else if(localStorage.getItem("paymentType")==null){
+            alert("Please select payment type")
         }else{
-            if(paymentType==="cashOnDelivery"){
+            if(localStorage.getItem("paymentType")==="cashOnDelivery"){
                 const form_data_body={
                     products,
                     "userAddress":{
@@ -76,6 +84,7 @@ function Payment(){
                         SetIsPaymentDone(true)
                         SetIsPaymentDone(true)
                         navigate("/my-orders")
+                        localStorage.removeItem("paymentType");
                         // navigate("/invoice")
                         // localStorage.setItem("BuyProductInvoice",cartModels);
                     }
@@ -86,7 +95,7 @@ function Payment(){
                 const options={
                     key:"rzp_live_HD5qU0zoy9Ntd2",
                     key_secret:"GXZHI3xZnA6BFaCZHEYQt2De",
-                    amount:localStorage.getItem("Amount"),
+                    amount:localStorage.getItem("Amount")*100,
                     // amount:parseInt(localStorage.getItem("price"))*100,
                     currency:"INR",
                     name:"Mahavir Electronics",
@@ -123,6 +132,7 @@ function Payment(){
                                         console.log("response",res)
                                         SetIsPaymentDone(true)
                                         SetIsPaymentDone(true)
+                                        localStorage.removeItem("paymentType");
                                         navigate("/my-orders")
                                         // navigate("/invoice")
                                         // localStorage.setItem("BuyProductInvoice",cartModels);
@@ -165,22 +175,25 @@ function Payment(){
                 (isPaymentDone)?(
                     <h1>Payment Done</h1>
                 ):(
-                    <><Header />
-                    <Row style={{ height: "100%", width: "100%",marginTop:"50px" }}>
+                    <>
+                    <body style={{background:"whitesmoke"}}>
+                    <Header />
+                    <Row style={{ height: "100%", width: "100%",marginTop:"70px" ,background:"white"}}>
                             <Col md={4}></Col>
+                            <center>
                             <Col md={8} className="payment">
                                 <h3>Payment</h3>
                                 <p style={{ fontSize: "16px", marginTop: "20px" }}>Choose payment method below</p>
                                 <Row>
                                     <Col md={8}>
                                         <Card style={{ width: "200px", height: "100px", border: "1px solid black", margin: "10px", backgroundColor: isActive ? 'lightblue' : '' }}>
-                                            <Card.Img id="razorpay" onClick={() => { paymentType = 'razorpay'; setIsActive(true); setIsActive1(false); } } style={{ padding: "35px", width: "200px", height: "100px" }} variant="top" src="https://upload.wikimedia.org/wikipedia/en/8/89/Razorpay_logo.svg" />
+                                            <Card.Img id="razorpay" onClick={() => { localStorage.setItem("paymentType",'razorpay'); setIsActive(true); setIsActive1(false); } } style={{ padding: "35px", width: "200px", height: "100px" }} variant="top" src="https://upload.wikimedia.org/wikipedia/en/8/89/Razorpay_logo.svg" />
                                             {/*  */}
                                         </Card>
                                     </Col>
                                     <Col md={4}>
-                                        <Card style={{ width: "140px", height: "100px", border: "1px solid black", margin: "10px", backgroundColor: isActive1 ? 'lightblue' : '' }}>
-                                            <Card.Img id="cashOnDelivery" onClick={() => { paymentType = 'cashOnDelivery'; setIsActive1(true); setIsActive(false); } } style={{ padding: "10px", width: "100px", height: "100px", marginLeft: "20px" }} variant="top" src="https://cdn-icons-png.flaticon.com/512/1019/1019607.png" />
+                                        <Card style={{ width: "150px", height: "100px", border: "1px solid black", margin: "10px", backgroundColor: isActive1 ? 'lightblue' : '' }} onClick={() => { paymentType = 'cashOnDelivery'; setIsActive1(true); setIsActive(false); } }>
+                                            <Card.Img id="cashOnDelivery" onClick={() => { localStorage.setItem("paymentType",'cashOnDelivery'); setIsActive1(true); setIsActive(false); } } style={{ padding: "10px", width: "100px", height: "100px", marginLeft: "20px" }} variant="top" src="https://cdn-icons-png.flaticon.com/512/1019/1019607.png" />
                                             {/* onClick={SetPaymentType("cashOnDelivery")} */}
                                         </Card>
                                     </Col>
@@ -198,8 +211,11 @@ function Payment(){
                                 </Col>
                                 </Row>
                             </Col>
-                            <Col md={2}></Col>
-                        </Row></>
+                            </center>
+                            
+                        </Row>
+                        <Footer/>
+                        </body></>
                     
                     
                 )

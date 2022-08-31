@@ -5,7 +5,7 @@ import MiniPosterHelper from "./MiniPosterHelper";
 import './MiniPoster.css';
 import { MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
 const MiniPosters = ({MiniPosters}) => {
-    console.log("MinPosters: ",MiniPosters)
+    // console.log("MinPosters: ",MiniPosters)
     // const element = MiniPosters.map((product,index) =>
     // <div key={index}> {/*refer you key in within a div*/}
     //   <Col md={3}>
@@ -27,7 +27,7 @@ const MiniPosters = ({MiniPosters}) => {
 
       // console.log(modelNumbers);
       localStorage.setItem("offerPostersModelNumber",product.modelNumbers)
-      console.log(localStorage.getItem("offerPostersModelNumber"))
+      // console.log(localStorage.getItem("offerPostersModelNumber"))
       navigate("/offers")
     }
     
@@ -51,7 +51,7 @@ const MiniPosters = ({MiniPosters}) => {
                     
                     return (
                       <MDBCard className="minipostercard" >
-                        <MDBCardImage style={{border: 'solid 1px gray'}} src={product.imageUrl} onClick={()=>handleMiniPosteronClick(product)} alt='...' position='top' />
+                        <MDBCardImage style={{border: 'solid 1px gray', cursor:"pointer"}} src={product.imageUrl} onClick={()=>handleMiniPosteronClick(product)} alt='...' position='top' />
                         
                       </MDBCard>
                     )

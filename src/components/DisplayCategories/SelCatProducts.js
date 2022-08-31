@@ -21,6 +21,7 @@ import Slideshow from "../offers/Slideshow";
 import "../../App.css";
 
 import {BsArrowUp} from "react-icons/bs";
+import { toast, ToastContainer } from "react-toastify";
 
 
 var modelNumsToCompare = new Set();
@@ -41,7 +42,7 @@ const SelCatProducts=()=>{
     const [offerPosters,setOfferPosters] = useState([]);
     const [isOfferPostersFetched,setIsOfferPostersFetched] = useState(false);
 
-    console.log(localStorage.getItem("Category"));
+    // console.log(localStorage.getItem("Category"));
 
     // const [cookies,SetCookie] = useCookies(['modelNumsToCompare'])
     // const [isFormLoaded,SetIsFormLoaded] = useState(false)
@@ -50,7 +51,7 @@ const SelCatProducts=()=>{
     // console.log("Cookies",cookies.CompareModels)
     // console.log("Cookies size",cookies.CompareModelsLength)
 
-    console.log("Models To Compare",localStorage.getItem("CompareModels"))
+    // console.log("Models To Compare",localStorage.getItem("CompareModels"))
     const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
     const [change, setChange] = useState(0);
 
@@ -84,12 +85,12 @@ const SelCatProducts=()=>{
                 method:"get",
                 url:url+"/get-offers"
               }).then(function(response){
-                console.log(response);
-                console.log("Poster response: ",response.data)
+                // console.log(response);
+                // console.log("Poster response: ",response.data)
                 if(response.status==200){
                   response.data.map(index=>{
                         if(index.isMegaPoster==="YES"&& index.category==localStorage.getItem("Category")) {
-                            console.log("in if ")
+                            // console.log("in if ")
                             MegaPoster.push(index)
                         }
                   })
@@ -123,13 +124,13 @@ const SelCatProducts=()=>{
 
       console.log(modelNumbers);
       localStorage.setItem("offerPostersModelNumber",modelNumbers)
-      console.log(localStorage.getItem("offerPostersModelNumber"))
+    //   console.log(localStorage.getItem("offerPostersModelNumber"))
       navigate("/offers")
     }
 
     function compareProducts(){
         if(localStorage.getItem("CompareModels")===null || localStorage.getItem("CompareModels")===""){
-            alert("Please select products to compare");
+            toast.error(<b>Please select products to compare</b>);
         }
         else{
             navigate("/compareproducts")
@@ -152,7 +153,7 @@ const SelCatProducts=()=>{
     function topFunction() {
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        console.log("In top Function")
+        // console.log("In top Function")
         // document.body.scrollIntoView();
         // window.location.reload();
     }
@@ -179,7 +180,7 @@ const SelCatProducts=()=>{
         console.log("Index",index);
         localStorage.setItem("productSelected",index.modelNumber);
         localStorage.setItem("productId",index.productId)
-        console.log("Product Selected",localStorage.getItem("productSelected"))
+        // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
       }
   
@@ -192,20 +193,20 @@ const SelCatProducts=()=>{
         
         if (event.target.checked) {
 
-            console.log('✅ Checkbox is checked');
+            // console.log('✅ Checkbox is checked');
             setChange(change+1)
             //document.getElementById(event.value).checked = "false"
-            console.log("Value",event.target.value);
+            // console.log("Value",event.target.value);
             modelNumsToCompare.add(event.target.value);
             alert(event.target.value)
-            console.log("ModelNumbers",modelNumsToCompare)
+            // console.log("ModelNumbers",modelNumsToCompare)
           } else {
             console.log('⛔ Checkbox is NOT checked');
             //document.getElementById(event.value).checked = "true"
             setChange(change-1)
             modelNumsToCompare.delete(event.target.value);
 
-            console.log("ModelNumbers",modelNumsToCompare)
+            // console.log("ModelNumbers",modelNumsToCompare)
           }
 
         str="";
@@ -214,12 +215,12 @@ const SelCatProducts=()=>{
             str +=  element + ",";
         })
         str = str.slice(0,str.length-1);
-        console.log(str);
+        // console.log(str);
         //localStorage.setItem("CompareModels",str);
         // SetCookie('CompareModels',str,{path:'/'});
         //getCompareBtn();
         localStorage.setItem("CompareModels",str);
-        console.log('Compare Models',localStorage.getItem("CompareModels"))
+        // console.log('Compare Models',localStorage.getItem("CompareModels"))
         setisAddCompareClicked(current => !current);
     }
 
@@ -238,7 +239,7 @@ const SelCatProducts=()=>{
             );
         }else{
             var modelNums = localStorage.getItem("CompareModels").split(',');
-            console.log("Model Nums",modelNums)
+            // console.log("Model Nums",modelNums)
         
             if(modelNums.includes(modelNumber)){
                 return(
@@ -262,6 +263,7 @@ const SelCatProducts=()=>{
     var modelNums;
     return(
         <>
+        <ToastContainer position="top-center"/>
         <Header className="header" style={{position:"sticky"}} productList={products}/>
         <div className="filterproducts_poster">
         {

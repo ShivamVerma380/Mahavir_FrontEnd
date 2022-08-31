@@ -82,7 +82,17 @@ function Cart() {
     function handleCheckout(){
         if(getCookie("isLoggedIn")==='true'){
             localStorage.setItem("type","checkout");
-            setCookie("models",getCookie("CartModels"));
+            var arr = [];
+            getCookie("CartModels").split(",").map(item=>{
+                if(item!=""){
+                    var pair = item.split("=")
+                    // if(pair[0])
+                    // cartModels.set(pair[0].trim(),parseInt(pair[1]));
+                    arr.push(pair[0].trim()+"="+parseInt(pair[1]));
+                }
+            })
+            setCookie("models",arr,20);
+            console.log("Models",getCookie("models"));
             navigate("/checkout");
         }
         else{

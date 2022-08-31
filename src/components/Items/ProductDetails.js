@@ -115,14 +115,14 @@ function ProductDetails() {
         method: "get",
         url: url+"/pincodes"
       }).then(function (response) {
-        console.log("Pincode response: ", response);
+        // console.log("Pincode response: ", response);
         if (response.status == 200) {
 
           response.data.map(index => {
             // setPincode(p=>new Set([...Pincode,index.pincode]))
             Pincode.push(index.pincode)
           })
-          console.log("Pincode Response: ", Pincode);
+          // console.log("Pincode Response: ", Pincode);
           // setPincode(response.data);
           setIsPincodeFetched(true);
 
@@ -139,17 +139,17 @@ function ProductDetails() {
       }).then(function (response) {
         console.log(response);
         if (response.status == 200) {
-          console.log("response data", response.data);
+          // console.log("response data", response.data);
           //product= response.data;
           setProduct(response.data);
           setIsProductFetched(true);
           imglink = product.productImage1;
-          console.log("Product Detail", product);
+          // console.log("Product Detail", product);
           //setimage(imglink);
           //productImg1 = 'data:image/jpg;base64,'+ product.productImage1.data;
           //console.log("Product Image 1:",productImg1);
           setimage(response.data.productImage1);
-          console.log(response.data.productInformation);
+          // console.log(response.data.productInformation);
           productInformation = response.data.productInformation;
           for (var k in response.data.productInformation) {
             keys.push(k);
@@ -162,7 +162,7 @@ function ProductDetails() {
           variantKeys.sort()
 
 
-          console.log("keys", keys);
+          // console.log("keys", keys);
           //productInformation= response.data.productInformation;
           //getProductInformationKeys(productInformation)
           // ImgHandler('data:image/jpg;base64,' +product.productImage1.data);
@@ -174,35 +174,36 @@ function ProductDetails() {
         }
       }).catch(function (error) {
         console.log("error", error);
-        toast("Item already present in cart")
+        toast.warn("Item already present in cart")
       })
 
       axios({
         method: "get",
         url: url+"/get-reviews/" + localStorage.getItem("productSelected")
       }).then(function (reviewresponse) {
-        console.log(reviewresponse);
+        // console.log(reviewresponse);
         if (reviewresponse.status == 200) {
-          console.log("Review Response", reviewresponse.data);
+          // console.log("Review Response", reviewresponse.data);
           setReview(reviewresponse.data);
           setIsReviewFetched(true);
 
 
-          console.log("Average rating: ", reviewresponse.data.averageRatings);
+          // console.log("Average rating: ", reviewresponse.data.averageRatings);
           // averagerate = parseInt(reviewresponse.data.averageRatings);
           SetAverageRate(parseInt(reviewresponse.data.averageRatings));
-          console.log("Average ", averagerate);
+          // console.log("Average ", averagerate);
         }
       }).catch(function (error) {
         console.log("error", error);
       })
-
       console.log("Url", url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/"  + localStorage.getItem("Category"));
+      
+      // console.log("Url", url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/"  + localStorage.getItem("Category"));
       axios.get(url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") +  "/" + localStorage.getItem("Category")).then(
         function (response) {
           if (response.status == 200) {
-            console.log(response.data);
-            console.log("In similar products",response.data)
+            // console.log(response.data);
+            // console.log("In similar products",response.data)
             setProductList(response.data);
             SetIsProductListFetched(true);
           }
@@ -224,7 +225,7 @@ function ProductDetails() {
         if (response.data[0].ProductID == -1) {
           SetQuantity(0);
         } else {
-          console.log("Quantity:", response.data);
+          // console.log("Quantity:", response.data);
           SetQuantity(response.data.length);
         }
         SetIsQuantitySet(true);
@@ -244,9 +245,9 @@ function ProductDetails() {
 
   function callProductDetails(index) {
     //alert(index);
-    console.log("Index", index);
+    // console.log("Index", index);
     localStorage.setItem("productSelected", index.modelNumber);
-    console.log("Product Selected", localStorage.getItem("productSelected"))
+    // console.log("Product Selected", localStorage.getItem("productSelected"))
     localStorage.setItem("productId", index.productId);
     localStorage.setItem("SubSubCategory", index.subCategoryMap[localStorage.getItem("SubCategory")]);
     // navigate("/productDetails")
@@ -268,7 +269,7 @@ function ProductDetails() {
 
   function inputQuantityEvent(event){
     flag = true;
-    console.log("value",event.target.value);
+    // console.log("value",event.target.value);
     // quantity = event.target.value;
     // localStorage.setItem("quantity", parseInt(event.target.value));
     // console.log("quantity",localStorage.getItem("quantity"));
@@ -286,7 +287,7 @@ function ProductDetails() {
     }
 
     var isLoggedIn = localStorage.getItem("isLoggedIn");
-    console.log("loggedIn", isLoggedIn);
+    // console.log("loggedIn", isLoggedIn);
 
     if (isLoggedIn === "true") {
 
@@ -300,20 +301,20 @@ function ProductDetails() {
           "Authorization": "Bearer " + localStorage.getItem("jwtToken")
         },
       }).then(function (response) {
-        console.log(response);
+        // console.log(response);
         if (response.status == 200) {
-          console.log("response", response);
-          console.log("Item added to cart successfully");
+          // console.log("response", response);
+          // console.log("Item added to cart successfully");
           navigate("/cart");
         } else {
-          console.log("In else");
-          alert("Item already present in cart")
-          console.log(response.data.message);
+          // console.log("In else");
+          toast.warn(<b>Item already present in cart</b>)
+          // console.log(response.data.message);
           return;
         }
       }).catch(function (error) {
-        console.log(error);
-        alert("Item already present in cart")
+        // console.log(error);
+        toast.warn(<b>Item already present in cart</b>)
         return;
       })
 
@@ -338,16 +339,18 @@ function ProductDetails() {
     
 
     if (flag == false) {
-      alert("Buy Now ");
+      // alert("Buy Now ");
     } else if (quantity <= 0) {
-      alert("Please enter a positive number");
+      toast.error(<b>Please enter a positive number</b>);
     } else {
-      alert("Quantity:" + quantity);
+      // alert("Quantity:" + quantity);
     }
-    console.log("Product", product);
+    // console.log("Product", product);
     localStorage.setItem("buyProduct",JSON.stringify(product));
     localStorage.setItem("type", "buyNow");
-    setCookie("models",product.modelNumber+"=1");
+    var arr = [];
+    arr.push(product.modelNumber+"=1");
+    setCookie("models",arr,20);
     navigate("/checkout")
   }
   else
@@ -358,15 +361,15 @@ function ProductDetails() {
 
   const InputPin = (e) => {
     pin = e.target.value
-    console.log("Pincode: ", pin)
+    // console.log("Pincode: ", pin)
   }
 
   const CheckPinHandler = () => {
     if (Pincode.includes(parseInt(pin))) {
-      alert("Delivery Available")
+      toast.success(<b>Delivery Available</b>)
     }
     else {
-      alert("Delivery Not available")
+      toast.error(<b>Delivery Not available</b>)
     }
   }
 
@@ -380,14 +383,14 @@ function ProductDetails() {
   const handleAddToCompare = event => {
     if (event.target.checked) {
 
-      console.log('✅ Checkbox is checked');
+      // console.log('✅ Checkbox is checked');
 
       setChange(change + 1)
 
 
 
     } else {
-      console.log('⛔️ Checkbox is NOT checked');
+      // console.log('⛔️ Checkbox is NOT checked');
       setChange(change - 1)
     }
     setisAddCompareClicked(current => !current);
@@ -401,24 +404,24 @@ function ProductDetails() {
     imglink = { e };
 
     setimage(imglink.e);
-    console.log("imglink.e", imglink.e);
-    console.log("Img Final:", imglinkfinal);
-    console.log("Image: ", imglink)
+    // console.log("imglink.e", imglink.e);
+    // console.log("Img Final:", imglinkfinal);
+    // console.log("Image: ", imglink)
   }
 
   function handleBtnClick(variantName) {
-    console.log("Variant Btn Clicked", variantName.index);
+    // console.log("Variant Btn Clicked", variantName.index);
     axios({
       method: "get",
       url: "http://localhost:8080/get-products/" + localStorage.getItem("productSelected") + "/" + variantName.index
     }).then(function (response) {
       if (response.status == 200) {
-        console.log("response data", response.data);
+        // console.log("response data", response.data);
         setProduct(response.data);
         setimage(response.data.productImage1);
       }
     }).catch(function (error) {
-      console.log("error", error);
+      // console.log("error", error);
     })
 
   }
@@ -482,7 +485,7 @@ function ProductDetails() {
 
   function WishlistHandler(index) {
     // alert("Item added successfully to wishlist");
-    console.log(index.modelNumber)
+    // console.log(index.modelNumber)
     if (localStorage.getItem("wishlistproduct") == null) {
       localStorage.setItem("wishlistproduct", index.modelNumber)
     } else {
@@ -490,13 +493,13 @@ function ProductDetails() {
       var flag = true;
       arr.map(i => {
 
-        console.log("i: ", i)
+        // console.log("i: ", i)
         if (i === index.modelNumber) {
           arr.splice(arr.indexOf(i), 1)
           localStorage.setItem("wishlistproduct", arr)
-          console.log('del arr: ' + arr)
-          console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
-          console.log("in if")
+          // console.log('del arr: ' + arr)
+          // console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
+          // console.log("in if")
           flag = false;
         }
       })
@@ -553,7 +556,7 @@ function ProductDetails() {
       if(index!=""){
         if(index.split("=")[0]===model){
           flag = true;
-          alert("Item is already present in cart")
+          toast.warn(<b>Item is already present in cart</b>)
         }
       }
     })
@@ -561,10 +564,10 @@ function ProductDetails() {
     //   alert("Item is already present in cart")
     // }
     if(!flag){
-      console.log("adddd" + model);
+      // console.log("adddd" + model);
       cart.push(model+"=1");
       setCookie("CartModels", cart, 20);
-      console.log("Cart Models",cart)
+      // console.log("Cart Models",cart)
       navigate("/cart")
       // alert("Added to cart" + model);
     }
@@ -585,22 +588,22 @@ function ProductDetails() {
       })
     })
     if (count == variantKeys.length) {
-      console.log("string", string);
-      console.log("required", required);
-      console.log("model No", product.modelNumber)
-      console.log("url", url+"/variant" + product.modelNumber + "/" + string.trim() + "/" + required.trim());
+      // console.log("string", string);
+      // console.log("required", required);
+      // console.log("model No", product.modelNumber)
+      // console.log("url", url+"/variant" + product.modelNumber + "/" + string.trim() + "/" + required.trim());
 
       axios.get(url+"/variant/" + product.modelNumber + "/" + string.trim() + "/" + required.trim())
         .then(function (response) {
           if (response.status == 200) {
-            console.log("product", response)
+            // console.log("product", response)
             localStorage.setItem("productSelected", response.data.message)
             window.location.reload()
 
           }
         }).catch(function (error) {
           console.log(error);
-          alert("Sorry No Product Found with this combination")
+          toast.error("Sorry No Product Found with this combination")
         })
 
     }
@@ -617,6 +620,8 @@ function ProductDetails() {
 
 
   return (
+    <>
+    <ToastContainer position="top-center"/>
     <div>
       <Header />
       {/* {
@@ -1225,7 +1230,7 @@ function ProductDetails() {
         ) : (null)
       }
     </div>
-
+    </>
   );
   {/* // <br></br> */ }
 

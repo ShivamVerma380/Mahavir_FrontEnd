@@ -14,6 +14,7 @@ import Header from "../../Header";
 
 
 import { ToastContainer, toast } from "react-toastify";
+import Footer from "../../Footer/Footer";
 
 // import { useFormik } from "formik";
 
@@ -574,7 +575,8 @@ function AddressBuyNowSummary(){
           ) : (null)}
 
 
-        </div></>
+        </div>
+        <Footer/></>
     
       );
 }
