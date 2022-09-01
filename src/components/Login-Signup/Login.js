@@ -20,6 +20,7 @@ const axios = require('axios');
 
 
 var email = "";
+var forgotemail = "";
 var password = "";
 var otp = "";
 var inputOtpByUser = "";
@@ -37,6 +38,7 @@ localStorage.setItem("isUserLoggedIn", isUserLoggedIn);
 
 function Login() {
     var cookietoken=getCookie("jwtToken");
+    
     
 
     const navigate = useNavigate();
@@ -63,6 +65,10 @@ function Login() {
     const inputEmailEvent = (event) => {
         email = event.target.value;
         // console.log("email",email);
+    }
+
+    const inputForgotEmailEvent = (event)=>{
+        forgotemail = event.target.value;
     }
 
     const inputOTPEvent = (event) => {
@@ -238,14 +244,14 @@ function Login() {
         setOtpForgotEmailActive(true);
         // alert(email);
 
-        if (email === "") {
+        if (forgotemail === "") {
             // console.log("Email is empty")
             toast.error(<b>Please Enter Email</b>)
         } else {
             // console.log("Email", email);
             axios({
                 method: "get",
-                url: url+"/forgotPassword/" + email
+                url: url+"/forgotPassword/" + forgotemail
             }).then(function (response) {
                 // console.log(response.data);
                 otp = response.data.otp;
@@ -351,13 +357,15 @@ function Login() {
         }
         else {
 
-
+            var form_data_bod = {
+                "password": newpassword
+            }
             const headers = { 
-                'Authorization': 'Bearer '+cookietoken,
+                
                 "Content-Type": "multipart/form-data"
                 
             };
-            axios.post(url+'/updatePassword/'+newpassword,{headers})
+            axios.post(url+'/updatePassword/'+forgotemail,form_data_bod,{headers})
             .then(function (response) {
                     if (response.status == 200) {
                         // console.log("Password Updated successfully");
@@ -490,7 +498,7 @@ function Login() {
                                     <div className="fields">
                                         <FormGroup>
                                             <Label id="email-input" for="email"></Label>
-                                            <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",color:"black",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputEmailEvent} />
+                                            <Input style={{borderRadius:'20px',justifyContent:"left",backgroundColor:"white",color:"black",borderBottom:"1px Solid #E2E2E2",width:"100%"}} id="email" name="email" placeholder="Enter email" type="email" className="input" onChange={inputForgotEmailEvent} />
                                         </FormGroup>
 
                                     </div>

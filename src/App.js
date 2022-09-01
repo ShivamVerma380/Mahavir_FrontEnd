@@ -58,6 +58,9 @@ function App() {
   const [MiniPoster,setMiniPoster] = useState([]);
   const [catProducts,setCatProducts] = useState([]);
   const [isCatProductFetched, setIsCatProductFetched] = useState(false);
+
+  // const[initialProducts,setInitialProducts] = useState([]);
+  // const[isInitialProductsFetched,setIsInitialProductsFetched] = useState(false);
   
   if (localStorage.getItem("comparecount")==null || localStorage.getItem("comparecount")==undefined) {
     count = 0;
@@ -112,6 +115,7 @@ function App() {
     window.scrollTo(0, 0)
     
     // setCountc(getCookie("countcompare"));
+    
     
 
 

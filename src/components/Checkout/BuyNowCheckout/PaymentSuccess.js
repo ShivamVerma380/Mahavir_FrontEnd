@@ -12,6 +12,8 @@ function PaymentSuccess(){
     console.log("pay",paymentmode)
     var paymentamount = localStorage.getItem("Amount")
 
+    
+    
     const handleOrders=()=>{
         navigate("/my-orders")
     }
