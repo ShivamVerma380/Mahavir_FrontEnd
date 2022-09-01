@@ -560,7 +560,11 @@ margin-bottom: 0;
   color: #212121;
 }
 
+.star-container svg{
 
+width: 35px;
+height: 35px;
+}
 
 @media screen and (min-width:320px) and (max-width:480px)
 {
@@ -689,9 +693,13 @@ margin-bottom: 0;
     margin-top: 20px;
     width: 350px;   
   }
-.pininput {
-  width: 120px;
-  margin-left: -7%;
+  .pininput {
+    width: 97px;
+    margin-left: -33%;
+    font-size: 11px;
+}
+.checkpinbtn {
+  margin-left: -35px;
 }
 .specifications {
 width: 100%;
