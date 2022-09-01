@@ -1,6 +1,7 @@
 import axios from "axios";
 import React,{useState,useEffect} from "react";
 import { Table, Row, Col } from "react-bootstrap";
+import {Button} from "reactstrap"
 import { useNavigate } from "react-router-dom";
 import url from "../../Uri";
 import { getCookie } from "../Cookies";
@@ -40,11 +41,16 @@ function OrderInvoices(){
         navigate("/invoice")
     }
 
+    const handleContinue=()=>{
+        navigate("/")
+    }
+
     return(
         <>
         <body style={{background:"whitesmoke"}}><Header/>
         <div style={{marginTop:"150px"}}>
             {(isOrdersFetched) ? (
+                <>
                 <Row>
                     <Col md={2}></Col>
                     <Col md={8} style={{background:"white"}}>
@@ -82,15 +88,25 @@ function OrderInvoices(){
                                             )}
 
                                             <td>{order.userAddress.address + "," + order.userAddress.city + "," + order.userAddress.state + "-" + order.userAddress.pincode}</td>
-                                            <td onClick={() => handleInvoiceClick(order)}>📅</td>
+                                            <td onClick={() => handleInvoiceClick(order)} style={{cursor:"pointer"}}>📅</td>
                                         </tr>
                                     );
                                 })}
                             </tbody>
                         </Table>
+                        <br></br>
+                        <h6 style={{fontWeight:300}}><i>* Please click on the invoice icon to view your order invoice!</i></h6>
                         </Col>
                         <Col md={2}></Col>
                 </Row>
+                <br></br>
+                <br></br>
+                <Row>
+                <center>
+                    <Button style={{background:"#C10000",border:"none"}} onClick={handleContinue}>Continue Shopping</Button>
+                </center>
+                </Row>
+                </>
             ) : (
                 null
             )}
