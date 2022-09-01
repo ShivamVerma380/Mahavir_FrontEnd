@@ -4,6 +4,7 @@ import { Table, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import url from "../../Uri";
 import { getCookie } from "../Cookies";
+import Footer from "../Footer/Footer";
 import Header from "../Header";
 
 function OrderInvoices(){
@@ -40,13 +41,15 @@ function OrderInvoices(){
     }
 
     return(
-        <><Header/>
+        <>
+        <body style={{background:"whitesmoke"}}><Header/>
         <div style={{marginTop:"150px"}}>
             {(isOrdersFetched) ? (
                 <Row>
                     <Col md={2}></Col>
-                    <Col md={8}>
+                    <Col md={8} style={{background:"white"}}>
                         <h3>Your Order Invoices:</h3>
+                        <br></br>
                         <Table striped hover border>
                             <thead>
                                 <tr>
@@ -91,7 +94,10 @@ function OrderInvoices(){
             ) : (
                 null
             )}
-        </div></>
+        </div>
+        
+       
+        </body></>
     );
 }
 

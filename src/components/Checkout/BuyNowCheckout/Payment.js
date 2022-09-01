@@ -56,6 +56,7 @@ function Payment(){
             alert("Please select payment type")
         }else{
             if(localStorage.getItem("paymentType")==="cashOnDelivery"){
+                localStorage.setItem("paymentmode",'cashOnDelivery');
                 const form_data_body={
                     products,
                     "userAddress":{
@@ -83,7 +84,7 @@ function Payment(){
                         console.log("response",res)
                         SetIsPaymentDone(true)
                         SetIsPaymentDone(true)
-                        navigate("/my-orders")
+                        navigate("/paymentsuccess")
                         localStorage.removeItem("paymentType");
                         // navigate("/invoice")
                         // localStorage.setItem("BuyProductInvoice",cartModels);
@@ -133,7 +134,7 @@ function Payment(){
                                         SetIsPaymentDone(true)
                                         SetIsPaymentDone(true)
                                         localStorage.removeItem("paymentType");
-                                        navigate("/my-orders")
+                                        navigate("/paymentsuccess")
                                         // navigate("/invoice")
                                         // localStorage.setItem("BuyProductInvoice",cartModels);
                                     }

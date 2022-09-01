@@ -60,6 +60,7 @@ import PrivacyPolicy from './components/Footer/PrivacyPolicy';
 import ShippingOptions from './components/Footer/ShippingOptions';
 import PaymentReturns from './components/Footer/PaymentReturns';
 import TermsOfUse from './components/Footer/TermsOfUse';
+import PaymentSuccess from './components/Checkout/BuyNowCheckout/PaymentSuccess';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var Category = localStorage.getItem("Category");
@@ -134,6 +135,7 @@ root.render(
 
       <Route path='/invoice' element={<Invoice/>}/>
       <Route path='/rate-products' element = {<Orders/>}/>
+      <Route path='paymentsuccess' element = {<PaymentSuccess/>}/>
     </Routes>
   </BrowserRouter>
 );
