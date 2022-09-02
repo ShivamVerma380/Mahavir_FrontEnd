@@ -95,8 +95,8 @@
     "universal-cookie": "^4.0.4"
   },
   "scripts": {
-    "start": "react-scripts --max_old_space_size=5120 start",
-    "build": "react-scripts --max_old_space_size=5120 build",
+    "start": "react-scripts --max_old_space_size=8192 start",
+    "build": "react-scripts --max_old_space_size=8192 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -123,6 +123,6 @@
     "web-vitals": "^2.1.4"
   },
   "proxy": "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com",
-  "start": "react-scripts --max_old_space_size=4096 start",
+  "start": "react-scripts --max_old_space_size=16192 start",
   "build": "react-scripts --max_old_space_size=16192 build"
 }
