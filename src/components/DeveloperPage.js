@@ -7,12 +7,12 @@ import { Icon } from '@iconify/react';
 import {HiOutlineMail} from "react-icons/hi";
 import {FaLinkedinIn} from "react-icons/fa";
 import {BsGithub} from "react-icons/bs";
-import shraddhaImg from "../assets/developers/Shraddha.jpg";
-import omkarImg from "../assets/developers/Omkar_img.jpeg";
-import shivamImg from "../assets/developers/Shivam_img.jpeg";
-import ketakiImg from "../assets/developers/Ketaki_img.jpeg";
-import siddhantImg from "../assets/developers/Siddhant_img.jpeg";
-import aditiImg from "../assets/developers/Aditi_img.jpeg";
+import omkarImg from "../assets/developers/Omkar_img.jpg";
+import shivamImg from "../assets/developers/Shivam_img.jpg";
+import ketakiImg from "../assets/developers/Ketaki_img.jpg";
+import siddhantImg from "../assets/developers/Siddhant_img.jpg";
+import aditiImg from "../assets/developers/Aditi_img.jpg";
+import shraddhaImg from "../assets/developers/Shraddha_img.jpg";
 
 
 

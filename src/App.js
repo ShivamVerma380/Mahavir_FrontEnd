@@ -19,11 +19,10 @@ import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 import ShopByBrands from './components/Items/ShopByBrands';
 import { getCookie, setCookie } from "./components/Cookies";
 
-import {Helmet} from 'react-helmet';
 import { RiCompassDiscoverLine } from 'react-icons/ri';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import HomeBottom from './components/Items/HomeBottom';
-
+import {Spinner} from 'react-bootstrap';
 import {BsArrowUp} from "react-icons/bs";
 
 // import Url from url
@@ -287,9 +286,10 @@ function App() {
       // }).catch(function(error){
       //     console.log(error);
       // })
-
+      var element = document.getElementById("spinner");
+      element.style.visibility="hidden";
+   
     }
-    
         
   },[]);
   // console.log("deals..",deals);
@@ -411,6 +411,7 @@ function App() {
   return (
 
     <div>
+      {/* <Spinner id="spinner" style={{marginTop:"200px"}}animation="border" /> */}
       {/* <button onclick={topFunction} id="myBtn" title="Go to top">Top</button> */}
       <Button  id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
       
@@ -423,6 +424,7 @@ function App() {
         )
       }
      <Header/>
+     
      
       
       {/* <AddItem/> */}
