@@ -205,3 +205,63 @@
     width: 4em;
     text-align: center;
 }
+
+.mobile_login{
+display: none;
+}
+
+@media screen and (min-width:320px) and (max-width:480px)
+{
+    .form-parent{
+        display: none;
+    }
+    .mobile_login{
+        display: block;
+        }
+    .form{
+        margin-top: 125px;
+        width: 100%;
+    }
+    #sign-up-form {
+        margin-left: 0%;
+    }
+
+    .login-button {
+        width:100%;
+    }
+
+    .New-account-button{
+        width: 100%;
+    }
+}
+/* ipads and tablets */
+@media screen and (min-width: 481px) and (max-width:768px)
+{
+    .form-parent{
+        display: none;
+    }
+    .mobile_login{
+        display: block;
+        }
+    .form{
+        margin-top: 125px;
+        width: 100%;
+    }
+    #sign-up-form {
+        margin-left: 0%;
+    }
+
+    .login-button {
+        width:100%;
+    }
+
+    .New-account-button{
+        width: 100%;
+    }
+}
+
+/* laplops and small screens */
+@media screen and (min-width: 769px) and (max-width:1024px)
+{
+    
+}

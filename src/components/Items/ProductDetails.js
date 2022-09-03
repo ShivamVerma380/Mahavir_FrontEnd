@@ -669,67 +669,21 @@ function ProductDetails() {
                     
                     <Row className="laptopimg" >
                       <Col md={2} className='smallImg'>
-                      {/* <div className="swiper-button-next"></div>
-                      <Swiper style={{marginTop:35}}
-                      height={350}
-                      
-                slidesPerView={4}
-                spaceBetween={5}
-                slidesPerGroup={4}
-                loop={false}
-                loopFillGroupWithBlank={true}
-                breakpoints={{
-                  700: {
-                    slidesPerView: 4,
-                  },
-                  400: {
-                    slidesPerView: 1,
-                  },
-                }}
-                direction={"vertical"}
-                pagination={{
-                  clickable: true,
-                }}
-                navigation={true}
-            
-                modules={[Pagination,Navigation]}
-                // className="mySwiper"
-              >  */}
+                    
                 
                 {getproductimg1(product)}
                 {getproductimg2(product)}
                 {getproductimg3(product)}
                 {getproductimg4(product)}
                 {getproductimg5(product)}
-                      {/* <SwiperSlide>                     
-                        {getproductimg1(product)}
-                                        
-                      </SwiperSlide>
-                      <SwiperSlide>
-                        {getproductimg2(product)}
-                      </SwiperSlide>
-                      <SwiperSlide>
-                      {getproductimg3(product)}
-                    </SwiperSlide>
-                    <SwiperSlide>
-                    {getproductimg4(product)}
-                  </SwiperSlide>
-                  <SwiperSlide>
-                  {getproductimg5(product)}
-                </SwiperSlide> */}
                 
                     
                   
-                
-              {/* </Swiper>
-              <div className="swiper-button-prev"></div> */}
-                        
 
                       </Col>
 
                       <Col className="imageproduct" md={10} >
-                        {/* <br></br>
-              <br></br> */}
+                    
 
                         <div className="largeimg" >
 
@@ -808,18 +762,7 @@ function ProductDetails() {
 
                   <Row className="inerrow1">
                     <h2 className="productname">{product.productName}</h2>
-                    {/* <ul className="list-inline small">
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
-                      <span style={{marginRight:'5px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
-                      <span style={{marginRight:'5px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
-                      <span style={{marginRight:'5px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star text-success fa-2x"></i></li>
-                      <span style={{marginRight:'5px'}}></span>
-                      <li className="list-inline-item m-0"><i className="fa fa-star-o text-gray fa-2x"></i></li>
-                      <span style={{marginRight:'5px'}}></span>
-                      </ul> */}
+                    
                       {
                         (isReviewFetched)?(
                           <>
@@ -937,17 +880,7 @@ function ProductDetails() {
                     )
                   }
 </Row>
-                  {/* {
-            (isVariantKeysFetched)?(
-              variantKeys.map(variant=>{
-                return(
-                  <ProductVariant variantName={variant} product={product}/>
-                );
-              })
-            ):(
-              null
-            )
-          } */}
+                  
 
 
                   <Row className="pincoderow">
@@ -963,56 +896,6 @@ function ProductDetails() {
                     </Col>
                   </Row>
                   <br></br>
-                   {/* <Row >
-                    <h4 className="rowtitle">PRODUCT DESCRIPTION</h4>
-
-                    {
-                     
-                      product.productDescriptions.map((index,pos) => {
-                        return (
-                          <>
-                            {
-                              (pos%2=="0")?(
-                                <>
-                                <Col md={3}>
-
-<img src={index.image} style={{ width: "130px" }}></img>
-
-</Col>
-                            <Col md={9}>
-                              <br></br>
-                              
-                              <h5 style={{fontWeight:600}}>{index.title}</h5>
-
-                              <p style={{fontFamily:"Roboto",letterSpacing:"0.01em",fontWeight:300,color:"#212121",fontSize:"13px",lineHeight:"17px"}}>{index.description}</p>
-                            </Col>
-                            
-                          </>
-                              ):(
-                                <>
-                                
-                            <Col md={9}>
-                              <br></br>
-                              
-                              <h5 style={{fontWeight:600}}>{index.title}</h5>
-
-                              <p style={{fontFamily:"Roboto",letterSpacing:"0.01em",fontWeight:300,color:"#212121",fontSize:"13px",lineHeight:"17px"}}>{index.description}</p>
-                            </Col>
-                            <Col md={3}>
-
-                              <img src={index.image} style={{ width: "130px" }}></img>
-
-                            </Col>
-                            </>
-                              )
-                            }
-                            
-                          </>
-                        )
-
-                      })
-                    }
-                  </Row> */}
                   
                   
                  
@@ -1176,7 +1059,7 @@ function ProductDetails() {
 
                         return (
                           <SwiperSlide >
-                            <Card style={{ width: '25rem' , cursor:'poniter' }} className="mb-2">
+                            <Card style={{ width: '25rem' , cursor:'pointer' }} className="mb-2">
                               {/* <AiOutlineHeart style={{ marginTop: "10px", marginLeft: "5px" }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> */}
                               <center>
                               <CardImg className="this.props.img" style={{height:"180px" , width:"160px"}} onClick={() => callProductDetails(index)}
@@ -1192,22 +1075,7 @@ function ProductDetails() {
                                   <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginLeft:"10px",fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b>
                                   <br></br>
                                 </CardSubtitle>
-                                {/* <CardText className="this.props.p change" onClick={() => callProductDetails(index)}>
-                                  {
-                                    index.productHighlights.split(';').splice(0,2).map((h,pos)=>{
-                                      return(
-                                        <p style={{fontSize:"10px"}}>{h}</p>
-                                      )
-                                    })
-                                  }
-                                </CardText> */}
-                                {/* <Form>
-                                  <Form.Check type="checkbox" label="Add To Compare" onChange={handleAddToCompare} />
-                                </Form> */}
-                                {/* <br></br> */}
-                                {/* {
-                                  fetchOfferAvailableBtn(index.offerPrice, index.productPrice)
-                                } */}
+                                
                               </CardBody>
                               <br></br>
                             </Card>
