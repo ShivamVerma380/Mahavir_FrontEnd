@@ -19,7 +19,6 @@ import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 import ShopByBrands from './components/Items/ShopByBrands';
 import { getCookie, setCookie } from "./components/Cookies";
 
-import {Helmet} from 'react-helmet';
 import { RiCompassDiscoverLine } from 'react-icons/ri';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import HomeBottom from './components/Items/HomeBottom';
@@ -58,6 +57,9 @@ function App() {
   const [MiniPoster,setMiniPoster] = useState([]);
   const [catProducts,setCatProducts] = useState([]);
   const [isCatProductFetched, setIsCatProductFetched] = useState(false);
+
+  // const[initialProducts,setInitialProducts] = useState([]);
+  // const[isInitialProductsFetched,setIsInitialProductsFetched] = useState(false);
   
   if (localStorage.getItem("comparecount")==null || localStorage.getItem("comparecount")==undefined) {
     count = 0;
@@ -112,6 +114,7 @@ function App() {
     window.scrollTo(0, 0)
     
     // setCountc(getCookie("countcompare"));
+    
     
 
 
