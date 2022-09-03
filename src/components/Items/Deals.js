@@ -189,7 +189,7 @@ function Deals({deals}) {
       //     navigate('/')
   
       // }
-      console.log("Wishlist clicked")
+      // console.log("Wishlist clicked")
       if(getCookie("isLoggedIn")!=='true'){
         navigate("/login")
       }else{
@@ -219,12 +219,14 @@ function Deals({deals}) {
           // navigate("/");
         }
         else{
-          alert("Item already present in wishlist")
+          // alert("Item already present in wishlist")
+          toast.warn(<b>Item already present in wishlist</b>)
           console.log(response.data)
         }
       }).catch(function (error) {
-          alert("Item already present in wishlist")
-          console.log("Error", error);
+          // alert("Item already present in wishlist")
+          toast.warn(<b>Item already present in wishlist</b>)
+          console.log("Error", error.response);
         
       })
     }
@@ -241,7 +243,7 @@ function Deals({deals}) {
     }
 
     function RemoveWishlist(index){
-      console.log("Wishlist",localStorage.getItem("Wishlist"))
+      // console.log("Wishlist",localStorage.getItem("Wishlist"))
       var formdata = {
         "modelNumber": index.modelNumber
   
@@ -253,8 +255,8 @@ function Deals({deals}) {
         }
       }).then(function (response) {
         if (response.status == 200) {
-          console.log("Removed from wishlist successfully");
-          console.log(response.data)
+          // console.log("Removed from wishlist successfully");
+          // console.log(response.data)
           // var arr = localStorage. 
           var arr = localStorage.getItem("Wishlist").split(",")
           var finalWishlist=[];
@@ -268,7 +270,7 @@ function Deals({deals}) {
           // navigate("/");
         }
       }).catch(function (error) {
-        console.log("Error", error);
+        console.log("Error", error.response);
       })
     }
 

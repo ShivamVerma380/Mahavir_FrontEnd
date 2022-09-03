@@ -42,7 +42,7 @@ function AddressBuyNowSummary(){
     const [city, setCity] = useState("Select City ▼");
     const [isCitySelected, setIsCitySelected] = useState(false);
     var token = getCookie("jwtToken");
-    console.log(token);
+    // console.log(token);
 
     
 
@@ -59,16 +59,16 @@ function AddressBuyNowSummary(){
           }).then(function (response) {
             console.log("Response", response);
             if (response.status == 200) {
-              console.log("Address response", response.data);
+              // console.log("Address response", response.data);
               setAddress(response.data);
-              console.log("Address: ", address)
+              // console.log("Address: ", address)
               setIsAddressFetched(true);
     
             } else {
-              console.log(response.data.message);
+              // console.log(response.data.message);
             }
           }).catch(function (error) {
-            console.log(error);
+            console.log(error.response);
           })
           // console.log("state",State.getStatesOfCountry('IN'))
           // 
@@ -79,7 +79,7 @@ function AddressBuyNowSummary(){
         }
       }, [])
     
-    console.log("Address length: ",address.length)
+    // console.log("Address length: ",address.length)
     
     const ProceedHandler = () => {
 
@@ -108,14 +108,14 @@ function AddressBuyNowSummary(){
             }
           }).then(function (response) {
             if (response.status == 200) {
-              console.log("Address Added successfully");
-              console.log(response.data)
+              // console.log("Address Added successfully");
+              // console.log(response.data)
               // navigate("/");
             }
           }).catch(function (error) {
-            console.log("Error", error);
+            console.log("Error", error.response);
           })
-          console.log("Form: ", formdata)
+          // console.log("Form: ", formdata)
           window.location.reload()
           // navigate("/OrderSummary")
         }
@@ -147,14 +147,14 @@ function AddressBuyNowSummary(){
     
       const InputAddressOneHandler = (e) => {
         addressone = e.target.value;
-        console.log("Address One: ", addressone)
+        // console.log("Address One: ", addressone)
         localStorage.setItem("address-one", addressone)
     
       }
     
       const InputAddressTwoHandler = (e) => {
         addresstwo = e.target.value;
-        console.log("Address Two: ", addresstwo)
+        // console.log("Address Two: ", addresstwo)
         localStorage.setItem("address-two", addresstwo)
     
       }
@@ -175,7 +175,7 @@ function AddressBuyNowSummary(){
     
       const InputZipHandler = (e) => {
         zip = e.target.value;
-        console.log("Zip: ", zip)
+        // console.log("Zip: ", zip)
         localStorage.setItem("zip", zip)
     
       }
@@ -187,7 +187,7 @@ function AddressBuyNowSummary(){
     
       const InputPhoneNoHandler = (e) => {
         phoneNo = e.target.value;
-        console.log("Phone No: ", phoneNo)
+        // console.log("Phone No: ", phoneNo)
         localStorage.setItem("phone", phoneNo)
     
       }
@@ -198,13 +198,13 @@ function AddressBuyNowSummary(){
         // console.log("addddd "+JSON.stringify(index))
         if (element.checked){
             localStorage.setItem("selectedaddress",JSON.stringify(index));
-            console.log("add   "+localStorage.getItem("selectedaddress"));
+            // console.log("add   "+localStorage.getItem("selectedaddress"));
         }
     
       }
     
       function handleAddressDelete(index){
-        console.log("Index",index);
+        // console.log("Index",index);
         axios.post(url+"/delete-address",index, {
           headers: {
             "Authorization": "Bearer "+token,
@@ -212,13 +212,13 @@ function AddressBuyNowSummary(){
           }
         }).then(function(response){
           if(response.status==200){
-            console.log("Address deleted successfully");
+            // console.log("Address deleted successfully");
             window.location.reload();
           }else{
-            console.log("Error in deleting address");
+            // console.log("Error in deleting address");
           }
         }).catch(function(error){
-          console.log("Error",error);
+          console.log("Error",error.response);
         }
         )
       
@@ -253,7 +253,7 @@ function AddressBuyNowSummary(){
       //     useEffect(() => {}, [values]);
 
       function handleProceedOnClick(){
-        console.log("address length",address.length);
+        // console.log("address length",address.length);
         var flag = true;
 
 
@@ -262,7 +262,7 @@ function AddressBuyNowSummary(){
             address.map((index,i)=>{
                 if(document.getElementById("add"+i).checked){
                     localStorage.setItem("selectedaddress",JSON.stringify(index));
-                    console.log("add   "+localStorage.getItem("selectedaddress"));
+                    // console.log("add   "+localStorage.getItem("selectedaddress"));
                     navigate("/summary")
                     flag = false;
                 }
@@ -275,7 +275,7 @@ function AddressBuyNowSummary(){
             //     }
             // }
         }catch(error){
-            console.log("error",error);
+            console.log("error",error.response);
         }
         // try {
             
@@ -302,30 +302,31 @@ function AddressBuyNowSummary(){
 
       function selectState(index){
         var arr = [];
-        console.log("Index",index);
-        console.log("cities",City.getCitiesOfState("IN",index.isoCode));
+        // console.log("Index",index);
+        // console.log("cities",City.getCitiesOfState("IN",index.isoCode));
         City.getCitiesOfState("IN",index.isoCode).map((city) => {
           arr.push(city.name);
         });
         incountry = "India";
-        console.log("Country: ", incountry)
+        // console.log("Country: ", incountry)
         localStorage.setItem("country", "India")
         setCities(arr);
         setCity("Select City ▼");
         setState(index.name);
         localStorage.setItem("state", index.name);
         instate = index.name;
-        console.log("Cities",arr);
+        // console.log("Cities",arr);
       }
 
       function selectCity(index){
         setCity(index);
         incity = index;
         localStorage.setItem("city", index);
-        console.log("City",index);
+        // console.log("City",index);
       }
       return (
         <>
+        <ToastContainer position="top-center"/>
         <Header/>
         <div className="deliveryAdd">
           

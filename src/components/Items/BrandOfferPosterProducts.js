@@ -9,9 +9,10 @@ import {setCookie,getCookie} from '../Cookies'
 import {FaArrowCircleUp} from 'react-icons/fa';
 import {RiArrowDropDownLine} from 'react-icons/ri'
 import Footer from "../Footer/Footer";
+import { toast, ToastContainer } from "react-toastify";
 
 const BrandOfferPosterProducts =()=>{
-    console.log("Inside poster");
+    // console.log("Inside poster");
     var comparemodels=getCookie("addToCompare").split(',');
     var token=getCookie("jwtToken");
     const [visible, setVisible] = useState(false)
@@ -43,7 +44,7 @@ const BrandOfferPosterProducts =()=>{
 
                     })
 
-                    console.log("products", products);
+                    // console.log("products", products);
                     SetAreProductsFetched(true);
 
                 })
@@ -85,7 +86,7 @@ const BrandOfferPosterProducts =()=>{
         //     navigate('/')
     
         // }
-        console.log("Wishlist clicked")
+        // console.log("Wishlist clicked")
         if(getCookie("isLoggedIn")!=='true'){
           navigate("/login")
         }else{
@@ -115,12 +116,14 @@ const BrandOfferPosterProducts =()=>{
             // navigate("/");
           }
           else{
-            alert("Item already present in wishlist")
-            console.log(response.data)
+            // alert("Item already present in wishlist")
+            toast.warn(<b>Item already present in wishlist</b>)
+            // console.log(response.data)
           }
         }).catch(function (error) {
-            alert("Item already present in wishlist")
-            console.log("Error", error);
+            // alert("Item already present in wishlist")
+            toast.warn(<b>Item already present in wishlist</b>)
+            console.log("Error", error.response);
           
         })
       }
@@ -129,7 +132,7 @@ const BrandOfferPosterProducts =()=>{
 
       function handleAddToCompare(index){
 
-        console.log("inside add to compare");
+        // console.log("inside add to compare");
         
         var element = document.getElementById(index.modelNumber);
         
@@ -146,7 +149,7 @@ const BrandOfferPosterProducts =()=>{
         //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
         // }
         // var length = comparemodels.length;
-        console.log("Length...",length)
+        // console.log("Length...",length)
         
         
         if(element.checked){
@@ -154,34 +157,36 @@ const BrandOfferPosterProducts =()=>{
             if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
                 flag = false;
                 document.getElementById(index.modelNumber).checked = false;
-                alert("Please select products from same category");
+                toast.error(<b>Please select products from same category</b>)
+                // alert("Please select products from same category");
             }
             if(length==4){
                 flag = false;
                 document.getElementById(index.modelNumber).checked=false;
-                alert("You can compare only 4 products");
+                // alert("You can compare only 4 products");
+                toast.error(<b>You can compare only 4 products</b>)
             }
             if(flag){
-                console.log("adddd"+index.modelNumber);
+                // console.log("adddd"+index.modelNumber);
                 comparemodels.push(index.modelNumber);
                 setCookie("addToCompare",comparemodels,20);
                 setLen(getCookie("addToCompare").split(',').length)
-                console.log(comparemodels);
-                console.log("checked "+index.modelNumber);
+                // console.log(comparemodels);
+                // console.log("checked "+index.modelNumber);
             }
         }
         else {
           for (var i = 0; i < comparemodels.length; i++) {
             if (comparemodels[i] === index.modelNumber) {
               comparemodels.splice(i, 1);
-                console.log(comparemodels);
+                // console.log(comparemodels);
                 setCookie("addToCompare",comparemodels,20);
                 setLen(getCookie("addToCompare").split(',').length)
                 // window.location.reload();
                 break;
             }
         }
-          console.log("unchecked "+index.modelNumber);
+        //   console.log("unchecked "+index.modelNumber);
 
         }
 
@@ -216,7 +221,7 @@ const BrandOfferPosterProducts =()=>{
     }
       
       localStorage.setItem("comparecount",change)
-      console.log("Get",localStorage.getItem("comparecount"))
+    //   console.log("Get",localStorage.getItem("comparecount"))
 
       function callProductDetails(index){
         //alert(index);
@@ -227,69 +232,69 @@ const BrandOfferPosterProducts =()=>{
     }
 
     function SortByLowPrice(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setProducts([]);
         arr = products;
-        console.log("Before sorting",products)
+        // console.log("Before sorting",products)
         arr.map(index=>{
-            console.log("indexOfferPrice",index.offerPrice)
+            // console.log("indexOfferPrice",index.offerPrice)
         })
         arr.sort((a,b)=>a.offerPrice-b.offerPrice);
-        console.log("After sorting",products)
+        // console.log("After sorting",products)
         arr.map(index=>{
-            console.log("indexOfferPrice--",index.offerPrice)
+            // console.log("indexOfferPrice--",index.offerPrice)
         })
         setProducts([...arr])
     }
     
     function SortByHighPrice(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setProducts([]);
         arr = products;
-        console.log("Before sorting",products)
+        // console.log("Before sorting",products)
         arr.map(index=>{
-            console.log("indexOfferPrice",index.offerPrice)
+            // console.log("indexOfferPrice",index.offerPrice)
         })
         arr.sort((a,b)=>b.offerPrice-a.offerPrice);
-        console.log("After sorting",products)
+        // console.log("After sorting",products)
         arr.map(index=>{
-            console.log("indexOfferPrice--",index.offerPrice)
+            // console.log("indexOfferPrice--",index.offerPrice)
         })
         setProducts([...arr])
     }
 
     function SortByTopRated(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setProducts([]);
         arr = products;
-        console.log("Before sorting",products)
+        // console.log("Before sorting",products)
         arr.map(index=>{
-            console.log("indexAverageRating",index.averageRating)
+            // console.log("indexAverageRating",index.averageRating)
         })
         arr.sort((a,b)=>b.averageRating-a.averageRating);
-        console.log("After sorting",products)
+        // console.log("After sorting",products)
         arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
+            // console.log("indexAverageRating--",index.averageRating)
         })
         setProducts([...arr])
     }
 
     function SortByDiscount(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setProducts([]);
         arr = products;
-        console.log("Before sorting",products)
+        // console.log("Before sorting",products)
         arr.map(index=>{
-            console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
+            // console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
         })
         arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
-        console.log("After sorting",products)
+        // console.log("After sorting",products)
         arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
+            // console.log("indexAverageRating--",index.averageRating)
         })
         setProducts([...arr])
     }
@@ -358,6 +363,7 @@ const BrandOfferPosterProducts =()=>{
         //     }
         // </div>
         <>
+        <ToastContainer position="top-center"/>
         <Header/>
 <body style={{background:"whitesmoke"}}>
              

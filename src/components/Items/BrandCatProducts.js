@@ -82,14 +82,14 @@ function BrandCatProducts() {
             axios.get(url + "/excel/shopByBrands/" + localStorage.getItem("brandName") + "/" + localStorage.getItem("shopbrandcat")).then(
                 function (response) {
                     if (response.status == 200) {
-                        console.log("Response", response.data);
+                        // console.log("Response", response.data);
                         setProducts(response.data);
                         SetSelectedProducts(response.data);
                         SetAreProductsFetched(true);
                         var minPrice = Number.MAX_VALUE, maxPrice = Number.MIN_VALUE;
                         // var priceArr=[]
                         response.data.map((index, pos) => {
-                            console.log("In selected products map...")
+                            // console.log("In selected products map...")
                             if (minPrice > parseInt(index.productPrice)) {
                                 minPrice = index.productPrice
                             }
@@ -97,14 +97,14 @@ function BrandCatProducts() {
                                 maxPrice = index.productPrice
                             }
                         })
-                        console.log("min", minPrice, "max", maxPrice)
+                        // console.log("min", minPrice, "max", maxPrice)
                         SetMin(minPrice);
                         SetMax(maxPrice);
                         SetValue([minPrice, maxPrice]);
 
                     }
                 }).catch(function (error) {
-                    console.log("error", error);
+                    console.log("error", error.response);
                 }
                 );
 
@@ -116,7 +116,7 @@ function BrandCatProducts() {
                         })
 
                     }).catch(function (error) {
-                        console.log("error", error);
+                        console.log("error", error.response);
                     })
 
                 SetIsCategoriesFetched(true);
@@ -139,7 +139,7 @@ function BrandCatProducts() {
                     // SetFilters(response.data.filterCriterias)
                     // SetIsFiltersFetched(true)
                 }).catch(function (error) {
-                    console.log("error", error)
+                    console.log("error", error.response)
                 })
         }
 
@@ -172,7 +172,7 @@ function BrandCatProducts() {
 
     function handleAddToCompare(index) {
 
-        console.log("inside add to compare");
+        // console.log("inside add to compare");
 
         var element = document.getElementById(index.modelNumber);
 
@@ -189,7 +189,7 @@ function BrandCatProducts() {
         //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
         // }
         // var length = comparemodels.length;
-        console.log("Length...", length)
+        // console.log("Length...", length)
 
 
         if (element.checked) {
@@ -197,34 +197,36 @@ function BrandCatProducts() {
             if (index.category !== localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory") !== null) {
                 flag = false;
                 document.getElementById(index.modelNumber).checked = false;
-                alert("Please select products from same category");
+                // alert("Please select products from same category");
+                toast.warn(<b>Please select products from same category</b>)
             }
             if (length == 4) {
                 flag = false;
                 document.getElementById(index.modelNumber).checked = false;
-                alert("You can compare only 4 products");
+                // alert("You can compare only 4 products");
+                toast.warn(<b>You can compare only 4 products</b>)
             }
             if (flag) {
-                console.log("adddd" + index.modelNumber);
+                // console.log("adddd" + index.modelNumber);
                 comparemodels.push(index.modelNumber);
                 setCookie("addToCompare", comparemodels, 20);
                 setLen(getCookie("addToCompare").split(',').length)
-                console.log(comparemodels);
-                console.log("checked " + index.modelNumber);
+                // console.log(comparemodels);
+                // console.log("checked " + index.modelNumber);
             }
         }
         else {
             for (var i = 0; i < comparemodels.length; i++) {
                 if (comparemodels[i] === index.modelNumber) {
                     comparemodels.splice(i, 1);
-                    console.log(comparemodels);
+                    // console.log(comparemodels);
                     setCookie("addToCompare", comparemodels, 20);
                     setLen(getCookie("addToCompare").split(',').length)
                     // window.location.reload();
                     break;
                 }
             }
-            console.log("unchecked " + index.modelNumber);
+            // console.log("unchecked " + index.modelNumber);
 
         }
 
@@ -259,7 +261,7 @@ function BrandCatProducts() {
     }
 
     localStorage.setItem("comparecount", change)
-    console.log("Get", localStorage.getItem("comparecount"))
+    // console.log("Get", localStorage.getItem("comparecount"))
 
     function WishlistHandler(index) {
         // alert("Item added successfully to wishlist");
@@ -286,7 +288,7 @@ function BrandCatProducts() {
         //     navigate('/')
 
         // }
-        console.log("Wishlist clicked")
+        // console.log("Wishlist clicked")
         if (getCookie("isLoggedIn") !== 'true') {
             navigate("/login")
         } else {
@@ -312,7 +314,7 @@ function BrandCatProducts() {
                     arr.push(index.modelNumber)
                     localStorage.setItem("Wishlist", arr)
                     window.location.reload();
-                    console.log(response.data)
+                    // console.log(response.data)
                     // navigate("/");
                 }
                 else {
@@ -320,8 +322,9 @@ function BrandCatProducts() {
                     console.log(response.data)
                 }
             }).catch(function (error) {
-                alert("Item already present in wishlist")
-                console.log("Error", error);
+                // alert("Item already present in wishlist")
+                toast.warn(<b>Item already present in wishlist</b>)
+                console.log("Error", error.response);
 
             })
         }
@@ -345,20 +348,20 @@ function BrandCatProducts() {
         // alert("hi")
         var element = document.getElementById(cat)
         if (element.checked == true) {
-            console.log(cat, " is checked")
+            // console.log(cat, " is checked")
             localStorage.setItem("Category", cat);
             localStorage.removeItem("SubCategory")
             localStorage.removeItem("SubSubCategory")
             window.location.reload()
         } else {
-            console.log(cat, " is not checked")
+            // console.log(cat, " is not checked")
         }
     }
 
     const handleFormCheck2 = (index, f) => {
         // alert("hi")
 
-        console.log("index:" + index + "    f:" + f)
+        // console.log("index:" + index + "    f:" + f)
 
         var element = document.getElementById(f + f);
 
@@ -383,7 +386,7 @@ function BrandCatProducts() {
             SetFilterSelected(arr);
             var productsArray = [];
             // console.log("products",products)
-            console.log("filterSelected", filterselected);
+            // console.log("filterSelected", filterselected);
 
             filterselected.map(filter => {
                 var v = filter.split("-");
@@ -397,7 +400,7 @@ function BrandCatProducts() {
 
                     }
                 })
-                console.log("val " + vals);
+                // console.log("val " + vals);
             })
             products.map(index => {
                 var flag = true;
@@ -408,7 +411,7 @@ function BrandCatProducts() {
                     var values = pair[1].split(";");
                     var valueflag = false;
                     values.map(v => {
-                        console.log(index.filtercriterias[key])
+                        // console.log(index.filtercriterias[key])
 
 
                         if (index.filtercriterias[key].includes(v)) {
@@ -426,7 +429,7 @@ function BrandCatProducts() {
             })
 
 
-            console.log("values", vals)
+            // console.log("values", vals)
 
             // console.log("Products Array",productsArray.length);
 
@@ -434,7 +437,7 @@ function BrandCatProducts() {
 
         } else {
 
-            console.log("Filter selected", filterselected)
+            // console.log("Filter selected", filterselected)
             var arr = filterselected;
             arr.map((i, pos) => {
                 var pair = i.split("-");
@@ -457,7 +460,7 @@ function BrandCatProducts() {
                 }
             })
 
-            console.log("Array:", arr)
+            // console.log("Array:", arr)
 
             // if(arr.length==0){
             //     console.log("In if")
@@ -467,8 +470,8 @@ function BrandCatProducts() {
             // }
             SetFilterSelected(arr);
             var productsArray = [];
-            console.log("products", products)
-            console.log("filterSelected", filterselected);
+            // console.log("products", products)
+            // console.log("filterSelected", filterselected);
 
             products.map(index => {
                 var flag = true;
@@ -480,7 +483,7 @@ function BrandCatProducts() {
                     // console.log("values",values)
                     var valueflag = false;
                     values.map(v => {
-                        console.log(index.filtercriterias[key])
+                        // console.log(index.filtercriterias[key])
                         if (index.filtercriterias[key] === v) {
                             valueflag = true;
                         }
@@ -508,7 +511,7 @@ function BrandCatProducts() {
                 })
                 // alert("val "+vals);
             })
-            console.log("Products Array", productsArray.length);
+            // console.log("Products Array", productsArray.length);
 
             SetSelectedProducts(productsArray);
         }
@@ -518,7 +521,7 @@ function BrandCatProducts() {
     const handleFormCheck = (index, f) => {
         // alert("hi")
 
-        console.log("index:" + index + "    f:" + f)
+        // console.log("index:" + index + "    f:" + f)
 
         var element = document.getElementById(f);
 
@@ -540,7 +543,7 @@ function BrandCatProducts() {
             SetFilterSelected(arr);
             var productsArray = [];
             // console.log("products",products)
-            console.log("filterSelected", filterselected);
+            // console.log("filterSelected", filterselected);
             products.map(index => {
                 var flag = true;
                 filterselected.map(a => {
@@ -548,10 +551,10 @@ function BrandCatProducts() {
                     // console.log("pair",pair)
                     var key = pair[0];
                     var values = pair[1].split(";");
-                    console.log("values", values)
+                    // console.log("values", values)
                     var valueflag = false;
                     values.map(v => {
-                        console.log(index.filtercriterias[key])
+                        // console.log(index.filtercriterias[key])
                         if (index.filtercriterias[key].includes(v)) {
                             valueflag = true;
                         }
@@ -571,7 +574,7 @@ function BrandCatProducts() {
         } else {
             // alert("here")
 
-            console.log("Filter selected", filterselected)
+            // console.log("Filter selected", filterselected)
             var arr = filterselected;
             arr.map((i, pos) => {
                 var pair = i.split("-");
@@ -594,7 +597,7 @@ function BrandCatProducts() {
                 }
             })
 
-            console.log("Array:", arr)
+            // console.log("Array:", arr)
 
             // if(arr.length==0){
             //     console.log("In if")
@@ -604,8 +607,8 @@ function BrandCatProducts() {
             // }
             SetFilterSelected(arr);
             var productsArray = [];
-            console.log("products", products)
-            console.log("filterSelected", filterselected);
+            // console.log("products", products)
+            // console.log("filterSelected", filterselected);
             products.map(index => {
                 var flag = true;
                 filterselected.map(a => {
@@ -629,7 +632,7 @@ function BrandCatProducts() {
                     productsArray.push(index);
                 }
             })
-            console.log("Products Array", productsArray.length);
+            // console.log("Products Array", productsArray.length);
 
             SetSelectedProducts(productsArray);
         }
@@ -642,13 +645,13 @@ function BrandCatProducts() {
             var flag = true;
             filterselected.map(a => {
                 var pair = a.split("-");
-                console.log("pair", pair)
+                // console.log("pair", pair)
                 var key = pair[0];
                 var values = pair[1].split(";");
-                console.log("values", values)
+                // console.log("values", values)
                 var valueflag = false;
                 values.map(v => {
-                    console.log(index.filtercriterias[key])
+                    // console.log(index.filtercriterias[key])
                     if (index.filtercriterias[key].includes(v)) {
                         valueflag = true;
                     }
@@ -663,74 +666,74 @@ function BrandCatProducts() {
         })
         SetSelectedProducts(arr)
 
-        console.log(newValue)
+        // console.log(newValue)
     };
 
 
     function SortByLowPrice() {
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr = [];
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting", selectedProducts)
+        // console.log("Before sorting", selectedProducts)
         arr.map(index => {
-            console.log("indexOfferPrice", index.offerPrice)
+            // console.log("indexOfferPrice", index.offerPrice)
         })
         arr.sort((a, b) => a.offerPrice - b.offerPrice);
-        console.log("After sorting", selectedProducts)
+        // console.log("After sorting", selectedProducts)
         arr.map(index => {
-            console.log("indexOfferPrice--", index.offerPrice)
+            // console.log("indexOfferPrice--", index.offerPrice)
         })
         SetSelectedProducts([...arr])
     }
 
     function SortByHighPrice() {
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr = [];
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting", selectedProducts)
+        // console.log("Before sorting", selectedProducts)
         arr.map(index => {
-            console.log("indexOfferPrice", index.offerPrice)
+            // console.log("indexOfferPrice", index.offerPrice)
         })
         arr.sort((a, b) => b.offerPrice - a.offerPrice);
-        console.log("After sorting", selectedProducts)
+        // console.log("After sorting", selectedProducts)
         arr.map(index => {
-            console.log("indexOfferPrice--", index.offerPrice)
+            // console.log("indexOfferPrice--", index.offerPrice)
         })
         SetSelectedProducts([...arr])
     }
 
     function SortByTopRated() {
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr = [];
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting", selectedProducts)
+        // console.log("Before sorting", selectedProducts)
         arr.map(index => {
-            console.log("indexAverageRating", index.averageRating)
+            // console.log("indexAverageRating", index.averageRating)
         })
         arr.sort((a, b) => b.averageRating - a.averageRating);
-        console.log("After sorting", selectedProducts)
+        // console.log("After sorting", selectedProducts)
         arr.map(index => {
-            console.log("indexAverageRating--", index.averageRating)
+            // console.log("indexAverageRating--", index.averageRating)
         })
         SetSelectedProducts([...arr])
     }
 
     function SortByDiscount() {
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr = [];
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting", selectedProducts)
+        // console.log("Before sorting", selectedProducts)
         arr.map(index => {
-            console.log("difference", ((index.productPrice - index.offerPrice) * 100 / index.productPrice))
+            // console.log("difference", ((index.productPrice - index.offerPrice) * 100 / index.productPrice))
         })
         arr.sort((a, b) => ((b.productPrice - b.offerPrice) * 100 / b.productPrice) - ((a.productPrice - a.offerPrice) * 100 / a.productPrice));
-        console.log("After sorting", selectedProducts)
+        // console.log("After sorting", selectedProducts)
         arr.map(index => {
-            console.log("indexAverageRating--", index.averageRating)
+            // console.log("indexAverageRating--", index.averageRating)
         })
         SetSelectedProducts([...arr])
     }
@@ -761,6 +764,7 @@ function BrandCatProducts() {
     const handleShow = () => setShow(true);
     return (
         <>
+        <ToastContainer position="top-center"/> 
             <Header />
             <body style={{ background: "whitesmoke" }}>
 

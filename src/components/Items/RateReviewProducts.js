@@ -9,12 +9,13 @@ import { getCookie } from "../Cookies";
 import { useNavigate } from "react-router-dom";
 import "./RateReview.css"
 import Header from "../Header";
+import { toast, ToastContainer } from "react-toastify";
 
 const RateReviewProducts = () => {
 
     const navigate = useNavigate();
 
-    console.log("Product Rate",localStorage.getItem("rateProduct"));
+    // console.log("Product Rate",localStorage.getItem("rateProduct"));
 
     var product = JSON.parse(localStorage.getItem("rateProduct"));
 
@@ -42,9 +43,10 @@ const RateReviewProducts = () => {
         var yyyy = today.getFullYear();
 
         reviewdate = mm + '/' + dd + '/' + yyyy;
-        console.log("Review Date",reviewdate.toString());
+        // console.log("Review Date",reviewdate.toString());
         if (userrating === "" || reviewdate === "" || userreview === "") {
-            alert("Please enter all details");
+            // alert("Please enter all details");
+            toast.error(<b>Please enter all details</b>)
         }
         else {
             var form_data_body = {
@@ -61,15 +63,15 @@ const RateReviewProducts = () => {
             }).then(function (response) {
                 console.log(response);
                 if (response.status == 200) {
-                    console.log("response", response);
-                    console.log("Review Added");
+                    // console.log("response", response);
+                    // console.log("Review Added");
                     navigate("/my-orders");
                     
                 }
                 else {
-                    console.log("In else");
+                    // console.log("In else");
                     alert(response.data.message);
-                    console.log(response.data.message);
+                    // console.log(response.data.message);
                     return;
                 }
     
@@ -78,9 +80,10 @@ const RateReviewProducts = () => {
             }).catch(function (error) {
                 // console.log(error);
                 
-                    console.log("Product Not Bought")
+                    // console.log("Product Not Bought")
                     // alert("Product Not Bought")
-                    alert("You have already rated the product or not buyed it")
+                    // alert("You have already rated the product or not buyed it")
+                    toast.error(<b>You have already rated the product or not buyed it</b>)
                 return;
             })
         }
@@ -90,6 +93,7 @@ const RateReviewProducts = () => {
 
     return (
         <><Header/>
+        <ToastContainer position="top-center"/>
         <div style={{marginTop:"150px"}}>
         <Container style={{ marginTop: 50 }}>
 

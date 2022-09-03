@@ -66,15 +66,15 @@ function BrandDetails() {
             axios.get(url+"/excel/shopByBrands").then(
                 function (response) {
                     if (response.status == 200) {
-                        console.log("Response", response.data);
+                        // console.log("Response", response.data);
                         brands.push(response.data);
 
                         setIsBrandsFetched(true);
-                        console.log("Brands", brands);
+                        // console.log("Brands", brands);
 
                     }
                 }).catch(function (error) {
-                    console.log("error", error);
+                    console.log("error", error.response);
                 }
                 );
 
@@ -96,9 +96,9 @@ function BrandDetails() {
     //     })
     // })
     parsedArr.map(index => {
-        console.log("arr", index.category)
+        // console.log("arr", index.category)
         index.products.map(i=>{
-            console.log("in",i.productImage1)
+            // console.log("in",i.productImage1)
         })
     })
 
@@ -108,14 +108,14 @@ function BrandDetails() {
         // })
         localStorage.setItem("shopbrandcat", index)
         localStorage.setItem("brandcatname",index.category)
-        console.log("Get cat: ", localStorage.getItem("shopbrandcat"))
+        // console.log("Get cat: ", localStorage.getItem("shopbrandcat"))
         // console.log("Model Num: ",index.products.modelNumber)
         // models.push(index.products.modelNumber);
         // console.log("model", models);
         // localStorage.setItem("models", models);
         // console.log("Models: ",localStorage.getItem("models"));
         // console.log("model", models);
-        console.log("on cat click");
+        // console.log("on cat click");
         navigate('/brandcatproducts')
     }
 
@@ -124,7 +124,7 @@ function BrandDetails() {
         // models+=index.category+",";
         models.push(index.category);
     })
-    console.log("Models: ",models)
+    // console.log("Models: ",models)
 
 
     const handleScroll= async (index)=> {
@@ -140,29 +140,29 @@ function BrandDetails() {
             
         // });
         document.getElementById(index).scrollIntoView();
-        console("Index: ",index)
-        console.log("on cat click");
+        // console("Index: ",index)
+        // console.log("on cat click");
         // ref.current?.scrollIntoView({behavior: 'smooth'});
         // console.log("Ref: ",ref.current)
         
     }
 
     const handleOfferPosterOnClick = (modelNumbers) => {
-        console.log("Item Clicked");
+        // console.log("Item Clicked");
 
         offermodel = modelNumbers;
         localStorage.setItem("offermodels", offermodel);
-        console.log("Offer Models: ", localStorage.getItem("offermodels"));
+        // console.log("Offer Models: ", localStorage.getItem("offermodels"));
         navigate('/brandofferposterproducts')
     }
 
     function callProductDetails(index) {
         //alert(index);
-        console.log("Index", index);
+        // console.log("Index", index);
         localStorage.setItem("productSelected", index.modelNumber);
         localStorage.setItem("productId", index.productId);
-        console.log("Product Id",localStorage.getItem("productId"));
-        console.log("Product Selected", localStorage.getItem("productSelected"))
+        // console.log("Product Id",localStorage.getItem("productId"));
+        // console.log("Product Selected", localStorage.getItem("productSelected"))
         navigate("/productDetails")
       }
 

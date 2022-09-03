@@ -179,7 +179,7 @@ function Login() {
             // console.log(response.data.message);
         }).catch(function (error) {
             console.log(error);
-            alert(error.response.data.message);
+            // alert(error.response.data.message);
         })
         isUserLoggedIn = true;
         // alert("login successful")
@@ -375,7 +375,7 @@ function Login() {
                         // navigate("/login");
                     }
                 }).catch(function (error) {
-                    console.log("Error", error);
+                    console.log("Error", error.response);
                 })
 
             
