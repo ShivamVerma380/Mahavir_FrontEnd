@@ -786,7 +786,7 @@ function ProductDetails() {
                       (product.offerPrice == null) ? (
                         <h4 className="productprice">MRP: <b>₹{product.productPrice}</b></h4>
                       ) : (
-                        <h4 className="productprice"><b style={{fontSize:"22px"}}>MSP:</b> <b style={{ marginRight: "20px", color: "#ed1c24",fontSize:"22px"}}>₹{product.offerPrice}</b> <b style={{fontSize:"16px",color:"grey"}}>MRP:</b>  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b> <b style={{color:"green",marginLeft:"-30px"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h4>
+                        <h4 className="productprice"><b style={{fontSize:"22px"}}>MSP:</b> <b style={{ marginRight: "20px", color: "#ed1c24",fontSize:"22px"}}>₹{product.offerPrice}</b> <b style={{fontSize:"16px",color:"grey"}}>MRP:</b>  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b> <b style={{color:"green",marginLeft:"-30px"}}>{Math.round((parseInt(product.productPrice.replace(',',''))-parseInt(product.offerPrice.replace(',','')))*100/parseInt(product.productPrice.replace(',','')))}% off</b></h4>
                       )
                     }
                   </Row>

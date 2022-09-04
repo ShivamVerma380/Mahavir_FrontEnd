@@ -84,7 +84,7 @@ function App() {
  
   // console.log("Count comp: ",getCookie("countcompare"))
 
-  var element = <div></div>;
+  // var element = <div></div>;
 
   //const[cookies,SetCookie] = useCookies(["modelNumsToCompare"])
 
@@ -286,8 +286,8 @@ function App() {
       // }).catch(function(error){
       //     console.log(error);
       // })
-      var element = document.getElementById("spinner");
-      element.style.visibility="hidden";
+      // var element = document.getElementById("spinner");
+      // element.style.visibility="hidden";
    
     }
         

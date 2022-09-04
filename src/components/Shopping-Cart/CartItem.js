@@ -74,7 +74,7 @@ const CartItem = ({item,quantity}) => {
                                         <Row>
                                             {
                                                 (item.productPrice === item.offerPrice) ? (<h4>₹ {item.productPrice}</h4>) : (
-                                                    <h4 ><b style={{ marginRight: "20px", color: "#C10000" , fontSize:"20px"}}>₹{item.offerPrice}</b><b style={{ color:"rgba(45, 45, 45, 0.8)",textDecorationLine: "line-through",fontSize:"16px", textDecorationStyle: "solid" }}>₹ {item.productPrice}</b> <b style={{color:"#C10000",fontSize:"15px",marginLeft:"8px"}}>{Math.round((item.productPrice-item.offerPrice)*100/item.productPrice)}% off</b></h4>
+                                                    <h4 ><b style={{ marginRight: "20px", color: "#C10000" , fontSize:"20px"}}>₹{item.offerPrice}</b><b style={{ color:"rgba(45, 45, 45, 0.8)",textDecorationLine: "line-through",fontSize:"16px", textDecorationStyle: "solid" }}>₹ {item.productPrice}</b> <b style={{color:"#C10000",fontSize:"15px",marginLeft:"8px"}}>{Math.round((parseInt(item.productPrice.replace(',',''))-parseInt(item.offerPrice.replace(',','')))*100/parseInt(item.productPrice.replace(',','')))}% off</b></h4>
                                                 )
                                             }
 
