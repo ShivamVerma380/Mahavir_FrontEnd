@@ -122,7 +122,7 @@ function OfferItems() {
             toast.warn("Item is already present in cart")
         }
         else{
-            console.log("adddd"+model);
+            // console.log("adddd"+model);
             cart.push(model);
             setCookie("CartModels",cart,20);
             toast.success("Added to cart"+model);
@@ -579,7 +579,7 @@ function OfferItems() {
         arr.map(index=>{
             // console.log("indexOfferPrice",index.offerPrice)
         })
-        arr.sort((a,b)=>a.offerPrice-b.offerPrice);
+        arr.sort((a,b)=>a.offerPrice.replace(',','')-b.offerPrice.replace(',',''));
         // console.log("After sorting",filterProducts)
         arr.map(index=>{
             // console.log("indexOfferPrice--",index.offerPrice)
@@ -596,7 +596,7 @@ function OfferItems() {
         arr.map(index=>{
             // console.log("indexOfferPrice",index.offerPrice)
         })
-        arr.sort((a,b)=>b.offerPrice-a.offerPrice);
+        arr.sort((a,b)=>b.offerPrice.replace(',','')-a.offerPrice.replace(',',''));
         // console.log("After sorting",filterProducts)
         arr.map(index=>{
             // console.log("indexOfferPrice--",index.offerPrice)
@@ -630,7 +630,7 @@ function OfferItems() {
         arr.map(index=>{
             // console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
         })
-        arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
+        arr.sort((a,b)=>((b.productPrice.replace(',','')-b.offerPrice.replace(',',''))*100/b.productPrice.replace(',',''))-((a.productPrice.replace(',','')-a.offerPrice.replace(',',''))*100/a.productPrice.replace(',','')));
         // console.log("After sorting",filterProducts)
         arr.map(index=>{
             // console.log("indexAverageRating--",index.averageRating)

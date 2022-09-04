@@ -679,7 +679,7 @@ function BrandCatProducts() {
         arr.map(index => {
             // console.log("indexOfferPrice", index.offerPrice)
         })
-        arr.sort((a, b) => a.offerPrice - b.offerPrice);
+        arr.sort((a, b) => a.offerPrice.replace(',','') - b.offerPrice.replace(',',''));
         // console.log("After sorting", selectedProducts)
         arr.map(index => {
             // console.log("indexOfferPrice--", index.offerPrice)
@@ -696,7 +696,7 @@ function BrandCatProducts() {
         arr.map(index => {
             // console.log("indexOfferPrice", index.offerPrice)
         })
-        arr.sort((a, b) => b.offerPrice - a.offerPrice);
+        arr.sort((a, b) => b.offerPrice.replace(',','') - a.offerPrice.replace(',',''));
         // console.log("After sorting", selectedProducts)
         arr.map(index => {
             // console.log("indexOfferPrice--", index.offerPrice)
@@ -730,7 +730,7 @@ function BrandCatProducts() {
         arr.map(index => {
             // console.log("difference", ((index.productPrice - index.offerPrice) * 100 / index.productPrice))
         })
-        arr.sort((a, b) => ((b.productPrice - b.offerPrice) * 100 / b.productPrice) - ((a.productPrice - a.offerPrice) * 100 / a.productPrice));
+        arr.sort((a, b) => ((b.productPrice.replace(',','') - b.offerPrice.replace(',','')) * 100 / b.productPrice.replace(',','')) - ((a.productPrice.replace(',','') - a.offerPrice.replace(',','')) * 100 / a.productPrice.replace(',','')));
         // console.log("After sorting", selectedProducts)
         arr.map(index => {
             // console.log("indexAverageRating--", index.averageRating)
@@ -902,7 +902,7 @@ function BrandCatProducts() {
                                     <p className="products">(<b>{selectedProducts.length}</b> Products Found )</p>
                                 </Col>
 
-                                <Col style={{ display: 'flex', justifyContent: 'end' }}>
+                                {/* <Col style={{ display: 'flex', justifyContent: 'end' }}>
                                     <NavDropdown title={<b>Sort By<RiArrowDropDownLine style={{ color: "black" }} size={25} /></b>}>
                                         <NavDropdown.Item style={{ color: 'black', fontSize: "20px", fontWeight: 'bold' }} target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
                                         <NavDropdown.Item style={{ color: 'black', fontSize: "20px", fontWeight: 'bold' }} target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
@@ -910,7 +910,7 @@ function BrandCatProducts() {
                                         <NavDropdown.Item style={{ color: 'black', fontSize: "20px", fontWeight: 'bold' }} target="_blank">Latest Arrival</NavDropdown.Item>
                                         <NavDropdown.Item style={{ color: 'black', fontSize: "20px", fontWeight: 'bold' }} target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
                                     </NavDropdown>
-                                </Col>
+                                </Col> */}
 
                             </Row>
                         }

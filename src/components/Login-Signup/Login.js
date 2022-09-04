@@ -176,9 +176,11 @@ function Login() {
                 toast.success(<b>Login successful</b>)
                 navigate("/");
             }
+            
             // console.log(response.data.message);
         }).catch(function (error) {
             console.log(error);
+            toast.error(<b>{error.response.data.message}</b>)
             // alert(error.response.data.message);
         })
         isUserLoggedIn = true;
@@ -333,6 +335,8 @@ function Login() {
                 }
             }).catch(function (error) {
                 console.log("Error", error);
+                toast.error(<b>{error.response.data.message}</b>)
+
             })
         }
     }

@@ -128,7 +128,7 @@ const ProductsByDeal = () => {
         //     navigate('/')
     
         // }
-        console.log("Wishlist clicked")
+        // console.log("Wishlist clicked")
         if(getCookie("isLoggedIn")!=='true'){
           navigate("/login")
         }else{
@@ -158,11 +158,13 @@ const ProductsByDeal = () => {
             // navigate("/");
           }
           else{
-            alert("Item already present in wishlist")
+            // alert("Item already present in wishlist")
+            toast.warn(<b>Item already present in wishlist</b>)
             console.log(response.data)
           }
         }).catch(function (error) {
-            alert("Item already present in wishlist")
+            // alert("Item already present in wishlist")
+            toast.warn(<b>Item already present in wishlist</b>)
             console.log("Error", error);
           
         })
@@ -172,7 +174,7 @@ const ProductsByDeal = () => {
 
       function handleAddToCompare(index){
 
-        console.log("inside add to compare");
+        // console.log("inside add to compare");
         
         var element = document.getElementById(index.modelNumber);
         
@@ -189,7 +191,7 @@ const ProductsByDeal = () => {
         //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
         // }
         // var length = comparemodels.length;
-        console.log("Length...",length)
+        // console.log("Length...",length)
         
         
         if(element.checked){
@@ -197,34 +199,36 @@ const ProductsByDeal = () => {
             if(index.category!==localStorage.getItem("AddToCompareCategory") && localStorage.getItem("AddToCompareCategory")!==null){
                 flag = false;
                 document.getElementById(index.modelNumber).checked = false;
-                alert("Please select products from same category");
+                // alert("Please select products from same category");
+                toast.warn(<b>Please select products from same category</b>)
             }
             if(length==4){
                 flag = false;
                 document.getElementById(index.modelNumber).checked=false;
-                alert("You can compare only 4 products");
+                // alert("You can compare only 4 products");
+                toast.warn(<b>You can compare only 4 products</b>)
             }
             if(flag){
-                console.log("adddd"+index.modelNumber);
+                // console.log("adddd"+index.modelNumber);
                 comparemodels.push(index.modelNumber);
                 setCookie("addToCompare",comparemodels,20);
                 setLen(getCookie("addToCompare").split(',').length)
-                console.log(comparemodels);
-                console.log("checked "+index.modelNumber);
+                // console.log(comparemodels);
+                // console.log("checked "+index.modelNumber);
             }
         }
         else {
           for (var i = 0; i < comparemodels.length; i++) {
             if (comparemodels[i] === index.modelNumber) {
               comparemodels.splice(i, 1);
-                console.log(comparemodels);
+                // console.log(comparemodels);
                 setCookie("addToCompare",comparemodels,20);
                 setLen(getCookie("addToCompare").split(',').length)
                 // window.location.reload();
                 break;
             }
         }
-          console.log("unchecked "+index.modelNumber);
+        //   console.log("unchecked "+index.modelNumber);
 
         }
 
@@ -259,14 +263,14 @@ const ProductsByDeal = () => {
     }
       
       localStorage.setItem("comparecount",change)
-      console.log("Get",localStorage.getItem("comparecount"))
+    //   console.log("Get",localStorage.getItem("comparecount"))
 
     function callProductDetails(index) {
         //alert(index);
-        console.log("Index", index);
+        // console.log("Index", index);
         localStorage.setItem("productId",index.productId);
         localStorage.setItem("productSelected", index.modelNumber);
-        console.log("Product Selected", localStorage.getItem("productSelected"))
+        // console.log("Product Selected", localStorage.getItem("productSelected"))
         navigate("/productDetails")
     }
 
@@ -292,69 +296,69 @@ const ProductsByDeal = () => {
     // console.log("Get", localStorage.getItem("comparecount"))
 
     function SortByLowPrice(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setProducts([]);
         arr = products;
-        console.log("Before sorting",products)
+        // console.log("Before sorting",products)
         arr.map(index=>{
-            console.log("indexOfferPrice",index.offerPrice)
+            // console.log("indexOfferPrice",index.offerPrice)
         })
-        arr.sort((a,b)=>a.offerPrice-b.offerPrice);
-        console.log("After sorting",products)
+        arr.sort((a,b)=>a.offerPrice.replace(',','')-b.offerPrice.replace(',',''));
+        // console.log("After sorting",products)
         arr.map(index=>{
-            console.log("indexOfferPrice--",index.offerPrice)
+            // console.log("indexOfferPrice--",index.offerPrice)
         })
         setProducts([...arr])
     }
     
     function SortByHighPrice(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setProducts([]);
         arr = products;
-        console.log("Before sorting",products)
+        // console.log("Before sorting",products)
         arr.map(index=>{
-            console.log("indexOfferPrice",index.offerPrice)
+            // console.log("indexOfferPrice",index.offerPrice)
         })
-        arr.sort((a,b)=>b.offerPrice-a.offerPrice);
-        console.log("After sorting",products)
+        arr.sort((a,b)=>b.offerPrice.replace(',','')-a.offerPrice.replace(',',''));
+        // console.log("After sorting",products)
         arr.map(index=>{
-            console.log("indexOfferPrice--",index.offerPrice)
+            // console.log("indexOfferPrice--",index.offerPrice)
         })
         setProducts([...arr])
     }
 
     function SortByTopRated(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setProducts([]);
         arr = products;
-        console.log("Before sorting",products)
+        // console.log("Before sorting",products)
         arr.map(index=>{
-            console.log("indexAverageRating",index.averageRating)
+            // console.log("indexAverageRating",index.averageRating)
         })
-        arr.sort((a,b)=>b.averageRating-a.averageRating);
-        console.log("After sorting",products)
+        arr.sort((a,b)=>b.averageRating.replace(',','')-a.averageRating.replace(',',''));
+        // console.log("After sorting",products)
         arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
+            // console.log("indexAverageRating--",index.averageRating)
         })
         setProducts([...arr])
     }
 
     function SortByDiscount(){
-        console.log("in sort function")
+        // console.log("in sort function")
         var arr=[]; 
         setProducts([]);
         arr = products;
-        console.log("Before sorting",products)
+        // console.log("Before sorting",products)
         arr.map(index=>{
-            console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
+            // console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
         })
-        arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
-        console.log("After sorting",products)
+        arr.sort((a,b)=>((b.productPrice.replace(',','')-b.offerPrice.replace(',',''))*100/b.productPrice.replace(',',''))-((a.productPrice.replace(',','')-a.offerPrice.replace(',',''))*100/a.productPrice.replace(',','')));
+        // console.log("After sorting",products)
         arr.map(index=>{
-            console.log("indexAverageRating--",index.averageRating)
+            // console.log("indexAverageRating--",index.averageRating)
         })
         setProducts([...arr])
     }
@@ -363,6 +367,7 @@ const ProductsByDeal = () => {
 
     return (
         <>
+        
         <body style={{background:"whitesmoke"}}>
 
 
@@ -393,13 +398,13 @@ const ProductsByDeal = () => {
                         
 
                         {/* <Col  style={{display:'flex',justifyContent:'end'}}>
-                            <NavDropdown title={<b>Sort By<RiArrowDropDownLine style={{color:"black"}} size={25}/></b>}>
-                            <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
-                            <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
-                            <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
-                            <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
-                            <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
-                            </NavDropdown>
+                        <NavDropdown title={<b>Sort By<RiArrowDropDownLine style={{color:"black"}} size={25}/></b>}>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
+                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
+                        </NavDropdown>
                         </Col> */}
                         
                         </Row>

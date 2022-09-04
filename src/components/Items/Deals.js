@@ -420,7 +420,7 @@ function Deals({deals}) {
                             <AiFillHeart style={{ marginLeft:'0px',marginTop:'10px',marginRight:'10px',alignSelf:'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} /> :
                             <AiOutlineHeart style={{  marginLeft:'0px',marginTop:'10px',marginRight:'10px',alignSelf:'end'}} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
                     } */}
-                  <MDBCardBody className="categoryproductscardbody">
+                  <MDBCardBody className="categoryproductscardbody" >
                     <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
                     
                     <MDBCardSubTitle style={{    marginTop: '5px',marginBottom: '5px',fontSize:'18px'}}>

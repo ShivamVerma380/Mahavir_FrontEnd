@@ -33,14 +33,14 @@ const RatingandReview = ({review}) => {
                     urls.push(axios.get(url+"/get-reviews/"+index.modelNumber))
             })
             axios.all(urls).then(axios.spread((...response) => {
-                console.log("response",response)
+                // console.log("response",response)
                 response.map(p=>{
                     reviews.push(p.data)
                 })
-                console.log("Review",reviews)
+                // console.log("Review",reviews)
                 setIsReviewsFetched(true);
             })).catch(function(error){
-                console.log("error",error);
+                console.log("error",error.response);
             })
 }})
 
@@ -52,7 +52,7 @@ function blankspace(){
         // alert(index);
         d.push(0);    
     }
-    console.log("d"+d)
+    // console.log("d"+d)
     return d;
     // d.map(m=>{
     //     return(

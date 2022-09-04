@@ -18,7 +18,7 @@ function ComparisonHighlights({product,showOnlyDiff}){
                 
                 
                     index.productHighlights.split(';').map((h,pos)=>{
-                        console.log("h:",h,"....arr:",arr[pos]);
+                        // console.log("h:",h,"....arr:",arr[pos]);
                         if(h!==arr[pos]){
                             ans.add(pos);
                         }
@@ -26,7 +26,7 @@ function ComparisonHighlights({product,showOnlyDiff}){
                     
                 
             })
-            console.log("ans",ans);
+            // console.log("ans",ans);
     }
 
     function blankspace(){
@@ -36,7 +36,7 @@ function ComparisonHighlights({product,showOnlyDiff}){
             // alert(index);
             d.push(0);    
         }
-        console.log("d"+d)
+        // console.log("d"+d)
         return d;
     }
 

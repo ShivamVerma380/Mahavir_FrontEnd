@@ -49,7 +49,7 @@ function ComparisonHeader({product}){
             axios.get(url+"/get-add-to-compare-subcat/"+localStorage.getItem("Category")+"/Brand")
                 .then(function(response){
                     if(response.status==200){
-                        console.log("Add To Compare SubCat",response.data);
+                        // console.log("Add To Compare SubCat",response.data);
                         SetBrands(response.data);
                     }
                     SetIsBrandsFetched(true);
@@ -63,12 +63,12 @@ function ComparisonHeader({product}){
         
     const handleFormCheck=(event)=>{
         if(event.target.checked){
-            console.log("checked")
+            // console.log("checked")
             // setCookie("isChecked","true",20);
             localStorage.setItem("isChecked",true)
         }
         else{
-            console.log("unchecked")
+            // console.log("unchecked")
             localStorage.removeItem("isChecked")
         }
         window.location.reload();
@@ -88,7 +88,7 @@ function ComparisonHeader({product}){
                 SetIsBrandSelected(true);
             }
         })
-        console.log("BrandSelected",brandName);
+        // console.log("BrandSelected",brandName);
     }
 
     function handleModelClick(modelName,modelNumber){
@@ -129,8 +129,8 @@ function ComparisonHeader({product}){
 
     localStorage.setItem("Arr",arr);
 
-    console.log("length",length);
-    console.log("isBrandsFetched",isBrandsFetched);
+    // console.log("length",length);
+    // console.log("isBrandsFetched",isBrandsFetched);
     return(
             <>
             <Row className="CompareHeader">
@@ -196,7 +196,7 @@ function ComparisonHeader({product}){
                             <h6 style={{color:"red"}}>MSP ₹{index.offerPrice}</h6>
                             <h6 style={{fontSize:"15px",textDecorationLine:"line-through"}}>MRP ₹{index.productPrice}</h6>
                             <h6 style={{color:"red",fontSize:"15px"}}>
-                                {parseInt(((index.productPrice-index.offerPrice)*100)/index.productPrice)}% OFF  You save ₹{index.productPrice-index.offerPrice} 
+                                {parseInt(((index.productPrice.replace(',','')-index.offerPrice.replace(',',''))*100)/index.productPrice.replace(',',''))}% OFF  You save ₹{index.productPrice.replace(',','')-index.offerPrice.replace(',','')} 
                             </h6>
                         </Col>
                     );
