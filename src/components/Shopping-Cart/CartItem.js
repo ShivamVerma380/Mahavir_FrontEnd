@@ -14,7 +14,7 @@ import Footer from "../Footer/Footer";
 const CartItem = ({item,quantity}) => {
     var cartmodelnums=new Array();
     
-    console.log("quantity",item.modelNumber,":",quantity)
+    // console.log("quantity",item.modelNumber,":",quantity)
     cartmodelnums=getCookie("CartModels").split(',');
 
     function removefromcart(){

@@ -16,7 +16,7 @@ function OrderInvoices(){
     const navigate = useNavigate();
 
 
-    console.log("Token....",getCookie("jwtToken"));
+    // console.log("Token....",getCookie("jwtToken"));
     useEffect(()=>{
         if(!isOrdersFetched){
             axios.get(url+"/my-invoice",{
@@ -25,18 +25,18 @@ function OrderInvoices(){
                 }
             }).then(function(response){
                 if(response.status==200){
-                    console.log("Response....",response.data);
+                    // console.log("Response....",response.data);
                     setOrders(response.data);
                     setIsOrdersFetched(true);
                 }
             }).catch(function(error){
-                console.log(url+"/my-invoice",error);
+                // console.log(url+"/my-invoice",error);
             })
         }
     })
 
     function handleInvoiceClick(order){
-        console.log("Order clicked",order);
+        // console.log("Order clicked",order);
         localStorage.setItem("Invoice",JSON.stringify(order));
         navigate("/invoice")
     }

@@ -61,7 +61,7 @@ function CategoriesToDisplay({ categoryDetail }) {
                 <Nav className="justify-content-center flex-grow-1 pe-3">
                   {
 
-                    console.log("CategoryDetail", categoryDetail)
+                    // console.log("CategoryDetail", categoryDetail)
                   }
                   {
 

@@ -34,13 +34,13 @@ const Orders=()=>{
                 }
             }).then(function(response){
                 if(response.status==200){
-                    console.log("Success",response.data);
+                    // console.log("Success",response.data);
                     setOrders([...response.data].reverse());
                     setFilteredOrders([...response.data].reverse());
                     SetIsOrdersFetched(true);
                 }
             }).catch(function(error){
-                console.log("Error",error);
+                console.log("Error",error.response);
             })
         }
 
@@ -68,9 +68,9 @@ const Orders=()=>{
             arr = orders
         }
 
-        console.log(date.getFullYear(),document.getElementById(date.getFullYear()).checked);
-        console.log(date.getFullYear()-1,document.getElementById(date.getFullYear()-1).checked);
-        console.log("Older",document.getElementById("Older").checked);
+        // console.log(date.getFullYear(),document.getElementById(date.getFullYear()).checked);
+        // console.log(date.getFullYear()-1,document.getElementById(date.getFullYear()-1).checked);
+        // console.log("Older",document.getElementById("Older").checked);
 
         var final_arr=[];
 
@@ -112,17 +112,17 @@ const Orders=()=>{
     }
 
     function rateProduct(order){
-        console.log("Rate rating",order);
+        // console.log("Rate rating",order);
         localStorage.setItem("rateProduct",JSON.stringify(order));
         navigate("/ratereview")
     }
 
     function editRating(order){
-        console.log("Edit Rating",order);
+        // console.log("Edit Rating",order);
     }
 
     function generateInvoice(order){
-        console.log("Generate Invoice",JSON.stringify(order));
+        // console.log("Generate Invoice",JSON.stringify(order));
         localStorage.setItem("Generate Invoice",JSON.stringify(order));
         navigate("/invoice")
     }

@@ -130,7 +130,7 @@ function BrandCatProducts() {
                     for (var key in response.data.filterCriterias) {
                         keySet.push(key);
                     }
-                    console.log("keySet", keySet)
+                    // console.log("keySet", keySet)
                     if (localStorage.getItem("SubCategory") != null && localStorage.getItem("SubSubCategory") != null) {
                         // filterselected.push(localStorage.getItem("SubCategory")+"-"+localStorage.getItem("SubSubCategory"))
                         SetFilterSelected([localStorage.getItem("SubCategory") + "-" + localStorage.getItem("SubSubCategory")])

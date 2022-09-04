@@ -149,14 +149,14 @@ function BuyNowSummary(){
     
             {/* <CartItem/> */}
             {
-                console.log("cartDetails",cartItems)
+                // console.log("cartDetails",cartItems)
             }
             {
                 (isCartItemsFetched )?(
                     cartItems.map((index,pos)=>{
-                    console.log("CartModel in map",cartModels)
-                    console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
-                    console.log("Model Number:",index.modelNumber)
+                    // console.log("CartModel in map",cartModels)
+                    // console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
+                    // console.log("Model Number:",index.modelNumber)
                     return(
                     <CheckoutItem item={index} quantity={cartModels.get(index.modelNumber)}/>
                     );
@@ -183,7 +183,7 @@ function BuyNowSummary(){
                                 
                                 cartItems.map(index=>{
                                     {
-                                        (index.freeItem) ? (price+=(parseInt(index.productPrice)+parseInt(index.freeItem.price))*parseInt(cartModels.get(index.modelNumber))) : (price+=parseInt(index.productPrice)*parseInt(cartModels.get(index.modelNumber)))
+                                        (index.freeItem) ? (price+=(parseInt(index.productPrice.replace(',',''))+parseInt(index.freeItem.price.replace(',','')))*parseInt(cartModels.get(index.modelNumber))) : (price+=parseInt(index.productPrice.replace(',',''))*parseInt(cartModels.get(index.modelNumber)))
                                     }
                                     
                                     
@@ -201,7 +201,7 @@ function BuyNowSummary(){
                                 {
                                     cartItems.map(index=>{
                                         {
-                                            (index.freeItem) ? (discount+=((parseInt(index.freeItem.price)+(parseInt(index.productPrice)-parseInt(index.offerPrice)))*parseInt(cartModels.get(index.modelNumber)))) : (discount+=((parseInt(index.productPrice)-parseInt(index.offerPrice))*parseInt(cartModels.get(index.modelNumber))))
+                                            (index.freeItem) ? (discount+=((parseInt(index.freeItem.price.replace(',',''))+(parseInt(index.productPrice.replace(',',''))-parseInt(index.offerPrice.replace(',',''))))*parseInt(cartModels.get(index.modelNumber)))) : (discount+=((parseInt(index.productPrice.replace(',',''))-parseInt(index.offerPrice.replace(',','')))*parseInt(cartModels.get(index.modelNumber))))
                                         }
                                           
                                     })

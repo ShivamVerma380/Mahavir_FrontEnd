@@ -816,7 +816,7 @@ function OfferItems() {
                                                             <h5 className="productprice">MRP: <b>₹{index.productPrice}</b></h5>
                                                         ) : (
                                                             <><h5 className="productprice"><b >MSP: ₹{index.offerPrice}</b></h5><br></br>
-                                                            <h4 className="offerprice"><b >MRP: <b style={{ textDecorationLine: "line-through"}}>₹{index.productPrice}  </b></b>  <b style={{color:'green'}}>  {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4></>
+                                                            <h4 className="offerprice"><b >MRP: <b style={{ textDecorationLine: "line-through"}}>₹{index.productPrice}  </b></b>  <b style={{color:'green'}}>  {Math.round((parseInt(index.productPrice.replace(',',''))-parseInt(index.offerPrice.replace(',','')))*100/parseInt(index.productPrice.replace(',','')))}% off</b></h4></>
                                                         )
                                                     }
                                                 </Col>

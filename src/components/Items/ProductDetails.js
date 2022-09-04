@@ -137,7 +137,7 @@ function ProductDetails() {
         method: "get",
         url: url+"/get-products/" + localStorage.getItem("productSelected")
       }).then(function (response) {
-        console.log(response);
+        // console.log(response);
         if (response.status == 200) {
           // console.log("response data", response.data);
           //product= response.data;
@@ -1051,7 +1051,8 @@ function ProductDetails() {
                     navigation={true}
                     modules={[Pagination, Navigation]}
                     className="mySwiper"
-                  > {console.log("Product List", productList)}
+                  > 
+                  {/* {console.log("Product List", productList)} */}
                     {
                       cards = productList.map(index => {
 

@@ -33,7 +33,7 @@ function BrandDetails() {
     </div>
     var models = [];
     var offermodel = [];
-    console.log("In Brand details")
+    // console.log("In Brand details")
     var cards = <div>
         <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="God" />
     </div>
@@ -51,10 +51,10 @@ function BrandDetails() {
     const parsedArr = JSON.parse(str);
     const parsedArray = JSON.parse(string);
 
-    console.log("stringify: ", parsedArr);
-    console.log("Stringify 1:", parsedArray);
+    // console.log("stringify: ", parsedArr);
+    // console.log("Stringify 1:", parsedArray);
 
-    console.log("links:", videoLinks);
+    // console.log("links:", videoLinks);
     // console.log("categories", categories);
 
     useEffect(() => {
@@ -211,7 +211,7 @@ function BrandDetails() {
                         offerPoster = parsedArray.map(index => {
                             //let Base64string = Buffer.from(index.image.data,"base64").toString();
 
-                            console.log("image", index.offerPoster);
+                            // console.log("image", index.offerPoster);
                             // var imgsrc = String.format("data:image/jpg;base64,{0}",index.image.data);
                             return (
 
@@ -273,7 +273,7 @@ function BrandDetails() {
 
                     {
                         cards = parsedArr.map(index => {
-                            console.log("Cat Img: ", index.catImage)
+                            // console.log("Cat Img: ", index.catImage)
                             return (
                                 <div className="container">
 

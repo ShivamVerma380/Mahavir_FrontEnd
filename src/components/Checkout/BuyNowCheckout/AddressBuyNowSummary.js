@@ -57,7 +57,7 @@ function AddressBuyNowSummary(){
               "Authorization": "Bearer "+token
             }
           }).then(function (response) {
-            console.log("Response", response);
+            // console.log("Response", response);
             if (response.status == 200) {
               // console.log("Address response", response.data);
               setAddress(response.data);
@@ -136,7 +136,7 @@ function AddressBuyNowSummary(){
 
       const InputFullNameHandler = (e) => {
         fullname = e.target.value;
-        console.log("Full Name: ", fullname)
+        // console.log("Full Name: ", fullname)
         localStorage.setItem("full-name", fullname)
         if (fullname === "") {
           toast.warn("Enter full name")
