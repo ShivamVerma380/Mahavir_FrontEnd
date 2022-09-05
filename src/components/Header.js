@@ -24,7 +24,7 @@ import 'typeface-roboto';
 import {RiArrowDropDownLine} from "react-icons/ri"
 import {HiOutlineShoppingCart} from "react-icons/hi"
 import url from "../Uri";
-import {AiOutlineTeam} from "react-icons/ai"
+import {AiOutlineTeam,AiTwotoneHome} from "react-icons/ai"
 
 
 const Header = ({productList}) => {
@@ -218,11 +218,12 @@ const Header = ({productList}) => {
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>
-            <h1 className="mahavir">Mahavir</h1>
+            <h1 className="mahavir">Mahavir </h1>
+            
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-          
+            
             <Nav className="justify-content-end flex-grow-1 pe-3" >
             <Search />
             {/* <SearchBar  productList={productList}/> */}

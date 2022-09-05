@@ -71,7 +71,7 @@ function CategoriesToDisplay({ categoryDetail }) {
                         <Nav.Link >
                           {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
                           {/* {<img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>} */}
-                          <Image thumbnail='true'  src={index.category_image} className="categoryImage" ></Image>
+                          <Image style={{background:"none"}} thumbnail='true'  src={index.category_image} className="categoryImage" ></Image>
                           
                           <NavDropdown right className="catdropdown"  title={index.category} renderMenuOnMount={true}>
                             {
