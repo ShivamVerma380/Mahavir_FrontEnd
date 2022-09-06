@@ -1,27 +1,12 @@
-# Fetching the latest node image on apline linux
-FROM node:alpine AS builder
-
-# Declaring env
-ENV NODE_ENV production
-
-# Setting up the work directory
+# Stage 0, "build-stage", based on Node.js, to build and compile the frontend
+FROM tiangolo/node-frontend:10 as build-stage
 WORKDIR /app
-
-# Installing dependencies
-COPY ./package.json ./
+COPY package*.json /app/
 RUN npm install
-
-# Copying all the files in our project
-COPY . .
-
-# Building our application
+COPY ./ /app/
 RUN npm run build
-
-# Fetching the latest nginx image
-FROM nginx
-
-# Copying built assets from builder
-COPY --from=builder /app/build /usr/share/nginx/html
-
-# Copying our nginx.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
+FROM nginx:1.15
+COPY --from=build-stage /app/build/ /usr/share/nginx/html
+# Copy the default nginx.conf provided by tiangolo/node-frontend
+COPY --from=build-stage /nginx.conf /etc/nginx/conf.d/default.conf
