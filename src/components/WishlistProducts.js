@@ -96,7 +96,7 @@ const WishlistProducts = () => {
           console.log(response.data.message);
         }
       }).catch(function (error) {
-        console.log(error);
+        console.log("error");
       })
       
 
@@ -191,7 +191,7 @@ const WishlistProducts = () => {
         // navigate("/");
       }
     }).catch(function (error) {
-      console.log("Error", error);
+      console.log("Error");
     });
     
     // setWish((products) => products.filter((i) => i !== index.modelNumber));

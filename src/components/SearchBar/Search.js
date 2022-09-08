@@ -28,7 +28,7 @@ function Search(){
                         setIsProductsFetched(true);
                     }
                 }).catch(function(error){
-                    console.log("error",error);
+                    console.log("error /get-search-products");
                 })
         }
     })

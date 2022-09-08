@@ -104,7 +104,11 @@ function BrandCatProducts() {
 
                     }
                 }).catch(function (error) {
+<<<<<<< HEAD
+                    console.log("error in shopByBrands");
+=======
                     console.log("error", error.response);
+>>>>>>> 85042c473a7f4f3e148534f5f7f0a0d2a7195610
                 }
                 );
 
@@ -116,7 +120,11 @@ function BrandCatProducts() {
                         })
 
                     }).catch(function (error) {
+<<<<<<< HEAD
+                        console.log("error in get-categories");
+=======
                         console.log("error", error.response);
+>>>>>>> 85042c473a7f4f3e148534f5f7f0a0d2a7195610
                     })
 
                 SetIsCategoriesFetched(true);
@@ -139,7 +147,11 @@ function BrandCatProducts() {
                     // SetFilters(response.data.filterCriterias)
                     // SetIsFiltersFetched(true)
                 }).catch(function (error) {
+<<<<<<< HEAD
+                    console.log("error in filtercriterias shopbrandcat")
+=======
                     console.log("error", error.response)
+>>>>>>> 85042c473a7f4f3e148534f5f7f0a0d2a7195610
                 })
         }
 
@@ -323,8 +335,9 @@ function BrandCatProducts() {
                 }
             }).catch(function (error) {
                 // alert("Item already present in wishlist")
-                toast.warn(<b>Item already present in wishlist</b>)
-                console.log("Error", error.response);
+                toast.warn("Item already present in wishlist")
+
+                // console.log("Error", error);
 
             })
         }

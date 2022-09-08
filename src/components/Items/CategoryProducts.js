@@ -49,7 +49,7 @@ function CategoryProducts(){
         }
         
         }).catch(function(error){
-            console.log(error.response);
+            console.log("error in get-products-by-category/Category");
         })
 
 

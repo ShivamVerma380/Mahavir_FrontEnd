@@ -46,7 +46,7 @@ function ComparisonHeader({product}){
                     SetIsBrandsFetched(true);
                     console.log("Brands",Brands);
                 }).catch(function(error){
-                    console.log("error");
+                    console.log("error in get-add-to-compare-subcat");
                 })
         }
     })
@@ -81,7 +81,7 @@ function ComparisonHeader({product}){
                     SetLength(length+1);
                 }
             }).catch(function(error){
-                console.log(error);
+                console.log("error in get-products/modelnumber");
             })
         
         SetModel(modelName);

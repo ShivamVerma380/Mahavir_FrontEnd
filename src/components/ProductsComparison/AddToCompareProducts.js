@@ -44,7 +44,7 @@ function AddToCompareProducts(){
                 // console.log("Product",product)
                 SetIsProductFetched(true)
             })).catch(function(error){
-                console.log("error",error.response);
+                console.log("error in /get-products/");
             })
         }
     })

@@ -68,7 +68,12 @@ function AddressBuyNowSummary(){
               // console.log(response.data.message);
             }
           }).catch(function (error) {
+<<<<<<< HEAD
+            console.log("Error");
+
+=======
             console.log(error.response);
+>>>>>>> 85042c473a7f4f3e148534f5f7f0a0d2a7195610
           })
           // console.log("state",State.getStatesOfCountry('IN'))
           // 
@@ -113,7 +118,11 @@ function AddressBuyNowSummary(){
               // navigate("/");
             }
           }).catch(function (error) {
+<<<<<<< HEAD
+            console.log("Error in address");
+=======
             console.log("Error", error.response);
+>>>>>>> 85042c473a7f4f3e148534f5f7f0a0d2a7195610
           })
           // console.log("Form: ", formdata)
           window.location.reload()
@@ -218,7 +227,7 @@ function AddressBuyNowSummary(){
             // console.log("Error in deleting address");
           }
         }).catch(function(error){
-          console.log("Error",error.response);
+          console.log("Error in delete-address");
         }
         )
       

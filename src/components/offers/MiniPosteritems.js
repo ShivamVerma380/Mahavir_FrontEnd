@@ -41,7 +41,7 @@ function MiniPosterItems(){
                     products.push(response.data);
                 }
             }).catch(function(error){
-                console.log("error",error);
+                console.log("error in get-products/modelNum");
             })
             console.log("Products array",productsArray);
             setProduct(productsArray);

@@ -40,7 +40,7 @@ const RatingandReview = ({review}) => {
                 // console.log("Review",reviews)
                 setIsReviewsFetched(true);
             })).catch(function(error){
-                console.log("error",error.response);
+                console.log("error in get-reviews/");
             })
 }})
 

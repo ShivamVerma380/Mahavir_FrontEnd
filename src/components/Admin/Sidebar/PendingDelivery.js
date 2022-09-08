@@ -26,7 +26,8 @@ const PendingDelivery = () => {
                         console.log("response",response);
                     }
                 }).catch(function(error){
-                    console.log("Error In Fetching orders",error);
+                    console.log("Error In Fetching orders");
+
                 })
         }
     })
@@ -53,7 +54,9 @@ const PendingDelivery = () => {
                     console.log("Error",response);
                 }
             }).catch(function(error){
-                console.log("Error",error);
+                console.log("Error in order-status",error);
+                // toast.warn("Error In Fetching orders",error)
+
             })
     }
 

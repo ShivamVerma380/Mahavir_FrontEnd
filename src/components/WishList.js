@@ -139,7 +139,7 @@ const RemoveFromWishListviaIcon=(event)=>{
             console.log(response.data.message);
           }
         }).catch(function (error) {
-          console.log(error);
+          console.log("error");
         })
 
         
