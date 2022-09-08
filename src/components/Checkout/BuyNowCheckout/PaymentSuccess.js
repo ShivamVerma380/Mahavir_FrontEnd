@@ -8,8 +8,8 @@ import {useNavigate} from "react-router-dom"
 function PaymentSuccess(){
     const navigate = useNavigate();
     var paymentmode = localStorage.getItem("paymentmode");
-    console.log("paid",localStorage.getItem("paymentmode"));
-    console.log("pay",paymentmode)
+    // console.log("paid",localStorage.getItem("paymentmode"));
+    // console.log("pay",paymentmode)
     var paymentamount = localStorage.getItem("Amount")
 
     

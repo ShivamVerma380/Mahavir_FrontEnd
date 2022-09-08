@@ -91,6 +91,7 @@ function CategoryProductsSwiper({ cattitle }) {
     localStorage.setItem("Category",index.category)
     localStorage.setItem("SubCategory","Brand")
     localStorage.setItem("SubSubCategory",index.subCategoryMap.Brand)
+    // localStorage.setItem("SubSubCategory","Whirlpool")
     // console.log(index.subCategoryMap.Brand);
     // console.log("Cat",localStorage.getItem("Category"))
     // console.log("SubCat",localStorage.getItem("SubCategory"))

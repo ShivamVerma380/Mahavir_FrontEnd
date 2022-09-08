@@ -704,12 +704,12 @@ function TestFilterProducts(){
         var arr=[]; 
         SetSelectedProducts([]);
         arr = selectedProducts;
-        console.log("Before sorting",selectedProducts)
+        // console.log("Before sorting",selectedProducts)
         arr.map(index=>{
             // console.log("indexOfferPrice",index.offerPrice)
         })
-        arr.sort((a,b)=>a.offerPrice-b.offerPrice);
-        console.log("After sorting",selectedProducts)
+        arr.sort((a,b)=>a.offerPrice.replace(',','')-b.offerPrice.replace(',',''));
+        // console.log("After sorting",selectedProducts)
         arr.map(index=>{
             // console.log("indexOfferPrice--",index.offerPrice)
         })
@@ -725,7 +725,7 @@ function TestFilterProducts(){
         arr.map(index=>{
             // console.log("indexOfferPrice",index.offerPrice)
         })
-        arr.sort((a,b)=>b.offerPrice-a.offerPrice);
+        arr.sort((a,b)=>b.offerPrice.replace(',','')-a.offerPrice.replace(',',''));
         // console.log("After sorting",selectedProducts)
         arr.map(index=>{
             // console.log("indexOfferPrice--",index.offerPrice)
@@ -759,7 +759,7 @@ function TestFilterProducts(){
         arr.map(index=>{
             // console.log("difference",((index.productPrice-index.offerPrice)*100/index.productPrice))
         })
-        arr.sort((a,b)=>((b.productPrice-b.offerPrice)*100/b.productPrice)-((a.productPrice-a.offerPrice)*100/a.productPrice));
+        arr.sort((a,b)=>((b.productPrice.replace(',','')-b.offerPrice.replace(',',''))*100/b.productPrice.replace(',',''))-((a.productPrice.replace(',','')-a.offerPrice.replace(',',''))*100/a.productPrice.replace(',','')));
         // console.log("After sorting",selectedProducts)
         arr.map(index=>{
             // console.log("indexAverageRating--",index.averageRating)
@@ -818,7 +818,7 @@ function TestFilterProducts(){
             <Col md={2} className="filtercol" style={{paddingLeft:"0px",paddingRight:"0px"}} >
             <h4><FcFilledFilter/>Filters</h4>   
                 <hr style={{}}></hr> 
-                <h4 style={{marginBottom:"15px"}}>Categories</h4>
+                <h4 style={{marginBottom:"15px",}}>Categories</h4>
               
                 {
                     (isCategoriesFetched)?(

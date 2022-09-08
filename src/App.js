@@ -84,7 +84,7 @@ function App() {
  
   // console.log("Count comp: ",getCookie("countcompare"))
 
-  var element = <div></div>;
+  // var element = <div></div>;
 
   //const[cookies,SetCookie] = useCookies(["modelNumsToCompare"])
 
@@ -286,9 +286,10 @@ function App() {
       // }).catch(function(error){
       //     console.log(error);
       // })
-
+      // var element = document.getElementById("spinner");
+      // element.style.visibility="hidden";
+   
     }
-    
         
   },[]);
   // console.log("deals..",deals);
@@ -410,7 +411,6 @@ function App() {
   return (
 
     <div>
-
       {/* <button onclick={topFunction} id="myBtn" title="Go to top">Top</button> */}
       <Button  id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
       
@@ -423,6 +423,7 @@ function App() {
         )
       }
      <Header/>
+     
      
       
       {/* <AddItem/> */}

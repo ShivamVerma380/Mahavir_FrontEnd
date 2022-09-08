@@ -31,13 +31,7 @@ function AdminNavbar() {
                 {SidebarData.map((item, index) => {
                 return (
                     <Nav.Link  href={item.path} className={item.cName}>{item.icon}<span className='span'> </span>{item.title}</Nav.Link>
-                    // <li key={index} className={item.cName}>
-                    // <Link to={item.path}>
-                    //     {item.icon}
-                        
-                    //     <span className='span'>{item.title}</span>
-                    // </Link>
-                    // </li>
+                    
                 );
                 })}
                   

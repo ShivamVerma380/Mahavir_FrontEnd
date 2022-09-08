@@ -41,10 +41,10 @@ function CategoryProducts(){
     useEffect(()=>{
         if(!isProductsFetched ){
         axios.get(url+"/get-products-by-category/"+localStorage.getItem("Category")).then(function(response){
-        console.log(response);
+        // console.log(response);
         if(response.status==200){
             setProducts(response.data);
-            console.log("Products By Cat: ",response.data);
+            // console.log("Products By Cat: ",response.data);
             setIsProductsFetched(true);
         }
         
@@ -63,21 +63,21 @@ function CategoryProducts(){
           "Authorization": "Bearer "+token
         }
       }).then(function (response) {
-        console.log("Response", response);
+        // console.log("Response", response);
         if (response.status == 200) {
-          console.log("Wishlist response", response.data);
+          // console.log("Wishlist response", response.data);
           setWish(response.data);
           setIsWishlistFetched(true);
-          console.log("...."+wishlist);
+          // console.log("...."+wishlist);
           // setAddress(response.data);
           // console.log("Address: ", address)
           // setIsAddressFetched(true);
 
         } else {
-          console.log(response.data.message);
+          // console.log(response.data.message);
         }
       }).catch(function (error) {
-        console.log(error);
+        console.log(error.response);
       })
     }
     })
@@ -91,11 +91,11 @@ function CategoryProducts(){
 
     function callProductDetails(index){
         //alert(index);
-        console.log("Index",index);
+        // console.log("Index",index);
         localStorage.setItem("productSelected",index.modelNumber);
         localStorage.setItem("productId", index.productId);
-        console.log("Product Id",localStorage.getItem("productId"));
-        console.log("Product Selected",localStorage.getItem("productSelected"))
+        // console.log("Product Id",localStorage.getItem("productId"));
+        // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
       }
 
@@ -107,12 +107,12 @@ function CategoryProducts(){
         if(element.checked){
           
           
-            console.log("adddd"+modelNumber);
+            // console.log("adddd"+modelNumber);
             comparemodels.push(modelNumber);
             setCookie("addToCompare",comparemodels,20);
             setLen(getCookie("addToCompare").split(',').length)
-          console.log(comparemodels);
-          console.log("checked "+modelNumber);
+          // console.log(comparemodels);
+          // console.log("checked "+modelNumber);
             
             
         
@@ -122,14 +122,14 @@ function CategoryProducts(){
           for (var i = 0; i < comparemodels.length; i++) {
             if (comparemodels[i] === modelNumber) {
               comparemodels.splice(i, 1);
-                console.log(comparemodels);
+                // console.log(comparemodels);
                 setCookie("addToCompare",comparemodels,20);
                 setLen(getCookie("addToCompare").split(',').length)
                 // window.location.reload();
                 break;
             }
         }
-          console.log("unchecked "+modelNumber);
+          // console.log("unchecked "+modelNumber);
 
         }
         // if (event.target.checked) {
@@ -149,12 +149,12 @@ function CategoryProducts(){
     }
       
       localStorage.setItem("comparecount",change)
-      console.log("Get",localStorage.getItem("comparecount"))
+      // console.log("Get",localStorage.getItem("comparecount"))
   
       
     function WishlistHandler(index) {
         // alert("Item added successfully to wishlist");
-        console.log(index.modelNumber)
+        // console.log(index.modelNumber)
         // if (localStorage.getItem("wishlistproduct")==null) {
         //   localStorage.setItem("wishlistproduct",index.modelNumber)
         // }else {
@@ -179,7 +179,7 @@ function CategoryProducts(){
           
         // }
 
-        console.log("Wishlist clicked")
+        // console.log("Wishlist clicked")
 
       
         var formdata = {
@@ -206,7 +206,7 @@ function CategoryProducts(){
             // alert("Item already present in wishlist")
           }
           else {
-            console.log("Error", error);
+            console.log("Error", error.response);
           }
           
         })
@@ -217,15 +217,15 @@ function CategoryProducts(){
 
     const RemoveFromWishList = (modelnum) => {
       var arr= [];
-      console.log("Wish ",wish)
+      // console.log("Wish ",wish)
           wish.map(pro=>{
             if(pro.modelNumber!==modelnum) {
               arr.push(pro);
             }
-            console.log("i Modelnum ",pro.modelNumber, "Index Modelnum ",modelnum)
+            // console.log("i Modelnum ",pro.modelNumber, "Index Modelnum ",modelnum)
           })
           setWish(arr);
-          console.log("Arr ",arr)
+          // console.log("Arr ",arr)
          
       // localStorage.setItem("RemoveIndex",index.modelNumber);
   
@@ -252,8 +252,8 @@ function CategoryProducts(){
         // }
       ).then(function (response) {
         if (response.status == 200) {
-          console.log("Deleted successfully");
-          console.log(response.data)
+          // console.log("Deleted successfully");
+          // console.log(response.data)
           // setRemoveClicked(true)
           
           // window.location.reload();
@@ -261,7 +261,7 @@ function CategoryProducts(){
           // navigate("/");
         }
       }).catch(function (error) {
-        console.log("Error", error);
+        console.log("Error", error.response);
       });
       
       // setWish((products) => products.filter((i) => i !== index.modelNumber));
@@ -281,13 +281,14 @@ function CategoryProducts(){
       }
       const addtocart=(model)=>{
         if(cart.includes(model)){
-            alert("Item is already present in cart")
+            // alert("Item is already present in cart")
+            toast.warn(<b>Item is already present in cart</b>)
         }
         else{
-            console.log("adddd"+model);
+            // console.log("adddd"+model);
             cart.push(model);
             setCookie("CartModels",cart,20);
-            alert("Added to cart"+model);
+            // alert("Added to cart"+model);
         }  
     }  
     
@@ -296,7 +297,7 @@ function CategoryProducts(){
     wish.map(i=>{
       wishlist.push(i.modelNumber);
     })
-    console.log("wish "+wishlist)
+    // console.log("wish "+wishlist)
 
    
 
@@ -307,6 +308,7 @@ function CategoryProducts(){
       (isProductsFetched)?
       (
         <>
+        <ToastContainer position="top-center"/>
 <Header/>
         <div >
           

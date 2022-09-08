@@ -3,7 +3,7 @@ import {React,useState} from "react";
 import { Row,Col, Container } from "react-bootstrap";
 function ComparisonProductInformation({title,product}){
     //title,
-    console.log("product",product)
+    // console.log("product",product)
     // console.log(product[0].productInformation[title]);
     
     var key =[];
@@ -27,17 +27,17 @@ function ComparisonProductInformation({title,product}){
             // alert(index);
             d.push(0);    
         }
-        console.log("d"+d)
+        // console.log("d"+d)
         return d;
     }
     function fetchKeys(){
         if(!isKeysFetched){
             key=[];
-            console.log("product",product[0])
+            // console.log("product",product[0])
             for(var k in product[0].productInformation){
                 key.push(k);
             }
-            console.log("key",key)
+            // console.log("key",key)
             SetIsKeysFetched(true)
         }
         
@@ -46,7 +46,7 @@ function ComparisonProductInformation({title,product}){
 
 
     function fetchDifferences(k){
-        console.log("Inside fetch ")
+        // console.log("Inside fetch ")
         var valuesPos=[]
         // product[0].productInformation[k].map((index,pos)=>{
         //     // if(index!==product[1].productInformation[k][pos]){
@@ -54,10 +54,10 @@ function ComparisonProductInformation({title,product}){
         //     // }
         //     console.log("index",index)
         // })
-        console.log("position 0",product[0].productInformation[k])
+        // console.log("position 0",product[0].productInformation[k])
         var keyArray=[];
         for(var item in product[0].productInformation[k]){
-            console.log("item",item,"   values",product[0].productInformation[k][item])
+            // console.log("item",item,"   values",product[0].productInformation[k][item])
             // if(product[0].productInformation[k][item]!==product[2].productInformation[k][item]){
             //     keyArray.push(item);
             // }
@@ -84,8 +84,8 @@ function ComparisonProductInformation({title,product}){
         
     
 
-        console.log("keyArray",keyArray)
-        console.log(".....",product[0].productInformation[k][keyArray[0]])
+        // console.log("keyArray",keyArray)
+        // console.log(".....",product[0].productInformation[k][keyArray[0]])
         var i=0;
         // for(var k1 in product[0].productInformation[k]){
         //     console.log("product[0].productInformation[k][k1]",product[0].productInformation[k][k1])

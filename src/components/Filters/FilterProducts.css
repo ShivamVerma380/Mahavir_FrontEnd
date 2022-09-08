@@ -118,7 +118,7 @@ width: 100%;
 }
 
 .filtercol label{
-    font-size: 18px;
+    font-size: 14px;
 }
 .filterproductsRow .nav-link{
     color: black;
@@ -135,8 +135,8 @@ width: 100%;
 }
 
 .filtercol .accordion-flush .accordion-item .accordion-button {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
     margin: 0%;
 }
 
@@ -378,8 +378,8 @@ h5{font-weight: 400}
 } */
 
 .filtercol h4 {
-    font-weight: 600;
-    font-size: 22px;
+    font-weight: 500;
+    font-size: 16px;
     line-height: 21px;
     margin-left: 14px;
     font-family: Roboto;

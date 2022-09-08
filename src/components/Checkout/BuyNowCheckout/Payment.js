@@ -10,6 +10,7 @@ import Card from 'react-bootstrap/Card';
 import './Payment.css';
 import Header from "../../Header";
 import Footer from "../../Footer/Footer";
+import { toast, ToastContainer } from "react-toastify";
 
 
 function Payment(){
@@ -19,9 +20,9 @@ function Payment(){
     // const [paymentType, SetPaymentType] = useState("");
     var paymentType = "";
     var arr=[];
-    console.log("product",product)
+    // console.log("product",product)
     arr.push(product);
-    console.log("arr",arr)
+    // console.log("arr",arr)
     
     if(product!=null){
         cartModels.set(product.modelNumber,1);
@@ -30,14 +31,14 @@ function Payment(){
 
     const navigate = useNavigate();
 
-    console.log("CartModels",cartModels)
+    // console.log("CartModels",cartModels)
 
-    console.log("Buy Amount",localStorage.getItem("Amount"));
+    // console.log("Buy Amount",localStorage.getItem("Amount"));
 
     var products = Object.fromEntries(cartModels);
 
     var address = JSON.parse(localStorage.getItem("selectedaddress"));
-    console.log("Address",address)
+    // console.log("Address",address)
 
     const[isPaymentDone,SetIsPaymentDone] = useState(false);
     const [isActive, setIsActive] = useState(false);
@@ -49,11 +50,13 @@ function Payment(){
 
     const PayAmount=(e)=>{
         e.preventDefault();
-        console.log("Payment Type",localStorage.getItem("paymentType"));
+        // console.log("Payment Type",localStorage.getItem("paymentType"));
         if(localStorage.getItem("Amount")===""){
-            alert("Please enter amount");
+            // alert("Please enter amount");
+            toast.warn("Please enter amount");
         }else if(localStorage.getItem("paymentType")==null){
-            alert("Please select payment type")
+            // alert("Please select payment type")
+            toast.warn(<b>Please select payment type</b>)
         }else{
             if(localStorage.getItem("paymentType")==="cashOnDelivery"){
                 localStorage.setItem("paymentmode",'cashOnDelivery');
@@ -73,7 +76,7 @@ function Payment(){
                     "paymentMode":"Cash On Delivery",
                     "paymentAmount":localStorage.getItem("Amount")
                 }
-                console.log("Form Data Body",form_data_body)
+                // console.log("Form Data Body",form_data_body)
                 axios.post(url+"/order",form_data_body,{
                 headers:{
                     "Authorization":"Bearer "+getCookie("jwtToken"),
@@ -81,7 +84,7 @@ function Payment(){
                 }
                 }).then(res=>{
                     if(res.status==200){
-                        console.log("response",res)
+                        // console.log("response",res)
                         SetIsPaymentDone(true)
                         SetIsPaymentDone(true)
                         navigate("/paymentsuccess")
@@ -90,7 +93,7 @@ function Payment(){
                         // localStorage.setItem("BuyProductInvoice",cartModels);
                     }
                 }).catch(err=>{
-                    console.log("Error",err)
+                    console.log("Error",err.response)
                 })
             }else{
                 const options={
@@ -102,8 +105,8 @@ function Payment(){
                     name:"Mahavir Electronics",
                     description:"Payment for products",
                     handler:function(response){
-                        alert(response.razorpay_payment_id);
-                        console.log("error in sending payment:",response);
+                        // alert(response.razorpay_payment_id);
+                        // console.log("error in sending payment:",response);
                         if(localStorage.getItem("Amount")!=null){
                                 const form_data_body={
                                     products,
@@ -122,7 +125,7 @@ function Payment(){
                                     "paymentAmount":localStorage.getItem("Amount"),
                                     "paymentId":response.razorpay_payment_id
                                 }
-                            console.log("Form Data Body",form_data_body)
+                            // console.log("Form Data Body",form_data_body)
                                 axios.post(url+"/order",form_data_body,{
                                 headers:{
                                     "Authorization":"Bearer "+getCookie("jwtToken"),
@@ -130,7 +133,7 @@ function Payment(){
                                 }
                                 }).then(res=>{
                                     if(res.status==200){
-                                        console.log("response",res)
+                                        // console.log("response",res)
                                         SetIsPaymentDone(true)
                                         SetIsPaymentDone(true)
                                         localStorage.removeItem("paymentType");
@@ -139,7 +142,7 @@ function Payment(){
                                         // localStorage.setItem("BuyProductInvoice",cartModels);
                                     }
                                 }).catch(err=>{
-                                    console.log("Error",err)
+                                    console.log("Error",err.response)
                                 })
                                 
                             } 
@@ -172,6 +175,7 @@ function Payment(){
 
     return(
         <div>
+            <ToastContainer position="top-center"/>
             {
                 (isPaymentDone)?(
                     <h1>Payment Done</h1>

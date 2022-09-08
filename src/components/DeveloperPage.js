@@ -7,7 +7,12 @@ import { Icon } from '@iconify/react';
 import {HiOutlineMail} from "react-icons/hi";
 import {FaLinkedinIn} from "react-icons/fa";
 import {BsGithub} from "react-icons/bs";
-// import shraddhaImg from "../assets/developers/Shraddha.jpg";
+import omkarImg from "../assets/developers/Omkar_img.jpg";
+import shivamImg from "../assets/developers/Shivam_img.jpg";
+import ketakiImg from "../assets/developers/Ketaki_img.jpg";
+import siddhantImg from "../assets/developers/Siddhant_img.jpg";
+import aditiImg from "../assets/developers/Aditi_img.jpg";
+import shraddhaImg from "../assets/developers/Shraddha_img.jpg";
 
 
 
@@ -23,7 +28,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src={omkarImg}/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Omkar Khare</h3>
@@ -44,7 +49,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img src={aditiImg}/>
                     </div>
                     <div class="contentBx">
                     <h3 style={{fontSize:"16px",color:"black"}}>Aditi Nikam</h3>
@@ -66,7 +71,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src={shivamImg}/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Shivam Verma</h3>
@@ -90,7 +95,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src={ketakiImg}/>
                     </div>
                     <div class="contentBx">
                     <h3 style={{fontSize:"16px",color:"black"}}>Ketaki Hadnurkar</h3>
@@ -112,7 +117,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src={siddhantImg}/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Siddhant Jain</h3>
@@ -133,7 +138,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src="https://asia.olympus-imaging.com/content/000107506.jpg"/>
+                        <img  src={shraddhaImg}/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Shraddha Mulay</h3>

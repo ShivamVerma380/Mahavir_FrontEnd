@@ -30,18 +30,18 @@ function AddToCompareProducts(){
     useEffect(()=>{
         if(!isProductFetched){
             var modelNumbers = getCookie("addToCompare").split(",")
-            console.log("modelNumbers",modelNumbers)
+            // console.log("modelNumbers",modelNumbers)
             var urls = []
             modelNumbers.map(index=>{
                 if(index!=="")
                     urls.push(axios.get(url+"/get-products/"+index))
             })
             axios.all(urls).then(axios.spread((...response) => {
-                console.log("response",response)
+                // console.log("response",response)
                 response.map(p=>{
                     product.push(p.data)
                 })
-                console.log("Product",product)
+                // console.log("Product",product)
                 SetIsProductFetched(true)
             })).catch(function(error){
                 console.log("error in /get-products/");
@@ -62,7 +62,7 @@ function AddToCompareProducts(){
             // alert(index);
             d.push(0);    
         }
-        console.log("d"+d)
+        // console.log("d"+d)
         return d;
         }
     return(

@@ -176,9 +176,15 @@ function Login() {
                 toast.success(<b>Login successful</b>)
                 navigate("/");
             }
+            
             // console.log(response.data.message);
         }).catch(function (error) {
+<<<<<<< HEAD
             console.log("error in login-user");
+=======
+            console.log(error);
+            toast.error(<b>{error.response.data.message}</b>)
+>>>>>>> 85042c473a7f4f3e148534f5f7f0a0d2a7195610
             // alert(error.response.data.message);
         })
         isUserLoggedIn = true;
@@ -332,7 +338,13 @@ function Login() {
                     // navigate("/");
                 }
             }).catch(function (error) {
+<<<<<<< HEAD
                 console.log("Error in /add-user");
+=======
+                console.log("Error", error);
+                toast.error(<b>{error.response.data.message}</b>)
+
+>>>>>>> 85042c473a7f4f3e148534f5f7f0a0d2a7195610
             })
         }
     }

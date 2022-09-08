@@ -9,15 +9,16 @@ import { QuantityPicker } from 'react-qty-picker';
 import 'typeface-roboto';
 import {AiFillDelete} from "react-icons/ai";
 import Footer from "../Footer/Footer";
+import { ToastContainer } from "react-toastify";
 
 const CheckoutItem = ({item,quantity}) => {
     var cartmodelnums=new Array();
     
-    console.log("quantity",item.modelNumber,":",quantity)
+    // console.log("quantity",item.modelNumber,":",quantity)
     cartmodelnums=getCookie("models").split(',');
 
     function removefromcart(){
-        console.log("Remove clicked")
+        // console.log("Remove clicked")
 
         var arr=[];
         // for(var k in cartmodelnums){
@@ -33,7 +34,7 @@ const CheckoutItem = ({item,quantity}) => {
                 }
             }
         })
-        console.log("arr remove item",arr)
+        // console.log("arr remove item",arr)
         setCookie("models",arr,20);
         window.location.reload();
 
@@ -56,6 +57,7 @@ const CheckoutItem = ({item,quantity}) => {
     return (
        
         <div>
+            <ToastContainer position="top-center"/>
             {
                 (!item.freeItem) ? (
                     

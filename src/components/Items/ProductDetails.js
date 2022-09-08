@@ -130,14 +130,14 @@ function ProductDetails() {
 
         }
       }).catch(function (error) {
-        console.log("error", error);
+        console.log("error", error.response);
       })
 
       axios({
         method: "get",
         url: url+"/get-products/" + localStorage.getItem("productSelected")
       }).then(function (response) {
-        console.log(response);
+        // console.log(response);
         if (response.status == 200) {
           // console.log("response data", response.data);
           //product= response.data;
@@ -173,7 +173,7 @@ function ProductDetails() {
           SetIsVariantKeysFetched(true);
         }
       }).catch(function (error) {
-        console.log("error", error);
+        console.log("error", error.response);
         toast.warn("Item already present in cart")
       })
 
@@ -208,7 +208,7 @@ function ProductDetails() {
             SetIsProductListFetched(true);
           }
         }).catch(function (error) {
-          console.log("error", error);
+          console.log("error", error.response);
         }
         );
 
@@ -217,21 +217,21 @@ function ProductDetails() {
         "sid": 0,
         "qty": 0
       }
-      axios.post("http://116.72.253.118:9896/invoice/GetSerialNosAccordingToGodownsJsonNew", form_data_body, {
-        headers: {
-          "Authorization": localStorage.getItem("InventoryToken")
-        }
-      }).then(function (response) {
-        if (response.data[0].ProductID == -1) {
-          SetQuantity(0);
-        } else {
-          // console.log("Quantity:", response.data);
-          SetQuantity(response.data.length);
-        }
-        SetIsQuantitySet(true);
-      }).catch(function (error) {
-        console.log("error", error);
-      })
+      // axios.post("http://116.72.253.118:9896/invoice/GetSerialNosAccordingToGodownsJsonNew", form_data_body, {
+      //   headers: {
+      //     "Authorization": localStorage.getItem("InventoryToken")
+      //   }
+      // }).then(function (response) {
+      //   if (response.data[0].ProductID == -1) {
+      //     SetQuantity(0);
+      //   } else {
+      //     // console.log("Quantity:", response.data);
+      //     SetQuantity(response.data.length);
+      //   }
+      //   SetIsQuantitySet(true);
+      // }).catch(function (error) {
+      //   console.log("error", error);
+      // })
 
     }
   }, []);
@@ -709,43 +709,22 @@ function ProductDetails() {
                       </Col>
                     </Row >
 
-                    {
-                      (isQuantitySet) ? (
-                        
-                        (Quantity == 0) ? (
-                          <Row>
-                            <Col md={2}></Col>
-                            <Col md={10}>
-                            <center>
-                            {/* <h4 style={{color:"rgb(255,98,98)"}}><b>OUT OF STOCK</b></h6> */}
-                            <Button className="addtocart">OUT OF STOCK</Button>
+                    <Row>
+                      <Col md={2}></Col>
+                      <Col md={10}>
+                        <Row>
+                      <Col className="addtocartcol">
+                      <Button className="addtocart"  onClick={() => addtocart(product.modelNumber)}>Add To Cart<span> </span><HiOutlineShoppingCart/></Button>
+                      
+                      </Col>
+                      <Col className="buynowcol">
+                      <Button className="addtocart" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
 
-                            </center>
-                            </Col>
-                            
-                          </Row>
+                      </Col>
+                      </Row>
+                      </Col>
 
-                        ) : (
-
-                          <Row>
-                            <Col md={2}></Col>
-                            <Col md={10}>
-                              <Row>
-                            <Col className="addtocartcol">
-                            <Button className="addtocart"  onClick={() => addtocart(product.modelNumber)}>Add To Cart<span> </span><HiOutlineShoppingCart/></Button>
-                            
-                            </Col>
-                            <Col className="buynowcol">
-                            <Button className="addtocart" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
-
-                            </Col>
-                            </Row>
-                            </Col>
-
-                          </Row>
-                        )
-                      ) : (null)
-                    }
+                    </Row>
 
 
                   </div>
@@ -786,7 +765,7 @@ function ProductDetails() {
                       (product.offerPrice == null) ? (
                         <h4 className="productprice">MRP: <b>₹{product.productPrice}</b></h4>
                       ) : (
-                        <h4 className="productprice"><b style={{fontSize:"22px"}}>MSP:</b> <b style={{ marginRight: "20px", color: "#ed1c24",fontSize:"22px"}}>₹{product.offerPrice}</b> <b style={{fontSize:"16px",color:"grey"}}>MRP:</b>  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b> <b style={{color:"green",marginLeft:"-30px"}}>{Math.round((product.productPrice-product.offerPrice)*100/product.productPrice)}% off</b></h4>
+                        <h4 className="productprice"><b style={{fontSize:"22px"}}>MSP:</b> <b style={{ marginRight: "20px", color: "#ed1c24",fontSize:"22px"}}>₹{product.offerPrice}</b> <b style={{fontSize:"16px",color:"grey"}}>MRP:</b>  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b> <b style={{color:"green",marginLeft:"-30px"}}>{Math.round((parseInt(product.productPrice.replace(',',''))-parseInt(product.offerPrice.replace(',','')))*100/parseInt(product.productPrice.replace(',','')))}% off</b></h4>
                       )
                     }
                   </Row>
@@ -1051,7 +1030,8 @@ function ProductDetails() {
                     navigation={true}
                     modules={[Pagination, Navigation]}
                     className="mySwiper"
-                  > {console.log("Product List", productList)}
+                  > 
+                  {/* {console.log("Product List", productList)} */}
                     {
                       cards = productList.map(index => {
 

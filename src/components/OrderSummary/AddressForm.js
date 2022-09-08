@@ -40,15 +40,15 @@ const AddressForm = () => {
           "Authorization": "Bearer "+token
         }
       }).then(function (response) {
-        console.log("Response", response);
+        // console.log("Response", response);
         if (response.status == 200) {
-          console.log("Address response", response.data);
+          // console.log("Address response", response.data);
           setAddress(response.data);
-          console.log("Address: ", address)
+          // console.log("Address: ", address)
           setIsAddressFetched(true);
 
         } else {
-          console.log(response.data.message);
+          // console.log(response.data.message);
         }
       }).catch(function (error) {
         console.log(error);
