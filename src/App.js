@@ -122,19 +122,7 @@ function App() {
     if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched && !isDealsFetched){
       
       // console.log("InventoryToken is null")
-      var form_data_body={
-        "UserName":"MahaStock",
-        "password":"abcd@123"
-      }
-      if(localStorage.getItem("InventoryToken")==null){
-        axios.post("http://116.72.253.118:9896/Login/chkUserLogin",form_data_body)
-        .then(function(response){
-          localStorage.setItem("InventoryToken",response.data.status);
-          // console.log("InventoryToken",localStorage.getItem("InventoryToken"));
-        }).catch(function(error){
-          console.log("error",error);
-        })
-      }
+      
       
 
       axios({

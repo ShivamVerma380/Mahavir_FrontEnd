@@ -89,9 +89,6 @@ function ProductDetails() {
   //const[productInformation,SetProductInformation] = useState();
   const [isProductInformationSet, SetIsProductInformationSet] = useState(false);
 
-  const [Quantity, SetQuantity] = useState();
-  const [isQuantitySet, SetIsQuantitySet] = useState(false);
-
   
   var cart = [];
   if(getCookie("CartModels")!=null){
@@ -109,7 +106,7 @@ function ProductDetails() {
 
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
     var token = localStorage.getItem("jwtToken");
-    if (localStorage.getItem("productSelected") != null && !isQuantitySet && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched && !isPincodeFetched && localStorage.getItem("Model Number") != null && !isProductListFetched) {
+    if (localStorage.getItem("productSelected") != null  && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched && !isPincodeFetched && localStorage.getItem("Model Number") != null && !isProductListFetched) {
 
       axios({
         method: "get",
@@ -217,21 +214,7 @@ function ProductDetails() {
         "sid": 0,
         "qty": 0
       }
-      // axios.post("http://116.72.253.118:9896/invoice/GetSerialNosAccordingToGodownsJsonNew", form_data_body, {
-      //   headers: {
-      //     "Authorization": localStorage.getItem("InventoryToken")
-      //   }
-      // }).then(function (response) {
-      //   if (response.data[0].ProductID == -1) {
-      //     SetQuantity(0);
-      //   } else {
-      //     // console.log("Quantity:", response.data);
-      //     SetQuantity(response.data.length);
-      //   }
-      //   SetIsQuantitySet(true);
-      // }).catch(function (error) {
-      //   console.log("error", error);
-      // })
+      
 
     }
   }, []);
