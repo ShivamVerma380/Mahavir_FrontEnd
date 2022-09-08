@@ -217,21 +217,21 @@ function ProductDetails() {
         "sid": 0,
         "qty": 0
       }
-      axios.post("http://116.72.253.118:9896/invoice/GetSerialNosAccordingToGodownsJsonNew", form_data_body, {
-        headers: {
-          "Authorization": localStorage.getItem("InventoryToken")
-        }
-      }).then(function (response) {
-        if (response.data[0].ProductID == -1) {
-          SetQuantity(0);
-        } else {
-          // console.log("Quantity:", response.data);
-          SetQuantity(response.data.length);
-        }
-        SetIsQuantitySet(true);
-      }).catch(function (error) {
-        console.log("error", error);
-      })
+      // axios.post("http://116.72.253.118:9896/invoice/GetSerialNosAccordingToGodownsJsonNew", form_data_body, {
+      //   headers: {
+      //     "Authorization": localStorage.getItem("InventoryToken")
+      //   }
+      // }).then(function (response) {
+      //   if (response.data[0].ProductID == -1) {
+      //     SetQuantity(0);
+      //   } else {
+      //     // console.log("Quantity:", response.data);
+      //     SetQuantity(response.data.length);
+      //   }
+      //   SetIsQuantitySet(true);
+      // }).catch(function (error) {
+      //   console.log("error", error);
+      // })
 
     }
   }, []);
@@ -709,60 +709,23 @@ function ProductDetails() {
                       </Col>
                     </Row >
 
-//                     {
-//                       (isQuantitySet) ? (
-                        
-//                         (Quantity == 0) ? (
-//                           <Row>
-//                             <Col md={2}></Col>
-//                             <Col md={10}>
-//                             <center>
-//                             {/* <h4 style={{color:"rgb(255,98,98)"}}><b>OUT OF STOCK</b></h6> */}
-//                             <Button className="addtocart">OUT OF STOCK</Button>
-
-//                             </center>
-//                             </Col>
-                            
-//                           </Row>
-
-//                         ) : (
-
-//                           <Row>
-//                             <Col md={2}></Col>
-//                             <Col md={10}>
-//                               <Row>
-//                             <Col className="addtocartcol">
-//                             <Button className="addtocart"  onClick={() => addtocart(product.modelNumber)}>Add To Cart<span> </span><HiOutlineShoppingCart/></Button>
-                            
-//                             </Col>
-//                             <Col className="buynowcol">
-//                             <Button className="addtocart" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
-
-//                             </Col>
-//                             </Row>
-//                             </Col>
-
-//                           </Row>
-//                         )
-//                       ) : (null)
-//                     }
-
                     <Row>
-                            <Col md={2}></Col>
-                            <Col md={10}>
-                              <Row>
-                            <Col className="addtocartcol">
-                            <Button className="addtocart"  onClick={() => addtocart(product.modelNumber)}>Add To Cart<span> </span><HiOutlineShoppingCart/></Button>
-                            
-                            </Col>
-                            <Col className="buynowcol">
-                            <Button className="addtocart" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
+                      <Col md={2}></Col>
+                      <Col md={10}>
+                        <Row>
+                      <Col className="addtocartcol">
+                      <Button className="addtocart"  onClick={() => addtocart(product.modelNumber)}>Add To Cart<span> </span><HiOutlineShoppingCart/></Button>
+                      
+                      </Col>
+                      <Col className="buynowcol">
+                      <Button className="addtocart" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
 
-                            </Col>
-                            </Row>
-                            </Col>
+                      </Col>
+                      </Row>
+                      </Col>
 
-                          </Row>
+                    </Row>
+
 
                   </div>
 
