@@ -709,25 +709,45 @@ function ProductDetails() {
                       </Col>
                     </Row >
 
-                    {
-                      (isQuantitySet) ? (
+//                     {
+//                       (isQuantitySet) ? (
                         
-                        (Quantity == 0) ? (
-                          <Row>
-                            <Col md={2}></Col>
-                            <Col md={10}>
-                            <center>
-                            {/* <h4 style={{color:"rgb(255,98,98)"}}><b>OUT OF STOCK</b></h6> */}
-                            <Button className="addtocart">OUT OF STOCK</Button>
+//                         (Quantity == 0) ? (
+//                           <Row>
+//                             <Col md={2}></Col>
+//                             <Col md={10}>
+//                             <center>
+//                             {/* <h4 style={{color:"rgb(255,98,98)"}}><b>OUT OF STOCK</b></h6> */}
+//                             <Button className="addtocart">OUT OF STOCK</Button>
 
-                            </center>
-                            </Col>
+//                             </center>
+//                             </Col>
                             
-                          </Row>
+//                           </Row>
 
-                        ) : (
+//                         ) : (
 
-                          <Row>
+//                           <Row>
+//                             <Col md={2}></Col>
+//                             <Col md={10}>
+//                               <Row>
+//                             <Col className="addtocartcol">
+//                             <Button className="addtocart"  onClick={() => addtocart(product.modelNumber)}>Add To Cart<span> </span><HiOutlineShoppingCart/></Button>
+                            
+//                             </Col>
+//                             <Col className="buynowcol">
+//                             <Button className="addtocart" onClick={()=>handleBuyNow(product)}>Buy Now</Button>
+
+//                             </Col>
+//                             </Row>
+//                             </Col>
+
+//                           </Row>
+//                         )
+//                       ) : (null)
+//                     }
+
+                    <Row>
                             <Col md={2}></Col>
                             <Col md={10}>
                               <Row>
@@ -743,10 +763,6 @@ function ProductDetails() {
                             </Col>
 
                           </Row>
-                        )
-                      ) : (null)
-                    }
-
 
                   </div>
 
