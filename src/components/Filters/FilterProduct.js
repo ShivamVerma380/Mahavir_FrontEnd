@@ -115,7 +115,7 @@ function FilterProduct() {
                     SetIsProductsFetched(true);
                     SetIsSelectedProductsFetched(true);
                 }).catch(function(error){
-                    console.log(error);
+                    console.log("Error in get-products-by-category");
                 })
         
             axios.get("http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com/filtercriterias/"+category)
@@ -128,7 +128,7 @@ function FilterProduct() {
                     console.log("keySet",keySet)
                     SetIsFiltersFetched(true)
                 }).catch(function(error){
-                    console.log("error in filtercriterias:"+error);
+                    console.log("error in filtercriterias:");
                 })
         
         }
@@ -172,7 +172,9 @@ function FilterProduct() {
             toast.warn(<b>Item already present in Wishlist</b>)
           }
           else {
-            console.log("Error", error);
+            // console.log("Error", error);
+            toast.warn("Error ",error)
+
           }
           
         })

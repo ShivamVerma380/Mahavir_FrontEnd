@@ -130,7 +130,7 @@ function TestFilterProducts(){
                 SetIsProductsFetched(true);
                 
             }).catch(function(error){
-                console.log("error",error);
+                console.log("error in get-products-by-category");
             })
 
             if(!isCategoriesFetched){
@@ -141,7 +141,7 @@ function TestFilterProducts(){
                     })
                     
                 }).catch(function(error){
-                    console.log("error",error);
+                    console.log("error in get-categories");
                 })
 
                 SetIsCategoriesFetched(true);
@@ -164,7 +164,7 @@ function TestFilterProducts(){
                     // SetFilters(response.data.filterCriterias)
                     // SetIsFiltersFetched(true)
                 }).catch(function(error){
-                    console.log("error",error)
+                    console.log("error in filtercriterias category")
                 })
 
                 
@@ -350,8 +350,8 @@ function TestFilterProducts(){
             // console.log(response.data)
           }
         }).catch(function (error) {
-            toast.warn(<b>Item already present in wishlist</b>)
-            console.log("Error", error);
+            // toast.warn(<b>Item already present in wishlist</b>)
+            console.log("Error in wishlist");
           
         })
       }

@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
 
-
+import 'react-toastify/dist/ReactToastify.css';
+import { Toast, ToastBody, ToastHeader } from "reactstrap";
+import { ToastContainer, toast } from 'react-toastify';
 /** subCategoriesArray variable to store different array for different dropdown */
 var subCategoriesArray = null;
 /** This will be used to create set of subCategories that user will see */
@@ -88,7 +90,9 @@ const CategoryDropdowns = ({Category}) => {
       
       console.log("subCategoriesArray:",subCategoriesArray);
     }).catch(function(error){
-      console.log("Error:",error);
+      // console.log("Error:",error);
+      toast.warn("Error ",error)
+
     })
   }
 
@@ -109,7 +113,9 @@ const CategoryDropdowns = ({Category}) => {
       
       console.log("subSubCategoriesArray:",subSubCategoriesArray);
     }).catch(function(error){
-      console.log("Error:",error);
+      console.log("Error in get-sub-sub-categories/");
+      // toast.warn("Error ",error)
+
     })
   }
 

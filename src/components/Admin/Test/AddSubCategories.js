@@ -5,6 +5,9 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { Container } from "@mui/system";
 import { constants } from "react-horizontal-scrolling-menu";
+import 'react-toastify/dist/ReactToastify.css';
+import { Toast, ToastBody, ToastHeader } from "reactstrap";
+import { ToastContainer, toast } from 'react-toastify';
 const AddSubCategories=()=>{
     
     console.log("Category Selected",localStorage.getItem("CategorySelected"));
@@ -33,7 +36,9 @@ const AddSubCategories=()=>{
                     SetIsCategoriesFetched(true);
                 }
             }).catch(function(error){
-                console.log("Error",error);
+                console.log("Error in admin");
+        //   toast.warn("Error ",error)
+
             })
         }       
     })
@@ -138,7 +143,9 @@ const AddSubCategories=()=>{
                 navigate("/addProductInformation/"+localStorage.getItem("ModelNos"));
             }
         }).catch(function(error){
-            console.log("error",error);
+            // console.log("error",error);
+            toast.warn("Error ")
+
         })
 
         

@@ -30,7 +30,7 @@ function OrderInvoices(){
                     setIsOrdersFetched(true);
                 }
             }).catch(function(error){
-                console.log(url+"/my-invoice",error);
+                console.log("error in /my-invoice");
             })
         }
     })

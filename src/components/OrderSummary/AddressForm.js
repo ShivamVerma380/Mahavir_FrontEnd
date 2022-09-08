@@ -199,7 +199,7 @@ const AddressForm = () => {
         console.log("Error in deleting address");
       }
     }).catch(function(error){
-      console.log("Error",error);
+      console.log("Error in /delete-address");
     }
     )
   

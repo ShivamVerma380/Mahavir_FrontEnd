@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container ,Table,Accordion,Button} from 'react-bootstrap';
 import AdminNavbar from "./AdminNavbar";
+import 'react-toastify/dist/ReactToastify.css';
+import { Toast, ToastBody, ToastHeader } from "reactstrap";
+import { ToastContainer, toast } from 'react-toastify';
 
 function CompletedOrders(){
     const [completedOrders,SetCompletedOrders] = useState([]);
@@ -20,7 +23,8 @@ function CompletedOrders(){
                         console.log("Response error:",response);
                     }
                 }).catch(function(error){
-                    console.log("Error",error);
+                    console.log("Error in completed-orders");
+
                 })
         }
     })

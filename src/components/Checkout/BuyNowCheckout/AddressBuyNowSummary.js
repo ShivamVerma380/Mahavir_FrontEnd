@@ -68,7 +68,8 @@ function AddressBuyNowSummary(){
               console.log(response.data.message);
             }
           }).catch(function (error) {
-            console.log(error);
+            console.log("Error");
+
           })
           // console.log("state",State.getStatesOfCountry('IN'))
           // 
@@ -113,7 +114,7 @@ function AddressBuyNowSummary(){
               // navigate("/");
             }
           }).catch(function (error) {
-            console.log("Error", error);
+            console.log("Error in address");
           })
           console.log("Form: ", formdata)
           window.location.reload()
@@ -218,7 +219,7 @@ function AddressBuyNowSummary(){
             console.log("Error in deleting address");
           }
         }).catch(function(error){
-          console.log("Error",error);
+          console.log("Error in delete-address");
         }
         )
       

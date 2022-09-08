@@ -104,7 +104,7 @@ function BrandCatProducts() {
 
                     }
                 }).catch(function (error) {
-                    console.log("error", error);
+                    console.log("error in shopByBrands");
                 }
                 );
 
@@ -116,7 +116,7 @@ function BrandCatProducts() {
                         })
 
                     }).catch(function (error) {
-                        console.log("error", error);
+                        console.log("error in get-categories");
                     })
 
                 SetIsCategoriesFetched(true);
@@ -139,7 +139,7 @@ function BrandCatProducts() {
                     // SetFilters(response.data.filterCriterias)
                     // SetIsFiltersFetched(true)
                 }).catch(function (error) {
-                    console.log("error", error)
+                    console.log("error in filtercriterias shopbrandcat")
                 })
         }
 
@@ -320,8 +320,10 @@ function BrandCatProducts() {
                     console.log(response.data)
                 }
             }).catch(function (error) {
-                alert("Item already present in wishlist")
-                console.log("Error", error);
+                // alert("Item already present in wishlist")
+                toast.warn("Item already present in wishlist")
+
+                // console.log("Error", error);
 
             })
         }

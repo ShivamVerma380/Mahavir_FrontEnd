@@ -4,6 +4,9 @@ import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './Navbar.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { Toast, ToastBody, ToastHeader } from "reactstrap";
+import { ToastContainer, toast } from 'react-toastify';
 import { IconContext } from 'react-icons';
 import { Offcanvas,Button } from 'react-bootstrap';
 function Navbar() {

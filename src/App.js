@@ -22,7 +22,7 @@ import { getCookie, setCookie } from "./components/Cookies";
 import { RiCompassDiscoverLine } from 'react-icons/ri';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import HomeBottom from './components/Items/HomeBottom';
-
+import {Spinner} from 'react-bootstrap';
 import {BsArrowUp} from "react-icons/bs";
 
 // import Url from url
@@ -32,7 +32,7 @@ var count = 0;
 
 function App() {
 
-  console.log("Url",url)
+  // console.log("Url",url)
 
   localStorage.setItem("quantity",1);
 
@@ -132,7 +132,7 @@ function App() {
           localStorage.setItem("InventoryToken",response.data.status);
           // console.log("InventoryToken",localStorage.getItem("InventoryToken"));
         }).catch(function(error){
-          console.log("error",error);
+          console.log("error");
         })
       }
       
@@ -165,7 +165,7 @@ function App() {
         }
         
       }).catch(function(error){
-        console.log("error",error);
+        console.log("error");
       })
 
       axios.get(url+"/refresh-token",{
@@ -182,7 +182,7 @@ function App() {
       }
       
     }).catch(function(error){
-        console.log(error);
+        console.log("error");
     
       })
 
@@ -196,7 +196,7 @@ function App() {
         }
         // console.log(response.data);
       }).catch(function(error){
-          console.log(error);
+          console.log("error");
       })
 
       axios.get(url+"/wishlist",{
@@ -215,7 +215,7 @@ function App() {
           }
         }
       ).catch(function(error){
-        console.log("Error",error);
+        console.log("Error");
       })
 
       axios.get(url+"/deals").then(
@@ -227,7 +227,7 @@ function App() {
                 // console.log("Deals: ",deals);
               }
             }).catch(function(error){
-              console.log("error",error);
+              console.log("error");
             }
           )
 
@@ -240,7 +240,7 @@ function App() {
       }
       
       }).catch(function(error){
-        console.log(error);
+        console.log("error");
       })
 
       axios.get(url+"/get-posters").then(function(response){     
@@ -252,7 +252,7 @@ function App() {
       }
       
       }).catch(function(error){
-        console.log(error);
+        console.log("error");
       })
 
       var urls=[];
@@ -410,6 +410,7 @@ function App() {
   return (
 
     <div>
+
       {/* <button onclick={topFunction} id="myBtn" title="Go to top">Top</button> */}
       <Button  id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
       
@@ -429,6 +430,8 @@ function App() {
       
       <div >
       <CategoriesToDisplay categoryDetail={categoryDisplay}/>
+<Spinner animation="border" />
+
      {
         fetchSlideshow()
       

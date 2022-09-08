@@ -104,7 +104,7 @@ const SelCatProducts=()=>{
                 }
                 
             }).catch(function(error){
-            console.log("error",error);
+            console.log("error in get-offers");
             })
         }
     })

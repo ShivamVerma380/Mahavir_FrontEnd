@@ -7,7 +7,9 @@ import Select from 'react-select';
 import ReactDOM from "react-dom";
 import ImageUploading from "react-images-uploading";
 import { useNavigate } from "react-router-dom";
-
+import 'react-toastify/dist/ReactToastify.css';
+import { Toast, ToastBody, ToastHeader } from "reactstrap";
+import { ToastContainer, toast } from 'react-toastify';
 var SelectedCategory = "";
 var modelNo = "";
 var productName = "";
@@ -204,7 +206,9 @@ function AddItem() {
             // this.setState({Categories:response.data,isCategoriesFetched:true});
           }
         }).catch(function (error) {
-          console.log("error", error);
+          // console.log("error", error);
+          toast.warn("Error ",error)
+
         })
     }
 
@@ -284,7 +288,7 @@ function AddItem() {
       localStorage.setItem("ModelNos",modelNo);
       navigate("/addSubCategories/"+modelNo)
     }).catch(function(error){
-      console.log(error)
+      console.log("Error in add-product")
     })
     
   }

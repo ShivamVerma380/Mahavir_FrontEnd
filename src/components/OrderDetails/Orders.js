@@ -40,7 +40,7 @@ const Orders=()=>{
                     SetIsOrdersFetched(true);
                 }
             }).catch(function(error){
-                console.log("Error",error);
+                console.log("Error in /my-orders");
             })
         }
 
