@@ -189,18 +189,18 @@ const Header = ({productList}) => {
           <Col md={1} >
             <p className="wishlist_" style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto",cursor:"pointer"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
           </Col>
-          <Col md={1}>
+          <Col md={2}>
             {/* <Button class="copyright" onClick={handleDevelopersPage}>Developer Team</Button> */}
 
             <p style={{color:"white",marginTop:"6px",cursor:"pointer"}} onClick={handleDevelopersPage}>Developer Team</p>
 
           </Col>
-          <Col md={1}>
+          {/* <Col md={1}>
           <AiOutlineInstagram className="instagram"/>
           </Col>
           <Col md={1}>
             <AiOutlineFacebook className="facebook"/>
-          </Col>
+          </Col> */}
         </Row>
         
       </div>
