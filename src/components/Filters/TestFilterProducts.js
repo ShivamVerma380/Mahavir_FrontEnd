@@ -379,6 +379,7 @@ function TestFilterProducts(){
             localStorage.setItem("Category",cat);
             localStorage.removeItem("SubCategory")
             localStorage.removeItem("SubSubCategory")
+            navigate("/"+cat);
             window.location.reload()
         }else{
             // console.log(cat," is not checked")

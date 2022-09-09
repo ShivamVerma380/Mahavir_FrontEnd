@@ -92,6 +92,7 @@ root.render(
       {/* <Route path='/OrderSummary' element = {<OrderSummary/>}/> */}
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
+      <Route path='/:Category' element={<SelCatProducts/>}/>
       <Route path='/offers' element={<OfferItems/>}/>
       {/* <Route path='/compareproducts' element={<AddToCompareProducts/>}/> */}
       {/* <Route path="/SearchBar" element={<SearchBar/>}/> */}
