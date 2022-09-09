@@ -123,39 +123,61 @@ function App() {
       
       // console.log("InventoryToken is null")
       
-      
+      if(localStorage.getItem("MegaMini")!=null){
+        var arr = JSON.parse(localStorage.getItem("MegaMini"))
+        arr.map(index=>{
+          if(index.isMegaPoster==="YES") {
+            // console.log("in if ")
+            MegaPoster.push(index)
+          }
+          else {
+            // console.log("in else ")
+            MiniPoster.push(index);
 
-      axios({
-        method:"get",
-        url:url+"/get-offers"
-      }).then(function(response){
-        // console.log(response);
-        // console.log("Poster response: ",response.data)
-        if(response.status==200){
-          response.data.map(index=>{
-            if(index.isMegaPoster==="YES") {
-              // console.log("in if ")
-              MegaPoster.push(index)
-            }
-            else {
-              // console.log("in else ")
-              MiniPoster.push(index);
+          }
 
-            }
+        })
+        setOfferPosters(arr);
             
-          })
+        // console.log("OfferPosters",offerPosters);
+        // console.log("Mini Posters: ",MiniPoster)
+        setIsOfferPostersFetched(true);
+      }else{
+        axios({
+          method:"get",
+          url:url+"/get-offers"
+        }).then(function(response){
+          // console.log(response);
+          // console.log("Poster response: ",response.data)
+          if(response.status==200){
+            response.data.map(index=>{
+              if(index.isMegaPoster==="YES") {
+                // console.log("in if ")
+                MegaPoster.push(index)
+              }
+              else {
+                // console.log("in else ")
+                MiniPoster.push(index);
+  
+              }
+              
+            })
+            
+            setOfferPosters(response.data);
+            
+            // console.log("OfferPosters",offerPosters);
+            // console.log("Mini Posters: ",MiniPoster)
+            setIsOfferPostersFetched(true);
+            localStorage.setItem("MegaMini",JSON.stringify(response.data))
+          }
           
-          setOfferPosters(response.data);
-          
-          // console.log("OfferPosters",offerPosters);
-          // console.log("Mini Posters: ",MiniPoster)
-          setIsOfferPostersFetched(true);
-        }
-        
-      }).catch(function(error){
-        console.log("error");
-      })
+        }).catch(function(error){
+          console.log("error");
+        })
+  
+      }
 
+      
       axios.get(url+"/refresh-token",{
         headers:{
           "Authorization":"Bearer "+getCookie("jwtToken"),
@@ -173,75 +195,109 @@ function App() {
         console.log("error");
     
       })
-
-
-      axios.get(url+"/get-categories").then(function(response){
-        // console.log(response);
-        if(response.status==200){
-            setcategoryDisplay(response.data);
-            setIsCategoryDisplayFetched(true);
-            // console.log(response.data);
-        }
-        // console.log(response.data);
-      }).catch(function(error){
-          console.log("error in fetching categories");
-      })
-
-      axios.get(url+"/wishlist",{
-        headers:{
-          "Authorization":"Bearer "+getCookie("jwtToken")
-        }
-      }).then(
-        function(response){
+      
+      if(localStorage.getItem("categoryDisplay")!=null){
+        console.log("In category display cookie")
+        var categoriesDisplay = JSON.parse(localStorage.getItem("categoryDisplay"));
+        setcategoryDisplay(categoriesDisplay)
+        setIsCategoryDisplayFetched(true);
+      }else{
+        axios.get(url+"/get-categories").then(function(response){
+          // console.log(response);
           if(response.status==200){
-            response.data.map(index=>{
-                arr.push(index.modelNumber)
-            })
-            // console.log("Wishlist",arr)
-            localStorage.setItem("Wishlist",arr);
-            // console.log("Wishlist",response.data);
+              setcategoryDisplay(response.data);
+              setIsCategoryDisplayFetched(true);
+              localStorage.setItem("categoryDisplay",JSON.stringify(response.data),20);
+              // console.log(response.data);
           }
-        }
-      ).catch(function(error){
-        console.log("Error");
-      })
+          // console.log(response.data);
+        }).catch(function(error){
+            console.log("error in fetching categories");
+        })
 
-      axios.get(url+"/deals").then(
-            function(response){
-              if(response.status==200){
-                // console.log(response.data);
-                setDeals(response.data);
-                SetIsDealsFetched(true);
-                // console.log("Deals: ",deals);
-              }
-            }).catch(function(error){
-              console.log("error in deals");
+      }
+     
+      
+      if(localStorage.getItem("Wishlist")!=null){
+        axios.get(url+"/wishlist",{
+          headers:{
+            "Authorization":"Bearer "+getCookie("jwtToken")
+          }
+        }).then(
+          function(response){
+            if(response.status==200){
+              response.data.map(index=>{
+                  arr.push(index.modelNumber)
+              })
+              // console.log("Wishlist",arr)
+              localStorage.setItem("Wishlist",arr);
+              // console.log("Wishlist",response.data);
             }
-          )
-
-      axios.get(url+"/hybrid-posters").then(function(response){     
-      if(response.status==200){
-        // console.log("Products",response.data);
-        setProducts(response.data);
+          }
+        ).catch(function(error){
+          console.log("Error");
+        })
+      }
+      
+      if(localStorage.getItem("Deals")!=null){
+        var deals = JSON.parse(localStorage.getItem("Deals"));
+        setDeals(deals);
+        SetIsDealsFetched(true);
+      }else{
+        axios.get(url+"/deals").then(
+          function(response){
+            if(response.status==200){
+              // console.log(response.data);
+              setDeals(response.data);
+              SetIsDealsFetched(true);
+              localStorage.setItem("Deals",JSON.stringify(response.data));
+              // console.log("Deals: ",deals);
+            }
+          }).catch(function(error){
+            console.log("error in deals");
+          }
+        )
+      }
+      
+      if(localStorage.getItem("products")!=null){
+        var products = JSON.parse(localStorage.getItem("products"));
+        setProducts(products);
         setIsProductsFetched(true);
-        // console.log("Products set",Products)
+      }else{
+        axios.get(url+"/hybrid-posters").then(function(response){     
+          if(response.status==200){
+            // console.log("Products",response.data);
+            setProducts(response.data);
+            setIsProductsFetched(true);
+            // console.log("Products set",Products)
+          }
+          
+          }).catch(function(error){
+            console.log("error in hybrid posters");
+          })
       }
-      
-      }).catch(function(error){
-        console.log("error in hybrid posters");
-      })
 
-      axios.get(url+"/get-posters").then(function(response){     
-      if(response.status==200){
-        // console.log("Posters",response.data);
-        setPosters(response.data);
+      
+
+      if(localStorage.getItem("Posters")!=null){
+        var posters = JSON.parse(localStorage.getItem("Posters"));
+        setPosters(posters);
         setIsPostersFetched(true);
-        // console.log("Posters set",Posters)
+      }else{
+        axios.get(url+"/get-posters").then(function(response){     
+          if(response.status==200){
+            // console.log("Posters",response.data);
+            setPosters(response.data);
+            setIsPostersFetched(true);
+            localStorage.setItem("Posters",JSON.stringify(response.data));
+            // console.log("Posters set",Posters)
+          }
+          
+          }).catch(function(error){
+            console.log("error in get-posters");
+          })
       }
       
-      }).catch(function(error){
-        console.log("error in get-posters");
-      })
 
       var urls=[];
             categoryDisplay.map(index => {
