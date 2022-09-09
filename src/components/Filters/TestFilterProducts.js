@@ -598,6 +598,7 @@ function TestFilterProducts(){
             // console.log("Products Array",productsArray.length);
             
             SetSelectedProducts(productsArray);
+            navigate("/"+localStorage.getItem("Category"))
 
         }else{
             // alert("here")
@@ -663,6 +664,7 @@ function TestFilterProducts(){
             // console.log("Products Array",productsArray.length);
             
             SetSelectedProducts(productsArray);
+            navigate("/"+localStorage.getItem("Category"))
         }
     }
 
