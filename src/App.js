@@ -184,7 +184,7 @@ function App() {
         }
         // console.log(response.data);
       }).catch(function(error){
-          console.log("error");
+          console.log("error in fetching categories");
       })
 
       axios.get(url+"/wishlist",{
@@ -215,7 +215,7 @@ function App() {
                 // console.log("Deals: ",deals);
               }
             }).catch(function(error){
-              console.log("error");
+              console.log("error in deals");
             }
           )
 
@@ -228,7 +228,7 @@ function App() {
       }
       
       }).catch(function(error){
-        console.log("error");
+        console.log("error in hybrid posters");
       })
 
       axios.get(url+"/get-posters").then(function(response){     
@@ -240,7 +240,7 @@ function App() {
       }
       
       }).catch(function(error){
-        console.log("error");
+        console.log("error in get-posters");
       })
 
       var urls=[];
@@ -418,8 +418,15 @@ function App() {
 
       
       <div >
-      <CategoriesToDisplay categoryDetail={categoryDisplay}/>
-<Spinner animation="border" />
+      {
+        (isCategoryDisplayFetched)?(
+          <CategoriesToDisplay categoryDetail={categoryDisplay}/>
+        ):(
+          null
+        )
+      }
+      
+{/* <Spinner animation="border" /> */}
 
      {
         fetchSlideshow()
