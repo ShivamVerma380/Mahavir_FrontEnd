@@ -360,13 +360,9 @@ function TestFilterProducts(){
 
 
     function callProductDetails(index) {
-        //alert(index);
-        // console.log("Index",index);
+        console.log("Product Id:",index.productId+" Model Number:"+index.modelNumber);
         localStorage.setItem("productId",index.productId);
         localStorage.setItem("productSelected", index.modelNumber);
-        // localStorage.removeItem("SubCategory")
-        // localStorage.removeItem("SubSubCategory")
-        // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
     }
 

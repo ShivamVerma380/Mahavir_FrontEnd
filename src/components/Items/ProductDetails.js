@@ -46,6 +46,7 @@ import url from "../../Uri";
 import {HiOutlineShoppingCart} from "react-icons/hi";
 import StarRatings from "react-star-ratings";
 import Footer from "../Footer/Footer";
+import LoadingSpinner from "../LoadingSpinner";
 // import './ProductDetails.css';
 // toast-configuration method,
 // it is compulsory method.
@@ -99,14 +100,15 @@ function ProductDetails() {
   // var averagerate = 4;
 
   const[averagerate,SetAverageRate]= useState(0);
+  const [isLoading,SetIsLoading] = useState(true);
 
   useEffect(() => {
 
 
 
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
-    var token = localStorage.getItem("jwtToken");
-    if (localStorage.getItem("productSelected") != null  && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched && !isPincodeFetched && localStorage.getItem("Model Number") != null && !isProductListFetched) {
+    // var token = localStorage.getItem("jwtToken");
+    if (localStorage.getItem("productSelected") != null  && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched && !isPincodeFetched && localStorage.getItem("productSelected") != null && !isProductListFetched) {
 
       axios({
         method: "get",
@@ -168,6 +170,7 @@ function ProductDetails() {
           SetIsProductInformationSet(true);
           SetIsKeysFetched(true);
           SetIsVariantKeysFetched(true);
+          SetIsLoading(false);
         }
       }).catch(function (error) {
         // console.log("error", error.response);
@@ -196,23 +199,19 @@ function ProductDetails() {
       // console.log("Url", url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/"  + localStorage.getItem("Category"));
       
       // console.log("Url", url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/"  + localStorage.getItem("Category"));
-      axios.get(url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") +  "/" + localStorage.getItem("Category")).then(
-        function (response) {
-          if (response.status == 200) {
-            // console.log(response.data);
-            // console.log("In similar products",response.data)
-            setProductList(response.data);
-            SetIsProductListFetched(true);
+      if(localStorage.getItem("SubSubCategory") != null && localStorage.getItem("Category") != null){
+        axios.get(url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") +  "/" + localStorage.getItem("Category")).then(
+          function (response) {
+            if (response.status == 200) {
+              // console.log(response.data);
+              // console.log("In similar products",response.data)
+              setProductList(response.data);
+              SetIsProductListFetched(true);
+            }
+          }).catch(function (error) {
+            console.log("error", error.response);
           }
-        }).catch(function (error) {
-          console.log("error", error.response);
-        }
-        );
-
-      var form_data_body = {
-        "prodid": localStorage.getItem("productId"),
-        "sid": 0,
-        "qty": 0
+          );
       }
       
 
@@ -237,26 +236,6 @@ function ProductDetails() {
     window.location.reload();
   }
 
-  const notify = () => {
-    return (
-      <Toast>
-        <ToastHeader>
-          Reactstrap
-        </ToastHeader>
-        <ToastBody>
-          This is a toast on a primary background — check it out!
-        </ToastBody>
-      </Toast>
-    );
-  }
-
-  function inputQuantityEvent(event){
-    flag = true;
-    // console.log("value",event.target.value);
-    // quantity = event.target.value;
-    // localStorage.setItem("quantity", parseInt(event.target.value));
-    // console.log("quantity",localStorage.getItem("quantity"));
-  }
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
@@ -623,7 +602,9 @@ function ProductDetails() {
 
 
             <div className="productdetailrow">
-              
+              {
+                isLoading?(<LoadingSpinner/>):(null)
+              }  
               <Row className="row1">
                 <Col md={6} style={{flex:'auto'}}>
                   <div className="innercol1">

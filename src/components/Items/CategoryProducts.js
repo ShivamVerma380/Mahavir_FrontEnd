@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Header from "../Header";
 import TestFilterProducts from "../Filters/TestFilterProducts";
 import url from "../../Uri";
+import LoadingSpinner from "../LoadingSpinner";
 // import {getCookie,setCookie} from '../Cookies';
 
 
@@ -33,6 +34,8 @@ function CategoryProducts(){
     const [isWishlistFetched, setIsWishlistFetched] = useState(false);
     
 
+    const [isLoading,SetIsLoading] = useState(true);
+
 
   const [isProductFetched, setIsProductFetched] = useState(false);
     const [wish, setWish] = useState([]);
@@ -46,10 +49,12 @@ function CategoryProducts(){
             setProducts(response.data);
             // console.log("Products By Cat: ",response.data);
             setIsProductsFetched(true);
+            SetIsLoading(false);
         }
         
         }).catch(function(error){
             console.log("error in get-products-by-category/Category");
+            
         })
 
 
@@ -68,10 +73,6 @@ function CategoryProducts(){
           // console.log("Wishlist response", response.data);
           setWish(response.data);
           setIsWishlistFetched(true);
-          // console.log("...."+wishlist);
-          // setAddress(response.data);
-          // console.log("Address: ", address)
-          // setIsAddressFetched(true);
 
         } else {
           // console.log(response.data.message);
@@ -94,8 +95,6 @@ function CategoryProducts(){
         // console.log("Index",index);
         localStorage.setItem("productSelected",index.modelNumber);
         localStorage.setItem("productId", index.productId);
-        // console.log("Product Id",localStorage.getItem("productId"));
-        // console.log("Product Selected",localStorage.getItem("productSelected"))
         navigate("/productDetails")
       }
 
@@ -111,11 +110,6 @@ function CategoryProducts(){
             comparemodels.push(modelNumber);
             setCookie("addToCompare",comparemodels,20);
             setLen(getCookie("addToCompare").split(',').length)
-          // console.log(comparemodels);
-          // console.log("checked "+modelNumber);
-            
-            
-        
           
         }
         else {
@@ -129,22 +123,8 @@ function CategoryProducts(){
                 break;
             }
         }
-          // console.log("unchecked "+modelNumber);
 
         }
-        // if (event.target.checked) {
-  
-        //   console.log('✅ Checkbox is checked');
-        //   setChange(change+1)
-          
-          
-          
-        // } else {
-        //   console.log('⛔️ Checkbox is NOT checked');
-        //   setChange(change-1)
-        // }
-        // setisAddCompareClicked(current => !current);
-        // // alert("Added To Compare");
         
     }
       
@@ -308,6 +288,9 @@ function CategoryProducts(){
       (isProductsFetched)?
       (
         <>
+        {
+          isLoading?(<LoadingSpinner/>):(null)
+        }
         <ToastContainer position="top-center"/>
 <Header/>
         <div >
