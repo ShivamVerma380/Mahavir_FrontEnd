@@ -4,6 +4,7 @@ import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
 import { Toast, ToastBody, ToastHeader } from "reactstrap";
 import { ToastContainer, toast } from 'react-toastify';
+import url from "../../Uri";
 /** subCategoriesArray variable to store different array for different dropdown */
 var subCategoriesArray = null;
 /** This will be used to create set of subCategories that user will see */
@@ -78,7 +79,7 @@ const CategoryDropdowns = ({Category}) => {
 
     axios({
       method:"get",
-      url:"http://localhost:8080/get-sub-categories/"+selectedCategory,
+      url:url+"/get-sub-categories/"+selectedCategory,
       headers:{
         "Authorization":"Bearer "+token,
       }
@@ -102,7 +103,7 @@ const CategoryDropdowns = ({Category}) => {
 
     axios({
       method:"get",
-      url:"http://localhost:8080/get-sub-sub-categories/"+selectedCategory+"/"+selectedSubCategory,
+      url:url+"/get-sub-sub-categories/"+selectedCategory+"/"+selectedSubCategory,
       headers:{
         "Authorization":"Bearer "+token,
       }

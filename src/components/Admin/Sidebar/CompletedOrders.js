@@ -5,15 +5,16 @@ import AdminNavbar from "./AdminNavbar";
 import 'react-toastify/dist/ReactToastify.css';
 import { Toast, ToastBody, ToastHeader } from "reactstrap";
 import { ToastContainer, toast } from 'react-toastify';
+import url from "../../../Uri";
 
 function CompletedOrders(){
     const [completedOrders,SetCompletedOrders] = useState([]);
     const [isCompletedOrdersFetched,SetIsCompletedOrdersFetched] = useState(false);
     // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
-    var uri="http://localhost:8080";
+    // var uri="?localhost:8080";
     useEffect(()=>{
         if(!isCompletedOrdersFetched){
-            axios.get(uri+"/completed-orders")
+            axios.get(url+"/completed-orders")
                 .then(function(response){
                     if(response.status==200){
                         console.log("Response success:",response.data);

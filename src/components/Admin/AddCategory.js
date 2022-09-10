@@ -6,6 +6,7 @@ import Header from "../Header";
 import CategoryDropdowns from "./CategoryDropdowns";
 import { useState } from "react";
 import axios from "axios";
+import url from "../../Uri";
 
 
 var flag = true;
@@ -53,7 +54,7 @@ class AddCategory extends React.Component{
 
     fetchCategories(){
         var updatedCategories=[];
-        axios.get("http://localhost:8080/get-categories").then(function(response){
+        axios.get(url+"/get-categories").then(function(response){
         console.log(response);
         if(response.status==200){
             console.log(response.data.category);

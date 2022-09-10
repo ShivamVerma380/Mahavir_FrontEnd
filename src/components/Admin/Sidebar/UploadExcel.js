@@ -7,6 +7,7 @@ import AdminHeader from "../../Admin/AdminHeader";
 import AdminNavbar from "./AdminNavbar";
 import axios from 'axios';
 import { getCookie } from '../../Cookies';
+import url from '../../../Uri';
 const UploadExcel = () => {
   const [selectedproductFile, setSelectedProductFile] = useState();
   const [selectedcategoryFile, setSelectedCategoryFile] = useState();
@@ -33,7 +34,7 @@ const UploadExcel = () => {
     console.log("Form Data",formData)
     alert("Submit Clicked")
 
-    axios.post("http://localhost:8080/excel/products",formData,{
+    axios.post(url+"/excel/products",formData,{
       headers:{
         "Authorization": "Bearer "+token
       },
@@ -61,7 +62,7 @@ const UploadExcel = () => {
     console.log("Form Data",formData)
     alert("Submit Clicked")
 
-    axios.post("http://localhost:8080/excel/Categories",formData,{
+    axios.post(url+"/excel/Categories",formData,{
       headers:{
         "Authorization": "Bearer "+token
       },
@@ -89,7 +90,7 @@ const UploadExcel = () => {
     console.log("Form Data",formData)
     alert("Submit Clicked")
 
-    axios.post("http://localhost:8080/excel/filters",formData,{
+    axios.post(url+"/excel/filters",formData,{
       headers:{
         "Authorization": "Bearer "+token
       },
@@ -115,7 +116,7 @@ const UploadExcel = () => {
     console.log("Form Data",formData)
     alert("Submit Clicked")
 
-    axios.post("http://localhost:8080/excel/shopByBrands",formData,{
+    axios.post(url+"/excel/shopByBrands",formData,{
       headers:{
         "Authorization": "Bearer "+token
       },
@@ -141,7 +142,7 @@ const UploadExcel = () => {
     console.log("Form Data",formData)
     alert("Submit Clicked")
 
-    axios.post("http://localhost:8080/excel/offerposters",formData,{
+    axios.post(url+"/excel/offerposters",formData,{
       headers:{
         "Authorization": "Bearer "+token
       },

@@ -6,14 +6,15 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Admin from './Admin';
 import url from "../../Uri";
 
-var email = "";
-var adminotp = "";
-var admininputotp = "";
-var inputsecretkey = "";
+
 
 
 
 const AdminLogin = () => {
+    var email = "";
+    const[adminotp,Setadminotp]=useState("");
+    const[admininputotp,Setadmininputotp]=useState("");
+    var inputsecretkey = "";
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [isNewOtpSent, setIsNewOtpSent] = useState(false)
     const [isOtpVerified,setIsOtpVerified] = useState(false);
@@ -48,7 +49,7 @@ const AdminLogin = () => {
                 url: url+"/verify-email/" + email
             }).then(function (response) {
                 console.log(response.data);
-                adminotp = response.data.otp;
+                Setadminotp(response.data.otp);
                 console.log("otp:", adminotp);
             }).catch(function (response) {
                 console.log(response);
@@ -68,7 +69,7 @@ const AdminLogin = () => {
     
     const verifyOTP = () => {
         //    alert(otp);
-        if (adminotp === admininputotp) {
+        if (adminotp === admininputotp ) {
             alert('Correct input otp');
             setIsOtpVerified(true);
             //    navigate('/email-auth');
@@ -87,7 +88,7 @@ const AdminLogin = () => {
     const navigate = useNavigate();
 
     const verifySecretKey = () => {
-        if (inputsecretkey==="123456") {
+        if (inputsecretkey==="380002") {
             alert("Correct key");
             setIsSecretKeyVerified(true);
            // navigate("/admindetail")

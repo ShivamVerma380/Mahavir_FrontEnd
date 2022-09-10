@@ -7,6 +7,7 @@ import AdminNavbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
 import './Navbar.css';
 import Navbar from './Navbarrrr';
+import url from "../../../Uri";
 const PendingDelivery = () => {
     
     const [orders,SetOrders] = useState([]);
@@ -16,7 +17,7 @@ const PendingDelivery = () => {
     
     useEffect(()=>{
         if(!isOrdersFetched){
-            axios.get("http://localhost:8080/pending-orders")
+            axios.get(url+"/pending-orders")
                 .then(function(response){
                     if(response.status==200){
                         console.log("Success",response.data)
@@ -41,7 +42,7 @@ const PendingDelivery = () => {
             "deliveryDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()
         }
         console.log("form data body",form_data_body)
-        axios.post("http://localhost:8080/order-status",form_data_body,{
+        axios.post(url+"/order-status",form_data_body,{
             headers:{
                 "Authorization":"Bearer "+token,
                 "Content-Type": "multipart/form-data"
