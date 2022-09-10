@@ -22,11 +22,13 @@ import { getCookie, setCookie } from "./components/Cookies";
 import { RiCompassDiscoverLine } from 'react-icons/ri';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import HomeBottom from './components/Items/HomeBottom';
-import {Spinner} from 'react-bootstrap';
 import {BsArrowUp} from "react-icons/bs";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 // import Url from url
 import url from './Uri';
+import LoadingSpinner from './components/LoadingSpinner';
 
 var count = 0;
 
@@ -57,6 +59,10 @@ function App() {
   const [MiniPoster,setMiniPoster] = useState([]);
   const [catProducts,setCatProducts] = useState([]);
   const [isCatProductFetched, setIsCatProductFetched] = useState(false);
+
+
+  const [isLoading,SetIsLoading] = useState(true);
+
 
   // const[initialProducts,setInitialProducts] = useState([]);
   // const[isInitialProductsFetched,setIsInitialProductsFetched] = useState(false);
@@ -201,6 +207,7 @@ function App() {
         var categoriesDisplay = JSON.parse(localStorage.getItem("categoryDisplay"));
         setcategoryDisplay(categoriesDisplay)
         setIsCategoryDisplayFetched(true);
+        SetIsLoading(false);
       }else{
         axios.get(url+"/get-categories").then(function(response){
           // console.log(response);
@@ -208,11 +215,13 @@ function App() {
               setcategoryDisplay(response.data);
               setIsCategoryDisplayFetched(true);
               localStorage.setItem("categoryDisplay",JSON.stringify(response.data),20);
+              SetIsLoading(false);
               // console.log(response.data);
           }
           // console.log(response.data);
         }).catch(function(error){
             console.log("error in fetching categories");
+            SetIsLoading(false);
         })
 
       }
@@ -457,6 +466,9 @@ function App() {
     <div>
       {/* <button onclick={topFunction} id="myBtn" title="Go to top">Top</button> */}
       <Button  id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
+      {
+        isLoading?(<LoadingSpinner/>):(null)
+      }
       
       {/* <-------------------Header/> */}
       {
@@ -478,6 +490,7 @@ function App() {
         (isCategoryDisplayFetched)?(
           <CategoriesToDisplay categoryDetail={categoryDisplay}/>
         ):(
+          // <Spinner animation="border" variant="warning" />
           null
         )
       }
