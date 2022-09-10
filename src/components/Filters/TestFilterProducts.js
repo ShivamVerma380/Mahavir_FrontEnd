@@ -19,6 +19,7 @@ import {RiArrowDropDownLine} from 'react-icons/ri'
 import {FcFilledFilter} from "react-icons/fc"
 import StarRatings from "react-star-ratings";
 import {BsArrowUp} from "react-icons/bs"
+import LoadingSpinner from "../LoadingSpinner";
 
 function TestFilterProducts(){
     var comparemodels=getCookie("addToCompare").split(',');
@@ -61,6 +62,8 @@ function TestFilterProducts(){
 
     const[filterselected,SetFilterSelected] = useState([])
 
+    const [isLoading,SetIsLoading] = useState(true);
+
 
     
     // if(localStorage.getItem("SubCategory")!=null && localStorage.getItem("SubSubCategory")!=null){
@@ -76,6 +79,7 @@ function TestFilterProducts(){
     const [vals,setVals]=useState([]);
     // vals.push(localStorage.getItem("SubSubCategory"));
 
+    // var flag1=false,flag2=false,flag3=false;
     
 
     useEffect(()=>{
@@ -99,7 +103,7 @@ function TestFilterProducts(){
                         
                     })
                     SetProducts(response.data);
-
+                    SetIsLoading(false);
                 }else{
                     response.data.map(product=>{
                         if(product.filtercriterias[localStorage.getItem("SubCategory")]===localStorage.getItem("SubSubCategory")){
@@ -119,6 +123,7 @@ function TestFilterProducts(){
                         
                     })
                     SetProducts(response.data);
+                    SetIsLoading(false);
                 }
                 
                 // console.log("min ",minPrice,"  max",maxPrice);
@@ -131,6 +136,7 @@ function TestFilterProducts(){
                 
             }).catch(function(error){
                 console.log("error in get-products-by-category");
+                SetIsLoading(false);
             })
 
             if(!isCategoriesFetched){
@@ -813,6 +819,9 @@ function TestFilterProducts(){
             ):(null)
           }
         
+        {
+          isLoading?(<LoadingSpinner/>):(null)
+        }
         <Row className="mainpage">
             <Col md={2} className="filtercol" style={{paddingLeft:"0px",paddingRight:"0px"}} >
             <h4><FcFilledFilter/>Filters</h4>   

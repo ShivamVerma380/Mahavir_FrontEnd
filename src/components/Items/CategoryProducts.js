@@ -49,7 +49,7 @@ function CategoryProducts(){
             setProducts(response.data);
             // console.log("Products By Cat: ",response.data);
             setIsProductsFetched(true);
-            SetIsLoading(false);
+            // SetIsLoading(false);
         }
         
         }).catch(function(error){
@@ -73,11 +73,12 @@ function CategoryProducts(){
           // console.log("Wishlist response", response.data);
           setWish(response.data);
           setIsWishlistFetched(true);
-
+          SetIsLoading(false);
         } else {
           // console.log(response.data.message);
         }
       }).catch(function (error) {
+        SetIsLoading(false);
         console.log(error.response);
       })
     }
@@ -288,11 +289,13 @@ function CategoryProducts(){
       (isProductsFetched)?
       (
         <>
+        
+        <ToastContainer position="top-center"/>
         {
           isLoading?(<LoadingSpinner/>):(null)
         }
-        <ToastContainer position="top-center"/>
-<Header/>
+        <Header/>
+        
         <div >
           
           {
