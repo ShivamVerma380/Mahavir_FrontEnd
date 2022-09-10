@@ -706,7 +706,7 @@ function ProductDetails() {
                   <Row className="inerrow1">
                     <h2 className="productname">{product.productName}</h2>
                     
-                      {
+                      {/* {
                         (isReviewFetched)?(
                           <>
                           <StarRatings name="small-rating" size={20} totalStars={5} rating={averagerate}/>
@@ -716,7 +716,7 @@ function ProductDetails() {
                         ):(
                           null
                         )
-                      }
+                      } */}
                       
                       
                       {/* <StarRating name="small-rating" caption="Small!" size={30} totalStars={5} rating={3} /> */}
