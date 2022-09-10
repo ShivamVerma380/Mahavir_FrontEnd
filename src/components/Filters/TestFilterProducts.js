@@ -94,11 +94,11 @@ function TestFilterProducts(){
                     // var priceArr=[]
                     response.data.map((index,pos)=>{
                         // console.log("In selected products map...")
-                        if(minPrice>parseInt(index.offerPrice)){
-                            minPrice = index.offerPrice
+                        if(minPrice>parseInt(index.offerPrice.replace(",",""))){
+                            minPrice = index.offerPrice.replace(",","");
                         }
-                        if(maxPrice<parseInt(index.offerPrice)){
-                            maxPrice = index.offerPrice
+                        if(maxPrice<parseInt(index.offerPrice.replace(",",""))){
+                            maxPrice = index.offerPrice.replace(",","");
                         }
                         
                     })
@@ -110,15 +110,15 @@ function TestFilterProducts(){
                             selectedProducts.push(product);
                         }                  
                     })
-                    var minPrice=Number.MAX_VALUE, maxPrice=Number.MIN_VALUE;
+                    var minPrice=100000000, maxPrice=100;
                     // var priceArr=[]
                     selectedProducts.map((index,pos)=>{
                         // console.log("In selected products map...")
-                        if(minPrice>parseInt(index.offerPrice)){
-                            minPrice = index.offerPrice
+                        if(parseInt(minPrice)>parseInt(index.offerPrice.replace(",",""))){
+                            minPrice = index.offerPrice.replace(",","");
                         }
-                        if(maxPrice<parseInt(index.offerPrice)){
-                            maxPrice = index.offerPrice
+                        if(parseInt(maxPrice)<parseInt(index.offerPrice.replace(",",""))){
+                            maxPrice = index.offerPrice.replace(",","");
                         }
                         
                     })
@@ -127,8 +127,8 @@ function TestFilterProducts(){
                 }
                 
                 // console.log("min ",minPrice,"  max",maxPrice);
-                SetMin(minPrice);
-                SetMax(maxPrice);
+                SetMin(parseInt(minPrice));
+                SetMax(parseInt(maxPrice));
                 SetValue([minPrice,maxPrice]);
                 
                 SetIsSelectedProductsFetched(true);
@@ -673,6 +673,7 @@ function TestFilterProducts(){
     
 
     const rangeSelector = (event, newValue) => {
+        // console.log("Range",newValue[0],)
         SetValue([parseInt(newValue[0]), parseInt(newValue[1])]);
         var arr=[];
         products.map(index=>{
@@ -694,7 +695,7 @@ function TestFilterProducts(){
                     flag = false;
                 }
             })
-            if(flag && index.offerPrice>=parseInt(newValue[0]) && index.offerPrice<=parseInt(newValue[1])){
+            if(flag && parseInt(index.offerPrice.replace(",",""))>=parseInt(newValue[0]) && parseInt(index.offerPrice.replace(",",""))<=parseInt(newValue[1])){
                 arr.push(index);
             }
         })
