@@ -170,7 +170,7 @@ function ProductDetails() {
           SetIsVariantKeysFetched(true);
         }
       }).catch(function (error) {
-        console.log("error", error.response);
+        // console.log("error", error.response);
         toast.warn("Item already present in cart")
       })
 
@@ -191,9 +191,9 @@ function ProductDetails() {
           // console.log("Average ", averagerate);
         }
       }).catch(function (error) {
-        console.log("error", error);
+        console.log("error");
       })
-      console.log("Url", url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/"  + localStorage.getItem("Category"));
+      // console.log("Url", url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/"  + localStorage.getItem("Category"));
       
       // console.log("Url", url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/"  + localStorage.getItem("Category"));
       axios.get(url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") +  "/" + localStorage.getItem("Category")).then(
