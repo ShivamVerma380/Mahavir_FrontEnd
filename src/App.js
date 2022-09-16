@@ -466,9 +466,9 @@ function App() {
     <div>
       {/* <button onclick={topFunction} id="myBtn" title="Go to top">Top</button> */}
       <Button  id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
-      {
+      {/* {
         isLoading?(<LoadingSpinner/>):(null)
-      }
+      } */}
       
       {/* <-------------------Header/> */}
       {
@@ -491,7 +491,7 @@ function App() {
           <CategoriesToDisplay categoryDetail={categoryDisplay}/>
         ):(
           // <Spinner animation="border" variant="warning" />
-          null
+          <CategoriesToDisplay categoryDetail={[]}/>
         )
       }
       
