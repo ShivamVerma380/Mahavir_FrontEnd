@@ -1,33 +1,13 @@
 import React from "react";
-import { Card, Row, Col, Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import MiniPosterHelper from "./MiniPosterHelper";
 import './MiniPoster.css';
-import { MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
+import { MDBRow, MDBCard,  MDBCardImage } from 'mdb-react-ui-kit';
 const MiniPosters = ({MiniPosters}) => {
-    // console.log("MinPosters: ",MiniPosters)
-    // const element = MiniPosters.map((product,index) =>
-    // <div key={index}> {/*refer you key in within a div*/}
-    //   <Col md={3}>
-        
-    //     <Card style={{ width: '15rem' }}>
-    //     <Card.Img variant="top" src={'data:image/jpg;base64,' +product.image.data} />
-    //     <Card.Body>
-    //     <Card.Title>{product.Description}</Card.Title>
-    //     <Button variant="primary">Add {product.Price}</Button>
-    //     </Card.Body>
-    //     </Card>
-    //   </Col>
-    // </div>
 
     const navigate = useNavigate();
 
     const handleMiniPosteronClick=(product)=>{
-      // alert("Offer Poster clicked");
-
-      // console.log(modelNumbers);
       localStorage.setItem("offerPostersModelNumber",product.modelNumbers)
-      // console.log(localStorage.getItem("offerPostersModelNumber"))
       navigate("/offers")
     }
     
@@ -60,29 +40,7 @@ const MiniPosters = ({MiniPosters}) => {
 
 
               </MDBRow>
-
-          
-                    {/* <div class="image-container" style={{gridTemplateColumns: 'repeat(+5, 1fr)',}}>
-
-                      {
-                        
-                        MiniPosters.slice(0,5).map((product,index) => {
-                          
-                          return(
-                              <div class="image_p">
-                              <img src={product.imageUrl} onClick={()=>handleMiniPosteronClick(product)}/>
-                            </div>
-                          
-                          )
-                          
-                        })
-                      }
-                      </div>              */}
         </div>
-        
-
-        
-        
     )
 
 }
