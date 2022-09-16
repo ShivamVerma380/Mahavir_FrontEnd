@@ -350,9 +350,7 @@ function App() {
 
   function fetchSlideshow(){
     if(MegaPoster.length===0){
-      return( 
-        <img className="d-block w-100" style={{height:"500"}} src={loading}/>
-      );
+      null
     }else{
       // console.log("Mega Poster",MegaPoster)
       return( 
