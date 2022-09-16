@@ -82,10 +82,11 @@ const ShopByBrands = () => {
   return (
     <div>
       <Container style={{ marginBottom: '70px', backgroundColor: "white" }}>
-        <h3 className="brand_title" style={{marginLeft:"30px"}}>Shop by brands</h3>
+        
         {
           (isBrandsFetched) ? (
             <>
+            <h3 className="brand_title" style={{marginLeft:"30px"}}>Shop by brands</h3>
               <Swiper
                 loop={false}
                 loopFillGroupWithBlank={true}
