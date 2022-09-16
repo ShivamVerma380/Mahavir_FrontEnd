@@ -25,7 +25,6 @@ import HomeBottom from './components/Items/HomeBottom';
 import {BsArrowUp} from "react-icons/bs";
 import Spinner from 'react-bootstrap/Spinner';
 
-import loading from "../src/assets/Loading.jpg";
 
 // import Url from url
 import url from './Uri';
@@ -350,7 +349,9 @@ function App() {
 
   function fetchSlideshow(){
     if(MegaPoster.length===0){
-      null
+      return( 
+        null
+      );
     }else{
       // console.log("Mega Poster",MegaPoster)
       return( 
@@ -467,8 +468,8 @@ function App() {
       <Button  id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
       {/* {
         isLoading?(<LoadingSpinner/>):(null)
-      } */}
-      
+      }
+       */}
       {/* <-------------------Header/> */}
       {
         (isProductsFetched)?(
