@@ -1,44 +1,29 @@
 import React from "react";
-import Button from '@mui/material/Button';
 
-import { Nav, Navbar, FormControl, Container, NavLink, Form, NavDropdown, Offcanvas, ListGroup ,Image} from 'react-bootstrap';
+import { Nav, Navbar,  Container,NavDropdown, Offcanvas, ListGroup ,Image} from 'react-bootstrap';
 
 import { useNavigate } from "react-router-dom";
 import "./CategoriesToDisplay.css"
-import { slide as Menu } from 'react-burger-menu'
 
 function CategoriesToDisplay({ categoryDetail }) {
-
-
-
-  var modelNumbers = [];
-
   var navigate = useNavigate();
 
-  const [isOpen, setIsOpen] = React.useState(false);
   var cards = <div>
     <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="Mandala" />
   </div>
 
   function handleSubSubCategoriesClick(category, subCategory, subSubCategory, modelNumber) {
-    // alert(modelNumber);
     localStorage.setItem("Category", category);
     localStorage.setItem("SubCategory", subCategory);
     localStorage.setItem("SubSubCategory", subSubCategory);
 
     localStorage.setItem("Model Number", modelNumber);
-    //.
-    // console.log("Cat",localStorage.getItem("Category"));
-    // console.log("SubCat",localStorage.getItem("SubCategory"));
-    // console.log("SubSubCat",localStorage.getItem("SubSubCategory"));
-    // console.log(localStorage.getItem("Model Number"));
-    //.
+    
     navigate("/" + category + "/" + subCategory + "/" + subSubCategory);
   }
 
   return (
     <div className="Category" >
-      {/* style={{marginTop:'92px'}}  */}
 
       {['sm'].map((expand) => (
 
@@ -59,18 +44,13 @@ function CategoriesToDisplay({ categoryDetail }) {
               <Offcanvas.Body>
               
                 <Nav className="justify-content-center flex-grow-1 pe-3">
-                  {
-
-                    // console.log("CategoryDetail", categoryDetail)
-                  }
+                    
                   {
 
                     cards = categoryDetail.map(index => {
                       return (
 
                         <Nav.Link >
-                          {/* <Button variant="text"><img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/> <span> </span>{index.category}</Button> */}
-                          {/* {<img src={"data:image/png;base64," +index.category_image.data} alt={index.category} className="category-image"/>} */}
                           <Image style={{background:"none"}} thumbnail='true'  src={index.category_image} className="categoryImage" ></Image>
                           
                           <NavDropdown right className="catdropdown"  title={index.category} renderMenuOnMount={true}>
@@ -80,7 +60,6 @@ function CategoriesToDisplay({ categoryDetail }) {
                                   <div style={{ display: 'block', padding: 10 ,width:'max-content'}}>
                                     <h5>{subCat.subCategoryName}</h5>
                                     <ListGroup >
-                                      {/*  <NavDropdown id="drop" style={{ color: "#00000" }} title={subCat.subCategoryName}>*/}
                                       {
                                         subCat.subSubCategories.map(subSubCategories => {
                                           return (
