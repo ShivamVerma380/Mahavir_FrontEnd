@@ -229,17 +229,15 @@ const WishlistProducts = () => {
                       <Image fluid='true' onClick={() => callProductDetails(index)} src={index.productImage1} style={{cursor:"pointer" }}></Image>
                     </Col>
                     <Col style={{ display:'flex',alignItems:'center' }} sm={8} >
-                      {/* <br></br>
-                      <h5>MSP: <b style={{ marginRight: "20px", color: "rgb(255,98,98)" }}>₹{index.offerPrice}</b> MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5> */}
-                   
+
                     <Row>
                     <h5 className="wishlist_product_title">{index.productName}</h5>
 
                     {
-                                                  (index.productPrice === index.offerPrice) ? (<h4>₹ {index.productPrice}</h4>) : (
-                                                      <h4><b className="wishlist_offerprice" >₹{index.offerPrice} </b> <b className="wishlist_productprice"> ₹ {index.productPrice}</b> <b className="wishlist_discount"> {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4>
-                                                  )
-                                              }
+                      (index.productPrice === index.offerPrice) ? (<h4>₹ {index.productPrice}</h4>) : (
+                          <h4><b className="wishlist_offerprice" >₹{index.offerPrice} </b> <b className="wishlist_productprice"> ₹ {index.productPrice}</b> <b className="wishlist_discount"> {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4>
+                      )
+                     }
                     </Row>
                     </Col>
   

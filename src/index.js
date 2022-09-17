@@ -30,7 +30,6 @@ import RateReviewProducts from './components/Items/RateReviewProducts';
 import AllComplaints from './components/Admin/Sidebar/AllComplaints';
 import AddToCompareProducts from './components/ProductsComparison/AddToCompareProducts';
 import GenerateBill from './components/GenerateBill';
-import WishList from './components/WishList';
 import DeveloperPage from './components/DeveloperPage';
 import AboutCompany from './components/Footer/AboutCompany';
 import FAQ from './components/Footer/FAQ';
@@ -102,7 +101,6 @@ root.render(
       <Route path='/ratereview' element = {<RateReviewProducts/>}/>
       <Route path='/usercomplaint' element = {<UserComplaint/>}/>
       <Route path='/generatebill' element = {<GenerateBill/>}/>
-      <Route path='/wishlist' element = {<WishList/>}/>
       <Route path='/developerpage' element = {<DeveloperPage/>}/>
       <Route path='/aboutcompany' element = {<AboutCompany/>}/>
       <Route path="/privacypolicy" element={<PrivacyPolicy/>}/>
