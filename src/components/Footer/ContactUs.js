@@ -109,7 +109,7 @@ const ContactUs = () => {
                 </Card>
 
                 <Row>
-                    <Col>
+                    <Col md={3}>
                         <Card style={{ marginTop: 40, padding: 10 }}>
                             <Card.Title>
                                 Sinhagad Road
@@ -122,7 +122,7 @@ const ContactUs = () => {
                         </Card>
                     </Col>
                     
-                    <Col>
+                    <Col md={3}>
                     <Card style={{ marginTop: 40, padding: 10 }}>
                             <Card.Title>
                                 Kothrud
@@ -135,7 +135,7 @@ const ContactUs = () => {
                         </Card>
                     </Col>
 
-                    <Col>
+                    <Col md={3}>
                     <Card style={{ marginTop: 40, padding: 10 }}>
                             <Card.Title>
                                 Camp

@@ -45,7 +45,7 @@ function Footer(){
                             <h3 style={{color:"white"}}>Help</h3>
                             <ul>
                                 <li><a href="/faq">FAQ</a></li>
-                                <li><a href="/shippingoptions">Shipping Areas</a></li>
+                                <li><a href="/shippingoptions">Shipping Options</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-3 item social">
