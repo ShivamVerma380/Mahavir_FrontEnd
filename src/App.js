@@ -6,14 +6,9 @@ import Product from './components/Items/Product';
 import { Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import {useState, useEffect} from "react";
 import axios from "axios";
-import AdminHeader from './components/Admin/AdminHeader';
-import ShowSearchResults from './components/ShowSearchResults';
-import Test from './components/Test';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import Footer from './components/Footer/Footer'
-import FeatureBrands from './components/Items/FeatureBrands';
 import MiniPosters from './components/offers/MiniPosters';
-import DeveloperPage from './components/DeveloperPage';
 import Deals from './components/Items/Deals';
 import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
 import ShopByBrands from './components/Items/ShopByBrands';
@@ -379,12 +374,6 @@ function App() {
         )
       }
      <Header/>
-     
-     
-      
-      {/* <AddItem/> */}
-
-      
       <div >
       {
         (isCategoryDisplayFetched)?(
@@ -404,12 +393,9 @@ function App() {
       {
         (isDealsFetched)?(
           deals.map(index=>{
-            // console.log("Index ",index);
             localStorage.setItem("dealindex",index)
             const dealproducts = JSON.stringify(index.products);
             localStorage.setItem("dealproduct", dealproducts);
-            // console.log("Deal products: ",dealproducts)
-            // localStorage.setItem("dealproduct",index.products)
             return(
               <Deals deals={index}/>
             )
