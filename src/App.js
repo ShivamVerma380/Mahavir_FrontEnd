@@ -404,7 +404,7 @@ function App() {
         ):(null)
       }
       
-      <MiniPosters MiniPosters={MiniPoster}/>
+      
       
       
       {/* <Deals/> */}
@@ -430,6 +430,7 @@ function App() {
       
       
       <ShopByBrands/>
+      <MiniPosters MiniPosters={MiniPoster}/>
       <MiniPostersBottom MiniPosters={MiniPoster}/>
 
       
