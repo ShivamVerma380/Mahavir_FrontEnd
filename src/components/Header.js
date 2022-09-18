@@ -132,9 +132,9 @@ const Header = ({productList}) => {
           <Col md={1} >
             <p className="wishlist_" style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto",cursor:"pointer"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
           </Col>
-          <Col md={2}>
+          <Col md={1}>
 
-            <p style={{color:"white",marginTop:"6px",cursor:"pointer"}} onClick={handleDevelopersPage}>Developer Team</p>
+            <p style={{color:"white",marginTop:"6px",cursor:"pointer", fontSize:"14px"}} onClick={handleDevelopersPage}>Developer Team</p>
 
           </Col>
          
