@@ -68,7 +68,7 @@ function AddressBuyNowSummary(){
               // console.log(response.data.message);
             }
           }).catch(function (error) {
-            console.log("Error");
+            console.log(error);
 
           })
           // console.log("state",State.getStatesOfCountry('IN'))

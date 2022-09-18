@@ -76,38 +76,7 @@ function App() {
 
   var arr=[];
   
-  // while (true) {
-  //   if (localStorage.getItem("comparecount")!=countc) {
-  //     setCountc(localStorage.getItem("comparecount"))
-  //   }
-  // }
-
   
-  
-  // localStorage.setItem("comparecount",0)
-
-  
- 
-  // console.log("Count comp: ",getCookie("countcompare"))
-
-  // var element = <div></div>;
-
-  //const[cookies,SetCookie] = useCookies(["modelNumsToCompare"])
-
-  // .
-  // console.log("CompareModels",localStorage.getItem("CompareModels"))
-  // console.log(localStorage.getItem("dealproduct"))
-  // console.log("Index",localStorage.getItem("dealindex"))
-  // console.log("Count C: ",countc)
-  // .
-
-  // console.log("Cookies size",cookies.CompareModelsLength)
-
-  //SetCookie("CompareModels","IPH287373");
-
-
-
-  // console.log("CompareModes",localStorage.getItem("CompareModels"));
 
 
   var Auth = "Bearer "+localStorage.getItem("jwtToken");
@@ -203,7 +172,7 @@ function App() {
       })
       
       if(localStorage.getItem("categoryDisplay")!=null){
-        console.log("In category display cookie")
+        // console.log("In category display cookie")
         var categoriesDisplay = JSON.parse(localStorage.getItem("categoryDisplay"));
         setcategoryDisplay(categoriesDisplay)
         setIsCategoryDisplayFetched(true);
@@ -329,18 +298,7 @@ function App() {
             )
       
 
-      // axios.get("http://localhost:8080/get-products-by-category/MOBILES").then(function(response){
-      //   console.log(response);
-      //   if(response.status==200){
-      //       setCategoryProducts(response.data);
-      //       console.log("Products By Cat: ",response.data);
-      //   }
-        
-      // }).catch(function(error){
-      //     console.log(error);
-      // })
-      // var element = document.getElementById("spinner");
-      // element.style.visibility="hidden";
+      
    
     }
         
@@ -383,69 +341,11 @@ function App() {
         // window.location.reload();
     }
 
-  // function fetchMiniPoster(){
-  //   if(MiniPoster.length===0){
-  //     return( 
-  //       null
-  //     );
-  //   }
-  //   else if(MiniPoster.length>6){
-  //     // var array = MiniPoster.slice(0,6)
-  //     // var miniarr = MiniPoster.slice(6)
-  //     // setMiniPoster(miniarr)
-  //     count+=6;
-  //     console.log("Mini: ",MiniPoster.slice(6))
-  //     return( 
+  
 
-        
-  //       <MiniPosters MiniPosters={MiniPoster.slice(count-6,count)}/>
-  //     );
-  //   }
+  
 
-  //   else if(MiniPoster.length<=6) {
-  //     return (
-  //       <MiniPosters MiniPosters={MiniPoster}/>
-  //     );
-      
-  //   }
-    
-  // }
-
-  function HandleCompareClick() {
-    
-  }
-
-  // function fetchMiniPosterTwo(){
-  //   if(MiniPoster.length===0){
-  //     return( 
-  //       null
-  //     );
-  //   }
-  //   else if(MiniPoster.length>6){
-  //     // var array = MiniPoster.slice(0,6)
-  //     // var miniarr = MiniPoster.slice(6)
-  //     // setMiniPoster(miniarr)
-  //     // while(count<=MiniPoster.length) {
-        
-  //     //   count+=6;
-  //     //   element=<MiniPosters MiniPosters={MiniPoster.slice(count-6,count)}/>
-  //     //   console.log("Mini: ",MiniPoster.slice(6))
-  //     return( 
-        
-  //       <MiniPosters MiniPosters={MiniPoster.slice(count)}/>
-  //     );
-      
-      
-  //   }
-
-  //   else if(MiniPoster.length<=6) {
-  //     return (
-  //       <MiniPosters MiniPosters={MiniPoster}/>
-  //     );
-      
-  //   }
-    
-  // }
+  
 
   
 
@@ -541,41 +441,17 @@ function App() {
 
       
       
-      {/* {
-        (isOfferPostersFetched)?(
-          fetchMiniPoster()
-        ) : (null)
-        
-      } */}
-
       
-
-      {/* <MiniPosters MiniPosters={MiniPoster}/> */}
-      
-      {/* <Product title="Mahavir Special" className="title" productList={Products}/>
-      <Product title="Deals Of The Day" className="title" productList={Products}/> */}
-      {/* {
-        fetchMiniPosterTwo()
-      } */}
       
       <ShopByBrands/>
       <MiniPostersBottom MiniPosters={MiniPoster}/>
 
-      {/* <MiniPosters/> */}
-      {/* <Test productList={Products} /> */}
-      {/* <FeatureBrands posterList={Posters}/> */}
-       
-      {/* <Button id="comparebtn">Compare{localStorage.getItem("comparecount")}</Button> */}
-      {/* {
-        getCompareBtn()
-     } */}
-
-     {/* <HomeBottom/> */}
+      
 
     
      <Footer/>
      </div>
-     {/* <DeveloperPage/> */}
+     
     </div>
     
      

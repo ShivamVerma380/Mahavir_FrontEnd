@@ -180,7 +180,7 @@ function Login() {
             // console.log(response.data.message);
         }).catch(function (error) {
             console.log("error in login-user");
-            // alert(error.response.data.message);
+            toast.error(error.response.data.message);
         })
         isUserLoggedIn = true;
         // alert("login successful")
