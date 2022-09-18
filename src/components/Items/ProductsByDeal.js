@@ -42,93 +42,10 @@ const ProductsByDeal = () => {
     })
 
 
-    // function WishlistHandler(index) {
-    //     // alert("Item added successfully to wishlist");
-    //     console.log(index.modelNumber)
-    //     // if (localStorage.getItem("wishlistproduct") == null) {
-    //     //     localStorage.setItem("wishlistproduct", index.modelNumber)
-    //     // } else {
-    //     //     var arr = localStorage.getItem("wishlistproduct").split(',')
-    //     //     var flag = true;
-    //     //     arr.map(i => {
-
-    //     //         console.log("i: ", i)
-    //     //         if (i === index.modelNumber) {
-    //     //             arr.splice(arr.indexOf(i), 1)
-    //     //             localStorage.setItem("wishlistproduct", arr)
-    //     //             console.log('del arr: ' + arr)
-    //     //             console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
-    //     //             console.log("in if")
-    //     //             flag = false;
-    //     //         }
-    //     //     })
-    //     //     if (flag)
-    //     //         localStorage.setItem("wishlistproduct", localStorage.getItem("wishlistproduct") + "," + index.modelNumber)
-    //     //     //navigate('/categoryProductsall')
-    //     //     ProductsByDeal(location.state.name)
-
-    //     // }
-
-    //     console.log("Wishlist clicked")
-
-      
-    //     var formdata = {
-    //       "modelNumber": index.modelNumber
-  
-    //     }
-  
-    //     axios.post(url+"/wishlist", formdata, {
-    //       headers: {
-    //         "Authorization": "Bearer "+token,
-    //         "Content-Type": "multipart/form-data"
-    //       }
-    //     }).then(function (response) {
-    //       if (response.status == 200) {
-    //         // console.log("Added to wishlist successfully");
-    //         toast.success(<b>Added to wishlist successfully</b>)
-            
-    //         console.log(response.data)
-    //         // navigate("/");
-    //       }
-    //     }).catch(function (error) {
-    //       if(error.response.status==406) {
-    //         toast.warn(<b>Item already present in Wishlist</b>)
-    //         // alert("Item already present in wishlist")
-    //       }
-    //       else {
-    //         console.log("Error", error);
-    //       }
-          
-    //     })
-
-    // }
+    
 
     function WishlistHandler(index) {
-        // alert("Item added successfully to wishlist");
-        // console.log(index.modelNumber)
-        // if (localStorage.getItem("wishlistproduct")==null) {
-        //   localStorage.setItem("wishlistproduct",index.modelNumber)
-        // }else {
-        //   var arr = localStorage.getItem("wishlistproduct").split(',')
-        //   var flag = true;
-        //   arr.map(i=>{
-    
-        //     console.log("i: ",i)
-        //     if( i=== index.modelNumber) {
-        //         arr.splice(arr.indexOf(i),1)
-        //         localStorage.setItem("wishlistproduct",arr)
-        //         console.log('del arr: ' + arr)
-        //         console.log('del ls: ' + localStorage.getItem("wishlistproduct"))
-        //        console.log("in if")
-        //       flag = false;
-        //     } 
-        //   }) 
-        //   if(flag)
-        //     localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
-        //     navigate('/')
-    
-        // }
-        // console.log("Wishlist clicked")
+        
         if(getCookie("isLoggedIn")!=='true'){
           navigate("/login")
         }else{
@@ -186,12 +103,7 @@ const ProductsByDeal = () => {
                 length++;
             }
         })
-        // if(length==0){
-        //     console.log("Category...",index.category)
-        //     localStorage.setItem("AddToCompareCategory",localStorage.getItem(index.category));
-        // }
-        // var length = comparemodels.length;
-        // console.log("Length...",length)
+        
         
         
         if(element.checked){
@@ -246,20 +158,7 @@ const ProductsByDeal = () => {
         }
 
 
-        // if (event.target.checked) {
-  
-        //   console.log('✅ Checkbox is checked');
-        //   setChange(change+1)
-          
-          
-          
-        // } else {
-        //   console.log('⛔️ Checkbox is NOT checked');
-        //   setChange(change-1)
-        // }
-        // setisAddCompareClicked(current => !current);
-        // // alert("Added To Compare");
-        
+       
     }
       
       localStorage.setItem("comparecount",change)
@@ -275,25 +174,7 @@ const ProductsByDeal = () => {
     }
 
 
-    // const handleAddToCompare = event => {
-    //     if (event.target.checked) {
-
-    //         console.log('✅ Checkbox is checked');
-    //         setChange(change + 1)
-
-
-
-    //     } else {
-    //         console.log('⛔️ Checkbox is NOT checked');
-    //         setChange(change - 1)
-    //     }
-    //     setisAddCompareClicked(current => !current);
-    //     // alert("Added To Compare");
-
-    // }
-
-    // localStorage.setItem("comparecount", change)
-    // console.log("Get", localStorage.getItem("comparecount"))
+    
 
     function SortByLowPrice(){
         // console.log("in sort function")
@@ -476,7 +357,7 @@ const ProductsByDeal = () => {
                                                         ) : (
                                                             // <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><p style={{fontSize:'24px',color:'#c10000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</p> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5></>
                                                             <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><b style={{fontSize:'24px',color:'#FA0000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</b><br></br>
-                                                            <b style={{fontWeight:500,fontSize:"18px",color:"#565959" }}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",fontWeight:500,fontSize:"18px",color:"#565959"}}>₹{index.productPrice}  </b></b>  <b style={{color:"green",fontSize:"18px",marginLeft:"10px"}}>  {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h5></>  
+                                                            <b style={{fontWeight:500,fontSize:"18px",color:"#565959" }}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",fontWeight:500,fontSize:"18px",color:"#565959"}}>₹{index.productPrice}  </b></b>  <b style={{color:"green",fontSize:"18px",marginLeft:"10px"}}>{Math.round((parseInt(index.productPrice.replace(',',''))-parseInt(index.offerPrice.replace(',','')))*100/parseInt(index.productPrice.replace(',','')))}% off</b></h5></>  
                                                         )
                                                     }
                                                 </Col>
