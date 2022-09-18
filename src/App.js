@@ -379,7 +379,6 @@ function App() {
         (isCategoryDisplayFetched)?(
           <CategoriesToDisplay categoryDetail={categoryDisplay}/>
         ):(
-          // <Spinner animation="border" variant="warning" />
           <CategoriesToDisplay categoryDetail={[]}/>
         )
       }

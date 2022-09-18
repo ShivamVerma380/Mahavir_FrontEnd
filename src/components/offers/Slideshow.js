@@ -44,7 +44,7 @@ function Slideshow({offerPosters}){
         <Row>
                     <Col md={2}></Col>
                     <Col md={8}>
-                    <button  onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp style={{color:"black"}} onClick={topFunction}/></button>
+                    <button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></button>
 
         <Carousel style={{cursor:"pointer"}} className="offerslide">
         {
@@ -60,9 +60,6 @@ function Slideshow({offerPosters}){
                       
                       />                    
                       </Carousel.Item>
-                   
-                    
-                  
                 )
 
             })
