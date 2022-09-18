@@ -1,9 +1,10 @@
 import React  from "react";
-
 import Carousel from 'react-bootstrap/Carousel';
 import { useNavigate } from "react-router-dom";
 import {BsArrowUp} from "react-icons/bs";
-import "../../App.css"
+import "../../App.css";
+import {Row,Col} from "react-bootstrap";
+import { color } from "@mui/system";
 
 function Slideshow({offerPosters}){
     
@@ -40,26 +41,36 @@ function Slideshow({offerPosters}){
     return(
     
       <div >
-        <button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></button>
+        <Row>
+                    <Col md={2}></Col>
+                    <Col md={8}>
+                    <button  onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp style={{color:"black"}} onClick={topFunction}/></button>
+
         <Carousel style={{cursor:"pointer"}} className="offerslide">
         {
             offerPoster= offerPosters.map(index=>{
                 return(
-                    <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index)}>
-                    <img id = "classname" 
-                    className="d-block w-100"
-                    src= {index.imageUrl}
-                    alt={index.alt}
-                    height={500}
+                  
+                      <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index)}>
+                      <img id = "classname" 
+                      className="d-block w-100"
+                      src= {index.imageUrl}
+                      alt={index.alt}
+                      height={500}
+                      
+                      />                    
+                      </Carousel.Item>
+                   
                     
-                    />                    
-                    </Carousel.Item>
                   
                 )
 
             })
         }
 </Carousel>
+</Col>
+                    <Col md={2}></Col>
+                  </Row>
 
 </div>
     );
