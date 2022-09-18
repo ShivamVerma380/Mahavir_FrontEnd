@@ -180,7 +180,7 @@ function Login() {
             // console.log(response.data.message);
         }).catch(function (error) {
             console.log("error in login-user");
-            toast.error(error.response.data.message);
+            toast.error(<b>Invalid Credentials</b>);
         })
         isUserLoggedIn = true;
         // alert("login successful")
@@ -330,6 +330,8 @@ function Login() {
                     localStorage.setItem("Name", firstName + " " + lastName);
                     localStorage.setItem("jwtToken", response.data.token);
                     window.location.reload();
+                    toast.success(<b>Registeration successful</b>)
+
                     // navigate("/");
                 }
             }).catch(function (error) {
