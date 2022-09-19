@@ -216,45 +216,102 @@ function CategoryProductsSwiper({ cattitle }) {
 
     // }
     // console.log("Wishlist clicked")
-    if(getCookie("isLoggedIn")!=='true'){
-      navigate("/login")
-    }else{
+  //   if(getCookie("isLoggedIn")!=='true'){
+  //     navigate("/login")
+  //   }else{
       
     
 
-    var formdata = {
-      "modelNumber": index.modelNumber
+  //   var formdata = {
+  //     "modelNumber": index.modelNumber
 
-    }
+  //   }
 
-    axios.post(url+"/wishlist", formdata, {
-      headers: {
-        "Authorization": "Bearer " + token,
-        "Content-Type": "multipart/form-data"
-      }
-    }).then(function (response) {
-      if (response.status == 200) {
-        // console.log("Added to wishlist successfully");
-        // toast.success(<b>Added to wishlist successfully</b>)
-        // alert("Item added to wishlist successfully")
-        var arr = localStorage.getItem("Wishlist").split(",")
-        arr.push(index.modelNumber)
-        localStorage.setItem("Wishlist", arr)
-        window.location.reload();
-        toast.success(<b>Item Added to Wishlist successfully</b>)
-        // console.log(response.data)
-        // navigate("/");
-      }
-      else{
-        toast.warn(<b>Item already present in wishlist</b>)
-        // console.log(response.data)
-      }
-    }).catch(function (error) {
-        toast.warn(<b>Item already present in wishlist</b>)
-        console.log("Error", error);
+  //   axios.post(url+"/wishlist", formdata, {
+  //     headers: {
+  //       "Authorization": "Bearer " + token,
+  //       "Content-Type": "multipart/form-data"
+  //     }
+  //   }).then(function (response) {
+  //     if (response.status == 200) {
+  //       // console.log("Added to wishlist successfully");
+  //       // toast.success(<b>Added to wishlist successfully</b>)
+  //       // alert("Item added to wishlist successfully")
+  //       var arr = localStorage.getItem("Wishlist").split(",")
+  //       arr.push(index.modelNumber)
+  //       localStorage.setItem("Wishlist", arr)
+  //       window.location.reload();
+  //       toast.success(<b>Item Added to Wishlist successfully</b>)
+  //       // console.log(response.data)
+  //       // navigate("/");
+  //     }
+  //     else{
+  //       toast.warn(<b>Item already present in wishlist</b>)
+  //       // console.log(response.data)
+  //     }
+  //   }).catch(function (error) {
+  //       toast.warn(<b>Item already present in wishlist</b>)
+  //       console.log("Error", error);
       
-    })
+  //   })
+  // }
+
+  if(getCookie("isLoggedIn")!=='true'){
+    navigate("/login")
+} else {
+
+if (localStorage.getItem("wishlistproduct")==null) {
+ localStorage.setItem("wishlistproduct",index.modelNumber)
+}else {
+ var arr = localStorage.getItem("wishlistproduct").split(',')
+ var flag = true;
+ arr.map(i=>{
+ 
+   
+   if( i=== index.modelNumber) {
+      arr.splice(arr.indexOf(i),1)
+       localStorage.setItem("wishlistproduct",arr)
+     
+     flag = false;
+   } 
+ }) 
+ if(flag)
+  localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+   navigate('/')
+
+}
+
+
+
+
+var formdata = {
+  "modelNumber": index.modelNumber
+
+}
+
+axios.post(url+"/wishlist", formdata, {
+  headers: {
+    "Authorization": "Bearer "+token,
+    "Content-Type": "multipart/form-data"
   }
+}).then(function (response) {
+  if (response.status == 200) {
+    toast.success(<b>Added to wishlist successfully</b>)
+    
+   
+  }
+}).catch(function (error) {
+  if(error.response.status==406) {
+    toast.warn(<b>Item already present in Wishlist</b>)
+    
+  }
+  else {
+    toast.error(<b>SignIn First</b>)
+    console.log("Error", error);
+  }
+  
+})
+}
 
   }
   const firstfourproducts = Products.slice(0, 4);
@@ -266,7 +323,7 @@ function CategoryProductsSwiper({ cattitle }) {
     (isProductsFetched) ?
       (
         <>
-        <ToastContainer position="top-center"/>
+        
           <div className="categoryproductswiper">
 
 

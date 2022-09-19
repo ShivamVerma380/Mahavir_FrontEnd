@@ -24,6 +24,7 @@ import Spinner from 'react-bootstrap/Spinner';
 // import Url from url
 import url from './Uri';
 import LoadingSpinner from './components/LoadingSpinner';
+import { ToastContainer } from 'react-toastify';
 
 var count = 0;
 
@@ -359,6 +360,7 @@ function App() {
   return (
 
     <div>
+      <ToastContainer position='top-center'/>
       {/* <button onclick={topFunction} id="myBtn" title="Go to top">Top</button> */}
       <Button  id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></Button>
       {/* {

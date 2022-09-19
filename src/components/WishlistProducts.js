@@ -235,7 +235,7 @@ const WishlistProducts = () => {
 
                     {
                       (index.productPrice === index.offerPrice) ? (<h4>₹ {index.productPrice}</h4>) : (
-                          <h4><b className="wishlist_offerprice" >₹{index.offerPrice} </b> <b className="wishlist_productprice"> ₹ {index.productPrice}</b> <b className="wishlist_discount"> {Math.round((index.productPrice-index.offerPrice)*100/index.productPrice)}% off</b></h4>
+                          <h4><b className="wishlist_offerprice" >₹{index.offerPrice} </b> <b className="wishlist_productprice"> ₹ {index.productPrice}</b> <b className="wishlist_discount">{Math.round((parseInt(index.productPrice.replace(',',''))-parseInt(index.offerPrice.replace(',','')))*100/parseInt(index.productPrice.replace(',','')))}% off</b></h4>
                       )
                      }
                     </Row>
