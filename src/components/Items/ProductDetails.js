@@ -297,24 +297,26 @@ function ProductDetails() {
   const handleBuyNow = (product) => {
 
     if(getCookie("isLoggedIn")==='true'){
-
-    
-
-    if (flag == false) {
-      // alert("Buy Now ");
-    } else if (quantity <= 0) {
-      toast.error(<b>Please enter a positive number</b>);
-    } else {
-      // alert("Quantity:" + quantity);
-    }
-    // console.log("Product", product);
-    localStorage.setItem("buyProduct",JSON.stringify(product));
-    localStorage.setItem("type", "buyNow");
-    var arr = [];
-    arr.push(product.modelNumber+"=1");
-    setCookie("models",arr,20);
-    navigate("/checkout")
-  }
+      if (Pincode.includes(parseInt(pin))) {
+        
+        if (flag == false) {
+          // alert("Buy Now ");
+        } else if (quantity <= 0) {
+          toast.error(<b>Please enter a positive number</b>);
+        } else {
+          // alert("Quantity:" + quantity);
+        }
+        // console.log("Product", product);
+        localStorage.setItem("buyProduct",JSON.stringify(product));
+        localStorage.setItem("type", "buyNow");
+        var arr = [];
+        arr.push(product.modelNumber+"=1");
+        setCookie("models",arr,20);
+        navigate("/checkout")
+      } else {
+        toast.error(<b>Delivery Not available</b>)
+      }
+   }
   else
   {
     navigate("/login")
