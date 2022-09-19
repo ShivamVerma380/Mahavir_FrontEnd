@@ -12,3 +12,11 @@
     background-color: #ED1C24;
     border-color: #ED1C24;
 }
+@media screen and (max-width: 768px) {
+    .mobileView{
+        display: none;
+    }
+    .orderInvoice{
+        margin-top: 30px;
+    }
+}
