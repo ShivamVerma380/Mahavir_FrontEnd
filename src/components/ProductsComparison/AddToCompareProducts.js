@@ -98,8 +98,7 @@ function AddToCompareProducts(){
                     
                     
                     <Row className="ComparisonHeader">
-                    
-                    <Col md={2} className="colll"></Col>
+                    <Col style={{marginLeft:"1px"}} md={2} className="colll"></Col>
                     {
                         product.map(index=>{
                             return(
