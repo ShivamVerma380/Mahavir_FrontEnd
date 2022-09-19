@@ -50,54 +50,6 @@ function Invoice(){
     })
 
     return(
-        // <Container style={{border:"2px solid #E2E2E2"}}>
-        //     <h3 style={{textAlign:"center"}}>Invoice</h3>
-        //     <h5>Sold By:<p>Mahavir Electronics and Furniture</p></h5>
-        //     <h5>Ship From Address:</h5>
-        //     <p> opp. Post Office, nr. Sahyadri Hospital, Vasant Baug, Ramyanagari Housing Society, Bibwewadi, Pune, Maharashtra 411037</p>
-        //     <h5>GSTIN:</h5>
-        //     <p>27AAAPO6914H1ZO</p>
-        //     <hr></hr>
-        //     <Row>
-        //         <Col md={4}>
-        //             <p><b>Order Id:</b>#MAH{order.orderId}</p>
-        //             <p><b>Order Date:</b>{order.buyDate}</p>
-        //             <p><b>Invoice Date:</b>{order.buyDate}</p>
-        //         </Col>
-        //         <Col md={4}>
-        //             <p><b>Bill/Ship To:</b></p>
-        //             <p><b>{order.userAddress.name}</b></p>
-        //             <p>{order.userAddress.address},</p>
-        //             <p>{order.userAddress.city},{order.userAddress.state}-{order.userAddress.pincode}</p>
-        //             <p>Phone:{order.userAddress.mobileNumber}</p>
-        //         </Col>
-        //         <Col md={4}>
-        //             <p>"Keep this invoice and manufacturer box for warranty purposes."</p>
-        //         </Col>
-        //     </Row>
-        //     <hr></hr>
-            
-        //     <hr></hr>
-        //     <br></br>
-        //     <br></br>
-        //     <Row>
-        //         <Col md={6}>
-        //         {
-        //             (order.paymentId==null)?(
-        //                 <p><b>Payment Mode:</b>Cash On Delivery</p>
-        //             ):(
-        //                 <p><b>Transaction Id:</b>{order.paymentId}</p>
-        //             )
-        //         }
-        //         </Col>
-        //         <Col md={6}>
-        //             <p style={{textAlign:"end"}}>Authorized Signature</p>
-        //         </Col>
-        //     </Row>
-        //     <hr></hr>
-            
-            
-        // </Container>
         <>
         <Header/>
         <Container>
@@ -149,15 +101,11 @@ function Invoice(){
                         <Col md={8}>
                         <p style={{textAlign:"center"}}>Order Details</p>
                                 <Table striped bordered hover style={{width:"100%", tableLayout:"fixed"}}>
-                                <thead>
+                                <thead style={{marginLeft:"0px", padding:"0px"}}>
                                 <tr>
-                                    <th><b>Product</b></th>
+                                    <th>Product</th>
                                     <th>Title</th>
                                     <th>Qty</th>
-                                    {/* <th>Product Price</th>
-                                    <th>Discount</th>
-                                    <th>Offer Price</th>
-                                    <th>Total</th> */}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -168,10 +116,6 @@ function Invoice(){
                                                     <td>{product.modelNumber}</td>
                                                     <td>{product.productName}</td>
                                                     <td>{invoice.products[product.modelNumber]}</td>
-                                                    {/* <td>{order.productPrice} X {order.quantity}</td>
-                                                    <td>{order.productPrice-order.offerPrice} X {order.quantity}</td>
-                                                    <td>{order.offerPrice} X {order.quantity}</td>
-                                                    <td>{order.paymentAmount}</td> */}
                                                 </tr>
                                             )
                                         })
@@ -179,7 +123,6 @@ function Invoice(){
                                     
                                     <br></br>
                                     <tr>
-                                        {/* <td></td> */}
                                         <td colSpan={2}><b>Grand Total:</b></td>
                                         <td>{invoice.paymentAmount}</td>
                                     </tr>

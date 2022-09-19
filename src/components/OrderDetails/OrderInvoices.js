@@ -54,7 +54,7 @@ function OrderInvoices(){
                 <Row>
                     <Col md={2}></Col>
                     <Col md={8} style={{background:"white"}}>
-                        <h3>Your Order Invoices:</h3>
+                        <h4 className="orderInvoice">Your Order Invoices:</h4>
                         <br></br>
                         <Table striped hover border>
                             <thead>
@@ -62,9 +62,9 @@ function OrderInvoices(){
                                     <th>Order Id</th>
                                     <th>Buy Date</th>
                                     <th>Delivery Date</th>
-                                    <th>Payment Amount</th>
-                                    <th>Transaction Id</th>
-                                    <th>Address</th>
+                                    <th className="mobileView">Payment Amount</th>
+                                    <th className="mobileView">Transaction Id</th>
+                                    <th className="mobileView">Address</th>
                                     <th>Invoice</th>
                                 </tr>
                             </thead>
@@ -80,14 +80,14 @@ function OrderInvoices(){
                                                 <td>-</td>
                                             )}
 
-                                            <td>{order.paymentAmount}</td>
+                                            <td className="mobileView">{order.paymentAmount}</td>
                                             {(order.paymentId != null) ? (
-                                                <td>{order.paymentId}</td>
+                                                <td className="mobileView">{order.paymentId}</td>
                                             ) : (
-                                                <td>Cash On Delivery</td>
+                                                <td className="mobileView">Cash On Delivery</td>
                                             )}
 
-                                            <td>{order.userAddress.address + "," + order.userAddress.city + "," + order.userAddress.state + "-" + order.userAddress.pincode}</td>
+                                            <td className="mobileView">{order.userAddress.address + "," + order.userAddress.city + "," + order.userAddress.state + "-" + order.userAddress.pincode}</td>
                                             <td onClick={() => handleInvoiceClick(order)} style={{cursor:"pointer"}}>📅</td>
                                         </tr>
                                     );
