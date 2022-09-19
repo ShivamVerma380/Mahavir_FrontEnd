@@ -40,36 +40,27 @@ function Slideshow({offerPosters}){
 
     return(
     
-      <div >
-        <Row>
-                    <Col md={2}></Col>
-                    <Col md={8}>
-                    <button onclick={()=>topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction}/></button>
+     
+                    <><button onclick={() => topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction} /></button><Carousel style={{ cursor: "pointer" , marginLeft:"30px", marginRight:"30px"}} className="offerslide">
+        {offerPoster = offerPosters.map(index => {
+          return (
 
-        <Carousel style={{cursor:"pointer"}} className="offerslide">
-        {
-            offerPoster= offerPosters.map(index=>{
-                return(
-                  
-                      <Carousel.Item interval={1000} onClick={()=>handleOfferPosterOnClick(index)}>
-                      <img id = "classname" 
-                      className="d-block w-100"
-                      src= {index.imageUrl}
-                      alt={index.alt}
-                      height={500}
-                      
-                      />                    
-                      </Carousel.Item>
-                )
+            <Carousel.Item interval={1000} onClick={() => handleOfferPosterOnClick(index)}>
+              <img id="classname"
+                className="d-block w-100"
+                src={index.imageUrl}
+                alt={index.alt}
+                height={500} 
+                />
+            </Carousel.Item>
 
-            })
-        }
-</Carousel>
-</Col>
-                    <Col md={2}></Col>
-                  </Row>
 
-</div>
+
+          );
+
+        })}
+      </Carousel></>
+
     );
 }
 export default Slideshow; 
