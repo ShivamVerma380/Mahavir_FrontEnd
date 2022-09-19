@@ -925,7 +925,7 @@ function ProductDetails() {
                           return (
                             <Row>
                               <Row>
-                                <Col className="star" md={1} style={{ textAlign: "right" }} >
+                                <Col md={1} style={{backgroundColor:"green",borderRadius:"20px",height:"fit-content"}}>
 
                                   {index.rating}<AiFillStar />
                                 </Col>
