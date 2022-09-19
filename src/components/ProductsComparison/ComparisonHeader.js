@@ -3,11 +3,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Row,Col ,NavItem ,NavDropdown,Form,Button,Image} from "react-bootstrap";
 import url from "../../Uri";
+import { useNavigate } from "react-router-dom";
 
 import {setCookie,getCookie} from '../Cookies';
 import './Compare.css';
 function ComparisonHeader({product}){
-
+    const navigate = useNavigate();
 
 
     const[length,SetLength] = useState(product.length); 
@@ -127,6 +128,25 @@ function ComparisonHeader({product}){
         window.location.reload();
     }
 
+    function callProductDetails(index) {
+        //alert(index);
+        console.log("Index",index);
+        localStorage.setItem("productId",index.productId);
+        localStorage.setItem("productSelected", index.modelNumber);
+        localStorage.setItem("Category",index.category)
+        localStorage.setItem("SubCategory","Brand")
+        localStorage.setItem("SubSubCategory",index.subCategoryMap.Brand)
+        // localStorage.setItem("SubSubCategory","Whirlpool")
+        // console.log(index.subCategoryMap.Brand);
+        // console.log("Cat",localStorage.getItem("Category"))
+        // console.log("SubCat",localStorage.getItem("SubCategory"))
+        // console.log("SubSubCat",localStorage.getItem("SubSubCategory"))
+        // localStorage.removeItem("SubCategory")
+        // localStorage.removeItem("SubSubCategory")
+        // console.log("Product Selected",localStorage.getItem("productSelected"))
+        navigate("/productDetails")
+      }
+
     localStorage.setItem("Arr",arr);
 
     // console.log("length",length);
@@ -183,7 +203,7 @@ function ComparisonHeader({product}){
             
                             <Row>
                             
-                        <Image  style={{ height:'130px',width:'190px', alignContent: "center", marginTop:"50px" }}  src={index.productImage1}/>
+                        <Image  style={{ height:'130px',width:'190px', alignContent: "center", marginTop:"50px", cursor:"pointer" }}  src={index.productImage1} onClick={() => callProductDetails(index)}/>
                         <Button className="cross" style={{height:'40px', width:'40px'}} onClick={()=>handleRemoveProduct(index.modelNumber)}>X</Button>
                         
                                
@@ -192,7 +212,7 @@ function ComparisonHeader({product}){
                             </Row>
                             
                             
-                            <p style={{ marginTop: "20px", fontSize:"18px" }}>{index.productName}</p>
+                            <p style={{ marginTop: "20px", fontSize:"18px", cursor:"pointer" }} onClick={() => callProductDetails(index)}>{index.productName}</p>
                             <h6 style={{color:"red"}}>MSP ₹{index.offerPrice}</h6>
                             <h6 style={{fontSize:"15px",textDecorationLine:"line-through"}}>MRP ₹{index.productPrice}</h6>
                             <h6 style={{color:"red",fontSize:"15px"}}>

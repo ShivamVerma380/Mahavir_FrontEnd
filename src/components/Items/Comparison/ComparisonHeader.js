@@ -68,6 +68,25 @@ function ComparisonHeader({product}){
         console.log("BrandSelected",brandName);
     }
 
+    function callProductDetails(index) {
+        //alert(index);
+        console.log("Index",index);
+        localStorage.setItem("productId",index.productId);
+        localStorage.setItem("productSelected", index.modelNumber);
+        localStorage.setItem("Category",index.category)
+        localStorage.setItem("SubCategory","Brand")
+        localStorage.setItem("SubSubCategory",index.subCategoryMap.Brand)
+        // localStorage.setItem("SubSubCategory","Whirlpool")
+        // console.log(index.subCategoryMap.Brand);
+        // console.log("Cat",localStorage.getItem("Category"))
+        // console.log("SubCat",localStorage.getItem("SubCategory"))
+        // console.log("SubSubCat",localStorage.getItem("SubSubCategory"))
+        // localStorage.removeItem("SubCategory")
+        // localStorage.removeItem("SubSubCategory")
+        // console.log("Product Selected",localStorage.getItem("productSelected"))
+        navigate("/productDetails")
+      }
+
     function handleModelClick(modelName,modelNumber){
 
         console.log("model number",modelNumber);
@@ -104,9 +123,9 @@ function ComparisonHeader({product}){
                 productArr.map(index=>{
                     return(
                         <Col md={2}>
-                            <img style={{ width: "10rem", alignContent: "center" }}  src={'data:image/jpg;base64,' + index.productImage1.data}></img>
+                            <img style={{ width: "10rem", alignContent: "center", cursor:"pointer" }}  src={'data:image/jpg;base64,' + index.productImage1.data} onClick={() => callProductDetails(index)}></img>
                             <br></br>
-                            <h6 style={{ marginTop: "20px" }}>{index.productName}</h6>
+                            <h6 style={{ marginTop: "20px", cursor:"pointer" }} onClick={() => callProductDetails(index)}>{index.productName}</h6>
                             <h6 style={{}}>₹{index.productPrice}</h6>
                         </Col>
                     );
