@@ -218,6 +218,8 @@
     margin-top: 3%;
     margin-left: -70%;
   }
- 
+  #comparebtn{
+    display: none;
+  }
 
 }
