@@ -79,7 +79,7 @@ function blankspace(){
                                     {/* <h6 className="star" >{index.averageRatings} <AiFillStar /></h6> */}
                                     <ReactStars
                                         count={5}
-                                        value={3}
+                                        value={index.averageRatings}
                                         size={28}
                                         edit={false}
                                         color2={'#198754'} />
