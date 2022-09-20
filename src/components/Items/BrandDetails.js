@@ -433,114 +433,12 @@ function BrandDetails() {
 
               </MDBRow>
                                                 
-                                                
-                                                    
-                //                                     <div className="brand_category_products_swiper">
-                //                                     <Row style={{marginTop:'10px'}} className='row-cols-1 row-cols-md-3 g-4'>
-                
-                
-                //                                     {
-
-                //                                     index.products.slice(0, 4).map(i=>{
-                //                                                 console.log("inside products")
-                //                                                 console.log("in pro",i.productName)
-                //                                                 return(
-                                                                
-                //                                                     <Card className="brand_category_product_card" >
-                //                                                     <Card.Img className="brand_category_product_img" variant="top" src={i.productImage1} />
-                //                                                     <Card.Body>
-                //                                                       <Card.Title>{i.productName}</Card.Title>
-                //                                                       <Card.Text>
-                //                                                     <b >₹{i.offerPrice}</b>
-
-                //                                                       <s style={{ marginLeft: 10 }}>₹{i.productPrice}</s>
-                //                                                       </Card.Text>
-                //                                                     </Card.Body>
-                //                                                   </Card>
-                                                                    
-                //                                                         // <Container onClick={()=>callProductDetails(i)}>
-                //                                                         // <center> 
-                //                                                         // <Image src={i.productImage1} style={{ width: 100, margin: 5, height:250, cursor:"pointer" }} />
-                //                                                         // </center>  
-                //                                                         // <h6>{i.productName}</h6>
-                //                                                         // </Container>
                                                                         
-
-                                                                    
-                                                                    
-                //                                                 )
-                //                                             })
-                //                                             // return (
-                //                                             //     <div className="container">
-                
-                //                                             //         <SwiperSlide>
-                //                                             //             <Image src={index.catImage} style={{ width: 100, margin: 5 }} />
-                //                                             //             <Button onClick={() => handleClick(index.category)} variant="outline-primary" className="brandcategory">{index.category}</Button>
-                //                                             //         </SwiperSlide>
-                //                                             //     </div>
-                //                                             // )
-                                                        
-                //                                     }
-                // </Row>
-                //                                 </div>   
-                                               
-                                            
-                                            
                                         
                                     }
 
 </Container>
-                                {/* <Swiper
-                                    slidesPerView={1}
-                                    spaceBetween={5}
-                                    slidesPerGroup={1}
-                                    loop={false}
-                                    loopFillGroupWithBlank={true}
-                                    breakpoints={{
-                                        700: {
-                                            slidesPerView: 1,
-                                        },
-                                        400: {
-                                            slidesPerView: 1,
-                                        },
-                                    }}
-                                    pagination={{
-                                        clickable: true,
-                                    }}
-                                    navigation={true}
-                                    modules={[Pagination, Navigation]}
-                                    className="mySwiper"
-                                    style={{ height: '150px' }}
-                                >
-
-
-                                    {
-                                        cards = parsedArr.map(index => {
-                                            // console.log("Cat Img: ", index.catImage)
-                                            console.log("insided parsedarr")
-                                            index.products.map(i=>{
-                                                console.log("inside products")
-                                                console.log("in pro",i.productName)
-                                                return(
-                                                    <SwiperSlide>
-                                                        <h6>{i.productName}</h6>
-                                                    </SwiperSlide>
-                                                    
-                                                )
-                                            })
-                                            // return (
-                                            //     <div className="container">
-
-                                            //         <SwiperSlide>
-                                            //             <Image src={index.catImage} style={{ width: 100, margin: 5 }} />
-                                            //             <Button onClick={() => handleClick(index.category)} variant="outline-primary" className="brandcategory">{index.category}</Button>
-                                            //         </SwiperSlide>
-                                            //     </div>
-                                            // )
-                                        })
-                                    }
-
-                                </Swiper> */}
+                                
                             </Row>
                             </>
                        
@@ -592,7 +490,7 @@ function BrandDetails() {
                             return (
                                 <div>
                                     <SwiperSlide className="brandvideo">
-                                        <iframe className="videoframe" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe className="videoframe" width="560" height="315" src={index} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </SwiperSlide>
                                 </div>
                             )
