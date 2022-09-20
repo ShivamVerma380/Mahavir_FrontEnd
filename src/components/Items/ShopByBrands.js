@@ -49,7 +49,6 @@ const ShopByBrands = () => {
     localStorage.setItem("brandOfferPosters", index.brandOfferPosters)
     localStorage.setItem("brandVideoLinks", index.videoLinks)
 
-
     const jsonArr = JSON.stringify(index.brandCategories);
     const jsonArray = JSON.stringify(index.brandOfferPosters);
 

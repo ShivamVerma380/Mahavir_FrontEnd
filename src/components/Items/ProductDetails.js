@@ -89,6 +89,7 @@ function ProductDetails() {
   const [isAddCompareClicked, setisAddCompareClicked] = useState(false);
   //const[productInformation,SetProductInformation] = useState();
   const [isProductInformationSet, SetIsProductInformationSet] = useState(false);
+  const [variantCount,setVariantCount]=useState(0);
 
   
   var cart = [];
@@ -389,7 +390,6 @@ function ProductDetails() {
     })
 
   }
-
   var variantcolorone = "";
   var variantcolortwo = "";
   var variantcolorthree = "";
@@ -536,11 +536,11 @@ function ProductDetails() {
       // alert("Added to cart" + model);
     }
   }
+  var count = 0;
 
 
   const handleVariantChange = (event) => {
     var string = "";
-    var count = 0;
     var required = "";
     variantKeys.map(key => {
       product.variantTypes[key].map(index => {
@@ -548,9 +548,11 @@ function ProductDetails() {
           string = string + index + " ";
           required = index;
           count++;
+          setVariantCount(count);
         }
       })
     })
+    console.log("count", count);
     if (count == variantKeys.length) {
       // console.log("string", string);
       // console.log("required", required);
@@ -785,7 +787,7 @@ function ProductDetails() {
                   <Row className="inerrow1">
                   {
                     (variantKeys.length > 0) ? (
-                      <h4 className="rowtitle">Variants</h4>
+                      <h4 className="rowtitle">Variants: {variantCount}/{variantKeys.length}</h4>
                     ) : (
                       null
                     )
@@ -811,6 +813,7 @@ function ProductDetails() {
                                     name={key}
                                     label={index}
                                     onChange={handleVariantChange}
+                                    
                                   />
                                 )
                               })
