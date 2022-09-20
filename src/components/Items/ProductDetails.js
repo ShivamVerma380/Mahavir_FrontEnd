@@ -314,7 +314,7 @@ function ProductDetails() {
         setCookie("models",arr,20);
         navigate("/checkout")
       } else {
-        toast.error(<b>Delivery Not available</b>)
+        toast.error(<b>Please enter pincode</b>)
       }
    }
   else
