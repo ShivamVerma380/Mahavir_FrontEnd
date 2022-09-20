@@ -33,17 +33,6 @@ function Search(){
         }
     })
     
-      const handleOnSearch = (string, results) => {
-
-        // console.log(string, results)
-      }
-    
-      const handleOnHover = (result) => {
-        // the item hovered
-        // console.log(result.name)
-
-      }
-    
       const handleOnSelect = (item) => {
         // the item selected
         // console.log(item.name)
@@ -106,14 +95,12 @@ function Search(){
         }
       }
     
-      const handleOnFocus = () => {
-        // console.log('Focused')
-      }
+      
     
       const formatResult = (item) => {
         return (
           <>
-            <span style={{ display: 'block', textAlign: 'left' }}>{item.name}</span>
+            <span style={{ display: 'block', textAlign: 'left', color:"white" }}>{item.name}</span>
           </>
         )
       }
@@ -124,22 +111,18 @@ function Search(){
               <ReactSearchAutocomplete 
                 styling={
                   {
-                  backgroundColor: "black",
-                  // hoverBackgroundColor:"white",
-                  hoverBackgroundColor:"white",
-                  placeholderColor: "grey",
-                  iconColor: "grey",
-                  color: "white"
+                    backgroundColor: "black",
+                    // hoverBackgroundColor:"white",
+                    hoverBackgroundColor:"grey",
+                    placeholderColor: "grey",
+                    iconColor: "grey",
+                    color: "white",
                   }
                 }
                 items={products}
                 fuseOptions={{keys:["name","price","highlights","category","subSubCategory","subSubCategory"]}}
                 resultStringKeyName="name"
-                onSearch={handleOnSearch}
-                onHover={handleOnHover}
                 onSelect={handleOnSelect}
-                onFocus={handleOnFocus}
-                autoFocus
                 formatResult={formatResult}
                 placeholder="Search"
               />
