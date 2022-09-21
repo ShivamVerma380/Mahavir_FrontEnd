@@ -1,6 +1,6 @@
 import { ComboBox } from "@progress/kendo-react-dropdowns";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useNavigate} from "react";
 import { Row,Col ,NavItem ,NavDropdown,Form} from "react-bootstrap";
 import url from "../../../Uri";
 
@@ -10,11 +10,11 @@ function ComparisonHeader({product}){
     var arr=[];
     if(length===1){
         arr.push("God");
-        arr.push("God");
-        arr.push("God");
+        // arr.push("God");
+        // arr.push("God;")
     }else if(length===2){
         arr.push("God");
-        arr.push("God");
+        // arr.push("God");
     }else if(length===3){
         arr.push("God");
     }
@@ -33,7 +33,7 @@ function ComparisonHeader({product}){
     const [productArr,SetProductArr] = useState(product);
     const [isProductArrUpdated,SetIsProductArrUpdated] = useState(true);
     
-    
+    const navigate=useNavigate();
     
     useEffect(()=>{
         if(length<4 && !isBrandsFetched){

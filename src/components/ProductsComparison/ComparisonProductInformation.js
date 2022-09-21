@@ -21,7 +21,7 @@ function ComparisonProductInformation({title,product}){
     const[isKeysFetched,SetIsKeysFetched] = useState(false);
 
     function blankspace(){
-        var dif=4-product.length;
+        var dif=4-product.length-1;
         var d=[];
         for (var index = 0; index < dif; index++) {
             // alert(index);

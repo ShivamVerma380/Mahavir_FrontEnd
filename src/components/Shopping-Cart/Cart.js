@@ -37,6 +37,7 @@ function Cart() {
       if(!isCartItemsFetched){
         if(getCookie("CartModels")!=null){
             var arr = getCookie("CartModels").split(",");
+            console.log(arr);
             arr.map(item=>{
               if(item!=""){
                   var pair = item.split("=")

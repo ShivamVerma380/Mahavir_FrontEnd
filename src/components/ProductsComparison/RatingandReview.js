@@ -45,7 +45,7 @@ const RatingandReview = ({review}) => {
 }})
 
 function blankspace(){
-    var dif=4-review.length;
+    var dif=4-review.length-1;
     var d=[];
     
     for (var index = 0; index < dif; index++) {
