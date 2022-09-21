@@ -13,7 +13,8 @@ import Footer from "../Footer/Footer";
 
 const CartItem = ({item,quantity}) => {
     var cartmodelnums=new Array();
-    
+    var cartVal = 0;
+
     // console.log("quantity",item.modelNumber,":",quantity)
     cartmodelnums=getCookie("CartModels").split(',');
 
@@ -100,15 +101,17 @@ const CartItem = ({item,quantity}) => {
                                                             var pair = index.split("=");
                                                             if(pair[0]===item.modelNumber){
                                                                 pair[1]=value;
+                                                                cartVal+=parseInt(value);
                                                             }
                                                             arr1.push(pair[0]+"="+pair[1])
                                                         }
                                                         
                                                     })
                                                     setCookie("CartModels",arr1,20);
+                                                    localStorage.setItem("CartQuantity",cartVal);
                                                     // localStorage.setItem("CartProducts",arr)
                                                     console.log("CartModels",arr1)
-                                                    window.location.reload()
+                                                    // window.location.reload()
                                                     }} />
                                             
                                                 <Button style={{background:"white",color:"black",fontSize:"20px",fontFamily:'Roboto',width:'fit-content',border: '0',marginLeft:'20px'}} onClick={removefromcart}><AiFillDelete/></Button>

@@ -23,28 +23,32 @@ function Cart() {
     var price=0;
     var discount=0;
     var amount=0;
-
+    // const [cartVal,setCartVal]=useState(0);
+    var cartVal = 0;
     const navigate = useNavigate();
     
     const[cartModels,SetCartModels] = useState(new Map());
     var qty=[];
-    
 
     const [cartItems,SetCartItems] = useState([]);
     const [isCartItemsFetched,SetIsCartItemsFetched] = useState(false);
+    
+    if(getCookie("CartModels")!=null){
+        var arr = getCookie("CartModels").split(",");
+        arr.map(item=>{
+          if(item!=""){
+              var pair = item.split("=")
+              // if(pair[0])
+              cartModels.set(pair[0].trim(),parseInt(pair[1]));
+            //   setCartVal(cartVal+parseInt(pair[1]));
+              cartVal+= parseInt(pair[1]);
+          }
+        })
+      }
 
     useEffect(()=>{
       if(!isCartItemsFetched){
-        if(getCookie("CartModels")!=null){
-            var arr = getCookie("CartModels").split(",");
-            arr.map(item=>{
-              if(item!=""){
-                  var pair = item.split("=")
-                  // if(pair[0])
-                  cartModels.set(pair[0].trim(),parseInt(pair[1]));
-              }
-            })
-          }
+        
       
         // console.log("Cart Models",cartModels)
         var urls=[];
@@ -136,7 +140,7 @@ function Cart() {
             }
             {
                 (isCartItemsFetched)?(
-                    cartItems.map((index,pos)=>{
+                    cartItems.map((index,pos)=>{                       
                     // console.log("CartModel in map",cartModels)
                     // console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
                     // console.log("Model Number:",index.modelNumber)
@@ -160,7 +164,7 @@ function Cart() {
                     </thead>
                     <tbody>
                         <tr>
-                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Price ({cartItems.length} Item)</td>
+                        <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2"}}>Price ({cartVal} Item)</td>
                         <td  style={{fontFamily:"Roboto",borderBottom:"1px solid #E2E2E2",textAlign:"end"}}>
                             {
                                 

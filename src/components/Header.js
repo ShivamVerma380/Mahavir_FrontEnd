@@ -24,6 +24,21 @@ const Header = ({productList}) => {
   const [isCategoryDisplayFetched,setIsCategoryDisplayFetched]=useState(false);
 
 
+
+  var count = 0;
+
+  if(getCookie("CartModels")!=null){
+    var arr = getCookie("CartModels").split(",");
+    arr.map(item=>{
+      if(item!=""){
+          var pair = item.split("=")
+          // if(pair[0])
+          // cartModels.set(pair[0].trim(),parseInt(pair[1]));
+          // setCartVal(cartVal+parseInt(pair[1]));
+          count+= parseInt(pair[1]);
+      }
+    })
+  }
       
   useEffect(()=>{
     if(!isCategoryDisplayFetched){
@@ -38,13 +53,10 @@ const Header = ({productList}) => {
   }
   });
 
-  var count = 0;
-  getCookie("CartModels").split(',').map(m=>{
     
-    if(m!==""){
-      count++;
-    }
-  })
+    
+      
+  
     
 
       function getCookie(cname) {
