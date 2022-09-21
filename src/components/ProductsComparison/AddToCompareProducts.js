@@ -56,7 +56,11 @@ function AddToCompareProducts(){
       }
 
       function blankspace(){
-        var dif=4-product.length-1;
+        var dif=4-product.length;
+        if(product.length==2 || product.length==4 )
+            dif = 4 - product.length-1;
+        if(product.length==1)
+            dif = 4-product.length-2;
         var d=[];
         for (var index = 0; index < dif; index++) {
             // alert(index);
