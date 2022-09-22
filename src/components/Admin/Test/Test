@@ -2,11 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import {Navbar,FormControl,Button,Form,NavDropdown, Nav, FormCheck,Container,Row,Col,Accordion, FloatingLabel} from 'react-bootstrap';
-import ImageUploader from 'react-images-upload';
 import axios from "axios";
-import Select from 'react-select';
 import ReactDOM from "react-dom";
-import ImageUploading from "react-images-uploading";
 // var SelectedCategory="";
 // var selectedSubCategory="";
 // var isSelectedSubCategory=false;

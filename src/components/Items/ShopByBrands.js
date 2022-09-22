@@ -4,7 +4,6 @@ import axios from "axios";
 import { Container } from 'react-bootstrap';
 import BrandDetails from "./BrandDetails";
 import { Navigate, useNavigate } from "react-router-dom";
-import Carousel from "react-grid-carousel";
 import './ShopByBrands.css';
 import { Pagination, Navigation } from "swiper";
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from "reactstrap";

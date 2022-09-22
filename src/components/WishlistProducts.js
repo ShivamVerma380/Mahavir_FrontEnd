@@ -98,12 +98,7 @@ const WishlistProducts = () => {
       }).catch(function (error) {
         console.log("error");
       })
-      
-
-      
-
-
-     
+    
     }
     // if (removeClicked) {
     //   axios({

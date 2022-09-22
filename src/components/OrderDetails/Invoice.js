@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React,{useState,useEffect} from 'react';
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import { keys } from 'underscore';
 import url from '../../Uri';
 import Header from "../Header";
 import "./orders.css";

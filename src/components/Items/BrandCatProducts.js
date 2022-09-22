@@ -9,7 +9,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Box from '@mui/material/Box';
-import { sortBy } from "underscore";
 import { AiFillStar } from "react-icons/ai";
 import "../Filters/FilterProducts.css"
 import { FaArrowCircleUp } from 'react-icons/fa';

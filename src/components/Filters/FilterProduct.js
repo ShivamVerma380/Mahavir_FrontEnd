@@ -6,7 +6,6 @@ import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import Typography from '@material-ui/core/Typography';
 // import Slider from '@material-ui/core/Slider';
 import Slider from '@mui/material/Slider';
-import e from "cors";
 import {setCookie,getCookie} from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
 import "./Slider.css"

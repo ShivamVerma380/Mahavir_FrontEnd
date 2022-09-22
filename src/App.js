@@ -23,7 +23,6 @@ import Spinner from 'react-bootstrap/Spinner';
 
 // import Url from url
 import url from './Uri';
-import LoadingSpinner from './components/LoadingSpinner';
 import { ToastContainer } from 'react-toastify';
 
 var count = 0;

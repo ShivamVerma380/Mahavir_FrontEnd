@@ -48,7 +48,6 @@ import FilterProduct from './components/Filters/FilterProduct';
 import WishlistProducts from './components/WishlistProducts';
 import AdminLogin from './components/Admin/AdminLogin';
 import Orders from './components/OrderDetails/Orders';
-import Checkout from './components/OrderSummary/Checkout';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import CompletedOrders from './components/Admin/Sidebar/CompletedOrders';
 import AddressBuyNowSummary from './components/Checkout/BuyNowCheckout/AddressBuyNowSummary';
@@ -62,12 +61,6 @@ import TermsOfUse from './components/Footer/TermsOfUse';
 import PaymentSuccess from './components/Checkout/BuyNowCheckout/PaymentSuccess';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-var Category = localStorage.getItem("Category");
-var SubCategory = localStorage.getItem("SubCategory");
-var SubSubCategory = localStorage.getItem("SubSubCategory");
-
-var ModelNos = localStorage.getItem("ModelNos");
-
 
 
 root.render(
@@ -88,13 +81,10 @@ root.render(
       <Route path='/pendingdelivery' element = {<PendingDelivery/>}/>
       <Route path='/allcomplaints' element = {<AllComplaints/>}/>
       <Route path='/AddressForm' element = {<AddressForm/>}/>
-      {/* <Route path='/OrderSummary' element = {<OrderSummary/>}/> */}
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
       <Route path='/:Category' element={<SelCatProducts/>}/>
       <Route path='/offers' element={<OfferItems/>}/>
-      {/* <Route path='/compareproducts' element={<AddToCompareProducts/>}/> */}
-      {/* <Route path="/SearchBar" element={<SearchBar/>}/> */}
       <Route path='/my-orders' element={<OrderInvoices/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>
       <Route path='/onlyreviews' element = {<OnlyReviews/>}/>
@@ -106,10 +96,8 @@ root.render(
       <Route path="/privacypolicy" element={<PrivacyPolicy/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/contactus' element = {<ContactUs/>}/>
-      {/* <Route path='/:Category'element={<ProductsByCategory/>}/> */}
       <Route path='/completedorders' element={<CompletedOrders/>}/>    
       <Route path='/terms-of-use' element={<TermsOfUse/>}/>
-      {/* <Route path='/AddNew' element={<AddNew/>}/> */}
       <Route path='/storelocator' element={<StoreLocator/>}/>
       <Route path='/addSubCategories/:ModelNos' element = {<AddSubCategories/>}/>
       <Route path='/addProductInformation/:ModelNos' element={<AddProductInformation/>}/>
@@ -124,8 +112,6 @@ root.render(
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
       <Route path='/shippingoptions' element={<ShippingOptions/>}/>
       <Route path='/paymentreturns' element={<PaymentReturns/>}/>
-      {/* <Route path='/checkout' element={<Checkout/>}/> */}
-      {/* <Route path='/payment' element={<Payment/>}/> */}
       <Route path='/compareProducts' element={<AddToCompareProducts/>}/>
       <Route path='/minibottom' element={<MiniPostersBottom/>}/>
       <Route path="/checkout" element={<AddressBuyNowSummary/>}/>

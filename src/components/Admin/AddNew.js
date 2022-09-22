@@ -1,6 +1,5 @@
 // import React , {useState} from 'react';
 // import { Accordion } from 'react-bootstrap';
-// import * as Select from 'react-select'
 // import AdminHeader from "./AdminHeader";
 // import Navbar from "./Sidebar/Navbar";
 // import {FormControl,Button,Form,NavDropdown, Nav, FormCheck,Container,Row,Col} from 'react-bootstrap';

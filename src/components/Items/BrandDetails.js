@@ -12,14 +12,13 @@ import './ShopByBrands.css';
 import { Carousel, CarouselItem } from "react-bootstrap";
 import Header from "../Header";
 import { Col, Row, Form, Card, Container, Image } from "react-bootstrap";
-import { MDBCarousel, MDBCol, MDBCarouselInner, MDBCarouselItem, MDBCarouselElement, MDBCardHeader, MDBCardFooter, MDBBtn, MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardLink, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
+import { MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardLink, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 import {useRef} from 'react';
 import { white } from "material-ui/styles/colors";
 import { fullWhite } from "material-ui/styles/colors";
 import url from "../../Uri";
 import Footer from "../Footer/Footer";
-import MovingComponent from 'react-moving-text';
 import {AiOutlineCaretRight} from "react-icons/ai"
 import {FaAngleRight} from "react-icons/fa"
 import { flexbox } from "@mui/system";

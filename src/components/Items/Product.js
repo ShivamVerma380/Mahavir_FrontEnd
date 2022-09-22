@@ -1,9 +1,6 @@
 import React from "react";
 //import { Row,Card,Col,CardImg, CardBody, CardTitle,CardSubtitle, CardText, Container } from "reactstrap";
 import {Card,Button, Form} from "react-bootstrap";
-import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
-import Arrow from 'react-arrows';
-import Carousel from 'react-bootstrap/Carousel';
 //import { Button } from "bootstrap";
 import { AiOutlineHeart, AiTwotoneHeart,AiFillHeart } from "react-icons/ai";
 

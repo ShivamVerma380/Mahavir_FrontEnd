@@ -1,7 +1,6 @@
 import { Input } from "reactstrap";
 import { ProgressBar, Form, Button, Col, Container, Row, Card ,Modal,Image,Carousel} from "react-bootstrap";
 import Header from "../Header";
-import Zoom from "react-img-zoom";
 import "./ProductDetails.css";
 import { AiOutlineMinus } from "react-icons/fa"
 import { useNavigate } from "react-router-dom";
@@ -9,11 +8,8 @@ import ReactImageMagnify from 'react-image-magnify';
 import watchImg1200 from '../../assets/watch.jpg'
 import watchImg300 from '../../assets/watch300.jpg'
 import React, { useEffect, useState } from "react";
-import { ImageList, Slider } from "@mui/material";
 import * as AiIcons from 'react-icons/ai';
-import { CProgress, CProgressBar } from '@coreui/react'
 import { Swiper, SwiperSlide } from "swiper/react";
-import { QuantityPicker } from 'react-qty-picker';
 import { AiFillStar } from "react-icons/ai";
 // Import Swiper styles
 import "swiper/css";
@@ -33,7 +29,6 @@ import { Toast, ToastBody, ToastHeader } from "reactstrap";
 
 import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
 
-import StarRating from 'react-star-rating'
 
 
 import ProductRating from "./ProductRating";
@@ -44,7 +39,6 @@ import { setCookie, getCookie } from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
 import url from "../../Uri";
 import {HiOutlineShoppingCart} from "react-icons/hi";
-import StarRatings from "react-star-ratings";
 import Footer from "../Footer/Footer";
 import LoadingSpinner from "../LoadingSpinner";
 // import './ProductDetails.css';

@@ -7,8 +7,6 @@ import { useRef } from "react";
 import "./SignIn.css"
 import { useState } from "react";
 import { IoMdLogOut } from "react-icons/io";
-import OTPInput, { ResendOTP } from "otp-input-react";
-import OtpTimer from "otp-timer";
 import Timer from "otp-timer";
 import OtpInput from "react-otp-input";
 import Footer from "../Footer/Footer";

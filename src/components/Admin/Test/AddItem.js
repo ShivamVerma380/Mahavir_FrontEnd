@@ -1,9 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Navbar, FormControl, Button, Form, NavDropdown, Nav, FormCheck, Container, Row, Col, Accordion, FloatingLabel, Dropdown } from 'react-bootstrap';
-import ImageUploader from 'react-images-upload';
 import axios from "axios";
-import Select from 'react-select';
 import ReactDOM from "react-dom";
 import ImageUploading from "react-images-uploading";
 import { useNavigate } from "react-router-dom";
