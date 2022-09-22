@@ -11,6 +11,10 @@
     font-size:20;
     font-family:'Roboto';
 }
+a{
+    text-decoration: none;
+    color: inherit;
+}
 /* mobiles */
 @media screen and (min-width: 320px) and (max-width:480px)
 {
