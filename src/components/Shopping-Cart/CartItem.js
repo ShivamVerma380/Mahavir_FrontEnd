@@ -111,7 +111,7 @@ const CartItem = ({item,quantity}) => {
                                                     localStorage.setItem("CartQuantity",cartVal);
                                                     // localStorage.setItem("CartProducts",arr)
                                                     console.log("CartModels",arr1)
-                                                    // window.location.reload()
+                                                    window.location.reload()
                                                     }} />
                                             
                                                 <Button style={{background:"white",color:"black",fontSize:"20px",fontFamily:'Roboto',width:'fit-content',border: '0',marginLeft:'20px'}} onClick={removefromcart}><AiFillDelete/></Button>
