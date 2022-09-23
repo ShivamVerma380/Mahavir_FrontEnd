@@ -46,6 +46,10 @@ const RatingandReview = ({review}) => {
 
 function blankspace(){
     var dif=4-review.length;
+        if(review.length==2 || review.length==4 )
+            dif = 4 - review.length-1;
+        if(review.length==1)
+            dif = 4-review.length-2;
     var d=[];
     
     for (var index = 0; index < dif; index++) {

@@ -15,18 +15,18 @@ function ComparisonHeader({product}){
     var arr=[];
     if(length===1){
         arr.push("God");
-        arr.push("God");
-        arr.push("God");
+        // arr.push("God");
+        // arr.push("God");
     }else if(length===2){
         arr.push("God");
-        arr.push("God");
+        // arr.push("God");
     }else if(length===3){
         arr.push("God");
     }else if(length===0){
         arr.push("God");
-        arr.push("God");
-        arr.push("God");
-        arr.push("God");
+        // arr.push("God");
+        // arr.push("God");
+        // arr.push("God");
     }
     
     const [Brands,SetBrands] = useState([]);
