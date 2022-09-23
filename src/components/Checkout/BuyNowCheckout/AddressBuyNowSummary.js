@@ -8,17 +8,13 @@ import { Button, Card, Container, Row, Col, Dropdown } from "react-bootstrap";
 import {  Input } from "reactstrap";
 import 'typeface-roboto';
 import {AiFillDelete} from 'react-icons/ai';
-import { Country, State, City }  from 'country-state-city';
-import { DropDownMenu } from "material-ui";
+import { State, City }  from 'country-state-city';
 import Header from "../../Header";
 
 
 import { ToastContainer, toast } from "react-toastify";
 import Footer from "../../Footer/Footer";
 
-// import { useFormik } from "formik";
-
-// import Select from "react-select";
 
 var fullname = "";
 var addressone = "";
@@ -224,34 +220,6 @@ function AddressBuyNowSummary(){
         )
       
       }
-          
-      
-      // const addressFromik = useFormik({
-      //   initialValues: {
-      //     country: "India",
-      //     state: null,
-      //     city: null
-      //   },
-      //   onSubmit: (values) => console.log(JSON.stringify(values))
-      // });
-      // const countries = csc.getAllCountries();
-
-      // const updatedCountries = countries.map((country) => ({
-      //   label: country.name,
-      //   value: country.id,
-      //   ...country
-      // }));
-      // const updatedStates = (countryId) =>
-      //   csc
-      //     .getStatesOfCountry(countryId)
-      //     .map((state) => ({ label: state.name, value: state.id, ...state }));
-      // const updatedCities = (stateId) =>
-      //   csc
-      //     .getCitiesOfState(stateId)
-      //     .map((city) => ({ label: city.name, value: city.id, ...city }));
-      //     const { values, handleSubmit, setFieldValue, setValues } = addressFromik;
-
-      //     useEffect(() => {}, [values]);
 
       function handleProceedOnClick(){
         // console.log("address length",address.length);

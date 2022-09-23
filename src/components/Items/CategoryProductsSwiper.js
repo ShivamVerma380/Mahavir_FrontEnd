@@ -9,7 +9,6 @@ import axios from "axios";
 import { getCookie, setCookie } from "../Cookies";
 import { ToastContainer, toast } from 'react-toastify';
 import { MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardImage, MDBContainer } from 'mdb-react-ui-kit';
-//import SimpleImageSlider from "react-simple-image-slider";
 import MovingComponent from 'react-moving-text'
 
 

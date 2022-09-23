@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Row,Col } from "react-bootstrap";
 import { Container } from "reactstrap";
-import { Flag } from "semantic-ui-react";
 
 // var showOnlyDiff = localStorage.getItem("showOnlyDiff");
 function ComparisonHighlights({product,showOnlyDiff}){

@@ -2,9 +2,6 @@ import React from "react";
 import Header from "../Header";
 import AdminHeader from "./AdminHeader";
 import AdminNavbar from "./Sidebar/AdminNavbar";
-import TextField from '@material-ui/core/TextField';
-import Autocomplete,
-{ createFilterOptions } from '@material-ui/lab/Autocomplete';
 // import { Dropdown, Option } from "./Dropdown";
 import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,10 +9,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import { Button } from "react-bootstrap";
 import AddCategory from "./AddCategory";
-import Select from 'react-select';
 import AddItem from "./Test/AddItem";
 
-const filter = createFilterOptions();
 const Categories = [
     { label: "TV", value: 1 },
     { label: "Mobile", value: 2 },

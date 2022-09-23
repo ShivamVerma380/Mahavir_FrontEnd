@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState }  from "react";
 import {Row,Col,Form,Button,Image} from 'react-bootstrap';
-// import { Header } from "semantic-ui-react";
 import Header from "../Header";
 import {setCookie,getCookie} from '../Cookies';
 import url from "../../Uri";

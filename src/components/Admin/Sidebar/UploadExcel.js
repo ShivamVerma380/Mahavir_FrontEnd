@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import { FileInput } from 'uiw';
 import { Button , Col,Row,Container} from 'react-bootstrap';
 import  { useState } from 'react';
 import AdminHeader from "../../Admin/AdminHeader";

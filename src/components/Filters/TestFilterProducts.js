@@ -9,7 +9,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Box from '@mui/material/Box';
-import { sortBy } from "underscore";
 import { AiFillStar } from "react-icons/ai";
 import "./FilterProducts.css"
 import {FaArrowCircleUp} from 'react-icons/fa';
@@ -17,7 +16,6 @@ import { Dropdown } from "reactstrap";
 import url from "../../Uri";
 import {RiArrowDropDownLine} from 'react-icons/ri'
 import {FcFilledFilter} from "react-icons/fc"
-import StarRatings from "react-star-ratings";
 import {BsArrowUp} from "react-icons/bs"
 import LoadingSpinner from "../LoadingSpinner";
 
