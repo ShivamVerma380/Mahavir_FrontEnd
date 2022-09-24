@@ -12,8 +12,8 @@ import url from "../../Uri";
 
 const AdminLogin = () => {
     var email = "";
-    const[adminotp,Setadminotp]=useState("");
-    const[admininputotp,Setadmininputotp]=useState("");
+    const[adminotp,Setadminotp]=useState();
+    var admininputotp;
     var inputsecretkey = "";
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [isNewOtpSent, setIsNewOtpSent] = useState(false)
@@ -50,6 +50,7 @@ const AdminLogin = () => {
             }).then(function (response) {
                 console.log(response.data);
                 Setadminotp(response.data.otp);
+                
                 console.log("otp:", adminotp);
             }).catch(function (response) {
                 console.log(response);
@@ -68,6 +69,7 @@ const AdminLogin = () => {
 
     
     const verifyOTP = () => {
+        console.log(adminotp,":",admininputotp);
         //    alert(otp);
         if (adminotp === admininputotp ) {
             alert('Correct input otp');

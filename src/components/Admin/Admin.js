@@ -109,44 +109,6 @@ export default function Admin () {
                 <h4 style={{marginLeft:"500px",marginTop:"20px"}}>You selected {value}</h4> */}
 
 
-            {/* <h1>Which service are you interested in?</h1>
-            <Dropdown
-                formLabel="Choose a service"
-                buttonText="Send form"
-                onChange={handleSelect}
-                
-                //action="/"
-            >
-                <Option value="Click to see options" />
-                <Option value="Option 1" />
-                <Option value="Option 2" />
-                <Option value="Option 3" />
-                
-            </Dropdown>
-            
-            <p>You selected {optionValue}</p> */}
-            
-         {/* <Autocomplete
-                    filterOptions={(options, params) => {
-                        const filtered = filter(options, params);
-                    // Suggest the creation of a new value
-                    if (params.inputValue !== '') {
-                        filtered.push(`Add "${params.inputValue}"`);
-                    }
-                    return filtered;
-                }}
-                selectOnFocus
-                clearOnBlur
-                handleHomeEndKeys
-                options={options}
-                renderOption={(option) => option}
-                style={{ width: 300 }}
-                freeSolo
-                renderInput={(params) => (
-                <TextField {...params} label="Enter Something"
-                    variant="outlined" />
-                )}
-            /> */}
             
             
         </div>
