@@ -47,7 +47,7 @@ function Search(){
           localStorage.removeItem("SubSubCategory")
           var arr = window.location.href.split("/")
           // console.log("Arr: ",arr)
-          if(arr.length==4) {
+          if(arr.length==5) {
             navigate("/categoryProductsall");
             window.location.reload()
             
@@ -74,7 +74,7 @@ function Search(){
           // window.location.reload()
 
           // console.log("arr",arr);
-          if(arr.length==4){
+          if(arr.length==5){
             localStorage.setItem("Category",item.category)
             localStorage.setItem("SubCategory",item.subCategory)
             localStorage.setItem("SubSubCategory",item.subSubCategory)
