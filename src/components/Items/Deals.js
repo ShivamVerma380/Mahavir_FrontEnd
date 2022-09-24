@@ -218,14 +218,14 @@ function Deals({deals}) {
           // console.log("Removed from wishlist successfully");
           // console.log(response.data)
           // var arr = localStorage. 
-          var arr = localStorage.getItem("Wishlist").split(",")
+          var arr = localStorage.getItem("wishlistproduct").split(",")
           var finalWishlist=[];
           arr.map(a=>{
             if( a!=="" && a!==index.modelNumber){
               finalWishlist.push(a)
             }
           })
-          localStorage.setItem("Wishlist",finalWishlist)
+          localStorage.setItem("wishlistproduct",finalWishlist)
           window.location.reload();
           // navigate("/");
         }
@@ -372,7 +372,7 @@ function Deals({deals}) {
 </div>                 
 
                   {
-                          (localStorage.getItem("Wishlist") != null && localStorage.getItem("Wishlist").includes(index.modelNumber)) ?
+                          (localStorage.getItem("wishlistproduct") != null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
                             <AiFillHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => RemoveWishlist(index)} /> :
                             <AiOutlineHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)} />
                         }
