@@ -416,7 +416,7 @@ axios.post(url+"/wishlist", formdata, {
 
 
                         } */}
-                            <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
+                            <MDBCardImage onClick={() => callProductDetails(index)} className="cardimage2" src={index.productImage1} alt='...' position='top' />
 
 </div>
                         {
@@ -426,14 +426,14 @@ axios.post(url+"/wishlist", formdata, {
                         }
                         <MDBCardBody className="categoryproductscardbody">
                           <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
-                          <MDBCardSubTitle style={{ marginTop: '5px', marginBottom: '5px', fontSize: '18px' }}>Rs. {index.offerPrice}</MDBCardSubTitle>
+                          <MDBCardSubTitle onClick={() => callProductDetails(index)} style={{ marginTop: '5px', marginBottom: '5px', fontSize: '18px' }}>Rs. {index.offerPrice}</MDBCardSubTitle>
 
                           {
                             fetchOfferAvailableBtn(index.offerPrice, index.productPrice)
                           }
                         </MDBCardBody>
                         <MDBCardBody className="categoryproductscardbodyonhover">
-                          <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
+                          <MDBCardTitle className="cardtitle" onClick={() => callProductDetails(index)}>{index.productName} </MDBCardTitle>
                           <MDBCardSubTitle style={{ marginTop: '5px', marginBottom: '5px', fontSize: '18px' }}>Rs. {index.offerPrice}</MDBCardSubTitle>
 
                           <MDBCardText className="text" onClick={() => callProductDetails(index)}>
