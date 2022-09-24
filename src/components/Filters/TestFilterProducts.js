@@ -545,6 +545,14 @@ function TestFilterProducts(){
         }
     }
 
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 500; // For Safari
+        document.documentElement.scrollTop = 500; // For Chrome, Firefox, IE and Opera
+        // console.log("In top Function")
+        // document.body.scrollIntoView();
+        // window.location.reload();
+    }
 
     const handleFormCheck=(index,f)=>{
         // alert("hi")
@@ -599,7 +607,7 @@ function TestFilterProducts(){
             
             SetSelectedProducts(productsArray);
             navigate("/"+localStorage.getItem("Category"))
-
+            topFunction();
         }else{
             // alert("here")
 
@@ -658,6 +666,7 @@ function TestFilterProducts(){
             
             SetSelectedProducts(productsArray);
             navigate("/"+localStorage.getItem("Category"))
+            topFunction();
         }
     }
 
