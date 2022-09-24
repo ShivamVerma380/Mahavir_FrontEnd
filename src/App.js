@@ -375,7 +375,7 @@ function App() {
         )
       }
      <Header/>
-      <div >
+      <div style={{marginTop:"200px"}}>
       {
         (isCategoryDisplayFetched)?(
           <CategoriesToDisplay categoryDetail={categoryDisplay}/>

@@ -180,7 +180,14 @@ const WishlistProducts = () => {
         // console.log("Deleted successfully");
         // console.log(response.data)
         // setRemoveClicked(true)
-        
+        var arr = localStorage.getItem("wishlistproduct").split(",")
+        var finalWishlist=[];
+        arr.map(a=>{
+          if( a!=="" && a!==modelnum){
+            finalWishlist.push(a)
+          }
+        })
+        localStorage.setItem("wishlistproduct",finalWishlist)
         window.location.reload();
         
         // navigate("/");
