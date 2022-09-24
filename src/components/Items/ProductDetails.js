@@ -148,6 +148,7 @@ function ProductDetails() {
           for (var k in response.data.productInformation) {
             keys.push(k);
           }
+          keys.sort();
 
           for (var k in response.data.variantTypes) {
             variantKeys.push(k);

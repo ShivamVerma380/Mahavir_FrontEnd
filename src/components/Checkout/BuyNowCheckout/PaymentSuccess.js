@@ -29,7 +29,7 @@ function PaymentSuccess(){
         <div style={{marginTop:"150px"}}>
         <Container style={{background:"white"}}>
             <center>
-                <TiTick size={200}/>
+                <TiTick style={{color:"green"}} size={200}/>
                 <br></br>
                 <br></br>
                 <h4>Yay! Your Order has been recieved </h4>
