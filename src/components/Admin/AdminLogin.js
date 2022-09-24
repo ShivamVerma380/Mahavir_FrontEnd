@@ -104,13 +104,8 @@ const AdminLogin = () => {
     
 
     return (
-
-
-
         <div>
             <center>
-
-                
                 {
                     (isLoggedIn) ? (<Admin/>):(
                     (!isOtpSent) ? (

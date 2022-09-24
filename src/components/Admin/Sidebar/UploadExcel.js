@@ -69,7 +69,7 @@ const UploadExcel = () => {
     }).then(function(response){
       console.log(response.data)
     }).catch(function(error){
-      console.log("Error in Categories");
+      console.log("Error in Categories:",error);
       // toast.warn("Error In Fetching orders",error)
 
     })
@@ -97,7 +97,7 @@ const UploadExcel = () => {
     }).then(function(response){
       console.log(response.data)
     }).catch(function(error){
-      console.log("Error in filters")
+      console.log("Error in filters:",error)
     })
 
 
@@ -123,7 +123,7 @@ const UploadExcel = () => {
     }).then(function(response){
       console.log(response.data)
     }).catch(function(error){
-      console.log("Error in shopByBrands")
+      console.log("Error in shopByBrands:",error)
     })
 
 
@@ -149,7 +149,7 @@ const UploadExcel = () => {
     }).then(function(response){
       console.log(response.data)
     }).catch(function(error){
-      console.log("error in offerposters")
+      console.log("error in offerposters:",error)
     })
 
 
