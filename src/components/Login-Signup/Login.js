@@ -139,7 +139,7 @@ function Login() {
         }
 
         var form_data_body = {
-            Email: email,
+            Email: email.toLowerCase(),
             Password: password
         }
         var authorization = "Bearer "+{tokenn};
@@ -219,7 +219,7 @@ function Login() {
             // console.log("Email", email);
             axios({
                 method: "get",
-                url: url+"/verify-email/" + email
+                url: url+"/verify-email/" + email.toLowerCase()
             }).then(function (response) {
                 // console.log(response.data);
                 otp = response.data.otp;
@@ -250,7 +250,7 @@ function Login() {
             // console.log("Email", email);
             axios({
                 method: "get",
-                url: url+"/forgotPassword/" + forgotemail
+                url: url+"/forgotPassword/" + forgotemail.toLowerCase()
             }).then(function (response) {
                 // console.log(response.data);
                 otp = response.data.otp;
@@ -311,7 +311,7 @@ function Login() {
         }
         else {
             var form_data_body = {
-                "Email": email,
+                "Email": email.toLowerCase(),
                 "Password": password,
                 "first_name": firstName,
                 "last_name": lastName,
@@ -366,7 +366,7 @@ function Login() {
                 "Content-Type": "multipart/form-data"
                 
             };
-            axios.post(url+'/updatePassword/'+forgotemail,form_data_bod,{headers})
+            axios.post(url+'/updatePassword/'+forgotemail.toLowerCase(),form_data_bod,{headers})
             .then(function (response) {
                     if (response.status == 200) {
                         // console.log("Password Updated successfully");
@@ -413,7 +413,7 @@ function Login() {
         toast.success(<b>Resend otp Clicked</b>)
         axios({
             method: "get",
-            url: url+"/resend-otp/" + email
+            url: url+"/resend-otp/" + email.toLowerCase()
         }).then(function (response) {
             // console.log(response.data);
             otp = response.data.otp;
