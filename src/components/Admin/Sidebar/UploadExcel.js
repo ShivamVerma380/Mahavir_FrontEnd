@@ -13,11 +13,13 @@ const UploadExcel = () => {
   const [selectedfilterFile, setSelectedFilterFile] = useState();
   const [selectedbrandsFile, setSelectedBrandsFile] = useState();
   const [selectedposterFile, setSelectedPosterFile] = useState();
+  const [selecteddealsFile, setSelectedDealsFile] = useState();
   const [isProductFilePicked, setIsProductFilePicked] = useState(false);
   const [isCategoryFilePicked, setIsCategoryFilePicked] = useState(false);
   const [isFilterFilePicked, setIsFilterFilePicked] = useState(false);
   const [isBrandsFilePicked, setIsBrandsFilePicked] = useState(false);
   const [isPosterFilePicked, setIsPosterFilePicked] = useState(false);
+  const [isDealsFilePicked, setIsDealsFilePicked] = useState(false);
 
    var token = getCookie("jwtToken");
 
@@ -155,6 +157,33 @@ const UploadExcel = () => {
 
   };
 
+  const DealsFileHandler = (event) => {
+    setSelectedDealsFile(event.target.files[0]);
+    setIsDealsFilePicked(true);
+  };
+
+  const handleDealsFileSubmission = () => {
+    const formData = new FormData();
+
+    formData.append('file', selecteddealsFile);
+    console.log("Form Data",formData)
+    alert("Submit Clicked")
+
+    axios.post(url+"/excel/deals",formData,{
+      headers:{
+        "Authorization": "Bearer "+token
+      },
+      
+    }).then(function(response){
+      console.log(response.data)
+    }).catch(function(error){
+      console.log("error in deals:",error)
+    })
+
+
+  };
+
+
 
   return (
     <div>
@@ -290,6 +319,34 @@ const UploadExcel = () => {
                 <p >
                   <b>lastModifiedDate:</b>{' '}
                   {selectedposterFile.lastModifiedDate.toLocaleDateString()}
+                </p>
+              </div>
+            ) : (
+              <p>Select a file to show details</p>
+            )}
+      
+            </Col>
+          </Row>
+
+          <hr></hr>
+          <Row>
+            <Col sm={6}>
+            <h5 >Upload Deals </h5>
+          
+            <input  type="file" name="deals" accept=".xlsx, .xls, .csv" onChange={DealsFileHandler}/>
+            <br></br><br></br>
+            <Button variant='flat' size="m" onClick={handleDealsFileSubmission}>Submit</Button>
+            <br></br><br></br>
+            </Col>
+            <Col sm={6}>
+                  {isDealsFilePicked ? (
+              <div style={{fontSize:'15px'}}>
+                <p ><b>Filename:</b> {selecteddealsFile.name}</p>
+                <p ><b>Filetype:</b> {selecteddealsFile.type}</p>
+                <p ><b>Size in bytes:</b> {selecteddealsFile.size}</p>
+                <p >
+                  <b>lastModifiedDate:</b>{' '}
+                  {selecteddealsFile.lastModifiedDate.toLocaleDateString()}
                 </p>
               </div>
             ) : (
