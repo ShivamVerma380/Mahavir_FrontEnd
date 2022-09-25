@@ -102,7 +102,7 @@ function Invoice(){
                                 <Table striped bordered hover style={{width:"100%", tableLayout:"fixed"}}>
                                 <thead style={{marginLeft:"0px", padding:"0px"}}>
                                 <tr>
-                                    <th>Product</th>
+                                    <th>Model No.</th>
                                     <th>Title</th>
                                     <th>Qty</th>
                                 </tr>
