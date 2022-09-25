@@ -25,6 +25,9 @@ import Spinner from 'react-bootstrap/Spinner';
 import url from './Uri';
 import { ToastContainer } from 'react-toastify';
 
+import PacmanLoader from "react-spinners/PacmanLoader";
+import ClockLoader from "react-spinners/ClockLoader";
+
 var count = 0;
 
 function App() {
@@ -173,6 +176,7 @@ function App() {
           if(response.status==200){
               setcategoryDisplay(response.data);
               setIsCategoryDisplayFetched(true);
+              SetIsLoading(false);
               localStorage.setItem("categoryDisplay",JSON.stringify(response.data),20);
               SetIsLoading(false);
               // console.log(response.data);
@@ -338,6 +342,13 @@ function App() {
   },[]);
   // console.log("deals..",deals);
 
+  // Custom css for loader
+  const override = `
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
+
   function fetchSlideshow(){
     if(MegaPoster.length===0){
       return( 
@@ -395,6 +406,16 @@ function App() {
   // console.log("Compare count: ",localStorage.getItem("comparecount"))
 
   return (
+    (isLoading)?(
+      // If page is still loading then splash screen
+      <div>
+        {<ClockLoader color={'#36D7B7'} isLoading={isLoading}
+          css={override} size={150} />}
+      
+      </div>
+    ):(
+      
+    
 
     <div>
       <ToastContainer position='top-center'/>
@@ -478,6 +499,7 @@ function App() {
      </div>
      
     </div>
+    )
     
      
   );
