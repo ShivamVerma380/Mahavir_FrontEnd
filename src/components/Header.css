@@ -119,8 +119,14 @@
     z-index: 4;
 }
 
+.cat_navbar{
+    margin-top: 186px;
+}
 @media screen and (min-width:320px) and (max-width:480px) {
 
+    .cat_navbar{
+        margin-top: 204px;
+    }
     .wishlist_{
         margin-left: -20px;
     }
@@ -165,6 +171,7 @@
     width: -moz-fit-content;
     width: fit-content;
     padding-right: 12px;
+    margin-left: 20px;
 }
   .top-header .col-md-4{
       display: none;
@@ -236,7 +243,9 @@
 /* desktop and large screens */
 @media screen and (min-width: 1025px) and (max-width:1200px)
 {
-
+    .cat_navbar {
+        margin-top: 204px;
+    }
 }
 
   /* ipads and tablets */
@@ -288,5 +297,7 @@
   /* extra large screens */
   @media screen and (min-width: 1201px) 
   {
-
+    .cat_navbar {
+        margin-top: 204px;
+    }
   }

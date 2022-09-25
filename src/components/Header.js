@@ -130,12 +130,12 @@ const Header = ({productList}) => {
       <div className="top-header" >
         
         <Row>
-          <Col md={3} style={{marginLeft:"0px"}}>
+          <Col md={3} >
             <p style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto",marginLeft:"20px"}}><MdOutlineLocalShipping style={{color:"white",height:"25px",width:"25px"}}/> FREE Express Shipping On All Orders</p>
           </Col>
           <Col md={4}></Col>
-          <Col md={1} style={{marginLeft:"00px"}}>
-          <NavDropdown style={{color:'white',marginTop:"-6px"}} title={<p style={{color:"white",fontSize:"13px",marginTop:"4px",fontWeight:500,fontFamily:"Roboto"}}><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store<RiArrowDropDownLine style={{color:"white"}} size={25}/></p>} >
+          <Col md={1} >
+          <NavDropdown style={{color:'white',marginTop:"6px"}} title={<p style={{color:"white",fontSize:"13px",fontWeight:500,fontFamily:"Roboto"}}><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store<RiArrowDropDownLine style={{color:"white"}} size={25}/></p>} >
                     <NavDropdown.Item style={{color:'black',fontSize:"13px",fontWeight:500}} href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"13px",fontWeight:500}} href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"13px",fontWeight:500}} href="https://goo.gl/maps/eLmvYz7aLYgTuiSa7" target="_blank">Kothrud</NavDropdown.Item>
