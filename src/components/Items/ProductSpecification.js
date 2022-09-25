@@ -4,6 +4,8 @@ import {Table,Row} from 'react-bootstrap';
 function ProductSpecification({title,product}){
     // console.log("productInfo",product.productInformation);
     // console.log("title",title)
+
+    
     
     const [key,SetKeys]= useState([]);
     const [value,SetValues]= useState([]);

@@ -428,20 +428,20 @@ function App() {
         fetchSlideshow()
       
       } 
-      {
-        (isDealsFetched)?(
-          deals.map(index=>{
-            localStorage.setItem("dealindex",index)
-            const dealproducts = JSON.stringify(index.products);
-            localStorage.setItem("dealproduct", dealproducts);
-            return(
-              <Deals deals={index}/>
-            )
-          })
+        {/* {
+          (isDealsFetched)?(
+            deals.map(index=>{
+              localStorage.setItem("dealindex",index)
+              const dealproducts = JSON.stringify(index.products);
+              localStorage.setItem("dealproduct", dealproducts);
+              return(
+                <Deals deals={index}/>
+              )
+            })
 
-        ):(null)
-      }
-      
+          ):(null)
+        }
+       */}
       
       
       
