@@ -1,3 +1,7 @@
+.addtocart:hover{
+  background-color: #ED1C24 !important;
+  border-color: #ED1C24 !important;
+}
 
 .productdetailrow {
   background-color: white;
@@ -243,16 +247,8 @@ color: #212121;
   font-size: 20px;
 }
 
-.buynow:hover{
-  background-color: #11639d;
-  border-color: #0b4268;
-  
-}
 
-.addtocart:hover{
-  background-color: #ED1C24;
-  border-color: #ED1C24;
-}
+
 
 .addtocartcol{
   display: flex;
@@ -457,7 +453,8 @@ margin-top: 10px;
   border-color: #FA0000;
 }
 .checkpinbtn:hover{
-  background: #fa7171;
+  background: #fa7171 !important;
+  border-color: #fa7171 !important;
 }
 
 
