@@ -28,13 +28,13 @@ function BrandDetails() {
     const iMac = useRef(null);
     const navigate = useNavigate();
     var offerPoster = <div>
-        <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="Mandala" />
+        <img className="logo_mahavir" alt="Mandala" />
     </div>
     var models = [];
     var offermodel = [];
     // console.log("In Brand details")
     var cards = <div>
-        <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="God" />
+        <img className="logo_mahavir" alt="God" />
     </div>
     const [brands, setBrands] = useState([]);
     const [isBrandsFetched, setIsBrandsFetched] = useState(false);

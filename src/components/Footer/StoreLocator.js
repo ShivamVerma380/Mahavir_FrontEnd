@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import map from "../../assets/Map.png"
 import { Card, Row, Col, Container } from "react-bootstrap";
 
 import iframe from 'react-iframe';

@@ -9,7 +9,7 @@ function CategoriesToDisplay({ categoryDetail }) {
   var navigate = useNavigate();
 
   var cards = <div>
-    <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="Mandala" />
+    <img className="logo_mahavir"  alt="Mandala" />
   </div>
 
   function handleSubSubCategoriesClick(category, subCategory, subSubCategory, modelNumber) {

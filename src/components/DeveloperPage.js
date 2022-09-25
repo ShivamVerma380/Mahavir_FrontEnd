@@ -1,18 +1,11 @@
 
 import React from "react";
 import "./DeveloperPage.css"
-import pic from "../assets/images.jpg"
 import {Row, Col, Card} from "react-bootstrap";
 import { Icon } from '@iconify/react';
 import {HiOutlineMail} from "react-icons/hi";
 import {FaLinkedinIn} from "react-icons/fa";
 import {BsGithub} from "react-icons/bs";
-import omkarImg from "../assets/developers/Omkar_img.jpg";
-import shivamImg from "../assets/developers/Shivam_img.jpg";
-import ketakiImg from "../assets/developers/Ketaki_img.jpg";
-import siddhantImg from "../assets/developers/Siddhant_img.jpg";
-import aditiImg from "../assets/developers/Aditi_img.jpg";
-import shraddhaImg from "../assets/developers/Shraddha_img.jpg";
 
 
 
@@ -28,7 +21,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src={omkarImg}/>
+                        <img  src="https://github.com/ShivamVerma380/MahavirImages/blob/main/developers/Omkar_img.jpg?raw=true"/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Omkar Khare</h3>
@@ -49,7 +42,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img src={aditiImg}/>
+                        <img src="https://github.com/ShivamVerma380/MahavirImages/blob/main/developers/Aditi_img.jpg?raw=true"/>
                     </div>
                     <div class="contentBx">
                     <h3 style={{fontSize:"16px",color:"black"}}>Aditi Nikam</h3>
@@ -71,7 +64,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src={shivamImg}/>
+                        <img  src="https://github.com/ShivamVerma380/MahavirImages/blob/main/developers/Shivam_img.jpg?raw=true"/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Shivam Verma</h3>
@@ -95,7 +88,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src={ketakiImg}/>
+                        <img  src="https://github.com/ShivamVerma380/MahavirImages/blob/main/developers/Ketaki_img.jpg?raw=true"/>
                     </div>
                     <div class="contentBx">
                     <h3 style={{fontSize:"16px",color:"black"}}>Ketaki Hadnurkar</h3>
@@ -117,7 +110,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src={siddhantImg}/>
+                        <img  src="https://github.com/ShivamVerma380/MahavirImages/blob/main/developers/Siddhant_img.jpg?raw=true"/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Siddhant Jain</h3>
@@ -138,7 +131,7 @@ const DeveloperPage = () => {
             <div style={{backgroundImage:"linear-gradient(#b3f6d8,#52a7c1)"}} class = "card">
                 <div class="content">
                     <div class="imgBx">
-                        <img  src={shraddhaImg}/>
+                        <img  src="https://github.com/ShivamVerma380/MahavirImages/blob/main/developers/Shraddha_img.jpg?raw=true"/>
                     </div>
                     <div class="contentBx">
                         <h3 style={{fontSize:"16px",color:"black"}}>Shraddha Mulay</h3>

@@ -114,7 +114,7 @@ const SelCatProducts=()=>{
     
 
     var offerPoster = <div>
-        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="Mandala" />
+        <img className="logo_mahavir"  alt="Mandala" />
       </div>
 
     
@@ -186,7 +186,7 @@ const SelCatProducts=()=>{
   
 
     var cards=<div>
-        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
+        <img className="logo_mahavir" alt="God" />
     </div>
 
     const handleAddToCompare=(event)=>{

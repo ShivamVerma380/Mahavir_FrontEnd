@@ -1,7 +1,5 @@
 import React  from "react";
 import { Row,Col, Container } from "reactstrap";
-// import '../App.css';
-// import {BsPinMapFill,BsFillPersonFill,BsFillCartPlusFill,BsSearch} from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar,FormControl,Button,Form,NavDropdown, Nav} from 'react-bootstrap';
@@ -80,7 +78,7 @@ const AdminHeader = () => {
 
            <Navbar bg="light" expand="lg">
             <Container fluid>
-            <Navbar.Brand href="/" style={{fontFamily:"Tapestry", marginLeft:"100px"}}><img className="logo_mahavir" src = {require ('../../assets/logo.jpg')}/>MAHAVIR</Navbar.Brand>
+            <Navbar.Brand href="/" style={{fontFamily:"Tapestry", marginLeft:"100px"}}><img className="logo_mahavir" />MAHAVIR</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                 <Nav

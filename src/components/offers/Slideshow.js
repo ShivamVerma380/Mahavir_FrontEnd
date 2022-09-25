@@ -11,7 +11,7 @@ function Slideshow({offerPosters}){
   const navigate = useNavigate();
 
     var offerPoster = <div>
-        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="Mandala" />
+        <img className="logo_mahavir"  alt="Mandala" />
       </div>
 
     

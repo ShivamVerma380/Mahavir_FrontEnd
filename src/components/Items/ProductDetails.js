@@ -5,8 +5,6 @@ import "./ProductDetails.css";
 import { AiOutlineMinus } from "react-icons/fa"
 import { useNavigate } from "react-router-dom";
 import ReactImageMagnify from 'react-image-magnify';
-import watchImg1200 from '../../assets/watch.jpg'
-import watchImg300 from '../../assets/watch300.jpg'
 import React, { useEffect, useState } from "react";
 import * as AiIcons from 'react-icons/ai';
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -289,7 +287,7 @@ function ProductDetails() {
   }
 
   var cards = <div>
-    <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="God" />
+    <img className="logo_mahavir" alt="God" />
   </div>
 
 

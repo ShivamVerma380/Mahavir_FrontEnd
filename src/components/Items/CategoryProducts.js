@@ -29,7 +29,7 @@ function CategoryProducts(){
     const [isProductsFetched,setIsProductsFetched] = useState(false);
     const navigate = useNavigate();
     var cards=<div>
-        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
+        <img className="logo_mahavir" alt="God" />
     </div>
     const [isWishlistFetched, setIsWishlistFetched] = useState(false);
     

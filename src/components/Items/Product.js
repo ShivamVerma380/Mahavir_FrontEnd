@@ -27,7 +27,7 @@ function Product({title,productList}){
     const [change, setChange] = useState(0);
     const navigate = useNavigate();
     var cards=<div>
-        <img className="logo_mahavir" src={require ('../../assets/images.jpg')} alt="God" />
+        <img className="logo_mahavir" alt="God" />
     </div>
 
     // const callProductDetails=()=>{

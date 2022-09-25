@@ -24,7 +24,7 @@ const ProductsByDeal = () => {
     const [products,setProducts]=useState([])
     const[len,setLen]=useState(getCookie("addToCompare").split(',').length);
     var cards = <div>
-        <img className="logo_mahavir" src={require('../../assets/images.jpg')} alt="God" />
+        <img className="logo_mahavir"  alt="God" />
     </div>
     products.push(location.state.index.products)
     // console.log("products",products);
