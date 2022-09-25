@@ -340,7 +340,7 @@ axios.post(url+"/wishlist", formdata, {
                     </filter>
                   </svg>
                   
-                  {
+                  {/* {
                     (animation) ? (
                       <MovingComponent
                     type="fadeInFromLeft"
@@ -355,8 +355,9 @@ axios.post(url+"/wishlist", formdata, {
                   </MovingComponent>
                    
                    ) : (null)
-                  }
+                  } */}
                   
+                  <span className="categorytitle" style={{marginLeft:"20px"}} filter-content="S">{cattitle}</span>
 
 
                 </Col>

@@ -299,7 +299,7 @@ function Deals({deals}) {
               </filter>
               </svg>
               
-              {
+              {/* {
                 (animation) ? (
                   <MovingComponent
                     type="fadeInFromLeft"
@@ -312,7 +312,9 @@ function Deals({deals}) {
                     <span className="categorytitle" style={{marginLeft:"20px"}} filter-content="S">{deals.title}</span>
                   </MovingComponent>
                 ) : (null)
-              }
+              } */}
+
+              <span className="categorytitle" style={{marginLeft:"20px"}} filter-content="S">{deals.title}</span>
               
               
               </Col>
