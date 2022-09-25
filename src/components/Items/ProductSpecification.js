@@ -20,7 +20,7 @@ function ProductSpecification({title,product}){
     return(
 
         <div style={{  borderBottom: '1px solid rgb(226, 226, 226)' }}> 
-            <h4 className="infotitle">{title}</h4>
+            <h4 className="infotitle">{title.substring(0,title.length-1)}</h4>
             <Table borderless className="infotable" >
             {
                 (isKeysFetched)?(

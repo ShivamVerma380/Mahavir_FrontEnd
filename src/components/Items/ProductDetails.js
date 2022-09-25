@@ -75,6 +75,7 @@ function ProductDetails() {
   var imglink;
 
   const [keys, SetKeys] = useState([]);
+  const [reverseKeys,SetRev] = useState([]);
   const [isKeysFetched, SetIsKeysFetched] = useState(false);
 
   const [variantKeys, SetVariantKeys] = useState([]);
@@ -145,8 +146,11 @@ function ProductDetails() {
           setimage(response.data.productImage1);
           // console.log(response.data.productInformation);
           productInformation = response.data.productInformation;
+          
           for (var k in response.data.productInformation) {
-            keys.push(k);
+            // reverseKeys.push(reverse(k));
+            keys.push(k.split('').reverse().join(''));
+
           }
           keys.sort();
 
@@ -854,7 +858,7 @@ function ProductDetails() {
                         keys.map(k => {
                           return (
 
-                            <ProductSpecification title={k} product={product} />
+                            <ProductSpecification title={k.split('').reverse().join('')} product={product} />
 
                           );
                         })
