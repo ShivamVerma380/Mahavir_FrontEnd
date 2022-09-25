@@ -102,7 +102,7 @@ function BuyNowSummary(){
             <div className="Cart" style={{boxSizing:"border-box"}}>
             <Row>
     
-            <Col sm={6} className='summaryTable'>
+            <Col sm={7} className='summaryTable'>
             {
                 (isCartItemsFetched && cartItems.length > 0)?(
                    
@@ -167,7 +167,7 @@ function BuyNowSummary(){
             </Col>
             {
                 (isCartItemsFetched && cartItems.length > 0)?(
-                    <Col sm={4} className="summarypriceTable">
+                    <Col sm={5} className="summarypriceTable">
                     <Table style={{margin_top:"50px", color:'black',width:"470px"}} >
                     <thead>
                         <tr>
