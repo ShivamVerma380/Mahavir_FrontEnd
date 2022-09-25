@@ -62,8 +62,8 @@ width: 100%;
 }
 
 .filterproductBtn:hover{
-    background-color: #0b4268;
-    border-color: #0b4268;
+    background-color: #0b4268 !important;
+    border-color: #0b4268 !important;
    
 }
 .filterproductBtn1:hover{
