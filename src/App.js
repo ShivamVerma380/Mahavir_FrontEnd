@@ -375,7 +375,7 @@ function App() {
         )
       }
      <Header/>
-      <div style={{marginTop:"200px"}}>
+      <div className="cat_navbar" >
       {
         (isCategoryDisplayFetched)?(
           <CategoriesToDisplay categoryDetail={categoryDisplay}/>

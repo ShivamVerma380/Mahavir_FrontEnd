@@ -119,8 +119,10 @@
     z-index: 4;
 }
 
+
 @media screen and (min-width:320px) and (max-width:480px) {
 
+   
     .wishlist_{
         margin-left: -20px;
     }
@@ -165,6 +167,7 @@
     width: -moz-fit-content;
     width: fit-content;
     padding-right: 12px;
+    margin-left: 20px;
 }
   .top-header .col-md-4{
       display: none;
@@ -236,7 +239,7 @@
 /* desktop and large screens */
 @media screen and (min-width: 1025px) and (max-width:1200px)
 {
-
+    
 }
 
   /* ipads and tablets */
@@ -288,5 +291,4 @@
   /* extra large screens */
   @media screen and (min-width: 1201px) 
   {
-
   }
