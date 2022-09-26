@@ -6,6 +6,8 @@ import { Icon } from '@iconify/react';
 import {HiOutlineMail} from "react-icons/hi";
 import {FaLinkedinIn} from "react-icons/fa";
 import {BsGithub} from "react-icons/bs";
+import {BsFillTelephoneOutboundFill} from "react-icons/bs";
+import { black } from "material-ui/styles/colors";
 
 
 
@@ -21,7 +23,7 @@ const DeveloperPage = () => {
                 {/* <p>We are Team Brewing Java. We are a team of 6 Full Stack Developers. We 
                     deliver web based and app based solutions as freelancers.</p> */}
             
-            <p><b>For Details-</b> Contact us at: <a>+91 8237345685</a> or Email us at: <a style={{color:"blue"}} href="mailto:teambrewingjava@gmail.com">teambrewingjava@gmail.com</a></p>
+            <p><b>For Details- </b>  Contact us at: <BsFillTelephoneOutboundFill/>  <a>+91 8237345685</a> or Email us at: <a style={{color:"black"}} href="mailto:teambrewingjava@gmail.com"><HiOutlineMail size={25}/></a>  <a style={{color:"blue"}} href="mailto:teambrewingjava@gmail.com"> teambrewingjava@gmail.com</a></p>
 
             </center>
             
