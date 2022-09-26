@@ -13,8 +13,20 @@ import {BsGithub} from "react-icons/bs";
 const DeveloperPage = () => {
     return(
        <html lang="en">
-        <h4 style={{marginTop:"30px", fontSize:"20px", textAlign:"center",fontFamily: "Open Sans"}}>Brewing Java Team</h4>
+        <h4 style={{marginTop:"30px", fontSize:"24px",fontWeight:600, textAlign:"center",fontFamily: "Open Sans"}}>Brewing Java Team</h4>
+        <hr></hr>
         <body>
+        
+            <center>
+                {/* <p>We are Team Brewing Java. We are a team of 6 Full Stack Developers. We 
+                    deliver web based and app based solutions as freelancers.</p> */}
+            
+            <p><b>For Details-</b> Contact us at: <a>+91 8237345685</a> or Email us at: <a style={{color:"blue"}} href="mailto:teambrewingjava@gmail.com">teambrewingjava@gmail.com</a></p>
+
+            </center>
+            
+        
+        <hr></hr>
         <section>
         <div  class="container1">
             <Row>
