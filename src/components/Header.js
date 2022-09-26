@@ -114,7 +114,12 @@ const Header = ({productList}) => {
     }
 
     const handleWishlist=()=>{
-        navigate("/wishlistproducts")
+      if(getCookie("isLoggedIn")!=='true'){
+        navigate("/login")
+    }else{
+      navigate("/wishlistproducts")
+    }
+
     }
 
     function handleDevelopersPage(){
