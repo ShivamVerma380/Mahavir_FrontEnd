@@ -369,15 +369,7 @@ function App() {
   return (
     (isLoading)?(
       // If page is still loading then splash screen
-      <div>
-        {/* {<ClockLoader color={'#36D7B7'} isLoading={isLoading}
-          css={override} size={150} />} */}
-
-        {
-          <img src='https://github.com/ShivamVerma380/MahavirImages/blob/main/Untitled%20design.gif?raw=true' isLoading={isLoading}/>
-        }
-      
-      </div>
+      null
     ):(
       
     
