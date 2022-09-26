@@ -85,15 +85,16 @@ function AddressBuyNowSummary(){
           toast.error("Please enter all details")
         }
         else {
+
           var formdata = {
-            "name": localStorage.getItem("full-name"),
-            "pincode": localStorage.getItem("zip"),
+            "name": document.getElementById("full_name").value+document.getElementById("last-name").value,
+            "pincode": document.getElementById("Zip").value,
             "locality": "",
             "landmark": "",
             "address": localStorage.getItem("address-one"),
             "city": localStorage.getItem("city"),
             "state": localStorage.getItem("state"),
-            "alternateMobile": localStorage.getItem("phone"),
+            "alternateMobile":document.getElementById("Phone").value,
             "addressType": ""
     
           }
@@ -117,7 +118,7 @@ function AddressBuyNowSummary(){
           // navigate("/OrderSummary")
         }
     
-    
+        // console.log("address-one",document.getElementById("address-one").value)
       }
     
       const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -435,7 +436,7 @@ function AddressBuyNowSummary(){
                       <Row style={{ marginTop: 20 }}>
                         <Col md={6}>
                           <Input
-                            id="Counrty"
+                            id="Country"
                             className="form-field"
                             type="text"
                             placeholder="India"

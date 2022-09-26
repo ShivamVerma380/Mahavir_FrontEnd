@@ -171,21 +171,10 @@ function App() {
       
       if(localStorage.getItem("categoryDisplay")!=null){
         // console.log("In category display cookie")
-        axios.get(url+"/get-categories").then(function(response){
-          // console.log(response);
-          if(response.status==200){
-              setcategoryDisplay(response.data);
-              setIsCategoryDisplayFetched(true);
-              SetIsLoading(false);
-              localStorage.setItem("categoryDisplay",JSON.stringify(response.data),20);
-              SetIsLoading(false);
-              // console.log(response.data);
-          }
-          // console.log(response.data);
-        }).catch(function(error){
-            console.log("error in fetching categories");
-            SetIsLoading(false);
-        })
+        var categoriesDisplay = JSON.parse(localStorage.getItem("categoryDisplay"));
+        setcategoryDisplay(categoriesDisplay)
+        setIsCategoryDisplayFetched(true);
+        SetIsLoading(false);
       }else{
         axios.get(url+"/get-categories").then(function(response){
           // console.log(response);
@@ -227,19 +216,9 @@ function App() {
       }
       
       if(localStorage.getItem("Deals")!=null){
-        axios.get(url+"/deals").then(
-          function(response){
-            if(response.status==200){
-              // console.log(response.data);
-              setDeals(response.data);
-              SetIsDealsFetched(true);
-              localStorage.setItem("Deals",JSON.stringify(response.data));
-              // console.log("Deals: ",deals);
-            }
-          }).catch(function(error){
-            console.log("error in deals");
-          }
-        )
+        var deals = JSON.parse(localStorage.getItem("Deals"));
+        setDeals(deals);
+        SetIsDealsFetched(true);
       }else{
         axios.get(url+"/deals").then(
           function(response){
@@ -257,17 +236,9 @@ function App() {
       }
       
       if(localStorage.getItem("products")!=null){
-        axios.get(url+"/hybrid-posters").then(function(response){     
-          if(response.status==200){
-            // console.log("Products",response.data);
-            setProducts(response.data);
-            setIsProductsFetched(true);
-            // console.log("Products set",Products)
-          }
-          
-          }).catch(function(error){
-            console.log("error in hybrid posters");
-          })
+        var products = JSON.parse(localStorage.getItem("products"));
+        setProducts(products);
+        setIsProductsFetched(true);
       }else{
         axios.get(url+"/hybrid-posters").then(function(response){     
           if(response.status==200){
@@ -286,18 +257,8 @@ function App() {
 
       if(localStorage.getItem("Posters")!=null){
         var posters = JSON.parse(localStorage.getItem("Posters"));
-        axios.get(url+"/get-posters").then(function(response){     
-          if(response.status==200){
-            // console.log("Posters",response.data);
-            setPosters(response.data);
-            setIsPostersFetched(true);
-            localStorage.setItem("Posters",JSON.stringify(response.data));
-            // console.log("Posters set",Posters)
-          }
-          
-          }).catch(function(error){
-            console.log("error in get-posters");
-          })
+        setPosters(posters);
+        setIsPostersFetched(true);
       }else{
         axios.get(url+"/get-posters").then(function(response){     
           if(response.status==200){

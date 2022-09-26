@@ -22,14 +22,14 @@ import 'typeface-roboto';
 
 // import MyOrders from './components/Orders/MyOrders';
 import AddCategory from './components/Admin/AddCategory';
-import SelCatProducts from './components/DisplayCategories/SelCatProducts';
+
 import OfferItems from './components/offers/OfferItems';
 import UploadExcel from './components/Admin/Sidebar/UploadExcel';
 
 import OnlyReviews from './components/Items/OnlyReviews';
 import RateReviewProducts from './components/Items/RateReviewProducts';
 import AllComplaints from './components/Admin/Sidebar/AllComplaints';
-import AddToCompareProducts from './components/ProductsComparison/AddToCompareProducts';
+
 import GenerateBill from './components/GenerateBill';
 import DeveloperPage from './components/DeveloperPage';
 import AboutCompany from './components/Footer/AboutCompany';
@@ -39,19 +39,18 @@ import StoreLocator from './components/Footer/StoreLocator';
 import AddSubCategories from './components/Admin/Test/AddSubCategories';
 import AddProductInformation from './components/Admin/Test/AddProductInformation';
 import MiniPosterItems from './components/offers/MiniPosteritems';
-import CategoryProductsSwiper from './components/Items/CategoryProductsSwiper';
-import CategoryProducts from './components/Items/CategoryProducts';
+
 import BrandDetails from './components/Items/BrandDetails';
 import BrandCatProducts from './components/Items/BrandCatProducts';
 import BrandOfferPosterProducts from './components/Items/BrandOfferPosterProducts';
-import ProductsByDeal from './components/Items/ProductsByDeal';
+
 import FilterProduct from './components/Filters/FilterProduct';
 import WishlistProducts from './components/WishlistProducts';
 import AdminLogin from './components/Admin/AdminLogin';
 import Orders from './components/OrderDetails/Orders';
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import CompletedOrders from './components/Admin/Sidebar/CompletedOrders';
-import AddressBuyNowSummary from './components/Checkout/BuyNowCheckout/AddressBuyNowSummary';
+
 import BuyNowSummary from './components/Checkout/BuyNowCheckout/BuyNowSummary';
 import Invoice from './components/OrderDetails/Invoice';
 import OrderInvoices from './components/OrderDetails/OrderInvoices';
@@ -61,12 +60,15 @@ import PaymentReturns from './components/Footer/PaymentReturns';
 import TermsOfUse from './components/Footer/TermsOfUse';
 import PaymentSuccess from './components/Checkout/BuyNowCheckout/PaymentSuccess';
 
-
 // import App from './App';
 const App = React.lazy(()=>import('./App'));
 const Payment = React.lazy(() => import('./components/Checkout/BuyNowCheckout/Payment'));
-
-
+const SelCatProducts = React.lazy(()=>import("./components/DisplayCategories/SelCatProducts"));
+const CategoryProducts = React.lazy(()=>import("./components/Items/CategoryProducts"));
+const CategoryProductsSwiper = React.lazy(()=>import("./components/Items/CategoryProductsSwiper"));
+const AddToCompareProducts = React.lazy(()=>import('./components/ProductsComparison/AddToCompareProducts'));
+const AddressBuyNowSummary = React.lazy(()=>import('./components/Checkout/BuyNowCheckout/AddressBuyNowSummary'));
+const ProductsByDeal = React.lazy(()=>import('./components/Items/ProductsByDeal'));
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
@@ -93,8 +95,7 @@ root.render(
       <Route path='/allcomplaints' element = {<AllComplaints/>}/>
       <Route path='/AddressForm' element = {<AddressForm/>}/>
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
-      <Route path= '/:Category/:SubCategory/:SubSubCategory' element={<SelCatProducts/>}/>
-      <Route path='/:Category' element={<SelCatProducts/>}/>
+      
       <Route path='/offers' element={<OfferItems/>}/>
       <Route path='/my-orders' element={<OrderInvoices/>}/>
       <Route path='/upload' element = {<UploadExcel/>}/>
@@ -113,23 +114,31 @@ root.render(
       <Route path='/addSubCategories/:ModelNos' element = {<AddSubCategories/>}/>
       <Route path='/addProductInformation/:ModelNos' element={<AddProductInformation/>}/>
       <Route path='/miniposteritems' element={<MiniPosterItems/>}/>
-      <Route path='/categoryproducts' element={<CategoryProductsSwiper/>}/>
-      <Route path='/categoryProductsall'element={<CategoryProducts/>}/>
+      
       <Route path='/branddetails' element={<BrandDetails/>}/>
       <Route path='/brandcatproducts' element={<BrandCatProducts/>}/>
       <Route path='/brandofferposterproducts' element={<BrandOfferPosterProducts/>}/>
-      <Route path='/productsbydeal' element={<ProductsByDeal/>}/>
+      
       <Route path='/filterproducts' element={<FilterProduct/>}/>
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
       <Route path='/shippingoptions' element={<ShippingOptions/>}/>
       <Route path='/paymentreturns' element={<PaymentReturns/>}/>
-      <Route path='/compareProducts' element={<AddToCompareProducts/>}/>
+      
       <Route path='/minibottom' element={<MiniPostersBottom/>}/>
-      <Route path="/checkout" element={<AddressBuyNowSummary/>}/>
+      
       <Route path='/summary' element={<BuyNowSummary/>}/>
       <Route path = "/payment" element = {<Payment/>}/>
 
-
+      <Route path= '/:Category/:SubCategory/:SubSubCategory' element={
+        <Suspense fallback={<div>Loading...</div>}>
+        <SelCatProducts/>
+        </Suspense>
+      }/>
+      <Route path='/:Category' element={
+        <Suspense fallback={<div>Loading...</div>}>
+        <SelCatProducts/>
+        </Suspense>
+      }/>
 
       <Route path = "/payment" element = {
         <Suspense fallback={<div>Loading...</div>}>
@@ -137,6 +146,36 @@ root.render(
         </Suspense>
       }/>
 
+
+      <Route path='/categoryproducts' element={
+        <Suspense fallback={<div>Loading...</div>}>
+        <CategoryProductsSwiper/>
+        </Suspense>
+      }/>
+        
+      <Route path='/categoryProductsall'element={
+        <Suspense fallback={<div>Loading...</div>}>
+          <CategoryProducts/>
+        </Suspense>
+      }/>
+
+      <Route path='/compareProducts' element={
+        <Suspense fallback={<div>Loading...</div>}>
+          <AddToCompareProducts/>
+        </Suspense>
+      }/>
+
+      <Route path="/checkout" element={
+        <Suspense fallback={<div>Loading...</div>}>
+          <AddressBuyNowSummary/>
+        </Suspense>    
+      }/>
+
+      <Route path='/productsbydeal' element={
+        <Suspense fallback={<div>Loading...</div>}>  
+          <ProductsByDeal/>
+        </Suspense>    
+      }/>
       <Route path='/invoice' element={<Invoice/>}/>
       <Route path='/rate-products' element = {<Orders/>}/>
       <Route path='paymentsuccess' element = {<PaymentSuccess/>}/>
