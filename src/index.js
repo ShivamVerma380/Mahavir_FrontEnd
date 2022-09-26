@@ -40,6 +40,7 @@ import Invoice from './components/OrderDetails/Invoice';
 import OrderInvoices from './components/OrderDetails/OrderInvoices';
 import AddressForm from './components/OrderSummary/AddressForm';
 import Spinner from 'react-bootstrap/Spinner';
+import DeveloperPage from './components/DeveloperPage';
 
 // import App from './App';
 const App = React.lazy(()=>import('./App'));
@@ -57,7 +58,6 @@ const PaymentReturns = React.lazy(()=>import('./components/Footer/PaymentReturns
 const TermsOfUse = React.lazy(()=>import('./components/Footer/TermsOfUse'));
 const PaymentSuccess = React.lazy(()=>import('./components/Checkout/BuyNowCheckout/PaymentSuccess'));
 const GenerateBill = React.lazy(()=>import('./components/GenerateBill'));
-const DeveloperPage = React.lazy(()=>import('./components/DeveloperPage'));
 const AboutCompany = React.lazy(()=>import('./components/Footer/AboutCompany'));
 const FAQ = React.lazy(()=>import('./components/Footer/FAQ'));
 const ContactUs = React.lazy(()=>import('./components/Footer/ContactUs'));
@@ -284,11 +284,7 @@ root.render(
         </Suspense>
       }/>
       <Route path='/developerpage' element = {
-        <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
-        }>   
           <DeveloperPage/>
-        </Suspense>    
       }/>
       <Route path='/aboutcompany' element = {
         <Suspense fallback={
