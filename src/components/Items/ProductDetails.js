@@ -18,27 +18,18 @@ import axios from "axios";
 
 // import required modules
 import { Pagination, Navigation } from "swiper";
+import Spinner from 'react-bootstrap/Spinner';
 import { CardImg, CardBody, CardTitle, CardSubtitle, CardText } from "reactstrap";
 
 
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Toast, ToastBody, ToastHeader } from "reactstrap";
-
-import { AiOutlineHeart, AiTwotoneHeart, AiFillHeart } from "react-icons/ai";
-
-
-
-import ProductRating from "./ProductRating";
-import UserReviewRating from "./UserReviewRating";
-import ComparisonProductInformation from "../ProductsComparison/ComparisonProductInformation";
 import ProductSpecification from "./ProductSpecification";
 import { setCookie, getCookie } from '../Cookies';
 import { ToastContainer, toast } from 'react-toastify';
 import url from "../../Uri";
 import {HiOutlineShoppingCart} from "react-icons/hi";
 import Footer from "../Footer/Footer";
-import LoadingSpinner from "../LoadingSpinner";
 // import './ProductDetails.css';
 // toast-configuration method,
 // it is compulsory method.
@@ -596,16 +587,17 @@ function ProductDetails() {
           null
         )
       } */}
-
       {
+        isLoading?(<Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />):(null)
+      }
+      {
+
         (isProductFetched) ? (
           <>
-
+            
 
             <div className="productdetailrow">
-              {
-                isLoading?(<LoadingSpinner/>):(null)
-              }  
+                
               <Row className="row1">
                 <Col md={6} style={{flex:'auto'}}>
                   <div className="innercol1">
@@ -1041,7 +1033,9 @@ function ProductDetails() {
             </div>
             <Footer/>
           </>
-        ) : (null)
+        ) : (
+          null
+        )
       }
     </div>
     </>

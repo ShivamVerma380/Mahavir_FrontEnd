@@ -4,14 +4,12 @@ import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter, HashRouter, Route, Routes,  } from 'react-router-dom';
+import {  HashRouter, Route, Routes } from 'react-router-dom';
 import Login from './components/Login-Signup/Login';
 import ProductDetails from './components/Items/ProductDetails';
 import Cart from "./components/Shopping-Cart/Cart";
 import CategoryDropdowns from './components/Admin/CategoryDropdowns';
-import PendingDelivery from './components/Admin/Sidebar/PendingDelivery'
-import UserComplaint from './components/Items/UserComplaint'
-import AddressForm from './components/OrderSummary/AddressForm';
+
 // import Payment from './components/Checkout/BuyNowCheckout/Payment';
 // import OrderSummary from './components/OrderSummary';
 import PaymentOption from './components/PaymentOption';
@@ -19,41 +17,29 @@ import 'typeface-roboto';
 
 
 import OfferItems from './components/offers/OfferItems';
-import UploadExcel from './components/Admin/Sidebar/UploadExcel';
+
 
 import OnlyReviews from './components/Items/OnlyReviews';
 import RateReviewProducts from './components/Items/RateReviewProducts';
-import AllComplaints from './components/Admin/Sidebar/AllComplaints';
 
-import GenerateBill from './components/GenerateBill';
-import DeveloperPage from './components/DeveloperPage';
-import AboutCompany from './components/Footer/AboutCompany';
-import FAQ from './components/Footer/FAQ';
-import ContactUs from './components/Footer/ContactUs';
-import StoreLocator from './components/Footer/StoreLocator';
-import AddSubCategories from './components/Admin/Test/AddSubCategories';
-import AddProductInformation from './components/Admin/Test/AddProductInformation';
 import MiniPosterItems from './components/offers/MiniPosteritems';
 
 import BrandDetails from './components/Items/BrandDetails';
 import BrandCatProducts from './components/Items/BrandCatProducts';
-import BrandOfferPosterProducts from './components/Items/BrandOfferPosterProducts';
+
 
 import FilterProduct from './components/Filters/FilterProduct';
 import WishlistProducts from './components/WishlistProducts';
-import AdminLogin from './components/Admin/AdminLogin';
+
 
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
-import CompletedOrders from './components/Admin/Sidebar/CompletedOrders';
+
 
 import BuyNowSummary from './components/Checkout/BuyNowCheckout/BuyNowSummary';
 import Invoice from './components/OrderDetails/Invoice';
 import OrderInvoices from './components/OrderDetails/OrderInvoices';
-import PrivacyPolicy from './components/Footer/PrivacyPolicy';
-import ShippingOptions from './components/Footer/ShippingOptions';
-import PaymentReturns from './components/Footer/PaymentReturns';
-import TermsOfUse from './components/Footer/TermsOfUse';
-import PaymentSuccess from './components/Checkout/BuyNowCheckout/PaymentSuccess';
+import AddressForm from './components/OrderSummary/AddressForm';
+import Spinner from 'react-bootstrap/Spinner';
 
 // import App from './App';
 const App = React.lazy(()=>import('./App'));
@@ -65,6 +51,26 @@ const AddToCompareProducts = React.lazy(()=>import('./components/ProductsCompari
 const AddressBuyNowSummary = React.lazy(()=>import('./components/Checkout/BuyNowCheckout/AddressBuyNowSummary'));
 const ProductsByDeal = React.lazy(()=>import('./components/Items/ProductsByDeal'));
 const Orders = React.lazy(()=>import('./components/OrderDetails/Orders'));
+const PrivacyPolicy = React.lazy(()=>import('./components/Footer/PrivacyPolicy'));
+const ShippingOptions= React.lazy(()=>import('./components/Footer/ShippingOptions'));
+const PaymentReturns = React.lazy(()=>import('./components/Footer/PaymentReturns'));
+const TermsOfUse = React.lazy(()=>import('./components/Footer/TermsOfUse'));
+const PaymentSuccess = React.lazy(()=>import('./components/Checkout/BuyNowCheckout/PaymentSuccess'));
+const GenerateBill = React.lazy(()=>import('./components/GenerateBill'));
+const DeveloperPage = React.lazy(()=>import('./components/DeveloperPage'));
+const AboutCompany = React.lazy(()=>import('./components/Footer/AboutCompany'));
+const FAQ = React.lazy(()=>import('./components/Footer/FAQ'));
+const ContactUs = React.lazy(()=>import('./components/Footer/ContactUs'));
+const StoreLocator = React.lazy(()=>import('./components/Footer/StoreLocator'));
+const BrandOfferPosterProducts = React.lazy(()=>import('./components/Items/BrandOfferPosterProducts'));
+const PendingDelivery = React.lazy(()=>import('./components/Admin/Sidebar/PendingDelivery'));
+const UserComplaint = React.lazy(()=>import('./components/Items/UserComplaint'));
+const AdminLogin = React.lazy(()=>import('./components/Admin/AdminLogin'));
+const AllComplaints = React.lazy(()=>import('./components/Admin/Sidebar/AllComplaints'));
+const AddSubCategories = React.lazy(()=>import('./components/Admin/Test/AddSubCategories'));
+const AddProductInformation = React.lazy(()=>import('./components/Admin/Test/AddProductInformation'));
+const CompletedOrders = React.lazy(()=>import('./components/Admin/Sidebar/CompletedOrders'));
+const UploadExcel = React.lazy(()=>import('./components/Admin/Sidebar/UploadExcel'));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -74,49 +80,124 @@ root.render(
   <HashRouter>
     <Routes>
       <Route path='/' element={
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
           <App/>
         </Suspense>
       }/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/productDetails' element = {<ProductDetails/>}/>
-      <Route path='/admin' element = {<AdminLogin/>}/>
+      <Route path='/admin' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <AdminLogin/>
+        </Suspense>
+      }/>
       {/* <Route path='/admin' element = {<Admin/>}/> */}
       {/* <Route path='/admindetail' element = {<Admin/>}/> */}
       <Route path='/cart' element = {<Cart/>}/>
       <Route path='/categorydrop' element = {<CategoryDropdowns/>}/>
-      <Route path='/pendingdelivery' element = {<PendingDelivery/>}/>
-      <Route path='/allcomplaints' element = {<AllComplaints/>}/>
+      <Route path='/pendingdelivery' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>  
+          <PendingDelivery/>
+        </Suspense>
+      }/>
+      <Route path='/allcomplaints' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
+          <AllComplaints/>
+        </Suspense>
+      }/>
       <Route path='/AddressForm' element = {<AddressForm/>}/>
       <Route path='/PaymentOption' element = {<PaymentOption/>}/>
       
       <Route path='/offers' element={<OfferItems/>}/>
       <Route path='/my-orders' element={<OrderInvoices/>}/>
-      <Route path='/upload' element = {<UploadExcel/>}/>
+      <Route path='/upload' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <UploadExcel/>
+        </Suspense>
+      }/>
       <Route path='/onlyreviews' element = {<OnlyReviews/>}/>
       <Route path='/ratereview' element = {<RateReviewProducts/>}/>
-      <Route path='/usercomplaint' element = {<UserComplaint/>}/>
-      <Route path='/generatebill' element = {<GenerateBill/>}/>
-      <Route path='/developerpage' element = {<DeveloperPage/>}/>
-      <Route path='/aboutcompany' element = {<AboutCompany/>}/>
-      <Route path="/privacypolicy" element={<PrivacyPolicy/>}/>
-      <Route path='/faq' element = {<FAQ/>}/>
-      <Route path='/contactus' element = {<ContactUs/>}/>
-      <Route path='/completedorders' element={<CompletedOrders/>}/>    
-      <Route path='/terms-of-use' element={<TermsOfUse/>}/>
-      <Route path='/storelocator' element={<StoreLocator/>}/>
-      <Route path='/addSubCategories/:ModelNos' element = {<AddSubCategories/>}/>
-      <Route path='/addProductInformation/:ModelNos' element={<AddProductInformation/>}/>
+      <Route path='/usercomplaint' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
+          <UserComplaint/>
+        </Suspense>
+      }/>
+      
+      <Route path='/completedorders' element={
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <CompletedOrders/>
+        </Suspense>
+      }/>    
+      <Route path='/terms-of-use' element={
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <TermsOfUse/>
+        </Suspense>    
+      }/>
+      <Route path='/storelocator' element={
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>  
+          <StoreLocator/>
+        </Suspense>
+      }/>
+      <Route path='/addSubCategories/:ModelNos' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <AddSubCategories/>
+        </Suspense>
+      }/>
+      <Route path='/addProductInformation/:ModelNos' element={
+          <Suspense fallback={
+            <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+          }> 
+          <AddProductInformation/>
+        </Suspense>
+      }/>
       <Route path='/miniposteritems' element={<MiniPosterItems/>}/>
       
       <Route path='/branddetails' element={<BrandDetails/>}/>
       <Route path='/brandcatproducts' element={<BrandCatProducts/>}/>
-      <Route path='/brandofferposterproducts' element={<BrandOfferPosterProducts/>}/>
+      <Route path='/brandofferposterproducts' element={
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <BrandOfferPosterProducts/>
+        </Suspense>
+      }/>
       
       <Route path='/filterproducts' element={<FilterProduct/>}/>
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
-      <Route path='/shippingoptions' element={<ShippingOptions/>}/>
-      <Route path='/paymentreturns' element={<PaymentReturns/>}/>
+      <Route path='/shippingoptions' element={
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
+          <ShippingOptions/>
+        </Suspense>  
+        }/>
+      <Route path='/paymentreturns' element={
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
+          <PaymentReturns/>
+        </Suspense>  
+      }/>
       
       <Route path='/minibottom' element={<MiniPostersBottom/>}/>
       
@@ -124,59 +205,128 @@ root.render(
       <Route path = "/payment" element = {<Payment/>}/>
 
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={
-        <Suspense fallback={<div>Loading...</div>}>
-        <SelCatProducts/>
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
+          <SelCatProducts/>
         </Suspense>
       }/>
       <Route path='/:Category' element={
-        <Suspense fallback={<div>Loading...</div>}>
-        <SelCatProducts/>
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
+          <SelCatProducts/>
         </Suspense>
       }/>
 
       <Route path = "/payment" element = {
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
           <Payment/>
         </Suspense>
       }/>
 
 
       <Route path='/categoryproducts' element={
-        <Suspense fallback={<div>Loading...</div>}>
-        <CategoryProductsSwiper/>
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
+          <CategoryProductsSwiper/>
         </Suspense>
       }/>
         
       <Route path='/categoryProductsall'element={
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
           <CategoryProducts/>
         </Suspense>
       }/>
 
       <Route path='/compareProducts' element={
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
           <AddToCompareProducts/>
         </Suspense>
       }/>
 
       <Route path="/checkout" element={
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
           <AddressBuyNowSummary/>
         </Suspense>    
       }/>
 
       <Route path='/productsbydeal' element={
-        <Suspense fallback={<div>Loading...</div>}>  
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
           <ProductsByDeal/>
         </Suspense>    
       }/>
       <Route path='/invoice' element={<Invoice/>}/>
       <Route path='/rate-products' element = {
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }> 
           <Orders/>
         </Suspense>
       }/>
-      <Route path='paymentsuccess' element = {<PaymentSuccess/>}/>
+
+      <Route path='/generatebill' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <GenerateBill/>
+        </Suspense>
+      }/>
+      <Route path='/developerpage' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <DeveloperPage/>
+        </Suspense>    
+      }/>
+      <Route path='/aboutcompany' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <AboutCompany/>
+        </Suspense>  
+      }/>
+      <Route path="/privacypolicy" element={
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>  
+          <PrivacyPolicy/>
+        </Suspense>
+      }/>
+      <Route path='/faq' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <FAQ/>
+        </Suspense>  
+      }/>
+      <Route path='/contactus' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <ContactUs/>
+        </Suspense>
+      }/>
+      <Route path='paymentsuccess' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />
+        }>   
+          <PaymentSuccess/>
+        </Suspense>    
+      }/>
+
+      
     </Routes>
   </HashRouter>
 );
