@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, HashRouter, Route, Routes,  } from 'react-router-dom';
 import Login from './components/Login-Signup/Login';
 import ProductDetails from './components/Items/ProductDetails';
-import Admin from './components/Admin/Admin';
 import Cart from "./components/Shopping-Cart/Cart";
 import CategoryDropdowns from './components/Admin/CategoryDropdowns';
 import PendingDelivery from './components/Admin/Sidebar/PendingDelivery'
@@ -18,10 +17,6 @@ import AddressForm from './components/OrderSummary/AddressForm';
 import PaymentOption from './components/PaymentOption';
 import 'typeface-roboto';
 
-
-
-// import MyOrders from './components/Orders/MyOrders';
-import AddCategory from './components/Admin/AddCategory';
 
 import OfferItems from './components/offers/OfferItems';
 import UploadExcel from './components/Admin/Sidebar/UploadExcel';
@@ -47,7 +42,7 @@ import BrandOfferPosterProducts from './components/Items/BrandOfferPosterProduct
 import FilterProduct from './components/Filters/FilterProduct';
 import WishlistProducts from './components/WishlistProducts';
 import AdminLogin from './components/Admin/AdminLogin';
-import Orders from './components/OrderDetails/Orders';
+
 import MiniPostersBottom from './components/offers/MiniPostersBottom';
 import CompletedOrders from './components/Admin/Sidebar/CompletedOrders';
 
@@ -69,13 +64,12 @@ const CategoryProductsSwiper = React.lazy(()=>import("./components/Items/Categor
 const AddToCompareProducts = React.lazy(()=>import('./components/ProductsComparison/AddToCompareProducts'));
 const AddressBuyNowSummary = React.lazy(()=>import('./components/Checkout/BuyNowCheckout/AddressBuyNowSummary'));
 const ProductsByDeal = React.lazy(()=>import('./components/Items/ProductsByDeal'));
+const Orders = React.lazy(()=>import('./components/OrderDetails/Orders'));
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>
   
   <HashRouter>
     <Routes>
@@ -177,7 +171,11 @@ root.render(
         </Suspense>    
       }/>
       <Route path='/invoice' element={<Invoice/>}/>
-      <Route path='/rate-products' element = {<Orders/>}/>
+      <Route path='/rate-products' element = {
+        <Suspense fallback={<div>Loading...</div>}>
+          <Orders/>
+        </Suspense>
+      }/>
       <Route path='paymentsuccess' element = {<PaymentSuccess/>}/>
     </Routes>
   </HashRouter>
