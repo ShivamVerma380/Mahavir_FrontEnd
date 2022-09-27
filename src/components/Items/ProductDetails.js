@@ -716,7 +716,7 @@ function ProductDetails() {
 
 
                       </Row>
-                      <br></br>
+//                       <br></br>
                       <Row className="innerrow1">
                       {
                       (product.offerPrice == null) ? (
