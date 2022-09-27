@@ -50,8 +50,13 @@ function AddToCompareProducts(){
     })
 
     function buyNow(index){
-        localStorage.setItem("buyProduct",JSON.stringify(index));
-        navigate('/checkout')
+        if(getCookie("isLoggedIn")!=='true'){
+            navigate("/login")
+        }else{
+            localStorage.setItem("buyProduct",JSON.stringify(index));
+            navigate('/checkout')
+        }
+        
         
       }
 

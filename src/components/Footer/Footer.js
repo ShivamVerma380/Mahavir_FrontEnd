@@ -17,7 +17,9 @@ function Footer(){
     function handlePrivacyPolicy(){
         navigate("/privacypolicy")
     }
-    
+    function handleDevelopersPage(){
+        navigate("/developerpage")
+    }
     return(
         <div class="footer-clean">
             {/* <hr></hr> */}
@@ -30,6 +32,10 @@ function Footer(){
                                 <li><a href="/#/aboutcompany">About Us</a></li>
                                 <li><a href="/#/contactus">Contact Us</a></li>
                                 <li><a href="/#/storelocator">Store Locator</a></li>
+                                <li>
+            <p style={{color:"white",marginTop:"6px",cursor:"pointer", fontSize:"14px"}} onClick={handleDevelopersPage}>Developer Team</p>
+
+                                </li>
                                 {/* <li><a href="#">Hear it from the Owners</a></li> */}
                             </ul>
                         </div>
@@ -46,6 +52,7 @@ function Footer(){
                             <ul>
                                 <li><a href="/#/faq">FAQ</a></li>
                                 <li><a href="/#/shippingoptions">Shipping Options</a></li>
+                                <li><a href="/#/developerpage">Developer Team</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-3 item social">

@@ -296,17 +296,23 @@ justify-content: center;
     .cardimg{
       height: 160px;
     }
-    .categoryproductscard{
+    .categoryproductscard {
       transition: transform 0.2s ease;
       border-radius: 0;
       /* border: solid 0.5px rgb(197 252 245); */
-      margin-left: 5px;
-      margin-right: 5px;
-      width: 9rem;
+      margin-left: 1px;
+      margin-right: 1px;
+      width: 10rem;
       text-align: left;
       padding: 0px;
       cursor: pointer;
-    }
+  }
+  .categoryproductscardbody {
+    padding: 8px;
+  }
+  .cardtitle {
+    margin-bottom: 0;
+}
 
     .explore{
       height: 35px;

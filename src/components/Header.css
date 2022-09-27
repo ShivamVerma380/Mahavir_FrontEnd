@@ -121,7 +121,9 @@
 
 
 @media screen and (min-width:320px) and (max-width:480px) {
-
+    .mahavirtitle{
+        font-size: 35px;
+    }
    
     .wishlist_{
         margin-left: -20px;
@@ -148,6 +150,7 @@
     
     .Header .navbar-light .navbar-toggler {
         width: 60px;
+        height: 42px;
         color: rgb(255 255 255);
         border-color: rgb(255 255 255);
         margin-top: 0%;
@@ -155,6 +158,9 @@
 
     .Header .navbar {
         top: 35px;
+        height: 55px;
+        margin: 0;
+        padding: 0;
     }
 
     .top-header .col-md-3{
@@ -185,7 +191,14 @@
   margin-right: 0px;
 }
 
-    
+.logo_mahavir {
+    height: 40px;
+    width: 40px;
+}  
+.logo_mahavir {
+    height: 40px;
+    width: 40px;
+}
     
 }
 
