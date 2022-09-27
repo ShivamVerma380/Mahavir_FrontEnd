@@ -100,7 +100,7 @@ function BuyNowSummary(){
         
         <div  className="cartpage"> 
             <div className="Cart" style={{boxSizing:"border-box"}}>
-            <Row>
+            <Row style={{display:'flex',justifyContent:'center'}}>
     
             <Col sm={7} className='summaryTable'>
             {
@@ -251,7 +251,7 @@ function BuyNowSummary(){
                     <Row>
                 <Col md-4></Col>
                 <Col md-4>
-                <Button style={{marginTop:"20px",background:"rgb(193,0,0)",color:"white",cursor:"pointer", height:"50px",width:"150px", fontSize:"16px"}} onClick={handleProceedToPaymentClick}>Place Order</Button>
+                <Button style={{marginTop:"20px",background:"rgb(193,0,0)",color:"white",cursor:"pointer", height:"50px",width:"150px", fontSize:"16px",border:'solid 1px rgb(193, 0, 0)'}} onClick={handleProceedToPaymentClick}>Place Order</Button>
                 </Col>
                 <Col md-4></Col>
             </Row>

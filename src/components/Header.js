@@ -140,7 +140,7 @@ const Header = ({productList}) => {
           </Col>
           <Col md={4}></Col>
           <Col md={1} >
-          <NavDropdown style={{color:'white'}} title={<p style={{color:"white",fontSize:"13px",fontWeight:500,fontFamily:"Roboto"}}><BiMap style={{color:"white",height:"25px",width:"25px"}}/> Store<RiArrowDropDownLine style={{color:"white"}} size={25}/></p>} >
+          <NavDropdown style={{color:'white'}} title={<p style={{color:"white",fontSize:"13px",fontWeight:500,fontFamily:"Roboto"}}><BiMap style={{color:"white",height:"25px",width:"25px",marginTop:'4px'}}/> Store<RiArrowDropDownLine style={{color:"white"}} size={25}/></p>} >
                     <NavDropdown.Item style={{color:'black',fontSize:"13px",fontWeight:500}} href="https://g.page/mahavir-electronics-and-furnitur?share" target="_blank">Bibvewadi</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"13px",fontWeight:500}} href="https://goo.gl/maps/Ukw2xUZkrXfjz25g8" target="_blank">Sinhagad Rd</NavDropdown.Item>
                     <NavDropdown.Item style={{color:'black',fontSize:"13px",fontWeight:500}} href="https://goo.gl/maps/eLmvYz7aLYgTuiSa7" target="_blank">Kothrud</NavDropdown.Item>
@@ -149,7 +149,6 @@ const Header = ({productList}) => {
           <Col md={1} >
             <p className="wishlist_" style={{color:"white",fontSize:"13px",marginTop:"6px",fontWeight:500,fontFamily:"Roboto",cursor:"pointer"}}  onClick={()=>handleWishlist()}><AiOutlineHeart style={{color:"white",height:"25px",width:"25px"}}/> Wishlist</p>
           </Col>
-         
         </Row>
         
       </div>
