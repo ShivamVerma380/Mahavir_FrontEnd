@@ -28,7 +28,7 @@ function ComparisonProductInformation({title,product}){
             <Col md={1}></Col>
             
             <Col md={2}>
-                <h5>{title}</h5>
+                <h5>{title.substring(0,title.length-1)}</h5>
             </Col>
             {
                 product.map(index=>{
