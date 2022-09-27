@@ -588,7 +588,7 @@ function ProductDetails() {
         )
       } */}
       {
-        isLoading?(<Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"200px"}} />):(null)
+        isLoading?(<Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />):(null)
       }
       {
 
@@ -716,7 +716,6 @@ function ProductDetails() {
 
 
                       </Row>
-//                       <br></br>
                       <Row className="innerrow1">
                       {
                       (product.offerPrice == null) ? (
