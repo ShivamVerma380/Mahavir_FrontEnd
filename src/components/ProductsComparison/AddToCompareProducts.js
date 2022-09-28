@@ -62,6 +62,12 @@ function AddToCompareProducts(){
 
       function blankspace(){
         var dif=4-product.length;
+        if(product.length==1){
+            dif-=2;
+        }
+        else if(product.length==2){
+            dif-=1;
+        }
         var d=[];
         for (var index = 0; index < dif; index++) {
             // alert(index);
@@ -105,6 +111,7 @@ function AddToCompareProducts(){
                     <Row className="ComparisonHeader">
                     <Col style={{marginLeft:"1px"}} md={2} className="colll"></Col>
                     {
+                        
                         product.map(index=>{
                             return(
                                 <Col md={2} className="colll">

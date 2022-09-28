@@ -30,6 +30,12 @@ function ComparisonHighlights({product,showOnlyDiff}){
 
     function blankspace(){
         var dif=4-product.length;
+        if(product.length==1){
+            dif-=2;
+        }
+        else if(product.length==2){
+            dif-=1;
+        }
         var d=[];
         for (var index = 0; index < dif; index++) {
             // alert(index);
