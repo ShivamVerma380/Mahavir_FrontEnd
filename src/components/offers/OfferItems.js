@@ -823,7 +823,7 @@ function OfferItems() {
                                             <Row className="checkboxx">
                                                 <Form className="check">
 
-                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" style={{fontSize:"18px"}} id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index.modelNumber)}/>
+                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" style={{fontSize:"18px"}} id={index.modelNumber}  label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
 
 
                                                 </Form>

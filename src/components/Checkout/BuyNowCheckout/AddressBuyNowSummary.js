@@ -19,10 +19,10 @@ import Footer from "../../Footer/Footer";
 var fullname = "";
 var addressone = "";
 var addresstwo = "";
-var incity = "";
-var instate = "";
+var incity = "Pune";
+var instate = "Maharashtra";
 var zip = "";
-var incountry = "";
+var incountry = "India";
 var phoneNo = "";
 
 
@@ -92,8 +92,8 @@ function AddressBuyNowSummary(){
             "locality": "",
             "landmark": "",
             "address": localStorage.getItem("address-one"),
-            "city": localStorage.getItem("city"),
-            "state": localStorage.getItem("state"),
+            "city": "Pune",
+            "state": "Maharashtra",
             "alternateMobile":document.getElementById("Phone").value,
             "addressType": ""
     
@@ -448,62 +448,32 @@ function AddressBuyNowSummary(){
 
                         </Col>
                         <Col md={6}>
-                          <Dropdown
+                          <Input
                             id="state"
+                            className="form-field"
                             type="text"
-                            placeholder="state"
-                            name="state"
-                            value={state}
-                            // onSelect={(e) => {
-                            //   setState(e.target.value);
-                            //   console.log("state", e.target.value);
-                            //   localStorage.setItem("state", e.target.value);
-                            // }
-                            // }
+                            placeholder="Maharashtra"
+                            value="Maharashtra"
+                            defaultValue="Maharashtra"
+                            readonly
                             style={{ borderRadius: "20px" }}
-                          >
-                            <Dropdown.Toggle style={{ background: "white", color: "black" }} className="form-field" id="dropdown-basic">
-                              {state}
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu style={{height:"200px", overflow:"auto"}}>
-                              {/* <Dropdown.Item ></Dropdown.Item> */}
-                              {states.map((index) => {
-                                return (
-                                  <Dropdown.Item style={{ fontSize: "14px" }} onClick={() => selectState(index)}>{index.name}</Dropdown.Item>
-                                );
-                              })}
-                            </Dropdown.Menu>
-                          </Dropdown>
+                          ></Input>
 
                         </Col>
-
-
-
-
                       </Row>
 
                       <Row style={{ marginTop: 20 }}>
                         <Col md={6} style={{ marginBottom: 20 }}>
-                          <Dropdown
-                            id="City"
+                          <Input
+                            id="city"
+                            className="form-field"
                             type="text"
-                            placeholder="City"
-                            name="City"
+                            placeholder="Pune"
+                            value="Pune"
+                            defaultValue="Pune"
+                            readonly
                             style={{ borderRadius: "20px" }}
-                          >
-                            <Dropdown.Toggle style={{ background: "white", color: "black" }} className="form-field" id="dropdown-basic">
-                              {city}
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu style={{height:"200px", overflow:"auto"}}>
-                              {cities.map((index) => {
-                                return (
-                                  <Dropdown.Item style={{ fontSize: "14px" }} onClick={() => selectCity(index)}>{index}</Dropdown.Item>
-                                );
-                              })}
-                            </Dropdown.Menu>
-                          </Dropdown>
+                          ></Input>
                         </Col>
 
                         <Col md={6}>

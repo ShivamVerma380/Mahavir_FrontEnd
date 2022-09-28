@@ -22,9 +22,11 @@ import Footer from "../Footer/Footer";
 import {AiOutlineCaretRight} from "react-icons/ai"
 import {FaAngleRight} from "react-icons/fa"
 import { flexbox } from "@mui/system";
+import { getCookie, setCookie } from "../Cookies";
+import { ToastContainer, toast } from 'react-toastify';
 
 function BrandDetails() {
-    
+    var token = getCookie("jwtToken");
     const iMac = useRef(null);
     const navigate = useNavigate();
     var offerPoster = <div>
@@ -176,6 +178,104 @@ function BrandDetails() {
     //     navigate("/offers")
     //   }
 
+    function RemoveWishlist(index){
+
+        // console.log("Wishlist",localStorage.getItem("Wishlist"))
+    
+        console.log("Wishlist",localStorage.getItem("wishlistproduct"))
+        console.log("in remove")
+    
+        var formdata = {
+          "modelNumber": index.modelNumber
+    
+        }
+        axios.post(url+"/delete-wishlist", formdata, {
+          headers: {
+            "Authorization": "Bearer "+getCookie("jwtToken"),
+            "Content-Type": "multipart/form-data"
+          }
+        }).then(function (response) {
+          if (response.status == 200) {
+            // console.log("Removed from wishlist successfully");
+            // console.log(response.data)
+            // var arr = localStorage. 
+            var arr = localStorage.getItem("wishlistproduct").split(",")
+            var finalWishlist=[];
+            arr.map(a=>{
+              if( a!=="" && a!==index.modelNumber){
+                finalWishlist.push(a)
+              }
+            })
+            localStorage.setItem("wishlistproduct",finalWishlist)
+            window.location.reload();
+            // navigate("/");
+          }
+        }).catch(function (error) {
+          console.log("Error", error);
+        })
+      }
+
+    function WishlistHandler(index) {
+    
+
+        if(getCookie("isLoggedIn")!=='true'){
+          navigate("/login")
+      } else {
+      
+      if (localStorage.getItem("wishlistproduct")==null) {
+       localStorage.setItem("wishlistproduct",index.modelNumber)
+      }else {
+       var arr = localStorage.getItem("wishlistproduct").split(',')
+       var flag = true;
+       arr.map(i=>{
+       
+         
+         if( i=== index.modelNumber) {
+            arr.splice(arr.indexOf(i),1)
+             localStorage.setItem("wishlistproduct",arr)
+           
+           flag = false;
+         } 
+       }) 
+       if(flag)
+        localStorage.setItem("wishlistproduct",localStorage.getItem("wishlistproduct")+","+index.modelNumber)
+         navigate('/branddetails')
+      
+      }
+      
+      
+      
+      
+      var formdata = {
+        "modelNumber": index.modelNumber
+      
+      }
+      
+      axios.post(url+"/wishlist", formdata, {
+        headers: {
+          "Authorization": "Bearer "+token,
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(function (response) {
+        if (response.status == 200) {
+          toast.success(<b>Added to wishlist successfully</b>)
+          
+         
+        }
+      }).catch(function (error) {
+        if(error.response.status==406) {
+          toast.warn(<b>Item already present in Wishlist</b>)
+          
+        }
+        else {
+          toast.error(<b>SignIn First</b>)
+          console.log("Error", error);
+        }
+        
+      })
+      }
+      
+        }
 
     function fetchOfferAvailableBtn(offerPrice, productPrice) {
         if (offerPrice !== productPrice) {
@@ -403,9 +503,9 @@ function BrandDetails() {
 </div>
 
                         {
-                          (localStorage.getItem("Wishlist") != null && localStorage.getItem("Wishlist").includes(index.modelNumber)) ?
-                            <AiFillHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} /> :
-                            <AiOutlineHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end' }} className="wishlisticon" size={30} />
+                          (localStorage.getItem("wishlistproduct") != null && localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
+                            <AiFillHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end', fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={30} onClick={() => RemoveWishlist(index)}/> :
+                            <AiOutlineHeart style={{ marginLeft: '0px', marginTop: '10px', marginRight: '10px', alignSelf: 'end' }} className="wishlisticon" size={30} onClick={() => WishlistHandler(index)}/>
                         }
                         <MDBCardBody className="categoryproductscardbody">
                           <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
