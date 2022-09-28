@@ -19,10 +19,10 @@ import Footer from "../../Footer/Footer";
 var fullname = "";
 var addressone = "";
 var addresstwo = "";
-var incity = "";
-var instate = "";
+var incity = "Pune";
+var instate = "Maharashtra";
 var zip = "";
-var incountry = "";
+var incountry = "India";
 var phoneNo = "";
 
 
@@ -92,8 +92,8 @@ function AddressBuyNowSummary(){
             "locality": "",
             "landmark": "",
             "address": localStorage.getItem("address-one"),
-            "city": localStorage.getItem("city"),
-            "state": localStorage.getItem("state"),
+            "city": "Pune",
+            "state": "Maharashtra",
             "alternateMobile":document.getElementById("Phone").value,
             "addressType": ""
     
