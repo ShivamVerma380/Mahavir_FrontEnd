@@ -24,7 +24,7 @@ import RateReviewProducts from './components/Items/RateReviewProducts';
 
 import MiniPosterItems from './components/offers/MiniPosteritems';
 
-import BrandDetails from './components/Items/BrandDetails';
+
 import BrandCatProducts from './components/Items/BrandCatProducts';
 
 
@@ -41,6 +41,7 @@ import OrderInvoices from './components/OrderDetails/OrderInvoices';
 import AddressForm from './components/OrderSummary/AddressForm';
 import Spinner from 'react-bootstrap/Spinner';
 import DeveloperPage from './components/DeveloperPage';
+
 
 // import App from './App';
 const App = React.lazy(()=>import('./App'));
@@ -71,6 +72,7 @@ const AddSubCategories = React.lazy(()=>import('./components/Admin/Test/AddSubCa
 const AddProductInformation = React.lazy(()=>import('./components/Admin/Test/AddProductInformation'));
 const CompletedOrders = React.lazy(()=>import('./components/Admin/Sidebar/CompletedOrders'));
 const UploadExcel = React.lazy(()=>import('./components/Admin/Sidebar/UploadExcel'));
+const BrandDetails = React.lazy(()=>import('./components/Items/BrandDetails'));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -172,7 +174,13 @@ root.render(
       }/>
       <Route path='/miniposteritems' element={<MiniPosterItems/>}/>
       
-      <Route path='/branddetails' element={<BrandDetails/>}/>
+      <Route path='/branddetails' element={
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+        }>  
+          <BrandDetails/>
+        </Suspense>    
+      }/>
       <Route path='/brandcatproducts' element={<BrandCatProducts/>}/>
       <Route path='/brandofferposterproducts' element={
         <Suspense fallback={
