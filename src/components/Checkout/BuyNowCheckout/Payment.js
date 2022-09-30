@@ -15,7 +15,11 @@ import { toast, ToastContainer } from "react-toastify";
 
 function Payment(){
 
-    var product = JSON.parse(localStorage.getItem("buyProduct"));
+    try{
+        var product = JSON.parse(localStorage.getItem("buyProduct"));
+    }catch(error){
+        console.log(error)
+    }
     const [cartModels,SetCartModels] = useState(new Map());
     // const [paymentType, SetPaymentType] = useState("");
     var paymentType = "";

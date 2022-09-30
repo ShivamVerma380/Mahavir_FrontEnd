@@ -202,7 +202,7 @@ root.render(
       <Route path='/minibottom' element={<MiniPostersBottom/>}/>
       
       <Route path='/summary' element={<BuyNowSummary/>}/>
-      <Route path = "/payment" element = {<Payment/>}/>
+      {/* <Route path = "/payment" element = {<Payment/>}/> */}
 
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={
         <Suspense fallback={
