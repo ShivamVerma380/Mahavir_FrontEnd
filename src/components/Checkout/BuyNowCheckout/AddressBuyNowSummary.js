@@ -87,7 +87,7 @@ function AddressBuyNowSummary(){
         else {
 
           var formdata = {
-            "name": document.getElementById("full_name").value+document.getElementById("last-name").value,
+            "name": document.getElementById("full_name").value,
             "pincode": document.getElementById("Zip").value,
             "locality": "",
             "landmark": "",
@@ -331,20 +331,22 @@ function AddressBuyNowSummary(){
 
               <>
                 <Row>
-                  <Col md={4}></Col>
-                  <Col md={4}>
+                  <Col md={2}></Col>
+
+                  <Col md={8}>
                     <Card>
                       <Card.Body>
                         <Card.Text style={{ width: "fitContent", paddingRight: "0" }}>
 
-                          <input type="radio" value="Address1" name="add" id={"add" + i} onChange={() => selectedaddress(index, index.name + "" + i)} /> <b style={{ marginRight: 20, marginLeft: 10 }}>{index.name}</b> <b>{index.mobileNumber}</b>
-                          <p>{index.address} {index.city} {index.state} <b>- {index.pincode}</b>, Alternate Mobile Number: <b>{index.alternateMobile}</b></p>
+                          <input type="radio" value="Address1" name="add" id={"add" + i} onChange={() => selectedaddress(index, index.name + "" + i)} /> <br></br><b style={{ marginRight: 20, marginLeft: 10 }}>{index.name}</b><br></br> <b>{index.mobileNumber}</b>
+                          <p>{index.address}<br></br> {index.city} {index.state} <b>- {index.pincode}</b>,<br></br> Alternate Mobile Number: <b>{index.alternateMobile}</b></p>
                           <AiFillDelete onClick={() => handleAddressDelete(index)} />
                         </Card.Text>
                       </Card.Body>
 
                     </Card>
-                  </Col><Col md={4}></Col>
+                    {/* </Col> */}
+                  </Col><Col md={2}></Col>
                 </Row>
                 <br></br>
               </>

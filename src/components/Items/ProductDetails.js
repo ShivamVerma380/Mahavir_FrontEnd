@@ -30,6 +30,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import url from "../../Uri";
 import {HiOutlineShoppingCart} from "react-icons/hi";
 import Footer from "../Footer/Footer";
+import { getCardHeaderUtilityClass } from "@mui/material";
 // import './ProductDetails.css';
 // toast-configuration method,
 // it is compulsory method.
@@ -533,7 +534,10 @@ function ProductDetails() {
       cart.push(model+"=1");
       setCookie("CartModels", cart, 20);
       // console.log("Cart Models",cart)
-      navigate("/cart")
+      // navigate("/cart")
+      toast("Item added successfully to cart")
+      window.location.reload()
+      // getHeader()
       // alert("Added to cart" + model);
     }
   }
@@ -585,12 +589,20 @@ function ProductDetails() {
     setIndex(selectedIndex);
   };
 
+  function getHeader(){
+    return(
+      <Header/>
+    )
+  }
 
   return (
     <>
     <ToastContainer position="top-center"/>
     <div>
-      <Header />
+      {/* <Header /> */}
+      {
+        getHeader()
+      }
       {/* {
         (isQuantitySet) ? (
           <div>
