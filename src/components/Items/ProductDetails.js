@@ -39,6 +39,9 @@ var pin = "";
 var i =0;
 
 function ProductDetails() {
+
+
+
   // let name = localStorage.getItem("Name")
   // var storedProduct = JSON.parse(localStorage.getItem("product"))
   // var id = storedProduct[0].id
@@ -87,6 +90,12 @@ function ProductDetails() {
   const[averagerate,SetAverageRate]= useState(0);
   const [isLoading,SetIsLoading] = useState(true);
 
+  function topFunction() {
+
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
   useEffect(() => {
 
 
@@ -94,6 +103,8 @@ function ProductDetails() {
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
     // var token = localStorage.getItem("jwtToken");
     if (localStorage.getItem("productSelected") != null  && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched && !isPincodeFetched && localStorage.getItem("productSelected") != null && !isProductListFetched) {
+
+      
 
       axios({
         method: "get",
@@ -202,6 +213,8 @@ function ProductDetails() {
           }
           );
       }
+      // topFunction();
+      
       
 
     }
@@ -593,8 +606,11 @@ function ProductDetails() {
       {
 
         (isProductFetched) ? (
+          
           <>
-            
+            {
+              topFunction()
+            }  
 
             <div className="productdetailrow">
                 

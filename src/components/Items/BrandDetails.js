@@ -58,8 +58,10 @@ function BrandDetails() {
     // console.log("links:", videoLinks);
     // console.log("categories", categories);
 
+    window.scrollTo(0,0)
+    
     useEffect(() => {
-        window.scrollTo(0,0)
+        
     // window.addEventListener('scroll', () => { if (window.scrollY > 700) { setAnimation(true); } else { setAnimation(false); } });
 
         // window.scrollTo(0, 0)
@@ -196,9 +198,6 @@ function BrandDetails() {
           }
         }).then(function (response) {
           if (response.status == 200) {
-            // console.log("Removed from wishlist successfully");
-            // console.log(response.data)
-            // var arr = localStorage. 
             var arr = localStorage.getItem("wishlistproduct").split(",")
             var finalWishlist=[];
             arr.map(a=>{
