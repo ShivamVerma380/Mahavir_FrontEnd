@@ -401,6 +401,7 @@ function AddressBuyNowSummary(){
                             className="form-field"
                             placeholder="Full Name"
                             name="fullname"
+                            autoComplete="off"
                             onChange={InputFullNameHandler}
                             style={{ borderRadius: "20px" }} />
                         </Col>
@@ -414,6 +415,7 @@ function AddressBuyNowSummary(){
                             type="text"
                             placeholder="Phone No."
                             name="Phone"
+                            autoComplete="off"
                             maxLength={10}
                             onChange={InputPhoneNoHandler}
                             style={{ borderRadius: "20px" }} />
@@ -427,6 +429,7 @@ function AddressBuyNowSummary(){
                             id="last-name"
                             className="form-field"
                             type="textarea"
+                            autoComplete="off"
                             maxLength={50}
                             placeholder="Address Line 1 (Street Address, P.O.)"
                             name="ADL1"
@@ -485,6 +488,7 @@ function AddressBuyNowSummary(){
                             type="text"
                             placeholder="Zip"
                             name="Zip"
+                            autoComplete="off"
                             maxLength={6}
                             onChange={InputZipHandler}
                             style={{ borderRadius: "20px" }} />

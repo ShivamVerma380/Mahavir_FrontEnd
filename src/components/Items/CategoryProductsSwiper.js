@@ -364,7 +364,7 @@ axios.post(url+"/wishlist", formdata, {
                         }
                         <MDBCardBody className="categoryproductscardbody">
                           <MDBCardTitle className="cardtitle">{index.productName} </MDBCardTitle>
-                          <MDBCardSubTitle onClick={() => callProductDetails(index)} style={{ marginTop: '5px', marginBottom: '5px', fontSize: '18px' }}>Rs. {index.offerPrice}</MDBCardSubTitle>
+                          <MDBCardSubTitle onClick={() => callProductDetails(index)} style={{ marginTop: '5px', marginBottom: '5px', fontSize: '18px' }}><b style={{fontSize:"18px"}}>MSP:</b> <b style={{ marginRight: "20px", color: "#ed1c24",fontSize:"18px"}}>₹{index.offerPrice}</b> <br></br><b style={{fontSize:"16px",color:"grey"}}>MRP:</b>  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{index.productPrice}</b></MDBCardSubTitle>
 
                           {
                             fetchOfferAvailableBtn(index.offerPrice, index.productPrice)
@@ -372,7 +372,7 @@ axios.post(url+"/wishlist", formdata, {
                         </MDBCardBody>
                         <MDBCardBody className="categoryproductscardbodyonhover">
                           <MDBCardTitle className="cardtitle" onClick={() => callProductDetails(index)}>{index.productName} </MDBCardTitle>
-                          <MDBCardSubTitle style={{ marginTop: '5px', marginBottom: '5px', fontSize: '18px' }}>Rs. {index.offerPrice}</MDBCardSubTitle>
+                          <MDBCardSubTitle onClick={() => callProductDetails(index)} style={{ marginTop: '5px', marginBottom: '5px', fontSize: '18px' }}><b style={{fontSize:"18px"}}>MSP:</b> <b style={{ marginRight: "20px", color: "#ed1c24",fontSize:"18px"}}>₹{index.offerPrice}</b> <br></br><b style={{fontSize:"16px",color:"grey"}}>MRP:</b>  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginRight:40,fontSize:"15px",color:"grey" }}>₹{index.productPrice}</b> </MDBCardSubTitle>
 
                           <MDBCardText className="text" onClick={() => callProductDetails(index)}>
                             View Details
