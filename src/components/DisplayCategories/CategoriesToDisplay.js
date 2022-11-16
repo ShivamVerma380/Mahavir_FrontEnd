@@ -5,12 +5,19 @@ import { Nav, Navbar,  Container,NavDropdown, Offcanvas, ListGroup ,Image} from 
 import { useNavigate } from "react-router-dom";
 import "./CategoriesToDisplay.css"
 
-function CategoriesToDisplay({ categoryDetail }) {
+function CategoriesToDisplay({categoryDetail ,extraCategories}) {
   var navigate = useNavigate();
 
   var cards = <div>
     <img className="logo_mahavir"  alt="Mandala" />
   </div>
+
+var cards2 = <div>
+  <img className="logo_mahavir"  alt="Mandala" />
+  </div>
+
+  console.log("categoryDetail",categoryDetail)
+  console.log("extraCategories",extraCategories)
 
   function handleSubSubCategoriesClick(category, subCategory, subSubCategory, modelNumber) {
     localStorage.setItem("Category", category);
@@ -20,6 +27,13 @@ function CategoriesToDisplay({ categoryDetail }) {
     localStorage.setItem("Model Number", modelNumber);
     
     navigate("/" + category + "/" + subCategory + "/" + subSubCategory);
+  }
+
+  function handleExtraCategoriesClick(category){
+    localStorage.setItem("Category", category)
+    localStorage.removeItem("SubCategory")
+    localStorage.removeItem("SubSubCategory")
+    navigate("/categoryProductsall")
   }
 
   return (
@@ -77,7 +91,6 @@ function CategoriesToDisplay({ categoryDetail }) {
 
                               })
                             }
-
                           </NavDropdown>
 
 
@@ -86,6 +99,34 @@ function CategoriesToDisplay({ categoryDetail }) {
                       )
                     })
                   }
+
+                  {  
+                    extraCategories.map(index => {
+                      return (
+                        <Nav.Link >
+                          <Image style={{background:"none"}} thumbnail='true'   className="categoryImage" ></Image>
+                          
+                          <NavDropdown right className="catdropdown"  title={index.parentName} renderMenuOnMount={true}>
+                            {
+                              index.categories.map(ind => {
+                                return (
+                                  <div style={{ display: 'block', padding: 10 ,width:'max-content'}}>
+                                    <ListGroup >
+                                        <ListGroup.Item style={{marginTop:'4px'}} onClick={()=>handleExtraCategoriesClick(ind.category)}>{ind.category}</ListGroup.Item>
+                                    </ListGroup>
+                                  </div>
+                                );
+
+                              })
+                            }
+                          </NavDropdown>
+
+
+                        </Nav.Link>
+                      );
+                    })
+                  }
+                  
                 </Nav>
 
               </Offcanvas.Body>

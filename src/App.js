@@ -45,6 +45,9 @@ function App() {
   const [allCategories,setAllCategories] = useState([]);
   const [isAllCategoriesFetched,setIsAllCategoriesFetched] = useState(false);
 
+  const [extraCategories,setExtraCategories] = useState([]);
+  const [isExtraCategoriesFetched,setIsExtraCategoriesFetched] = useState(false);
+
   const [Products,setProducts] = useState([]);
   const [isProductsFetched,setIsProductsFetched] = useState(false);
 
@@ -95,7 +98,7 @@ function App() {
 
 
     // var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
-    if(!isOfferPostersFetched && !isAllCategoriesFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched && !isDealsFetched){
+    if(!isOfferPostersFetched && !isAllCategoriesFetched && !isExtraCategoriesFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched && !isDealsFetched){
       
       // console.log("InventoryToken is null")
       
@@ -164,6 +167,27 @@ function App() {
         }
         // console.log(response.data);
       }).catch(function(error){
+          console.log("error in fetching categories");
+          SetIsLoading(false);
+      })
+
+      axios.get(url+"/extraCategories").then(function(response){
+        // console.log(response);
+        if(response.status==200){
+            setExtraCategories(response.data);
+            
+            // var arr = response.data;
+            // categoryDisplay.push(arr);
+            // setAllCategories(response.data);
+            // setIsAllCategoriesFetched(true);
+            // console.log("extraCategories",response.data);
+            // localStorage.setItem("allCategories",JSON.stringify(response.data),20);
+            SetIsLoading(false);
+            setIsExtraCategoriesFetched(true);
+            // console.log(response.data);
+        }
+        // console.log(response.data);
+      }).catch(function(error){ 
           console.log("error in fetching categories");
           SetIsLoading(false);
       })
@@ -367,8 +391,8 @@ function App() {
      <Header/>
       <div className="cat_navbar" >
       {
-        (isCategoryDisplayFetched)?(
-          <CategoriesToDisplay categoryDetail={categoryDisplay}/>
+        (isCategoryDisplayFetched && isExtraCategoriesFetched)?(
+          <CategoriesToDisplay categoryDetail={categoryDisplay} extraCategories={extraCategories}/>
         ):(
           <CategoriesToDisplay categoryDetail={[]}/>
         )
