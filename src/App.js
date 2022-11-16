@@ -154,6 +154,7 @@ function App() {
         if(response.status==200){
             setcategoryDisplay(response.data);
             setIsCategoryDisplayFetched(true);
+            // console.log("categoryDisplay",response);
             localStorage.setItem("categoryDisplay",JSON.stringify(response.data),20);
             SetIsLoading(false);
             // console.log(response.data);
