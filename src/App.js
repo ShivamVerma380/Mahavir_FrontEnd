@@ -42,6 +42,9 @@ function App() {
   const [categoryDisplay,setcategoryDisplay] = useState([]);
   const [isCategoryDisplayFetched,setIsCategoryDisplayFetched] = useState(false);
 
+  const [allCategories,setAllCategories] = useState([]);
+  const [isAllCategoriesFetched,setIsAllCategoriesFetched] = useState(false);
+
   const [Products,setProducts] = useState([]);
   const [isProductsFetched,setIsProductsFetched] = useState(false);
 
@@ -92,7 +95,7 @@ function App() {
 
 
     // var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaHJhZGRoYTA5QGdtYWlsLmNvbSIsImV4cCI6MTY1NDY4NDk0MCwiaWF0IjoxNjU0NTg0OTQwfQ.XuIhXTFQYRmsr68C9vElKXsb4VeN3fqW3OoJH7QFJFY4i8DSHtR0u9BdogUAP6KySxYCmB0rI6cQ3ZjaV8BqMA"
-    if(!isOfferPostersFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched && !isDealsFetched){
+    if(!isOfferPostersFetched && !isAllCategoriesFetched && !isCategoryDisplayFetched && !isProductsFetched  && !isPostersFetched && !isCatProductFetched && !isDealsFetched){
       
       // console.log("InventoryToken is null")
       
@@ -156,6 +159,22 @@ function App() {
             setIsCategoryDisplayFetched(true);
             // console.log("categoryDisplay",response);
             localStorage.setItem("categoryDisplay",JSON.stringify(response.data),20);
+            SetIsLoading(false);
+            // console.log(response.data);
+        }
+        // console.log(response.data);
+      }).catch(function(error){
+          console.log("error in fetching categories");
+          SetIsLoading(false);
+      })
+
+      axios.get(url+"/get-all-categories").then(function(response){
+        // console.log(response);
+        if(response.status==200){
+            setAllCategories(response.data);
+            setIsAllCategoriesFetched(true);
+            // console.log("categoryDisplay",response);
+            // localStorage.setItem("categoryDisplay",JSON.stringify(response.data),20);
             SetIsLoading(false);
             // console.log(response.data);
         }
@@ -381,8 +400,8 @@ function App() {
       {/* <Deals/> */}
     
     {
-      (isCategoryDisplayFetched)? ( 
-        categoryDisplay.map(index=>{
+      (isAllCategoriesFetched)? ( 
+        allCategories.map(index=>{
           
           return(
           <div>
