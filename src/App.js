@@ -64,7 +64,7 @@ function App() {
   const [catProducts,setCatProducts] = useState([]);
   const [isCatProductFetched, setIsCatProductFetched] = useState(false);
 
-  const [isBothTypesFetched,SetIsBothTypesFetched] = useState(false);
+  // const [isBothTypesFetched,SetIsBothTypesFetched] = useState(false);
   const [isLoading,SetIsLoading] = useState(true);
 
 
@@ -184,7 +184,7 @@ function App() {
             // localStorage.setItem("allCategories",JSON.stringify(response.data),20);
             SetIsLoading(false);
             setIsExtraCategoriesFetched(true);
-            SetIsBothTypesFetched(true);
+            // SetIsBothTypesFetched(true);
             // console.log(response.data);
         }
         // console.log(response.data);
@@ -392,10 +392,11 @@ function App() {
      <Header/>
       <div className="cat_navbar" >
       {
-        (isCategoryDisplayFetched && isExtraCategoriesFetched && isBothTypesFetched)?(
+        (isCategoryDisplayFetched && isExtraCategoriesFetched )?(
           <CategoriesToDisplay categoryDetail={categoryDisplay} extraCategories={extraCategories}/>
         ):(
-          <CategoriesToDisplay categoryDetail={[]}/>
+          
+          <CategoriesToDisplay categoryDetail={[]} extraCategories={[]}/>
         )
       }
       
