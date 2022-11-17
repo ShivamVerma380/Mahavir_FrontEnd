@@ -138,7 +138,7 @@ function TestFilterProducts(){
             })
 
             if(!isCategoriesFetched){
-                axios.get(url+"/get-categories")
+                axios.get(url+"/get-all-categories")
                 .then(function(response){
                     response.data.map(cat=>{
                         categories.push(cat.category);
