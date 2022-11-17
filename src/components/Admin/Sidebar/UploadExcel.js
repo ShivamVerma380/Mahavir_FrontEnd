@@ -21,6 +21,7 @@ const UploadExcel = () => {
   const [isPosterFilePicked, setIsPosterFilePicked] = useState(false);
   const [isDealsFilePicked, setIsDealsFilePicked] = useState(false);
 
+
    var token = getCookie("jwtToken");
 
   const ProductFileHandler = (event) => {

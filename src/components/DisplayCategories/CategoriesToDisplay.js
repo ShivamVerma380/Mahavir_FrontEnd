@@ -107,18 +107,23 @@ var cards2 = <div>
                           <Image style={{background:"none"}} thumbnail='true'  src={index.imgUrl}  className="categoryImage" ></Image>
                           
                           <NavDropdown right className="catdropdown"  title={index.parentName} renderMenuOnMount={true}>
+                          <ListGroup >
                             {
                               index.categories.map(ind => {
                                 return (
-                                  <div style={{ display: 'block', padding: 10 ,width:'max-content'}}>
-                                    <ListGroup >
-                                        <ListGroup.Item style={{marginTop:'4px'}} onClick={()=>handleExtraCategoriesClick(ind.category)}>{ind.category}</ListGroup.Item>
-                                    </ListGroup>
+                                  
+                                  <div style={{ padding: 10 }}>
+                                    
+                                        <ListGroup.Item style={{marginTop:"4px"}} onClick={()=>handleExtraCategoriesClick(ind.category)}>{ind.category}</ListGroup.Item>
+                                        
+                                    
+                                    
                                   </div>
                                 );
 
                               })
                             }
+                            </ListGroup>
                           </NavDropdown>
 
 
