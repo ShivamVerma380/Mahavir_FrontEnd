@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Nav, Navbar,  Container,NavDropdown, Offcanvas, ListGroup ,Image} from 'react-bootstrap';
+import { Nav, Navbar,  Container,NavDropdown, Offcanvas, ListGroup ,Image,Col} from 'react-bootstrap';
 
 import { useNavigate } from "react-router-dom";
 import "./CategoriesToDisplay.css"
@@ -107,18 +107,21 @@ var cards2 = <div>
                           <Image style={{background:"none"}} thumbnail='true'  src={index.imgUrl}  className="categoryImage" ></Image>
                           
                           <NavDropdown right className="catdropdown"  title={index.parentName} renderMenuOnMount={true}>
-                          <ListGroup >
+                          <ListGroup>
                             {
-                              index.categories.map(ind => {
+                              index.categories.map((ind,pos) => {
                                 return (
+                                  (pos%2==0)?(
+                                      
+                                    
+                                        <ListGroup.Item style={{padding:"10px"}} onClick={()=>handleExtraCategoriesClick(ind.category)}>{ind.category}</ListGroup.Item>
+
+                                  ):(
+                                    
+                                     <ListGroup.Item style={{padding:"10px"}} onClick={()=>handleExtraCategoriesClick(ind.category)}>{ind.category}</ListGroup.Item>
+                          
+                                  )
                                   
-                                  <div style={{ padding: 10 }}>
-                                    
-                                        <ListGroup.Item style={{marginTop:"4px"}} onClick={()=>handleExtraCategoriesClick(ind.category)}>{ind.category}</ListGroup.Item>
-                                        
-                                    
-                                    
-                                  </div>
                                 );
 
                               })
