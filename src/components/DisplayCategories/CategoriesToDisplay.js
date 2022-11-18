@@ -72,13 +72,13 @@ var cards2 = <div>
                               index.subCategories.map(subCat => {
                                 return (
                                   <div style={{ display: 'block', padding: 10 ,width:'max-content'}}>
-                                    <h5>{subCat.subCategoryName}</h5>
+                                    <h5  style={{marginRight:40}}>{subCat.subCategoryName}</h5>
                                     <ListGroup >
                                       {
                                         subCat.subSubCategories.map(subSubCategories => {
                                           return (
 
-                                            <ListGroup.Item style={{marginTop:'4px'}} onClick={() => handleSubSubCategoriesClick(index.category, subCat.subCategoryName, subSubCategories.subSubCategoryName, subSubCategories.modelNumber)}>{subSubCategories.subSubCategoryName}</ListGroup.Item>
+                                            <ListGroup.Item style={{marginTop:'4px', marginRight:50}} onClick={() => handleSubSubCategoriesClick(index.category, subCat.subCategoryName, subSubCategories.subSubCategoryName, subSubCategories.modelNumber)}>{subSubCategories.subSubCategoryName}</ListGroup.Item>
 
                                           );
                                         })

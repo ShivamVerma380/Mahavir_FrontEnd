@@ -44,7 +44,7 @@ function Footer(){
                             <ul>
                                 <li><a href="/#/paymentreturns">Payments & Returns</a></li>
                                 <li><a href="/#/terms-of-use">Terms of Use</a></li>
-                                <li><p onClick={handlePrivacyPolicy}>Privacy Policy</p></li>
+                                <li style={{cursor:"pointer"}}><p onClick={handlePrivacyPolicy}>Privacy Policy</p></li>
                             </ul>
                         </div>
                         <div class="col-sm-4 col-md-3 item">

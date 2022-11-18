@@ -97,7 +97,7 @@ const ContactUs = () => {
                 <h3>ADDRESS</h3>
 
 
-                <Card style={{ marginTop: 40, padding: 10 }}>
+                {/* <Card style={{ marginTop: 40, padding: 10 }}>
                     <Card.Title>
                         MAIN OFFICE
 
@@ -106,11 +106,25 @@ const ContactUs = () => {
                         Opp. Post Office, nr. Sahyadri Hospital, Vasant Baug, Ramyanagari <br></br> Housing Society, Bibwewadi, Pune, Maharashtra 411037 <br></br>
 
                     </Card.Text>
-                </Card>
+                </Card> */}
 
                 <Row>
+
                     <Col md={3}>
-                        <Card style={{ marginTop: 40, padding: 10 }}>
+                        <Card style={{ marginTop: 40, padding: 10, height:150}}>
+                            <Card.Title>
+                                Bibvewadi
+
+                            </Card.Title>
+                            <Card.Text>
+                            Opp. Post Office, nr. Sahyadri Hospital, Vasant Baug, Ramyanagari <br></br> Housing Society, Bibwewadi, Pune, Maharashtra 411037 <br></br>
+
+                            </Card.Text>
+                        </Card>
+                    </Col>
+
+                    <Col md={3}>
+                        <Card style={{ marginTop: 40, padding: 10, height:150}}>
                             <Card.Title>
                                 Sinhagad Road
 
@@ -123,7 +137,7 @@ const ContactUs = () => {
                     </Col>
                     
                     <Col md={3}>
-                    <Card style={{ marginTop: 40, padding: 10 }}>
+                    <Card style={{ marginTop: 40, padding: 10, height:150}}>
                             <Card.Title>
                                 Kothrud
 
@@ -136,7 +150,7 @@ const ContactUs = () => {
                     </Col>
 
                     <Col md={3}>
-                    <Card style={{ marginTop: 40, padding: 10 }}>
+                    <Card style={{ marginTop: 40, padding: 10, height:150}}>
                             <Card.Title>
                                 Camp
 
