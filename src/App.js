@@ -193,7 +193,7 @@ function App() {
           SetIsLoading(false);
       })
 
-      axios.get(url+"/get-all-categories").then(function(response){
+      axios.get(url+"/get-categories").then(function(response){
         // console.log(response);
         if(response.status==200){
             setAllCategories(response.data);
