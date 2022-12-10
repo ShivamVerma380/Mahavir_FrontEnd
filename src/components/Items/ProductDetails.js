@@ -3,7 +3,7 @@ import { ProgressBar, Form, Button, Col, Container, Row, Card ,Modal,Image,Carou
 import Header from "../Header";
 import "./ProductDetails.css";
 import { AiOutlineMinus } from "react-icons/fa"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ReactImageMagnify from 'react-image-magnify';
 import React, { useEffect, useState } from "react";
 import * as AiIcons from 'react-icons/ai';
@@ -79,6 +79,12 @@ function ProductDetails() {
   const [isProductInformationSet, SetIsProductInformationSet] = useState(false);
   const [variantCount,setVariantCount]=useState(0);
 
+
+  const search = useLocation().pathname;
+    
+  const model = new URLSearchParams(search).get("id");
+  console.log("ModelNo: ", search.substring(16));
+
   
   var cart = [];
   if(getCookie("CartModels")!=null){
@@ -131,7 +137,7 @@ function ProductDetails() {
 
       axios({
         method: "get",
-        url: url+"/get-products/" + localStorage.getItem("productSelected")
+        url: url+"/get-products/" + search.substring(16)
       }).then(function (response) {
         // console.log(response);
         if (response.status == 200) {
@@ -235,7 +241,7 @@ function ProductDetails() {
     // console.log("Product Selected", localStorage.getItem("productSelected"))
     localStorage.setItem("productId", index.productId);
     localStorage.setItem("SubSubCategory", index.subCategoryMap[localStorage.getItem("SubCategory")]);
-    // navigate("/productDetails")
+    navigate("/productDetails/"+index.modelNumber);
     window.location.reload();
   }
 

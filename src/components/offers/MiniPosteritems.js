@@ -61,7 +61,7 @@ function MiniPosterItems(){
         console.log("Index",index);
         localStorage.setItem("productSelected",index.modelNumber);
         console.log("Product Selected",localStorage.getItem("productSelected"))
-        navigate("/productDetails")
+        navigate("/productDetails/"+index.modelNumber);
       }
   
 

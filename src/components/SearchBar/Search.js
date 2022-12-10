@@ -91,7 +91,7 @@ function Search(){
           if(window.location.href.includes("productDetails"))
             window.location.reload();
           else
-            navigate("/productDetails");
+            navigate("/productDetails/"+item.id);
         }
       }
     

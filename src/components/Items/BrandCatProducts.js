@@ -340,7 +340,7 @@ function BrandCatProducts() {
         localStorage.removeItem("SubCategory")
         localStorage.removeItem("SubSubCategory")
         // console.log("Product Selected",localStorage.getItem("productSelected"))
-        navigate("/productDetails")
+        navigate("/productDetails/"+index.modelNumber)
     }
 
 

@@ -89,7 +89,7 @@ root.render(
         </Suspense>
       }/>
       <Route path='/login' element={<Login/>}/>
-      <Route path='/productDetails' element = {<ProductDetails/>}/>
+      <Route path='/productDetails/:ModelNo' element = {<ProductDetails/>}/>
       <Route path='/admin' element = {
         <Suspense fallback={
           <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />

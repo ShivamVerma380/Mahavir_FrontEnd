@@ -299,7 +299,7 @@ function TestFilterProducts(){
         console.log("Product Id:",index.productId+" Model Number:"+index.modelNumber);
         localStorage.setItem("productId",index.productId);
         localStorage.setItem("productSelected", index.modelNumber);
-        navigate("/productDetails")
+        navigate("/productDetails/"+index.modelNumber);
     }
 
     function RemoveWishlist(index){

@@ -167,7 +167,7 @@ function BrandDetails() {
         localStorage.setItem("productId", index.productId);
         // console.log("Product Id",localStorage.getItem("productId"));
         // console.log("Product Selected", localStorage.getItem("productSelected"))
-        navigate("/productDetails")
+        navigate("/productDetails/"+index.modelNumber)
       }
 
 
