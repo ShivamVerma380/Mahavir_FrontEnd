@@ -52,7 +52,7 @@ function Footer(){
                             <ul>
                                 <li><a href="/#/faq">FAQ</a></li>
                                 <li><a href="/#/shippingoptions">Shipping Options</a></li>
-                                <li><a href="/#/developerpage">Developer Team</a></li>
+                                {/* <li><a href="/#/developerpage">Developer Team</a></li> */}
                             </ul>
                         </div>
                         <div class="col-lg-3 item social">

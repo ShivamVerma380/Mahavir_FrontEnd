@@ -200,6 +200,8 @@ function ProductDetails() {
           SetAverageRate(parseInt(reviewresponse.data.averageRatings));
           // console.log("Average ", averagerate);
         }
+
+        
       }).catch(function (error) {
         console.log("error");
       })
@@ -217,7 +219,7 @@ function ProductDetails() {
         }).catch(function (error) {
           console.log("error", error.response);
         }
-        );
+        );  
       // topFunction();
       
       
