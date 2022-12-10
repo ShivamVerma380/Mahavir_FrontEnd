@@ -109,7 +109,7 @@ function ProductDetails() {
 
     //var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGIuY2NjY2NjY2NqaGRoZGIiLCJleHAiOjE2NTQ0NDU2MzQsImlhdCI6MTY1NDM1OTIzNH0.fgpAQXcaaNruyanPxU2Xrkfe1AnsrUjf25boDfZhm8Q"
     // var token = localStorage.getItem("jwtToken");
-    if (localStorage.getItem("productSelected") != null  && !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched && !isPincodeFetched && localStorage.getItem("productSelected") != null && !isProductListFetched) {
+    if ( !isImgLinkfinalSet && !isProductInformationSet && !isKeysFetched && !isVariantKeysFetched && !isPincodeFetched  && !isProductListFetched) {
 
       
 
@@ -186,7 +186,7 @@ function ProductDetails() {
 
       axios({
         method: "get",
-        url: url+"/get-reviews/" + localStorage.getItem("productSelected")
+        url: url+"/get-reviews/" + search.substring(16)
       }).then(function (reviewresponse) {
         // console.log(reviewresponse);
         if (reviewresponse.status == 200) {
@@ -206,20 +206,18 @@ function ProductDetails() {
       // console.log("Url", url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/"  + localStorage.getItem("Category"));
       
       // console.log("Url", url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") + "/"  + localStorage.getItem("Category"));
-      if(localStorage.getItem("SubSubCategory") != null && localStorage.getItem("Category") != null){
-        axios.get(url+"/similar-products/" + localStorage.getItem("productSelected") + "/" + localStorage.getItem("SubSubCategory") +  "/" + localStorage.getItem("Category")).then(
-          function (response) {
-            if (response.status == 200) {
-              // console.log(response.data);
-              // console.log("In similar products",response.data)
-              setProductList(response.data);
-              SetIsProductListFetched(true);
-            }
-          }).catch(function (error) {
-            console.log("error", error.response);
+      axios.get(url+"/similar-products/" + search.substring(16) + "/" + localStorage.getItem("SubSubCategory") +  "/" + localStorage.getItem("Category")).then(
+        function (response) {
+          if (response.status == 200) {
+            // console.log(response.data);
+            // console.log("In similar products",response.data)
+            setProductList(response.data);
+            SetIsProductListFetched(true);
           }
-          );
-      }
+        }).catch(function (error) {
+          console.log("error", error.response);
+        }
+        );
       // topFunction();
       
       
