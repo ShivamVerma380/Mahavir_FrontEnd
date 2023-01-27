@@ -102,7 +102,7 @@ function BuyNowSummary(){
             <div className="Cart" style={{boxSizing:"border-box"}}>
             <Row style={{display:'flex',justifyContent:'center'}}>
     
-            <Col sm={7} className='summaryTable'>
+            <Col className='summaryTable'>
             {
                 (isCartItemsFetched && cartItems.length > 0)?(
                    
@@ -167,8 +167,8 @@ function BuyNowSummary(){
             </Col>
             {
                 (isCartItemsFetched && cartItems.length > 0)?(
-                    <Col sm={5} className="summarypriceTable">
-                    <Table style={{margin_top:"50px", color:'black',width:"470px"}} >
+                    <Col className="summarypriceTable">
+                    <Table style={{margin_top:"50px", color:'black',width:"100%"}} >
                     <thead>
                         <tr>
                         <th  className='cartTitle' style={{fontFamily:"typeface-roboto",borderBottom:"1px solid #E2E2E2"}}> Price Details</th>
@@ -248,12 +248,9 @@ function BuyNowSummary(){
             </Row>
             {
                 (cartItems.length > 0)?(
-                    <Row>
-                <Col md-4></Col>
-                <Col md-4>
+                    <Row className='place_order_button_row'>
+                
                 <Button style={{marginTop:"20px",background:"rgb(193,0,0)",color:"white",cursor:"pointer", height:"50px",width:"150px", fontSize:"16px",border:'solid 1px rgb(193, 0, 0)'}} onClick={handleProceedToPaymentClick}>Place Order</Button>
-                </Col>
-                <Col md-4></Col>
             </Row>
             
                 ):(

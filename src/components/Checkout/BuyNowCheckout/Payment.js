@@ -194,13 +194,13 @@ function Payment(){
                                 <h3>Payment</h3>
                                 <p style={{ fontSize: "16px", marginTop: "20px" }}>Choose payment method below</p>
                                 <Row>
-                                    <Col md={8}>
+                                    {/* <Col md={8}>
                                         <Card style={{ width: "200px", height: "100px", border: "1px solid black", margin: "10px", backgroundColor: isActive ? 'lightblue' : '' }}>
                                             <Card.Img id="razorpay" onClick={() => { localStorage.setItem("paymentType",'razorpay'); setIsActive(true); setIsActive1(false); } } style={{ padding: "35px", width: "200px", height: "100px" }} variant="top" src="https://upload.wikimedia.org/wikipedia/en/8/89/Razorpay_logo.svg" />
-                                            {/*  */}
+                                        
                                         </Card>
-                                    </Col>
-                                    <Col md={4}>
+                                    </Col> */}
+                                    <Col md={12}>
                                         <Card style={{ width: "150px", height: "100px", border: "1px solid black", margin: "10px", backgroundColor: isActive1 ? 'lightblue' : '' }} onClick={() => { paymentType = 'cashOnDelivery'; setIsActive1(true); setIsActive(false); } }>
                                             <Card.Img id="cashOnDelivery" onClick={() => { localStorage.setItem("paymentType",'cashOnDelivery'); setIsActive1(true); setIsActive(false); } } style={{ padding: "10px", width: "100px", height: "100px", marginLeft: "20px" }} variant="top" src="https://cdn-icons-png.flaticon.com/512/1019/1019607.png" />
                                             {/* onClick={SetPaymentType("cashOnDelivery")} */}

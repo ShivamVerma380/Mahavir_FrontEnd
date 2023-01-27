@@ -523,7 +523,12 @@ function AddressBuyNowSummary(){
 
 
         </div>
-        <Footer/></>
+
+         
+            <Footer/>
+
+        
+        </>
     
       );
 }

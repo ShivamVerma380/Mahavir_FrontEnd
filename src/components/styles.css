@@ -228,12 +228,14 @@ body {
 
 /* Footer */
 .footer-clean {
-  /* padding:50px 0; */
-  background-color:black;
-  color:white;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  width: 100%;
+  position: relative;
+    bottom: 0px;
+    /* padding: 50px 0; */
+    background-color: black;
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 100%;
 }
 
 .footer-clean h3 {
