@@ -38,6 +38,14 @@ function CompletedOrders(){
         }
     })
 
+    function handleGenerateInvoice(order){
+        console.log("Invoice",order)
+        console.log("Generate Invoice",JSON.stringify(order));
+        localStorage.setItem("Invoice",JSON.stringify(order));
+        navigate("/invoice")
+    }
+
+
     return(
         <div>
             <AdminNavbar/>
@@ -72,7 +80,7 @@ function CompletedOrders(){
                                             <td>{order.userAddress.mobileNumber}</td>
                                             <td>{order.paymentAmount}</td>
                                             <td>{order.paymentMode}</td>
-                                            <td>👁️‍🗨️</td>
+                                            <td onClick={()=>handleGenerateInvoice(order)}>📅</td>
                                         </tr>
                                     );
                                 })

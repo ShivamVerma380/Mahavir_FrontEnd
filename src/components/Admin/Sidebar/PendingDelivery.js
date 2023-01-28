@@ -105,8 +105,8 @@ const PendingDelivery = () => {
                                 <td>{order.userAddress.mobileNumber}</td>
                                 <td>{order.paymentAmount}</td>
                                 <td>{order.paymentMode}</td>
-                                <td><Button onClick={()=>handleGenerateInvoice(order)}>👁️‍🗨️</Button></td>
-                                <td><Button onClick={()=>handleOrderClick(order)}>✅</Button></td>
+                                <td onClick={()=>handleGenerateInvoice(order)}>📅</td>
+                                <td ><Button onClick={()=>handleOrderClick(order)}>✅</Button></td>
                             </tr>
                         );
                     })
