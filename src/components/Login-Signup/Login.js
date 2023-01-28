@@ -153,32 +153,21 @@ function Login() {
         }).then(function (response) {
             // console.log(response);
             if (response.status == 200) {
-                // localStorage.setItem("isLoggedIn", "true");
-                // localStorage.setItem("Name", response.data.message);
-                // localStorage.setItem("jwtToken", response.data.token);
-                // var token = localStorage.getItem("jwtToken");
-                //alert("token "+localStorage.getItem("jwtToken"));
-                // console.log(response.data.message);
-                // var cookiedata=[];
-                // cookiedata.add(localStorage.getItem("isLoggedIn"))
-                // alert('cookie data'+cookiedata);
-                //alert("loginh");
-                // response.cookie("jwttoken",localStorage.getItem("jwtToken"),{
-                //     expires: new Date(Date.now()+25892000000),
-                //     httpOnly:true
-                // });
+
                 setCookie("jwtToken",response.data.token,20);
                 setCookie("Name",response.data.message,20);
                 setCookie("isLoggedIn",true,20);
                 // alert("loginh11");
                 toast.success(<b>Login successful</b>)
                 navigate("/");
+            }else{
+                toast.error(<b>{response.data.message}</b>);
             }
             
             // console.log(response.data.message);
         }).catch(function (error) {
             console.log("error in login-user");
-            toast.error(<b>Invalid Credentials</b>);
+            toast.error(<b>{error.response.data.message}</b>);
         })
         isUserLoggedIn = true;
         // alert("login successful")
@@ -331,9 +320,12 @@ function Login() {
                     toast.success(<b>Registeration successful</b>)
 
                     // navigate("/");
+                }else{
+                    toast.error(<b>{response.data.message}</b>)
                 }
             }).catch(function (error) {
-                console.log("Error in /add-user");
+                // console.log("Error in /add-user");
+                toast.error(<b>{error.response.data.message}</b>)
             })
         }
     }

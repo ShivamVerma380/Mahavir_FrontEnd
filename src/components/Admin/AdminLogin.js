@@ -1,166 +1,146 @@
 import React, { useState } from "react";
-import { Input, Label } from 'reactstrap';
-import { Button, Container, Form, FormGroup, Row, Col } from "react-bootstrap";
+import { Col, Input, Label, Row } from 'reactstrap';
+import { Button, Container, Form,Card } from "react-bootstrap";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import Admin from './Admin';
 import url from "../../Uri";
+import { MDBInput } from "mdb-react-ui-kit";
 
 
 
 
 
 const AdminLogin = () => {
-    var email = "";
-    const[adminotp,Setadminotp]=useState();
-    var admininputotp;
-    var inputsecretkey = "";
-    const [isOtpSent, setIsOtpSent] = useState(false);
-    const [isNewOtpSent, setIsNewOtpSent] = useState(false)
-    const [isOtpVerified,setIsOtpVerified] = useState(false);
-    const [isSecretKeyVerified,setIsSecretKeyVerified] = useState(false);
-    const [isLoggedIn,setIsLoggedIn] = useState(false);
-    
-    const inputEmailEvent = (event) => {
-        email = event.target.value;
-    }
 
-    const inputOTPEvent = (event) => {
-        admininputotp = event.target.value;
-        console.log("Input: ",admininputotp)
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [otp,setOtp] = useState("");
+    const [inputOtp,setInputOtp] = useState("");
+    const [isEmailVerified,setIsEmailVerified] = useState(false);
 
-    }
-
-    const inputSecretKeyEvent = (event) => {
-        inputsecretkey = event.target.value;
-        console.log("Secret Key: ",inputsecretkey)
-    }
-
-    const sendOTP = () => {
-        alert(email);
-
-        if (email === "") {
-            console.log("Email is empty")
-            alert("Please Enter Email")
-        } else {
-            console.log("Email", email);
-            axios({
-                method: "get",
-                url: url+"/verify-email/" + email
-            }).then(function (response) {
-                console.log(response.data);
-                Setadminotp(response.data.otp);
-                
-                console.log("otp:", adminotp);
-            }).catch(function (response) {
-                console.log(response);
-                return;
-            })
-
-
-            setIsOtpSent(true);
-            setIsNewOtpSent(true);
-            //setIsOTPVerified(true);
-            console.log("isOTPSent", isOtpSent);
-            // console.log("isOTPVerified", isOTPNotVerified);
-        }
-
-    }
-
-    
-    const verifyOTP = () => {
-        console.log(adminotp,":",admininputotp);
-        //    alert(otp);
-        if (adminotp === admininputotp ) {
-            alert('Correct input otp');
-            setIsOtpVerified(true);
-            //    navigate('/email-auth');
-            //    setIsOTPSent(false);
-            // setIsUserRegistered(true);
-            // setIsNewOtpVerified(true);
-            //    setIsEmailVerified(false);
-        }
-        else {
-            alert('incorrect otp')
-        }
-
-
-
-    }
     const navigate = useNavigate();
 
-    const verifySecretKey = () => {
-        if (inputsecretkey==="380002") {
-            alert("Correct key");
-            setIsSecretKeyVerified(true);
-           // navigate("/admindetail")
-            setIsLoggedIn(true);
+
+    const handleEmailChange = (e) => {
+        e.preventDefault();
+        setEmail(e.target.value);
+    }
+
+    const handlePasswordChange = (e) => {
+        e.preventDefault();
+        setPassword(e.target.value);
+    }
+
+    const handleOtpChange = (e) => {
+        e.preventDefault();
+        setInputOtp(e.target.value);
+    }
+
+    function verifyEmail(){
+
+        if(email=="" || password==""){
+            alert("Please enter email and password");
+            return;
         }
-        else {
-            alert("Wrong Key");
+
+
+
+        axios.get(url+"/verify-email/"+email)
+        .then((res) => {
+            // console.log(res.data);
+            if(res.status==200){
+                // alert("Email Verified")
+                setOtp(res.data.otp);
+                setIsEmailVerified(true);
+                // document.getElementById("signInButtonAdmin").disabled = false;
+            }
+            else{
+                alert(res.data.message);
+            }
+        }).catch((err) => {
+            // console.log(err);
+            alert(err.response.data.message);
+        })
+    }
+
+    function signIn(){
+
+        console.log("In sign in")
+
+        if(email=="" || password==""){
+            alert("Please enter email and password");
+            return;
         }
+
+        if(inputOtp!=otp){
+            alert("Please enter correct OTP");
+            return;
+        }
+
+        var form_data_body = new FormData();
+
+        form_data_body.append("Email",email);
+        form_data_body.append("Password",password);
+
+        axios.post(url+"/login-admin",form_data_body)
+        .then((res) => {
+            // console.log(res.data);
+            if(res.status==200){
+                alert("Login Successful");
+                // console.log(res.data);
+                // localStorage.setItem("admin",JSON.stringify(res.data.admin));
+                localStorage.setItem("jwtTokenAdmin",res.data.token);
+                localStorage.setItem("isAdminLoggedIn","yes,true");
+                // window.location.reload();
+                navigate("/pendingdelivery")   
+            }
+            else{
+                alert(res.data.message);
+            }
+        }).catch((err) => {
+            // console.log(err);
+            alert(err.response.data.message);
+        })
     }
 
     
 
+
+
     return (
-        <div>
-            <center>
-                {
-                    (isLoggedIn) ? (<Admin/>):(
-                    (!isOtpSent) ? (
-                        <div>
-                            <h1>Please Login First</h1>
-                            <FormGroup>
-                                <Label
-                                    for="email"
-                                >
-                                </Label>
-                                <Input
-                                    id="email"
-                                    name="email"
-                                    placeholder="Enter Email"
-                                    type="email" className="input"
-                                    onChange={inputEmailEvent}
-                                />
-                            </FormGroup>
-                            <Button onClick={sendOTP}>Send OTP</Button>
-                        </div>
-                    ) : (
-                        (!isOtpVerified) ? (
-                            <div>
-                            <h1>Enter your OTP</h1>
-                            <FormGroup>
-                                <Label for="otp-input" id="Enter-otp-input">Enter OTP</Label>
-                                <br></br>
-                                <Input id="otp" name="otp" placeholder="Enter OTP" className="input" onChange={inputOTPEvent} />
-                            </FormGroup>
-                            <Button onClick={() => verifyOTP()}>Submit OTP</Button>
+        <div className='signin'>
 
-                        </div>
-                        ) : (
-                            <div>
-                            <h1>Enter Secret Key</h1>
-                            <FormGroup>
-                                
-                                <br></br>
-                                <Input id="otp" name="otp" placeholder="Enter Secret Key" className="input" onChange={inputSecretKeyEvent} />
-                            </FormGroup>
-                            <Button onClick={() => verifySecretKey()}>Submit Key</Button>
+        <Container className="justify-content-center" style={{marginTop:"10%"}}>
+            <h4 style={{textAlign:"center"}}>Admin Login</h4>
+            <br/>
+            <Row>
+                <Col>
+                    <MDBInput wrapperClass='mb-4' placeholder='Email address' id='form1' type='email' onChange={handleEmailChange} />
+                </Col>
+                <Col>
+                    <MDBInput wrapperClass='mb-4' placeholder='Password' id='form2' type='password'  onChange={handlePasswordChange}/>
+                </Col>
+            </Row>
+            
+            
+            <Row>
+               <Col>
+                    <MDBInput wrapperClass='mb-4' placeholder='Enter 6 digit OTP recieved on mail' id='form3' type='number' onChange={handleOtpChange}  />
+               </Col>
+               <Col>
+                    <Button className="mb-4 w-100" onClick={verifyEmail}>Verify Email</Button>
+               </Col> 
+            </Row>
+            
+            
 
-                        </div>
-                        )
+            <Button id="signInButtonAdmin" className="mb-4 w-100" disabled={!isEmailVerified} onClick={signIn}>Sign in</Button>
+            {/* <p className="text-center">Not a member? <a onClick={() => handleJustifyClick('tab2')} >Register</a></p> */}
+            
+        </Container>
 
-                        
-
-                    )
-                    )
-                }
-
-            </center>
-
-        </div>
-
-    )
+    </div>
+    );
 }
 export default AdminLogin

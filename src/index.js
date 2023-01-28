@@ -4,7 +4,7 @@ import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {  HashRouter, Route, Routes } from 'react-router-dom';
+import {  HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Login from './components/Login-Signup/Login';
 import ProductDetails from './components/Items/ProductDetails';
 import Cart from "./components/Shopping-Cart/Cart";
@@ -83,7 +83,7 @@ root.render(
     <Routes>
       <Route path='/' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <App/>
         </Suspense>
@@ -92,7 +92,7 @@ root.render(
       <Route path='/productDetails/:ModelNo' element = {<ProductDetails/>}/>
       <Route path='/admin' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <AdminLogin/>
         </Suspense>
@@ -103,14 +103,14 @@ root.render(
       <Route path='/categorydrop' element = {<CategoryDropdowns/>}/>
       <Route path='/pendingdelivery' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>  
           <PendingDelivery/>
         </Suspense>
       }/>
       <Route path='/allcomplaints' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <AllComplaints/>
         </Suspense>
@@ -122,7 +122,7 @@ root.render(
       <Route path='/my-orders' element={<OrderInvoices/>}/>
       <Route path='/upload' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <UploadExcel/>
         </Suspense>
@@ -131,7 +131,7 @@ root.render(
       <Route path='/ratereview' element = {<RateReviewProducts/>}/>
       <Route path='/usercomplaint' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <UserComplaint/>
         </Suspense>
@@ -139,35 +139,35 @@ root.render(
       
       <Route path='/completedorders' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <CompletedOrders/>
         </Suspense>
       }/>    
       <Route path='/terms-of-use' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <TermsOfUse/>
         </Suspense>    
       }/>
       <Route path='/storelocator' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>  
           <StoreLocator/>
         </Suspense>
       }/>
       <Route path='/addSubCategories/:ModelNos' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <AddSubCategories/>
         </Suspense>
       }/>
       <Route path='/addProductInformation/:ModelNos' element={
           <Suspense fallback={
-            <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+            <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
           }> 
           <AddProductInformation/>
         </Suspense>
@@ -176,7 +176,7 @@ root.render(
       
       <Route path='/branddetails' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>  
           <BrandDetails/>
         </Suspense>    
@@ -184,7 +184,7 @@ root.render(
       <Route path='/brandcatproducts' element={<BrandCatProducts/>}/>
       <Route path='/brandofferposterproducts' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <BrandOfferPosterProducts/>
         </Suspense>
@@ -194,14 +194,14 @@ root.render(
       <Route path='/wishlistproducts' element={<WishlistProducts/>}/>
       <Route path='/shippingoptions' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <ShippingOptions/>
         </Suspense>  
         }/>
       <Route path='/paymentreturns' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <PaymentReturns/>
         </Suspense>  
@@ -214,14 +214,14 @@ root.render(
 
       <Route path= '/:Category/:SubCategory/:SubSubCategory' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <SelCatProducts/>
         </Suspense>
       }/>
       <Route path='/:Category' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <SelCatProducts/>
         </Suspense>
@@ -229,7 +229,7 @@ root.render(
 
       <Route path = "/payment" element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <Payment/>
         </Suspense>
@@ -238,7 +238,7 @@ root.render(
 
       <Route path='/categoryproducts' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <CategoryProductsSwiper/>
         </Suspense>
@@ -246,7 +246,7 @@ root.render(
         
       <Route path='/categoryProductsall'element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <CategoryProducts/>
         </Suspense>
@@ -254,7 +254,7 @@ root.render(
 
       <Route path='/compareProducts' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <AddToCompareProducts/>
         </Suspense>
@@ -262,7 +262,7 @@ root.render(
 
       <Route path="/checkout" element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <AddressBuyNowSummary/>
         </Suspense>    
@@ -270,7 +270,7 @@ root.render(
 
       <Route path='/productsbydeal' element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <ProductsByDeal/>
         </Suspense>    
@@ -278,7 +278,7 @@ root.render(
       <Route path='/invoice' element={<Invoice/>}/>
       <Route path='/rate-products' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }> 
           <Orders/>
         </Suspense>
@@ -286,7 +286,7 @@ root.render(
 
       <Route path='/generatebill' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <GenerateBill/>
         </Suspense>
@@ -296,35 +296,36 @@ root.render(
       }/>
       <Route path='/aboutcompany' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <AboutCompany/>
         </Suspense>  
       }/>
       <Route path="/privacypolicy" element={
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>  
           <PrivacyPolicy/>
         </Suspense>
       }/>
       <Route path='/faq' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <FAQ/>
         </Suspense>  
       }/>
       <Route path='/contactus' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
         }>   
           <ContactUs/>
         </Suspense>
       }/>
       <Route path='paymentsuccess' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",margin:"50%"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} 
+          />
         }>   
           <PaymentSuccess/>
         </Suspense>    

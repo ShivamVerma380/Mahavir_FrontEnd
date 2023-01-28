@@ -16,12 +16,16 @@ const PendingDelivery = () => {
     const navigate = useNavigate();
     
     useEffect(()=>{
+
+        if(localStorage.getItem("isAdminLoggedIn")!=="yes,true"){
+            navigate('/')
+        }
         if(!isOrdersFetched){
             axios.get(url+"/pending-orders")
                 .then(function(response){
                     if(response.status==200){
                         console.log("Success",response.data)
-                        SetOrders(response.data);
+                        SetOrders([...response.data].reverse());
                         SetIsOrdersFetched(true);
                     }else{
                         console.log("response",response);
@@ -36,7 +40,7 @@ const PendingDelivery = () => {
     function handleOrderClick(order){
         console.log("Order clicked",order);
         let date = new Date();
-        var token=getCookie("jwtToken");
+        var token=localStorage.getItem("jwtTokenAdmin");
         var form_data_body={
             "orderId":""+order.orderId,
             "deliveryDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()
@@ -101,8 +105,8 @@ const PendingDelivery = () => {
                                 <td>{order.userAddress.mobileNumber}</td>
                                 <td>{order.paymentAmount}</td>
                                 <td>{order.paymentMode}</td>
-                                <td><Button onClick={()=>handleGenerateInvoice(order)}>👁️‍🗨️</Button></td>
-                                <td><Button onClick={()=>handleOrderClick(order)}>✅</Button></td>
+                                <td onClick={()=>handleGenerateInvoice(order)}>📅</td>
+                                <td ><Button onClick={()=>handleOrderClick(order)}>✅</Button></td>
                             </tr>
                         );
                     })

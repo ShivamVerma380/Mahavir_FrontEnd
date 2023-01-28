@@ -96,6 +96,7 @@ function Cart() {
                 }
             })
             setCookie("models",arr,20);
+            localStorage.setItem("buyProduct",arr);
             // console.log("Models",getCookie("models"));
             navigate("/checkout");
         }

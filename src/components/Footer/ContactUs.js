@@ -68,7 +68,7 @@ const ContactUs = () => {
                             </Card>
                         </Col>
 
-                        <Col md={3}>
+                        {/* <Col md={3}>
                             <Card>
                                 <Card.Body>
                                     <Card.Title>
@@ -82,7 +82,7 @@ const ContactUs = () => {
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
-                        </Col>
+                        </Col> */}
 
 
                     </Row>
@@ -149,7 +149,7 @@ const ContactUs = () => {
                         </Card>
                     </Col>
 
-                    <Col md={3}>
+                    {/* <Col md={3}>
                     <Card style={{ marginTop: 40, padding: 10, height:150}}>
                             <Card.Title>
                                 Camp
@@ -160,7 +160,7 @@ const ContactUs = () => {
 
                             </Card.Text>
                         </Card>
-                    </Col>
+                    </Col> */}
                 </Row>
 
 

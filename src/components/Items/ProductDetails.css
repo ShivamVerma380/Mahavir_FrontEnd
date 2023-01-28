@@ -340,12 +340,12 @@ cursor: pointer;
   /* background-color: #11639d; */
 }
 
-::-webkit-scrollbar{
+/* ::-webkit-scrollbar{
 
   width:0;
   background: transparent;
 
-}
+} */
 
 
 
@@ -641,9 +641,9 @@ height: 35px;
     -ms-overflow-style: none;
 
   }
-  ::-webkit-scrollbar {
+  /* ::-webkit-scrollbar {
     display: none;
-  }
+  } */
   .offerrow{
     margin-top: 10px;
     margin-bottom: 10px;
