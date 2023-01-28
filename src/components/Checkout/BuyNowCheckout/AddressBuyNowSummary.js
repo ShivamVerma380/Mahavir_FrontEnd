@@ -51,7 +51,7 @@ function AddressBuyNowSummary() {
       // console.log("Response", response);
       if (response.status == 200) {
         // console.log("Address response", response.data);
-        setAddress([...response.data]);
+        setAddress([...response.data].reverse());
         // console.log("Address: ", address)
         setIsAddressFetched(true);
 
