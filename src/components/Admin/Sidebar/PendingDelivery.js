@@ -40,7 +40,7 @@ const PendingDelivery = () => {
     function handleOrderClick(order){
         console.log("Order clicked",order);
         let date = new Date();
-        var token=getCookie("jwtToken");
+        var token=localStorage.getItem("jwtTokenAdmin");
         var form_data_body={
             "orderId":""+order.orderId,
             "deliveryDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()
