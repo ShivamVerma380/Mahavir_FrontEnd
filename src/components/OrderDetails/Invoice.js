@@ -122,7 +122,9 @@ function Invoice() {
                                             </thead>
                                             <tbody>
                                                 {
+                                                    
                                                     products.map(product => {
+                                                        console.log("p: "+JSON.stringify(product));
                                                         return (
                                                             <tr>
                                                                 <td>{product.modelNumber}</td>
