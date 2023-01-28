@@ -80,11 +80,21 @@
 /* desktop and large screens */
 @media screen and (min-width: 1025px) and (max-width:1200px)
 {
-
+  .offerslide .carousel-item {
+    height: fit-content;
+  }
+  .offerslide .carousel-item img{
+    height: fit-content;
+  }
 }
 
  /* extra large screens */
  @media screen and (min-width: 1201px) 
  {
-
+  .offerslide .carousel-item {
+    height: fit-content;
+  }
+  .offerslide .carousel-item img{
+    height: fit-content;
+  }
  }
