@@ -104,13 +104,13 @@ function Deals({deals}) {
            }
          }).then(function (response) {
            if (response.status == 200) {
-             toast.success(<b>Added to wishlist successfully</b>)
+             toast.info(<b>Item added to wishlist</b>)
              
             
            }
          }).catch(function (error) {
            if(error.response.status==406) {
-             toast.warn(<b>Item already present in Wishlist</b>)
+             toast.info(<b>Item added to wishlist</b>)
              
            }
            else {
