@@ -50,6 +50,8 @@ function Payment(){
 
     let date = new Date()
 
+
+    // localStorage.setItem("paymentType","");
     
 
     const PayAmount=(e)=>{
@@ -58,11 +60,16 @@ function Payment(){
         if(localStorage.getItem("Amount")===""){
             // alert("Please enter amount");
             toast.warn("Please enter amount");
-        }else if(localStorage.getItem("paymentType")==null){
+        }else if(localStorage.getItem("paymentType")!=="cashOnDelivery"){
             // alert("Please select payment type")
             toast.warn(<b>Please select payment type</b>)
         }else{
             if(localStorage.getItem("paymentType")==="cashOnDelivery"){
+
+                // document.getElementById("payment_nextbtn").setDis
+
+                e.currentTarget.disabled = true;
+
                 localStorage.setItem("paymentmode",'cashOnDelivery');
                 const form_data_body={
                     products,
@@ -89,15 +96,24 @@ function Payment(){
                 }).then(res=>{
                     if(res.status==200){
                         // console.log("response",res)
+                        toast.success(<b>Order Placed Successfully</b>)
                         SetIsPaymentDone(true)
                         SetIsPaymentDone(true)
                         navigate("/paymentsuccess")
+                        localStorage.removeItem("buyProduct");
                         localStorage.removeItem("paymentType");
+                        e.currentTarget.disabled = false;
                         // navigate("/invoice")
                         // localStorage.setItem("BuyProductInvoice",cartModels);
+                    }else{
+                        // console.log("Error",res)
+                        toast.error(<b>{res.data.message}</b>)
+                        e.currentTarget.disabled = false;
                     }
                 }).catch(err=>{
+                    toast.error(<b>{err.response.data.message}</b>)
                     console.log("Error",err.response)
+                    e.currentTarget.disabled = false;
                 })
             }else{
                 const options={
@@ -201,10 +217,15 @@ function Payment(){
                                         </Card>
                                     </Col> */}
                                     <Col md={12}>
-                                        <Card style={{ width: "150px", height: "100px", border: "1px solid black", margin: "10px", backgroundColor: isActive1 ? 'lightblue' : '' }} onClick={() => { paymentType = 'cashOnDelivery'; setIsActive1(true); setIsActive(false); } }>
+                                        <Card style={{ width: "150px", height: "100px", border: "1px solid black", margin: "10px", backgroundColor: isActive1 ? 'lightblue' : '' }} onClick={() => { localStorage.setItem("paymentType","cashOnDelivery"); paymentType = 'cashOnDelivery'; setIsActive1(true); setIsActive(false); } }>
                                             <Card.Img id="cashOnDelivery" onClick={() => { localStorage.setItem("paymentType",'cashOnDelivery'); setIsActive1(true); setIsActive(false); } } style={{ padding: "10px", width: "100px", height: "100px", marginLeft: "20px" }} variant="top" src="https://cdn-icons-png.flaticon.com/512/1019/1019607.png" />
                                             {/* onClick={SetPaymentType("cashOnDelivery")} */}
                                         </Card>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={12}>
+                                        <h3>Cash On Delivery</h3>
                                     </Col>
                                 </Row>
 
@@ -216,7 +237,7 @@ function Payment(){
                                 <Row>
                                     <Col md={3}></Col>
                                     <Col md={6}>
-                                <Button className="payment_nextbtn" onClick={PayAmount}>Next</Button>
+                                <Button id="payment_nextbtn" className="payment_nextbtn" onClick={PayAmount}>Next</Button>
                                 </Col>
                                 </Row>
                             </Col>

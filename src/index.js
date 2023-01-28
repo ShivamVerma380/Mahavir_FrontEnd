@@ -4,7 +4,7 @@ import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {  HashRouter, Route, Routes } from 'react-router-dom';
+import {  HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Login from './components/Login-Signup/Login';
 import ProductDetails from './components/Items/ProductDetails';
 import Cart from "./components/Shopping-Cart/Cart";
@@ -324,7 +324,8 @@ root.render(
       }/>
       <Route path='paymentsuccess' element = {
         <Suspense fallback={
-          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} 
+          />
         }>   
           <PaymentSuccess/>
         </Suspense>    
