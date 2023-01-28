@@ -63,6 +63,8 @@ const ProductsByDeal = () => {
             "Content-Type": "multipart/form-data"
           }
         }).then(function (response) {
+
+
           if (response.status == 200) {
             // console.log("Added to wishlist successfully");
             // toast.success(<b>Added to wishlist successfully</b>)
@@ -75,13 +77,16 @@ const ProductsByDeal = () => {
             // navigate("/");
           }
           else{
-            // alert("Item already present in wishlist")
-            toast.warn(<b>Item already present in wishlist</b>)
-            console.log(response.data)
+
+            if(response.status==406){
+                // alert("Item already present in wishlist")
+                toast.success(<b>Item added to  wishlist</b>)
+                console.log(response.data)
+            }  
           }
         }).catch(function (error) {
             // alert("Item already present in wishlist")
-            toast.warn(<b>Item already present in wishlist</b>)
+            toast.success(<b>Item added to wishlist</b>)
             console.log("Error", error);
           
         })
