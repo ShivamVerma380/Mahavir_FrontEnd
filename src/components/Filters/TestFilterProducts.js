@@ -474,6 +474,9 @@ function TestFilterProducts() {
             // console.log("Products Array",productsArray.length);
 
             SetSelectedProducts(productsArray);
+            setPaginationLength(Math.ceil(productsArray.length/10));
+            setPage(1);
+            setPaginationProducts([...productsArray].slice(0, 10));
 
         } else {
 
@@ -554,6 +557,9 @@ function TestFilterProducts() {
             // console.log("Products Array",productsArray.length);
 
             SetSelectedProducts(productsArray);
+            setPaginationLength(Math.ceil(productsArray.length/10));
+            setPage(1);
+            setPaginationProducts([...productsArray].slice(0, 10));
         }
     }
 
@@ -617,7 +623,10 @@ function TestFilterProducts() {
             })
             // console.log("Products Array",productsArray.length);
 
-            SetSelectedProducts(productsArray);
+            SetSelectedProducts([...productsArray]);
+            setPaginationLength(Math.ceil(productsArray.length/10));
+            setPage(1);
+            setPaginationProducts([...productsArray].slice(0, 10));
             navigate("/" + localStorage.getItem("Category"))
             topFunction();
         } else {
@@ -676,7 +685,10 @@ function TestFilterProducts() {
             })
             // console.log("Products Array",productsArray.length);
 
-            SetSelectedProducts(productsArray);
+            SetSelectedProducts([...productsArray]);
+            setPaginationLength(Math.ceil(productsArray.length/10));
+            setPage(1);
+            setPaginationProducts([...productsArray].slice(0, 10));
             navigate("/" + localStorage.getItem("Category"))
             topFunction();
         }
@@ -789,12 +801,14 @@ function TestFilterProducts() {
 
     function fetchPaginationProducts(event,value){
         // console.log("value",value)
+        setPage(value)
         if(value === 1){
             setPaginationProducts([...selectedProducts.slice(0,10)])
         }
         else{
             setPaginationProducts([...selectedProducts.slice((value-1)*10,value*10)])
         }
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1156,7 +1170,7 @@ function TestFilterProducts() {
                             )
                         }
                         <div style={{ display: 'block', padding: 30 }}>
-                        <Pagination count={paginationLength} color="primary" onChange={(event,value)=>fetchPaginationProducts(event,value)}/>
+                        <Pagination count={paginationLength} color="primary" page={page} onChange={(event,value)=>fetchPaginationProducts(event,value)}/>
                         </div>
 
                     </Col>
