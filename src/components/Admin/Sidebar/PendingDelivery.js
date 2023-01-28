@@ -21,7 +21,7 @@ const PendingDelivery = () => {
                 .then(function(response){
                     if(response.status==200){
                         console.log("Success",response.data)
-                        SetOrders(response.data);
+                        SetOrders([...response.data].reverse());
                         SetIsOrdersFetched(true);
                     }else{
                         console.log("response",response);
