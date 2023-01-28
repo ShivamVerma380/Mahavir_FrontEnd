@@ -17,10 +17,6 @@ function Navbar() {
   const handleShow = () => setShow(true);
   return (
     <>
-
-    
-
-    
       <IconContext.Provider value={{ color: '#ffff' }}>
         <div className='navbar'>
           <Link to='#' className='menu-bars'>
