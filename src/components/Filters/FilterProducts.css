@@ -249,6 +249,10 @@ letter-spacing: 0.01em;
 
 color: rgba(33, 33, 33, 0.7);
 }
+
+.dealsPage{
+    padding: 2%;
+}
 @media only screen and (max-width: 1024px){
     .filterproductsRow{
         width: 100%;
@@ -392,7 +396,9 @@ h5{font-weight: 400}
 }
 @media screen and (min-width:320px) and (max-width:480px){
 /* mobile  */
-
+.dealsPage{
+    padding: 1%;
+}
 .productprice {
     font-size: 14px;
 }

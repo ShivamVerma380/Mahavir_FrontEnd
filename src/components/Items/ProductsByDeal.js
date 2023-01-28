@@ -11,8 +11,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import url from "../../Uri";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Footer from "../Footer/Footer";
-
-
+import './Categoryproducts.css';
+import "../Filters/FilterProducts.css"
 
 const ProductsByDeal = () => {
     var token=getCookie("jwtToken");
@@ -266,161 +266,140 @@ const ProductsByDeal = () => {
           (((len-1)>0) ? <Button id="comparebtn" style={{position:'fixed'}} onClick={()=>navigate('/compareProducts')}>Compare: {len-1}</Button> : (null))
           
           }
-            <Row className="mainpage" style={{marginTop:"120px"}}>
-                <Col md={1}></Col>
-                <Col md={10} style={{background:"white"}}>
-                    {
-                        <Row className="filterproductsRow">
-                    
-                    
+          
+          <Row className="mainpage" style={{marginTop:"120px"}}>
+          <div className="dealsPage">
+           <Col style={{background:"white"}}>
+               {
+                   <Row className="filterproductsRow">
 
-                        <Col >
-                        <h3 style={{fontWeight:600,  lineHeight:"21px",fontFamily:"Roboto", textAlign:"center"}}>{location.state.name}</h3>
-    
-                        
-    
-                        <p className="products" style={{textAlign:"center"}}>(<b>{location.state.index.products.length}</b> Products Found )</p>
-                        </Col> 
-                        
+                   <Col >
+                   <h3 style={{fontWeight:600,  lineHeight:"21px",fontFamily:"Roboto", textAlign:"center"}}>{location.state.name}</h3>
 
-                        {/* <Col  style={{display:'flex',justifyContent:'end'}}>
-                        <NavDropdown title={<b>Sort By<RiArrowDropDownLine style={{color:"black"}} size={25}/></b>}>
-                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
-                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
-                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
-                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
-                        <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
-                        </NavDropdown>
-                        </Col> */}
-                        
-                        </Row>
-                
-                    }
-                    <br></br>
-                    {
-                    location.state.index.products.map(index => {
-                    return (
+                   
 
-                        <>
-                        <Row className="filterproductsrow">
-                            <Col md={1}></Col>
-                            <Col md={2} className="imagecol">
-                                {/* <img onClick={() => callProductDetails(index)} style={{ height: '60%', width: '100%', cursor: 'pointer', justifySelf: 'center' }} src={"data:image/png;base64," + index.productImage1.data} /> */}
-                                {/* <img onClick={() => callProductDetails(index)} style={{ height: '60%', width: '100%', cursor: 'pointer', justifySelf: 'center' }} src={index.productImage1} /> */}
-                                <Image fluid="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                   <p className="products" style={{textAlign:"center"}}>(<b>{location.state.index.products.length}</b> Products Found )</p>
+                   </Col> 
+                   
 
-                            </Col>
-                            <Col md={4}>
-                                <Row className="innerrow" onClick={() => callProductDetails(index)}>
-                                    <Col md={1}></Col>
-                                    <Col md={12}>
-                                    <h4 className="multipleproduct_title" onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
-                                    </Col>
-                                </Row>
+                   {/* <Col  style={{display:'flex',justifyContent:'end'}}>
+                   <NavDropdown title={<b>Sort By<RiArrowDropDownLine style={{color:"black"}} size={25}/></b>}>
+                   <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByLowPrice}>Price: Low To High</NavDropdown.Item>
+                   <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByHighPrice}>Price: High To Low</NavDropdown.Item>
+                   <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByTopRated}>Top Rated</NavDropdown.Item>
+                   <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank">Latest Arrival</NavDropdown.Item>
+                   <NavDropdown.Item style={{color:'black',fontSize:"20px",fontWeight:'bold'}}  target="_blank" onClick={SortByDiscount}>Discount: More To Less</NavDropdown.Item>
+                   </NavDropdown>
+                   </Col> */}
+                   
+               </Row>
+           
+               }
+               <br></br>
+               {
+               location.state.index.products.map(index => {
+               return (
 
-                                {/* <Row> */}
-                                                {/* <Col md={11} style={{    paddingBottom: '40px',width: '10%'}} className="star">
-                                                {Math.round(index.averageRating * 10) / 10} <span> </span><AiFillStar />
-=======
-                                {/* <Row>
->>>>>>> c0487a6602f7d443adf779576a8923d447849b5a
-                                                
+                   <>
+                   <Row className="filterproductsRow">
+                                   <Col md={2} className="imagecol">
+                                       <Image style={{border:'0', cursor:"pointer"}} thumbnail="true" className="filterproductImage"  onClick={() => callProductDetails(index)}  src={index.productImage1} />
+                                   </Col>
+                                   <Col md={7} >
+                                       <Row className="innerrow" onClick={() => callProductDetails(index)} >
+                                           
+                                               <h4 className="multipleproduct_title" onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h4>
+                                       </Row>
+                                       <Row>
+                                           {/* <Col md={11} style={{    paddingBottom: '40px',width: '10%'}} className="star">
+                                           {Math.round(index.averageRating * 10) / 10} <span> </span><AiFillStar />
+                                           
+                                           </Col> */}
+                                          
 
+                                              
+                                               {/* <StarRatings name="small-rating"  size={20} totalStars={5} rating={index.averageRating}/> */}
+                                           
+                                       </Row>
+                                       
+                                       <Row className="innerrow">
+                                           <Col>
+                                               {
+                                                   (index.productHighlights!=null)?(
+                                                       index.productHighlights.split(';').map(highlight => {
+                                                           return (
+                                                               <h6 className="multipleproduct_highlights">• {highlight}<br></br></h6>
+                                                           );
+                                                       })
+                                                   ):(
+                                                       null
+                                                   )
                                                    
-                                                
+                                               }
+                                               {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
+                                           </Col>
 
-                                            {/* </Row> */}
+                                       </Row>
+                                       
 
-                                            
+                                       
+{/* 
+                                       <Row className="innerrow">
+                                           <Col><Button className="filterproductBtn"  variant="outline-primary" size="1" onClick={()=>addtocart(index.modelNumber)}>Add To Cart</Button></Col>
+                                           <Col><Button className="filterproductBtn" variant="outline-primary">Buy Now</Button></Col>
+                                       
 
-                                            <Row className="innerrow">
-                                                <Col md={1}></Col>
-                                                <Col>
-                                                    {
-                                                        (index.productHighlights!=null)?(
-                                                            index.productHighlights.split(';').map(highlight => {
-                                                                return (
-                                                                    <h6 className="multipleproduct_highlights">• {highlight}<br></br></h6>
-                                                                );
-                                                            })
-                                                        ):(
-                                                            null
-                                                        )
-                                                        
-                                                    }
-                                                    {/* <h6 style={{color:'GrayText'}}>{index.productHighlights.split}</h6> */}
-                                                </Col>
+                                       </Row> */}
+                                   </Col>
 
-                                            </Row>
-                                            </Col>
-                                <Col md={3}>
-                                <Row >
-                                                <Col >
-                                                    {
-                                                        (index.offerPrice==null) ? (
-                                                            <h4 style={{fontSize:'24px'}}>MRP: <b>₹{index.productPrice}</b></h4>
-                                                        ) : (
-                                                            // <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><p style={{fontSize:'24px',color:'#c10000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</p> | MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid" }}>₹{index.productPrice}</b></h5></>
-                                                            <><h5 style={{fontSize:'24px',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}><b style={{fontSize:'24px',color:'#FA0000',fontWeight:'600',fontFamily:'Roboto',lineHeight:'26px',letterSpacing:'0.01em'}}>MSP: ₹{index.offerPrice}</b><br></br>
-                                                            <b style={{fontWeight:500,fontSize:"18px",color:"#565959" }}>MRP: <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",fontWeight:500,fontSize:"18px",color:"#565959"}}>₹{index.productPrice}  </b></b>  <b style={{color:"green",fontSize:"18px",marginLeft:"10px"}}>{Math.round((parseInt(index.productPrice.replace(',',''))-parseInt(index.offerPrice.replace(',','')))*100/parseInt(index.productPrice.replace(',','')))}% off</b></h5></>  
-                                                        )
-                                                    }
-                                                </Col>
-                                            </Row>
-                                            <Row className="checkboxx">
-                                                <Form className="check">
+                                   <Col md={3} className="lastcol">
 
-                                                    <Form.Check style={{
-                                                        '@media screen and(min-width: 480px)': {
-                                                            display: 'none'
-                                                    },fontSize:"18px"}} defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber} label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
+                                       
 
+                                       <Row >
+                                           <Col >
+                                               {
+                                                   (index.offerPrice==null) ? (
+                                                       <h5 className="productprice">MRP: <b>₹{index.productPrice}</b></h5>
+                                                   ) : (
+                                                       <><h5 className="productprice"><b >MSP: ₹{index.offerPrice}</b></h5><br></br>
+                                                       <h4 className="offerprice"><b >MRP: <b style={{ textDecorationLine: "line-through"}}>₹{index.productPrice}  </b></b>  <b style={{color:'green'}}>  {Math.round((parseInt(index.productPrice.replace(',',''))-parseInt(index.offerPrice.replace(',','')))*100/parseInt(index.productPrice.replace(',','')))}% off</b></h4></>
+                                                   )
+                                               }
+                                           </Col>
+                                       </Row>
+                                       <Row className="checkboxx">
+                                           <Form className="check">
 
-                                                </Form>
-                                            </Row>
-                                            <br></br>
+                                               <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber} style={{fontSize:"18px"}} label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
+                                           </Form>
+                                       </Row>
+                                       <br></br>
 
-                                            <Row>
-                                            
-                                            
-                                            <Button style={{width:"max-content", height:"max-content", fontSize:"18px"}} className="filterproductBtn" variant="outline-primary" onClick={()=>WishlistHandler(index)}>Add to wishlist</Button>
-                                            
-                                            </Row>
-                                </Col>
-                                <Col md={1}></Col>
+                                       <Row >
+                                        
+                                            <Button className="filterproductBtn" variant="outline-primary" onClick={()=>WishlistHandler(index)}>Add to wishlist</Button>
 
-                                {/* <Row>
-                                    <Col md={11}>
-                                        <h3 onClick={() => callProductDetails(index)} style={{ cursor: 'pointer' }}>{index.productName}</h3>
-                                    </Col>
-                                    <Col md={1}>
-                                        {(localStorage.getItem("wishlistproduct").includes(index.modelNumber)) ?
-                                            <AiFillHeart style={{ marginTop: "10px", marginLeft: "10px", fill: 'rgb(255, 88, 88)' }} className="wishlisticon" size={50} onClick={() => WishlistHandler(index)} /> :
-                                            <AiOutlineHeart style={{ marginTop: "10px", marginLeft: "10px" }} className="wishlisticon" size={50} onClick={() => WishlistHandler(index)} />
-                                        }
-                                    </Col>
+                                       </Row>
+                                        
+                                       
 
-                                </Row> */}
-                                
-                                
+                                   </Col>
+                                   
 
-                                
-
-                                <br></br>
-                            
+                               </Row>
+               
+                   </>
 
 
-                        </Row>
-                        <hr></hr>
-                        <br></br>
-                        </>
-
-
-                    )
-                })}
-                    
-                </Col>
-            </Row>
+               )
+           })}
+               
+           </Col>
+           </div>
+       </Row>
+          
+            
 
 
 

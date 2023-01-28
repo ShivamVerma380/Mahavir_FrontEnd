@@ -11,6 +11,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import MovingComponent from 'react-moving-text'
 import { MDBCarousel,MDBCol,MDBCarouselInner,MDBCarouselItem,MDBCarouselElement,MDBCardHeader,MDBCardFooter,MDBBtn,MDBRow,MDBCard, MDBCardBody, MDBCardTitle, MDBCardSubTitle, MDBCardText, MDBCardLink, MDBCardImage ,MDBContainer } from 'mdb-react-ui-kit';
 import url from "../../Uri";
+import './Categoryproducts.css';
+import "../Filters/FilterProducts.css"
 
 function Deals({deals}) {
     // var product = [];
@@ -211,20 +213,12 @@ function Deals({deals}) {
       
         <div>
 
-          
-          
-          
-          
               
               <MDBContainer className="categoryproductscontainer">
             <Row className="categoryproductsrow">
               <Col md={8}>
               <svg className="svgtitle" xmlns="http://www.w3.org/2000/svg">
-
-
               <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
-
-
                 <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
               </filter>
               </svg>
@@ -256,7 +250,7 @@ function Deals({deals}) {
             </Row>
           
           
-          <MDBRow style={{justifyContent: 'center',padding: '10px'}} className='row-cols-1 row-cols-md-3 g-4'>
+          <MDBRow style={{justifyContent: 'center',padding: '10px'}} >
             {
               firstfourproducts.map(index=>{
                 const images = [
@@ -266,7 +260,7 @@ function Deals({deals}) {
                 ];
                 return(
                 <MDBCard className="categoryproductscard" >
-                                   <div className="cardimg">
+                        <div className="cardimg">
                         <MDBCardImage className="cardimage" src={index.productImage1}  alt='...' position='top' />
                         {/* {
                           ( index.productImage2 !== null && index.productImage3 !== null) ? 

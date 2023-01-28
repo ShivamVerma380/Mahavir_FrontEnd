@@ -14,6 +14,8 @@ const AdminHeader = () => {
     const navigate = useNavigate();
     var loginStatus = localStorage.getItem("isLoggedIn");
     const [isUserLoggedIn,setIsUserLoggedIn] = React.useState(localStorage.getItem("isLoggedIn"));
+   
+
     if(loginStatus=="true"){
         console.log("In login status")
         setIsUserLoggedIn(true);

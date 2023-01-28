@@ -936,9 +936,6 @@ function TestFilterProducts() {
                                     <div className="offcavasfilters">
                                         {/* <i class="fa fa-filter fa-3x" aria-hidden="true" onClick={handleShow}></i> */}
                                         <FcFilledFilter onClick={handleShow} />
-                                        {/* <Button variant="primary" onClick={handleShow}>
-        Launch
-      </Button> */}
 
                                         <Offcanvas show={show} onHide={handleClose}>
                                             <Offcanvas.Header closeButton>
@@ -962,9 +959,6 @@ function TestFilterProducts() {
                                                 }
                                                 <hr></hr><br></br>
                                                 <React.Fragment>
-                                                    {/* <Typography id="range-slider" gutterBottom>
-                    Select Price Range:
-                </Typography> */}
 
                                                     <Slider
                                                         defaultValue={[parseInt(min), parseInt(max)]}
@@ -1128,18 +1122,18 @@ function TestFilterProducts() {
                                                     <Row className="checkboxx">
                                                         <Form className="check">
 
-                                                            <Form.Check defaultChecked={(comparemodels.includes(index.modelNumber)) ? (true) : (false)} type="checkbox" id={index.modelNumber} style={{ fontSize: "18px" }} label="Add To Compare" onChange={() => handleAddToCompare(index)} />
+                                                    <Form.Check defaultChecked={(comparemodels.includes( index.modelNumber))?(true):(false)} type="checkbox" id={index.modelNumber} style={{fontSize:"18px"}} label = "Add To Compare" onChange={()=>handleAddToCompare(index)}/>
 
 
-                                                        </Form>
-                                                    </Row>
-                                                    <br></br>
+                                                </Form>
+                                            </Row>
+                                            <br></br>
 
-                                                    <Row >
-                                                        {/* className="btnrow" */}
-
-
-                                                        <Button className="filterproductBtn" variant="outline-primary" onClick={() => WishlistHandler(index)}>Add to wishlist</Button>
+                                            <Row >
+                                                {/* className="btnrow" */}
+                                            
+                                            
+                                                 <Button className="filterproductBtn" variant="outline-primary" onClick={()=>WishlistHandler(index)}>Add to wishlist</Button>
 
                                                     </Row>
 
