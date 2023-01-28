@@ -322,38 +322,7 @@ axios.post(url+"/wishlist", formdata, {
                       <MDBCard className="categoryproductscard">
                         <div className="cardimg">
                         <MDBCardImage className="cardimage" src={index.productImage1}  alt='...' position='top' />
-                        {/* {
-                          ( index.productImage2 !== null && index.productImage3 !== null) ? 
-                            <Carousel interval={1000} className="cardimage2" indicators='' variant="dark">
-                              <Carousel.Item>
-                                <img
-                                  className="d-block w-100"
-                                  src={index.productImage1}
-                                  
-                                  alt="First slide"
-                                />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <img
-                                  className="d-block w-100"
-                                  src={index.productImage2}
-                                  
-                                  alt="Second slide"
-                                />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <img
-                                  className="d-block w-100"
-                                  src={index.productImage3}
-                                  
-                                  alt="Third slide"
-                                />
-                              </Carousel.Item>
-                            </Carousel>
-                            : <MDBCardImage className="cardimage2" src={index.productImage1} alt='...' position='top' />
-
-
-                        } */}
+                       
                             <MDBCardImage onClick={() => callProductDetails(index)} className="cardimage2" src={index.productImage1} alt='...' position='top' />
 
 </div>
