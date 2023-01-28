@@ -138,12 +138,12 @@
 
 /* Product */
 .carousel-control-next-icon {
-  background: black;
-  border-radius: 50%;
+  background-image: url(https://www.freeiconspng.com/thumbs/arrow-icon/right-arrow-icon-27.png);
 }
 .carousel-control-prev-icon {
-  border-radius: 50%;
-  background: black;
+    transform: rotate(180deg);
+    background-image: url(https://www.freeiconspng.com/thumbs/arrow-icon/right-arrow-icon-27.png);
+
 }
 .Cart{
   /* margin: 20px; */

@@ -28,39 +28,43 @@ function PaymentSuccess(){
         <Header/>
         <div style={{marginTop:"150px"}}>
         <Container style={{background:"white"}}>
-            <center>
+       <Row>         
                 <TiTick style={{color:"green"}} size={200}/>
-                <br></br>
-                <br></br>
-                <h4>Yay! Your Order has been recieved </h4>
-                <br></br>
-                <br></br>
+                </Row>
+   <Row>
+   <center><h4>Yay! Your Order has been recieved </h4>
+                    </center>
+                
+                </Row>
+                <Row>
+                    <center>
                 {
                     (paymentmode === "cashOnDelivery")?(
                         <>
-                        <h4>Payment mode: Cash On Delivery</h4>
-                        <br></br>
-                        <h4>Amount to be paid: {paymentamount}</h4>
+                        <h5>Payment mode: Cash On Delivery</h5>
+                     
+                        <h5>Amount to be paid: {paymentamount}</h5>
                         </>
                     ):(
                         <>
-                        <h4>Payment mode : Paid Online</h4>
+                        <h5>Payment mode : Paid Online</h5>
                         </>
                     )
                 }
-                <br></br>
-                <Row>
-                    <Col md={4}></Col>
-                    <Col md={2}>
-                        <Button style={{background:"#C10000",border:"none"}} onClick={handleOrders}>View my Orders</Button>
-                    </Col>
-                    <Col md={2}>
-                    <Button style={{background:"#C10000",border:"none"}} onClick={handleContinue}>Continue Shopping</Button>
-                    </Col>
+                </center>
                 </Row>
-                <br></br>
+                <Row>
                 
-            </center>
+                    <center>
+                        <Button style={{background:"#C10000",border:"none",width:'fit-content',marginLeft:'10px',marginRight:'10px',marginBottom:'20px'}} onClick={handleOrders}>View my Orders</Button>
+                    
+                        <Button style={{background:"#C10000",border:"none",width:'fit-content',marginLeft:'10px',marginRight:'10px',marginBottom:'20px'}} onClick={handleContinue}>Continue Shopping</Button>
+                        </center>
+                    
+                </Row>
+               
+                
+            
         </Container>
         </div>
         <br></br>

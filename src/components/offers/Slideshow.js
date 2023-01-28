@@ -41,7 +41,7 @@ function Slideshow({offerPosters}){
     return(
     
      
-                    <><button onclick={() => topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction} /></button>
+                    <div ><button onclick={() => topFunction()} id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction} /></button>
                     <Carousel style={{ cursor: "pointer" }} className="offerslide">
         {offerPoster = offerPosters.map(index => {
           return (
@@ -60,7 +60,7 @@ function Slideshow({offerPosters}){
           );
 
         })}
-      </Carousel></>
+      </Carousel></div>
 
     );
 }

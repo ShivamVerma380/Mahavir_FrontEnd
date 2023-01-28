@@ -182,21 +182,16 @@
 
 .brand_category_swiper .swiper-slide{
   /* margin-top: 0; */
-  width: 70px;
+  /* width: fit-content !important; */
+  
 }
 
-.brand_category_swiper .swiper-button-next {
-  background: transparent;
-  margin-left: 1%;
-  color: #000;
-  margin-right: 1%;
-}
-
-.brand_category_swiper .swiper-button-prev {
-  background: transparent;
-  margin-left: 1%;
-  color: #000;
-  margin-right: 1%;
+.brand_category_swiper .swiper-button-next, .swiper-button-prev {
+  background: #000000d6;
+  border-radius: 50%;
+    color: white;
+   padding: 20px;
+  
 }
 
 .brand_category_swiper .swiper-pagination-clickable .swiper-pagination-bullet{
@@ -307,7 +302,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
 .brandlogo {
   width: fit-content;
-  height: 126px;
+  height: 100%;
 }
 
 .brandvideo{
@@ -322,6 +317,12 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 .brandsliderimage{
   width: 100%;
 }
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-family: swiper-icons;
+  font-size: 12px;
+ 
+}
 /* title end */
 /* laplops and small screens */
 @media screen and (min-width: 769px) and (max-width:1024px)
@@ -333,8 +334,8 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .brandlogo {
-  
-  height: 90px;
+  width: fit-content;
+  height: 100%;
 }
 }
 
@@ -346,6 +347,12 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 /* laplops and small screens */
 @media screen and (min-width: 769px) and (max-width:1024px)
 {
+  .brand_category_swiper .swiper-slide {
+    margin-left: 15px;
+    /* margin-top: 0; */
+    /* width: fit-content !important; */
+    margin-right: 15px;
+}
   .brandsliderimage{
     height: 300px;
     width: 100%;
@@ -399,8 +406,8 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     width: 100%;
   }
   .brandlogo {
-    height: 100px;
-    width: 100px;
+    height: 100%;
+    width: fit-content;
   }
 
   .brand_category_product_cardimage {
@@ -440,7 +447,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
 .brandlogo {
   width: fit-content;
-  height: 90px;
+  height: 100%;
 }
 
 .brandsliderimage{

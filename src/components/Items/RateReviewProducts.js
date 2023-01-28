@@ -97,13 +97,10 @@ const RateReviewProducts = () => {
         <div style={{marginTop:"150px"}}>
         <Container style={{ marginTop: 50 }}>
 
-            
-            
-            
             <Row>
             
-                <Col md={4}></Col>
-                <Col md={4}>
+                
+                <Col >
                 <h1>Rate this Product</h1>
                 <br></br>
                     <img src={product.productImage1} style={{ width: "150px", height: "150px" }}></img>
@@ -126,16 +123,9 @@ const RateReviewProducts = () => {
                 <Input placeholder="Review of product here " type="textarea" style={{ height: 100 ,fontSize:"16px"}} onChange={ReviewHandler}></Input>
                 <Button style={{ marginTop: 20, backgroundColor:"rgb(255, 88, 88)" ,fontSize:"16px", alignContent:"center"}} onClick={HandleSubmit}>SUBMIT</Button>
                 </Col>
-                <Col md={4} className="productname">
-                    
-                </Col>
 
             </Row>
-
-            
-
-           
-            
+ 
         </Container>
         </div>
         </>
