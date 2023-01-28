@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom'
-import { Button , Col,Row,Container} from 'react-bootstrap';
-import  { useState } from 'react';
+import { Button, Col, Row, Container } from 'react-bootstrap';
+import { useState } from 'react';
 import AdminHeader from "../../Admin/AdminHeader";
 import AdminNavbar from "./AdminNavbar";
 import axios from 'axios';
 import { getCookie } from '../../Cookies';
 import url from '../../../Uri';
+import { useNavigate } from 'react-router-dom';
 const UploadExcel = () => {
   const [selectedproductFile, setSelectedProductFile] = useState();
   const [selectedcategoryFile, setSelectedCategoryFile] = useState();
@@ -26,7 +27,16 @@ const UploadExcel = () => {
   const [isExtraCategoriesFilePicked, setIsExtraCategoriesFilePicked] = useState(false);
 
 
-   var token = getCookie("jwtToken");
+  var token = getCookie("jwtToken");
+
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("isAdminLoggedIn") !== "yes,true") {
+      navigate('/')
+    }
+  })
 
   const ProductFileHandler = (event) => {
     setSelectedProductFile(event.target.files[0]);
@@ -37,17 +47,17 @@ const UploadExcel = () => {
     const formData = new FormData();
 
     formData.append('file', selectedproductFile);
-    console.log("Form Data",formData)
+    console.log("Form Data", formData)
     alert("Submit Clicked")
 
-    axios.post(url+"/excel/products",formData,{
-      headers:{
-        "Authorization": "Bearer "+token
+    axios.post(url + "/excel/products", formData, {
+      headers: {
+        "Authorization": "Bearer " + token
       },
-      
-    }).then(function(response){
+
+    }).then(function (response) {
       console.log(response.data)
-    }).catch(function(error){
+    }).catch(function (error) {
       console.log("Error in products");
       // toast.warn("Error In Fetching orders",error)
 
@@ -65,18 +75,18 @@ const UploadExcel = () => {
     const formData = new FormData();
 
     formData.append('file', selectedcategoryFile);
-    console.log("Form Data",formData)
+    console.log("Form Data", formData)
     alert("Submit Clicked")
 
-    axios.post(url+"/excel/Categories",formData,{
-      headers:{
-        "Authorization": "Bearer "+token
+    axios.post(url + "/excel/Categories", formData, {
+      headers: {
+        "Authorization": "Bearer " + token
       },
-      
-    }).then(function(response){
+
+    }).then(function (response) {
       console.log(response.data)
-    }).catch(function(error){
-      console.log("Error in Categories:",error);
+    }).catch(function (error) {
+      console.log("Error in Categories:", error);
       // toast.warn("Error In Fetching orders",error)
 
     })
@@ -93,18 +103,18 @@ const UploadExcel = () => {
     const formData = new FormData();
 
     formData.append('file', selectedfilterFile);
-    console.log("Form Data",formData)
+    console.log("Form Data", formData)
     alert("Submit Clicked")
 
-    axios.post(url+"/excel/filters",formData,{
-      headers:{
-        "Authorization": "Bearer "+token
+    axios.post(url + "/excel/filters", formData, {
+      headers: {
+        "Authorization": "Bearer " + token
       },
-      
-    }).then(function(response){
+
+    }).then(function (response) {
       console.log(response.data)
-    }).catch(function(error){
-      console.log("Error in filters:",error)
+    }).catch(function (error) {
+      console.log("Error in filters:", error)
     })
 
 
@@ -119,18 +129,18 @@ const UploadExcel = () => {
     const formData = new FormData();
 
     formData.append('file', selectedbrandsFile);
-    console.log("Form Data",formData)
+    console.log("Form Data", formData)
     alert("Submit Clicked")
 
-    axios.post(url+"/excel/shopByBrands",formData,{
-      headers:{
-        "Authorization": "Bearer "+token
+    axios.post(url + "/excel/shopByBrands", formData, {
+      headers: {
+        "Authorization": "Bearer " + token
       },
-      
-    }).then(function(response){
+
+    }).then(function (response) {
       console.log(response.data)
-    }).catch(function(error){
-      console.log("Error in shopByBrands:",error)
+    }).catch(function (error) {
+      console.log("Error in shopByBrands:", error)
     })
 
 
@@ -145,18 +155,18 @@ const UploadExcel = () => {
     const formData = new FormData();
 
     formData.append('file', selectedposterFile);
-    console.log("Form Data",formData)
+    console.log("Form Data", formData)
     alert("Submit Clicked")
 
-    axios.post(url+"/excel/offerposters",formData,{
-      headers:{
-        "Authorization": "Bearer "+token
+    axios.post(url + "/excel/offerposters", formData, {
+      headers: {
+        "Authorization": "Bearer " + token
       },
-      
-    }).then(function(response){
+
+    }).then(function (response) {
       console.log(response.data)
-    }).catch(function(error){
-      console.log("error in offerposters:",error)
+    }).catch(function (error) {
+      console.log("error in offerposters:", error)
     })
 
 
@@ -171,18 +181,18 @@ const UploadExcel = () => {
     const formData = new FormData();
 
     formData.append('file', selecteddealsFile);
-    console.log("Form Data",formData)
+    console.log("Form Data", formData)
     alert("Submit Clicked")
 
-    axios.post(url+"/excel/deals",formData,{
-      headers:{
-        "Authorization": "Bearer "+token
+    axios.post(url + "/excel/deals", formData, {
+      headers: {
+        "Authorization": "Bearer " + token
       },
-      
-    }).then(function(response){
+
+    }).then(function (response) {
       console.log(response.data)
-    }).catch(function(error){
-      console.log("error in deals:",error)
+    }).catch(function (error) {
+      console.log("error in deals:", error)
     })
 
 
@@ -198,18 +208,18 @@ const UploadExcel = () => {
     const formData = new FormData();
 
     formData.append('file', selectedcategoryFile);
-    console.log("Form Data",formData)
+    console.log("Form Data", formData)
     alert("Submit Clicked")
 
-    axios.post(url+"/excel/isCategoryInNavbar",formData,{
-      headers:{
-        "Authorization": "Bearer "+token
+    axios.post(url + "/excel/isCategoryInNavbar", formData, {
+      headers: {
+        "Authorization": "Bearer " + token
       },
-      
-    }).then(function(response){
+
+    }).then(function (response) {
       console.log(response.data)
-    }).catch(function(error){
-      console.log("Error in Categories:",error);
+    }).catch(function (error) {
+      console.log("Error in Categories:", error);
       // toast.warn("Error In Fetching orders",error)
 
     })
@@ -226,18 +236,18 @@ const UploadExcel = () => {
     const formData = new FormData();
 
     formData.append('file', selectedcategoryFile);
-    console.log("Form Data",formData)
+    console.log("Form Data", formData)
     alert("Submit Clicked")
 
-    axios.post(url+"/excel/parentCategories",formData,{
-      headers:{
-        "Authorization": "Bearer "+token
+    axios.post(url + "/excel/parentCategories", formData, {
+      headers: {
+        "Authorization": "Bearer " + token
       },
-      
-    }).then(function(response){
+
+    }).then(function (response) {
       console.log(response.data)
-    }).catch(function(error){
-      console.log("Error in Categories:",error);
+    }).catch(function (error) {
+      console.log("Error in Categories:", error);
       // toast.warn("Error In Fetching orders",error)
 
     })
@@ -250,20 +260,20 @@ const UploadExcel = () => {
   return (
     <div>
       {/* <AdminHeader/> */}
-        <AdminNavbar/>
-        <Container className="uploadexcel" style={{padding:'50px'}}>
-          <Row>
-            <Col sm={6}>
+      <AdminNavbar />
+      <Container className="uploadexcel" style={{ padding: '50px' }}>
+        <Row>
+          <Col sm={6}>
             <h5 >Upload Your Products Excel Datasheet here</h5>
-          
-            <input  type="file" name="file" accept=".xlsx, .xls, .csv" onChange={ProductFileHandler} />
+
+            <input type="file" name="file" accept=".xlsx, .xls, .csv" onChange={ProductFileHandler} />
             <br></br><br></br>
             <Button variant='flat' size="m" onClick={handleProductsFileSubmission}>Submit</Button>
             <br></br><br></br>
-            </Col>
-            <Col sm={6}>
-                  {isProductFilePicked ? (
-              <div style={{fontSize:'15px'}}>
+          </Col>
+          <Col sm={6}>
+            {isProductFilePicked ? (
+              <div style={{ fontSize: '15px' }}>
                 <p ><b>Filename:</b> {selectedproductFile.name}</p>
                 <p ><b>Filetype:</b> {selectedproductFile.type}</p>
                 <p ><b>Size in bytes:</b> {selectedproductFile.size}</p>
@@ -275,22 +285,22 @@ const UploadExcel = () => {
             ) : (
               <p>Select a file to show details</p>
             )}
-      
-            </Col>
-          </Row>
-              <hr></hr>
-          <Row>
-            <Col sm={6}>
+
+          </Col>
+        </Row>
+        <hr></hr>
+        <Row>
+          <Col sm={6}>
             <h5 >Upload Your Categories Datasheet here</h5>
-          
-            <input  type="file" name="categoriesfile" accept=".xlsx, .xls, .csv" onChange={CategoryFileHandler}/>
+
+            <input type="file" name="categoriesfile" accept=".xlsx, .xls, .csv" onChange={CategoryFileHandler} />
             <br></br><br></br>
             <Button variant='flat' size="m" onClick={handleCategoryFileSubmission}>Submit</Button>
             <br></br><br></br>
-            </Col>
-            <Col sm={6}>
-                  {isCategoryFilePicked ? (
-              <div style={{fontSize:'15px'}}>
+          </Col>
+          <Col sm={6}>
+            {isCategoryFilePicked ? (
+              <div style={{ fontSize: '15px' }}>
                 <p ><b>Filename:</b> {selectedcategoryFile.name}</p>
                 <p ><b>Filetype:</b> {selectedcategoryFile.type}</p>
                 <p ><b>Size in bytes:</b> {selectedcategoryFile.size}</p>
@@ -302,23 +312,23 @@ const UploadExcel = () => {
             ) : (
               <p>Select a file to show details</p>
             )}
-      
-            </Col>
-          </Row>
 
-          <hr></hr>
-          <Row>
-            <Col sm={6}>
+          </Col>
+        </Row>
+
+        <hr></hr>
+        <Row>
+          <Col sm={6}>
             <h5 >Upload filter criterias </h5>
-         
-            <input  type="file" name="filtercriteria" accept=".xlsx, .xls, .csv" onChange={FilterFileHandler}/>
+
+            <input type="file" name="filtercriteria" accept=".xlsx, .xls, .csv" onChange={FilterFileHandler} />
             <br></br><br></br>
             <Button variant='flat' size="m" onClick={handleFilterFileSubmission}>Submit</Button>
             <br></br><br></br>
-            </Col>
-            <Col sm={6}>
-                  {isFilterFilePicked ? (
-              <div style={{fontSize:'15px'}}>
+          </Col>
+          <Col sm={6}>
+            {isFilterFilePicked ? (
+              <div style={{ fontSize: '15px' }}>
                 <p ><b>Filename:</b> {selectedfilterFile.name}</p>
                 <p ><b>Filetype:</b> {selectedfilterFile.type}</p>
                 <p ><b>Size in bytes:</b> {selectedfilterFile.size}</p>
@@ -330,23 +340,23 @@ const UploadExcel = () => {
             ) : (
               <p>Select a file to show details</p>
             )}
-      
-            </Col>
-          </Row>
 
-          <hr></hr>
-          <Row>
-            <Col sm={6}>
+          </Col>
+        </Row>
+
+        <hr></hr>
+        <Row>
+          <Col sm={6}>
             <h5 >Upload shop by brands </h5>
-          
-            <input  type="file" name="shopbybrands" accept=".xlsx, .xls, .csv" onChange={BrandFileHandler}/>
+
+            <input type="file" name="shopbybrands" accept=".xlsx, .xls, .csv" onChange={BrandFileHandler} />
             <br></br><br></br>
             <Button variant='flat' size="m" onClick={handleBrandFileSubmission}>Submit</Button>
             <br></br><br></br>
-            </Col>
-            <Col sm={6}>
-                  {isBrandsFilePicked ? (
-              <div style={{fontSize:'15px'}}>
+          </Col>
+          <Col sm={6}>
+            {isBrandsFilePicked ? (
+              <div style={{ fontSize: '15px' }}>
                 <p ><b>Filename:</b> {selectedbrandsFile.name}</p>
                 <p ><b>Filetype:</b> {selectedbrandsFile.type}</p>
                 <p ><b>Size in bytes:</b> {selectedbrandsFile.size}</p>
@@ -358,23 +368,23 @@ const UploadExcel = () => {
             ) : (
               <p>Select a file to show details</p>
             )}
-      
-            </Col>
-          </Row>
 
-          <hr></hr>
-          <Row>
-            <Col sm={6}>
+          </Col>
+        </Row>
+
+        <hr></hr>
+        <Row>
+          <Col sm={6}>
             <h5 >Upload mega mini posters </h5>
-            
-            <input  type="file" name="megaminiposters" accept=".xlsx, .xls, .csv" onChange={PosterFileHandler}/>
+
+            <input type="file" name="megaminiposters" accept=".xlsx, .xls, .csv" onChange={PosterFileHandler} />
             <br></br><br></br>
             <Button variant='flat' size="m" onClick={handlePosterFileSubmission}>Submit</Button>
             <br></br><br></br>
-            </Col>
-            <Col sm={6}>
-                  {isPosterFilePicked ? (
-              <div style={{fontSize:'15px'}}>
+          </Col>
+          <Col sm={6}>
+            {isPosterFilePicked ? (
+              <div style={{ fontSize: '15px' }}>
                 <p ><b>Filename:</b> {selectedposterFile.name}</p>
                 <p ><b>Filetype:</b> {selectedposterFile.type}</p>
                 <p ><b>Size in bytes:</b> {selectedposterFile.size}</p>
@@ -386,23 +396,23 @@ const UploadExcel = () => {
             ) : (
               <p>Select a file to show details</p>
             )}
-      
-            </Col>
-          </Row>
 
-          <hr></hr>
-          <Row>
-            <Col sm={6}>
+          </Col>
+        </Row>
+
+        <hr></hr>
+        <Row>
+          <Col sm={6}>
             <h5 >Upload Deals </h5>
-          
-            <input  type="file" name="deals" accept=".xlsx, .xls, .csv" onChange={DealsFileHandler}/>
+
+            <input type="file" name="deals" accept=".xlsx, .xls, .csv" onChange={DealsFileHandler} />
             <br></br><br></br>
             <Button variant='flat' size="m" onClick={handleDealsFileSubmission}>Submit</Button>
             <br></br><br></br>
-            </Col>
-            <Col sm={6}>
-                  {isDealsFilePicked ? (
-              <div style={{fontSize:'15px'}}>
+          </Col>
+          <Col sm={6}>
+            {isDealsFilePicked ? (
+              <div style={{ fontSize: '15px' }}>
                 <p ><b>Filename:</b> {selecteddealsFile.name}</p>
                 <p ><b>Filetype:</b> {selecteddealsFile.type}</p>
                 <p ><b>Size in bytes:</b> {selecteddealsFile.size}</p>
@@ -414,23 +424,23 @@ const UploadExcel = () => {
             ) : (
               <p>Select a file to show details</p>
             )}
-      
-            </Col>
-          </Row>
 
-          <hr></hr>
-          <Row>
-            <Col sm={6}>
+          </Col>
+        </Row>
+
+        <hr></hr>
+        <Row>
+          <Col sm={6}>
             <h5 >Upload Is In Navbar </h5>
-          
-            <input  type="file" name="deals" accept=".xlsx, .xls, .csv" onChange={IsInNavbarFileHandler}/>
+
+            <input type="file" name="deals" accept=".xlsx, .xls, .csv" onChange={IsInNavbarFileHandler} />
             <br></br><br></br>
             <Button variant='flat' size="m" onClick={handleIsInNavbarFileSubmission}>Submit</Button>
             <br></br><br></br>
-            </Col>
-            <Col sm={6}>
-                  {isDealsFilePicked ? (
-              <div style={{fontSize:'15px'}}>
+          </Col>
+          <Col sm={6}>
+            {isDealsFilePicked ? (
+              <div style={{ fontSize: '15px' }}>
                 <p ><b>Filename:</b> {selecteddealsFile.name}</p>
                 <p ><b>Filetype:</b> {selecteddealsFile.type}</p>
                 <p ><b>Size in bytes:</b> {selecteddealsFile.size}</p>
@@ -442,23 +452,23 @@ const UploadExcel = () => {
             ) : (
               <p>Select a file to show details</p>
             )}
-      
-            </Col>
-          </Row>
 
-          <hr></hr>
-          <Row>
-            <Col sm={6}>
+          </Col>
+        </Row>
+
+        <hr></hr>
+        <Row>
+          <Col sm={6}>
             <h5 >Upload Extra Categories </h5>
-          
-            <input  type="file" name="deals" accept=".xlsx, .xls, .csv" onChange={ExtraCategoriesFileHandler}/>
+
+            <input type="file" name="deals" accept=".xlsx, .xls, .csv" onChange={ExtraCategoriesFileHandler} />
             <br></br><br></br>
             <Button variant='flat' size="m" onClick={handleExtraCategoriesFileSubmission}>Submit</Button>
             <br></br><br></br>
-            </Col>
-            <Col sm={6}>
-                  {isDealsFilePicked ? (
-              <div style={{fontSize:'15px'}}>
+          </Col>
+          <Col sm={6}>
+            {isDealsFilePicked ? (
+              <div style={{ fontSize: '15px' }}>
                 <p ><b>Filename:</b> {selecteddealsFile.name}</p>
                 <p ><b>Filetype:</b> {selecteddealsFile.type}</p>
                 <p ><b>Size in bytes:</b> {selecteddealsFile.size}</p>
@@ -470,10 +480,10 @@ const UploadExcel = () => {
             ) : (
               <p>Select a file to show details</p>
             )}
-      
-            </Col>
-          </Row>
-      
+
+          </Col>
+        </Row>
+
       </Container>
     </div>
   )

@@ -16,6 +16,10 @@ const PendingDelivery = () => {
     const navigate = useNavigate();
     
     useEffect(()=>{
+
+        if(localStorage.getItem("isAdminLoggedIn")!=="yes,true"){
+            navigate('/')
+        }
         if(!isOrdersFetched){
             axios.get(url+"/pending-orders")
                 .then(function(response){

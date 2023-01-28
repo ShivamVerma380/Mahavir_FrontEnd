@@ -6,13 +6,21 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Toast, ToastBody, ToastHeader } from "reactstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import url from "../../../Uri";
+import { useNavigate } from "react-router-dom";
 
 function CompletedOrders(){
     const [completedOrders,SetCompletedOrders] = useState([]);
     const [isCompletedOrdersFetched,SetIsCompletedOrdersFetched] = useState(false);
     // var uri = "http://mahavirbackend-env.eba-bkwmcbpz.us-east-1.elasticbeanstalk.com";
+
+    const navigate = useNavigate();
     // var uri="?localhost:8080";
     useEffect(()=>{
+
+        if(localStorage.getItem("isAdminLoggedIn")!=="yes,true"){
+            navigate('/')
+        }
+
         if(!isCompletedOrdersFetched){
             axios.get(url+"/completed-orders")
                 .then(function(response){

@@ -97,6 +97,7 @@ const AdminLogin = () => {
             setIsSecretKeyVerified(true);
            // navigate("/admindetail")
             setIsLoggedIn(true);
+            localStorage.setItem("isAdminLoggedIn","yes,true");
         }
         else {
             alert("Wrong Key");

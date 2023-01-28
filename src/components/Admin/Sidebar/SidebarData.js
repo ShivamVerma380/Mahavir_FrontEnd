@@ -32,19 +32,19 @@ export const SidebarData = [
     cName: 'nav-text'
   },
 
-  {
-    title: 'Add New',
-    path:'/AddNew',
-    icon: <MdIcons.MdOutlineProductionQuantityLimits/>,
-    cName: 'nav-text'
-  },
+  // {
+  //   title: 'Add New',
+  //   path:'/AddNew',
+  //   icon: <MdIcons.MdOutlineProductionQuantityLimits/>,
+  //   cName: 'nav-text'
+  // },
   
-  {
-    title: 'Logout',
-    path: '/',
-    icon: <RiIcons.RiLogoutBoxRFill />,
-    cName: 'nav-text'
-  },
+  // {
+  //   title: 'Logout',
+  //   path: '/',
+  //   icon: <RiIcons.RiLogoutBoxRFill />,
+  //   cName: 'nav-text'
+  // },
   {
     title: 'Upload Excel',
     path:'/upload',
