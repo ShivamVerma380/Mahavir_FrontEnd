@@ -14,7 +14,8 @@ const AdminLogin = () => {
     var email = "";
     const[adminotp,Setadminotp]=useState();
     var admininputotp;
-    var inputsecretkey = "";
+    // var inputsecretkey = "";
+    const [inputsecretkey,setInputSecretKey] = useState("");
     const [isOtpSent, setIsOtpSent] = useState(false);
     const [isNewOtpSent, setIsNewOtpSent] = useState(false)
     const [isOtpVerified,setIsOtpVerified] = useState(false);
@@ -32,8 +33,9 @@ const AdminLogin = () => {
     }
 
     const inputSecretKeyEvent = (event) => {
-        inputsecretkey = event.target.value;
-        console.log("Secret Key: ",inputsecretkey)
+        // inputsecretkey = event.target.value;
+        setInputSecretKey(event.target.value);
+        // console.log("Secret Key: ",inputsecretkey)
     }
 
     const sendOTP = () => {
