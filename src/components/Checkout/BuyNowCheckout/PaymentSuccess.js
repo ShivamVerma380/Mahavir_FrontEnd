@@ -50,12 +50,12 @@ function PaymentSuccess(){
                 }
                 <br></br>
                 <Row>
-                    <Col md={4}></Col>
-                    <Col md={2}>
-                        <Button style={{background:"#C10000",border:"none"}} onClick={handleOrders}>View my Orders</Button>
+                    <Col md={3}></Col>
+                    <Col md={3}>
+                        <Button style={{background:"#C10000",border:"none",margin:"20px"}} onClick={handleOrders}>View my Orders</Button>
                     </Col>
-                    <Col md={2}>
-                    <Button style={{background:"#C10000",border:"none"}} onClick={handleContinue}>Continue Shopping</Button>
+                    <Col md={3}>
+                    <Button style={{background:"#C10000",border:"none",margin:"20px"}} onClick={handleContinue}>Continue Shopping</Button>
                     </Col>
                 </Row>
                 <br></br>
