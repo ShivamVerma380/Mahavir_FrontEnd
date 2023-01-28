@@ -316,7 +316,11 @@ function ProductDetails() {
           // alert("Quantity:" + quantity);
         }
         // console.log("Product", product);
-        localStorage.setItem("buyProduct",JSON.stringify(product));
+        var arr =[];
+
+        arr.push(product.modelNumber+"=1");
+        localStorage.setItem("buyProduct",arr);
+        console.log("Buy Product",localStorage.getItem("buyProduct"));
         localStorage.setItem("type", "buyNow");
         var arr = [];
         arr.push(product.modelNumber+"=1");

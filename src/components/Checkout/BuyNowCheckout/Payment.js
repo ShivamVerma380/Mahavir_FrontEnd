@@ -16,7 +16,8 @@ import { toast, ToastContainer } from "react-toastify";
 function Payment(){
 
     try{
-        var product = JSON.parse(localStorage.getItem("buyProduct"));
+        console.log("Buy Product",localStorage.getItem("buyProduct"))
+        var product = localStorage.getItem("buyProduct");
     }catch(error){
         console.log(error)
     }
@@ -24,12 +25,17 @@ function Payment(){
     // const [paymentType, SetPaymentType] = useState("");
     var paymentType = "";
     var arr=[];
-    // console.log("product",product)
+    console.log("product",product)
     arr.push(product);
     // console.log("arr",arr)
     
     if(product!=null){
-        cartModels.set(product.modelNumber,1);
+        var arr= product.split(",");
+        arr.map(a=>{
+            var item = a.split("=")
+            cartModels.set(item[0],item[1])
+        })
+        // cartModels.set(product.modelNumber,1);
     }
     
 
@@ -63,14 +69,23 @@ function Payment(){
         }else if(localStorage.getItem("paymentType")!=="cashOnDelivery"){
             // alert("Please select payment type")
             toast.warn(<b>Please select payment type</b>)
-        }else{
+        }
+        else{
             if(localStorage.getItem("paymentType")==="cashOnDelivery"){
 
                 // document.getElementById("payment_nextbtn").setDis
-
+                toast.info(<b>Processing your order...</b>)
                 e.currentTarget.disabled = true;
 
                 localStorage.setItem("paymentmode",'cashOnDelivery');
+
+                console.log("Products",products);
+
+                if(products.size===0){
+                    toast.error(<b>Please add products to cart</b>)
+                    return;
+                }
+
                 const form_data_body={
                     products,
                     "userAddress":{

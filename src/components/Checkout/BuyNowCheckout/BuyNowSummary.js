@@ -24,6 +24,8 @@ function BuyNowSummary(){
     var discount=0;
     var amount=0;
 
+
+    var modelNo="";
     const navigate = useNavigate();
     
     const[cartModels,SetCartModels] = useState(new Map());
@@ -44,9 +46,23 @@ function BuyNowSummary(){
                         var pair = item.split("=")
                         // if(pair[0])
                         cartModels.set(pair[0].trim(),parseInt(pair[1]));
+                        modelNo = pair[0].trim();
                     }
                 })
                 }  
+
+            // if(localStorage.getItem("buyProduct")!=null){
+            //     var product = localStorage.getItem("buyProduct");
+
+            //     var arr = product.split(",");
+
+            //     arr.map(a=>{
+            //         if(a!=""){
+            //             var pair = a.split("=");
+            //             cartModels.set(pair[0].trim(),parseInt(pair[1]));
+            //         }
+            //     })
+            // }
             
             // console.log("Cart Models",cartModels)
             var urls=[];
@@ -84,6 +100,14 @@ function BuyNowSummary(){
             // alert("Please add items to purchase");
             toast.warn(<b>Please add items to purchase</b>)
         }else{
+            var arr="";
+            cartItems.map((index,pos)=>{
+                // console.log("CartModel in map",cartModels)
+                // console.log("cart model quantity",index.modelNumber,":",cartModels.get(index.modelNumber))
+                // console.log("Model Number:",index.modelNumber)
+                arr+=index.modelNumber+"="+cartModels.get(index.modelNumber)+",";
+            })
+            localStorage.setItem("buyProduct",arr)
             localStorage.setItem("Amount",parseInt(amount));
             navigate("/payment")
         }
