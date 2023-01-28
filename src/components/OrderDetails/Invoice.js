@@ -64,55 +64,95 @@ function Invoice() {
     return (
         <>
             <Header />
+            <div style={{marginTop: "150px"}}>
             <Container id="invoice">
                 {
                     (areProductsFetched) ? (
                         <>
-                            <div style={{ border: "1px solid gray", marginTop: "150px" }}>
-                                <h2 style={{ textAlign: "center", marginTop: "10px", textDecorationLine: "underline" }}>Invoice</h2>
-                                <br></br>
-                                <br></br>
+                            <div style={{ border: "1px solid gray" }}>
+                            <Container className='invoiceContainer'>
+                                <h4 style={{ textAlign: "center" }}>Invoice</h4>
+                           <hr></hr>
+                          
                                 <Row>
-                                    <Col sm={1}></Col>
-                                    <Col md={5}>
+                                    
+                                    <Col>
+                                    <Table bordered hover>
+                                        <tbody>
+                                            <tr>
+                                                <td>Sold By:</td>
+                                                <td>Mahavir Electronics and Furniture</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Shipped From Address:</td>
+                                                <td>Mahavir Electronics, Bibwewadi, Pune, Maharashtra-411037.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>GSTIN:</td>
+                                                <td>27AAAPO6914H1ZO</td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={2}>"Keep this invoice and manufacturer box for warranty purposes."</td>
+                                            </tr>
+                                        </tbody>
 
-                                        <h4 style={{ color: "blue" }}>Sold By: </h4>
-                                        <h4>Mahavir Electronics and Furniture</h4>
-                                        <h4 style={{ color: "blue" }}>Shipped From Address:</h4>
-                                        <p>Mahavir Electronics, Bibwewadi, Pune, Maharashtra-411037.</p>
-                                        <br></br>
-                                        <h5><b style={{ color: "blue" }}>GSTIN:</b> 27AAAPO6914H1ZO</h5>
-
-                                        <p>"Keep this invoice and manufacturer box for warranty purposes."</p>
+                                    </Table>
                                     </Col>
-                                    <Col md={1}></Col>
-                                    <Col md={4}>
-                                        <p><b>Order Id:</b>#MAV{invoice.orderId}</p>
-                                        <p><b>Order Date:</b>{invoice.buyDate}</p>
-                                        <p><b>Invoice Date:</b>{invoice.buyDate}</p>
+                                
+                                    <Col>
+                                    <Table bordered hover>
+                                        <tbody>
+                                            <tr>
+                                                <td>Order Id:</td>
+                                                <td>#MAV{invoice.orderId}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Order Date:</td>
+                                                <td>{invoice.buyDate}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Invoice Date:</td>
+                                                <td>{invoice.buyDate}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                        
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                    <Table bordered hover>
+                                        <tbody>
+                                            <tr>
+                                            <td>Bill/Ship To:</td>
+                                            <td>{invoice.userAddress.name}</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Your address:</td>
+                                            <td>{invoice.userAddress.address}</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Shipping address:</td>
+                                            <td>{invoice.userAddress.city}, {invoice.userAddress.state}.</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Pincode:</td>
+                                            <td>{invoice.userAddress.pincode}</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Contact number:</td>
+                                            <td>{invoice.userAddress.mobileNumber}</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </Table>
                                     </Col>
                                 </Row>
 
-                                <hr></hr>
                                 <Row>
-                                    <Col sm={1}></Col>
-                                    <Col md={6} >
-                                        <p><b>Bill/Ship To: </b>{invoice.userAddress.name}</p>
-                                        <p>Your address: {invoice.userAddress.address}</p>
-                                        <p>Shipping address: {invoice.userAddress.city}, {invoice.userAddress.state}. </p>
-                                        <p>Pincode: {invoice.userAddress.pincode}</p>
-                                        <p>Contact number: {invoice.userAddress.mobileNumber}</p>
-                                    </Col>
-
-                                </Row>
-                                <hr></hr>
-                                <br></br>
-
-                                <Row>
-                                    <Col sm={2}></Col>
-                                    <Col md={8}>
                                         <p style={{ textAlign: "center" }}>Order Details</p>
-                                        <Table striped bordered hover style={{ width: "100%", tableLayout: "fixed" }}>
+                                    <Col>
+                                        <Table bordered hover style={{ width: "100%", tableLayout: "fixed" }}>
                                             <thead style={{ marginLeft: "0px", padding: "0px" }}>
                                                 <tr>
                                                     <th>Product</th>
@@ -135,7 +175,6 @@ function Invoice() {
                                                     })
                                                 }
 
-                                                <br></br>
                                                 <tr>
                                                     <td colSpan={2}><b>Grand Total:</b></td>
                                                     <td>{invoice.paymentAmount}</td>
@@ -144,9 +183,10 @@ function Invoice() {
                                         </Table>
                                     </Col>
                                 </Row>
+                                </Container>
 
                             </div>
-                            <br></br>
+                            
 
                         </>
                     ) : (
@@ -155,8 +195,9 @@ function Invoice() {
                 }
                 
             </Container>
+            </div>
             <center>
-                    <Button onClick={printInvoice}>PRINT INVOICE</Button>
+                    <Button style={{marginTop:'10px'}} onClick={printInvoice}>PRINT INVOICE</Button>
             </center>
         </>
 

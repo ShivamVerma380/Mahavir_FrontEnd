@@ -12,6 +12,14 @@
     background-color: #ED1C24;
     border-color: #ED1C24;
 }
+
+.invoiceContainer{
+    padding: 4%;
+}
+
+.invoiceContainer .table td, th{
+    font-size: 12px;
+}
 @media screen and (max-width: 768px) {
     .mobileView{
         display: none;
