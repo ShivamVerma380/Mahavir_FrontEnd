@@ -71,7 +71,7 @@ function Invoice() {
                         <>
                             <div style={{ border: "1px solid gray" }}>
                             <Container className='invoiceContainer'>
-                                <h4 style={{ textAlign: "center" }}>Invoice</h4>
+                                <h4 style={{ textAlign: "center" }}>Mahavir Electronics and Furniture</h4>
                            <hr></hr>
                           
                                 <Row>
@@ -104,7 +104,7 @@ function Invoice() {
                                         <tbody>
                                             <tr>
                                                 <td>Order Id:</td>
-                                                <td>#MEF100{invoice.orderId}</td>
+                                                <td><b>#MEF100{invoice.orderId}</b></td>
                                             </tr>
                                             <tr>
                                                 <td>Order Date:</td>
@@ -177,7 +177,7 @@ function Invoice() {
 
                                                 <tr>
                                                     <td colSpan={2}><b>Grand Total:</b></td>
-                                                    <td>{invoice.paymentAmount}</td>
+                                                    <td><b>₨ {invoice.paymentAmount}/-</b></td>
                                                 </tr>
                                             </tbody>
                                         </Table>
@@ -186,8 +186,7 @@ function Invoice() {
                                 </Container>
 
                             </div>
-                            
-
+                    
                         </>
                     ) : (
                         null
