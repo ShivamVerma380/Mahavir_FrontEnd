@@ -98,7 +98,7 @@ function Payment(){
                     "state":address.state,
                     "addressType":"home"
                     },
-                    "buyDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear(),
+                    "buyDate":date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear(),
                     "paymentMode":"Cash On Delivery",
                     "paymentAmount":localStorage.getItem("Amount")
                 }
