@@ -402,7 +402,7 @@ function Login() {
     }
 
     const handleResendClick = () => {
-        toast.success(<b>Resend otp Clicked</b>)
+        toast.info(<b>New OTP has been sent to your email...</b>)
         axios({
             method: "get",
             url: url + "/resend-otp/" + email.toLowerCase()
