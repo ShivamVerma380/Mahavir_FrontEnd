@@ -510,6 +510,7 @@ function Login() {
                                         <div className="submit-container">
                                             <Button className="login-button" onClick={() => sendForgotOTP()} style={{ background: otpForgotEmailActive ? '#DA0606' : '#DA0606' }}>Send OTP</Button>
 
+                                            <Button className="login-button" onClick={() => {window.location.reload()}} style={{ background: otpForgotEmailActive ? '#DA0606' : '#DA0606' }}>Login</Button>
 
                                         </div>
                                         {/* </center> */}
