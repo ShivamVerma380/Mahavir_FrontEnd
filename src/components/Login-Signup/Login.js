@@ -505,7 +505,7 @@ function Login() {
 
                                     </div>
                                     <br></br>
-                                    <p>By continuing,you agree to our <a href="http://www.google.com">Terms of use</a> and<a href="http://www.google.com"> Privacy Policy</a></p>
+                                    <p>By continuing,you agree to our <a href="https://mahavirelectronics.net/#/terms-of-use">Terms of use</a> and<a href="https://mahavirelectronics.net/#/privacypolicy"> Privacy Policy</a></p>
                                     <br></br>
                                     <div className="submit-container">
                                         <Button className="login-button" onClick={() => sendForgotOTP()} style={{background: otpForgotEmailActive?'#DA0606':'#DA0606'}}>Send OTP</Button>
