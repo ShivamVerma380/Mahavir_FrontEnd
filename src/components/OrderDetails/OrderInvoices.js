@@ -1,6 +1,6 @@
 import axios from "axios";
 import React,{useState,useEffect} from "react";
-import { Table, Row, Col } from "react-bootstrap";
+import { Table, Row, Col, Container } from "react-bootstrap";
 import {Button} from "reactstrap"
 import { useNavigate } from "react-router-dom";
 import url from "../../Uri";
@@ -48,12 +48,12 @@ function OrderInvoices(){
     return(
         <>
         <body style={{background:"whitesmoke"}}><Header/>
-        <div style={{marginTop:"150px"}}>
+        <div >
             {(isOrdersFetched) ? (
                 <>
+                <Container className="myOrders">
                 <Row>
-                    <Col md={2}></Col>
-                    <Col md={8} style={{background:"white"}}>
+                    <Col style={{padding:'2%',background:"white"}}>
                         <h4 className="orderInvoice">Your Order Invoices:</h4>
                         <br></br>
                         <Table striped hover border>
@@ -97,7 +97,6 @@ function OrderInvoices(){
                         <br></br>
                         <h6 style={{fontWeight:300}}><i>* Please click on the invoice icon to view your order invoice!</i></h6>
                         </Col>
-                        <Col md={2}></Col>
                 </Row>
                 <br></br>
                 <br></br>
@@ -106,6 +105,7 @@ function OrderInvoices(){
                     <Button style={{background:"#C10000",border:"none"}} onClick={handleContinue}>Continue Shopping</Button>
                 </center>
                 </Row>
+                </Container>
                 </>
             ) : (
                 null
