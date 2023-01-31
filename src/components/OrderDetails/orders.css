@@ -20,12 +20,32 @@
 .invoiceContainer .table td, th{
     font-size: 12px;
 }
+
+.ordersbox{
+    padding: 2%;
+}
+
+.buttonn:hover{
+    background-color: #ED1C24;
+}
 @media screen and (max-width: 768px) {
     .mobileView{
         display: none;
     }
     .orderInvoice{
         margin-top: 30px;
+    }
+}
+
+/* mobiles */
+@media screen and (min-width: 320px) and (max-width:480px)
+{
+    .ordersbox .col-md-4{
+        width: 100%;
+    }
+
+    .orders{
+        margin-top: 80px;
     }
 }
 

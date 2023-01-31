@@ -163,10 +163,9 @@ const Orders=()=>{
                                         <Image thumbnail="true" src={order.productImage1}/>
                                         </Col>
                                         <Col md={4}>
-                                            <h5><br></br>{order.productName}
+                                            <h5>{order.productName}
                                             
                                             </h5>
-                                            <br></br>
                                             {
                                             (order.productRated==true)?(
                                                     
@@ -184,12 +183,12 @@ const Orders=()=>{
                                         </Col>
                                         <Col md={2}>
                                             
-                                        <h5> <br></br>MSP: <b style={{marginRight:"20px",color:"rgb(255,98,98)"}}>₹{order.productPrice} </b> </h5> 
+                                        <h5 style={{marginTop:'10px'}}> MSP: <b style={{color:"rgb(255,98,98)"}}>₹{order.productPrice} </b> </h5> 
                     
                                         </Col>
                                         <Col md={4}>
 
-                                        <h5><br></br>Quantity:{order.quantity}
+                                        <h5>Quantity:{order.quantity}
                                         <br></br>Ordered On: {order.buyDate}
                                         <br></br>Delivery Date:{order.deliveryDate}
                                         <br></br>Payment Mode:{order.paymentMode}</h5>
@@ -198,6 +197,7 @@ const Orders=()=>{
                                         </Col>
                                     </Row>
 
+                                        
                                 // <Row>
                                 //     <Col md={2}>
                                 //         <img style={{height:"275px" ,width:"275px"}} src={order.productImage1}></img>
