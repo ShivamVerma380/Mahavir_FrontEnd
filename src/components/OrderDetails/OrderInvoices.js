@@ -72,7 +72,7 @@ function OrderInvoices(){
                                 {orders.map(order => {
                                     return (
                                         <tr>
-                                            <td>#MAV{order.orderId}</td>
+                                            <td>#MEF100{order.orderId}</td>
                                             <td>{order.buyDate}</td>
                                             {(order.deliveryDate != null) ? (
                                                 <td>{order.deliveryDate}</td>
