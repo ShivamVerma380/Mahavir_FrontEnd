@@ -56,15 +56,15 @@ function OrderInvoices(){
                     <Col style={{padding:'2%',background:"white"}}>
                         <h4 className="orderInvoice">Your Order Invoices:</h4>
                         <br></br>
-                        <Table striped hover border>
+                        <Table striped hover border className="mobileView" >
                             <thead>
                                 <tr>
                                     <th>Order Id</th>
                                     <th>Buy Date</th>
                                     <th>Delivery Date</th>
-                                    <th className="mobileView">Payment Amount</th>
-                                    <th className="mobileView">Transaction Id</th>
-                                    <th className="mobileView">Address</th>
+                                
+                                   
+
                                     <th>Invoice</th>
                                 </tr>
                             </thead>
@@ -80,14 +80,46 @@ function OrderInvoices(){
                                                 <td>-</td>
                                             )}
 
-                                            <td className="mobileView">{order.paymentAmount}</td>
-                                            {(order.paymentId != null) ? (
-                                                <td className="mobileView">{order.paymentId}</td>
+                                            
+                                         
+                                            <td onClick={() => handleInvoiceClick(order)} style={{cursor:"pointer"}}>📅</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </Table>
+                        <Table striped hover border className="orderTableDesktop">
+                            <thead>
+                                <tr>
+                                    <th>Order Id</th>
+                                    <th>Buy Date</th>
+                                    <th>Delivery Date</th>
+                                    <th >Payment Amount</th>
+                                    <th >Transaction Id</th>
+                                    <th >Address</th>
+                                    <th>Invoice</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders.map(order => {
+                                    return (
+                                        <tr>
+                                            <td>#MEF100{order.orderId}</td>
+                                            <td>{order.buyDate}</td>
+                                            {(order.deliveryDate != null) ? (
+                                                <td>{order.deliveryDate}</td>
                                             ) : (
-                                                <td className="mobileView">Cash On Delivery</td>
+                                                <td>-</td>
                                             )}
 
-                                            <td className="mobileView">{order.userAddress.address + "," + order.userAddress.city + "," + order.userAddress.state + "-" + order.userAddress.pincode}</td>
+                                            <td >{order.paymentAmount}</td>
+                                            {(order.paymentId != null) ? (
+                                                <td >{order.paymentId}</td>
+                                            ) : (
+                                                <td >Cash On Delivery</td>
+                                            )}
+
+                                            <td >{order.userAddress.address + "," + order.userAddress.city + "," + order.userAddress.state + "-" + order.userAddress.pincode}</td>
                                             <td onClick={() => handleInvoiceClick(order)} style={{cursor:"pointer"}}>📅</td>
                                         </tr>
                                     );
