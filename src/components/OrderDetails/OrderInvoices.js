@@ -54,39 +54,52 @@ function OrderInvoices(){
                 <Container className="myOrders">
                 <Row>
                     <Col style={{padding:'2%',background:"white"}}>
-                        <h4 className="orderInvoice">Your Order Invoices:</h4>
+                        <h4 className="orderInvoice">Your Order Invoices</h4>
                         <br></br>
                         <Table striped hover border className="mobileView" >
-                            <thead>
+                            {/* <thead>
                                 <tr>
                                     <th>Order Id</th>
                                     <th>Buy Date</th>
-                                    <th>Delivery Date</th>
-                                
-                                   
-
+                                    <th>Delivery Date</th>  
                                     <th>Invoice</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                            </thead> */}
                                 {orders.map(order => {
                                     return (
+                                        <center>
+                                            <Table striped hover border className="mobileView" >
+                                        <tbody>
                                         <tr>
+                                            <td>Order Id</td>
                                             <td>#MEF100{order.orderId}</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Buy Date</td>
+
                                             <td>{order.buyDate}</td>
+                                            </tr>
+                                            <tr>
+                                            <td>Delivery Date</td>
                                             {(order.deliveryDate != null) ? (
+                                                
                                                 <td>{order.deliveryDate}</td>
+                                                
                                             ) : (
                                                 <td>-</td>
                                             )}
-
-                                            
-                                         
+                                            </tr>
+                                            <tr>
+                                            <td>Invoice</td>
                                             <td onClick={() => handleInvoiceClick(order)} style={{cursor:"pointer"}}>📅</td>
                                         </tr>
+                                        </tbody>
+                                        
+                                        </Table>
+                                        <hr></hr>
+                                        </center>
                                     );
                                 })}
-                            </tbody>
                         </Table>
                         <Table striped hover border className="orderTableDesktop">
                             <thead>
