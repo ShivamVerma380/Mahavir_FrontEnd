@@ -724,7 +724,8 @@ function TestFilterProducts() {
             }
         })
         SetSelectedProducts(arr)
-
+        setPaginationLength(Math.ceil(arr.length/10));
+        setPaginationProducts([...arr].slice(0, 10));
         // console.log(newValue)
     };
 
