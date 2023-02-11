@@ -77,8 +77,7 @@ function BrandDetails() {
 
                     }
                 }).catch(function (error) {
-                    console.log("error in shopByBrands");
-                    
+                    console.log("error in shopByBrands"); 
                 }
                 );
 
