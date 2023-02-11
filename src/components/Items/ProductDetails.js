@@ -325,6 +325,8 @@ function ProductDetails() {
         var arr = [];
         arr.push(product.modelNumber+"=1");
         setCookie("models",arr,20);
+        localStorage.setItem("buyProductType","buyNow");
+        // console.log("Buy Product",localStorage.getItem("buyProduct"));
         navigate("/checkout")
       } else {
         toast.error(<b>Please enter pincode</b>)

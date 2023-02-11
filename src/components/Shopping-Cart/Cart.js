@@ -97,6 +97,7 @@ function Cart() {
             })
             setCookie("models",arr,20);
             localStorage.setItem("buyProduct",arr);
+            localStorage.setItem("buyProductType","cart");
             // console.log("Models",getCookie("models"));
             navigate("/checkout");
         }

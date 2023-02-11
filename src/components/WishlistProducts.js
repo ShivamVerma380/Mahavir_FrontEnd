@@ -47,7 +47,8 @@ const WishlistProducts = () => {
       setCookie("CartModels", cart, 20);
       RemoveFromWishList(index.modelNumber);
       // console.log("Cart Models",cart)
-      navigate("/cart")
+      // navigate("/cart")
+      window.location.reload();
       // alert("Added to cart" + model);
     }
   }
