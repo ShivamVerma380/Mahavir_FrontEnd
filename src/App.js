@@ -371,7 +371,7 @@ function App() {
       <div>
         <ToastContainer position='top-center' />
         {/* <button onclick={topFunction} id="myBtn" title="Go to top">Top</button> */}
-        <Button id="myBtn" title="Go to top"><BsArrowUp onClick={topFunction} /></Button>
+        <Button id="myBtn" ><BsArrowUp onClick={topFunction} /></Button>
         {/* {
         isLoading?(<LoadingSpinner/>):(null)
       }
