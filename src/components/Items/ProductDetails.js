@@ -872,6 +872,11 @@ function ProductDetails() {
 
                     </Col>
                   </Row>
+                  <Row>
+                    <Col>
+                      <h4 className="rowtitle">Delivery Available within 2-3 days</h4>
+                    </Col>
+                  </Row>
                   <br></br>
                   
                   
