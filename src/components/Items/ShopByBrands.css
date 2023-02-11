@@ -302,7 +302,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
 .brandlogo {
   width: fit-content;
-  height: 100%;
+  height: 80%;
 }
 
 .brandvideo{
@@ -342,7 +342,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
 .brandlogo {
   width: fit-content;
-  height: 100%;
+  height: 80%;
 }
 }
 
@@ -413,7 +413,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     width: 100%;
   }
   .brandlogo {
-    height: 100%;
+    height: 80%;
     width: fit-content;
   }
 
@@ -444,7 +444,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   }
 }
 /* ipads and tablets */
-@media screen and (min-width: 481px) and (max-width:768px)
+@media screen and (min-width: 425px) and (max-width:768px)
 {
   .brand_title {
     margin-bottom: 0px;
@@ -454,7 +454,7 @@ filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
 .brandlogo {
   width: fit-content;
-  height: 100%;
+  height: 50%;
 }
 
 .brandsliderimage{

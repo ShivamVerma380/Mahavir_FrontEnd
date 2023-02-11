@@ -292,7 +292,11 @@ root.render(
         </Suspense>
       }/>
       <Route path='/developerpage' element = {
+        <Suspense fallback={
+          <Spinner animation="border" variant="danger" style={{justifyContent:"center",alignItems:"center",marginLeft:"50%",marginTop:"25%",position:"fixed"}} />
+        }> 
           <DeveloperPage/>
+        </Suspense>
       }/>
       <Route path='/aboutcompany' element = {
         <Suspense fallback={
