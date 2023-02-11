@@ -41,7 +41,7 @@ var cards2 = <div>
 
       {['sm'].map((expand) => (
 
-        <Navbar className="cat_nav" style={{background:'#2b2d42', zIndex: '1', height:60}} bg="dark" key={expand}  expand={expand} variant="dark">
+        <Navbar className="cat_nav" style={{background:'#FFFFFF', zIndex: '1', height:60}} bg="dark" key={expand}  expand={expand} variant="dark">
           <Container fluid>
           
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -67,7 +67,7 @@ var cards2 = <div>
                         <Nav.Link >
                           <Image style={{background:"none"}} thumbnail='true'  src={index.category_image} className="categoryImage" ></Image>
                           
-                          <NavDropdown right className="catdropdown"  title={index.category} renderMenuOnMount={true}>
+                          <NavDropdown  right className="catdropdown"  title={index.category} renderMenuOnMount={true}>
                             {
                               index.subCategories.map(subCat => {
                                 return (

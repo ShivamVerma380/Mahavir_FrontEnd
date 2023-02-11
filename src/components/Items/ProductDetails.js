@@ -781,7 +781,8 @@ function ProductDetails() {
                           product.productHighlights.split(';').map(index => {
                             return (
                               <Row>
-                              <h5 style={{ marginLeft: '10px' }}>•<span style={{ marginLeft: '10px' }}> </span>{index}</h5>
+                              <h5  style={{ marginLeft: '10px' }}>•<span style={{ marginLeft: '10px' }}> </span><b>{index}</b></h5>
+                              {/* <h5  style={{ marginLeft: '10px' }}>•<span style={{ marginLeft: '10px' }}> </span>{index}</h5> */}
                               </Row>
                             );
 
@@ -1049,7 +1050,7 @@ function ProductDetails() {
                                 <CardSubtitle onClick={() => callProductDetails(index)}>
                                   {/* <s>₹{index.productPrice}</s> */}
                                   <b style={{color:"#C10000"}} >₹{index.offerPrice}</b> 
-                                  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginLeft:"10px",fontSize:"15px",color:"grey" }}>₹{product.productPrice}</b>
+                                  <b style={{ textDecorationLine: "line-through", textDecorationStyle: "solid",marginLeft:"10px",fontSize:"15px",color:"grey" }}>₹{index.productPrice}</b>
                                   <br></br>
                                 </CardSubtitle>
                                 
