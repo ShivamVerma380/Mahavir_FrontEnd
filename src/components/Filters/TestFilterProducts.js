@@ -745,6 +745,8 @@ function TestFilterProducts() {
             // console.log("indexOfferPrice--",index.offerPrice)
         })
         SetSelectedProducts([...arr])
+        setPaginationLength(Math.ceil(arr.length/10));
+        setPaginationProducts([...arr].slice(0, 10));
     }
 
     function SortByHighPrice() {
@@ -762,6 +764,8 @@ function TestFilterProducts() {
             // console.log("indexOfferPrice--",index.offerPrice)
         })
         SetSelectedProducts([...arr])
+        setPaginationLength(Math.ceil(arr.length/10));
+        setPaginationProducts([...arr].slice(0, 10));
     }
 
     function SortByTopRated() {
@@ -779,6 +783,8 @@ function TestFilterProducts() {
             // console.log("indexAverageRating--",index.averageRating)
         })
         SetSelectedProducts([...arr])
+        setPaginationLength(Math.ceil(arr.length/10));
+        setPaginationProducts([...arr].slice(0, 10));
     }
 
     function SortByDiscount() {
@@ -796,6 +802,8 @@ function TestFilterProducts() {
             // console.log("indexAverageRating--",index.averageRating)
         })
         SetSelectedProducts([...arr])
+        setPaginationLength(Math.ceil(arr.length/10));
+        setPaginationProducts([...arr].slice(0, 10));
     }
 
 

@@ -319,10 +319,6 @@ function BrandDetails() {
                                     <Image className="brandsliderimage"
                                         src={index.offerPoster}
                                         alt={index.alt}
-
-
-
-
                                     />
 
                                 </CarouselItem>
