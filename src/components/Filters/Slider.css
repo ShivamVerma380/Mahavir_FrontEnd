@@ -49,15 +49,19 @@
 }
 
 .offerslide .carousel-item {
-  height: 200px;
+  height:  fit-content;
 }
 .offerslide .carousel-item img{
-  height: 200px;
+  height: fit-content;
 }
 
+.carousel-indicators {
+  display: none;
+}
 
-
-
+span {
+  margin-bottom: 0 !important;
+}
 }
 
 /* ipads and tablets */
