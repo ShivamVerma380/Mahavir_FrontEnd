@@ -43,7 +43,7 @@ const PendingDelivery = () => {
         var token=localStorage.getItem("jwtTokenAdmin");
         var form_data_body={
             "orderId":""+order.orderId,
-            "deliveryDate":date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()
+            "deliveryDate":date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()
         }
         console.log("form data body",form_data_body)
         axios.post(url+"/order-status",form_data_body,{
