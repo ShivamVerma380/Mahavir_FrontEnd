@@ -311,7 +311,7 @@ function Login() {
                     "Content-Type": "multipart/form-data"
                 }
             }).then(function (response) {
-                if (response.status == 201) {
+                if (response.status == 200) {
                     // console.log("User Registered successfully");
                     localStorage.setItem("isLoggedIn", true);
                     localStorage.setItem("Name", firstName + " " + lastName);
