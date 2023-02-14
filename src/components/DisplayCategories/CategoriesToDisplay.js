@@ -65,7 +65,7 @@ var cards2 = <div>
                       return (
 
                         <Nav.Link >
-                          <Image style={{background:"none"}} thumbnail='true'  src={index.category_image} className="categoryImage" ></Image>
+                          <Image style={{background:"#ffff"}} thumbnail='true'  src={index.category_image} className="categoryImage" ></Image>
                           
                           <NavDropdown  right className="catdropdown"  title={index.category} renderMenuOnMount={true}>
                             {
@@ -104,7 +104,7 @@ var cards2 = <div>
                     extraCategories.map(index => {
                       return (
                         <Nav.Link >
-                          <Image style={{background:"none"}} thumbnail='true'  src={index.imgUrl}  className="categoryImage" ></Image>
+                          <Image  thumbnail='true'  src={index.imgUrl}  className="categoryImage" ></Image>
                           
                           <NavDropdown right className="catdropdown"  title={index.parentName} renderMenuOnMount={true}>
                           <ListGroup>

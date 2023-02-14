@@ -219,8 +219,8 @@ justify-content: center;
     transform: translate3D(0, -50%, 0);
   }
   .icon-right.after:after {
-    left: 50%;
-    color: black;
+    left: -50%;
+    color: white;
     transition: 0.15s 0.25s ease left, 0.5s 0.05s ease color;
   }
   .icon-right.after:before {
